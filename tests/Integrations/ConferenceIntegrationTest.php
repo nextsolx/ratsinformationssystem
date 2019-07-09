@@ -19,9 +19,12 @@ class ConferenceIntegrationTest extends TestCase
 
         $response->assertJson([
             'data' => [[
-                'title' => 'Naturschutzbeirat bei der Unteren Naturschutzbehörde',
-                'location' => 'Stadthaus Deutz, Konferenzraum 16.F.43',
-                'date' => Carbon::parse('2019-07-01 07:00:00')->toW3cString(),
+                'title' => '4. Sitzung des Finanzausschusses',
+                'location' => [
+                    'description' => 'Rathaus der Beispielstadt, Ratshausplatz 1, 12345 Beispielstadt'
+                ],
+                'dateFrom' => '2013-01-04T08:00:00+01:00',
+                'dateTill' => '2013-01-04T12:00:00+01:00',
             ]]
         ]);
     }

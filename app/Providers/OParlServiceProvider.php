@@ -3,6 +3,7 @@
 namespace App\Providers;
 use App\OParl\OParlApi;
 use Illuminate\Support\ServiceProvider;
+use Tests\Mocks\OParlApiMock;
 
 class OParlServiceProvider extends ServiceProvider
 {
@@ -14,6 +15,9 @@ class OParlServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(\App\Contracts\OParlApi::class, function ($app) {
+            if ($app->runningUnitTests()) {
+                return new OParlApiMock();
+            }
             return new OParlApi(config('oparl.domain'), config('oparl.body_id'));
         });
     }

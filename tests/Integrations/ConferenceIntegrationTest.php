@@ -11,9 +11,9 @@ class ConferenceIntegrationTest extends TestCase
     /**
     * @test
     */
-    public function get_all_conferences()
+    public function get_all_meetings()
     {
-        $response = $this->json('GET', '/api/conferences');
+        $response = $this->json('GET', '/api/meetings');
 
         $response->assertStatus(200);
 

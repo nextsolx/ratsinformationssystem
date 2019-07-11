@@ -47,6 +47,11 @@ class Meeting
         return Arr::last(explode('/', $organizationUrl));
     }
 
+    public function extractId()
+    {
+        return Arr::last(explode('/', $this->id));
+    }
+
     public function agendaCount()
     {
         return $this->agendaItem ? count($this->agendaItem) : 0;

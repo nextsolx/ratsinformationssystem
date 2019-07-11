@@ -20,6 +20,7 @@ class Meeting extends JsonResource
         }
 
         return [
+            'id' => $this->extractId(),
             'title' => $this->name,
             'dateFrom' => $this->start,
             'dateTill' => $this->end,

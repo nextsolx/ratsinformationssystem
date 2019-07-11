@@ -11,5 +11,18 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
+mix.options({
+        processCssUrls: true
+    });
+
+mix.copy('resources/img', 'public/img')
+    .copy('resources/fonts', 'public/fonts')
+    .js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css');
+
+if (mix.inProduction()) {
+    mix.disableNotifications();
+    mix.version();
+}
+
+mix.sourceMaps(false, 'source-map');

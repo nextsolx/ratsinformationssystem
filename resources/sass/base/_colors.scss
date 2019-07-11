@@ -1,0 +1,239 @@
+$c-dark-primary: rgba(0, 0, 0, .87);
+$c-dark-secondary: rgba(0, 0, 0, .54);
+$c-dark-disabled: rgba(0, 0, 0, .38);
+
+$c-light-primary: #fff;
+$c-light-secondary: rgba(255, 255, 255, .7);
+$c-light-disabled: rgba(255, 255, 255, .3);
+
+$c-box-shadow: rgba(0, 0, 0, .16);
+$c-box-shadow2: rgba(0, 0, 0, .32);
+
+$c-white: $c-light-primary;
+$c-white2: #f6f6f6;
+$c-black: #000;
+$c-brown: #6c655f;
+
+$c-red: #e1151b;
+$c-red2: #f00;
+$c-red3: #ed1c24;
+
+$c-blue: #a1daf8;
+$c-blue2: #007aff;
+$c-blue3: #0c2e42;
+$c-blue4: #3485ff;
+
+$c-gray: #212121;
+$c-gray2: #545458;
+$c-gray3: #dadce0;
+$c-gray4: #f5f5f5;
+$c-gray5: #fafafb;
+$c-gray6: #576268;
+$c-gray7: #ccc;
+$c-gray8: #8c8c8c;
+
+$c-primary: $c-gray;
+$c-secondary: $c-gray8;
+$c-link: $c-blue4;
+
+// color classes
+.ris-dark-primary {
+    color: $c-dark-primary;
+}
+
+.ris-dark-secondary {
+    color: $c-dark-secondary;
+}
+
+.ris-dark-disabled {
+    color: $c-dark-disabled;
+}
+
+.ris-light-primary {
+    color: $c-light-primary;
+}
+
+.ris-light-secondary {
+    color: $c-light-secondary;
+}
+
+.ris-light-disabled {
+    color: $c-light-disabled;
+}
+
+.ris-white {
+    color: $c-white;
+}
+
+.ris-white2 {
+    color: $c-white2;
+}
+
+.ris-black {
+    color: $c-black;
+}
+
+.ris-brown {
+    color: $c-brown;
+}
+
+.ris-red {
+    color: $c-red;
+}
+
+.ris-red2 {
+    color: $c-red2;
+}
+
+.ris-red3 {
+    color: $c-red3;
+}
+
+.ris-blue {
+    color: $c-blue;
+}
+
+.ris-blue2 {
+    color: $c-blue2;
+}
+
+.ris-blue3 {
+    color: $c-blue3;
+}
+
+.ris-blue4 {
+    color: $c-blue4;
+}
+
+.ris-gray {
+    color: $c-gray;
+}
+
+.ris-gray2 {
+    color: $c-gray2;
+}
+
+.ris-gray3 {
+    color: $c-gray3;
+}
+
+.ris-gray4 {
+    color: $c-gray4;
+}
+
+.ris-gray5 {
+    color: $c-gray5;
+}
+
+.ris-gray6 {
+    color: $c-gray6;
+}
+
+.ris-gray7 {
+    color: $c-gray7;
+}
+
+.ris-gray8 {
+    color: $c-gray8;
+}
+
+// background-color classes
+.ris-bg-dark-primary {
+    background-color: $c-dark-primary;
+}
+
+.ris-bg-dark-secondary {
+    background-color: $c-dark-secondary;
+}
+
+.ris-bg-dark-disabled {
+    background-color: $c-dark-disabled;
+}
+
+.ris-bg-light-primary {
+    background-color: $c-light-primary;
+}
+
+.ris-bg-light-secondary {
+    background-color: $c-light-secondary;
+}
+
+.ris-bg-light-disabled {
+    background-color: $c-light-disabled;
+}
+
+.ris-bg-white {
+    background-color: $c-white;
+}
+
+.ris-bg-white2 {
+    background-color: $c-white2;
+}
+
+.ris-bg-black {
+    background-color: $c-black;
+}
+
+.ris-bg-brown {
+    background-color: $c-brown;
+}
+
+.ris-bg-red {
+    background-color: $c-red;
+}
+
+.ris-bg-red2 {
+    background-color: $c-red2;
+}
+
+.ris-bg-red3 {
+    background-color: $c-red3;
+}
+
+.ris-bg-blue {
+    background-color: $c-blue;
+}
+
+.ris-bg-blue2 {
+    background-color: $c-blue2;
+}
+
+.ris-bg-blue3 {
+    background-color: $c-blue3;
+}
+
+.ris-bg-blue4 {
+    background-color: $c-blue4;
+}
+
+.ris-bg-gray {
+    background-color: $c-gray;
+}
+
+.ris-bg-gray2 {
+    background-color: $c-gray2;
+}
+
+.ris-bg-gray3 {
+    background-color: $c-gray3;
+}
+
+.ris-bg-gray4 {
+    background-color: $c-gray4;
+}
+
+.ris-bg-gray5 {
+    background-color: $c-gray5;
+}
+
+.ris-bg-gray6 {
+    background-color: $c-gray6;
+}
+
+.ris-bg-gray7 {
+    background-color: $c-gray7;
+}
+
+.ris-bg-gray8 {
+    background-color: $c-gray8;
+}

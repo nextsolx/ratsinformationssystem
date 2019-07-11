@@ -1,0 +1,13 @@
+.ris-card-list {
+    border-bottom: 1px solid $c-gray7;
+    margin-top: $indent-l;
+    padding-bottom: $indent-ml;
+
+    &__item {
+        margin-bottom: $indent-l;
+    }
+
+    .ris-title {
+        margin-bottom: $indent-ml;
+    }
+}

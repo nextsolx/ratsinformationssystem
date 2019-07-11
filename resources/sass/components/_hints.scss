@@ -1,0 +1,16 @@
+.ris-hint-box {
+    align-items: center;
+    background-color: $c-white2;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: $indent-ml;
+
+    @include breakpoint($bp-mobile-max) {
+        padding: $indent-m;
+    }
+
+    @include breakpoint($bp-tablet-min) {
+        padding: $indent-ml;
+    }
+}

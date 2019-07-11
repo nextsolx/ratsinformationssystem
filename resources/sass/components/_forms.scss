@@ -1,0 +1,136 @@
+.ris-input-wrapper {
+    &:not(:last-child) {
+        margin-bottom: $indent-m;
+    }
+}
+
+// input with a right label
+
+.ris-checkbox,
+.ris-radio {
+    opacity: 0;
+    position: absolute;
+
+    &:focus + .ris-input-label {
+        &::before,
+        &::after {
+            outline: none;
+        }
+    }
+
+    & + .ris-input-label {
+        align-items: center;
+        display: inline-flex;
+        height: 34px;
+        padding-left: 44px;
+        position: relative;
+
+        &::before,
+        &::after {
+            background-color: $c-white;
+            border: 1px solid $c-gray3;
+            content: '';
+            display: inline-block;
+            height: 31px;
+            left: 0;
+            position: absolute;
+            top: 0;
+            width: 31px;
+        }
+    }
+}
+
+.ris-radio {
+    & + .ris-input-label {
+        &::before,
+        &::after {
+            border-radius: 50%;
+        }
+    }
+
+    &:checked + .ris-input-label {
+        &::after {
+            background-color: $c-gray2;
+            border-radius: 50%;
+            transform: scale(.8);
+        }
+    }
+}
+
+.ris-checkbox {
+    & + .ris-input-label {
+        &::before,
+        &::after {
+            border-radius: 4px;
+        }
+    }
+
+    &:checked + .ris-input-label {
+        &::after {
+            background-color: $c-gray2;
+            border-radius: 4px;
+            transform: scale(.8);
+        }
+    }
+}
+
+.ris-input {
+    background-color: $c-white2;
+    border: 1px solid $c-gray7;
+    border-radius: 2px;
+    box-shadow: 0 1px 6px 0 $c-box-shadow;
+    box-sizing: border-box;
+    font-size: $fs-l;
+    height: 40px;
+    line-height: $lh-l;
+    max-width: 460px;
+    outline: none;
+    padding: $indent-s $indent-s $indent-s $indent-xl;
+    width: 100%;
+}
+
+.ris-search {
+    position: relative;
+
+    &__button {
+        background: transparent;
+        border: 0;
+        cursor: pointer;
+        display: inline-block;
+        margin: 0;
+        outline: none;
+        padding: 0;
+        position: absolute;
+
+        &::before {
+            align-items: center;
+            color: $c-gray2;
+            content: 'S';
+            display: inline-flex;
+            font-family: $ff-ris-font-icons;
+            height: 40px;
+            justify-content: center;
+            line-height: 1;
+            margin: 0;
+            padding: 0;
+            pointer-events: none;
+            speak: none;
+            width: 40px;
+        }
+    }
+
+    &__input {
+        appearance: none;
+        background-color: $c-white2;
+        border: 1px solid $c-gray7;
+        border-radius: 2px;
+        box-shadow: 0 1px 6px 0 $c-box-shadow;
+        box-sizing: border-box;
+        font-size: $fs-l;
+        line-height: $lh-l;
+        outline: none;
+        padding: $indent-s $indent-s $indent-s $indent-xl;
+        text-overflow: ellipsis;
+        width: 100%;
+    }
+}

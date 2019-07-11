@@ -1,8 +1,17 @@
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+// Mixins, responsive points and so on
+@import 'abstracts/index';
 
-// Variables
-@import 'variables';
+// Base colors, typography, icons and so on
+@import 'base/index';
 
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
+// Components buttons, label
+@import 'components/index';
+
+// Vendors
+@import 'vendors/index';
+
+// Layouts main, header, footer
+@import 'layouts/index';
+
+// Pages start, Themen, Kalendar so on
+@import 'pages/index';

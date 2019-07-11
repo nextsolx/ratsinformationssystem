@@ -1,0 +1,23 @@
+// border
+$border: 1px solid $c-gray3;
+
+.ris-border {
+    border: $border;
+}
+
+// border-radius
+$b-radius-primary: 4px;
+$b-radius-secondary: 28px;
+$b-radius-thirty: 16px;
+
+.ris-b-radius-primary {
+    border-radius: $b-radius-primary;
+}
+
+.ris-b-radius-secondary {
+    border-radius: $b-radius-secondary;
+}
+
+.ris-b-radius-thirty {
+    border-radius: $b-radius-thirty;
+}

@@ -1,0 +1,60 @@
+.ris-link {
+    color: $c-link;
+    cursor: pointer;
+    display: inline-block;
+    font-family: $ff-helvetica-neue;
+    font-size: $fs-l;
+    line-height: $lh-l;
+    text-decoration: none;
+
+    &_underline {
+        color: $c-gray2;
+        font-family: $ff-helvetica;
+        font-size: $fs-m;
+        line-height: $lh-l;
+        text-decoration: underline;
+    }
+
+    &__secondary {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+
+        &::after {
+            content: 'I';
+            display: inline-block;
+            font-family: $ff-ris-font-icons;
+            font-size: $fs-m;
+            height: 14px;
+            line-height: 1;
+            margin: 0;
+            speak: none;
+            width: 14px;
+        }
+    }
+
+    &_has-icon {
+        align-items: center;
+        color: $c-primary;
+        display: flex;
+        font-family: $ff-sf-pro-display-bold;
+        justify-content: space-between;
+
+        &::after {
+            color: $c-secondary;
+            content: 'I';
+            display: inline-block;
+            font-family: $ff-ris-font-icons;
+            height: 14px;
+            line-height: 1;
+            margin: 0;
+            padding: 0;
+            speak: none;
+            width: 14px;
+
+            @include breakpoint($bp-mobile-max) {
+                font-size: $fs-s;
+            }
+        }
+    }
+}

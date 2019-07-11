@@ -1,0 +1,32 @@
+.ris-label {
+    align-items: center;
+    background-color: $c-gray4;
+    border: 0;
+    border-radius: $b-radius-secondary;
+    color: $c-gray2;
+    display: inline-flex;
+    font-family: $ff-open-sans;
+    font-size: $fs-l;
+    font-weight: 600;
+    justify-content: center;
+    line-height: $lh-l;
+    min-width: 136px;
+    outline: none;
+    padding-bottom: $indent-s;
+    padding-top: $indent-s;
+
+    &::after {
+        color: $c-gray2;
+        content: 'J';
+        display: inline-block;
+        font-family: $ff-ris-font-icons;
+        font-size: $fs-m;
+        height: 16px;
+        line-height: 1;
+        margin: 0 0 0 $indent-m;
+        padding: 0;
+        pointer-events: none;
+        speak: none;
+        width: 16px;
+    }
+}

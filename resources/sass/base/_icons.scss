@@ -1,0 +1,139 @@
+.ris-i {
+    color: $c-gray2;
+    display: inline-block;
+    font-family: $ff-ris-font-icons;
+    height: 16px;
+    line-height: 1;
+    margin: 0;
+    padding: 0;
+    speak: none;
+    width: 16px;
+
+    &_has-bg {
+        background-color: $c-gray4;
+        border-radius: 50%;
+        display: inline-block;
+        line-height: 1;
+        padding: 7px;
+    }
+
+    &__add {
+        &::before {
+            content: 'J';
+        }
+    }
+
+    &__apps {
+        &::before {
+            content: 'B';
+        }
+    }
+
+    &__arrow-drop-down {
+        &::before {
+            content: 'C';
+        }
+    }
+
+    &__arrow-drop-up {
+        &::before {
+            content: 'D';
+        }
+    }
+
+    &__arrow-forward {
+        &::before {
+            content: 'E';
+        }
+    }
+
+    &__back {
+        &::before {
+            content: 'F';
+        }
+    }
+
+    &__check {
+        &::before {
+            content: 'G';
+        }
+    }
+
+    &__chevron-left {
+        &::before {
+            content: 'H';
+        }
+    }
+
+    &__chevron-right {
+        &::before {
+            content: 'I';
+        }
+    }
+
+    &__close {
+        &::before {
+            content: 'J';
+        }
+    }
+
+    &__expand-less {
+        &::before {
+            content: 'K';
+        }
+    }
+
+    &__expand-more {
+        &::before {
+            content: 'L';
+        }
+    }
+
+    &__favorite {
+        &::before {
+            content: 'M';
+        }
+    }
+
+    &__fullscreen-exit {
+        &::before {
+            content: 'N';
+        }
+    }
+
+    &__fullscreen {
+        &::before {
+            content: 'O';
+        }
+    }
+
+    &__menu {
+        &::before {
+            content: 'P';
+        }
+    }
+
+    &__more {
+        &::before {
+            content: 'Q';
+        }
+    }
+
+    &__refresh {
+        &::before {
+            content: 'R';
+        }
+    }
+
+    &__search {
+        &::before {
+            content: 'S';
+        }
+    }
+
+    &__account-circle {
+        &::before {
+            content: 'T';
+        }
+    }
+}

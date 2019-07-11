@@ -18,3 +18,7 @@ Route::get('/', function () {
 Route::get('/styleguide', function () {
     return view('styleguide');
 });
+
+Route::get('/kalender', function () {
+    return view('kalender');
+});

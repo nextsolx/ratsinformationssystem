@@ -23,8 +23,8 @@ export default {
         };
     },
     mounted() {
-        L.map('map-desktop-osm', {
-            fullscreenControl: true
+        this.$nextTick(() => {
+            this.$refs.mapDesktopOsm.mapObject.addControl(new L.Control.Fullscreen());
         });
     }
 };

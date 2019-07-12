@@ -3,47 +3,56 @@
 namespace Tests\Mocks;
 
 
+use Carbon\Carbon;
+
 class MeetingMock
 {
     public static function example()
     {
-        return array (
+        return self::meeting();
+    }
+
+    public static function exampleOldDate()
+    {
+        return self::meeting(Carbon::parse('2019-01-04T08:00:00+01:00')->subYears(5));
+    }
+
+        private static function meeting(Carbon $date = null)
+    {
+        return [
             'id' => 'https://oparl.example.org/meeting/281',
             'type' => 'https://schema.oparl.org/1.1/Meeting',
             'name' => '4. Sitzung des Finanzausschusses',
-            'start' => '2013-01-04T08:00:00+01:00',
-            'end' => '2013-01-04T12:00:00+01:00',
-            'location' =>
-                array (
+            'start' => $date ? $date->toW3cString() : '2019-01-04T08:00:00+01:00',
+            'end' => $date ? $date->addHour()->toW3cString() :'2019-01-04T12:00:00+01:00',
+            'location' => [
                     'id' => 'https://oparl.example.org/location/0',
                     'type' => 'https://schema.oparl.org/1.1/Location',
                     'description' => 'Rathaus der Beispielstadt, Ratshausplatz 1, 12345 Beispielstadt',
                     'created' => '2012-01-06T12:01:00+01:00',
                     'modified' => '2012-01-08T14:05:27+01:00',
                     'geojson' =>
-                        array (
+                        [
                             'type' => 'Feature',
                             'geometry' =>
-                                array (
+                                [
                                     'type' => 'Point',
                                     'coordinates' =>
-                                        array (
+                                        [
                                             0 => 50.1234,
                                             1 => 10.4321,
-                                        ),
-                                ),
+                                        ],
+                                ],
                             'properties' =>
-                                array (
+                                [
                                     'name' => 'Rathausplatz',
-                                ),
-                        ),
-                ),
-            'organization' =>
-                array (
+                                ],
+                        ],
+                ],
+            'organization' => [
                     0 => 'https://oparl.example.org/organization/34',
-                ),
-            'invitation' =>
-                array (
+                ],
+            'invitation' => [
                     'id' => 'https://oparl.example.org/files/57739',
                     'type' => 'https://schema.oparl.org/1.1/File',
                     'name' => 'Einladung',
@@ -56,9 +65,8 @@ class MeetingMock
                     'accessUrl' => 'https://oparl.example.org/files/57739.pdf',
                     'downloadUrl' => 'https://oparl.example.org/files/download/57739.pdf',
                     'created' => '2012-01-06T12:01:00+01:00',
-                ),
-            'resultsProtocol' =>
-                array (
+                ],
+            'resultsProtocol' => [
                     'id' => 'https://oparl.example.org/files/57739',
                     'type' => 'https://schema.oparl.org/1.1/File',
                     'name' => 'Protokoll',
@@ -71,9 +79,8 @@ class MeetingMock
                     'downloadUrl' => 'https://oparl.example.org/files/download/57739.pdf',
                     'modified' => '2012-01-08T14:05:27+01:00',
                     'created' => '2012-01-06T12:01:00+01:00',
-                ),
-            'verbatimProtocol' =>
-                array (
+                ],
+            'verbatimProtocol' => [
                     'id' => 'https://oparl.example.org/files/57739',
                     'type' => 'https://schema.oparl.org/1.1/File',
                     'name' => 'Wortprotokoll',
@@ -86,11 +93,10 @@ class MeetingMock
                     'downloadUrl' => 'https://oparl.example.org/files/download/57739.pdf',
                     'modified' => '2012-01-08T14:05:27+01:00',
                     'created' => '2012-01-08T14:05:27+01:00',
-                ),
-            'auxiliaryFile' =>
-                array (
+                ],
+            'auxiliaryFile' => [
                     0 =>
-                        array (
+                        [
                             'id' => 'https://oparl.example.org/files/57739',
                             'type' => 'https://schema.oparl.org/1.1/File',
                             'name' => 'Nachtrags-Tagesordnung',
@@ -103,12 +109,11 @@ class MeetingMock
                             'downloadUrl' => 'https://oparl.example.org/files/download/57739.pdf',
                             'modified' => '2012-01-08T14:05:27+01:00',
                             'created' => '2012-01-08T14:05:27+01:00',
-                        ),
-                ),
-            'agendaItem' =>
-                array (
+                        ],
+                ],
+            'agendaItem' => [
                     0 =>
-                        array (
+                        [
                             'id' => 'https://oparl.example.org/agendaitem/3271',
                             'type' => 'https://schema.oparl.org/1.1/AgendaItem',
                             'meeting' => 'https://oparl.example.org/meeting/281',
@@ -120,10 +125,10 @@ class MeetingMock
                             'resolutionText' => 'Der Beschluss weicht wie folgt vom Antrag ab: ...',
                             'created' => '2012-01-06T12:01:00+01:00',
                             'modified' => '2012-01-08T14:05:27+01:00',
-                        ),
-                ),
+                        ],
+                ],
             'created' => '2012-01-06T12:01:00+01:00',
             'modified' => '2012-01-08T14:05:27+01:00',
-        );
+        ];
     }
 }

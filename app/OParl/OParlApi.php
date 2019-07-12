@@ -3,7 +3,9 @@
 namespace App\OParl;
 
 use GuzzleHttp\Client;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Str;
 
 class OParlApi
 {
@@ -19,7 +21,6 @@ class OParlApi
         $this->client = new Client([
             'base_uri' => $domain,
         ]);
-
     }
 
     private function call(string $method, string $endpoint, int $page = null) {
@@ -27,7 +28,9 @@ class OParlApi
             return $data;
         }
 
-        $response = $this->client->request($method, sprintf('%s?page=%s', $endpoint, $page));
+        $urlConcat = Str::contains($endpoint, '?') ? '&' : '?';
+
+        $response = $this->client->request($method, sprintf('%s%spage=%s', $endpoint, $urlConcat , $page));
 
         $data = json_decode($response->getBody()->getContents(), true);
 
@@ -56,9 +59,13 @@ class OParlApi
         Cache::put($this->getCacheHash($method, $endpoint, $page), $data, now()->addMinutes(10));
     }
 
-    public function meetings(int $page = null)
+    public function meetings(int $page = null, Carbon $from = null)
     {
         $endpoint = sprintf('body/%s/%s', $this->bodyId, 'meeting');
+
+        if ($from) {
+            $endpoint .= '?' . 'created_since=' . urlencode($from->toIso8601String());
+        }
 
         return $this->call('GET', $endpoint, $page);
     }

@@ -4,13 +4,14 @@ namespace App\OParl;
 
 use App\Meeting;
 use App\Organization;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 
 class OParlApiManager
 {
-    public static function meetings($page = null)
+    public static function meetings($page = null, Carbon $from = null)
     {
-        $data = resolve(\App\Contracts\OParlApi::class)->meetings($page);
+        $data = resolve(\App\Contracts\OParlApi::class)->meetings($page, $from);
 
         $meeting = collect($data['data'])->map(function ($meetingData) {
             return new Meeting($meetingData);

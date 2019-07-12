@@ -3,14 +3,27 @@
 namespace Tests\Mocks;
 
 
+use Illuminate\Support\Carbon;
+
 class OParlApiMock implements \App\Contracts\OParlApi
 {
-    public function meetings()
+    public function meetings($page = null, Carbon $from = null)
     {
-        return [
-            'data' => [
+        $data = [
+            MeetingMock::example(),
+            MeetingMock::exampleOldDate(),
+        ];
+
+        if ($from && $from->isAfter(
+            Carbon::parse('2014-01-04T08:00:00+01:00')
+        )) {
+            $data = [
                 MeetingMock::example(),
-            ],
+            ];
+        }
+
+        return [
+            'data' => $data,
             'links' => [
                 "first" => "https://example.oparl.org/body/0/meeting",
                 "last" => "https://example.oparl.org/body/0/meeting",

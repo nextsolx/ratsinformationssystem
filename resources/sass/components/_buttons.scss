@@ -1,0 +1,69 @@
+.ris-button {
+    border: 0;
+    border-radius: $b-radius-primary;
+    cursor: pointer;
+    font-family: $ff-open-sans;
+    font-size: $fs-l;
+    font-weight: 600;
+    line-height: $lh-l;
+    min-width: 174px;
+    outline: none;
+    padding-bottom: $indent-m;
+    padding-top: $indent-m;
+    position: relative;
+    text-align: center;
+
+    &_primary {
+        background-color: $c-red;
+        color: $c-white;
+    }
+
+    &_secondary {
+        background-color: $c-white;
+        color: $c-gray2;
+    }
+
+    &_full {
+        width: 100%;
+    }
+
+    &_has-border {
+        border: 1px solid $c-gray3;
+    }
+
+    &_has-icon {
+        &::before {
+            color: $c-gray2;
+            content: 'L';
+            display: inline-block;
+            font-family: $ff-ris-font-icons;
+            font-size: $fs-s;
+            height: 16px;
+            line-height: $lh-s;
+            margin: 0;
+            padding: 0;
+            pointer-events: none;
+            position: absolute;
+            right: $indent-m;
+            speak: none;
+            top: calc(50% - #{$lh-s / 2});
+            width: 16px;
+        }
+    }
+
+    &_red3 {
+        color: $c-red3;
+    }
+
+    &_blue2 {
+        color: $c-blue2;
+    }
+
+    &_bg-gray4 {
+        background-color: $c-gray4;
+    }
+
+    &_bg-gray2 {
+        background-color: $c-gray2;
+    }
+}

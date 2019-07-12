@@ -1,0 +1,136 @@
+// font-size
+$fs-xxxl: 24px;
+$fs-xxl: 22px;
+$fs-xll: 20px;
+$fs-xl: 18px;
+$fs-l: 16px;
+$fs-m: 14px;
+$fs-s: 12px;
+
+// line-height
+$lh-xxl: 32px;
+$lh-xl: 28px;
+$lh-l: 24px;
+$lh-m: 20px;
+$lh-s: 16px;
+
+// font-family
+$ff-sf-pro-display-medium: 'SanFrancisco Pro Display Medium', sans-serif;
+$ff-sf-pro-display-light: 'SanFrancisco Pro Display Light', sans-serif;
+$ff-sf-pro-display-bold: 'SanFrancisco Pro Display Bold', sans-serif;
+$ff-sf-pro-text-bold: 'SanFrancisco Pro Text Bold', sans-serif;
+$ff-sf-pro-text-medium: 'SanFrancisco Pro Text Medium', sans-serif;
+$ff-sf-ui-text-regular: 'SanFrancisco UI Text Regular', sans-serif;
+$ff-sf-ui-text-semibold: 'SanFrancisco UI Text Semibold', sans-serif;
+$ff-open-sans: 'Open Sans', sans-serif;
+$ff-helvetica: 'Helvetica', sans-serif;
+$ff-helvetica-neue: 'Helvetica Neue', sans-serif;
+$ff-ris-font-icons: 'RIS Font Icons';
+
+// margin/padding/spacing
+$indent-xxl: 60px;
+$indent-xl: 40px;
+$indent-l: 32px;
+$indent-ml: 24px;
+$indent-m: 16px;
+$indent-sm: 12px;
+$indent-s: 8px;
+
+.ris-indent-xxl {
+    padding: $indent-xxl;
+}
+
+.ris-indent-xl {
+    padding: $indent-xl;
+}
+
+.ris-indent-l {
+    padding: $indent-l;
+}
+
+.ris-indent-ml {
+    padding: $indent-ml;
+}
+
+.ris-indent-m {
+    padding: $indent-m;
+}
+
+.ris-indent-sm {
+    padding: $indent-sm;
+}
+
+.ris-indent-s {
+    padding: $indent-s;
+}
+
+// the main typography classes
+.ris-headline {
+    color: $c-primary;
+    font-family: $ff-helvetica;
+    font-weight: bold;
+
+    @include breakpoint($bp-mobile-max) {
+        font-size: $fs-l;
+        line-height: $lh-l;
+    }
+
+    @include breakpoint($bp-tablet-min) {
+        font-size: $fs-xxxl;
+        line-height: $lh-xxl;
+    }
+}
+
+.ris-title {
+    color: $c-primary;
+    font-family: $ff-helvetica;
+    font-weight: bold;
+
+    @include breakpoint($bp-mobile-max) {
+        font-size: $fs-xll;
+        line-height: $lh-l;
+    }
+
+    @include breakpoint($bp-tablet-min) {
+        font-size: $fs-xxl;
+        line-height: $lh-xxl;
+    }
+}
+
+.ris-subheader {
+    color: $c-secondary;
+    font-family: $ff-helvetica-neue;
+
+    @include breakpoint($bp-mobile-max) {
+        font-size: $fs-l;
+        line-height: $lh-l;
+    }
+
+    @include breakpoint($bp-tablet-min) {
+        font-size: $fs-xl;
+        line-height: $lh-xl;
+    }
+}
+
+.ris-body-1 {
+    color: $c-primary;
+    font-family: $ff-sf-pro-display-medium;
+    font-size: $fs-l;
+    font-weight: bold;
+    line-height: $lh-l;
+}
+
+.ris-body-2 {
+    color: $c-secondary;
+    font-family: $ff-helvetica-neue;
+    font-size: $fs-l;
+    line-height: $lh-l;
+}
+
+.ris-caption {
+    color: $c-secondary;
+    font-family: $ff-helvetica-neue;
+    font-size: $fs-m;
+    font-weight: 500;
+    line-height: $lh-l;
+}

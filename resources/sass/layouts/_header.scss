@@ -1,0 +1,108 @@
+.ris-header {
+    @include breakpoint($bp-mobile-max) {
+        align-items: center;
+        box-shadow: 0 1px 6px 0 $c-box-shadow;
+        display: flex;
+        padding-bottom: $indent-sm;
+        padding-top: $indent-sm;
+    }
+
+    @include breakpoint($bp-desktop-min) {
+        box-shadow: 0 6px 6px -2px $c-box-shadow2;
+    }
+
+    &__bottom {
+        @include breakpoint($bp-mobile-max) {
+            display: inline-flex;
+            flex-grow: 1;
+        }
+
+        @include breakpoint($bp-tablet-min) {
+            display: flex;
+        }
+    }
+
+    &__top {
+        @include breakpoint($bp-mobile-max) {
+            display: inline-flex;
+        }
+
+        @include breakpoint($bp-tablet-min) {
+            background-color: $c-red;
+            display: flex;
+        }
+    }
+
+    .ris-logo {
+        @include breakpoint($bp-mobile-max) {
+            height: 37px;
+            margin-left: $indent-sm;
+
+            &__desktop {
+                display: none;
+            }
+        }
+
+        @include breakpoint($bp-tablet-min) {
+            height: 48px;
+
+            &__mobile {
+                display: none;
+            }
+        }
+    }
+
+    .ris-slogan {
+        border-left: 4px solid $c-white;
+        color: $c-white;
+        flex-grow: 1;
+        font-family: $ff-open-sans;
+        font-size: $fs-xl;
+        line-height: $lh-l;
+        margin-left: $indent-s;
+        padding-left: 20px;
+        padding-top: 13px;
+
+        @include breakpoint($bp-mobile-max) {
+            display: none;
+        }
+    }
+
+    .ris-account {
+        align-items: center;
+        color: $c-white;
+        display: inline-flex;
+        font-family: $ff-ris-font-icons;
+        font-size: $fs-xl;
+        line-height: 1;
+        padding-right: 14px;
+        text-decoration: none;
+
+        @include breakpoint($bp-mobile-max) {
+            display: none;
+        }
+
+        &::before {
+            content: 'T';
+        }
+
+        &::after {
+            content: 'C';
+            font-size: $fs-s;
+            margin-left: $indent-s;
+        }
+    }
+
+    .ris-search {
+        flex-grow: 1;
+
+        @include breakpoint($bp-mobile-max) {
+            margin-left: $indent-sm;
+        }
+
+        @include breakpoint($bp-tablet-min) {
+            align-self: center;
+            margin-left: $indent-sm * 2;
+        }
+    }
+}

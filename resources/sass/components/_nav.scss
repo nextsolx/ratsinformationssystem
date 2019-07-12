@@ -1,0 +1,152 @@
+.ris-nav {
+    $base: &;
+
+    display: inline-flex;
+    font-family: $ff-helvetica;
+
+    @include breakpoint($bp-mobile-max) {
+        font-size: $fs-m;
+        line-height: $lh-l;
+
+        &__overlay {
+            opacity: 0;
+            transition: opacity .2s;
+
+            & > #{$base}__menu {
+                background-color: $c-white;
+                bottom: 0;
+                box-shadow: 0 2px 12px 0 $c-box-shadow2;
+                display: none;
+                height: 80vh;
+                position: absolute;
+                right: 0;
+                width: 80vw;
+            }
+
+            &_active {
+                height: 100%;
+                left: 0;
+                opacity: 1;
+                position: fixed;
+                top: 0;
+                width: 100%;
+                z-index: 100;
+
+                & > #{$base}__menu {
+                    display: block;
+                }
+            }
+        }
+    }
+
+    &__menu-header {
+        align-items: center;
+        box-shadow: 0 2px 6px -2px $c-box-shadow2;
+        display: flex;
+        font-family: $ff-helvetica;
+        font-size: $fs-l;
+        font-weight: bold;
+        justify-content: space-between;
+        line-height: $indent-xxl;
+        padding-left: $indent-m;
+        padding-right: $indent-m;
+        text-transform: uppercase;
+
+        @include breakpoint($bp-tablet-min) {
+            display: none;
+        }
+    }
+
+    @include breakpoint($bp-tablet-min) {
+        margin-left: $indent-m;
+        margin-right: $indent-l;
+    }
+
+    &__cta {
+        background: none;
+        border: 0;
+        margin: 0;
+        outline: none;
+
+        &:active {
+            border-style: outset;
+        }
+
+        &_parent {
+            font-family: $ff-helvetica;
+            padding-left: $indent-sm;
+            padding-right: $indent-sm;
+            position: relative;
+            text-transform: uppercase;
+            z-index: 101;
+
+            @include breakpoint($bp-tablet-min) {
+                display: none;
+            }
+        }
+
+        &_child {
+            font-size: $fs-m;
+
+            @include breakpoint($bp-tablet-min) {
+                display: none;
+            }
+
+            .ris-i {
+                color: $c-black;
+                font-size: $fs-m;
+            }
+        }
+    }
+
+    &__link {
+        color: $c-gray;
+        font-family: $ff-helvetica;
+        font-size: $fs-l;
+        font-weight: bold;
+        line-height: $indent-xxl;
+        margin-left: $indent-sm;
+        margin-right: $indent-sm;
+        text-decoration: none;
+
+        @include breakpoint($bp-mobile-max) {
+            align-items: center;
+            display: flex;
+            margin-left: 40px;
+        }
+
+        @include breakpoint($bp-tablet-min) {
+            display: inline-flex;
+        }
+
+        &_active {
+            @include breakpoint($bp-mobile-max) {
+                &::before {
+                    background-color: $c-red;
+                    border-radius: 50%;
+                    content: '';
+                    display: inline-block;
+                    height: 10px;
+                    margin-left: -20px;
+                    margin-right: 10px;
+                    width: 10px;
+                }
+            }
+
+            @include breakpoint($bp-tablet-min) {
+                border-bottom: 4px solid $c-red;
+                color: $c-red;
+            }
+        }
+
+        &-wrapper {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+
+            @include breakpoint($bp-tablet-min) {
+                display: inline-flex;
+            }
+        }
+    }
+}

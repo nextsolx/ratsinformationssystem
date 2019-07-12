@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="12px" viewBox="0 0 18 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 55.2 (78181) - https://sketchapp.com -->
+    <title>F936BA5C-8106-44CC-AC12-657794F73612</title>
+    <desc>Created with sketchtool.</desc>
+    <g id="GUI" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="UI-Elemente" transform="translate(-779.000000, -1783.000000)">
+            <g id="menu" transform="translate(776.000000, 1777.000000)">
+                <rect id="bounds" x="0" y="0" width="24" height="24"></rect>
+                <path d="M3,18 L21,18 L21,16 L3,16 L3,18 L3,18 Z M3,13 L21,13 L21,11 L3,11 L3,13 L3,13 Z M3,6 L3,8 L21,8 L21,6 L3,6 L3,6 Z" id="Shape" fill="#545458"></path>
+            </g>
+        </g>
+    </g>
+</svg>

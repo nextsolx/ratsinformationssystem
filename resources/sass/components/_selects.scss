@@ -1,0 +1,54 @@
+.ris-select {
+    background: $c-white;
+    border: 1px solid $c-gray3;
+    border-radius: $b-radius-primary;
+    display: inline-block;
+    overflow: hidden;
+    padding: 0;
+    position: relative;
+    vertical-align: middle;
+
+    &::before {
+        color: $c-gray2;
+        content: 'L';
+        display: inline-block;
+        font-family: $ff-ris-font-icons;
+        font-size: $fs-s;
+        height: 16px;
+        line-height: $lh-s;
+        margin: 0;
+        padding: 0;
+        pointer-events: none;
+        position: absolute;
+        right: $indent-m;
+        speak: none;
+        top: calc(50% - #{$lh-s / 2});
+        width: 16px;
+    }
+
+    &__select {
+        appearance: none;
+        background: transparent;
+        background-image: none;
+        border: 0;
+        cursor: pointer;
+        font-family: $ff-open-sans;
+        font-size: $fs-l;
+        font-weight: 600;
+        height: 54px;
+        line-height: $lh-l;
+        min-width: 174px;
+        padding: 0 $indent-m * 2 0 $indent-m;
+        text-align: center;
+        text-indent: .01px;
+        text-overflow: unset;
+
+        &:focus {
+            outline: none;
+        }
+
+        &::-ms-expand {
+            display: none;
+        }
+    }
+}

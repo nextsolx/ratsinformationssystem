@@ -1,99 +1,76 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.app')
 
-        <title>Laravel</title>
-
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+@section('content')
+    <main class="ris-content ris-content__welcome">
+        <div class="ris-welcome">
+            <div class="ris-welcome__headline">
+                <img class="ris-welcome__headline-img_left" src="./img/couple_near_table.png" alt="Kölner Stadtpolitik"/>
+                <div>
+                    <div class="ris-headline">
+                        Kölner Stadtpolitik
+                    </div>
+                    <div class="ris-subheader">
+                        Einfach und Transparent
+                    </div>
                 </div>
             </div>
+
+            <map-mobile-app class="map-mobile"></map-mobile-app>
+
+            <section class="ris-card-list">
+                <div class="ris-title">Kommende Stadtrat Sitzungen</div>
+
+                <div class="ris-card-list__item">
+                    <div class="ris-caption">02.05.2019, 15:30 Uhr</div>
+                    <a class="ris-link ris-link_has-icon">Ausschuss Soziales und Senioren</a>
+                    <div class="ris-body-2">Historisches Rathaus, Konrad ....</div>
+                </div>
+
+                <div class="ris-card-list__item">
+                    <div class="ris-caption">02.05.2019, 15:30 Uhr</div>
+                    <a class="ris-link ris-link_has-icon">Ausschuss Soziales und Senioren</a>
+                    <div class="ris-body-2">Historisches Rathaus, Konrad ....</div>
+                </div>
+
+                <a href="/kalender" class="ris-link ris-body2">
+                    Zur Sitzungsübersicht
+                </a>
+            </section>
+
+            <section class="ris-card-list">
+                <div class="ris-title">Aktuelle Themen und Vorlagen</div>
+
+                <div class="ris-card-list__item">
+                    <div class="ris-caption">Bürgereingabe: BV3/0020/2016</div>
+                    <a class="ris-link ris-link_has-icon">Entwicklung einer Beteiligungskultur für Köln</a>
+                    <div class="ris-body-2">Letzte Bearbeitung: 27.10.2018</div>
+                </div>
+
+                <div class="ris-card-list__item">
+                    <div class="ris-caption">Bürgereingabe: BV3/0020/2016</div>
+                    <a class="ris-link ris-link_has-icon">Generalsanierung Drehbrücke Deutzer Hafen</a>
+                    <div class="ris-body-2">Letzte Bearbeitung: 27.10.2018</div>
+                </div>
+
+                <a href="/themen_and_karte" class="ris-link ris-body2">
+                    Alle Themen ansehen
+                </a>
+            </section>
+
+            <div class="ris-hint-box">
+                <div>
+                    <div class="ris-title">Die Gremien</div>
+                    <div class="ris-subheader">
+                        Wer entscheidet? Welches Organ ist für mein Anliegen zuständig?
+                    </div>
+                    <a href="/themen_and_karte" class="ris-link ris-link__secondary ris-body2">
+                        Was macht der Stadtrat?
+                    </a>
+                </div>
+                <img class="ris-welcome__headline-img_right" src="./img/car_with_man.png" alt="Kölner Stadtpolitik"/>
+            </div>
         </div>
-    </body>
-</html>
+
+        <map-desktop-app class="map-desktop"></map-desktop-app>
+    </main>
+@endsection

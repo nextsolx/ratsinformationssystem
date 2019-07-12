@@ -1,0 +1,78 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+<metadata>
+Created by FontForge 20170731 at Mon Jul  8 12:39:11 2019
+ By Aleksey,,,
+Copyright (c) 2019, Alexandr Krivonos
+</metadata>
+<defs>
+<font id="Untitled1" horiz-adv-x="1000" >
+  <font-face 
+    font-family="Untitled1"
+    font-weight="400"
+    font-stretch="normal"
+    units-per-em="1000"
+    panose-1="2 0 5 9 0 0 0 0 0 0"
+    ascent="800"
+    descent="-200"
+    cap-height="800"
+    bbox="0 -200 1000 800"
+    underline-thickness="50"
+    underline-position="-150"
+    unicode-range="U+0041-0054"
+  />
+<missing-glyph 
+d="M33 0v666h265v-666h-265zM66 33h199v600h-199v-600z" />
+    <glyph glyph-name=".notdef" 
+d="M33 0v666h265v-666h-265zM66 33h199v600h-199v-600z" />
+    <glyph glyph-name=".null" horiz-adv-x="0" 
+ />
+    <glyph glyph-name="nonmarkingreturn" 
+ />
+    <glyph glyph-name="A" unicode="A" 
+d="M429 800h142v-429h429v-142h-429v-429h-142v429h-429v142h429v429z" />
+    <glyph glyph-name="B" unicode="B" 
+d="M0 550v250h250v-250h-250zM375 -200v250h250v-250h-250zM0 -200v250h250v-250h-250zM0 175v250h250v-250h-250zM375 175v250h250v-250h-250zM750 800h250v-250h-250v250zM375 550v250h250v-250h-250zM750 175v250h250v-250h-250zM750 -200v250h250v-250h-250z" />
+    <glyph glyph-name="C" unicode="C" 
+d="M0 640h1000l-500 -500z" />
+    <glyph glyph-name="D" unicode="D" 
+d="M0 140l500 500l500 -500h-1000z" />
+    <glyph glyph-name="E" unicode="E" 
+d="M500 800l500 -500l-500 -500l-88 88l350 350h-762v124h762l-350 350z" />
+    <glyph glyph-name="F" unicode="F" 
+d="M1000 362v-124h-762l350 -350l-88 -88l-500 500l500 500l88 -88l-350 -350h762z" />
+    <glyph glyph-name="G" unicode="G" 
+d="M333 178l589 589l78 -78l-667 -667l-311 311l78 78z" />
+    <glyph glyph-name="H" unicode="H" 
+d="M617 683l-384 -383l384 -383l-117 -117l-500 500l500 500z" />
+    <glyph glyph-name="I" unicode="I" 
+d="M50 683l117 117l500 -500l-500 -500l-117 117l383 383z" />
+    <glyph glyph-name="J" unicode="J" 
+d="M1000 700l-400 -400l400 -400l-100 -100l-400 400l-400 -400l-100 100l400 400l-400 400l100 100l400 -400l400 400z" />
+    <glyph glyph-name="K" unicode="K" 
+d="M500 700l500 -500l-117 -117l-383 384l-383 -384l-117 117z" />
+    <glyph glyph-name="L" unicode="L" 
+d="M883 670l117 -117l-500 -500l-500 500l117 117l383 -383z" />
+    <glyph glyph-name="M" unicode="M" 
+d="M500 633q28 73 98.5 120t151.5 47q106 0 178 -71.5t72 -178.5q0 -41 -11.5 -81t-38 -81.5t-55.5 -78.5t-78 -87t-90.5 -90t-108.5 -105t-118 -116q-51 51 -118 116t-108.5 105t-90.5 90t-78 87t-55.5 78.5t-38 81.5t-11.5 81q0 107 72 178.5t178 71.5q81 0 151.5 -47
+t98.5 -120z" />
+    <glyph glyph-name="N" unicode="N" 
+d="M0 14v143h357v-357h-143v214h-214zM214 586v214h143v-357h-357v143h214zM643 -200v357h357v-143h-214v-214h-143zM786 586h214v-143h-357v357h143v-214z" />
+    <glyph glyph-name="O" unicode="O" 
+d="M143 157v-214h214v-143h-357v357h143zM0 443v357h357v-143h-214v-214h-143zM857 -57v214h143v-357h-357v143h214zM643 800h357v-357h-143v214h-214v143z" />
+    <glyph glyph-name="P" unicode="P" 
+d="M0 -6v111h1000v-111h-1000zM0 272v111h1000v-111h-1000zM0 661h1000v-111h-1000v111z" />
+    <glyph glyph-name="Q" unicode="Q" 
+d="M125 550q-52 0 -88.5 36.5t-36.5 88.5t36.5 88.5t88.5 36.5t88.5 -36.5t36.5 -88.5t-36.5 -88.5t-88.5 -36.5zM125 425q52 0 88.5 -36.5t36.5 -88.5t-36.5 -88.5t-88.5 -36.5t-88.5 36.5t-36.5 88.5t36.5 88.5t88.5 36.5zM125 50q52 0 88.5 -36.5t36.5 -88.5t-36.5 -88.5
+t-88.5 -36.5t-88.5 36.5t-36.5 88.5t36.5 88.5t88.5 36.5z" />
+    <glyph glyph-name="R" unicode="R" 
+d="M500 800q93 0 181 -33t194 -92l125 125v-438h-438l188 188q-87 125 -250 125q-155 0 -265 -110t-110 -265t110 -265t265 -110q118 0 217.5 69t157.5 181h125q-58 -164 -194.5 -269.5t-305.5 -105.5q-206 0 -353 147t-147 353t147 353t353 147z" />
+    <glyph glyph-name="S" unicode="S" 
+d="M694 189l278 -278l-83 -83l-278 278v43l-15 16q-101 -87 -235 -87q-98 0 -181 48t-131.5 131.5t-48.5 181.5t48.5 181t131.5 131.5t181 48.5t181.5 -48.5t131.5 -131.5t48 -181q0 -134 -87 -235l16 -15h43zM361 189q104 0 177 73t73 177t-73 177t-177 73t-177 -73
+t-73 -177t73 -177t177 -73z" />
+    <glyph glyph-name="T" unicode="T" 
+d="M500 800q-136 0 -251 -67t-182 -182t-67 -251t67 -251t182 -182t251 -67t251 67t182 182t67 251t-67 251t-182 182t-251 67zM500 650q62 0 106 -44t44 -106t-44 -106t-106 -44t-106 44t-44 106t44 106t106 44zM500 -60q-92 0 -171.5 43.5t-128.5 117.5q1 46 56 83t122 54
+t122 17q39 0 89 -10.5t97.5 -29t80 -49t33.5 -65.5q-49 -74 -128.5 -117.5t-171.5 -43.5z" />
+  </font>
+</defs></svg>

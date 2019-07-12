@@ -1,0 +1,5 @@
+@mixin breakpoint($bp) {
+    @media #{$bp} {
+        @content;
+    }
+}

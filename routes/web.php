@@ -14,3 +14,6 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/api/meetings', 'MeetingController@index');
+Route::get('/api/topics', 'TopicController@index');

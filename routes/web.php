@@ -15,6 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Route::get('/styleguide', function () {
     return view('styleguide');
 });
@@ -22,3 +23,7 @@ Route::get('/styleguide', function () {
 Route::get('/kalender', function () {
     return view('kalender');
 });
+
+Route::get('/api/meetings', 'MeetingController@index');
+Route::get('/api/topics', 'TopicController@index');
+

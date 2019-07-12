@@ -24,6 +24,7 @@ Route::get('/kalender', function () {
     return view('kalender');
 });
 
-Route::get('/api/meetings', 'MeetingController@index');
+Route::get('/api/meetings', 'MeetingController@all');
+Route::get('/api/meeting/{id}', 'MeetingController@index');
 Route::get('/api/topics', 'TopicController@index');
 

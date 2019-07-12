@@ -22,6 +22,13 @@ class OParlApiManager
         return [$meeting, $pages];
     }
 
+    public static function meeting(string $id)
+    {
+        $data = resolve(\App\Contracts\OParlApi::class)->meeting($id);
+
+        return new Meeting($data);
+    }
+
     public static function organization(string $organizationId)
     {
         $data = resolve(\App\Contracts\OParlApi::class)->organization($organizationId);

@@ -70,6 +70,13 @@ class OParlApi
         return $this->call('GET', $endpoint, $page);
     }
 
+    public function meeting(string $id)
+    {
+        $endpoint = sprintf('%s/%s','meeting', $id);
+
+        return $this->call('GET', $endpoint);
+    }
+
     public function organization(string $organizationID, int $page = null)
     {
         $endpoint = sprintf('%s/%s', 'organization', $organizationID);

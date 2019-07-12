@@ -11,7 +11,7 @@ use Illuminate\Support\Carbon;
 
 class MeetingController extends Controller
 {
-    public function index(Request $request)
+    public function all(Request $request)
     {
         $from = $request->input('from');
         $from = $from ? Carbon::parse($from) : null;
@@ -26,5 +26,12 @@ class MeetingController extends Controller
         );
 
         return Meeting::collection($meetings);
+    }
+
+    public function index($id)
+    {
+        $meeting = OParlApiManager::meeting($id);
+
+        return new Meeting($meeting);
     }
 }

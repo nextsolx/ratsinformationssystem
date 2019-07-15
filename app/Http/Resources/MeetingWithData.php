@@ -4,8 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-
-class Meeting extends JsonResource
+class MeetingWithData extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -28,6 +27,10 @@ class Meeting extends JsonResource
             'peopleCount' => $this->peopleCount(),
             'fileCount' => $this->fileCount(),
             'location' => new Location($this->location()),
+            'agenda' => Agendum::collection($this->agenda()),
+            'organizations' => Organization::collection($this->organizations()),
+            'people' => Person::collection($this->people()),
+            'files' => File::collection($this->files()),
         ];
     }
 }

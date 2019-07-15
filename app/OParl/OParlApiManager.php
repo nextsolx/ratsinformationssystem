@@ -4,6 +4,8 @@ namespace App\OParl;
 
 use App\Meeting;
 use App\Organization;
+use App\Person;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 
@@ -53,8 +55,31 @@ class OParlApiManager
         return $oganizations;
     }
 
+    public static function personFromMembership(string $id)
+    {
+        $data = resolve(\App\Contracts\OParlApi::class)->membership($id);
+
+        if ($personUrl = Arr::get($data, 'person')) {
+            return static::person(self::extractId($personUrl));
+        }
+
+        return new Person([]);
+    }
+
+    public static function person(string $id)
+    {
+        $data = resolve(\App\Contracts\OParlApi::class)->person($id);
+
+        return new Person($data);
+    }
+
     private static function extractPages($data)
     {
         return $data['pagination'];
+    }
+
+    private static function extractId(string $url)
+    {
+        return Arr::last(explode('/', $url));
     }
 }

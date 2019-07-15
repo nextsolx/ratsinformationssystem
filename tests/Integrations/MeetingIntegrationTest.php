@@ -72,6 +72,9 @@ class MeetingIntegrationTest extends TestCase
                     ],
                     'dateFrom' => '2019-01-04T08:00:00+01:00',
                     'dateTill' => '2019-01-04T12:00:00+01:00',
+                    'files' => [
+
+                    ],
                 ]
             ]);
 

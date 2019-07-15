@@ -3,10 +3,18 @@
 namespace Tests\Mocks;
 
 
+use App\Person;
 use Illuminate\Support\Carbon;
 
 class OParlApiMock implements \App\Contracts\OParlApi
 {
+    public function meeting(string $id)
+    {
+        $data = MeetingMock::example();
+
+        return $data;
+    }
+
     public function meetings($page = null, Carbon $from = null)
     {
         $data = [
@@ -56,5 +64,18 @@ class OParlApiMock implements \App\Contracts\OParlApi
                 'totalPages' => 1,
             ]
         ];
+    }
+
+
+    public function person(string $id)
+    {
+        $data = PersonMock::example();
+
+        return $data;
+    }
+
+    public function membership(string $id)
+    {
+        return PersonMock::example();
     }
 }

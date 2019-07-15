@@ -7,7 +7,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 
-class OParlApi
+class OParlApi implements \App\Contracts\OParlApi
 {
     private $domain;
     private $bodyId;
@@ -33,6 +33,10 @@ class OParlApi
         $response = $this->client->request($method, sprintf('%s%spage=%s', $endpoint, $urlConcat , $page));
 
         $data = json_decode($response->getBody()->getContents(), true);
+
+        if (!$data) {
+            $data = [];
+        }
 
         $this->setCache(
             $data,
@@ -70,6 +74,20 @@ class OParlApi
         return $this->call('GET', $endpoint, $page);
     }
 
+    public function person(string $id)
+    {
+        $endpoint = sprintf('%s/%s','person', $id);
+
+        return $this->call('GET', $endpoint);
+    }
+
+    public function membership(string $id)
+    {
+        $endpoint = sprintf('%s/%s','membership', $id);
+
+        return $this->call('GET', $endpoint);
+    }
+
     public function meeting(string $id)
     {
         $endpoint = sprintf('%s/%s','meeting', $id);
@@ -83,4 +101,5 @@ class OParlApi
 
         return $this->call('GET', $endpoint, $page);
     }
+
 }

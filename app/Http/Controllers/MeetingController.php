@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Http\Resources\Meeting;
+use App\Http\Resources\MeetingWithData;
 use App\OParl\OParlApiManager;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -32,6 +33,6 @@ class MeetingController extends Controller
     {
         $meeting = OParlApiManager::meeting($id);
 
-        return new Meeting($meeting);
+        return new MeetingWithData($meeting);
     }
 }

@@ -23,7 +23,7 @@ Vue.use(VCalendar, {
 });
 
 export default {
-    name: 'CalenderApp',
+    name: 'CalendarApp',
     data: () => ({
         attrs: [
             {

@@ -15,13 +15,12 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-
 Route::get('/styleguide', function () {
     return view('styleguide');
 });
 
 Route::get('/kalender', function () {
-    return view('calender');
+    return view('calendar');
 })->name('calendar');
 
 Route::get('/themen-und-karte', function () {

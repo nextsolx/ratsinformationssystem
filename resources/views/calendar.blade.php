@@ -1,26 +1,26 @@
 @extends('layouts.app')
 
 @section('content')
-    <main class="ris-content ris-calender">
-        <h1 class="ris-calender__headline ris-headline">
+    <main class="ris-content ris-calendar">
+        <h1 class="ris-calendar__headline ris-headline">
             Sitzungskalender
         </h1>
 
-        <div class="ris-calender__flex-wrapper">
-            <calender-app></calender-app>
+        <div class="ris-calendar__flex-wrapper">
+            <calendar-app></calendar-app>
 
-            <div class="ris-calender__content">
-                <div class="ris-calender__card-list-wrapper">
+            <div class="ris-calendar__content">
+                <div class="ris-calendar__card-list-wrapper">
 
-                    <div class="ris-calender__card-list">
-                        <section class="ris-calender__card-day">
-                            <div class="ris-calender__card-day-left">
+                    <div class="ris-calendar__card-list">
+                        <section class="ris-calendar__card-day">
+                            <div class="ris-calendar__card-day-left">
                                 3<br/>
-                                <span class="ris-calender__card-day-of-week">Mo</span>
+                                <span class="ris-calendar__card-day-of-week">Mo</span>
                             </div>
 
-                            <div class="ris-calender__card-day-right">
-                                <div class="ris-calender__card">
+                            <div class="ris-calendar__card-day-right">
+                                <div class="ris-calendar__card">
                                     <h2 class="ris-headline">
                                         Unterausschuss Kulturbauten
                                     </h2>
@@ -37,15 +37,15 @@
                         </section>
                     </div>
 
-                    <div class="ris-calender__card-list">
-                        <section class="ris-calender__card-day">
-                            <div class="ris-calender__card-day-left">
+                    <div class="ris-calendar__card-list">
+                        <section class="ris-calendar__card-day">
+                            <div class="ris-calendar__card-day-left">
                                 4<br/>
-                                <span class="ris-calender__card-day-of-week">Di</span>
+                                <span class="ris-calendar__card-day-of-week">Di</span>
                             </div>
 
-                            <div class="ris-calender__card-day-right">
-                                <div class="ris-calender__card">
+                            <div class="ris-calendar__card-day-right">
+                                <div class="ris-calendar__card">
                                     <h2 class="ris-headline">
                                         Integrationsrat
                                     </h2>
@@ -59,7 +59,7 @@
                                     </div>
                                 </div>
 
-                                <div class="ris-calender__card">
+                                <div class="ris-calendar__card">
                                     <h2 class="ris-headline">
                                         Ausschuss Schule und Weiterbildung
                                     </h2>

@@ -4,6 +4,7 @@ namespace App\OParl;
 
 use App\Meeting;
 use App\Organization;
+use App\Paper;
 use App\Person;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
@@ -11,6 +12,19 @@ use Illuminate\Support\Collection;
 
 class OParlApiManager
 {
+    public static function topics($page = null)
+    {
+        $data = resolve(\App\Contracts\OParlApi::class)->papers($page);
+
+        $papers = collect($data['data'])->map(function ($papersData) {
+            return new Paper($papersData);
+        });
+
+        $pages = self::extractPages($data);
+
+        return [$papers, $pages];
+    }
+
     public static function meetings($page = null, Carbon $from = null)
     {
         $data = resolve(\App\Contracts\OParlApi::class)->meetings($page, $from);

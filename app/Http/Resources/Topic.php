@@ -19,7 +19,8 @@ class Topic extends JsonResource
         }
 
         return [
-            'title' => $this->title,
+            'name' => $this->name,
+            'location' => new Location($this->location()),
         ];
     }
 }

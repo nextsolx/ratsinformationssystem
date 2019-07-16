@@ -2,8 +2,6 @@
 
 namespace Tests\Mocks;
 
-
-use App\Person;
 use Illuminate\Support\Carbon;
 
 class OParlApiMock implements \App\Contracts\OParlApi
@@ -15,7 +13,12 @@ class OParlApiMock implements \App\Contracts\OParlApi
         return $data;
     }
 
-    public function meetings($page = null, Carbon $from = null)
+    public function papers(int $page = null)
+    {
+        // TODO: Implement papers() method.
+    }
+
+    public function meetings(int $page = null, Carbon $from = null)
     {
         $data = [
             MeetingMock::example(),
@@ -78,4 +81,6 @@ class OParlApiMock implements \App\Contracts\OParlApi
     {
         return PersonMock::example();
     }
+
+
 }

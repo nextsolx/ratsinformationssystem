@@ -63,6 +63,13 @@ class OParlApi implements \App\Contracts\OParlApi
         Cache::put($this->getCacheHash($method, $endpoint, $page), $data, now()->addMinutes(10));
     }
 
+    public function papers(int $page = null)
+    {
+        $endpoint = sprintf('body/%s/%s', $this->bodyId, 'paper');
+
+        return $this->call('GET', $endpoint, $page);
+    }
+
     public function meetings(int $page = null, Carbon $from = null)
     {
         $endpoint = sprintf('body/%s/%s', $this->bodyId, 'meeting');

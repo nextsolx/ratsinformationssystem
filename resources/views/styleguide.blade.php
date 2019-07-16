@@ -446,6 +446,10 @@
                         <span class="ris-i ris-i__favorite"></span>
                         <span class="ris-i ris-i__search"></span>
                         <span class="ris-i ris-i__account-circle"></span>
+                        <span class="ris-i ris-i__calendar"></span>
+                        <span class="ris-i ris-i__download"></span>
+                        <span class="ris-i ris-i__list"></span>
+                        <span class="ris-i ris-i__people"></span>
 
                         <br/><br/>
 

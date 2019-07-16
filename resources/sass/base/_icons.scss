@@ -136,4 +136,28 @@
             content: 'T';
         }
     }
+
+    &__calendar {
+        &::before {
+            content: 'U';
+        }
+    }
+
+    &__download {
+        &::before {
+            content: 'V';
+        }
+    }
+
+    &__list {
+        &::before {
+            content: 'W';
+        }
+    }
+
+    &__people {
+        &::before {
+            content: 'X';
+        }
+    }
 }

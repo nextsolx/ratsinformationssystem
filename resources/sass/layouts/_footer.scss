@@ -1,0 +1,44 @@
+.ris-footer {
+    position: relative;
+
+    &__logo {
+        display: block;
+        padding-bottom: $indent-m;
+
+        &::before {
+            background-image: url('../img/footer-logo-part-1.svg');
+            content: '';
+            display: inline-block;
+            height: 69px;
+            width: calc(100% - 100px);
+        }
+
+        &::after {
+            background-image: url('../img/footer-logo-part-2.svg');
+            background-repeat: no-repeat;
+            content: '';
+            display: inline-block;
+            height: 69px;
+            width: 100px;
+        }
+    }
+
+    &__link-list {
+        display: flex;
+        justify-content: flex-end;
+        list-style: none;
+        margin: 0 100px 0 0;
+        padding: 0;
+        position: absolute;
+        right: 0;
+    }
+
+    &__link {
+        color: $c-gray8;
+        font-family: $ff-helvetica;
+        font-size: $fs-l;
+        line-height: $lh-l;
+        margin-left: $indent-sm;
+        margin-right: $indent-sm;
+    }
+}

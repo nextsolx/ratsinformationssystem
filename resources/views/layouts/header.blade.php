@@ -10,7 +10,7 @@
         </div>
 
         <div class="ris-header__bottom">
-            <div class="ris-search">
+            <div class="ris-search" role="search">
                 <button class="ris-search__button"></button>
                 <input type="search" class="ris-search__input"
                        placeholder="Suche nach Themen, Vorlagen, Sitzungen..."
@@ -36,19 +36,29 @@
                         </div>
                         <ul class="ris-nav__link-wrapper">
                             <li>
-                                <a class="ris-nav__link ris-nav__link_active" href="/">Start</a>
+                                <a class="ris-nav__link @if (url()->current() === route('welcome')) ris-nav__link_active @endif"
+                                   href="/"
+                                >Start</a>
                             </li>
                             <li>
-                                <a class="ris-nav__link" href="/themen_and_karte">Themen & Karte</a>
+                                <a class="ris-nav__link @if (url()->current() === route('themes-map')) ris-nav__link_active @endif"
+                                   href="{{ route('themes-map') }}"
+                                >Themen & Karte</a>
                             </li>
                             <li>
-                                <a class="ris-nav__link" href="/kalender">Kalender</a>
+                                <a class="ris-nav__link @if (url()->current() === route('calendar')) ris-nav__link_active @endif"
+                                   href="{{ route('calendar') }}"
+                                >Kalender</a>
                             </li>
                             <li>
-                                <a class="ris-nav__link" href="/gremien">Gremien</a>
+                                <a class="ris-nav__link @if (url()->current() === route('committee')) ris-nav__link_active @endif"
+                                   href="{{ route('committee') }}"
+                                >Gremien</a>
                             </li>
                             <li>
-                                <a class="ris-nav__link" href="/merkliste">Merkliste</a>
+                                <a class="ris-nav__link @if (url()->current() === route('bookmarks')) ris-nav__link_active @endif"
+                                   href="{{ route('bookmarks') }}"
+                                >Merkliste</a>
                             </li>
                         </ul>
                     </nav>

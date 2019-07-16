@@ -33,7 +33,7 @@ export default {
 <template>
     <div id="map-mobile-osm" class="ris-map ris-map__mobile">
         <l-map ref="mapMobileOsm"
-               :zoom="zoom" :center="center">
+            :zoom="zoom" :center="center">
             <l-tile-layer
                 :url="url"
                 :attribution="attribution"

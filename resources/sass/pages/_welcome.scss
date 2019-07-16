@@ -3,6 +3,28 @@
         display: flex;
         padding: 50px 50px 100px;
     }
+
+    .ris-map {
+        margin-bottom: 20px;
+        z-index: 1;
+
+        @include breakpoint($bp-mobile-max) {
+            height: 30vh;
+
+            &__desktop {
+                display: none;
+            }
+        }
+
+        @include breakpoint($bp-tablet-min) {
+            height: 644px;
+            width: 320px;
+
+            &__mobile {
+                display: none;
+            }
+        }
+    }
 }
 
 .ris-welcome {
@@ -52,28 +74,6 @@
             @include breakpoint($bp-tablet-min) {
                 max-width: 270px;
             }
-        }
-    }
-}
-
-.ris-map {
-    margin-bottom: 20px;
-    z-index: 1;
-
-    @include breakpoint($bp-mobile-max) {
-        height: 30vh;
-
-        &__desktop {
-            display: none;
-        }
-    }
-
-    @include breakpoint($bp-tablet-min) {
-        height: 644px;
-        width: 320px;
-
-        &__mobile {
-            display: none;
         }
     }
 }

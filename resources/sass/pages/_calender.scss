@@ -1,0 +1,128 @@
+.ris-calender {
+    &__headline {
+        border-bottom: 1px solid $c-gray7;
+
+        @include breakpoint($bp-mobile-max) {
+            font-size: $fs-xxxl;
+            line-height: $lh-xxl;
+            padding: $indent-m;
+        }
+
+        @include breakpoint($bp-tablet-min) {
+            font-size: $fs-xxxxl;
+            line-height: $lh-xxxl;
+            padding: $indent-ml;
+        }
+    }
+
+    &__flex-wrapper {
+        @include breakpoint($bp-tablet-min) {
+            display: flex;
+        }
+    }
+
+    &__content {
+        background-color: $c-white2;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        height: calc(100vh - 193px);
+    }
+
+    &__card-list {
+        padding: $indent-sm $indent-m;
+
+        &-wrapper {
+            flex-grow: 1;
+        }
+    }
+
+    &__card-day {
+        display: flex;
+        justify-content: space-between;
+
+        &-left {
+            font-family: $ff-helvetica;
+            font-size: $fs-xxxl;
+            font-weight: bold;
+            line-height: $lh-xl;
+            padding-top: $indent-s;
+
+            @include breakpoint($bp-tablet-min) {
+                flex-grow: 1;
+                text-align: center;
+            }
+        }
+
+        &-right {
+            background-color: $c-white;
+            flex-basis: 83%;
+        }
+
+        &-of-week {
+            font-size: $fs-l;
+            line-height: $lh-l;
+        }
+    }
+
+    &__card {
+        border-radius: $b-radius-primary;
+        box-shadow: 0 1px 6px 0 $c-box-shadow;
+        box-sizing: border-box;
+        padding: $indent-m;
+
+        &:not(:last-child) {
+            margin-bottom: $indent-m;
+        }
+
+        .ris-subheader {
+            margin-bottom: 8px;
+        }
+    }
+
+    .ris-session-count {
+        color: $c-secondary;
+        display: flex;
+        font-family: $ff-helvetica;
+        font-size: $fs-l;
+        line-height: $lh-l;
+
+        &__agenda {
+            align-items: center;
+            display: flex;
+
+            &::after {
+                @include font-icon('W', 24px);
+
+                opacity: .5;
+                padding-left: $indent-s;
+            }
+        }
+
+        &__people {
+            align-items: center;
+            display: flex;
+            margin-left: 20px;
+
+            &::after {
+                @include font-icon('X', 22px);
+
+                opacity: .5;
+                padding-left: $indent-s;
+            }
+        }
+
+        &__file {
+            align-items: center;
+            display: flex;
+            margin-left: 20px;
+
+            &::after {
+                @include font-icon('V', 20px);
+
+                opacity: .5;
+                padding-left: $indent-s;
+            }
+        }
+    }
+}

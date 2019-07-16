@@ -1,0 +1,98 @@
+.ris-calendar-app {
+    display: inline-block;
+    position: relative;
+
+    @include breakpoint($bp-mobile-max) {
+        width: 100%;
+    }
+
+    @include breakpoint($bp-tablet-min) {
+        width: 320px;
+    }
+
+    &__icon-calendar {
+        color: $c-gray2;
+        cursor: pointer;
+        padding: 19px;
+        position: absolute;
+        right: 0;
+        top: 0;
+
+        &::after {
+            @include font-icon('U', $fs-xl);
+        }
+
+        @include breakpoint($bp-tablet-min) {
+            display: none;
+        }
+    }
+
+    .c-header {
+        padding: 16px;
+
+        @include breakpoint($bp-mobile-max) {
+            margin-right: 48px;
+        }
+    }
+
+    .c-title-anchor .c-title {
+        color: $c-primary;
+        line-height: $lh-l !important;
+        font-size: $fs-l !important;
+        font-weight: bold !important;
+
+        &::after {
+            @include font-icon('C', 10px);
+
+            align-items: center;
+            display: inline-flex;
+            justify-content: center;
+            padding-left: 10px;
+        }
+    }
+
+    .c-arrow-layout {
+        .svg-icon {
+            color: $c-gray2;
+            height: 22px;
+            width: 22px;
+        }
+
+        &:first-child {
+            margin-right: $indent-m !important;
+        }
+    }
+
+    .c-pane-container {
+        box-shadow: 0 6px 6px -2px $c-box-shadow2;
+        color: $c-primary !important;
+        margin-bottom: $indent-s;
+
+        .hidden {
+            height: 0;
+            padding: 0;
+            opacity: 0;
+        }
+    }
+
+    .c-weekdays,
+    .c-weeks {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .c-weekday {
+        font-family: $ff-helvetica;
+        font-size: $fs-l;
+        font-weight: bold;
+    }
+
+    .c-day-content {
+        font-family: $ff-helvetica;
+        font-size: $fs-l !important;
+    }
+
+    .c-day-dots {
+        padding-bottom: 3px !important;
+    }
+}

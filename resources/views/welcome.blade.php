@@ -6,9 +6,9 @@
             <div class="ris-welcome__headline">
                 <img class="ris-welcome__headline-img_left" src="./img/couple_near_table.png" alt="Kölner Stadtpolitik"/>
                 <div>
-                    <div class="ris-headline">
+                    <h1 class="ris-headline">
                         Kölner Stadtpolitik
-                    </div>
+                    </h1>
                     <div class="ris-subheader">
                         Einfach und Transparent
                     </div>

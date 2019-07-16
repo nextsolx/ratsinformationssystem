@@ -19,9 +19,8 @@ Route::get('/styleguide', function () {
     return view('styleguide');
 });
 
-Route::get('/kalender', function () {
-    return view('calendar');
-})->name('calendar');
+Route::get('/kalender', 'MeetingController@calendar')
+    ->name('calendar');
 
 Route::get('/themen-und-karte', function () {
     return view('themes-map');

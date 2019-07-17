@@ -49,11 +49,11 @@
         justify-content: space-between;
 
         &-left {
-            flex-basis: 48px;
             font-family: $ff-helvetica;
             font-size: $fs-xxxl;
             font-weight: bold;
             line-height: $lh-xl;
+            min-width: 48px;
             padding-top: $indent-s;
         }
 
@@ -81,6 +81,7 @@
         .ris-title {
             font-size: $fs-l;
             line-height: $lh-l;
+            word-break: break-word;
         }
 
         .ris-subheader {

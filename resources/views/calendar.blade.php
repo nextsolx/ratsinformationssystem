@@ -22,7 +22,7 @@ if (isset($meetings) and is_array($meetings)) {
         </h1>
 
         <div class="ris-calendar__flex-wrapper">
-            <calendar-app></calendar-app>
+            <calendar-app :meeting-list="{{ json_encode($meetings) }}"></calendar-app>
 
             <div class="ris-calendar__content">
                 <div class="ris-calendar__card-list-wrapper">

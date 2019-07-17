@@ -38,8 +38,8 @@
         &-ris-subheader {
             color: $c-primary;
             font-size: $fs-l;
-            margin: $indent-s 0 $indent-s 64px;
             line-height: $lh-l;
+            margin: $indent-s 0 $indent-s 64px;
             text-transform: uppercase;
         }
     }
@@ -84,11 +84,10 @@
         }
 
         .ris-subheader {
-            margin-bottom: 8px;
             display: inline-flex;
-
             font-size: $fs-l;
             line-height: $lh-l;
+            margin-bottom: 8px;
         }
     }
 

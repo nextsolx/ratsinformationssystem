@@ -1,6 +1,25 @@
 .ris-footer {
-    padding-top: 120px;
+    padding-top: 100px;
     position: relative;
+
+    &__back-to-top {
+        background-color: $c-white;
+        border: 0;
+        border-radius: 50%;
+        box-shadow: 0 2px 12px 0 $c-box-shadow2;
+        cursor: pointer;
+        display: inline-flex;
+        outline: none;
+        padding: 0;
+        position: absolute;
+        right: 12px;
+        top: 0;
+
+        .ris-i {
+            padding: 24px;
+            transform: rotate(90deg);
+        }
+    }
 
     &__logo {
         display: block;

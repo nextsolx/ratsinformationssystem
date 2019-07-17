@@ -13,7 +13,11 @@ class OParlApiManager
     {
         $data = resolve(\App\Contracts\OParlApi::class)->meetings($page, $from);
 
-        $meeting = collect($data['data'])->map(function ($meetingData) {
+        $meeting_sorted = collect($data['data'])
+                                ->sortBy('start')
+                                ->sortByDesc('start');
+
+        $meeting = $meeting_sorted->map(function ($meetingData) {
             return new Meeting($meetingData);
         });
 

@@ -1,5 +1,20 @@
 @extends('layouts.app')
 
+<?php $meeting_list_sorted = [];
+if (isset($meetings) and is_array($meetings)) {
+    foreach($meetings as $meet) {
+        $meeting_list_sorted[
+            Carbon\Carbon::parse($meet->dateFrom)->weekOfYear . "_" .
+            Carbon\Carbon::parse($meet->dateFrom)->year
+            ][
+            Carbon\Carbon::parse($meet->dateFrom)->year . "_" .
+            Carbon\Carbon::parse($meet->dateFrom)->month . "_" .
+            Carbon\Carbon::parse($meet->dateFrom)->day
+            ][] = $meet;
+    }
+}
+?>
+
 @section('content')
     <main class="ris-content ris-calendar">
         <h1 class="ris-calendar__headline ris-headline">
@@ -12,69 +27,50 @@
             <div class="ris-calendar__content">
                 <div class="ris-calendar__card-list-wrapper">
 
-                    <div class="ris-calendar__card-list">
-                        <section class="ris-calendar__card-day">
-                            <div class="ris-calendar__card-day-left">
-                                3<br/>
-                                <span class="ris-calendar__card-day-of-week">Mo</span>
-                            </div>
+                    @foreach ($meeting_list_sorted as $meeting_list_per_week)
 
-                            <div class="ris-calendar__card-day-right">
-                                <div class="ris-calendar__card">
-                                    <h2 class="ris-headline">
-                                        Unterausschuss Kulturbauten
-                                    </h2>
-                                    <div class="ris-subheader">
-                                        UAK/0019/2018
-                                    </div>
-                                    <div class="ris-session-count">
-                                        <div class="ris-session-count__agenda">22</div>
-                                        <div class="ris-session-count__people">30</div>
-                                        <div class="ris-session-count__file">22</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
+                        @foreach ($meeting_list_per_week as $meeting_list_per_day)
+                            <div class="ris-calendar__card-list">
+                                <section class="ris-calendar__card-day">
 
-                    <div class="ris-calendar__card-list">
-                        <section class="ris-calendar__card-day">
-                            <div class="ris-calendar__card-day-left">
-                                4<br/>
-                                <span class="ris-calendar__card-day-of-week">Di</span>
-                            </div>
+                                    <div class="ris-calendar__card-day-left">
+                                        {{ Carbon\Carbon::parse($meeting_list_per_day[0]->dateFrom)->day }}
+                                        <br/>
+                                        <span class="ris-calendar__card-day-of-week">
+                                            {{ Carbon\Carbon::parse($meeting_list_per_day[0]->dateFrom)->locale('de')->minDayName }}
+                                        </span>
+                                    </div>
 
-                            <div class="ris-calendar__card-day-right">
-                                <div class="ris-calendar__card">
-                                    <h2 class="ris-headline">
-                                        Integrationsrat
-                                    </h2>
-                                    <div class="ris-subheader">
-                                        IR/0034/2018
+                                    <div class="ris-calendar__card-day-right">
+                                        @foreach ($meeting_list_per_day as $meeting)
+                                            <div class="ris-calendar__card">
+                                                <h2 class="ris-title">
+                                                    {{ $meeting->title }}
+                                                </h2>
+                                                <div class="ris-subheader">
+                                                    Lorem data UAK/
+                                                    <span>00{{ Carbon\Carbon::parse($meeting->dateFrom)->weekOfYear }}</span>
+                                                    /
+                                                    <span>{{ Carbon\Carbon::parse($meeting->dateFrom)->year }}</span>
+                                                </div>
+                                                <div class="ris-session-count">
+                                                    <div class="ris-session-count__agenda">{{ $meeting->agendaCount }}</div>
+                                                    <div class="ris-session-count__people">{{ $meeting->peopleCount }}</div>
+                                                    <div class="ris-session-count__file">{{ $meeting->fileCount }}</div>
+                                                </div>
+                                            </div>
+                                        @endforeach
                                     </div>
-                                    <div class="ris-session-count">
-                                        <div class="ris-session-count__agenda">22</div>
-                                        <div class="ris-session-count__people">30</div>
-                                        <div class="ris-session-count__file">22</div>
-                                    </div>
-                                </div>
 
-                                <div class="ris-calendar__card">
-                                    <h2 class="ris-headline">
-                                        Ausschuss Schule und Weiterbildung
-                                    </h2>
-                                    <div class="ris-subheader">
-                                        SHA/0036/2018
-                                    </div>
-                                    <div class="ris-session-count">
-                                        <div class="ris-session-count__agenda">22</div>
-                                        <div class="ris-session-count__people">30</div>
-                                        <div class="ris-session-count__file">22</div>
-                                    </div>
-                                </div>
+                                </section>
                             </div>
-                        </section>
-                    </div>
+                        @endforeach
+
+                        <div class="ris-subheader ris-calendar__card-list-ris-subheader">Kalenderwoche
+                            {{ Carbon\Carbon::parse(head($meeting_list_per_week)[0]->dateFrom)->weekOfYear }}
+                        </div>
+
+                    @endforeach
                 </div>
 
                 @include('layouts.footer')

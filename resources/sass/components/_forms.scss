@@ -123,8 +123,8 @@
         appearance: none;
         background-color: $c-white2;
         border: 1px solid $c-gray7;
-        border-radius: 2px;
-        box-shadow: 0 1px 6px 0 $c-box-shadow;
+        border-radius: $b-radius-primary;
+        box-shadow: 0 1px 4px 0 $c-box-shadow;
         box-sizing: border-box;
         font-size: $fs-l;
         line-height: $lh-l;

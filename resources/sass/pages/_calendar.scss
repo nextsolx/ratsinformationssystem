@@ -26,7 +26,6 @@
         display: flex;
         flex-direction: column;
         flex-grow: 1;
-        height: calc(100vh - 193px);
     }
 
     &__card-list {
@@ -35,6 +34,14 @@
         &-wrapper {
             flex-grow: 1;
         }
+
+        &-ris-subheader {
+            color: $c-primary;
+            font-size: $fs-l;
+            margin: $indent-s 0 $indent-s 64px;
+            line-height: $lh-l;
+            text-transform: uppercase;
+        }
     }
 
     &__card-day {
@@ -42,21 +49,16 @@
         justify-content: space-between;
 
         &-left {
+            flex-basis: 48px;
             font-family: $ff-helvetica;
             font-size: $fs-xxxl;
             font-weight: bold;
             line-height: $lh-xl;
             padding-top: $indent-s;
-
-            @include breakpoint($bp-tablet-min) {
-                flex-grow: 1;
-                text-align: center;
-            }
         }
 
         &-right {
-            background-color: $c-white;
-            flex-basis: 83%;
+            flex-grow: 1;
         }
 
         &-of-week {
@@ -66,6 +68,7 @@
     }
 
     &__card {
+        background-color: $c-white;
         border-radius: $b-radius-primary;
         box-shadow: 0 1px 6px 0 $c-box-shadow;
         box-sizing: border-box;
@@ -75,8 +78,17 @@
             margin-bottom: $indent-m;
         }
 
+        .ris-title {
+            font-size: $fs-l;
+            line-height: $lh-l;
+        }
+
         .ris-subheader {
             margin-bottom: 8px;
+            display: inline-flex;
+
+            font-size: $fs-l;
+            line-height: $lh-l;
         }
     }
 

@@ -5,20 +5,8 @@ namespace App;
 use App\OParl\OParlApiManager;
 use Illuminate\Support\Arr;
 
-class Meeting
+class Meeting extends Model
 {
-    private $data;
-
-    public function __construct(array $data)
-    {
-        $this->data = $data;
-    }
-
-    public function __get($name)
-    {
-        return Arr::get($this->data, $name);
-    }
-
     public function location()
     {
         return Arr::has($this->data, 'location') ? new Location($this->location) : null;
@@ -26,8 +14,8 @@ class Meeting
 
     public function organization()
     {
-        if ($organizationId = collect($this->organization)->first()) {
-            return OParlApiManager::organization($organizationId);
+        if ($organizationUrl = collect($this->organization)->first()) {
+            return OParlApiManager::organization($this->extractIdFromUrl($organizationUrl));
         }
 
         return null;
@@ -36,25 +24,52 @@ class Meeting
     public function organizations()
     {
         $organizationIds = collect($this->organization)->map(function ($organizationUrl) {
-            return $this->extractOrganizationId($organizationUrl);
+            return $this->extractIdFromUrl($organizationUrl);
         });
 
         return OParlApiManager::organizations($organizationIds);
     }
 
-    private function extractOrganizationId(string $organizationUrl)
+    public function files()
     {
-        return Arr::last(explode('/', $organizationUrl));
+        $files = collect($this->auxiliaryFile)->map(function ($auxiliaryFile) {
+            return new File($auxiliaryFile);
+        });
+
+        if ($this->vebatimProtocol) {
+            $files->push(new File($this->invitation));
+        }
+        if ($this->vebatimProtocol) {
+            $files->push(new File($this->vebatimProtocol));
+        }
+
+        return $files;
     }
 
-    public function extractId()
+    private function extractIdFromUrl(string $url)
     {
-        return Arr::last(explode('/', $this->id));
+        return Arr::last(explode('/', $url));
+    }
+
+    public function agenda()
+    {
+        return collect($this->agendaItem)->map(function ($agendaItem) {
+            return new Agendum($agendaItem);
+        });
     }
 
     public function agendaCount()
     {
         return $this->agendaItem ? count($this->agendaItem) : 0;
+    }
+
+    public function people()
+    {
+        return $this->organizations()->map(function($organization) {
+            return collect($organization->membership)->map(function($membershipUrl) {
+                return OParlApiManager::personFromMembership($this->extractIdFromUrl($membershipUrl));
+            });
+        })->flatten(1);
     }
 
     public function peopleCount()
@@ -71,5 +86,4 @@ class Meeting
             (int)((bool)$this->verbatimProtocol) +
             ($this->auxiliaryFile ? count($this->auxiliaryFile) : 0);
     }
-
 }

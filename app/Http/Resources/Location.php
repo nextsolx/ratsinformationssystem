@@ -19,12 +19,13 @@ class Location extends JsonResource
         }
 
         return [
-            "room" => $this->room,
-            'StreetAddress' => $this->streetAddress,
+            'room' => $this->room,
+            'streetAddress' => $this->streetAddress,
             'postalCode' => $this->postalCode,
             'city' => $this->locality,
             'district' => $this->subLocality,
             'description' => $this->description,
+            'geo' => $this->when($this->geojson, [$this->getLocationX(), $this->getLocationY()])
         ];
     }
 }

@@ -11,28 +11,15 @@ class TopicController extends Controller
 {
     public function index(Request $request)
     {
-        list($meetings, $pages) = OParlApiManager::topics($request->input('page'));
+        list($topics, $pages) = OParlApiManager::topics($request->input('page'));
 
-        $meetings = new LengthAwarePaginator(
-            $meetings,
+        $topics = new LengthAwarePaginator(
+            $topics,
             $pages['totalElements'],
             $pages['elementsPerPage'],
             $pages['currentPage']
         );
 
-        return Topic::collection($meetings);
-    }
-
-    private function data()
-    {
-        return collect([
-            (object) [
-                'title' => 'Bewohnerparken Köln-Lindenthal',
-            ], (object) [
-                'title' => 'Mitführen von Hunden auf den städtischen Friedhöfen',
-            ], (object) [
-                'title' => 'Generalsanierung Drehbrücke Deutzer Hafen',
-            ],
-        ]);
+        return Topic::collection($topics);
     }
 }

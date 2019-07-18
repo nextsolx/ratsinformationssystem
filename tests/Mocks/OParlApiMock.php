@@ -15,7 +15,25 @@ class OParlApiMock implements \App\Contracts\OParlApi
 
     public function papers(int $page = null)
     {
-        // TODO: Implement papers() method.
+        $data = [
+            PapersMock::example(),
+            PapersMock::example(),
+        ];
+
+        return [
+            'data' => $data,
+            'links' => [
+                "first" => "https://example.oparl.org/body/0/paper",
+                "last" => "https://example.oparl.org/body/0/paper",
+                "self" => "https://example.oparl.org/body/0/paper",
+            ],
+            'pagination' => [
+                'currentPage' => 1,
+                'elementsPerPage' => 1,
+                'totalElements' => 1,
+                'totalPages' => 1,
+            ]
+        ];
     }
 
     public function meetings(int $page = null, Carbon $from = null)

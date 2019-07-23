@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class Topic extends JsonResource
+class File extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -19,9 +19,11 @@ class Topic extends JsonResource
         }
 
         return [
-            'id' => $this->extractId(),
+            'id' => $this->id,
             'name' => $this->name,
-            'location' => new Location($this->location()),
+            'fileName' => $this->fileName,
+            'accessUrl' => $this->accessUrl,
+            'downloadUrl' => $this->downloadUrl,
         ];
     }
 }

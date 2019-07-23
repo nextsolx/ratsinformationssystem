@@ -2,12 +2,41 @@
 
 namespace Tests\Mocks;
 
-
 use Illuminate\Support\Carbon;
 
 class OParlApiMock implements \App\Contracts\OParlApi
 {
-    public function meetings($page = null, Carbon $from = null)
+    public function meeting(string $id)
+    {
+        $data = MeetingMock::example();
+
+        return $data;
+    }
+
+    public function papers(int $page = null)
+    {
+        $data = [
+            PapersMock::example(),
+            PapersMock::example(),
+        ];
+
+        return [
+            'data' => $data,
+            'links' => [
+                "first" => "https://example.oparl.org/body/0/paper",
+                "last" => "https://example.oparl.org/body/0/paper",
+                "self" => "https://example.oparl.org/body/0/paper",
+            ],
+            'pagination' => [
+                'currentPage' => 1,
+                'elementsPerPage' => 1,
+                'totalElements' => 1,
+                'totalPages' => 1,
+            ]
+        ];
+    }
+
+    public function meetings(int $page = null, Carbon $from = null)
     {
         $data = [
             MeetingMock::example(),
@@ -57,4 +86,19 @@ class OParlApiMock implements \App\Contracts\OParlApi
             ]
         ];
     }
+
+
+    public function person(string $id)
+    {
+        $data = PersonMock::example();
+
+        return $data;
+    }
+
+    public function membership(string $id)
+    {
+        return PersonMock::example();
+    }
+
+
 }

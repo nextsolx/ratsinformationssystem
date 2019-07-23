@@ -1,9 +1,10 @@
 <script>
 import Vue from 'vue';
 import VCalendar from 'v-calendar';
+
+const axios = require('axios');
 const moment = require('moment');
 require('moment/locale/de');
-
 
 Vue.use(require('vue-moment'), {
     moment
@@ -22,14 +23,13 @@ Vue.use(VCalendar, {
     }
 });
 
+import noticeMixin from '../mixins/NoticeMixin';
+
+
+
 export default {
     name: 'CalendarApp',
-    props: {
-        meetingList: {
-            type: Array,
-            default: () => []
-        }
-    },
+    mixins: [ noticeMixin ],
     data: () => ({
         attrs: [
             {
@@ -56,31 +56,74 @@ export default {
                     new Date(),
                 ],
             },
-        ]
+        ],
+        navButtons: '.c-arrow-layout',
+        meetingList: [],
+        currentYear: moment().year(),
+        currentMonth: moment().month() + 1,
+        loading: false,
+        emptyMeetingList: false,
+        infoTitle: 'There are no meetings on this date',
     }),
     methods: {
         toggleCalendar() {
             let weekdaysAndWeeks = document.querySelectorAll('.c-weekdays, .c-weeks');
             weekdaysAndWeeks.forEach(el => el.classList.toggle('hidden'));
+        },
+        disableEnableNavButtons() {
+            const navButtons = document.querySelectorAll(this.navButtons);
+            navButtons.forEach(el => {
+                el.style = 'pointer-events: ' + (this.loading ? 'none' : 'auto');
+            });
+        },
+        loadMeetings(year = this.currentYear, month = this.currentMonth) {
+            if (!this.loading && !this.emptyMeetingList) {
+                this.loading = true;
+                this.currentYear = year;
+                this.currentMonth = month;
+
+                this.disableEnableNavButtons();
+
+                axios
+                    .get(`/api/meetings?year=${this.currentYear}&monthPlusTwoWeek=${this.currentMonth}`)
+                    .then(res => {
+                        if (res.data.data.length > 0) {
+                            for (let { title, dateFrom } of res.data.data) {
+                                this.attrs.push({
+                                    dates: [
+                                        dateFrom
+                                    ],
+                                    popover: {
+                                        label: title
+                                    },
+                                    dot: {
+                                        backgroundColor:
+                                            moment(dateFrom).isBefore(new Date())
+                                                ? '#ccc'
+                                                : moment(dateFrom).isSame(new Date()) ? '#fff' : '#ed1c24',
+                                    },
+                                });
+                            }
+                        } else {
+                            this.emptyMeetingList = true;
+                        }
+                    })
+                    .finally(() => {
+                        this.loading = false;
+                        this.disableEnableNavButtons();
+                    });
+            }
+
+            if (this.emptyMeetingList) {
+                this.info(this.infoTitle);
+            }
+        },
+        navClicked(page) {
+            this.loadMeetings(page.year, page.month);
         }
     },
     mounted() {
-        for(let meet of this.meetingList) {
-            this.attrs.push({
-                dates: [
-                    meet.dateFrom
-                ],
-                popover: {
-                    label: meet.title
-                },
-                dot: {
-                    backgroundColor:
-                        moment(meet.dateFrom).isBefore(new Date())
-                            ? '#ccc'
-                            : moment(meet.dateFrom).isSame(new Date()) ? '#fff' : '#ed1c24',
-                },
-            });
-        }
+        this.loadMeetings();
     }
 };
 </script>
@@ -90,6 +133,7 @@ export default {
         <v-calendar
             :attributes="attrs"
             :is-expanded="true"
+            @update:fromPage="navClicked"
                 />
         <div class="ris-calendar-app__icon-calendar"
             @click="toggleCalendar">

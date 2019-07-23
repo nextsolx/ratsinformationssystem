@@ -1,23 +1,25 @@
 <script>
 import Vue from 'vue';
 import { ContentLoader } from 'vue-content-loader';
-import iView from 'iview';
 
 const axios = require('axios');
 const moment = require('moment');
 require('moment/locale/de');
 
-
 Vue.use(require('vue-moment'), {
     moment
 });
-Vue.use(iView);
+
+import noticeMixin from '../mixins/NoticeMixin';
+
+
 
 export default {
     name: 'Calendar',
     components: {
         ContentLoader
     },
+    mixins: [ noticeMixin ],
     data: () => ({
         observableBlock: '.ris-footer',
         prevRatio: 0,
@@ -26,13 +28,9 @@ export default {
         meetingList: [],
         cardListSelector: '#card-list',
         currentPage: 1,
+        infoTitle: 'All meetings have been loaded',
     }),
     methods: {
-        noticeInfo () {
-            this.$Notice.info({
-                title: 'All meetings have been loaded',
-            });
-        },
         createObserver() {
             let options = {
                 root: null,
@@ -84,7 +82,7 @@ export default {
             }
 
             if (this.emptyMeetingList) {
-                this.noticeInfo();
+                this.info(this.infoTitle);
             }
         },
         sortedMeetingList(meetingList) {
@@ -110,9 +108,18 @@ export default {
         }
     },
     filters: {
-        moment(date) {
-            return moment(date);
-        }
+        momentDate(date) {
+            return moment(date).date();
+        },
+        momentDayFormat(date) {
+            return moment(date).format('dd');
+        },
+        momentWeek(date) {
+            return moment(date).week();
+        },
+        momentYear(date) {
+            return moment(date).year();
+        },
     },
     mounted() {
         window.addEventListener('load', () => {
@@ -124,45 +131,46 @@ export default {
 
 <template>
     <div>
-        <div v-for="(meetingWeekList, meetingWeekYearKey ) in meetingList">
+        <div v-for="(meetingWeekList, meetingWeekYearKey ) in meetingList"
+            :key="meetingWeekYearKey">
             <div class="ris-calendar__card-list"
                 v-for="meetingListPerDay in meetingWeekList"
                     >
                 <section class="ris-calendar__card-day">
                     <div class="ris-calendar__card-day-left">
-                        {{ meetingListPerDay[0].dateFrom | moment().date() }}
+                        {{ meetingListPerDay[0].dateFrom | momentDate() }}
                         <br>
                         <span class="ris-calendar__card-day-of-week">
-                            {{ meetingListPerDay[0].dateFrom | moment().format('dd') }}
+                            {{ meetingListPerDay[0].dateFrom | momentDayFormat() }}
                         </span>
                     </div>
 
                     <div class="ris-calendar__card-day-right">
                         <div class="ris-calendar__card"
-                            v-for="meeting in meetingListPerDay"
-                            :key="meeting.title"
-                            :data-date-from="meeting.dateFrom"
+                            v-for="{ title, dateFrom, agendaCount, peopleCount, fileCount } in meetingListPerDay"
+                            :key="title"
+                            :data-date-from="dateFrom"
                                 >
                             <h2 class="ris-title">
-                                {{ meeting.title }}
+                                {{ title }}
                             </h2>
                             <div class="ris-subheader">
                                 Lorem data UAK/
-                                <span>00{{ meeting.dateFrom | moment().week() }}</span>
+                                <span>00{{ dateFrom | momentWeek() }}</span>
                                 /
-                                <span>{{ meeting.dateFrom | moment().year() }}</span>
+                                <span>{{ dateFrom | momentYear() }}</span>
                             </div>
                             <div class="ris-session-count">
-                                <div class="ris-session-count__agenda">{{ meeting.agendaCount }}</div>
-                                <div class="ris-session-count__people">{{ meeting.peopleCount }}</div>
-                                <div class="ris-session-count__file">{{ meeting.fileCount }}</div>
+                                <div class="ris-session-count__agenda">{{ agendaCount }}</div>
+                                <div class="ris-session-count__people">{{ peopleCount }}</div>
+                                <div class="ris-session-count__file">{{ fileCount }}</div>
                             </div>
                         </div>
                     </div>
                 </section>
             </div>
             <div class="ris-subheader ris-calendar__card-list-ris-subheader">
-                Kalenderwoche {{ meetingList[meetingWeekYearKey].dayList[0].dateFrom | moment().week() }}
+                Kalenderwoche {{ meetingList[meetingWeekYearKey].dayList[0].dateFrom | momentWeek() }}
             </div>
         </div>
 

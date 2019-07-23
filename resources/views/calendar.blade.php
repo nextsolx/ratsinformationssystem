@@ -25,7 +25,7 @@ if (isset($meetings) and is_array($meetings)) {
             <calendar-app :meeting-list="{{ json_encode($meetings) }}"></calendar-app>
 
             <div class="ris-calendar__content">
-                <div class="ris-calendar__card-list-wrapper">
+                <div class="ris-calendar__card-list-wrapper" data-page-loaded="1" id="card-list">
 
                     @foreach ($meeting_list_sorted as $meeting_list_per_week)
 
@@ -71,6 +71,8 @@ if (isset($meetings) and is_array($meetings)) {
                         </div>
 
                     @endforeach
+
+                    <calendar></calendar>
                 </div>
 
                 @include('layouts.footer')

@@ -12,7 +12,7 @@
         "style-lint": "sass-lint ./resources/sass/**/*.scss -v -q"
     },
     "devDependencies": {
-        "axios": "^0.19",
+        "axios": "^0.19.0",
         "cross-env": "^5.1",
         "laravel-mix": "^4.0.7",
         "lodash": "^4.17.5",
@@ -28,10 +28,12 @@
     "dependencies": {
         "eslint": "^6.0.1",
         "eslint-plugin-vue": "^5.2.3",
+        "iview": "^3.4.2",
         "leaflet": "^1.5.1",
         "leaflet-fullscreen": "^1.0.2",
         "sass-lint": "^1.13.1",
         "v-calendar": "^0.9.7",
+        "vue-content-loader": "^0.2.2",
         "vue-moment": "^4.0.0",
         "vue2-leaflet": "^2.1.1"
     },

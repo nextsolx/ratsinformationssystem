@@ -1,8 +1,11 @@
 .ris-i {
+    align-items: center;
+    box-sizing: content-box;
     color: $c-gray2;
-    display: inline-block;
+    display: inline-flex;
     font-family: $ff-ris-font-icons;
     height: 16px;
+    justify-content: center;
     line-height: 1;
     margin: 0;
     padding: 0;

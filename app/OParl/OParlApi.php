@@ -7,7 +7,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 
-class OParlApi
+class OParlApi implements \App\Contracts\OParlApi
 {
     private $domain;
     private $bodyId;
@@ -34,6 +34,10 @@ class OParlApi
 
         $data = json_decode($response->getBody()->getContents(), true);
 
+        if (!$data) {
+            $data = [];
+        }
+
         $this->setCache(
             $data,
             $method,
@@ -59,6 +63,13 @@ class OParlApi
         Cache::put($this->getCacheHash($method, $endpoint, $page), $data, now()->addMinutes(10));
     }
 
+    public function papers(int $page = null)
+    {
+        $endpoint = sprintf('body/%s/%s', $this->bodyId, 'paper');
+
+        return $this->call('GET', $endpoint, $page);
+    }
+
     public function meetings(int $page = null, Carbon $from = null)
     {
         $endpoint = sprintf('body/%s/%s', $this->bodyId, 'meeting');
@@ -70,10 +81,32 @@ class OParlApi
         return $this->call('GET', $endpoint, $page);
     }
 
+    public function person(string $id)
+    {
+        $endpoint = sprintf('%s/%s','person', $id);
+
+        return $this->call('GET', $endpoint);
+    }
+
+    public function membership(string $id)
+    {
+        $endpoint = sprintf('%s/%s','membership', $id);
+
+        return $this->call('GET', $endpoint);
+    }
+
+    public function meeting(string $id)
+    {
+        $endpoint = sprintf('%s/%s','meeting', $id);
+
+        return $this->call('GET', $endpoint);
+    }
+
     public function organization(string $organizationID, int $page = null)
     {
         $endpoint = sprintf('%s/%s', 'organization', $organizationID);
 
         return $this->call('GET', $endpoint, $page);
     }
+
 }

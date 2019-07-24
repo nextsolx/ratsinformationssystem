@@ -18,7 +18,7 @@ class TopicIntegrationTest extends TestCase
 
         $response->assertJson([
             'data' => [[
-                'title' => 'Bewohnerparken Köln-Lindenthal'
+                'name' => 'Antwort auf Anfrage 1200/2014'
             ]]
         ]);
     }

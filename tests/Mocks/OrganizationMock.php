@@ -42,7 +42,7 @@ class OrganizationMock
                 ],
             'meeting' => 'https://oparl.example.org/organization/34/meetings',
             'membership' => [
-                    'https://oparl.example.org/membership/27',
+                    'https://oparl.example.org/membership/385',
                     'https://oparl.example.org/membership/48',
                     'https://oparl.example.org/membership/57',
                 ],

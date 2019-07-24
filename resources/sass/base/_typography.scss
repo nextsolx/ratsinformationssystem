@@ -9,7 +9,8 @@ $fs-m: 14px;
 $fs-s: 12px;
 
 // line-height
-$lh-xxxl: 32px;
+$lh-xxxxl: 40px;
+$lh-xxxl: 34px;
 $lh-xxl: 32px;
 $lh-xl: 28px;
 $lh-l: 24px;
@@ -74,13 +75,13 @@ $indent-s: 8px;
     margin: 0;
 
     @include breakpoint($bp-mobile-max) {
-        font-size: $fs-l;
-        line-height: $lh-l;
+        font-size: $fs-xxxl;
+        line-height: $lh-xxl;
     }
 
     @include breakpoint($bp-tablet-min) {
-        font-size: $fs-xxxl;
-        line-height: $lh-xxl;
+        font-size: $fs-xxxxl;
+        line-height: $lh-xxxxl;
     }
 }
 
@@ -103,16 +104,11 @@ $indent-s: 8px;
 
 .ris-subheader {
     color: $c-secondary;
-    font-family: $ff-helvetica-neue;
+    font-family: $ff-helvetica;
 
     @include breakpoint($bp-mobile-max) {
         font-size: $fs-l;
         line-height: $lh-l;
-    }
-
-    @include breakpoint($bp-tablet-min) {
-        font-size: $fs-xl;
-        line-height: $lh-xl;
     }
 }
 
@@ -132,16 +128,15 @@ $indent-s: 8px;
 }
 
 .ris-body-2 {
-    color: $c-secondary;
-    font-family: $ff-helvetica-neue;
+    color: $c-primary;
+    font-family: $ff-helvetica;
     font-size: $fs-l;
     line-height: $lh-l;
 }
 
 .ris-caption {
     color: $c-secondary;
-    font-family: $ff-helvetica-neue;
-    font-size: $fs-m;
-    font-weight: 500;
+    font-family: $ff-helvetica;
+    font-size: $fs-l;
     line-height: $lh-l;
 }

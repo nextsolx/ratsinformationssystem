@@ -2,7 +2,7 @@
     border: 0;
     border-radius: $b-radius-primary;
     cursor: pointer;
-    font-family: $ff-open-sans;
+    font-family: $ff-helvetica-neue;
     font-size: $fs-l;
     font-weight: 600;
     line-height: $lh-l;
@@ -29,6 +29,10 @@
 
     &_has-border {
         border: 1px solid $c-gray3;
+    }
+
+    &_has-shadow {
+        box-shadow: 0 1px 6px 0 $c-box-shadow3;
     }
 
     &_has-icon {

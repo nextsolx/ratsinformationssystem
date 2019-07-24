@@ -5,31 +5,46 @@
         margin-bottom: $indent-m;
     }
 
-    &__content {
-        @include breakpoint($bp-mobile-max) {
-            padding: $indent-ml $indent-m;
-        }
+    .ris-title {
+        margin-bottom: $indent-s;
+    }
 
+    &__content {
         @include breakpoint($bp-tablet-min) {
             flex-grow: 1;
-            padding: $indent-xl $indent-ml;
         }
 
-        .ris-hint-box {
-            .ris-subheader {
-                @include breakpoint($bp-mobile-max) {
-                    margin-bottom: $indent-m;
-                }
+        &_wrapper {
+            border-bottom: 1px solid $c-gray7;
 
-                @include breakpoint($bp-tablet-min) {
-                    max-width: 270px;
-                }
+            @include breakpoint($bp-mobile-max) {
+                padding: $indent-ml $indent-m;
+            }
+
+            @include breakpoint($bp-tablet-min) {
+                margin-left: $indent-ml;
+                margin-right: $indent-ml;
+                padding-bottom: $indent-xl;
+                padding-top: $indent-xl;
+            }
+
+            .ris-subheader {
+                margin-bottom: $indent-m;
             }
         }
     }
 
+    .ris-filter-buttons {
+        @include breakpoint($bp-tablet-min) {
+            margin-top: $indent-ml;
+        }
+
+        @include breakpoint($bp-mobile-max) {
+            margin-top: $indent-m;
+        }
+    }
+
     .ris-map {
-        margin-bottom: 20px;
         z-index: 1;
 
         @include breakpoint($bp-mobile-max) {

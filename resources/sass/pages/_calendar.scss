@@ -10,7 +10,7 @@
 
         @include breakpoint($bp-tablet-min) {
             font-size: $fs-xxxxl;
-            line-height: $lh-xxxl;
+            line-height: $lh-xxl;
             padding: $indent-ml;
         }
     }

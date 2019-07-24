@@ -1,0 +1,73 @@
+.ivu-notice {
+    $root: &;
+
+    background-color: $c-error;
+    border-radius: $b-radius-primary;
+    border-top: 1px solid $c-secondary;
+    box-shadow: 0 1px 6px 0 $c-box-shadow;
+    display: flex;
+    height: auto;
+    justify-content: space-between;
+    position: absolute;
+    overflow: hidden;
+    left: $indent-s;
+    right: $indent-s;
+    transition-property: transform, opacity, top;
+    transition-duration: 0.1s;
+
+    @include breakpoint($bp-mobile-max) {
+        left: $indent-m;
+        right: $indent-m;
+    }
+
+    @include breakpoint($bp-tablet-min) {
+        left: $indent-l;
+        right: $indent-l;
+    }
+
+    &_success {
+        background-color: $c-success;
+
+        #{$root}__text,
+        #{$root}__close {
+            color: $c-white;
+        }
+    }
+
+    &-wrap {
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: $indent-s;
+        z-index: 100;
+
+        @include breakpoint($bp-mobile-max) {
+            top: $indent-m;
+        }
+
+        @include breakpoint($bp-tablet-min) {
+            top: $indent-l;
+        }
+
+        &_hidden {
+            pointer-events: none;
+        }
+    }
+
+    &__text {
+        color: $c-primary;
+        margin: $indent-l;
+    }
+
+    &__close {
+        border: 0;
+        background: transparent;
+        height: $indent-l;
+        width: $indent-l;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $c-primary;
+        cursor: pointer;
+    }
+}

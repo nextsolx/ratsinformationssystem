@@ -32,9 +32,16 @@ $c-gray6: #576268;
 $c-gray7: #ccc;
 $c-gray8: #8c8c8c;
 
+$c-green: #43fa9d;
+$c-orange: #ff9900;
+
 $c-primary: $c-gray;
 $c-secondary: $c-gray8;
 $c-link: $c-blue4;
+$c-error: $c-red;
+$c-info: $c-blue4;
+$c-success: $c-green;
+$c-warning: $c-orange;
 
 // color classes
 .ris-dark-primary {
@@ -137,6 +144,14 @@ $c-link: $c-blue4;
     color: $c-gray8;
 }
 
+.ris-green {
+    color: $c-green;
+}
+
+.ris-orange {
+    color: $c-orange;
+}
+
 // background-color classes
 .ris-bg-dark-primary {
     background-color: $c-dark-primary;
@@ -236,4 +251,12 @@ $c-link: $c-blue4;
 
 .ris-bg-gray8 {
     background-color: $c-gray8;
+}
+
+.ris-bg-green {
+    background-color: $c-green;
+}
+
+.ris-bg-orange {
+    background-color: $c-orange;
 }

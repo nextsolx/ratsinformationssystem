@@ -118,10 +118,17 @@ $indent-s: 8px;
 
 .ris-body-1 {
     color: $c-primary;
-    font-family: $ff-sf-pro-display-medium;
-    font-size: $fs-l;
-    font-weight: bold;
-    line-height: $lh-l;
+    font-family: $ff-helvetica;
+
+    @include breakpoint($bp-mobile-max) {
+        font-size: $fs-l;
+        line-height: $lh-l;
+    }
+
+    @include breakpoint($bp-tablet-min) {
+        font-size: $fs-xll;
+        line-height: $lh-l;
+    }
 }
 
 .ris-body-2 {

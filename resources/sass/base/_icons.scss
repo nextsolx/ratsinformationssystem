@@ -163,4 +163,10 @@
             content: 'X';
         }
     }
+
+    &__info {
+        &::before {
+            content: 'Y';
+        }
+    }
 }

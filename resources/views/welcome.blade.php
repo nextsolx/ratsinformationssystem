@@ -1,18 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-    <main class="ris-content ris-content__welcome">
-        <div class="ris-welcome">
-            <div class="ris-welcome__headline">
-                <img class="ris-welcome__headline-img_left" src="./img/couple_near_table.png" alt="Kölner Stadtpolitik"/>
-                <div>
-                    <h1 class="ris-headline">
-                        Kölner Stadtpolitik
-                    </h1>
-                    <div class="ris-subheader">
-                        Einfach und Transparent
-                    </div>
-                </div>
+    <main class="ris-content ris-welcome">
+        <div class="ris-welcome__content">
+            <h1 class="ris-headline">
+                Stadtpolitik Köln
+            </h1>
+            <div class="ris-body-1">
+                Hier finden Sie Informationen rund um die Themen, welche aktuell in der Kölner Stadtpolitik behandelt werden.
             </div>
 
             <map-mobile-app class="map-mobile"></map-mobile-app>
@@ -32,7 +27,7 @@
                     <div class="ris-body-2">Historisches Rathaus, Konrad ....</div>
                 </div>
 
-                <a href="/kalender" class="ris-link ris-body2">
+                <a href="{{ route('calendar') }}" class="ris-link ris-body2">
                     Zur Sitzungsübersicht
                 </a>
             </section>
@@ -52,22 +47,22 @@
                     <div class="ris-body-2">Letzte Bearbeitung: 27.10.2018</div>
                 </div>
 
-                <a href="/themen_and_karte" class="ris-link ris-body2">
+                <a href="{{ route('themes-map') }}" class="ris-link ris-body2">
                     Alle Themen ansehen
                 </a>
             </section>
 
+            <div class="ris-title">Merkliste</div>
+            <div class="ris-subheader">
+                Hier finden Sie Ihre gemerkten Themen, Sitzungen und Personen an einem Ort.
+            </div>
+
             <div class="ris-hint-box">
                 <div>
-                    <div class="ris-title">Die Gremien</div>
-                    <div class="ris-subheader">
-                        Wer entscheidet? Welches Organ ist für mein Anliegen zuständig?
-                    </div>
-                    <a href="/themen_and_karte" class="ris-link ris-link__secondary ris-body2">
-                        Was macht der Stadtrat?
+                    <a href="{{ route('themes-map') }}" class="ris-link ris-link__secondary ris-body2">
+                        Zur Merkliste
                     </a>
                 </div>
-                <img class="ris-welcome__headline-img_right" src="./img/car_with_man.png" alt="Kölner Stadtpolitik"/>
             </div>
         </div>
 

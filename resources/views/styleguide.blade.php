@@ -316,6 +316,20 @@
                         ></div>
                     </div>
 
+                    <div class="gui-flex-wrapper">
+                        <div class="gui-color-square ris-bg-green"
+                             v-tooltip="'$c-green or .ris-bg-green or .ris-green'"
+                             data-var-name="$c-green"
+                             @click="copy($event)"
+                        ></div>
+
+                        <div class="gui-color-square ris-bg-orange"
+                             v-tooltip="'$c-orange or .ris-bg-orange or .ris-orange'"
+                             data-var-name="$c-orange"
+                             @click="copy($event)"
+                        ></div>
+                    </div>
+
                     <div class="gui-headline">FORM ITEMS</div>
                     <div class="gui-flex-wrapper">
                         <div>
@@ -450,6 +464,7 @@
                         <span class="ris-i ris-i__download"></span>
                         <span class="ris-i ris-i__list"></span>
                         <span class="ris-i ris-i__people"></span>
+                        <span class="ris-i ris-i__info"></span>
 
                         <br/><br/>
 

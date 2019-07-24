@@ -1,0 +1,145 @@
+.ivu-notice {
+    $base: ivu-notice;
+
+    margin-right: 24px;
+    position: fixed;
+    z-index: 1010;
+
+    @include breakpoint($bp-mobile-max) {
+        width: 280px;
+    }
+
+    @include breakpoint($bp-tablet-min) {
+        width: 350px;
+    }
+
+    &-content-with-icon {
+        margin-left: 51px;
+    }
+
+    &-with-icon .#{$base}-desc,
+    &-with-icon .#{$base}-title {
+        margin-left: 30px;
+    }
+
+    &-with-desc .#{$base}-desc,
+    &-with-desc .#{$base}-title {
+        margin-left: 40px;
+    }
+
+    &-notice {
+        background: $c-white;
+        border-radius: 4px;
+        box-shadow: 0 1px 6px $c-box-shadow;
+        margin-bottom: $indent-m;
+        padding: $indent-m;
+        line-height: 1;
+        position: relative;
+        overflow: hidden;
+
+        &-close {
+            color: $c-secondary;
+            position: absolute;
+            right: 8px;
+            top: 15px;
+            outline: none;
+
+            i {
+                color: $c-secondary;
+                font-family: 'RIS Font Icons';
+                font-style: normal;
+
+                &:hover {
+                    color: $c-gray2;
+                    cursor: pointer;
+                }
+
+                &:before {
+                    content: 'J';
+                }
+            }
+        }
+
+        &-content-with-render {
+            .ivu-notice-desc {
+                display: none;
+            }
+        }
+
+        &-with-desc {
+            .ivu-notice-notice-close {
+                top: 8px;
+            }
+        }
+    }
+
+    &-content-with-render-notitle {
+        margin-left: 26px;
+    }
+
+    &-title {
+        color: $c-primary;
+        font-family: $ff-helvetica;
+        font-size: $fs-m;
+        line-height: $lh-m;
+        padding-right: 10px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    &-with-desc .#{$base}-title {
+        font-weight: bold;
+    }
+
+    &-desc {
+        color: $c-primary;
+        font-family: $ff-helvetica-neue;
+        font-size: $fs-s;
+        text-align: justify;
+        line-height: 1.5;
+    }
+
+    &-icon {
+        position: absolute;
+        font-size: $fs-l;
+
+        &-success {
+            color: $c-success;
+        }
+
+        &-info {
+            color: $c-info
+        }
+
+        &-warning {
+            color: $c-warning;
+        }
+
+        &-error {
+            color: $c-error;
+        }
+    }
+
+    .#{$base}-icon {
+        font-size: $fs-l;
+    }
+
+    &-with-desc .#{$base}-icon {
+        font-size: $fs-xxxl;
+    }
+
+    &-custom-content {
+        position: relative;
+    }
+
+    .ivu-icon-ios-information-circle,
+    .ivu-icon-ios-information-circle-outline {
+        font-family: 'RIS Font Icons';
+        font-style: normal;
+
+        &:before {
+            content: 'Y';
+        }
+    }
+}

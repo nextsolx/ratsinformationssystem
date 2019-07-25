@@ -2,24 +2,41 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 
-class Model
+class Model extends \Illuminate\Database\Eloquent\Model
 {
-    protected $data;
+    public $incrementing = false;
 
-    public function __construct(array $data)
+    protected $dates = [];
+
+    public static function initialize (array $data)
     {
-        $this->data = $data;
+        $data['id'] = self::extractId($data);
+
+        $data = collect($data)->mapWithKeys(function ($value, $key) {
+            if (in_array($key, (new static())->dates)) {
+                $value = Carbon::parse($value);
+            }
+
+            return [Str::snake($key) => $value];
+        });
+
+        return self::updateOrCreate(
+            ['id' =>  $data['id']],
+            $data->toArray()
+        );
     }
 
-    public function __get($name)
+    public static function extractId($data)
     {
-        return Arr::get($this->data, $name);
+        return self::extractIdFromUrl($data['id']);
     }
 
-    public function extractId()
+    public static function extractIdFromUrl($url)
     {
-        return Arr::last(explode('/', $this->id));
+        return Arr::last(explode('/', $url));
     }
 }

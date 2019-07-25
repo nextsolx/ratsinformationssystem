@@ -7,11 +7,41 @@ use Illuminate\Support\Arr;
 
 class Meeting extends Model
 {
+    protected $dates = [
+        'start',
+        'end',
+    ];
+
+    protected $fillable = [
+        'id',
+        'name',
+        'meeting_state',
+        'start',
+        'end',
+    ];
+
+    public static function initialize(array $data)
+    {
+        $meeting = parent::initialize($data);
+
+        if ($location = Arr::get($data, 'location')) {
+            $location = Location::initialize($data['location']);
+            $location->meeting()->associate($meeting);
+            $location->save();
+        }
+
+        return $meeting;
+    }
+
     public function location()
     {
+        return $this->hasOne(Location::class);
+
+        //Todo: Verify
         return Arr::has($this->data, 'location') ? new Location($this->location) : null;
     }
 
+    //Todo: Verify
     public function organization()
     {
         if ($organizationUrl = collect($this->organization)->first()) {
@@ -21,6 +51,7 @@ class Meeting extends Model
         return null;
     }
 
+    //Todo: Verify
     public function organizations()
     {
         $organizationIds = collect($this->organization)->map(function ($organizationUrl) {
@@ -30,6 +61,7 @@ class Meeting extends Model
         return OParlApiManager::organizations($organizationIds);
     }
 
+    //Todo: Verify
     public function files()
     {
         $files = collect($this->auxiliaryFile)->map(function ($auxiliaryFile) {
@@ -46,11 +78,7 @@ class Meeting extends Model
         return $files;
     }
 
-    private function extractIdFromUrl(string $url)
-    {
-        return Arr::last(explode('/', $url));
-    }
-
+    //Todo: Verify
     public function agenda()
     {
         return collect($this->agendaItem)->map(function ($agendaItem) {
@@ -58,11 +86,13 @@ class Meeting extends Model
         });
     }
 
+    //Todo: Verify
     public function agendaCount()
     {
         return $this->agendaItem ? count($this->agendaItem) : 0;
     }
 
+    //Todo: Verify
     public function people()
     {
         return $this->organizations()->map(function($organization) {
@@ -72,6 +102,7 @@ class Meeting extends Model
         })->flatten(1);
     }
 
+    //Todo: Verify
     public function peopleCount()
     {
         return $this->organizations()->map(function($organization) {
@@ -79,6 +110,7 @@ class Meeting extends Model
         })->sum();
     }
 
+    //Todo: Verify
     public function fileCount()
     {
         return (int)((bool)$this->invitation) +

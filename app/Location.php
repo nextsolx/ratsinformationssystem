@@ -6,16 +6,33 @@ use Illuminate\Support\Arr;
 
 class Location extends Model
 {
+    protected $fillable = [
+        'id',
+        'locality',
+        'sub_locality',
+        'street_address',
+        'postal_code',
+        'room',
+        'description',
+        'geojson'
+    ];
+
+    public function meeting()
+    {
+        return $this->belongsTo(Meeting::class);
+    }
+
+    //Todo: Verify
     public function getLocationX()
     {
         return Arr::first($this->getPoint());
     }
-
+    //Todo: Verify
     public function getLocationY()
     {
         return Arr::last($this->getPoint());
     }
-
+    //Todo: Verify
     private function getPoint()
     {
         return $this->geojson ? Arr::get($this->geojson, 'geometry.coordinates') : [];

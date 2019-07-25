@@ -22,9 +22,13 @@ Route::get('/styleguide', function () {
 Route::get('/kalender', 'MeetingController@calendar')
     ->name('calendar');
 
-Route::get('/themen-und-karte', function () {
-    return view('themes-map');
-})->name('themes-map');
+Route::get('/themen', function () {
+    return view('themes');
+})->name('themes');
+
+Route::get('/karte', function () {
+    return view('map');
+})->name('map');
 
 Route::get('/gremien', function () {
     return view('committee');

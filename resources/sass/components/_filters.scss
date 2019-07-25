@@ -1,5 +1,5 @@
 .ris-filter {
-    $base: ris-filter;
+    $base: &;
 
     border: $border;
     border-radius: $b-radius-primary;
@@ -10,8 +10,8 @@
     &_has-indent {
         padding: $indent-m;
 
-        .#{$base}__title,
-        .#{$base}__subheader {
+        #{$base}__title,
+        #{$base}__subheader {
             padding-left: 0;
             padding-right: 0;
         }
@@ -39,7 +39,7 @@
                 width: 16px;
             }
 
-            .#{$base}__subheader {
+            #{$base}__subheader {
                 padding-right: $indent-l;
             }
         }
@@ -58,7 +58,7 @@
     }
 
     &_active {
-        .#{$base}__delimiter {
+        #{$base}__delimiter {
             display: block;
         }
     }

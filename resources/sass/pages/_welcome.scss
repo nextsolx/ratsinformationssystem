@@ -3,10 +3,10 @@
 
     .ris-headline {
         margin-bottom: $indent-m;
-    }
 
-    .ris-title {
-        margin-bottom: $indent-s;
+        @include breakpoint($bp-tablet-min) {
+            margin-top: $indent-m;
+        }
     }
 
     &__content {
@@ -25,7 +25,11 @@
                 margin-left: $indent-ml;
                 margin-right: $indent-ml;
                 padding-bottom: $indent-xl;
-                padding-top: $indent-xl;
+                padding-top: $indent-ml;
+            }
+
+            .ris-title {
+                margin-bottom: $indent-s;
             }
 
             .ris-subheader {

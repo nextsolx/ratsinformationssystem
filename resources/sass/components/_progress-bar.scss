@@ -1,0 +1,12 @@
+.ris-progress-bar {
+    background-color: $c-white2;
+    border-radius: $b-radius-primary;
+    height: 6px;
+    width: 140px;
+
+    &__progress {
+        background-color: $c-red;
+        border-radius: $b-radius-primary;
+        height: 6px;
+    }
+}

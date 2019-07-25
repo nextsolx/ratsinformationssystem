@@ -105,11 +105,8 @@ $indent-s: 8px;
 .ris-subheader {
     color: $c-secondary;
     font-family: $ff-helvetica;
-
-    @include breakpoint($bp-mobile-max) {
-        font-size: $fs-l;
-        line-height: $lh-l;
-    }
+    font-size: $fs-l;
+    line-height: $lh-l;
 }
 
 .ris-body-1 {

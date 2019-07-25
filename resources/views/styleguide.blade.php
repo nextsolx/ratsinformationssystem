@@ -470,10 +470,13 @@
                         <span class="ris-i ris-i__search"></span>
                         <span class="ris-i ris-i__account-circle"></span>
                         <span class="ris-i ris-i__calendar"></span>
+                        <span class="ris-i ris-i__calendar-empty"></span>
                         <span class="ris-i ris-i__download"></span>
                         <span class="ris-i ris-i__list"></span>
                         <span class="ris-i ris-i__people"></span>
                         <span class="ris-i ris-i__info"></span>
+                        <span class="ris-i ris-i__star-filled"></span>
+                        <span class="ris-i ris-i__marker-with-dot"></span>
 
                         <br/><br/>
 

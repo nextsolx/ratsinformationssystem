@@ -41,9 +41,14 @@
                                 >Start</a>
                             </li>
                             <li>
-                                <a class="ris-nav__link @if (url()->current() === route('themes-map')) ris-nav__link_active @endif"
-                                   href="{{ route('themes-map') }}"
-                                >Themen & Karte</a>
+                                <a class="ris-nav__link @if (url()->current() === route('themes')) ris-nav__link_active @endif"
+                                   href="{{ route('themes') }}"
+                                >Themen</a>
+                            </li>
+                            <li>
+                                <a class="ris-nav__link @if (url()->current() === route('map')) ris-nav__link_active @endif"
+                                   href="{{ route('map') }}"
+                                >Karte</a>
                             </li>
                             <li>
                                 <a class="ris-nav__link @if (url()->current() === route('calendar')) ris-nav__link_active @endif"

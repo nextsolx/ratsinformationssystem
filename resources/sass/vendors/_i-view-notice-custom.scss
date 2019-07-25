@@ -1,5 +1,5 @@
 .ivu-notice {
-    $base: ivu-notice;
+    $base: &;
 
     margin-right: 24px;
     position: fixed;
@@ -17,13 +17,13 @@
         margin-left: 51px;
     }
 
-    &-with-icon .#{$base}-desc,
-    &-with-icon .#{$base}-title {
+    &-with-icon #{$base}-desc,
+    &-with-icon #{$base}-title {
         margin-left: 30px;
     }
 
-    &-with-desc .#{$base}-desc,
-    &-with-desc .#{$base}-title {
+    &-with-desc #{$base}-desc,
+    &-with-desc #{$base}-title {
         margin-left: 40px;
     }
 
@@ -88,7 +88,7 @@
         white-space: nowrap;
     }
 
-    &-with-desc .#{$base}-title {
+    &-with-desc #{$base}-title {
         font-weight: bold;
     }
 
@@ -121,11 +121,11 @@
         }
     }
 
-    .#{$base}-icon {
+    #{$base}-icon {
         font-size: $fs-l;
     }
 
-    &-with-desc .#{$base}-icon {
+    &-with-desc #{$base}-icon {
         font-size: $fs-xxxl;
     }
 

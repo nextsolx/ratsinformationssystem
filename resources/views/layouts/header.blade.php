@@ -60,6 +60,13 @@
                                    href="{{ route('committee') }}"
                                 >Gremien</a>
                             </li>
+
+                            <li>
+                                <a class="ris-nav__link @if (url()->current() === route('people')) ris-nav__link_active @endif"
+                                   href="{{ route('people') }}"
+                                >Personen</a>
+                            </li>
+
                             <li>
                                 <a class="ris-nav__link @if (url()->current() === route('bookmarks')) ris-nav__link_active @endif"
                                    href="{{ route('bookmarks') }}"

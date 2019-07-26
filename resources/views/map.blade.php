@@ -6,6 +6,9 @@
             Map
         </h1>
 
+        <map-mobile-app class="map-mobile"></map-mobile-app>
+
+        <map-desktop-app class="map-desktop"></map-desktop-app>
 
 
     </main>

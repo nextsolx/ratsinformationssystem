@@ -34,6 +34,10 @@ Route::get('/gremien', function () {
     return view('committee');
 })->name('committee');
 
+Route::get('/personen', function () {
+    return view('people');
+})->name('people');
+
 Route::get('/merkliste', function () {
     return view('bookmarks');
 })->name('bookmarks');

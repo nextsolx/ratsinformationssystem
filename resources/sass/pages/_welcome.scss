@@ -1,4 +1,6 @@
 .ris-welcome {
+    $base: &;
+
     display: flex;
 
     .ris-headline {
@@ -11,7 +13,10 @@
 
     &__content {
         @include breakpoint($bp-tablet-min) {
+            box-shadow: 0 5px 6px 0 $c-box-shadow3;
             flex-grow: 1;
+            position: relative;
+            z-index: 2;
         }
 
         &_wrapper {
@@ -38,6 +43,103 @@
         }
     }
 
+    &__people-wrapper {
+        > .ris-body-2 {
+            font-weight: bold;
+            margin-bottom: $indent-s;
+        }
+
+        #{$base}__people-list {
+            display: flex;
+
+            @include breakpoint($bp-mobile-max) {
+                flex-direction: column;
+            }
+
+            @include breakpoint($bp-tablet-min) {
+                flex-wrap: wrap;
+            }
+        }
+
+        #{$base}__people {
+            border-radius: $b-radius-primary;
+            box-shadow: 0 1px 6px 0 $c-box-shadow3;
+            margin-bottom: $indent-m;
+
+            @include breakpoint($bp-mobile-max) {
+                align-items: center;
+                display: flex;
+                min-height: 80px;
+
+                &:not(:last-child) {
+                    margin-bottom: $indent-m;
+                }
+
+                &:nth-child(n+4) {
+                    display: none;
+                }
+            }
+
+            @include breakpoint($bp-tablet-min) {
+                width: 120px;
+
+                &:not(:last-child) {
+                    margin-right: $indent-m;
+                }
+            }
+
+            &-img {
+                object-fit: cover;
+
+                @include breakpoint($bp-mobile-max) {
+                    border-radius: $b-radius-primary 0 0 $b-radius-primary;
+                    height: 80px;
+                    max-width: 80px;
+                }
+
+                @include breakpoint($bp-tablet-min) {
+                    border-radius: $b-radius-primary $b-radius-primary 0 0;
+                    height: 100px;
+                    width: 100%;
+                }
+            }
+
+            .ris-link {
+                color: $c-primary;
+                font-family: $ff-helvetica;
+
+                @include breakpoint($bp-mobile-max) {
+                    padding-left: $indent-m;
+                    padding-right: $indent-m;
+                }
+
+                @include breakpoint($bp-tablet-min) {
+                    padding-left: $indent-s;
+                    padding-right: $indent-s;
+                    padding-top: $indent-s;
+                    width: 50%;
+                }
+            }
+
+            .ris-caption {
+                @include breakpoint($bp-mobile-max) {
+                    padding-left: $indent-m;
+                    padding-right: $indent-m;
+                }
+
+                @include breakpoint($bp-tablet-min) {
+                    padding-bottom: $indent-s;
+                    padding-left: $indent-s;
+                    padding-right: $indent-s;
+                }
+            }
+        }
+    }
+
+    &__bookmarks {
+        border-bottom: 0;
+    }
+
     .ris-filter-buttons {
         @include breakpoint($bp-tablet-min) {
             margin-top: $indent-ml;
@@ -48,11 +150,18 @@
         }
     }
 
-    .ris-map {
+    &-map {
+        display: flex;
+        justify-content: center;
+        opacity: .8;
+        position: relative;
         z-index: 1;
 
         @include breakpoint($bp-mobile-max) {
-            height: 30vh;
+            align-items: center;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px 0 $c-box-shadow2;
+            overflow: hidden;
 
             &__desktop {
                 display: none;
@@ -60,11 +169,42 @@
         }
 
         @include breakpoint($bp-tablet-min) {
-            height: 644px;
-            width: 320px;
-
             &__mobile {
                 display: none;
+            }
+        }
+
+        .ris-button {
+            font-weight: 500;
+            line-height: $lh-m;
+            opacity: .8;
+            position: absolute;
+            text-decoration: none;
+            z-index: 2;
+
+            @include breakpoint($bp-tablet-min) {
+                top: 330px;
+            }
+        }
+
+        &__desktop-sticky {
+            display: flex;
+            height: 1024px;
+            justify-content: center;
+            position: sticky;
+            top: 0;
+        }
+
+        &__img {
+            @include breakpoint($bp-mobile-max) {
+                height: 30vh;
+                object-fit: cover;
+                width: 100%;
+            }
+
+            @include breakpoint($bp-tablet-min) {
+                height: 1024px;
+                width: 320px;
             }
         }
     }

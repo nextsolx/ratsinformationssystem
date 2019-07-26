@@ -1,0 +1,22 @@
+.ris-map {
+    z-index: 1;
+
+    @include breakpoint($bp-mobile-max) {
+        height: 30vh;
+        margin: auto;
+        width: 95%;
+
+        &__desktop {
+            display: none;
+        }
+    }
+
+    @include breakpoint($bp-tablet-min) {
+        height: 1024px;
+        width: 320px;
+
+        &__mobile {
+            display: none;
+        }
+    }
+}

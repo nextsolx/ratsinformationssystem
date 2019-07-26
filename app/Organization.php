@@ -34,9 +34,19 @@ class Organization extends Model
         return $this->belongsTo(Organization::class, 'parent_id');
     }
 
-    //Todo: Verify
+    public function people()
+    {
+        return $this->belongsToMany(Person::class, 'memberships')
+            ->using(Membership::class);
+    }
+
+    public function meetings()
+    {
+        return $this->belongsToMany(Meeting::class);
+    }
+
     public function peopleCount()
     {
-        return $this->membership ? count($this->membership) : 0;
+        return $this->people()->count();
     }
 }

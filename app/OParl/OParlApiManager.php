@@ -80,6 +80,13 @@ class OParlApiManager
         return [$data['data'],  self::extractPages($data)];
     }
 
+    public static function memberships($page = null)
+    {
+        $data = resolve(\App\Contracts\OParlApi::class)->memberships($page);
+
+        return [$data['data'],  self::extractPages($data)];
+    }
+
     public static function agendaItems($page = null)
     {
         $data = resolve(\App\Contracts\OParlApi::class)->agendaItems($page);

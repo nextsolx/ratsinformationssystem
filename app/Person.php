@@ -15,4 +15,10 @@ class Person extends Model
         'life',
         'life_source',
     ];
+
+    public function organizations()
+    {
+        return $this->belongsToMany(Organization::class, 'memberships')
+            ->using(Membership::class);
+    }
 }

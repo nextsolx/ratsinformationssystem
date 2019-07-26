@@ -102,6 +102,14 @@ class OParlApi implements \App\Contracts\OParlApi
         return $this->call('GET', $endpoint, $page);
     }
 
+    public function memberships(int $page = null)
+    {
+        $endpoint = sprintf('body/%s/%s', $this->bodyId, 'membership');
+
+        return $this->call('GET', $endpoint, $page);
+    }
+
+
     public function agendaItems(int $page = null)
     {
         $endpoint = sprintf('body/%s/%s', $this->bodyId, 'agenda_item');

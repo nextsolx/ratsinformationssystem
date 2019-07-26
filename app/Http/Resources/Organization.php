@@ -19,7 +19,7 @@ class Organization extends JsonResource
         }
 
         return [
-            'id' => $this->extractId(),
+            'id' => $this->id,
             'name' => $this->name,
             'shortName' => $this->shortName,
             'organizationType' => $this->organizationType,

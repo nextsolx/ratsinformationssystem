@@ -7,17 +7,17 @@ use Illuminate\Support\Arr;
 
 class Meeting extends Model
 {
-    protected $dates = [
-        'start',
-        'end',
-    ];
-
     protected $fillable = [
         'id',
         'name',
         'meeting_state',
         'start',
         'end',
+    ];
+
+    protected $dates = [
+        'start',
+        'end'
     ];
 
     public static function initialize(array $data)
@@ -30,92 +30,89 @@ class Meeting extends Model
             $location->save();
         }
 
+        if ($organizations = Arr::get($data, 'organization')) {
+            foreach ($organizations as $organization) {
+                $meeting->organizations()->attach(self::extractIdFromUrl($organization));
+            }
+        }
+
+        if ($file = Arr::get($data, 'invitation')) {
+            $meeting->files()->attach(
+                self::extractIdFromUrl($file['id']),
+                ['type' => 'inviation']
+            );
+        }
+
+        if ($file = Arr::get($data, 'resultsProtocol')) {
+            $meeting->files()->attach(
+                self::extractIdFromUrl($file['id']),
+                ['type' => 'resultsProtocol']
+            );
+        }
+
+        if ($file = Arr::get($data, 'verbatimProtocol')) {
+            $meeting->files()->attach(
+                self::extractIdFromUrl($file['id']),
+                ['type' => 'verbatimProtocol']
+            );
+        }
+
+        if ($files = Arr::get($data, 'auxiliaryFile')) {
+            foreach ($files as $file) {
+                $meeting->files()->attach(
+                    self::extractIdFromUrl($file['id']),
+                    ['type' => 'auxiliaryFile']
+                );
+            }
+        }
+
         return $meeting;
     }
 
     public function location()
     {
         return $this->hasOne(Location::class);
-
-        //Todo: Verify
-        return Arr::has($this->data, 'location') ? new Location($this->location) : null;
     }
 
-    //Todo: Verify
     public function organization()
     {
-        if ($organizationUrl = collect($this->organization)->first()) {
-            return OParlApiManager::organization($this->extractIdFromUrl($organizationUrl));
-        }
-
-        return null;
+        return $this->organizations()->first();
     }
 
-    //Todo: Verify
     public function organizations()
     {
-        $organizationIds = collect($this->organization)->map(function ($organizationUrl) {
-            return $this->extractIdFromUrl($organizationUrl);
-        });
-
-        return OParlApiManager::organizations($organizationIds);
+        return $this->belongsToMany(Organization::class);
     }
 
-    //Todo: Verify
-    public function files()
-    {
-        $files = collect($this->auxiliaryFile)->map(function ($auxiliaryFile) {
-            return new File($auxiliaryFile);
-        });
-
-        if ($this->vebatimProtocol) {
-            $files->push(new File($this->invitation));
-        }
-        if ($this->vebatimProtocol) {
-            $files->push(new File($this->vebatimProtocol));
-        }
-
-        return $files;
-    }
-
-    //Todo: Verify
-    public function agenda()
-    {
-        return collect($this->agendaItem)->map(function ($agendaItem) {
-            return new Agendum($agendaItem);
-        });
-    }
-
-    //Todo: Verify
-    public function agendaCount()
-    {
-        return $this->agendaItem ? count($this->agendaItem) : 0;
-    }
-
-    //Todo: Verify
     public function people()
     {
-        return $this->organizations()->map(function($organization) {
-            return collect($organization->membership)->map(function($membershipUrl) {
-                return OParlApiManager::personFromMembership($this->extractIdFromUrl($membershipUrl));
-            });
+        return $this->organizations->map(function($organization) {
+            return $organization->people;
         })->flatten(1);
     }
 
-    //Todo: Verify
     public function peopleCount()
     {
-        return $this->organizations()->map(function($organization) {
-            return $organization->peopleCount();
-        })->sum();
+        return $this->people()->count();
     }
 
-    //Todo: Verify
+    public function agenda()
+    {
+        return $this->hasMany(Agendum::class);
+    }
+
+    public function agendaCount()
+    {
+        return $this->agenda()->count();
+    }
+
+    public function files()
+    {
+        return $this->belongsToMany(File::class);
+    }
+
     public function fileCount()
     {
-        return (int)((bool)$this->invitation) +
-            (int)((bool)$this->resultsProtocol) +
-            (int)((bool)$this->verbatimProtocol) +
-            ($this->auxiliaryFile ? count($this->auxiliaryFile) : 0);
+        return $this->files()->count();
     }
 }

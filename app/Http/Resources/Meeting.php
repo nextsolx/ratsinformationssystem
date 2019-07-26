@@ -20,14 +20,14 @@ class Meeting extends JsonResource
         }
 
         return [
-            'id' => $this->extractId(),
+            'id' => $this->id,
             'title' => $this->name,
             'dateFrom' => $this->start,
             'dateTill' => $this->end,
             'agendaCount' => $this->agendaCount(),
             'peopleCount' => $this->peopleCount(),
             'fileCount' => $this->fileCount(),
-            'location' => new Location($this->location()),
+            'location' => new Location($this->location),
         ];
     }
 }

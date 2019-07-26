@@ -2,26 +2,25 @@
 
 namespace App\Console\Commands;
 
-use App\Consultation;
+use App\Membership;
 use App\OParl\OParlApiManager;
-use App\Person;
 use Illuminate\Console\Command;
 
-class CrawlConsultations extends Command
+class CrawlMemberships extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'crawl:consultations';
+    protected $signature = 'crawl:memberships';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Crawl all Consultations';
+    protected $description = 'Crawl all People';
 
     /**
      * Create a new command instance.
@@ -43,10 +42,10 @@ class CrawlConsultations extends Command
         $page = 1;
 
         do {
-            list($consultations, $pages) = OParlApiManager::consultations($page);
+            list($memberships, $pages) = OParlApiManager::memberships($page);
 
-            collect($consultations)->each(function ($consultation) {
-                Consultation::initialize($consultation);
+            collect($memberships)->each(function ($membership) {
+                Membership::initialize($membership);
             });
 
             $page ++;

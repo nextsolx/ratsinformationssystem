@@ -120,7 +120,13 @@ export default {
         },
         navClicked(page) {
             this.loadMeetings(page.year, page.month);
-        }
+        },
+        dayClicked(day) {
+            const $el = document.querySelector(`#_${day.day}_${day.month}_${day.year}`);
+            if ($el) {
+                $el.scrollIntoView({ behavior: 'smooth' });
+            }
+        },
     },
     mounted() {
         this.loadMeetings();
@@ -134,6 +140,7 @@ export default {
             :attributes="attrs"
             :is-expanded="true"
             @update:fromPage="navClicked"
+            @dayclick="dayClicked"
                 />
         <div class="ris-calendar-app__icon-calendar"
             @click="toggleCalendar">

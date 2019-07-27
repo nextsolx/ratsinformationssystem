@@ -73,7 +73,7 @@ export default {
         disableEnableNavButtons() {
             const navButtons = document.querySelectorAll(this.navButtons);
             navButtons.forEach(el => {
-                el.style = 'pointer-events: ' + (this.loading ? 'none' : 'auto');
+                el.style.pointerEvents = this.loading ? 'none' : 'auto';
             });
         },
         loadMeetings(year = this.currentYear, month = this.currentMonth) {

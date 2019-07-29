@@ -72,9 +72,12 @@
         margin-bottom: $indent-s;
 
         .hidden {
-            height: 0;
-            padding: 0;
-            opacity: 0;
+            @include breakpoint($bp-mobile-max) {
+                display: none;
+                height: 0;
+                padding: 0;
+                opacity: 0;
+            }
         }
     }
 

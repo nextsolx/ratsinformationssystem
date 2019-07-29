@@ -9,6 +9,8 @@ export default {
     methods: {
         close() {
             this.navMobileActive = !this.navMobileActive;
+
+            this.$emit('nav-active', this.navMobileActive);
         }
     }
 };

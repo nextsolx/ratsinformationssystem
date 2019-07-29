@@ -65,6 +65,15 @@
             border-radius: $b-radius-primary;
             box-shadow: 0 1px 6px 0 $c-box-shadow3;
             margin-bottom: $indent-m;
+            text-decoration: none;
+
+            &:hover {
+                box-shadow: 0 1px 3px 0 $c-box-shadow3;
+
+                .ris-body-1 {
+                    color: $c-red;
+                }
+            }
 
             @include breakpoint($bp-mobile-max) {
                 align-items: center;
@@ -104,9 +113,11 @@
                 }
             }
 
-            .ris-link {
+            .ris-body-1 {
                 color: $c-primary;
                 font-family: $ff-helvetica;
+                line-height: $lh-l;
+                font-size: $fs-l;
 
                 @include breakpoint($bp-mobile-max) {
                     padding-left: $indent-m;
@@ -157,6 +168,12 @@
         position: relative;
         z-index: 1;
 
+        &:hover {
+            .ris-button {
+                opacity: .7;
+            }
+        }
+
         @include breakpoint($bp-mobile-max) {
             align-items: center;
             border-radius: 4px;
@@ -183,16 +200,16 @@
             z-index: 2;
 
             @include breakpoint($bp-tablet-min) {
+                left: 25%;
                 top: 330px;
             }
         }
 
         &__desktop-sticky {
-            display: flex;
             height: 1024px;
-            justify-content: center;
             position: sticky;
             top: 0;
+            width: 320px;
         }
 
         &__img {
@@ -204,7 +221,7 @@
 
             @include breakpoint($bp-tablet-min) {
                 height: 1024px;
-                width: 320px;
+                width: 100%;
             }
         }
     }

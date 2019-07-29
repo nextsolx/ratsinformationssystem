@@ -37,6 +37,6 @@ class Model extends \Illuminate\Database\Eloquent\Model
 
     public static function extractIdFromUrl($url)
     {
-        return Arr::last(explode('/', $url));
+        return Str::before(Arr::last(explode('/', $url)), '?');
     }
 }

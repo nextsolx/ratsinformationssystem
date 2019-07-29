@@ -33,7 +33,7 @@ export default {
 <template>
     <div id="map-desktop-osm" class="ris-map ris-map__desktop">
         <l-map ref="mapDesktopOsm"
-               :zoom="zoom" :center="center">
+            :zoom="zoom" :center="center">
             <l-tile-layer
                 :url="url"
                 :attribution="attribution"

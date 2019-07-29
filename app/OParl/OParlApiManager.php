@@ -29,21 +29,7 @@ class OParlApiManager
     {
         $data = resolve(\App\Contracts\OParlApi::class)->meetings($page, $from);
 
-        return [$data['data'],  self::extractPages($data)];
-    }
-
-    public static function meeting(string $id)
-    {
-        $data = resolve(\App\Contracts\OParlApi::class)->meeting($id);
-
-        return new Meeting($data);
-    }
-
-    public static function organization(string $organizationId)
-    {
-        $data = resolve(\App\Contracts\OParlApi::class)->organization($organizationId);
-
-        return new Organization($data);
+        return [$data['data'], self::extractPages($data)];
     }
 
     public static function organizations($page = null, Collection $organizationIds = null)
@@ -56,56 +42,56 @@ class OParlApiManager
 
         $data = resolve(\App\Contracts\OParlApi::class)->organizations($page);
 
-        return [$data['data'],  self::extractPages($data)];
+        return self::returnData($data);
     }
 
     public static function locations($page = null)
     {
         $data = resolve(\App\Contracts\OParlApi::class)->locations($page);
 
-        return [$data['data'],  self::extractPages($data)];
+        return self::returnData($data);
     }
 
     public static function papers($page = null)
     {
         $data = resolve(\App\Contracts\OParlApi::class)->papers($page);
 
-        return [$data['data'],  self::extractPages($data)];
+        return self::returnData($data);
     }
 
     public static function people($page = null)
     {
         $data = resolve(\App\Contracts\OParlApi::class)->people($page);
 
-        return [$data['data'],  self::extractPages($data)];
+        return self::returnData($data);
     }
 
     public static function memberships($page = null)
     {
         $data = resolve(\App\Contracts\OParlApi::class)->memberships($page);
 
-        return [$data['data'],  self::extractPages($data)];
+        return self::returnData($data);
     }
 
     public static function agendaItems($page = null)
     {
         $data = resolve(\App\Contracts\OParlApi::class)->agendaItems($page);
 
-        return [$data['data'],  self::extractPages($data)];
+        return self::returnData($data);
     }
 
     public static function consultations($page = null)
     {
         $data = resolve(\App\Contracts\OParlApi::class)->consultations($page);
 
-        return [$data['data'],  self::extractPages($data)];
+        return self::returnData($data);
     }
 
     public static function files($page = null)
     {
         $data = resolve(\App\Contracts\OParlApi::class)->files($page);
 
-        return [$data['data'],  self::extractPages($data)];
+        return self::returnData($data);
     }
 
     public static function personFromMembership(string $id)
@@ -129,6 +115,19 @@ class OParlApiManager
     private static function extractPages($data)
     {
         return $data['pagination'];
+    }
+
+    private static function extractData($data)
+    {
+        return $data['data'];
+    }
+
+    private static function returnData($data)
+    {
+        return [
+            self::extractData($data),
+            self::extractPages($data)
+        ];
     }
 
     private static function extractId(string $url)

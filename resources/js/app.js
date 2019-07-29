@@ -4,7 +4,14 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+require('intersection-observer');
+require('es6-promise').polyfill();
+require('./polyfill');
+
 import Vue from 'vue';
+import iView from 'iview';
+
+Vue.use(iView);
 
 require('./bootstrap');
 

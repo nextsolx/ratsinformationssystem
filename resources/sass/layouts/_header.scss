@@ -7,7 +7,7 @@
         padding-top: $indent-sm;
     }
 
-    @include breakpoint($bp-desktop-min) {
+    @include breakpoint($bp-tablet-min) {
         box-shadow: 0 6px 6px -2px $c-box-shadow2;
     }
 

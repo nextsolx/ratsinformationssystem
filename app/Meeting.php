@@ -103,7 +103,7 @@ class Meeting extends Model
 
     public function agendaCount()
     {
-        return $this->agenda()->count();
+        return $this->agenda->count();
     }
 
     public function files()
@@ -113,6 +113,6 @@ class Meeting extends Model
 
     public function fileCount()
     {
-        return $this->files()->count();
+        return $this->files->count();
     }
 }

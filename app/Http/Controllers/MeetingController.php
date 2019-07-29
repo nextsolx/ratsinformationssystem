@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Http\Resources\Meeting;
 use App\Http\Resources\MeetingWithData;
 use App\OParl\OParlApiManager;
@@ -12,10 +11,31 @@ use Illuminate\Support\Carbon;
 
 class MeetingController extends Controller
 {
-    public function all(Request $request)
+
+    public function calendar(Request $request)
     {
         $from = $request->input('from');
         $from = $from ? Carbon::parse($from) : null;
+
+        list($meetings, $pages) = OParlApiManager::meetings($request->input('page'), $from);
+
+        $meetings = new LengthAwarePaginator(
+            $meetings,
+            $pages['totalElements'],
+            $pages['elementsPerPage'],
+            $pages['currentPage']
+        );
+
+        return view('calendar')->with([
+            'meetings' => Meeting::collection($meetings)->toResponse(request())->getData()->data,
+            'links' => $meetings->toArray(),
+        ]);
+
+    }
+
+    public function all(Request $request)
+    {
+        $from = $request->input('from') ? Carbon::parse($request->input('from')) : null;
 
         list($meetings, $pages) = OParlApiManager::meetings($request->input('page'), $from);
 

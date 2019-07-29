@@ -26,6 +26,10 @@ Route::get('/themen', function () {
     return view('themes');
 })->name('themes');
 
+Route::get('/neue-themen', function () {
+    return view('themes');
+})->name('new-themes');
+
 Route::get('/karte', function () {
     return view('map');
 })->name('map');

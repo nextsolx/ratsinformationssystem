@@ -41,7 +41,10 @@
                                 >Start</a>
                             </li>
                             <li>
-                                <a class="ris-nav__link @if (url()->current() === route('themes')) ris-nav__link_active @endif"
+                                <a class="ris-nav__link
+                                    @if (url()->current() === route('themes') or url()->current() === route('new-themes'))
+                                        ris-nav__link_active
+                                    @endif"
                                    href="{{ route('themes') }}"
                                 >Themen</a>
                             </li>

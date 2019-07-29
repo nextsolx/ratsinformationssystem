@@ -33,7 +33,11 @@ if (isset($meetings) and is_array($meetings)) {
                             <div class="ris-calendar__card-list">
                                 <section class="ris-calendar__card-day">
 
-                                    <div class="ris-calendar__card-day-left">
+                                    <div class="ris-calendar__card-day-left"
+                                        id="{{ '_' . Carbon\Carbon::parse($meeting_list_per_day[0]->dateFrom)->day
+                                        . '_' . Carbon\Carbon::parse($meeting_list_per_day[0]->dateFrom)->month
+                                        . '_' . Carbon\Carbon::parse($meeting_list_per_day[0]->dateFrom)->year }}"
+                                        >
                                         {{ Carbon\Carbon::parse($meeting_list_per_day[0]->dateFrom)->day }}
                                         <br/>
                                         <span class="ris-calendar__card-day-of-week">

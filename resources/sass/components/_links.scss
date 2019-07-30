@@ -7,6 +7,10 @@
     line-height: $lh-l;
     text-decoration: none;
 
+    &:hover {
+        color: $c-red;
+    }
+
     &_underline {
         color: $c-gray2;
         font-family: $ff-helvetica;
@@ -35,26 +39,29 @@
 
     &_has-icon {
         align-items: center;
-        color: $c-primary;
+        background-color: $c-white2;
+        border-radius: $b-radius-primary;
         display: flex;
-        font-family: $ff-sf-pro-display-bold;
+        font-weight: 500;
         justify-content: space-between;
+        padding: $indent-sm;
+
+        @include breakpoint($bp-tablet-min) {
+            margin-left: auto;
+            width: 224px;
+        }
 
         &::after {
-            color: $c-secondary;
             content: 'I';
             display: inline-block;
             font-family: $ff-ris-font-icons;
+            font-size: $fs-m;
             height: 14px;
             line-height: 1;
             margin: 0;
             padding: 0;
             speak: none;
             width: 14px;
-
-            @include breakpoint($bp-mobile-max) {
-                font-size: $fs-s;
-            }
         }
     }
 }

@@ -228,11 +228,6 @@
                              data-var-name="$c-red"
                              @click="copy($event)"
                         ></div>
-                        <div class="gui-color-square ris-bg-blue"
-                             v-tooltip="'$c-blue or .ris-bg-blue or .ris-blue'"
-                             data-var-name="$c-blue"
-                             @click="copy($event)"
-                        ></div>
                     </div>
 
                     <div class="gui-flex-wrapper">
@@ -271,6 +266,9 @@
                              data-var-name="$c-red3"
                              @click="copy($event)"
                         ></div>
+                    </div>
+
+                    <div class="gui-flex-wrapper">
                         <div class="gui-color-square ris-bg-blue"
                              v-tooltip="'$c-blue or .ris-bg-blue or .ris-blue'"
                              data-var-name="$c-blue"
@@ -281,9 +279,6 @@
                              data-var-name="$c-blue2"
                              @click="copy($event)"
                         ></div>
-                    </div>
-
-                    <div class="gui-flex-wrapper">
                         <div class="gui-color-square ris-bg-blue3"
                              v-tooltip="'$c-blue3 or .ris-bg-blue3 or .ris-blue3'"
                              data-var-name="$c-blue3"
@@ -294,6 +289,14 @@
                              data-var-name="$c-blue4"
                              @click="copy($event)"
                         ></div>
+                        <div class="gui-color-square ris-bg-blue5"
+                             v-tooltip="'$c-blue5 or .ris-bg-blue5 or .ris-blue5'"
+                             data-var-name="$c-blue5"
+                             @click="copy($event)"
+                        ></div>
+                    </div>
+
+                    <div class="gui-flex-wrapper">
                         <div class="gui-color-square ris-bg-gray6"
                              v-tooltip="'$c-gray6 or .ris-bg-gray6 or .ris-gray6'"
                              data-var-name="$c-gray6"
@@ -316,6 +319,20 @@
                         ></div>
                     </div>
 
+                    <div class="gui-flex-wrapper">
+                        <div class="gui-color-square ris-bg-green"
+                             v-tooltip="'$c-green or .ris-bg-green or .ris-green'"
+                             data-var-name="$c-green"
+                             @click="copy($event)"
+                        ></div>
+
+                        <div class="gui-color-square ris-bg-orange"
+                             v-tooltip="'$c-orange or .ris-bg-orange or .ris-orange'"
+                             data-var-name="$c-orange"
+                             @click="copy($event)"
+                        ></div>
+                    </div>
+
                     <div class="gui-headline">FORM ITEMS</div>
                     <div class="gui-flex-wrapper">
                         <div>
@@ -334,10 +351,16 @@
                                         v-tooltip="'.ris-button .ris-button_secondary .ris-button_has-border .ris-gray2'"
                                         @click="copy($event)"
                                 >Secondary Button</button>
+                                <button class="ris-button ris-button_secondary ris-button_has-shadow gui-indent-b-r"
+                                        v-tooltip="'.ris-button .ris-button_secondary .ris-button_has-shadow .ris-gray2'"
+                                        @click="copy($event)"
+                                >Secondary Button</button>
                                 <button class="ris-button ris-button_secondary ris-button_has-border ris-button_bg-gray4 gui-indent-b-r"
                                         v-tooltip="'.ris-button .ris-button_secondary .ris-button_has-border .ris-button_bg-gray4'"
                                         @click="copy($event)"
                                 >Secondary Button</button>
+                            </div>
+                            <div>
                                 <button class="ris-button ris-button_secondary gui-indent-b-r"
                                         v-tooltip="'.ris-button .ris-button_secondary'"
                                         @click="copy($event)"
@@ -447,9 +470,13 @@
                         <span class="ris-i ris-i__search"></span>
                         <span class="ris-i ris-i__account-circle"></span>
                         <span class="ris-i ris-i__calendar"></span>
+                        <span class="ris-i ris-i__calendar-empty"></span>
                         <span class="ris-i ris-i__download"></span>
                         <span class="ris-i ris-i__list"></span>
                         <span class="ris-i ris-i__people"></span>
+                        <span class="ris-i ris-i__info"></span>
+                        <span class="ris-i ris-i__star-filled"></span>
+                        <span class="ris-i ris-i__marker-with-dot"></span>
 
                         <br/><br/>
 

@@ -8,6 +8,7 @@ $c-light-disabled: rgba(255, 255, 255, .3);
 
 $c-box-shadow: rgba(0, 0, 0, .16);
 $c-box-shadow2: rgba(0, 0, 0, .32);
+$c-box-shadow3: rgba(33, 33, 33, .24);
 
 $c-white: $c-light-primary;
 $c-white2: #f6f6f6;
@@ -22,6 +23,7 @@ $c-blue: #a1daf8;
 $c-blue2: #007aff;
 $c-blue3: #0c2e42;
 $c-blue4: #3485ff;
+$c-blue5: #4e8eb2;
 
 $c-gray: #212121;
 $c-gray2: #545458;
@@ -32,9 +34,16 @@ $c-gray6: #576268;
 $c-gray7: #ccc;
 $c-gray8: #8c8c8c;
 
+$c-green: #43fa9d;
+$c-orange: #f90;
+
 $c-primary: $c-gray;
 $c-secondary: $c-gray8;
-$c-link: $c-blue4;
+$c-link: $c-blue5;
+$c-error: $c-red;
+$c-info: $c-blue4;
+$c-success: $c-green;
+$c-warning: $c-orange;
 
 // color classes
 .ris-dark-primary {
@@ -105,6 +114,10 @@ $c-link: $c-blue4;
     color: $c-blue4;
 }
 
+.ris-blue5 {
+    color: $c-blue5;
+}
+
 .ris-gray {
     color: $c-gray;
 }
@@ -135,6 +148,14 @@ $c-link: $c-blue4;
 
 .ris-gray8 {
     color: $c-gray8;
+}
+
+.ris-green {
+    color: $c-green;
+}
+
+.ris-orange {
+    color: $c-orange;
 }
 
 // background-color classes
@@ -206,6 +227,10 @@ $c-link: $c-blue4;
     background-color: $c-blue4;
 }
 
+.ris-bg-blue5 {
+    background-color: $c-blue5;
+}
+
 .ris-bg-gray {
     background-color: $c-gray;
 }
@@ -236,4 +261,12 @@ $c-link: $c-blue4;
 
 .ris-bg-gray8 {
     background-color: $c-gray8;
+}
+
+.ris-bg-green {
+    background-color: $c-green;
+}
+
+.ris-bg-orange {
+    background-color: $c-orange;
 }

@@ -163,4 +163,28 @@
             content: 'X';
         }
     }
+
+    &__info {
+        &::before {
+            content: 'Y';
+        }
+    }
+
+    &__star-filled {
+        &::before {
+            content: 'Z';
+        }
+    }
+
+    &__marker-with-dot {
+        &::before {
+            content: 'a';
+        }
+    }
+
+    &__calendar-empty {
+        &::before {
+            content: 'b';
+        }
+    }
 }

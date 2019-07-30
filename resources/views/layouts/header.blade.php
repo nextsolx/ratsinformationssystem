@@ -1,4 +1,6 @@
-<header-app inline-template>
+<header-app inline-template
+    @nav-active="navActiveMethod"
+>
     <header class="ris-header">
         <div class="ris-header__top">
             <a class="ris-logo" href="/" title="Stadt Koeln">
@@ -22,7 +24,7 @@
                         @click="close"
                 >Menu</button>
                 <div class="ris-nav__overlay"
-                        @click.self.stop="navMobileActive = false"
+                        @click.self.stop="close"
                         :class="{ 'ris-nav__overlay_active': navMobileActive }"
                 >
                     <nav class="ris-nav__menu">
@@ -41,9 +43,14 @@
                                 >Start</a>
                             </li>
                             <li>
-                                <a class="ris-nav__link @if (url()->current() === route('themes-map')) ris-nav__link_active @endif"
-                                   href="{{ route('themes-map') }}"
-                                >Themen & Karte</a>
+                                <a class="ris-nav__link @if (url()->current() === route('themes')) ris-nav__link_active @endif"
+                                   href="{{ route('themes') }}"
+                                >Themen</a>
+                            </li>
+                            <li>
+                                <a class="ris-nav__link @if (url()->current() === route('map')) ris-nav__link_active @endif"
+                                   href="{{ route('map') }}"
+                                >Karte</a>
                             </li>
                             <li>
                                 <a class="ris-nav__link @if (url()->current() === route('calendar')) ris-nav__link_active @endif"
@@ -55,6 +62,13 @@
                                    href="{{ route('committee') }}"
                                 >Gremien</a>
                             </li>
+
+                            <li>
+                                <a class="ris-nav__link @if (url()->current() === route('people')) ris-nav__link_active @endif"
+                                   href="{{ route('people') }}"
+                                >Personen</a>
+                            </li>
+
                             <li>
                                 <a class="ris-nav__link @if (url()->current() === route('bookmarks')) ris-nav__link_active @endif"
                                    href="{{ route('bookmarks') }}"

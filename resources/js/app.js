@@ -35,4 +35,12 @@ files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(
 
 new Vue({
     el: '#root',
+    data: () => ({
+        navActive: false
+    }),
+    methods: {
+        navActiveMethod(event) {
+            this.navActive = event;
+        }
+    },
 });

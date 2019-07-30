@@ -4,6 +4,15 @@
     display: inline-flex;
     font-family: $ff-helvetica;
 
+    &__root_active {
+        @include breakpoint($bp-mobile-max) {
+            left: 0;
+            position: fixed;
+            right: 0;
+            top: 0;
+        }
+    }
+
     @include breakpoint($bp-mobile-max) {
         font-size: $fs-m;
         line-height: $lh-l;
@@ -30,7 +39,7 @@
                 position: fixed;
                 top: 0;
                 width: 100%;
-                z-index: 500;
+                z-index: 1001;
 
                 & > #{$base}__menu {
                     display: block;

@@ -3,9 +3,9 @@ export default {
     name: 'FooterApp',
     methods: {
         backToTop() {
-            const $el = document.querySelector('#_ris-calendar-headline');
+            const $el = document.querySelector('.ris-content');
             if ($el) {
-                $el.scrollIntoView();
+                $el.scrollIntoView({ behavior: 'smooth'});
             }
         }
     },

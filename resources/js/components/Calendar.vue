@@ -134,7 +134,8 @@ export default {
         <div v-for="(meetingWeekList, meetingWeekYearKey ) in meetingList"
             :key="meetingWeekYearKey">
             <div class="ris-calendar__card-list"
-                v-for="meetingListPerDay in meetingWeekList"
+                v-for="(meetingListPerDay, meetingListPerDayKey) in meetingWeekList"
+                :key="meetingListPerDayKey"
                     >
                 <section class="ris-calendar__card-day">
                     <div class="ris-calendar__card-day-left">
@@ -147,8 +148,8 @@ export default {
 
                     <div class="ris-calendar__card-day-right">
                         <div class="ris-calendar__card"
-                            v-for="{ title, dateFrom, agendaCount, peopleCount, fileCount } in meetingListPerDay"
-                            :key="title"
+                            v-for="{ id, title, dateFrom, agendaCount, peopleCount, fileCount } in meetingListPerDay"
+                            :key="id"
                             :data-date-from="dateFrom"
                                 >
                             <h2 class="ris-title">

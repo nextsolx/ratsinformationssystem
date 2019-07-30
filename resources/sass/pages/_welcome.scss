@@ -14,7 +14,7 @@
     &__content {
         @include breakpoint($bp-tablet-min) {
             box-shadow: 0 5px 6px 0 $c-box-shadow3;
-            flex-grow: 1;
+            flex-basis: calc(100% - 320px);
             position: relative;
             z-index: 2;
         }
@@ -65,6 +65,15 @@
             border-radius: $b-radius-primary;
             box-shadow: 0 1px 6px 0 $c-box-shadow3;
             margin-bottom: $indent-m;
+            text-decoration: none;
+
+            &:hover {
+                box-shadow: 0 1px 3px 0 $c-box-shadow3;
+
+                .ris-body-1 {
+                    color: $c-red;
+                }
+            }
 
             @include breakpoint($bp-mobile-max) {
                 align-items: center;
@@ -104,9 +113,11 @@
                 }
             }
 
-            .ris-link {
+            .ris-body-1 {
                 color: $c-primary;
                 font-family: $ff-helvetica;
+                font-size: $fs-l;
+                line-height: $lh-l;
 
                 @include breakpoint($bp-mobile-max) {
                     padding-left: $indent-m;
@@ -151,26 +162,58 @@
     }
 
     &-map {
+        align-items: center;
         display: flex;
         justify-content: center;
         opacity: .8;
-        position: relative;
+        text-decoration: none;
         z-index: 1;
 
+        &:hover {
+            .ris-button {
+                opacity: .7;
+            }
+        }
+
         @include breakpoint($bp-mobile-max) {
-            align-items: center;
             border-radius: 4px;
             box-shadow: 0 2px 4px 0 $c-box-shadow2;
-            overflow: hidden;
+            height: 30vh;
+            position: relative;
+            width: 100%;
 
             &__desktop {
                 display: none;
             }
+
+            &__img {
+                height: 30vh;
+                left: 0;
+                object-fit: cover;
+                position: absolute;
+                top: 0;
+                width: 100%;
+            }
         }
 
         @include breakpoint($bp-tablet-min) {
+            height: 100%;
+            position: fixed;
+            right: 0;
+            top: 0;
+            width: 320px;
+
             &__mobile {
                 display: none;
+            }
+
+            &__img {
+                height: 100%;
+                object-fit: cover;
+                position: absolute;
+                right: 0;
+                top: 0;
+                width: 320px;
             }
         }
 
@@ -178,33 +221,10 @@
             font-weight: 500;
             line-height: $lh-m;
             opacity: .8;
-            position: absolute;
-            text-decoration: none;
             z-index: 2;
 
             @include breakpoint($bp-tablet-min) {
-                top: 330px;
-            }
-        }
-
-        &__desktop-sticky {
-            display: flex;
-            height: 1024px;
-            justify-content: center;
-            position: sticky;
-            top: 0;
-        }
-
-        &__img {
-            @include breakpoint($bp-mobile-max) {
-                height: 30vh;
-                object-fit: cover;
-                width: 100%;
-            }
-
-            @include breakpoint($bp-tablet-min) {
-                height: 1024px;
-                width: 320px;
+                height: 20px;
             }
         }
     }

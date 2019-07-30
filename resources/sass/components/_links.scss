@@ -7,6 +7,10 @@
     line-height: $lh-l;
     text-decoration: none;
 
+    &:hover {
+        color: $c-red;
+    }
+
     &_underline {
         color: $c-gray2;
         font-family: $ff-helvetica;

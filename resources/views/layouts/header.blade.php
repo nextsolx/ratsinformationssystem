@@ -1,4 +1,6 @@
-<header-app inline-template>
+<header-app inline-template
+    @nav-active="navActiveMethod"
+>
     <header class="ris-header">
         <div class="ris-header__top">
             <a class="ris-logo" href="/" title="Stadt Koeln">
@@ -22,7 +24,7 @@
                         @click="close"
                 >Menu</button>
                 <div class="ris-nav__overlay"
-                        @click.self.stop="navMobileActive = false"
+                        @click.self.stop="close"
                         :class="{ 'ris-nav__overlay_active': navMobileActive }"
                 >
                     <nav class="ris-nav__menu">

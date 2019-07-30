@@ -19,15 +19,15 @@
                     Wählen Sie Ihren Stadtbezirk und finden Sie Themen in Ihrer Umgebung.
                 </div>
 
-                <div class="ris-welcome-map ris-welcome-map__mobile">
+                <a class="ris-welcome-map ris-welcome-map__mobile" title="Karte öffnen"
+                    href="{{ route('map') }}"
+                >
                     <img src="./img/map-mobile-thumbnail.jpg" class="ris-welcome-map__img"
                          alt="Karte öffnen" />
-                    <a href="{{ route('map') }}" class="ris-button ris-button_primary ris-button_bg-gray2"
-                       title="Karte öffnen"
-                    >
+                    <div class="ris-button ris-button_primary ris-button_bg-gray2">
                         Karte öffnen
-                    </a>
-                </div>
+                    </div>
+                </a>
 
                 <div class="ris-filter-buttons">
                     <div class="ris-filter-buttons__title">
@@ -68,15 +68,15 @@
             <section class="ris-card-list ris-card-list__themes">
                 <div class="ris-title">Aktuelle Themen</div>
 
-                <div class="ris-card-list__item ris-card-list__item_has-bookmark">
+                <a class="ris-card-list__item" title="Bewohnerparken Köln-Lindenthal"
+                     href="{{ route('themes') }}"
+                >
                     <div class="ris-card-list__themes-top">
                         <img src="./img/thumbnail-map-tile.png" class="ris-card-list__themes-img"
                              alt="Generalsanierung Drehbrücke Deutzer Hafen Teilergebnis"/>
-                        <a class="ris-link" title="Bewohnerparken Köln-Lindenthal"
-                           href="/"
-                        >
+                        <div class="ris-body-1">
                             Bewohnerparken Köln-Lindenthal
-                        </a>
+                        </div>
                     </div>
                     <div class="ris-card-list__themes-bottom">
                         <div class="ris-caption ris-card-list__themes-number">Thema 2477/2018</div>
@@ -86,17 +86,17 @@
                         </div>
                         <div class="ris-caption ris-card-list__themes-date">27.10.2018</div>
                     </div>
-                </div>
+                </a>
 
-                <div class="ris-card-list__item">
+                <a class="ris-card-list__item" title="Generalsanierung Drehbrücke Deutzer Hafen Teilergebnis"
+                     href="{{ route('themes') }}"
+                >
                     <div class="ris-card-list__themes-top">
                         <img src="./img/thumbnail-bridge-tile.png" class="ris-card-list__themes-img"
                              alt="Generalsanierung Drehbrücke Deutzer Hafen Teilergebnis"/>
-                        <a class="ris-link" title="Generalsanierung Drehbrücke Deutzer Hafen Teilergebnis"
-                            href="/"
-                        >
+                        <div class="ris-body-1">
                             Generalsanierung Drehbrücke Deutzer Hafen Teilergebnis
-                        </a>
+                        </div>
                     </div>
                     <div class="ris-card-list__themes-bottom">
                         <div class="ris-caption ris-card-list__themes-number">Thema 2477/2018</div>
@@ -105,17 +105,17 @@
                         </div>
                         <div class="ris-caption ris-card-list__themes-date">27.10.2018</div>
                     </div>
-                </div>
+                </a>
 
-                <div class="ris-card-list__item">
+                <a class="ris-card-list__item" title="Bewohnerparken Köln-Lindenthal"
+                     href="{{ route('themes') }}"
+                >
                     <div class="ris-card-list__themes-top">
                         <img src="./img/thumbnail-map-tile.png" class="ris-card-list__themes-img"
                              alt="Generalsanierung Drehbrücke Deutzer Hafen Teilergebnis"/>
-                        <a class="ris-link" title="Bewohnerparken Köln-Lindenthal"
-                            href="/"
-                        >
+                        <div class="ris-body-1">
                             Bewohnerparken Köln-Lindenthal
-                        </a>
+                        </div>
                     </div>
                     <div class="ris-card-list__themes-bottom">
                         <div class="ris-caption ris-card-list__themes-number">Thema 2477/2018</div>
@@ -125,7 +125,7 @@
                         </div>
                         <div class="ris-caption ris-card-list__themes-date">27.10.2018</div>
                     </div>
-                </div>
+                </a>
 
                 <a href="{{ route('themes') }}" class="ris-link ris-link_has-icon"
                     title="Alle Themen"
@@ -137,27 +137,27 @@
             <section class="ris-card-list ris-card-list__calendar">
                 <div class="ris-title">Aktuelle Sitzungen</div>
 
-                <div class="ris-card-list__item">
-                    <a class="ris-link" title="Ausschuss für Anregungen und Beschwerden"
-                        href="/"
-                    >
+                <a class="ris-card-list__item" title="Ausschuss für Anregungen und Beschwerden"
+                   href="{{ route('calendar') }}"
+                >
+                    <div class="ris-body-1">
                         Ausschuss für Anregungen und Beschwerden
-                    </a>
+                    </div>
                     <div class="ris-caption">BA/0028/2018</div>
                     <div class="ris-body-2 ris-card-list__calendar-date">Morgen, 17:00 Uhr</div>
                     <div class="ris-body-2 ris-card-list__calendar-place">Rathaus Spanischer Bau, Theodor-Heuss-Saal, Raum-Nr. A 119</div>
-                </div>
+                </a>
 
-                <div class="ris-card-list__item">
-                    <a class="ris-link" title="Ausschuss für Anregungen und Beschwerden"
-                        href="/"
-                    >
+                <a class="ris-card-list__item" title="Ausschuss für Anregungen und Beschwerden"
+                   href="{{ route('calendar') }}"
+                >
+                    <div class="ris-body-1">
                         Ausschuss für Anregungen und Beschwerden
-                    </a>
+                    </div>
                     <div class="ris-caption">BA/0028/2018</div>
                     <div class="ris-body-2 ris-card-list__calendar-date">Morgen, 17:00 Uhr</div>
                     <div class="ris-body-2 ris-card-list__calendar-place">Rathaus Spanischer Bau, Theodor-Heuss-Saal, Raum-Nr. A 119</div>
-                </div>
+                </a>
 
                 <a href="{{ route('calendar') }}" class="ris-link ris-link_has-icon"
                     title="Zum Sitzungskalender"
@@ -189,71 +189,71 @@
                 </div>
 
                 <div class="ris-welcome__people-list">
-                    <div class="ris-welcome__people">
+                    <a class="ris-welcome__people" href="{{ route('people') }}/1"
+                        title="Constanze Aengenvoort"
+                    >
                         <img src="./img/person-1.jpg" class="ris-welcome__people-img"
                              alt="Constanze Aengenvoort"
                         />
                         <div>
-                            <a href="{{ route('people') }}/1" class="ris-link"
-                                title="Constanze Aengenvoort"
-                            >
+                            <div class="ris-body-1">
                                 Constanze Aengenvoort
-                            </a>
+                            </div>
                             <div class="ris-caption">CDU</div>
                         </div>
-                    </div>
-                    <div class="ris-welcome__people">
+                    </a>
+                    <a class="ris-welcome__people" href="{{ route('people') }}/2"
+                        title="Hamide Akbayir"
+                    >
                         <img src="./img/person-2.jpg" class="ris-welcome__people-img"
                              alt="Hamide Akbayir"
                         />
                         <div>
-                            <a href="{{ route('people') }}/2" class="ris-link"
-                               title="Hamide Akbayir"
-                            >
+                            <div class="ris-body-1">
                                 Hamide Akbayir
-                            </a>
+                            </div>
                             <div class="ris-caption">DIE LINKE</div>
                         </div>
-                    </div>
-                    <div class="ris-welcome__people">
+                    </a>
+                    <a class="ris-welcome__people" href="{{ route('people') }}/3"
+                       title="Horst Thelen"
+                    >
                         <img src="./img/person-3.jpg" class="ris-welcome__people-img"
                              alt="Horst Thelen"
                         />
                         <div>
-                            <a href="{{ route('people') }}/3" class="ris-link"
-                               title="Horst Thelen"
-                            >
+                            <div class="ris-body-1">
                                 Horst Thelen
-                            </a>
+                            </div>
                             <div class="ris-caption">DIE GRÜNEN</div>
                         </div>
-                    </div>
-                    <div class="ris-welcome__people">
+                    </a>
+                    <a class="ris-welcome__people" href="{{ route('people') }}/4"
+                       title="Lino Hammer"
+                    >
                         <img src="./img/person-4.jpg" class="ris-welcome__people-img"
                              alt="Lino Hammer"
                         />
                         <div>
-                            <a href="{{ route('people') }}/4" class="ris-link"
-                               title="Lino Hammer"
-                            >
+                            <div class="ris-body-1">
                                 Lino Hammer
-                            </a>
+                            </div>
                             <div class="ris-caption">DIE GRÜNEN</div>
                         </div>
-                    </div>
-                    <div class="ris-welcome__people">
+                    </a>
+                    <a class="ris-welcome__people" href="{{ route('people') }}/5"
+                        title="Stephan Pohl"
+                    >
                         <img src="./img/person-5.jpg" class="ris-welcome__people-img"
                              alt="Stephan Pohl"
                         />
                         <div>
-                            <a href="{{ route('people') }}/5" class="ris-link"
-                               title="Stephan Pohl"
-                            >
+                            <div class="ris-body-1">
                                 Stephan Pohl
-                            </a>
+                            </div>
                             <div class="ris-caption">SPD</div>
                         </div>
-                    </div>
+                    </a>
                 </div>
 
                 <a href="{{ route('people') }}" class="ris-link ris-link_has-icon"
@@ -279,16 +279,14 @@
 
         </div>
 
-        <div class="ris-welcome-map ris-welcome-map__desktop">
-            <div class="ris-welcome-map__desktop-sticky">
-                <img src="./img/map-desktop-thumbnail.jpg" class="ris-welcome-map__img"
-                     alt="Karte öffnen" />
-                <a href="{{ route('map') }}" class="ris-button ris-button_primary ris-button_bg-gray2"
-                    title="Karte öffnen"
-                >
-                    Karte öffnen
-                </a>
+        <a class="ris-welcome-map ris-welcome-map__desktop" title="Karte öffnen"
+           href="{{ route('map') }}"
+        >
+            <img src="./img/map-desktop-thumbnail.jpg" class="ris-welcome-map__img"
+                 alt="Karte öffnen" />
+            <div class="ris-button ris-button_primary ris-button_bg-gray2">
+                Karte öffnen
             </div>
-        </div>
+        </a>
     </main>
 @endsection

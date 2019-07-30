@@ -143,7 +143,6 @@ export default {
             @dayclick="dayClicked"
                 />
         <div class="ris-calendar-app__icon-calendar"
-            @click="toggleCalendar">
-        </div>
+            @click="toggleCalendar"/>
     </div>
 </template>

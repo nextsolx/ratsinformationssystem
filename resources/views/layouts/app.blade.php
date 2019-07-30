@@ -11,7 +11,9 @@
     </head>
     <body class="ris-body">
 
-        <div id="root">
+        <div id="root"
+            :class="{ 'ris-nav__root_active': navActive }"
+        >
             @include('layouts.header')
 
             @yield('content')

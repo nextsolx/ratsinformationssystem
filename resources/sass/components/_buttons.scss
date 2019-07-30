@@ -13,6 +13,10 @@
     position: relative;
     text-align: center;
 
+    &:hover {
+        opacity: .9;
+    }
+
     &_primary {
         background-color: $c-red;
         color: $c-white;

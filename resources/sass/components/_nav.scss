@@ -4,6 +4,15 @@
     display: inline-flex;
     font-family: $ff-helvetica;
 
+    &__root_active {
+        @include breakpoint($bp-mobile-max) {
+            left: 0;
+            position: fixed;
+            right: 0;
+            top: 0;
+        }
+    }
+
     @include breakpoint($bp-mobile-max) {
         font-size: $fs-m;
         line-height: $lh-l;

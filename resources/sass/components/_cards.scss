@@ -20,20 +20,30 @@
         border-radius: $b-radius-primary;
         box-shadow: 0 1px 6px 0 $c-box-shadow3;
         box-sizing: border-box;
+        display: block;
         margin-bottom: $indent-m;
         padding: $indent-m;
         position: relative;
+        text-decoration: none;
+
+        &:hover {
+            box-shadow: 0 1px 3px 0 $c-box-shadow3;
+
+            .ris-body-1 {
+                color: $c-red;
+            }
+        }
 
         @include breakpoint($bp-tablet-min) {
             min-height: 112px;
         }
 
-        .ris-link {
+        .ris-body-1 {
             -webkit-box-orient: vertical;
-            color: $c-primary;
             display: -webkit-box;
-            font-family: $ff-helvetica;
+            font-size: $fs-l;
             font-weight: bold;
+            line-height: $lh-l;
             overflow: hidden;
 
             @include breakpoint($bp-mobile-max) {
@@ -53,9 +63,10 @@
                 content: 'Z';
                 font-family: $ff-ris-font-icons;
                 height: 16px;
+                padding: $indent-m;
                 position: absolute;
-                right: $indent-m;
-                top: $indent-m;
+                right: 0;
+                top: 0;
                 width: 16px;
             }
 

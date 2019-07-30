@@ -24,9 +24,9 @@
                 >
                     <img src="./img/map-mobile-thumbnail.jpg" class="ris-welcome-map__img"
                          alt="Karte öffnen" />
-                    <button class="ris-button ris-button_primary ris-button_bg-gray2">
+                    <div class="ris-button ris-button_primary ris-button_bg-gray2">
                         Karte öffnen
-                    </button>
+                    </div>
                 </a>
 
                 <div class="ris-filter-buttons">
@@ -279,16 +279,14 @@
 
         </div>
 
-        <div class="ris-welcome-map ris-welcome-map__desktop">
-            <a class="ris-welcome-map__desktop-sticky" title="Karte öffnen"
-               href="{{ route('map') }}"
-            >
-                <img src="./img/map-desktop-thumbnail.jpg" class="ris-welcome-map__img"
-                     alt="Karte öffnen" />
-                <button class="ris-button ris-button_primary ris-button_bg-gray2">
-                    Karte öffnen
-                </button>
-            </a>
-        </div>
+        <a class="ris-welcome-map ris-welcome-map__desktop" title="Karte öffnen"
+           href="{{ route('map') }}"
+        >
+            <img src="./img/map-desktop-thumbnail.jpg" class="ris-welcome-map__img"
+                 alt="Karte öffnen" />
+            <div class="ris-button ris-button_primary ris-button_bg-gray2">
+                Karte öffnen
+            </div>
+        </a>
     </main>
 @endsection

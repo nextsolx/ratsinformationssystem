@@ -1,0 +1,14 @@
+.ris-themes {
+    &__content {
+        .ris-headline {
+            @include breakpoint($bp-mobile-max) {
+                padding: $indent-s $indent-m;
+            }
+
+            @include breakpoint($bp-tablet-min) {
+                padding: $indent-s $indent-ml;
+            }
+        }
+    }
+
+}

@@ -22,4 +22,21 @@ class TopicController extends Controller
 
         return Topic::collection($topics);
     }
+
+    public function all(Request $request)
+    {
+        list($topics, $pages) = OParlApiManager::topics($request->input('page'));
+
+        $topics = new LengthAwarePaginator(
+            $topics,
+            $pages['totalElements'],
+            $pages['elementsPerPage'],
+            $pages['currentPage']
+        );
+
+        return view('themes')->with([
+            'topics' => Topic::collection($topics)->toResponse(request())->getData()->data,
+            'links' => $topics->toArray(),
+        ]);
+    }
 }

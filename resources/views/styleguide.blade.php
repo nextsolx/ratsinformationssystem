@@ -94,8 +94,8 @@
         </style>
         <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}"/>
     </head>
-    <body class="ris-main">
-        <section class="ris-content" id="root">
+    <body class="ris-body">
+        <section class="ris-main" id="root">
                 <div class="gui-styleguide" id="styleguide">
                     <div class="gui-headline">TYPOGRAPHY</div>
 

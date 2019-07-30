@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <main class="ris-content ris-privacy-policy">
+    <main class="ris-main ris-privacy-policy">
         <h1 class="ris-privacy-policy__headline ris-headline">
             Datenschutz
         </h1>

@@ -16,7 +16,7 @@ if (isset($meetings) and is_array($meetings)) {
 ?>
 
 @section('content')
-    <main class="ris-content ris-calendar">
+    <main class="ris-main ris-calendar">
         <h1 class="ris-calendar__headline ris-headline">
             Sitzungskalender
         </h1>

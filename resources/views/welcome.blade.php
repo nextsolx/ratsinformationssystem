@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <main class="ris-content ris-welcome">
+    <main class="ris-main ris-welcome">
         <div class="ris-welcome__content">
 
             <section class="ris-welcome__content_wrapper">

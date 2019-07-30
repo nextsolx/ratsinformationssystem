@@ -1,8 +1,15 @@
 .ris-breadcrumbs {
     display: inline-flex;
     list-style: none;
-    margin: $indent-m;
     padding: 0;
+
+    @include breakpoint($bp-mobile-max) {
+        margin: $indent-m;
+    }
+
+    @include breakpoint($bp-tablet-min) {
+        margin: $indent-m $indent-ml;
+    }
 
     &__home-link {
         line-height: 1;

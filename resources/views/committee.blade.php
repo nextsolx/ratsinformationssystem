@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <main class="ris-content ris-committee">
+    <main class="ris-main ris-committee">
         <h1 class="ris-committee__headline ris-headline">
             Gremien
         </h1>

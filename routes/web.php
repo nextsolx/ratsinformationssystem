@@ -22,9 +22,8 @@ Route::get('/styleguide', function () {
 Route::get('/kalender', 'MeetingController@calendar')
     ->name('calendar');
 
-Route::get('/themen', function () {
-    return view('themes');
-})->name('themes');
+Route::get('/themen', 'TopicController@all')
+    ->name('themes');
 
 Route::get('/neue-themen', function () {
     return view('themes');

@@ -140,6 +140,7 @@ if (typeof Object.assign !== 'function') {
                         if (Object.prototype.hasOwnProperty.call(nextSource, nextKey)) {
                             to[nextKey] = nextSource[nextKey];
                         }
+
                     }
                 }
             }

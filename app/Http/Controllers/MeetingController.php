@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\GetMeetingsRequest;
 use App\Http\Resources\Meeting;
 use App\Http\Resources\MeetingWithData;
 use Illuminate\Http\Request;
@@ -29,9 +30,11 @@ class MeetingController extends Controller
         ]);
     }
 
-    public function all(Request $request)
+    public function all(GetMeetingsRequest $request)
     {
         $from = $request->input('from');
+        $year = $request->input('year');
+        $month = $request->input('month');
 
         $meetingsQuery = \App\Meeting::with(['location', 'agenda', 'files', 'organizations', 'organizations.people'])
             ->whereNotNull('start')
@@ -39,7 +42,18 @@ class MeetingController extends Controller
 
 
         if ($from = $from ? Carbon::parse($from) : null) {
-            $meetingsQuery->where('start' , '>=', $from);
+            $meetingsQuery = $meetingsQuery->where('start' , '>=', $from);
+        }
+
+        if ($year) {
+            $date = Carbon::parse()->year($year)->month($month);
+
+
+            $meetingsQuery = $meetingsQuery
+                ->whereBetween('start' , [
+                    $date->startOfMonth()->subWeek()->clone(),
+                    $date->endOfMonth()->addWeeks(2)->clone()
+                ]);
         }
 
         return Meeting::collection($meetingsQuery->paginate(100));

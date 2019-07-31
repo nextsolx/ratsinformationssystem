@@ -133,6 +133,8 @@
         }
 
         &-number {
+            display: flex;
+
             @include breakpoint($bp-mobile-max) {
                 flex-basis: 100%;
                 margin-bottom: $indent-s;

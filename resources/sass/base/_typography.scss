@@ -87,16 +87,17 @@ $indent-s: 8px;
 
 .ris-title {
     color: $c-primary;
-    font-family: $ff-helvetica;
     font-weight: bold;
     margin: 0;
 
     @include breakpoint($bp-mobile-max) {
+        font-family: $ff-helvetica-neue;
         font-size: $fs-xll;
         line-height: $lh-l;
     }
 
     @include breakpoint($bp-tablet-min) {
+        font-family: $ff-helvetica;
         font-size: $fs-xxl;
         line-height: $lh-xxl;
     }

@@ -1,6 +1,7 @@
 .ris-themes {
     &__content {
-        .ris-headline {
+        .ris-headline,
+        .ris-top-box {
             @include breakpoint($bp-mobile-max) {
                 padding: $indent-s $indent-m;
             }
@@ -11,4 +12,17 @@
         }
     }
 
+    .swiper-container {
+        @include breakpoint($bp-mobile-max) {
+            padding-right: $indent-m;
+        }
+    }
+
+    .ris-card-list {
+        border-bottom: 0;
+
+        &:not(:last-child) {
+            padding-bottom: 0;
+        }
+    }
 }

@@ -187,4 +187,16 @@
             content: 'b';
         }
     }
+
+    &__filter {
+        &::before {
+            content: 'd';
+        }
+    }
+
+    &__chevron-double {
+        &::before {
+            content: 'e';
+        }
+    }
 }

@@ -79,7 +79,12 @@
                         </div>
                     </div>
                     <div class="ris-card-list__themes-bottom">
-                        <div class="ris-caption ris-card-list__themes-number">Thema 2477/2018</div>
+                        <div class="ris-caption ris-card-list__themes-number">
+                            Thema &nbsp;
+                            <span>2477</span>
+                            /
+                            <span>{{ Carbon\Carbon::parse('27.10.2018')->year }}</span>
+                        </div>
                         <div class="ris-card-list__themes-completed">
                             <span class="ris-i ris-i__check ris-i_has-bg"></span>
                             Abgeschlossen
@@ -99,7 +104,12 @@
                         </div>
                     </div>
                     <div class="ris-card-list__themes-bottom">
-                        <div class="ris-caption ris-card-list__themes-number">Thema 2477/2018</div>
+                        <div class="ris-caption ris-card-list__themes-number">
+                            Thema &nbsp;
+                            <span>2477</span>
+                            /
+                            <span>{{ Carbon\Carbon::parse('27.10.2018')->year }}</span>
+                        </div>
                         <div class="ris-progress-bar">
                             <div class="ris-progress-bar__progress" style="width: 60%"></div>
                         </div>
@@ -118,7 +128,12 @@
                         </div>
                     </div>
                     <div class="ris-card-list__themes-bottom">
-                        <div class="ris-caption ris-card-list__themes-number">Thema 2477/2018</div>
+                        <div class="ris-caption ris-card-list__themes-number">
+                            Thema &nbsp;
+                            <span>2477</span>
+                            /
+                            <span>{{ Carbon\Carbon::parse('27.10.2018')->year }}</span>
+                        </div>
                         <div class="ris-card-list__themes-completed">
                             <span class="ris-i ris-i__check ris-i_has-bg"></span>
                             Abgeschlossen

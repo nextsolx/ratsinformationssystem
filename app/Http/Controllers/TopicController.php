@@ -27,13 +27,23 @@ class TopicController extends Controller
                 $query->where('sub_locality', '=', $district);
             });
         }
-
-
         return Topic::collection($paperQuery->paginate(100));
     }
 
     public function index(Request $request, Paper $paper)
     {
         return new Topic($paper);
+    }
+
+    public function themen(Request $request)
+    {
+        $paperQuery = \App\Paper::with(['location']);
+
+        $topics = Topic::collection($paperQuery->paginate(100))->toResponse(request())->getData(),
+
+        return view('themes')->with([
+            'topics' => $topics,
+            'links' => $topics->links,
+        ]);
     }
 }

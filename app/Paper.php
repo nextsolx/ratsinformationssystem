@@ -18,9 +18,29 @@ class Paper extends Model
         'date',
     ];
 
-    //Todo: Verify
+    public static function initialize(array $data)
+    {
+        $meeting = parent::initialize($data);
+
+        if ($location = Arr::get($data, 'location')) {
+            $location = Location::initialize($data['location']);
+            $location->meeting()->associate($meeting);
+            $location->save();
+        }
+    }
+
     public function location()
     {
-        return Arr::has($this->data, 'location') ? new Location($this->location) : Location::fallback();
+        return $this->belongsTo(Location::class);
+    }
+
+    public function consultations()
+    {
+        return $this->hasMany(Consultation::class);
+    }
+
+    public function meetings()
+    {
+//        return $this->hasManyThrough(Meeting::class, Consultation::class);
     }
 }

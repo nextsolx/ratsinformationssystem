@@ -20,13 +20,15 @@ class Paper extends Model
 
     public static function initialize(array $data)
     {
-        $meeting = parent::initialize($data);
+        $paper = parent::initialize($data);
 
         if ($location = Arr::get($data, 'location')) {
             $location = Location::initialize($data['location']);
-            $location->meeting()->associate($meeting);
+            $paper->location()->associate($location);
             $location->save();
         }
+
+        return $paper;
     }
 
     public function location()

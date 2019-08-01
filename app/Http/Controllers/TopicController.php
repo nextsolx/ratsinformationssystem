@@ -3,25 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\Topic;
-use App\OParl\OParlApiManager;
 use App\Paper;
 use Illuminate\Http\Request;
-use Illuminate\Pagination\LengthAwarePaginator;
 
 class TopicController extends Controller
 {
     public function all(Request $request)
     {
-        list($topics, $pages) = OParlApiManager::topics($request->input('page'));
+        $paperQuery = \App\Paper::with(['location']);
 
-        $topics = new LengthAwarePaginator(
-            $topics,
-            $pages['totalElements'],
-            $pages['elementsPerPage'],
-            $pages['currentPage']
-        );
-
-        return Topic::collection($topics);
+        return Topic::collection($paperQuery->paginate(100));
     }
 
     public function index(Request $request, Paper $paper)

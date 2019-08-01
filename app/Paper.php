@@ -43,6 +43,8 @@ class Paper extends Model
 
     public function meetings()
     {
-//        return $this->hasManyThrough(Meeting::class, Consultation::class);
+        return $this->consultations->map(function($organization) {
+            return $organization->meeting;
+        })->flatten(1);
     }
 }

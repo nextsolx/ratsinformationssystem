@@ -19,18 +19,18 @@ class MeetingWithData extends JsonResource
         }
 
         return [
-            'id' => $this->extractId(),
+            'id' => $this->id,
             'title' => $this->name,
             'dateFrom' => $this->start,
             'dateTill' => $this->end,
             'agendaCount' => $this->agendaCount(),
             'peopleCount' => $this->peopleCount(),
             'fileCount' => $this->fileCount(),
-            'location' => new Location($this->location()),
-            'agenda' => Agendum::collection($this->agenda()),
-            'organizations' => Organization::collection($this->organizations()),
+            'location' => new Location($this->location),
+            'agenda' => Agendum::collection($this->agenda),
+            'organizations' => Organization::collection($this->organizations),
             'people' => Person::collection($this->people()),
-            'files' => File::collection($this->files()),
+            'files' => File::collection($this->files),
         ];
     }
 }

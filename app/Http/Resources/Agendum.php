@@ -19,7 +19,7 @@ class Agendum extends JsonResource
         }
 
         return [
-            'id' => $this->extractId(),
+            'id' => $this->id,
             'number' => $this->number,
             'name' => $this->name,
             'resolutionText' => $this->resolutionText,

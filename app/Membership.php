@@ -2,19 +2,34 @@
 
 namespace App;
 
-use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
-class Model extends \Illuminate\Database\Eloquent\Model
+class Membership extends Pivot
 {
-    public $incrementing = false;
+    protected $table = 'memberships';
+    public $incrementing = true;
 
-    protected $dates = [];
+    protected $dates = [
+        'start_date',
+        'end_date',
+    ];
+
+    protected $fillable = [
+        'person_id',
+        'organization_id',
+        'role',
+        'voting_right',
+        'start_date',
+        'end_date',
+    ];
+
 
     public static function initialize (array $data)
     {
-        $data['id'] = self::extractId($data);
+        $data['person_id'] = self::extractIdFromUrl(Arr::get($data, 'person'));
+        $data['organization_id'] = self::extractIdFromUrl(Arr::get($data, 'organization'));
 
         $data = collect($data)->mapWithKeys(function ($value, $key) {
             if (in_array($key, (new static())->dates)) {
@@ -37,6 +52,6 @@ class Model extends \Illuminate\Database\Eloquent\Model
 
     public static function extractIdFromUrl($url)
     {
-        return Str::before(Arr::last(explode('/', $url)), '?');
+        return Arr::last(explode('/', $url));
     }
 }

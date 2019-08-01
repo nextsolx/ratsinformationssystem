@@ -2,57 +2,65 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\GetMeetingsRequest;
 use App\Http\Resources\Meeting;
 use App\Http\Resources\MeetingWithData;
-use App\OParl\OParlApiManager;
 use Illuminate\Http\Request;
-use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Carbon;
 
 class MeetingController extends Controller
 {
-
     public function calendar(Request $request)
     {
         $from = $request->input('from');
-        $from = $from ? Carbon::parse($from) : null;
 
-        list($meetings, $pages) = OParlApiManager::meetings($request->input('page'), $from);
+        $meetingsQuery = \App\Meeting::with(['location', 'agenda', 'files', 'organizations', 'organizations.people'])
+            ->whereNotNull('start')
+            ->orderBy('start', 'DESC');
 
-        $meetings = new LengthAwarePaginator(
-            $meetings,
-            $pages['totalElements'],
-            $pages['elementsPerPage'],
-            $pages['currentPage']
-        );
+        if ($from = $from ? Carbon::parse($from) : null) {
+            $meetingsQuery->where('start' , '>=', $from);
+        }
+
+        $meetings = Meeting::collection($meetingsQuery->paginate(100))->toResponse(request())->getData();
 
         return view('calendar')->with([
-            'meetings' => Meeting::collection($meetings)->toResponse(request())->getData()->data,
-            'links' => $meetings->toArray(),
+            'meetings' => $meetings->data,
+            'links' => $meetings->links,
         ]);
-
     }
 
-    public function all(Request $request)
+    public function all(GetMeetingsRequest $request)
     {
-        $from = $request->input('from') ? Carbon::parse($request->input('from')) : null;
+        $from = $request->input('from');
+        $year = $request->input('year');
+        $month = $request->input('month');
 
-        list($meetings, $pages) = OParlApiManager::meetings($request->input('page'), $from);
+        $meetingsQuery = \App\Meeting::with(['location', 'agenda', 'files', 'organizations', 'organizations.people'])
+            ->whereNotNull('start')
+            ->orderBy('start', 'DESC');
 
-        $meetings = new LengthAwarePaginator(
-            $meetings,
-            $pages['totalElements'],
-            $pages['elementsPerPage'],
-            $pages['currentPage']
-        );
 
-        return Meeting::collection($meetings);
+        if ($from = $from ? Carbon::parse($from) : null) {
+            $meetingsQuery = $meetingsQuery->where('start' , '>=', $from);
+        }
+
+        if ($year) {
+            $date = Carbon::parse()->year($year)->month($month);
+
+
+            $meetingsQuery = $meetingsQuery
+                ->whereBetween('start' , [
+                    $date->startOfMonth()->subWeek()->clone(),
+                    $date->endOfMonth()->addWeeks(2)->clone()
+                ]);
+        }
+
+        return Meeting::collection($meetingsQuery->paginate(100));
     }
 
     public function index($id)
     {
-        $meeting = OParlApiManager::meeting($id);
-
-        return new MeetingWithData($meeting);
+        return new MeetingWithData(\App\Meeting::findOrFail($id));
     }
 }

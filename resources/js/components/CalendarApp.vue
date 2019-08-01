@@ -77,6 +77,9 @@ export default {
             });
         },
         loadMeetings(year = this.currentYear, month = this.currentMonth) {
+            console.log(this.loading);
+            console.log(this.emptyMeetingList);
+
             if (!this.loading && !this.emptyMeetingList) {
                 this.loading = true;
                 this.currentYear = year;
@@ -85,7 +88,7 @@ export default {
                 this.disableEnableNavButtons();
 
                 axios
-                    .get(`/api/meetings?year=${this.currentYear}&monthPlusTwoWeek=${this.currentMonth}`)
+                    .get(`/api/meetings?year=${this.currentYear}&month=${this.currentMonth}`)
                     .then(res => {
                         if (res.data.data.length > 0) {
                             for (let { title, dateFrom } of res.data.data) {
@@ -117,8 +120,11 @@ export default {
             if (this.emptyMeetingList) {
                 this.info(this.infoTitle);
             }
+
+            this.emptyMeetingList = false;
         },
         navClicked(page) {
+            console.log('hey');
             this.loadMeetings(page.year, page.month);
         },
         dayClicked(day) {

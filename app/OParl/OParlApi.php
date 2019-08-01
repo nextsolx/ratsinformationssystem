@@ -70,6 +70,20 @@ class OParlApi implements \App\Contracts\OParlApi
         return $this->call('GET', $endpoint, $page);
     }
 
+    public function people(int $page = null)
+    {
+        $endpoint = sprintf('body/%s/%s', $this->bodyId, 'person');
+
+        return $this->call('GET', $endpoint, $page);
+    }
+
+    public function locations(int $page = null)
+    {
+        $endpoint = sprintf('body/%s/%s', $this->bodyId, 'location');
+
+        return $this->call('GET', $endpoint, $page);
+    }
+
     public function meetings(int $page = null, Carbon $from = null)
     {
         $endpoint = sprintf('body/%s/%s', $this->bodyId, 'meeting');
@@ -77,6 +91,42 @@ class OParlApi implements \App\Contracts\OParlApi
         if ($from) {
             $endpoint .= '?' . 'created_since=' . urlencode($from->toIso8601String());
         }
+
+        return $this->call('GET', $endpoint, $page);
+    }
+
+    public function organizations(int $page = null)
+    {
+        $endpoint = sprintf('body/%s/%s', $this->bodyId, 'organization');
+
+        return $this->call('GET', $endpoint, $page);
+    }
+
+    public function memberships(int $page = null)
+    {
+        $endpoint = sprintf('body/%s/%s', $this->bodyId, 'membership');
+
+        return $this->call('GET', $endpoint, $page);
+    }
+
+
+    public function agendaItems(int $page = null)
+    {
+        $endpoint = sprintf('body/%s/%s', $this->bodyId, 'agenda_item');
+
+        return $this->call('GET', $endpoint, $page);
+    }
+
+    public function consultations(int $page = null)
+    {
+        $endpoint = sprintf('body/%s/%s', $this->bodyId, 'consultation');
+
+        return $this->call('GET', $endpoint, $page);
+    }
+
+    public function files(int $page = null)
+    {
+        $endpoint = sprintf('body/%s/%s', $this->bodyId, 'file');
 
         return $this->call('GET', $endpoint, $page);
     }

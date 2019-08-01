@@ -19,9 +19,11 @@ class Topic extends JsonResource
         }
 
         return [
-            'id' => $this->extractId(),
+            'id' => $this->id,
             'name' => $this->name,
-            'location' => new Location($this->location()),
+            'location' => new Location($this->location),
+            'meetings' => $this->meetings(),
+            'process' => $this->consultations
         ];
     }
 }

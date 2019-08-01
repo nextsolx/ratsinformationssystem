@@ -3,24 +3,38 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\Topic;
-use App\OParl\OParlApiManager;
+use App\Paper;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use Illuminate\Pagination\LengthAwarePaginator;
 
 class TopicController extends Controller
 {
-    public function index(Request $request)
+    public function all(Request $request)
     {
-        list($topics, $pages) = OParlApiManager::topics($request->input('page'));
+        $postalCode = $request->input('postalCode');
+        $district = $request->input('district');
 
-        $topics = new LengthAwarePaginator(
-            $topics,
-            $pages['totalElements'],
-            $pages['elementsPerPage'],
-            $pages['currentPage']
-        );
+        $paperQuery = \App\Paper::with(['location']);
 
-        return Topic::collection($topics);
+        if ($postalCode) {
+            $paperQuery->whereHas('location', function (Builder $query) use ($postalCode){
+                $query->where('postal_code', '=', $postalCode);
+            });
+        }
+
+        if ($district) {
+            $paperQuery->whereHas('location', function (Builder $query) use ($district){
+                $query->where('sub_locality', '=', $district);
+            });
+        }
+
+
+        return Topic::collection($paperQuery->paginate(100));
+    }
+
+    public function index(Request $request, Paper $paper)
+    {
+        return new Topic($paper);
     }
 
     public function all(Request $request)

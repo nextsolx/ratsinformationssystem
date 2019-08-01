@@ -56,4 +56,5 @@ Route::get('/impressum', function () {
 
 Route::get('/api/meetings', 'MeetingController@all');
 Route::get('/api/meeting/{id}', 'MeetingController@index');
-Route::get('/api/topics', 'TopicController@index');
+Route::get('/api/topics', 'TopicController@all');
+Route::get('/api/topic/{paper}', 'TopicController@index');

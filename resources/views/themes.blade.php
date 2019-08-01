@@ -25,71 +25,69 @@
                         <div class="ris-filter__content-wrapper">
                             <div class="ris-filter__content">
 
-                                <div class="ris-filter-buttons">
+                                <div class="ris-filter-buttons" id="_filter-district-list">
                                     <div class="ris-filter-buttons__title">
                                         Nach Bezirken filtern
                                     </div>
 
-                                    <button class="ris-button ris-button_secondary ris-button_has-shadow">
+                                    <button class="ris-button ris-button_secondary ris-button_has-shadow"
+                                        @click="getTopicByDistrict"
+                                    >
                                         Innenstadt
                                     </button>
-                                    <button class="ris-button ris-button_secondary ris-button_has-shadow">
+                                    <button class="ris-button ris-button_secondary ris-button_has-shadow"
+                                        @click="getTopicByDistrict"
+                                    >
                                         Rodenkirchen
                                     </button>
-                                    <button class="ris-button ris-button_secondary ris-button_has-shadow">
+                                    <button class="ris-button ris-button_secondary ris-button_has-shadow"
+                                        @click="getTopicByDistrict"
+                                    >
                                         Lindenthal
                                     </button>
-                                    <button class="ris-button ris-button_secondary ris-button_has-shadow">
+                                    <button class="ris-button ris-button_secondary ris-button_has-shadow"
+                                        @click="getTopicByDistrict"
+                                    >
                                         Ehrenfeld
                                     </button>
-                                    <button class="ris-button ris-button_secondary ris-button_has-shadow">
+                                    <button class="ris-button ris-button_secondary ris-button_has-shadow"
+                                        @click="getTopicByDistrict"
+                                    >
                                         Nippes
                                     </button>
-                                    <button class="ris-button ris-button_secondary ris-button_has-shadow">
+                                    <button class="ris-button ris-button_secondary ris-button_has-shadow"
+                                        @click="getTopicByDistrict"
+                                    >
                                         Chorweiler
                                     </button>
-                                    <button class="ris-button ris-button_secondary ris-button_has-shadow">
+                                    <button class="ris-button ris-button_secondary ris-button_has-shadow"
+                                        @click="getTopicByDistrict"
+                                    >
                                         Porz
                                     </button>
-                                    <button class="ris-button ris-button_secondary ris-button_has-shadow">
+                                    <button class="ris-button ris-button_secondary ris-button_has-shadow"
+                                        @click="getTopicByDistrict"
+                                    >
                                         Kalk
                                     </button>
-                                    <button class="ris-button ris-button_secondary ris-button_has-shadow">
+                                    <button class="ris-button ris-button_secondary ris-button_has-shadow"
+                                        @click="getTopicByDistrict"
+                                    >
                                         Mülheim
                                     </button>
                                 </div>
 
-                                <div class="ris-filter-buttons">
+                                <div class="ris-filter-buttons" id="_filter-postcode-list"
+                                     v-if="postcodeList.length > 0"
+                                >
                                     <div class="ris-filter-buttons__title">
                                         Nach Postleitzahlen filtern
                                     </div>
 
-                                    <button class="ris-button ris-button_secondary ris-button_has-shadow">
-                                        Innenstadt
-                                    </button>
-                                    <button class="ris-button ris-button_secondary ris-button_has-shadow">
-                                        Rodenkirchen
-                                    </button>
-                                    <button class="ris-button ris-button_secondary ris-button_has-shadow">
-                                        Lindenthal
-                                    </button>
-                                    <button class="ris-button ris-button_secondary ris-button_has-shadow">
-                                        Ehrenfeld
-                                    </button>
-                                    <button class="ris-button ris-button_secondary ris-button_has-shadow">
-                                        Nippes
-                                    </button>
-                                    <button class="ris-button ris-button_secondary ris-button_has-shadow">
-                                        Chorweiler
-                                    </button>
-                                    <button class="ris-button ris-button_secondary ris-button_has-shadow">
-                                        Porz
-                                    </button>
-                                    <button class="ris-button ris-button_secondary ris-button_has-shadow">
-                                        Kalk
-                                    </button>
-                                    <button class="ris-button ris-button_secondary ris-button_has-shadow">
-                                        Mülheim
+                                    <button class="ris-button ris-button_secondary ris-button_has-shadow"
+                                        v-for="postcode in postcodeList"
+                                    >
+                                         @{{ postcode }}
                                     </button>
                                 </div>
 

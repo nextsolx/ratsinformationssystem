@@ -27,8 +27,6 @@ class TopicController extends Controller
                 $query->where('sub_locality', '=', $district);
             });
         }
-
-
         return Topic::collection($paperQuery->paginate(100));
     }
 
@@ -37,20 +35,15 @@ class TopicController extends Controller
         return new Topic($paper);
     }
 
-    public function all(Request $request)
+    public function themen(Request $request)
     {
-        list($topics, $pages) = OParlApiManager::topics($request->input('page'));
+        $paperQuery = \App\Paper::with(['location']);
 
-        $topics = new LengthAwarePaginator(
-            $topics,
-            $pages['totalElements'],
-            $pages['elementsPerPage'],
-            $pages['currentPage']
-        );
+        $topics = Topic::collection($paperQuery->paginate(100))->toResponse(request())->getData(),
 
         return view('themes')->with([
-            'topics' => Topic::collection($topics)->toResponse(request())->getData()->data,
-            'links' => $topics->toArray(),
+            'topics' => $topics,
+            'links' => $topics->links,
         ]);
     }
 }

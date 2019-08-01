@@ -22,6 +22,8 @@ class Topic extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'location' => new Location($this->location),
+            'meetings' => $this->meetings(),
+            'process' => $this->consultations
         ];
     }
 }

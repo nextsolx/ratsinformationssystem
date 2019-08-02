@@ -39,18 +39,29 @@ export default {
                     .get(`/api/topics?district=${district}`)
                     .then(res => {
                         if (res.data.data.length === 0) {
-                            this.info(`${district}. ${this.districtInfoTitle}`);
+                            this.info(district, this.districtInfoTitle);
                             this.hideShowThemeListBlocks('none');
                         } else {
                             this.scrollTo(this.themeListNewSelector);
                             this.hideShowThemeListBlocks('block');
                             this.removeDefaultThemeList();
 
-                            this.themeListNew = res.data.data.slice(1, this.themeListLimitUntil);
-
                             res.data.data.forEach((topic) => {
-                                if (topic.location.postalCode && !this.postcodeList.includes(topic.location.postalCode)) {
-                                    this.postcodeList.push(topic.location.postalCode);
+                                if (topic.newTopic && this.themeListNew.length < 3) {
+                                    this.themeListNew.push(topic);
+                                } else if (topic.finished && this.themeListFinished < 3) {
+                                    this.themeListFinished.push(topic);
+                                } else {
+                                    if (this.themeListProgress < 3) {
+                                        this.themeListProgress.push(topic);
+                                    }
+                                }
+
+                                // for filter block
+                                if (topic.location.postalCode) {
+                                    if (!this.postcodeList.includes(topic.location.postalCode)) {
+                                        this.postcodeList.push(topic.location.postalCode);
+                                    }
                                 }
                             });
                         }

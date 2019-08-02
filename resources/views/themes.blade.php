@@ -5,7 +5,7 @@
 
         @include('layouts.breadcrumbs')
 
-        <themes inline-template>
+        <theme-list inline-template>
 
             <div class="ris-themes__content">
                 <h1 class="ris-headline">
@@ -108,174 +108,192 @@
                     </div>
                 </div>
 
-                <section class="ris-top-box">
-                    <div class="ris-title">Top-Themen</div>
+                @if (!empty($topics))
+                    <section class="ris-top-box">
+                        <div class="ris-title">Top-Themen</div>
 
-                    <div class="swiper-container">
-                        <div class="swiper-wrapper">
+                        <div class="swiper-container">
+                            <div class="swiper-wrapper">
+                                @foreach ($topics as $topic)
+                                    @if ($loop->iteration > 10)
+                                        @break
+                                    @endif
 
-                            @foreach ($topics as $topic)
-                                @if ($loop->iteration > 10)
-                                    @break
-                                @endif
-
-                                <a class="ris-top-box__card swiper-slide" href="{{ route('people') }}/1"
-                                   title="{{ $topic->name }}"
-                                >
-                                    <div class="ris-top-box__card-top">
-                                        <img src="./img/thumbnail-bridge-big-tile.png" class="ris-top-box__card-img"
-                                             alt="{{ $topic->name }}"/>
-                                        <div class="ris-body-1">
-                                            {{ $topic->name }}
-                                        </div>
-                                    </div>
-                                    <div class="ris-top-box__card-bottom">
-                                        <div class="ris-caption ris-top-box__card-number">
-                                            Thema &nbsp;
-                                            <span>2477</span>
-                                            /
-                                            <span>{{ Carbon\Carbon::parse('27.10.2018')->year }}</span>
-                                        </div>
-                                        <div class="ris-top-box__card-progress-box">
-                                            <div class="ris-progress-bar">
-                                                <div class="ris-progress-bar__progress" style="width: 25%"></div>
+                                    <a class="ris-top-box__card swiper-slide" href="{{ route('people') }}/1"
+                                       title="{{ $topic->name }}"
+                                    >
+                                        <div class="ris-top-box__card-top">
+                                            <img src="./img/thumbnail-bridge-big-tile.png" class="ris-top-box__card-img"
+                                                 alt="{{ $topic->name }}"/>
+                                            <div class="ris-body-1">
+                                                {{ $topic->name }}
                                             </div>
-                                            <div class="ris-caption ris-top-box__card-date">27.10.2018</div>
                                         </div>
-                                    </div>
-                                </a>
+                                        <div class="ris-top-box__card-bottom">
+                                            <div class="ris-caption ris-top-box__card-number">
+                                                Thema &nbsp;
+                                                <span>2477</span>
+                                                /
+                                                <span>{{ Carbon\Carbon::parse('27.10.2018')->year }}</span>
+                                            </div>
+                                            <div class="ris-top-box__card-progress-box">
+                                                <div class="ris-progress-bar">
+                                                    <div class="ris-progress-bar__progress" style="width: 25%"></div>
+                                                </div>
+                                                <div class="ris-caption ris-top-box__card-date">27.10.2018</div>
+                                            </div>
+                                        </div>
+                                    </a>
 
-                            @endforeach
-
+                                @endforeach
+                            </div>
                         </div>
-                    </div>
 
-                </section>
+                    </section>
+                @endif
 
-                <section class="ris-card-list ris-card-list__themes">
-                    <div class="ris-title">Neue Themen</div>
 
-                    @foreach ($topics as $topic)
-                        @if ($loop->iteration > 3)
-                            @break
-                        @endif
-                        <a class="ris-card-list__item" title="{{ $topic->name }}"
-                           href="{{ route('themes') }}"
+                @if (!empty($topics))
+                    <section class="ris-card-list ris-card-list__themes _theme-list-new-block">
+                        <div class="ris-title">Neue Themen</div>
+
+                        @foreach ($topics as $topic)
+                            @if ($loop->iteration > 3)
+                                @break
+                            @endif
+                            <a class="ris-card-list__item _theme-new-default" title="{{ $topic->name }}"
+                                href="{{ route('themes') }}"
+                            >
+                                <div class="ris-card-list__themes-top">
+                                    <img src="./img/thumbnail-map-tile.png" class="ris-card-list__themes-img"
+                                         alt="{{ $topic->name }}"/>
+                                    <div class="ris-body-1">
+                                        {{ $topic->name }}
+                                    </div>
+                                </div>
+                                <div class="ris-card-list__themes-bottom">
+                                    <div class="ris-caption ris-card-list__themes-number">
+                                        Thema &nbsp;
+                                        <span>2477</span>
+                                        /
+                                        <span>{{ Carbon\Carbon::parse('27.10.2018')->year }}</span>
+                                    </div>
+                                    <div class="ris-progress-bar">
+                                        <div class="ris-progress-bar__progress" style="width: 25%"></div>
+                                    </div>
+                                    <div class="ris-caption ris-card-list__themes-date">27.10.2018</div>
+                                </div>
+                            </a>
+                        @endforeach
+
+                        <theme v-if="themeListNew"
+                            :theme-list-type="themeListNew ? 1 : null"
+                            :theme-list-data="themeListNew"/>
+
+                        <a href="{{ route('themes') }}" class="ris-link ris-link_has-icon"
+                           title="Mehr anzeigen"
                         >
-                            <div class="ris-card-list__themes-top">
-                                <img src="./img/thumbnail-map-tile.png" class="ris-card-list__themes-img"
-                                     alt="{{ $topic->name }}"/>
-                                <div class="ris-body-1">
-                                    {{ $topic->name }}
-                                </div>
-                            </div>
-                            <div class="ris-card-list__themes-bottom">
-                                <div class="ris-caption ris-card-list__themes-number">
-                                    Thema &nbsp;
-                                    <span>2477</span>
-                                    /
-                                    <span>{{ Carbon\Carbon::parse('27.10.2018')->year }}</span>
-                                </div>
-                                <div class="ris-progress-bar">
-                                    <div class="ris-progress-bar__progress" style="width: 25%"></div>
-                                </div>
-                                <div class="ris-caption ris-card-list__themes-date">27.10.2018</div>
-                            </div>
+                            Mehr anzeigen
                         </a>
-                    @endforeach
-
-                    <a href="{{ route('themes') }}" class="ris-link ris-link_has-icon"
-                       title="Mehr anzeigen"
-                    >
-                        Mehr anzeigen
-                    </a>
-                </section>
+                    </section>
+                @endif
 
 
+                @if (!empty($topics))
+                    <section class="ris-card-list ris-card-list__themes _theme-list-progress-block">
+                        <div class="ris-title">Kürzlich aktualisiert</div>
 
-                <section class="ris-card-list ris-card-list__themes">
-                    <div class="ris-title">Kürzlich aktualisiert</div>
+                        @foreach ($topics as $topic)
+                            @if ($loop->iteration > 3)
+                                @break
+                            @endif
+                            <a class="ris-card-list__item _theme-progress-default" title="{{ $topic->name }}"
+                                href="{{ route('themes') }}"
+                            >
+                                <div class="ris-card-list__themes-top">
+                                    <img src="./img/thumbnail-map-tile.png" class="ris-card-list__themes-img"
+                                         alt="{{ $topic->name }}"/>
+                                    <div class="ris-body-1">
+                                        {{ $topic->name }}
+                                    </div>
+                                </div>
+                                <div class="ris-card-list__themes-bottom">
+                                    <div class="ris-caption ris-card-list__themes-number">
+                                        Thema &nbsp;
+                                        <span>2477</span>
+                                        /
+                                        <span>{{ Carbon\Carbon::parse('27.10.2018')->year }}</span>
+                                    </div>
+                                    <div class="ris-progress-bar">
+                                        <div class="ris-progress-bar__progress" style="width: 75%"></div>
+                                    </div>
+                                    <div class="ris-caption ris-card-list__themes-date">27.10.2018</div>
+                                </div>
+                            </a>
+                        @endforeach
 
-                    @foreach ($topics as $topic)
-                        @if ($loop->iteration > 3)
-                            @break
-                        @endif
-                        <a class="ris-card-list__item" title="{{ $topic->name }}"
-                           href="{{ route('themes') }}"
+                        <theme v-if="themeListProgress"
+                            :theme-list-type="themeListProgress ? 2 : null"
+                            :theme-list-data="themeListProgress"/>
+
+                        <a href="{{ route('themes') }}" class="ris-link ris-link_has-icon"
+                           title="Mehr anzeigen"
                         >
-                            <div class="ris-card-list__themes-top">
-                                <img src="./img/thumbnail-map-tile.png" class="ris-card-list__themes-img"
-                                     alt="{{ $topic->name }}"/>
-                                <div class="ris-body-1">
-                                    {{ $topic->name }}
-                                </div>
-                            </div>
-                            <div class="ris-card-list__themes-bottom">
-                                <div class="ris-caption ris-card-list__themes-number">
-                                    Thema &nbsp;
-                                    <span>2477</span>
-                                    /
-                                    <span>{{ Carbon\Carbon::parse('27.10.2018')->year }}</span>
-                                </div>
-                                <div class="ris-progress-bar">
-                                    <div class="ris-progress-bar__progress" style="width: 75%"></div>
-                                </div>
-                                <div class="ris-caption ris-card-list__themes-date">27.10.2018</div>
-                            </div>
+                            Mehr anzeigen
                         </a>
-                    @endforeach
-
-                    <a href="{{ route('themes') }}" class="ris-link ris-link_has-icon"
-                       title="Mehr anzeigen"
-                    >
-                        Mehr anzeigen
-                    </a>
-                </section>
+                    </section>
+                @endif
 
 
+                @if (!empty($topics))
+                    <section class="ris-card-list ris-card-list__themes _theme-list-finished-block">
+                        <div class="ris-title">Kürzlich abgeschlossen</div>
 
-                <section class="ris-card-list ris-card-list__themes">
-                    <div class="ris-title">Kürzlich abgeschlossen</div>
+                        @foreach ($topics as $topic)
+                            @if ($loop->iteration > 3)
+                                @break
+                            @endif
+                            <a class="ris-card-list__item _theme-finished-default" title="{{ $topic->name }}"
+                                href="{{ route('themes') }}"
+                            >
+                                <div class="ris-card-list__themes-top">
+                                    <img src="./img/thumbnail-bridge-tile.png" class="ris-card-list__themes-img"
+                                         alt="{{ $topic->name }}"/>
+                                    <div class="ris-body-1">
+                                        {{ $topic->name }}
+                                    </div>
+                                </div>
+                                <div class="ris-card-list__themes-bottom">
+                                    <div class="ris-caption ris-card-list__themes-number">
+                                        Thema &nbsp;
+                                        <span>2477</span>
+                                        /
+                                        <span>{{ Carbon\Carbon::parse('27.10.2018')->year }}</span>
+                                    </div>
+                                    <div class="ris-card-list__themes-completed">
+                                        <span class="ris-i ris-i__check ris-i_has-bg"></span>
+                                        Abgeschlossen
+                                    </div>
+                                    <div class="ris-caption ris-card-list__themes-date">27.10.2018</div>
+                                </div>
+                            </a>
+                        @endforeach
 
-                    @foreach ($topics as $topic)
-                        @if ($loop->iteration > 3)
-                            @break
-                        @endif
-                        <a class="ris-card-list__item" title="{{ $topic->name }}"
-                           href="{{ route('themes') }}"
+                        <theme v-if="themeListFinished"
+                            :theme-list-type="themeListFinished ? 3 : null"
+                            :theme-list-data="themeListFinished"/>
+
+                        <a href="{{ route('themes') }}" class="ris-link ris-link_has-icon"
+                           title="Mehr anzeigen"
                         >
-                            <div class="ris-card-list__themes-top">
-                                <img src="./img/thumbnail-bridge-tile.png" class="ris-card-list__themes-img"
-                                     alt="{{ $topic->name }}"/>
-                                <div class="ris-body-1">
-                                    {{ $topic->name }}
-                                </div>
-                            </div>
-                            <div class="ris-card-list__themes-bottom">
-                                <div class="ris-caption ris-card-list__themes-number">
-                                    Thema &nbsp;
-                                    <span>2477</span>
-                                    /
-                                    <span>{{ Carbon\Carbon::parse('27.10.2018')->year }}</span>
-                                </div>
-                                <div class="ris-card-list__themes-completed">
-                                    <span class="ris-i ris-i__check ris-i_has-bg"></span>
-                                    Abgeschlossen
-                                </div>
-                                <div class="ris-caption ris-card-list__themes-date">27.10.2018</div>
-                            </div>
+                            Mehr anzeigen
                         </a>
-                    @endforeach
+                    </section>
+                @endif
 
-                    <a href="{{ route('themes') }}" class="ris-link ris-link_has-icon"
-                       title="Mehr anzeigen"
-                    >
-                        Mehr anzeigen
-                    </a>
-                </section>
             </div>
 
-        </themes>
+        </theme-list>
 
         @include('layouts.footer')
 

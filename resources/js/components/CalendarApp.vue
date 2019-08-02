@@ -62,7 +62,6 @@ export default {
         currentYear: moment().year(),
         currentMonth: moment().month() + 1,
         loading: false,
-        emptyMeetingList: false,
         infoTitle: 'There are no meetings on this date',
     }),
     methods: {
@@ -77,10 +76,7 @@ export default {
             });
         },
         loadMeetings(year = this.currentYear, month = this.currentMonth) {
-            console.log(this.loading);
-            console.log(this.emptyMeetingList);
-
-            if (!this.loading && !this.emptyMeetingList) {
+            if (!this.loading) {
                 this.loading = true;
                 this.currentYear = year;
                 this.currentMonth = month;
@@ -108,7 +104,7 @@ export default {
                                 });
                             }
                         } else {
-                            this.emptyMeetingList = true;
+                            this.info(this.infoTitle);
                         }
                     })
                     .finally(() => {
@@ -116,15 +112,8 @@ export default {
                         this.disableEnableNavButtons();
                     });
             }
-
-            if (this.emptyMeetingList) {
-                this.info(this.infoTitle);
-            }
-
-            this.emptyMeetingList = false;
         },
         navClicked(page) {
-            console.log('hey');
             this.loadMeetings(page.year, page.month);
         },
         dayClicked(day) {

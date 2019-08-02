@@ -28,7 +28,7 @@ export default {
         <a class="ris-card-list__item"
             v-for="{ id, name } in themeListData"
             :key="id"
-            :href="id"
+            :href="'/thema/' + id"
             :title="name"
                 >
             <div class="ris-card-list__themes-top">

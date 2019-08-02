@@ -119,8 +119,8 @@
                                         @break
                                     @endif
 
-                                    <a class="ris-top-box__card swiper-slide" href="{{ route('people') }}/1"
-                                       title="{{ $topic->name }}"
+                                    <a class="ris-top-box__card swiper-slide" title="{{ $topic->name }}"
+                                        href="/thema/{{ $topic->id }}"
                                     >
                                         <div class="ris-top-box__card-top">
                                             <img src="./img/thumbnail-bridge-big-tile.png" class="ris-top-box__card-img"
@@ -162,7 +162,7 @@
                                 @break
                             @endif
                             <a class="ris-card-list__item _theme-new-default" title="{{ $topic->name }}"
-                                href="{{ route('themes') }}"
+                                href="/thema/{{ $topic->id }}"
                             >
                                 <div class="ris-card-list__themes-top">
                                     <img src="./img/thumbnail-map-tile.png" class="ris-card-list__themes-img"
@@ -191,7 +191,7 @@
                             :theme-list-data="themeListNew"/>
 
                         <a href="{{ route('themes') }}" class="ris-link ris-link_has-icon"
-                           title="Mehr anzeigen"
+                            title="Mehr anzeigen"
                         >
                             Mehr anzeigen
                         </a>
@@ -208,7 +208,7 @@
                                 @break
                             @endif
                             <a class="ris-card-list__item _theme-progress-default" title="{{ $topic->name }}"
-                                href="{{ route('themes') }}"
+                                href="/thema/{{ $topic->id }}"
                             >
                                 <div class="ris-card-list__themes-top">
                                     <img src="./img/thumbnail-map-tile.png" class="ris-card-list__themes-img"
@@ -237,7 +237,7 @@
                             :theme-list-data="themeListProgress"/>
 
                         <a href="{{ route('themes') }}" class="ris-link ris-link_has-icon"
-                           title="Mehr anzeigen"
+                            title="Mehr anzeigen"
                         >
                             Mehr anzeigen
                         </a>
@@ -254,7 +254,7 @@
                                 @break
                             @endif
                             <a class="ris-card-list__item _theme-finished-default" title="{{ $topic->name }}"
-                                href="{{ route('themes') }}"
+                                href="/thema/{{ $topic->id }}"
                             >
                                 <div class="ris-card-list__themes-top">
                                     <img src="./img/thumbnail-bridge-tile.png" class="ris-card-list__themes-img"
@@ -284,7 +284,7 @@
                             :theme-list-data="themeListFinished"/>
 
                         <a href="{{ route('themes') }}" class="ris-link ris-link_has-icon"
-                           title="Mehr anzeigen"
+                            title="Mehr anzeigen"
                         >
                             Mehr anzeigen
                         </a>

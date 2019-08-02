@@ -4,8 +4,8 @@
     <header class="ris-header">
         <div class="ris-header__top">
             <a class="ris-logo" href="/" title="Stadt Koeln">
-                <img class="ris-logo__desktop" src="./img/logo_desktop_stadt_koeln.png" alt="Stadt Koeln"/>
-                <img class="ris-logo__mobile" src="./img/logo_mobile_stadt_koeln.png" alt="Stadt Koeln" content="noindex"/>
+                <img class="ris-logo__desktop" src="/img/logo_desktop_stadt_koeln.png" alt="Stadt Koeln"/>
+                <img class="ris-logo__mobile" src="/img/logo_mobile_stadt_koeln.png" alt="Stadt Koeln" content="noindex"/>
             </a>
             <div class="ris-slogan">Stadtpolitik</div>
             <a class="ris-account" href="/account"></a>

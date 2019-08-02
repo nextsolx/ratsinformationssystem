@@ -29,6 +29,8 @@ Route::get('/neue-themen', function () {
     return view('themes');
 })->name('new-themes');
 
+Route::get('/thema/{paper}', 'TopicController@topic')->name('topic-detail');
+
 Route::get('/karte', function () {
     return view('map');
 })->name('map');

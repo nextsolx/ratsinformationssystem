@@ -23,7 +23,9 @@ class Topic extends JsonResource
             'name' => $this->name,
             'location' => new Location($this->location),
             'meetings' => $this->meetings(),
-            'process' => $this->consultations
+            'process' => $this->consultations,
+            'finished' => $this->isFinished(),
+            'newTopic' => $this->isNew(),
         ];
     }
 }

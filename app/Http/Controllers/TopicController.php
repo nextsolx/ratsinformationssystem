@@ -39,7 +39,7 @@ class TopicController extends Controller
     {
         $paperQuery = \App\Paper::with(['location']);
 
-        $topics = Topic::collection($paperQuery->paginate(100))->toResponse(request())->getData(),
+        $topics = Topic::collection($paperQuery->paginate(100))->toResponse(request())->getData();
 
         return view('themes')->with([
             'topics' => $topics,

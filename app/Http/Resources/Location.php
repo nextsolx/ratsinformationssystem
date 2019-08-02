@@ -20,8 +20,8 @@ class Location extends JsonResource
 
         return [
             'room' => $this->room,
-            'streetAddress' => $this->streetAddress,
-            'postalCode' => $this->postalCode,
+            'streetAddress' => $this->street_address,
+            'postalCode' => $this->postal_code,
             'city' => $this->locality,
             'district' => $this->subLocality,
             'description' => $this->description,

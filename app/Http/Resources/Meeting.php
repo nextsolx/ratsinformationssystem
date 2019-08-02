@@ -22,8 +22,8 @@ class Meeting extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->name,
-            'dateFrom' => $this->start,
-            'dateTill' => $this->end,
+            'dateFrom' => $this->start->toDateTimeString(),
+            'dateTill' => $this->end->toDateTimeString(),
             'agendaCount' => $this->agendaCount(),
             'peopleCount' => $this->peopleCount(),
             'fileCount' => $this->fileCount(),

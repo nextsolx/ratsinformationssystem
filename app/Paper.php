@@ -47,4 +47,14 @@ class Paper extends Model
             return $organization->meeting;
         })->flatten(1);
     }
+
+    public function isFinished() : bool
+    {
+        return (bool) $this->consultations()->where('authoritative', true)->count();
+    }
+
+    public function isNew() : bool
+    {
+        return (bool)   $this->date->subMonths(12)->isFuture();
+    }
 }

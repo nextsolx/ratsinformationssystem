@@ -30,6 +30,15 @@ class TopicController extends Controller
         return Topic::collection($paperQuery->paginate(100));
     }
 
+    public function topic(Request $request, Paper $paper)
+    {
+        $topic = (new Topic($paper))->toResponse(request())->getData()->data;
+
+        return view('topic-detail')->with([
+            'topic' => $topic
+        ]);
+    }
+
     public function index(Request $request, Paper $paper)
     {
         return new Topic($paper);

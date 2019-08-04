@@ -129,7 +129,7 @@
     }
 
     .ris-label {
-        display: block;
+        display: inline-flex;
         margin-bottom: $indent-m;
     }
 
@@ -147,6 +147,11 @@
             font-weight: bold;
             line-height: $lh-l;
             margin-bottom: $indent-s;
+        }
+
+        &__selected {
+            border-bottom: 1px solid $c-gray7;
+            margin-bottom: $indent-m;
         }
 
         .ris-button {

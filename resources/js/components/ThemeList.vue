@@ -10,20 +10,20 @@ export default {
     data: () => ({
         activeFilter: false,
         loading: false,
+        firstLoading: true,
         themeListNew: [],
         themeListProgress: [],
         themeListFinished: [],
-        themeListNewSelector: '._theme-list-new-block',
-        themeListProgressSelector: '._theme-list-progress-block',
-        themeListFinishedSelector: '._theme-list-finished-block',
-        themeNewDefault: '._theme-new-default',
-        themeProgressDefault: '._theme-progress-default',
-        themeFinishedDefault: '._theme-finished-default',
+        themeListNewCount: 0,
+        themeListProgressCount: 0,
+        themeListFinishedCount: 0,
+        themeFirstBlock: '.ris-card-list__themes',
         themeListLimitUntil: 4,
         districtList: [],
         postcodeList: [],
-        districtInfoTitle: 'There are no topics',
-        postcodeInfoTitle: 'There are no topics for the selected postcode',
+        currentDistrictNameList: [],
+        districtInfoDescription: 'There are no topics',
+        postcodeInfoDescription: 'There are no topics for the selected postcode',
     }),
     methods: {
         collapseFilter() {
@@ -33,42 +33,77 @@ export default {
             if (!this.loading) {
                 this.loading = true;
                 this.postcodeList = [];
-                const district = (e.currentTarget.innerText).trim();
 
-                axios
-                    .get(`/api/topics?district=${district}`)
-                    .then(res => {
-                        if (res.data.data.length === 0) {
-                            this.info(district, this.districtInfoTitle);
-                            this.hideShowThemeListBlocks('none');
-                        } else {
-                            this.scrollTo(this.themeListNewSelector);
-                            this.hideShowThemeListBlocks('block');
-                            this.removeDefaultThemeList();
+                this.themeListNew = [];
+                this.themeListProgress = [];
+                this.themeListFinished = [];
+                this.themeListNewCount = 0;
+                this.themeListProgressCount = 0;
+                this.themeListFinishedCount = 0;
 
-                            res.data.data.forEach((topic) => {
-                                if (topic.newTopic && this.themeListNew.length < 3) {
-                                    this.themeListNew.push(topic);
-                                } else if (topic.finished && this.themeListFinished < 3) {
-                                    this.themeListFinished.push(topic);
+                // collapse filter block when choose some filter
+                this.activeFilter = false;
+
+                this.currentDistrictNameList.push(e.currentTarget.innerText.trim());
+
+                const filterSelectedBlock = this.$refs.filterSelected;
+
+                this.currentDistrictNameList.forEach(currentDistrictName => {
+                    if (filterSelectedBlock) {
+                        filterSelectedBlock.style.display = 'block';
+                        filterSelectedBlock.innerHTML += `
+                            <button class="ris-label"
+                                @click="removeSelectFilter(${currentDistrictName})"
+                            >${currentDistrictName}</button>`;
+                    }
+
+                    axios
+                        .get(`/api/topics?district=${currentDistrictName}`)
+                            .then(res => {
+                                if (res.data.data.length === 0) {
+                                    this.info(currentDistrictName, this.districtInfoDescription);
                                 } else {
-                                    if (this.themeListProgress < 3) {
-                                        this.themeListProgress.push(topic);
-                                    }
-                                }
+                                    this.scrollTo(this.themeFirstBlock);
 
-                                // for filter block
-                                if (topic.location.postalCode) {
-                                    if (!this.postcodeList.includes(topic.location.postalCode)) {
-                                        this.postcodeList.push(topic.location.postalCode);
-                                    }
+                                    res.data.data.forEach((topic) => {
+                                        if (topic.newTopic) {
+                                            this.themeListNewCount++;
+
+                                            if (this.themeListNew.length < 3) {
+                                                this.themeListNew.push(topic);
+                                            }
+                                        } else if (topic.finished) {
+                                            this.themeListFinishedCount++;
+
+                                            if (this.themeListFinished.length < 3) {
+                                                this.themeListFinished.push(topic);
+                                            }
+                                        } else {
+                                            this.themeListProgressCount++;
+
+                                            if (this.themeListProgress.length < 3) {
+                                                this.themeListProgress.push(topic);
+                                            }
+                                        }
+
+                                        // for filter block
+                                        if (topic.location.postalCode) {
+                                            if (!this.postcodeList.includes(topic.location.postalCode)) {
+                                                this.postcodeList.push(topic.location.postalCode);
+                                            }
+                                        }
+                                    });
+                                }
+                            })
+                            .finally(() => {
+                                this.loading = false;
+
+                                if (this.firstLoading) {
+                                    this.removeDefaultThemeList();
+                                    this.firstLoading = false;
                                 }
                             });
-                        }
-                    })
-                    .finally(() => {
-                        this.loading = false;
-                    });
+                });
             }
         },
         scrollTo(selector) {
@@ -78,26 +113,20 @@ export default {
             }
         },
         removeDefaultThemeList() {
-            const themeListDefault = [this.themeNewDefault,
-                this.themeProgressDefault,
-                this.themeFinishedDefault];
+            const themeListDefault = [
+                this.$refs.themeListNewBlock,
+                this.$refs.themeListProgressBlock,
+                this.$refs.themeListFinishedBlock
+            ];
+
             themeListDefault.forEach(theme => {
-                const themeTag = document.querySelectorAll(theme);
-                if (themeTag) {
-                    themeTag.forEach(item => item.remove());
+                if (theme) {
+                    theme.remove();
                 }
             });
         },
-        hideShowThemeListBlocks(displayValue) {
-            const themeListDefault = [this.themeListNewSelector,
-                this.themeListProgressSelector,
-                this.themeListFinishedSelector];
-            themeListDefault.forEach(theme => {
-                const themeTag = document.querySelectorAll(theme);
-                if (themeTag) {
-                    themeTag.forEach(item => item.style.display = displayValue);
-                }
-            });
+        removeSelectFilter(filter) {
+            //this.currentDistrictNameList = [];
         }
     },
     mounted() {

@@ -7,7 +7,9 @@
 
         <theme-list inline-template>
 
-            <div class="ris-themes__content">
+            <div class="ris-themes__content"
+                ref="themesContent"
+            >
                 <h1 class="ris-headline">
                     Themen
                 </h1>
@@ -25,7 +27,13 @@
                         <div class="ris-filter__content-wrapper">
                             <div class="ris-filter__content">
 
-                                <div class="ris-filter-buttons" id="_filter-district-list">
+                                <div class="ris-filter-buttons">
+
+                                    <div class="ris-filter-buttons__selected"
+                                        ref="filterSelected"
+                                        v-if="currentDistrictNameList.length > 0"
+                                    ></div>
+
                                     <div class="ris-filter-buttons__title">
                                         Nach Bezirken filtern
                                     </div>
@@ -77,7 +85,7 @@
                                     </button>
                                 </div>
 
-                                <div class="ris-filter-buttons" id="_filter-postcode-list"
+                                <div class="ris-filter-buttons"
                                      v-if="postcodeList.length > 0"
                                 >
                                     <div class="ris-filter-buttons__title">
@@ -153,15 +161,17 @@
                 @endif
 
 
-                @if (!empty($topics))
-                    <section class="ris-card-list ris-card-list__themes _theme-list-new-block">
+                @if (!empty($topics_new))
+                    <section class="ris-card-list ris-card-list__themes"
+                        ref="themeListNewBlock"
+                    >
                         <div class="ris-title">Neue Themen</div>
 
-                        @foreach ($topics as $topic)
+                        @foreach ($topics_new as $topic)
                             @if ($loop->iteration > 3)
                                 @break
                             @endif
-                            <a class="ris-card-list__item _theme-new-default" title="{{ $topic->name }}"
+                            <a class="ris-card-list__item" title="{{ $topic->name }}"
                                 href="/thema/{{ $topic->id }}"
                             >
                                 <div class="ris-card-list__themes-top">
@@ -186,28 +196,39 @@
                             </a>
                         @endforeach
 
-                        <theme v-if="themeListNew"
-                            :theme-list-type="themeListNew ? 1 : null"
-                            :theme-list-data="themeListNew"/>
-
                         <a href="{{ route('themes') }}" class="ris-link ris-link_has-icon"
                             title="Mehr anzeigen"
                         >
                             Mehr anzeigen
                         </a>
                     </section>
+                @else
+                    <section class="ris-card-list ris-card-list__themes">
+                        <div class="ris-title">There are no topics</div>
+                    </section>
                 @endif
 
+                <theme
+                        :theme-list-data="themeListNew"
+                        :theme-list-data-count="themeListNewCount"
+                        :theme-list-type="themeListNew ? 1 : null"
+                        :theme-first-loading="firstLoading"
+                >
+                </theme>
 
-                @if (!empty($topics))
-                    <section class="ris-card-list ris-card-list__themes _theme-list-progress-block">
+
+
+                @if (!empty($topics_progress))
+                    <section class="ris-card-list ris-card-list__themes"
+                        ref="themeListProgressBlock"
+                    >
                         <div class="ris-title">Kürzlich aktualisiert</div>
 
-                        @foreach ($topics as $topic)
+                        @foreach ($topics_progress as $topic)
                             @if ($loop->iteration > 3)
                                 @break
                             @endif
-                            <a class="ris-card-list__item _theme-progress-default" title="{{ $topic->name }}"
+                            <a class="ris-card-list__item" title="{{ $topic->name }}"
                                 href="/thema/{{ $topic->id }}"
                             >
                                 <div class="ris-card-list__themes-top">
@@ -232,33 +253,44 @@
                             </a>
                         @endforeach
 
-                        <theme v-if="themeListProgress"
-                            :theme-list-type="themeListProgress ? 2 : null"
-                            :theme-list-data="themeListProgress"/>
-
                         <a href="{{ route('themes') }}" class="ris-link ris-link_has-icon"
                             title="Mehr anzeigen"
                         >
                             Mehr anzeigen
                         </a>
                     </section>
+                @else
+                    <section class="ris-card-list ris-card-list__themes">
+                        <div class="ris-title">There are no topics</div>
+                    </section>
                 @endif
 
+                <theme
+                        :theme-list-data="themeListProgress"
+                        :theme-list-data-count="themeListProgressCount"
+                        :theme-list-type="themeListProgress ? 2 : null"
+                        :theme-first-loading="firstLoading"
+                >
+                </theme>
 
-                @if (!empty($topics))
-                    <section class="ris-card-list ris-card-list__themes _theme-list-finished-block">
+
+
+                @if (!empty($topics_finished))
+                    <section class="ris-card-list ris-card-list__themes"
+                        ref="themeListFinishedBlock"
+                    >
                         <div class="ris-title">Kürzlich abgeschlossen</div>
 
-                        @foreach ($topics as $topic)
+                        @foreach ($topics_finished as $topic)
                             @if ($loop->iteration > 3)
                                 @break
                             @endif
-                            <a class="ris-card-list__item _theme-finished-default" title="{{ $topic->name }}"
-                                href="/thema/{{ $topic->id }}"
+                            <a class="ris-card-list__item" title="{{ $topic->name }}"
+                                    href="/thema/{{ $topic->id }}"
                             >
                                 <div class="ris-card-list__themes-top">
                                     <img src="./img/thumbnail-bridge-tile.png" class="ris-card-list__themes-img"
-                                         alt="{{ $topic->name }}"/>
+                                            alt="{{ $topic->name }}"/>
                                     <div class="ris-body-1">
                                         {{ $topic->name }}
                                     </div>
@@ -279,18 +311,25 @@
                             </a>
                         @endforeach
 
-                        <theme v-if="themeListFinished"
-                            :theme-list-type="themeListFinished ? 3 : null"
-                            :theme-list-data="themeListFinished"/>
-
                         <a href="{{ route('themes') }}" class="ris-link ris-link_has-icon"
-                            title="Mehr anzeigen"
+                                title="Mehr anzeigen"
                         >
                             Mehr anzeigen
                         </a>
                     </section>
+                @else
+                    <section class="ris-card-list ris-card-list__themes">
+                        <div class="ris-title">There are no topics</div>
+                    </section>
                 @endif
 
+                <theme
+                        :theme-list-data="themeListFinished"
+                        :theme-list-data-count="themeListFinishedCount"
+                        :theme-list-type="themeListFinished ? 3 : null"
+                        :theme-first-loading="firstLoading"
+                >
+                </theme>
             </div>
 
         </theme-list>

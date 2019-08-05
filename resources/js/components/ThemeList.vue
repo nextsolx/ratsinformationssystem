@@ -19,12 +19,18 @@ export default {
         themeListFinishedCount: 0,
         themeFirstBlock: '.ris-card-list__themes',
         themeListLimitUntil: 4,
-        districtList: [],
         postcodeList: [],
-        currentDistrictNameList: [],
+        selectedDistrictList: [],
+        districtList: [],
         districtInfoDescription: 'There are no topics',
         postcodeInfoDescription: 'There are no topics for the selected postcode',
     }),
+    props: {
+        defaultDistrictList: {
+            type: Array,
+            default: () => [],
+        },
+    },
     methods: {
         collapseFilter() {
             this.activeFilter = !this.activeFilter;
@@ -41,69 +47,63 @@ export default {
                 this.themeListProgressCount = 0;
                 this.themeListFinishedCount = 0;
 
-                // collapse filter block when choose some filter
-                this.activeFilter = false;
+                // collapse filter block when the district is selected
+                this.collapseFilter();
 
-                this.currentDistrictNameList.push(e.currentTarget.innerText.trim());
+                const currentSelectedDistrict = e.currentTarget.innerText.trim();
+                this.selectedDistrictList.push(currentSelectedDistrict);
 
-                const filterSelectedBlock = this.$refs.filterSelected;
+                this.removeDistrictFromList(currentSelectedDistrict);
 
-                this.currentDistrictNameList.forEach(currentDistrictName => {
-                    if (filterSelectedBlock) {
-                        filterSelectedBlock.style.display = 'block';
-                        filterSelectedBlock.innerHTML += `
-                            <button class="ris-label"
-                                @click="removeSelectFilter(${currentDistrictName})"
-                            >${currentDistrictName}</button>`;
-                    }
+                this.selectedDistrictList.forEach(currentDistrictName => {
 
                     axios
                         .get(`/api/topics?district=${currentDistrictName}`)
-                            .then(res => {
-                                if (res.data.data.length === 0) {
-                                    this.info(currentDistrictName, this.districtInfoDescription);
-                                } else {
-                                    this.scrollTo(this.themeFirstBlock);
+                        .then(res => {
+                            if (res.data.data.length === 0) {
+                                this.info(currentDistrictName, this.districtInfoDescription);
+                            } else {
+                                res.data.data.forEach((topic) => {
+                                    if (topic.newTopic) {
+                                        this.themeListNewCount++;
 
-                                    res.data.data.forEach((topic) => {
-                                        if (topic.newTopic) {
-                                            this.themeListNewCount++;
-
-                                            if (this.themeListNew.length < 3) {
-                                                this.themeListNew.push(topic);
-                                            }
-                                        } else if (topic.finished) {
-                                            this.themeListFinishedCount++;
-
-                                            if (this.themeListFinished.length < 3) {
-                                                this.themeListFinished.push(topic);
-                                            }
-                                        } else {
-                                            this.themeListProgressCount++;
-
-                                            if (this.themeListProgress.length < 3) {
-                                                this.themeListProgress.push(topic);
-                                            }
+                                        if (this.themeListNew.length < 3) {
+                                            this.themeListNew.push(topic);
                                         }
+                                    } else if (topic.finished) {
+                                        this.themeListFinishedCount++;
 
-                                        // for filter block
-                                        if (topic.location.postalCode) {
-                                            if (!this.postcodeList.includes(topic.location.postalCode)) {
-                                                this.postcodeList.push(topic.location.postalCode);
-                                            }
+                                        if (this.themeListFinished.length < 3) {
+                                            this.themeListFinished.push(topic);
                                         }
-                                    });
-                                }
-                            })
-                            .finally(() => {
-                                this.loading = false;
+                                    } else {
+                                        this.themeListProgressCount++;
 
-                                if (this.firstLoading) {
-                                    this.removeDefaultThemeList();
-                                    this.firstLoading = false;
-                                }
-                            });
+                                        if (this.themeListProgress.length < 3) {
+                                            this.themeListProgress.push(topic);
+                                        }
+                                    }
+
+                                    // for filter block
+                                    if (topic.location.postalCode) {
+                                        if (!this.postcodeList.includes(topic.location.postalCode)) {
+                                            this.postcodeList.push(topic.location.postalCode);
+                                        }
+                                    }
+                                });
+                            }
+                        })
+                        .finally(() => {
+                            this.loading = false;
+
+                            if (this.firstLoading) {
+                                this.removeDefaultBlocks();
+                                this.firstLoading = false;
+                            }
+                        });
                 });
+
+                this.scrollTo(this.themeFirstBlock);
             }
         },
         scrollTo(selector) {
@@ -112,24 +112,53 @@ export default {
                 el.scrollIntoView({ behavior: 'smooth'});
             }
         },
-        removeDefaultThemeList() {
-            const themeListDefault = [
-                this.$refs.themeListNewBlock,
-                this.$refs.themeListProgressBlock,
-                this.$refs.themeListFinishedBlock
+        removeDefaultBlocks() {
+            const defaultBlocks = [
+                this.$refs.defaultThemeListNewBlock,
+                this.$refs.defaultThemeListProgressBlock,
+                this.$refs.defaultThemeListFinishedBlock,
+                this.$refs.defaultDistrictListBlock
             ];
 
-            themeListDefault.forEach(theme => {
+            defaultBlocks.forEach(theme => {
                 if (theme) {
                     theme.remove();
                 }
             });
         },
-        removeSelectFilter(filter) {
-            //this.currentDistrictNameList = [];
-        }
+        removeDistrictFromList(district) {
+            if (this.districtList.includes(district)) {
+                const districtIndex = this.districtList.indexOf(district);
+                this.districtList.splice(districtIndex, 1);
+            }
+        },
+        removeSelectedDistrict(district) {
+            if (this.selectedDistrictList.includes(district)) {
+                const selectedDistrictIndex = this.selectedDistrictList.indexOf(district);
+                this.selectedDistrictList.splice(selectedDistrictIndex, 1);
+
+                this.updateDistrictList();
+            }
+        },
+        updateDistrictList() {
+            this.districtList = this.defaultDistrictList.slice(0);
+
+            this.selectedDistrictList.forEach(selectedDistrict => {
+                if (this.districtList.includes(selectedDistrict)) {
+                    const districtIndex = this.districtList.indexOf(selectedDistrict);
+                    this.districtList.splice(districtIndex, 1);
+                }
+            });
+
+            this.scrollTo(this.themeFirstBlock);
+            this.collapseFilter();
+        },
     },
     mounted() {
+        if (this.defaultDistrictList) {
+            this.districtList = this.defaultDistrictList.slice(0);
+        }
+
         new Swiper ('.swiper-container', {
             slidesPerView: 8,
             spaceBetween: 16,

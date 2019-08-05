@@ -51,9 +51,14 @@ class TopicController extends Controller
         $topics = Topic::collection($paperQuery->paginate(100))->toResponse(request())->getData();
 
         return view('themes')->with([
+            'topics' => $topics->data,
             'topics_new' => $topics->data,
             'topics_progress' => $topics->data,
             'topics_finished' => $topics->data,
+            'district_list' => [
+                'Innenstadt', 'Rodenkirchen', 'Lindenthal', 'Ehrenfeld',
+                'Nippes',  'Chorweiler', 'Porz',  'Kalk',  'Mülheim'
+            ],
             'links' => $topics->links,
         ]);
     }

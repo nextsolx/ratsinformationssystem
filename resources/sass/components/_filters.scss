@@ -82,7 +82,7 @@
     }
 
     &_active {
-        #{$base}__content-wrapper {
+        #{$base}__content {
             background: $c-white;
             border-radius: $b-radius-primary;
             bottom: auto;
@@ -114,12 +114,8 @@
         }
     }
 
-    &__content-wrapper {
-        display: none;
-    }
-
     &__content {
-        padding: $indent-m;
+        display: none;
 
         #{$base}-buttons__title {
             font-weight: normal;
@@ -130,14 +126,21 @@
 
     .ris-label {
         display: inline-flex;
-        margin-bottom: $indent-m;
+        margin-bottom: $indent-s;
+
+        &:not(:last-child) {
+            margin-right: $indent-s;
+        }
     }
 
     &-buttons {
+        margin-left: 16px;
+        margin-right: 16px;
+        padding-bottom: 16px;
+        padding-top: 16px;
+
         &:not(:last-child) {
             border-bottom: 1px solid $c-gray7;
-            margin-bottom: $indent-m;
-            padding-bottom: $indent-m;
         }
 
         &__title {
@@ -150,8 +153,16 @@
         }
 
         &__selected {
-            border-bottom: 1px solid $c-gray7;
-            margin-bottom: $indent-m;
+            display: none;
+            margin-left: 0;
+            margin-right: 0;
+            padding-bottom: $indent-s;
+            padding-left: $indent-m;
+            padding-right: $indent-m;
+
+            &_active {
+                display: block;
+            }
         }
 
         .ris-button {

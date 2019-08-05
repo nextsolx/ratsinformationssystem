@@ -5,11 +5,11 @@
 
         @include('layouts.breadcrumbs')
 
-        <theme-list inline-template>
+        <theme-list inline-template
+            :default-district-list="{{json_encode($district_list)}}"
+        >
 
-            <div class="ris-themes__content"
-                ref="themesContent"
-            >
+            <div class="ris-themes__content">
                 <h1 class="ris-headline">
                     Themen
                 </h1>
@@ -24,83 +24,66 @@
                             Filtern
                         </div>
 
-                        <div class="ris-filter__content-wrapper">
-                            <div class="ris-filter__content">
-
-                                <div class="ris-filter-buttons">
-
-                                    <div class="ris-filter-buttons__selected"
-                                        ref="filterSelected"
-                                        v-if="currentDistrictNameList.length > 0"
-                                    ></div>
-
-                                    <div class="ris-filter-buttons__title">
-                                        Nach Bezirken filtern
-                                    </div>
-
-                                    <button class="ris-button ris-button_secondary ris-button_has-shadow"
-                                        @click="getTopicByDistrict"
-                                    >
-                                        Innenstadt
-                                    </button>
-                                    <button class="ris-button ris-button_secondary ris-button_has-shadow"
-                                        @click="getTopicByDistrict"
-                                    >
-                                        Rodenkirchen
-                                    </button>
-                                    <button class="ris-button ris-button_secondary ris-button_has-shadow"
-                                        @click="getTopicByDistrict"
-                                    >
-                                        Lindenthal
-                                    </button>
-                                    <button class="ris-button ris-button_secondary ris-button_has-shadow"
-                                        @click="getTopicByDistrict"
-                                    >
-                                        Ehrenfeld
-                                    </button>
-                                    <button class="ris-button ris-button_secondary ris-button_has-shadow"
-                                        @click="getTopicByDistrict"
-                                    >
-                                        Nippes
-                                    </button>
-                                    <button class="ris-button ris-button_secondary ris-button_has-shadow"
-                                        @click="getTopicByDistrict"
-                                    >
-                                        Chorweiler
-                                    </button>
-                                    <button class="ris-button ris-button_secondary ris-button_has-shadow"
-                                        @click="getTopicByDistrict"
-                                    >
-                                        Porz
-                                    </button>
-                                    <button class="ris-button ris-button_secondary ris-button_has-shadow"
-                                        @click="getTopicByDistrict"
-                                    >
-                                        Kalk
-                                    </button>
-                                    <button class="ris-button ris-button_secondary ris-button_has-shadow"
-                                        @click="getTopicByDistrict"
-                                    >
-                                        Mülheim
-                                    </button>
-                                </div>
-
-                                <div class="ris-filter-buttons"
-                                     v-if="postcodeList.length > 0"
+                        <div class="ris-filter__content">
+                            <div class="ris-filter-buttons ris-filter-buttons__selected"
+                                    :class="selectedDistrictList.length > 0
+                                    ? 'ris-filter-buttons__selected_active'
+                                    : ''"
+                            >
+                                <button class="ris-label ris-label_has-border"
+                                        v-for="currentDistrictName in selectedDistrictList"
+                                        @click="removeSelectedDistrict(currentDistrictName)"
                                 >
-                                    <div class="ris-filter-buttons__title">
-                                        Nach Postleitzahlen filtern
-                                    </div>
+                                    @{{ currentDistrictName }}
+                                </button>
+                            </div>
 
-                                    <button class="ris-button ris-button_secondary ris-button_has-shadow"
-                                        v-for="postcode in postcodeList"
-                                    >
-                                         @{{ postcode }}
-                                    </button>
+                            <div class="ris-filter-buttons"
+                                ref="defaultDistrictListBlock"
+                            >
+                                <div class="ris-filter-buttons__title">
+                                    Nach Bezirken filtern
                                 </div>
 
+                                @foreach ($district_list as $district)
+                                    <button class="ris-button ris-button_secondary ris-button_has-shadow"
+                                        @click="getTopicByDistrict"
+                                    >
+                                        {{ $district }}
+                                    </button>
+                                @endforeach
+                            </div>
+
+                            <div class="ris-filter-buttons"
+                                v-if="districtList.length > 0 && !firstLoading"
+                            >
+                                <div class="ris-filter-buttons__title">
+                                    Nach Bezirken filtern
+                                </div>
+
+                                <button class="ris-button ris-button_secondary ris-button_has-shadow"
+                                    @click="getTopicByDistrict"
+                                    v-for="district in districtList"
+                                >
+                                    @{{ district }}
+                                </button>
+                            </div>
+
+                            <div class="ris-filter-buttons"
+                                 v-if="postcodeList.length > 0"
+                            >
+                                <div class="ris-filter-buttons__title">
+                                    Nach Postleitzahlen filtern
+                                </div>
+
+                                <button class="ris-button ris-button_secondary ris-button_has-shadow"
+                                    v-for="postcode in postcodeList"
+                                >
+                                     @{{ postcode }}
+                                </button>
                             </div>
                         </div>
+
                     </div>
 
                     <div class="ris-select">
@@ -163,7 +146,7 @@
 
                 @if (!empty($topics_new))
                     <section class="ris-card-list ris-card-list__themes"
-                        ref="themeListNewBlock"
+                        ref="defaultThemeListNewBlock"
                     >
                         <div class="ris-title">Neue Themen</div>
 
@@ -220,7 +203,7 @@
 
                 @if (!empty($topics_progress))
                     <section class="ris-card-list ris-card-list__themes"
-                        ref="themeListProgressBlock"
+                        ref="defaultThemeListProgressBlock"
                     >
                         <div class="ris-title">Kürzlich aktualisiert</div>
 
@@ -277,7 +260,7 @@
 
                 @if (!empty($topics_finished))
                     <section class="ris-card-list ris-card-list__themes"
-                        ref="themeListFinishedBlock"
+                        ref="defaultThemeListFinishedBlock"
                     >
                         <div class="ris-title">Kürzlich abgeschlossen</div>
 

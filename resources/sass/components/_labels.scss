@@ -4,16 +4,15 @@
     border: 0;
     border-radius: $b-radius-secondary;
     color: $c-gray2;
+    cursor: pointer;
     display: inline-flex;
-    font-family: $ff-open-sans;
+    font-family: $ff-helvetica-neue;
     font-size: $fs-l;
-    font-weight: 600;
+    font-weight: 400;
     justify-content: center;
     line-height: $lh-l;
-    min-width: 136px;
     outline: none;
-    padding-bottom: $indent-s;
-    padding-top: $indent-s;
+    padding: $indent-s $indent-m;
 
     &::after {
         color: $c-gray2;
@@ -26,5 +25,21 @@
         padding: 0;
         pointer-events: none;
         speak: none;
+    }
+
+    &:hover {
+        opacity: .9;
+    }
+
+    &_has-border {
+        border: 1px solid $c-gray3;
+    }
+
+    &_has-shadow {
+        box-shadow: 0 1px 6px 0 $c-box-shadow3;
+
+        &:hover {
+            box-shadow: 0 1px 3px 0 $c-box-shadow3;
+        }
     }
 }

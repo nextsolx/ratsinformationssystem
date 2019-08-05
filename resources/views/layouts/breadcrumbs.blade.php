@@ -6,17 +6,45 @@
             <span class="ris-link__text">Stadt Koeln</span>
         </a>
     </li>
-    <li class="ris-breadcrumbs__item">
-        <a href="{{ route('themes') }}" title="Themen"
-           class="ris-link"
-        >
-            <span>Themen</span>
-        </a>
-    <li class="ris-breadcrumbs__item">
-        <a href="{{ route('new-themes') }}" title="Neue Themen"
-           class="ris-link"
-        >
-            <span>Neue Themen</span>
-        </a>
-    </li>
+
+    @if (url()->current() === route('theme-overview')
+        or url()->current() === route('new-themes')
+        or url()->current() === route('progress-themes')
+        or url()->current() === route('finished-themes')
+    )
+        <li class="ris-breadcrumbs__item">
+            <a href="{{ route('theme-overview') }}" title="Themen"
+               class="ris-link"
+            >
+                <span>Themen</span>
+            </a>
+        </li>
+    @endif
+
+    @if (url()->current() === route('new-themes'))
+        <li class="ris-breadcrumbs__item">
+            <a href="{{ route('new-themes') }}" title="Neue Themen"
+               class="ris-link"
+            >
+                <span>Neue Themen</span>
+            </a>
+        </li>
+    @elseif (url()->current() === route('progress-themes'))
+        <li class="ris-breadcrumbs__item">
+            <a href="{{ route('progress-themes') }}" title="Kürzlich aktualisiert"
+                class="ris-link"
+            >
+                <span>Kürzlich aktualisiert</span>
+            </a>
+        </li>
+    @elseif (url()->current() === route('finished-themes'))
+        <li class="ris-breadcrumbs__item">
+            <a href="{{ route('finished-themes') }}" title="Kürzlich abgeschlossen"
+                class="ris-link"
+            >
+                <span>Kürzlich abgeschlossen</span>
+            </a>
+        </li>
+    @endif
+
 </ol>

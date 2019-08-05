@@ -16,45 +16,16 @@ export default {
             default: () => ([])
 
         },
-        themeListDataCount: {
-            type: Number,
-            default: 0
-        },
         themeListType: {
-            type: Number,
-            default: 0
+            type: String,
+            default: ''
         },
-        themeFirstLoading: {
-            type: Boolean,
-            default: true
-        }
     },
-    data: () => ({
-        districtInfoDescription: 'There are no topics',
-    }),
 };
 </script>
 
 <template>
-    <section class="ris-card-list ris-card-list__themes"
-        v-if="!themeFirstLoading"
-            >
-        <div class="ris-title"
-            v-if="themeListType === 1"
-                >
-            Neue Themen
-        </div>
-        <div class="ris-title"
-            v-if="themeListType === 2"
-                >
-            Kürzlich aktualisiert
-        </div>
-        <div class="ris-title"
-            v-if="themeListType === 3"
-                >
-            Kürzlich abgeschlossen
-        </div>
-
+    <div>
         <a class="ris-card-list__item"
             v-for="{ id, name } in themeListData"
             :key="id"
@@ -77,17 +48,17 @@ export default {
                 </div>
 
                 <div class="ris-progress-bar"
-                    v-if="themeListType === 1"
+                    v-if="themeListType === 'new'"
                         >
                     <div class="ris-progress-bar__progress" style="width: 25%"/>
                 </div>
                 <div class="ris-progress-bar"
-                    v-if="themeListType === 2"
+                    v-else-if="themeListType === 'progress'"
                         >
                     <div class="ris-progress-bar__progress" style="width: 75%"/>
                 </div>
                 <div class="ris-card-list__themes-completed"
-                    v-else-if="themeListType === 3"
+                    v-else-if="themeListType === 'finished'"
                         >
                     <span class="ris-i ris-i__check ris-i_has-bg"/>
                     Abgeschlossen
@@ -96,18 +67,5 @@ export default {
                 <div class="ris-caption ris-card-list__themes-date">27.10.2018</div>
             </div>
         </a>
-
-        <a href="/themes" class="ris-link ris-link_has-icon"
-            title="Mehr anzeigen"
-            v-if="themeListDataCount > 3"
-                >
-            Mehr anzeigen
-        </a>
-
-        <div class="ris-body-1"
-            v-if="themeListData.length === 0"
-                >
-            {{ districtInfoDescription }}
-        </div>
-    </section>
+    </div>
 </template>

@@ -44,10 +44,14 @@
                             </li>
                             <li>
                                 <a class="ris-nav__link
-                                    @if (url()->current() === route('themes') or url()->current() === route('new-themes'))
+                                    @if (url()->current() === route('theme-overview')
+                                        or url()->current() === route('new-themes')
+                                        or url()->current() === route('progress-themes')
+                                        or url()->current() === route('finished-themes')
+                                    )
                                         ris-nav__link_active
                                     @endif"
-                                   href="{{ route('themes') }}"
+                                   href="{{ route('theme-overview') }}"
                                 >Themen</a>
                             </li>
                             <li>

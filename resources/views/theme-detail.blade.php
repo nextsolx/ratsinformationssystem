@@ -9,9 +9,11 @@
 
             <h1 class="ris-headline">{{ $topic->name }}</h1>
 
-            <div>{{ $topic->location->description }}</div>
+            @if (isset($topic->location))
+                <div>{{ $topic->location->description }}</div>
 
-            <div>{{ $topic->location->streetAddress }}</div>
+                <div>{{ $topic->location->streetAddress }}</div>
+            @endif
 
         </div>
 

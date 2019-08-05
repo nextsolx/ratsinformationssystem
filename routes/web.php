@@ -22,14 +22,20 @@ Route::get('/styleguide', function () {
 Route::get('/kalender', 'MeetingController@calendar')
     ->name('calendar');
 
-Route::get('/themen', 'TopicController@themen')
-    ->name('themes');
+Route::get('/themen-overview', 'TopicController@themen')
+    ->name('theme-overview');
 
-Route::get('/neue-themen', function () {
-    return view('themes');
-})->name('new-themes');
+Route::get('/neue-themen', 'TopicController@newThemes')
+    ->name('new-themes');
 
-Route::get('/thema/{paper}', 'TopicController@topic')->name('topic-detail');
+Route::get('/aktualisiert-themen', 'TopicController@progressThemes')
+    ->name('progress-themes');
+
+Route::get('/abgeschlossen-themen', 'TopicController@finishedThemes')
+    ->name('finished-themes');
+
+Route::get('/thema/{paper}', 'TopicController@topic')
+    ->name('theme-detail');
 
 Route::get('/karte', function () {
     return view('map');

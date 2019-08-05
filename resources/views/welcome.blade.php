@@ -69,7 +69,7 @@
                 <div class="ris-title">Aktuelle Themen</div>
 
                 <a class="ris-card-list__item" title="Bewohnerparken Köln-Lindenthal"
-                     href="{{ route('themes') }}"
+                    href="theme/id"
                 >
                     <div class="ris-card-list__themes-top">
                         <img src="./img/thumbnail-map-tile.png" class="ris-card-list__themes-img"
@@ -94,7 +94,7 @@
                 </a>
 
                 <a class="ris-card-list__item" title="Generalsanierung Drehbrücke Deutzer Hafen Teilergebnis"
-                     href="{{ route('themes') }}"
+                     href="theme/id"
                 >
                     <div class="ris-card-list__themes-top">
                         <img src="./img/thumbnail-bridge-tile.png" class="ris-card-list__themes-img"
@@ -118,7 +118,7 @@
                 </a>
 
                 <a class="ris-card-list__item" title="Bewohnerparken Köln-Lindenthal"
-                     href="{{ route('themes') }}"
+                    href="theme/id"
                 >
                     <div class="ris-card-list__themes-top">
                         <img src="./img/thumbnail-map-tile.png" class="ris-card-list__themes-img"
@@ -142,7 +142,7 @@
                     </div>
                 </a>
 
-                <a href="{{ route('themes') }}" class="ris-link ris-link_has-icon"
+                <a href="{{ route('theme-overview') }}" class="ris-link ris-link_has-icon"
                     title="Alle Themen"
                 >
                     Alle Themen

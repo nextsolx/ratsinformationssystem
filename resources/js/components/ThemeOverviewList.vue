@@ -1,14 +1,15 @@
 <script>
+import Theme from './Theme';
+
 export default {
     name: 'ThemeOverviewList',
     components: {
-        'theme': () => import('./Theme'),
+        Theme
     },
     props: {
         themeListData: {
             type: Array,
             default: () => ([])
-
         },
         themeListDataCount: {
             type: Number,
@@ -34,7 +35,7 @@ export default {
 </script>
 
 <template>
-    <section class="ris-card-list ris-card-list__themes"
+    <section class="ris-section-wrapper ris-card-list ris-card-list__themes"
         v-if="!themeFirstLoading"
             >
         <div class="ris-title"
@@ -56,8 +57,7 @@ export default {
         <theme
             :theme-list-data="themeListData"
             :theme-list-type="themeListType"
-        >
-        </theme>
+                />
 
         <a :href="themeTypeLink" class="ris-link ris-link_has-icon"
             title="Mehr anzeigen"

@@ -134,10 +134,8 @@
     }
 
     &-buttons {
-        margin-left: 16px;
-        margin-right: 16px;
-        padding-bottom: 16px;
-        padding-top: 16px;
+        margin-left: $indent-m;
+        margin-right: $indent-m;
 
         &:not(:last-child) {
             border-bottom: 1px solid $c-gray7;

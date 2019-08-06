@@ -474,6 +474,9 @@
                         <span class="ris-i ris-i__marker-with-dot"></span>
                         <span class="ris-i ris-i__filter"></span>
                         <span class="ris-i ris-i__chevron-double"></span>
+                        <span class="ris-i ris-i__download-with-box"></span>
+                        <span class="ris-i ris-i__eye"></span>
+                        <span class="ris-i ris-i__resize-text"></span>
 
                         <br/><br/>
 

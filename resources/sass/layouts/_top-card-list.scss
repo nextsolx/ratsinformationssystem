@@ -1,0 +1,108 @@
+.ris-top-card-list {
+    @include breakpoint($bp-mobile-max) {
+        padding-left: $indent-m;
+        padding-right: $indent-m;
+    }
+
+    @include breakpoint($bp-tablet-min) {
+        margin-left: $indent-ml;
+        margin-right: $indent-ml;
+    }
+
+    > .ris-title {
+        margin-bottom: $indent-s;
+    }
+
+    &__item {
+        border-radius: $b-radius-primary;
+        box-shadow: 0 1px 6px 0 $c-box-shadow3;
+        box-sizing: border-box;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        margin-bottom: $indent-m;
+        text-decoration: none;
+
+        &:hover {
+            box-shadow: 0 1px 3px 0 $c-box-shadow3;
+
+            .ris-body-1 {
+                color: $c-red;
+            }
+        }
+
+        @include breakpoint($bp-mobile-max) {
+            width: 120px;
+        }
+
+        &-top {
+            width: 100%;
+        }
+
+        &-bottom {
+            width: 100%;
+
+            @include breakpoint($bp-mobile-max) {
+                display: none;
+            }
+
+            @include breakpoint($bp-tablet-min) {
+                padding-bottom: $indent-m;
+                padding-left: $indent-m;
+                padding-right: $indent-m;
+            }
+        }
+
+        &-img {
+            border-radius: $b-radius-primary $b-radius-primary 0 0;
+            display: inline-block;
+            object-fit: cover;
+            width: 100%;
+
+            @include breakpoint($bp-mobile-max) {
+                height: 96px;
+            }
+
+            @include breakpoint($bp-tablet-min) {
+                height: 120px;
+            }
+        }
+
+        &-number {
+            display: flex;
+            padding-bottom: $indent-s;
+        }
+
+        &-progress-box {
+            align-items: center;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .ris-progress-bar {
+            flex-grow: 1;
+            margin-right: $indent-l;
+            width: auto;
+        }
+
+        .ris-body-1 {
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;
+            display: -webkit-box;
+            font-weight: bold;
+            height: $lh-l * 3;
+            line-height: $lh-l;
+            overflow: hidden;
+
+            @include breakpoint($bp-mobile-max) {
+                font-size: $fs-m;
+                margin: $indent-s;
+            }
+
+            @include breakpoint($bp-tablet-min) {
+                font-size: $fs-l;
+                margin: $indent-m;
+            }
+        }
+    }
+}

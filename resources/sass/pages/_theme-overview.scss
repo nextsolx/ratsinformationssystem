@@ -1,0 +1,19 @@
+.ris-theme-overview {
+    &__content {
+        .ris-headline {
+            padding-bottom: $indent-s;
+            padding-top: $indent-s;
+        }
+    }
+
+    .ris-section-wrapper {
+        border-bottom: 0;
+        padding-bottom: 0;
+    }
+
+    .swiper-container {
+        @include breakpoint($bp-mobile-max) {
+            padding-right: $indent-m;
+        }
+    }
+}

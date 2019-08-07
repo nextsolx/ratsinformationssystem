@@ -1,0 +1,8 @@
+.ris-action-box {
+    display: flex;
+    margin-top: $indent-s;
+
+    .ris-filter {
+        flex-grow: 1;
+    }
+}

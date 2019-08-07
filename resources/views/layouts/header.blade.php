@@ -4,8 +4,8 @@
     <header class="ris-header">
         <div class="ris-header__top">
             <a class="ris-logo" href="/" title="Stadt Koeln">
-                <img class="ris-logo__desktop" src="./img/logo_desktop_stadt_koeln.png" alt="Stadt Koeln"/>
-                <img class="ris-logo__mobile" src="./img/logo_mobile_stadt_koeln.png" alt="Stadt Koeln" content="noindex"/>
+                <img class="ris-logo__desktop" src="/img/logo_desktop_stadt_koeln.png" alt="Stadt Koeln"/>
+                <img class="ris-logo__mobile" src="/img/logo_mobile_stadt_koeln.png" alt="Stadt Koeln" content="noindex"/>
             </a>
             <div class="ris-slogan">Stadtpolitik</div>
             <a class="ris-account" href="/account"></a>
@@ -43,8 +43,15 @@
                                 >Start</a>
                             </li>
                             <li>
-                                <a class="ris-nav__link @if (url()->current() === route('themes')) ris-nav__link_active @endif"
-                                   href="{{ route('themes') }}"
+                                <a class="ris-nav__link
+                                    @if (url()->current() === route('theme-overview')
+                                        or url()->current() === route('new-themes')
+                                        or url()->current() === route('progress-themes')
+                                        or url()->current() === route('finished-themes')
+                                    )
+                                        ris-nav__link_active
+                                    @endif"
+                                   href="{{ route('theme-overview') }}"
                                 >Themen</a>
                             </li>
                             <li>

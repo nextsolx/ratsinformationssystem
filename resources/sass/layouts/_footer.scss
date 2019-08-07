@@ -60,5 +60,9 @@
         line-height: $lh-l;
         margin-left: $indent-sm;
         margin-right: $indent-sm;
+
+        &:hover {
+            color: $c-red;
+        }
     }
 }

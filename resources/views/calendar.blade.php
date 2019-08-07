@@ -16,12 +16,12 @@ if (isset($meetings) and is_array($meetings)) {
 ?>
 
 @section('content')
-    <main class="ris-content ris-calendar">
+    <main class="ris-main ris-calendar">
         <h1 class="ris-calendar__headline ris-headline">
             Sitzungskalender
         </h1>
 
-        <div class="ris-calendar__flex-wrapper">
+        <div class="ris-calendar__flex-wrapper ris-content ris-content_has-widget ris-content_six-eight-eight">
             <calendar-app></calendar-app>
 
             <div class="ris-calendar__content">

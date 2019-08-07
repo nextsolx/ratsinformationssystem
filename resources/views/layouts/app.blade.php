@@ -9,7 +9,7 @@
 
         <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}"/>
     </head>
-    <body class="ris-main">
+    <body class="ris-body">
 
         <div id="root"
             :class="{ 'ris-nav__root_active': navActive }"

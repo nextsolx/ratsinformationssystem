@@ -31,7 +31,8 @@ export default {
     name: 'CalendarApp',
     mixins: [ noticeMixin ],
     data: () => ({
-        attrs: [
+        attrs: [],
+        attrsToday: [
             {
                 contentStyle: {
                     fontWeight: 'bold',
@@ -62,8 +63,8 @@ export default {
         currentYear: moment().year(),
         currentMonth: moment().month() + 1,
         loading: false,
-        emptyMeetingList: false,
-        infoTitle: 'There are no meetings on this date',
+        infoTitle: 'Calendar',
+        infoDescription: 'There are no meetings in the calendar for the current month',
     }),
     methods: {
         toggleCalendar() {
@@ -77,10 +78,7 @@ export default {
             });
         },
         loadMeetings(year = this.currentYear, month = this.currentMonth) {
-            console.log(this.loading);
-            console.log(this.emptyMeetingList);
-
-            if (!this.loading && !this.emptyMeetingList) {
+            if (!this.loading) {
                 this.loading = true;
                 this.currentYear = year;
                 this.currentMonth = month;
@@ -90,6 +88,8 @@ export default {
                 axios
                     .get(`/api/meetings?year=${this.currentYear}&month=${this.currentMonth}`)
                     .then(res => {
+                        this.attrs = [];
+
                         if (res.data.data.length > 0) {
                             for (let { title, dateFrom } of res.data.data) {
                                 this.attrs.push({
@@ -108,23 +108,18 @@ export default {
                                 });
                             }
                         } else {
-                            this.emptyMeetingList = true;
+                            this.info(this.infoTitle, this.infoDescription);
                         }
+
+                        this.attrs = this.attrs.concat(...this.attrsToday);
                     })
                     .finally(() => {
                         this.loading = false;
                         this.disableEnableNavButtons();
                     });
             }
-
-            if (this.emptyMeetingList) {
-                this.info(this.infoTitle);
-            }
-
-            this.emptyMeetingList = false;
         },
         navClicked(page) {
-            console.log('hey');
             this.loadMeetings(page.year, page.month);
         },
         dayClicked(day) {

@@ -1,19 +1,6 @@
 .ris-card-list {
     $base: &;
 
-    border-bottom: 1px solid $c-gray7;
-
-    @include breakpoint($bp-mobile-max) {
-        padding: $indent-ml $indent-m;
-    }
-
-    @include breakpoint($bp-tablet-min) {
-        margin-left: $indent-ml;
-        margin-right: $indent-ml;
-        padding-bottom: $indent-xl;
-        padding-top: $indent-ml;
-    }
-
     &__item {
         $base-item: &;
 
@@ -133,6 +120,8 @@
         }
 
         &-number {
+            display: flex;
+
             @include breakpoint($bp-mobile-max) {
                 flex-basis: 100%;
                 margin-bottom: $indent-s;

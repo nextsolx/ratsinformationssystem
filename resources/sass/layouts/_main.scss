@@ -1,4 +1,56 @@
-.ris-main {
+.ris-body {
     font-family: $ff-open-sans;
     margin: 0 auto;
+}
+
+.ris-content {
+    $base-content: &;
+    position: relative;
+
+    &_six-eight-eight {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 688px;
+
+        @include breakpoint($bp-tablet-min) {
+            .ris-welcome {
+                &__content {
+                    flex-basis: 668px;
+                    padding-right: $indent-ml;
+                }
+
+                &-map__desktop {
+                    margin-left: 668px + $indent-ml;
+                    right: auto;
+                }
+            }
+
+            &#{$base-content}_has-widget {
+                max-width: 1024px;
+            }
+
+            .ris-section-wrapper {
+                margin-left: 0;
+                margin-right: 0;
+            }
+        }
+    }
+}
+
+.ris-section-wrapper {
+    border-bottom: 1px solid $c-gray7;
+
+    @include breakpoint($bp-mobile-max) {
+        margin-bottom: $indent-ml;
+        padding-bottom: $indent-ml;
+        padding-left: $indent-m;
+        padding-right: $indent-m;
+    }
+
+    @include breakpoint($bp-tablet-min) {
+        margin-bottom: $indent-ml;
+        margin-left: $indent-ml;
+        margin-right: $indent-ml;
+        padding-bottom: $indent-xl;
+    }
 }

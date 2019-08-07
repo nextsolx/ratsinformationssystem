@@ -34,7 +34,7 @@ class TopicController extends Controller
     {
         $topic = (new Topic($paper))->toResponse(request())->getData()->data;
 
-        return view('topic-detail')->with([
+        return view('theme-detail')->with([
             'topic' => $topic
         ]);
     }
@@ -50,8 +50,66 @@ class TopicController extends Controller
 
         $topics = Topic::collection($paperQuery->paginate(100))->toResponse(request())->getData();
 
-        return view('themes')->with([
-            'topics' => $topics,
+        return view('theme-overview')->with([
+            'topics' => $topics->data,
+            'topics_new' => $topics->data,
+            'topics_progress' => $topics->data,
+            'topics_finished' => $topics->data,
+            'district_list' => [
+                'Innenstadt', 'Rodenkirchen', 'Lindenthal', 'Ehrenfeld',
+                'Nippes',  'Chorweiler', 'Porz',  'Kalk',  'Mülheim'
+            ],
+            'links' => $topics->links,
+        ]);
+    }
+
+    public function newThemes(Request $request)
+    {
+        $paperQuery = \App\Paper::with(['location']);
+
+        $topics = Topic::collection($paperQuery->paginate(100))->toResponse(request())->getData();
+
+        return view('theme-list')->with([
+            'theme_list' => $topics->data,
+            'theme_type' => 'new',
+            'district_list' => [
+                'Innenstadt', 'Rodenkirchen', 'Lindenthal', 'Ehrenfeld',
+                'Nippes',  'Chorweiler', 'Porz',  'Kalk',  'Mülheim'
+            ],
+            'links' => $topics->links,
+        ]);
+    }
+
+    public function progressThemes(Request $request)
+    {
+        $paperQuery = \App\Paper::with(['location']);
+
+        $topics = Topic::collection($paperQuery->paginate(100))->toResponse(request())->getData();
+
+        return view('theme-list')->with([
+            'theme_list' => $topics->data,
+            'theme_type' => 'progress',
+            'district_list' => [
+                'Innenstadt', 'Rodenkirchen', 'Lindenthal', 'Ehrenfeld',
+                'Nippes',  'Chorweiler', 'Porz',  'Kalk',  'Mülheim'
+            ],
+            'links' => $topics->links,
+        ]);
+    }
+
+    public function finishedThemes(Request $request)
+    {
+        $paperQuery = \App\Paper::with(['location']);
+
+        $topics = Topic::collection($paperQuery->paginate(100))->toResponse(request())->getData();
+
+        return view('theme-list')->with([
+            'theme_list' => $topics->data,
+            'theme_type' => 'finished',
+            'district_list' => [
+                'Innenstadt', 'Rodenkirchen', 'Lindenthal', 'Ehrenfeld',
+                'Nippes',  'Chorweiler', 'Porz',  'Kalk',  'Mülheim'
+            ],
             'links' => $topics->links,
         ]);
     }

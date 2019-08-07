@@ -94,8 +94,8 @@
         </style>
         <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}"/>
     </head>
-    <body class="ris-main">
-        <section class="ris-content" id="root">
+    <body class="ris-body">
+        <section class="ris-main" id="root">
                 <div class="gui-styleguide" id="styleguide">
                     <div class="gui-headline">TYPOGRAPHY</div>
 
@@ -392,11 +392,6 @@
                                     Themen filtern ...
                                 </div>
 
-                                <hr class="ris-filter__delimiter"
-                                     v-tooltip="'.ris-filter__delimiter'"
-                                     @click="copy($event)"
-                                />
-
                                 <div class="ris-filter__content">
 
                                     <button class="ris-label"
@@ -477,6 +472,11 @@
                         <span class="ris-i ris-i__info"></span>
                         <span class="ris-i ris-i__star-filled"></span>
                         <span class="ris-i ris-i__marker-with-dot"></span>
+                        <span class="ris-i ris-i__filter"></span>
+                        <span class="ris-i ris-i__chevron-double"></span>
+                        <span class="ris-i ris-i__download-with-box"></span>
+                        <span class="ris-i ris-i__eye"></span>
+                        <span class="ris-i ris-i__resize-text"></span>
 
                         <br/><br/>
 
@@ -488,6 +488,107 @@
                         <span class="ris-i ris-i__check ris-i_has-bg"></span>
                     </div>
 
+                    <div class="gui-headline">Action Items</div>
+
+                    <div class="ris-action-box">
+                        <div class="ris-filter"
+                             :class="{'ris-filter_active': activeFilter}"
+                        >
+                            <div class="ris-filter__subheader ris-filter__subheader_has-left-icon ris-subheader"
+                                 @click="collapseFilter"
+                            >
+                                Filtern
+                            </div>
+
+                            <div class="ris-filter__content-wrapper">
+                                <div class="ris-filter__content">
+
+                                    <div class="ris-filter-buttons">
+                                        <div class="ris-filter-buttons__title">
+                                            Nach Bezirken filtern
+                                        </div>
+
+                                        <button class="ris-button ris-button_secondary ris-button_has-shadow">
+                                            Innenstadt
+                                        </button>
+                                        <button class="ris-button ris-button_secondary ris-button_has-shadow">
+                                            Rodenkirchen
+                                        </button>
+                                        <button class="ris-button ris-button_secondary ris-button_has-shadow">
+                                            Lindenthal
+                                        </button>
+                                        <button class="ris-button ris-button_secondary ris-button_has-shadow">
+                                            Ehrenfeld
+                                        </button>
+                                        <button class="ris-button ris-button_secondary ris-button_has-shadow">
+                                            Nippes
+                                        </button>
+                                        <button class="ris-button ris-button_secondary ris-button_has-shadow">
+                                            Chorweiler
+                                        </button>
+                                        <button class="ris-button ris-button_secondary ris-button_has-shadow">
+                                            Porz
+                                        </button>
+                                        <button class="ris-button ris-button_secondary ris-button_has-shadow">
+                                            Kalk
+                                        </button>
+                                        <button class="ris-button ris-button_secondary ris-button_has-shadow">
+                                            Mülheim
+                                        </button>
+                                    </div>
+
+                                    <div class="ris-filter-buttons">
+                                        <div class="ris-filter-buttons__title">
+                                            Nach Postleitzahlen filtern
+                                        </div>
+
+                                        <button class="ris-button ris-button_secondary ris-button_has-shadow">
+                                            Innenstadt
+                                        </button>
+                                        <button class="ris-button ris-button_secondary ris-button_has-shadow">
+                                            Rodenkirchen
+                                        </button>
+                                        <button class="ris-button ris-button_secondary ris-button_has-shadow">
+                                            Lindenthal
+                                        </button>
+                                        <button class="ris-button ris-button_secondary ris-button_has-shadow">
+                                            Ehrenfeld
+                                        </button>
+                                        <button class="ris-button ris-button_secondary ris-button_has-shadow">
+                                            Nippes
+                                        </button>
+                                        <button class="ris-button ris-button_secondary ris-button_has-shadow">
+                                            Chorweiler
+                                        </button>
+                                        <button class="ris-button ris-button_secondary ris-button_has-shadow">
+                                            Porz
+                                        </button>
+                                        <button class="ris-button ris-button_secondary ris-button_has-shadow">
+                                            Kalk
+                                        </button>
+                                        <button class="ris-button ris-button_secondary ris-button_has-shadow">
+                                            Mülheim
+                                        </button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ris-select">
+                            <div class="ris-select__label">Sortierung</div>
+                            <select class="ris-select__select">
+                                <option class="ris-select__option" data-sort-type="progress">
+                                    Fortschritt
+                                </option>
+                                <option class="ris-select__option" data-sort-type="creation-date">
+                                    Einstellungsdatum
+                                </option>
+                            </select>
+                        </div>
+
+                    </div>
+
                     <div class="ris-filter ris-filter_has-indent gui-indent-b">
                         <div class="ris-filter__title ris-title"
                              v-tooltip="'.ris-filter__title .ris-title'"
@@ -495,13 +596,14 @@
 
                         <div class="gui-flex-wrapper gui-indent-b">
                             <div class="ris-select gui-indent-r">
-                                <select class="ris-select__select ris-gray2"
-                                        v-tooltip="'.ris-select__select .ris-gray2'"
-                                        name="menu" id="ris-menu"
-                                >
-                                    <option value="11-jan">11.Jan Long text</option>
-                                    <option value="25-jan">25.Jan</option>
-                                    <option value="30-jan">30.Jan</option>
+                                <div class="ris-select__label">Sortierung long label, see mobile</div>
+                                <select class="ris-select__select">
+                                    <option class="ris-select__option" value="progress" data-sort-type="progress">
+                                        Fortschritt long option, see mobile
+                                    </option>
+                                    <option class="ris-select__option" value="creation-date" data-sort-type="creation-date">
+                                        Einstellungsdatum
+                                    </option>
                                 </select>
                             </div>
                             <div class="ris-select">

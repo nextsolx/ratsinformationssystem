@@ -61,14 +61,14 @@
     & + .ris-input-label {
         &::before,
         &::after {
-            border-radius: 4px;
+            border-radius: $b-radius-primary;
         }
     }
 
     &:checked + .ris-input-label {
         &::after {
             background-color: $c-gray2;
-            border-radius: 4px;
+            border-radius: $b-radius-primary;
             transform: scale(.8);
         }
     }

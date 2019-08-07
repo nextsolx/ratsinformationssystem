@@ -1,0 +1,132 @@
+.ris-theme-detail {
+    .ris-section-wrapper {
+        &:last-child {
+            border-bottom: 0;
+        }
+
+        &_full {
+            padding-left: 0;
+            padding-right: 0;
+
+            @include breakpoint($bp-tablet-min) {
+                padding-top: $indent-s;
+            }
+
+            .ris-headline,
+            .ris-caption {
+                @include breakpoint($bp-mobile-max) {
+                    padding-left: $indent-m;
+                    padding-right: $indent-m;
+                }
+            }
+        }
+    }
+
+    .ris-img-wrapper {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 1024px;
+        width: 100%;
+
+        &:not(:last-child) {
+            margin-bottom: $indent-m;
+        }
+
+        .ris-link {
+            width: 100%;
+        }
+
+        .ris-img {
+            width: 100%;
+        }
+    }
+
+    .ris-title {
+        margin-bottom: $indent-s;
+    }
+
+    .ris-caption {
+        margin-top: $indent-s;
+
+        &:not(:last-child) {
+            margin-bottom: $indent-s;
+        }
+    }
+
+    .ris-map-detail {
+        @include breakpoint($bp-tablet-min) {
+            display: flex;
+            justify-content: center;
+        }
+
+        .ris-img {
+            border-radius: $b-radius-primary;
+        }
+    }
+
+    .ris-map-all-street-address {
+        display: flex;
+
+        @include breakpoint($bp-mobile-max) {
+            margin-bottom: $indent-m;
+        }
+
+        &::before {
+            color: $c-secondary;
+            content: 'a';
+            display: inline-block;
+            font-family: $ff-ris-font-icons;
+            font-size: $fs-xl;
+            margin-right: $indent-sm;
+        }
+    }
+
+    .ris-action-box {
+        align-items: center;
+        justify-content: space-between;
+
+        .ris-title {
+            margin-bottom: 0;
+        }
+    }
+
+    .ris-document {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: $indent-sm;
+        margin-top: $indent-sm;
+
+        &-many,
+        &-one {
+            .ris-icon-wrapper {
+                align-items: center;
+                display: flex;
+                height: 48px;
+                justify-content: center;
+                margin-right: $indent-m;
+                min-width: 48px;
+                width: 48px;
+            }
+        }
+
+        &::after {
+            color: $c-secondary;
+            content: 'f';
+            display: inline-block;
+            font-family: $ff-ris-font-icons;
+            font-size: $fs-xl;
+            margin-left: $indent-sm;
+        }
+
+        .ris-title {
+            font-size: $fs-l;
+            line-height: $lh-m;
+            margin-bottom: 0;
+        }
+
+        .ris-text-wrapper {
+            flex-grow: 1;
+        }
+    }
+}

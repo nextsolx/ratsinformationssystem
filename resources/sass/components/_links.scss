@@ -9,6 +9,10 @@
 
     &:hover {
         color: $c-red;
+
+        .ris-img {
+            opacity: .9;
+        }
     }
 
     &_underline {

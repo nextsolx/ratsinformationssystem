@@ -187,4 +187,34 @@
             content: 'b';
         }
     }
+
+    &__filter {
+        &::before {
+            content: 'd';
+        }
+    }
+
+    &__chevron-double {
+        &::before {
+            content: 'e';
+        }
+    }
+
+    &__download-with-box {
+        &::before {
+            content: 'f';
+        }
+    }
+
+    &__eye {
+        &::before {
+            content: 'g';
+        }
+    }
+
+    &__resize-text {
+        &::before {
+            content: 'h';
+        }
+    }
 }

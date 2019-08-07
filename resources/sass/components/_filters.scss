@@ -4,8 +4,17 @@
     border: $border;
     border-radius: $b-radius-primary;
     display: inline-block;
-    min-width: 288px;
     position: relative;
+
+    @include breakpoint($bp-mobile-max) {
+        margin-right: $indent-s;
+        min-width: 42vw;
+    }
+
+    @include breakpoint($bp-tablet-min) {
+        margin-right: $indent-sm;
+        min-width: 300px;
+    }
 
     &_has-indent {
         padding: $indent-m;
@@ -18,29 +27,44 @@
     }
 
     &__subheader {
-        padding: $indent-m;
+        color: $c-gray2;
+        display: flex;
+        padding: $indent-sm;
+
+        &:hover {
+            cursor: pointer;
+        }
 
         &_has-icon {
             &::after {
+                align-self: center;
                 color: $c-gray2;
                 content: 'L';
                 display: inline-block;
+                flex-grow: 1;
                 font-family: $ff-ris-font-icons;
                 font-size: $fs-s;
-                height: 16px;
-                line-height: $lh-s;
+                line-height: 1;
                 margin: 0;
                 padding: 0;
                 pointer-events: none;
-                position: absolute;
-                right: $indent-m;
                 speak: none;
-                top: $indent-m;
-                width: 16px;
+                text-align: right;
+                width: 100%;
             }
 
             #{$base}__subheader {
                 padding-right: $indent-l;
+            }
+        }
+
+        &_has-left-icon {
+            &::before {
+                content: 'd';
+                display: inline-block;
+                font-family: $ff-ris-font-icons;
+                font-size: $fs-xl;
+                margin-right: $indent-sm;
             }
         }
     }
@@ -58,30 +82,65 @@
     }
 
     &_active {
-        #{$base}__delimiter {
-            display: block;
+        #{$base}__content {
+            background: $c-white;
+            border-radius: $b-radius-primary;
+            bottom: auto;
+            box-shadow: 0 1px 6px 0 $c-box-shadow2;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: absolute;
+            right: auto;
+            top: calc(100% + 15px);
+            transform: translateX(-50%);
+            z-index: 101;
+
+            @include breakpoint($bp-mobile-max) {
+                left: 100%;
+                width: calc(100vw - #{$indent-m * 2});
+            }
+
+            @include breakpoint($bp-tablet-min) {
+                left: 50%;
+                width: 100%;
+            }
+        }
+
+        #{$base}__subheader_has-left-icon {
+            &::before {
+                transform: rotate(180deg);
+            }
         }
     }
 
-    &__delimiter {
-        border: 0;
-        border-bottom: $border;
-        display: none;
-        margin: 0;
-        padding: 0;
-        width: 100%;
-    }
-
     &__content {
-        margin: $indent-m;
+        display: none;
+
+        #{$base}-buttons__title {
+            font-weight: normal;
+            line-height: 32px;
+            margin-bottom: $indent-m;
+        }
     }
 
     .ris-label {
-        display: block;
-        margin-bottom: $indent-m;
+        display: inline-flex;
+        margin-bottom: $indent-s;
+
+        &:not(:last-child) {
+            margin-right: $indent-s;
+        }
     }
 
     &-buttons {
+        margin-left: $indent-m;
+        margin-right: $indent-m;
+
+        &:not(:last-child) {
+            border-bottom: 1px solid $c-gray7;
+        }
+
         &__title {
             color: $c-primary;
             font-family: $ff-helvetica;
@@ -89,6 +148,19 @@
             font-weight: bold;
             line-height: $lh-l;
             margin-bottom: $indent-s;
+        }
+
+        &__selected {
+            display: none;
+            margin-left: 0;
+            margin-right: 0;
+            padding-bottom: $indent-s;
+            padding-left: $indent-m;
+            padding-right: $indent-m;
+
+            &_active {
+                display: block;
+            }
         }
 
         .ris-button {

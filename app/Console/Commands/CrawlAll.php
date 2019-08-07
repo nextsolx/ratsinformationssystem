@@ -2,8 +2,6 @@
 
 namespace App\Console\Commands;
 
-use App\OParl\OParlApiManager;
-use App\Person;
 use Illuminate\Console\Command;
 
 class CrawlAll extends Command

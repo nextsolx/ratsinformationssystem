@@ -21,11 +21,18 @@ class Topic extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'location' => new Location($this->location),
-            'meetings' => $this->meetings(),
-            'process' => $this->consultations,
+            'text' => $this->text(),
+            'reference' => $this->reference,
+            'type' => $this->paper_type,
+            'result' => $this->result(),
+            'date' => $this->date,
+            'modified' => $this->modified,
             'finished' => $this->isFinished(),
             'newTopic' => $this->isNew(),
+            'location' => new Location($this->location),
+            'meetings' => Meeting::collection($this->meetings),
+            'process' => Consultation::collection($this->consultations),
+            'files' => File::collection($this->files),
         ];
     }
 }

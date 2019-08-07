@@ -6,7 +6,10 @@
             Gremien
         </h1>
 
-
-
+        <ul>
+        @foreach($committees as $committee)
+            <li>{{ $committee['title'] }}</li>
+        @endforeach
+        </ul>
     </main>
 @endsection

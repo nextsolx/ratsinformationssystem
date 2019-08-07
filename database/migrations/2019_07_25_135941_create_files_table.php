@@ -20,7 +20,7 @@ class CreateFilesTable extends Migration
             $table->string('mime_type')->nullable();
             $table->integer('size')->nullable();
 
-            $table->text('text')->nullable();
+            $table->longText('text')->nullable();
             $table->string('access_url')->nullable();
             $table->string('download_url')->nullable();
             $table->dateTime('date')->nullable();

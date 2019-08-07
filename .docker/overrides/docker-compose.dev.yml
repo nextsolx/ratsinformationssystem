@@ -38,7 +38,7 @@ services:
 
   mysql:
     image: mysql:5.7
-    command: "--performance-schema=OFF --innodb_flush_log_at_trx_commit=2 --innodb_log_buffer_size=4M --innodb_buffer_pool_size=128M"
+    command: --max_allowed_packet=32505856
     volumes:
       - mysql:/var/lib/mysql
       - ./.docker/overrides/mysql:/docker-entrypoint-initdb.d/
@@ -53,3 +53,4 @@ services:
 volumes:
   mysql:
     driver: local
+

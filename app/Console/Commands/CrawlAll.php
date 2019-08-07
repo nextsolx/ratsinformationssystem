@@ -75,7 +75,6 @@ class CrawlAll extends Command
         $this->call('crawl:files');
         $this->info('done.');
 
-
         $this->info('Crawling finished');
     }
 }

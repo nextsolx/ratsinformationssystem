@@ -9,7 +9,7 @@ use Illuminate\Support\Arr;
 class Paper extends Model
 {
     public static $basicScope = [
-        'location', 'files', 'agendaItems',
+        'locations', 'files', 'agendaItems',
         'consultations', 'consultations.meeting', 'consultations.agendum',
         'meetings', 'meetings.location', 'meetings.agenda', 'meetings.files', 'meetings.organizations', 'meetings.organizations.people',
     ];
@@ -32,10 +32,11 @@ class Paper extends Model
     {
         $paper = parent::initialize($data);
 
-        if ($location = Arr::get($data, 'location')) {
-            $location = Location::initialize($data['location']);
-            $paper->location()->associate($location);
-            $location->save();
+        if ($locations = Arr::get($data, 'location')) {
+            foreach ($locations as $location) {
+                $location = Location::initialize($location);
+                $paper->locations()->syncWithoutDetaching($location);
+            }
         }
 
         if ($file = Arr::get($data, 'mainFile')) {
@@ -57,9 +58,9 @@ class Paper extends Model
         return $paper;
     }
 
-    public function location()
+    public function locations()
     {
-        return $this->belongsTo(Location::class);
+        return $this->belongsToMany(Location::class);
     }
 
     public function consultations()
@@ -94,7 +95,7 @@ class Paper extends Model
 
     public function scopeNew(Builder $query)
     {
-        return $query->where('date', '>=' , Carbon::now()->subMonths(12));
+        return $query->whereNotNull('date')->where('date', '>=' , Carbon::now()->subMonths(12));
     }
 
     public function scopeUpdated(Builder $query)
@@ -104,9 +105,9 @@ class Paper extends Model
 
     public function scopeFinished(Builder $query)
     {
-        return $query->whereHas('consultations', function (Builder $query) {
-            return  $query->where('authoritative', '=', 1);
-        });
+        return $query->join('consultations', 'papers.id', '=', 'consultations.paper_id')
+            ->where('consultations.authoritative', '=', 1)
+            ->select('papers.*')->distinct();
     }
 
     public function result()

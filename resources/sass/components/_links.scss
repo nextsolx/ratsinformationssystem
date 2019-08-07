@@ -45,6 +45,7 @@
         align-items: center;
         background-color: $c-white2;
         border-radius: $b-radius-primary;
+        box-sizing: border-box;
         display: flex;
         font-weight: 500;
         justify-content: space-between;
@@ -52,7 +53,7 @@
 
         @include breakpoint($bp-tablet-min) {
             margin-left: auto;
-            width: 224px;
+            width: 250px;
         }
 
         &::after {

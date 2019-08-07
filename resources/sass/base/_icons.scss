@@ -217,4 +217,10 @@
             content: 'h';
         }
     }
+
+    &__calendar-arrow {
+        &::before {
+            content: 'i';
+        }
+    }
 }

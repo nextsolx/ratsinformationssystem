@@ -33,7 +33,7 @@
                 <section class="ris-section-wrapper">
                     <div class="ris-title">Ort</div>
 
-                    <div class="ris-img-wrapper">
+                    <div class="ris-map-img ris-img-wrapper">
                         <a href="{{ route('map') }}" class="ris-link"
                             title="Karte öffnen"
                         >
@@ -57,7 +57,9 @@
                         </a>
                     </div>
                 </section>
+            @endif
 
+            @if (isset($topic->process))
                 <section class="ris-section-wrapper">
                     <div class="ris-action-box">
                         <div class="ris-title">Politischer Prozess</div>
@@ -75,10 +77,41 @@
                         </div>
                     </div>
 
-                    <div class="ris-meeting-process">
+                    <div class="ris-process">
+                        @foreach ($topic->process as $process)
+                            <div class="ris-process__item">
+                                <div class="ris-process__created-at ris-body-2">{{ $process->created_at }}</div>
+                                <div class="ris-process__role ris-title">{{ $process->role }}</div>
+                                <div class="ris-process__description ris-body-2">Lorem description. Der Finanzausschuss hat über die Vorlage beraten und stimmt der Umsetzung uneingeschränkt zu. </div>
+                                <div class="ris-process__meeting-summary">
+                                    <div class="ris-process__meeting">
+                                        <div class="ris-caption">Sitzung BV1/0035/2018</div>
+                                        <div class="ris-caption">Tagesordnungspunkt (TOP) 3.11</div>
+                                    </div>
 
+                                    <a href="{{ route('map') }}" class="ris-link ris-link_has-icon"
+                                        title="Karte öffnen"
+                                    >
+                                        Karte öffnen
+                                    </a>
+                                </div>
+
+                                {{--@if (isset($process->meeting))
+                                    <div class="ris-process__meeting">
+                                        @if (isset($process->meeting->name))
+                                            <div class="ris-process__meeting-name">{{ $process->meeting->name }}</div>
+                                        @endif
+                                        @if (isset($process->meeting->meeting_state))
+                                            <div class="ris-process__meeting-state">{{ $process->meeting->meeting_state }}</div>
+                                        @endif
+                                        <div class="ris-process__meeting-created-at">{{ $process->meeting->created_at }}</div>
+                                    </div>
+                                @endif--}}
+                            </div>
+                        @endforeach
                     </div>
                 </section>
+            @endif
 
                 {{--hide if data not exist--}}
                 <section class="ris-section-wrapper">
@@ -126,8 +159,6 @@
                         <span class="ris-text-wrapper">Anlage 1 - Zustimmung 14 Kostenberechnung</span>
                     </div>
                 </section>
-
-            @endif
 
         </div>
 

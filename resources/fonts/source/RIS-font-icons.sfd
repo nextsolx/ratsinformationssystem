@@ -22,7 +22,7 @@ OS2Version: 0
 OS2_WeightWidthSlopeOnly: 0
 OS2_UseTypoMetrics: 1
 CreationTime: 1561623301
-ModificationTime: 1565095088
+ModificationTime: 1565184943
 OS2TypoAscent: 0
 OS2TypoAOffset: 1
 OS2TypoDescent: 0
@@ -36,6 +36,7 @@ HheadAscent: 0
 HheadAOffset: 1
 HheadDescent: 0
 HheadDOffset: 1
+OS2Vendor: 'PfEd'
 DEI: 91125
 Encoding: ISO8859-1
 UnicodeInterp: none
@@ -44,7 +45,7 @@ DisplaySize: -48
 AntiAlias: 1
 FitToEm: 0
 WinInfo: 44 22 7
-BeginChars: 256 34
+BeginChars: 256 35
 
 StartChar: A
 Encoding: 65 65 0
@@ -934,7 +935,7 @@ SplineSet
  833.333007812 281.111328125 l 1
  166.666992188 281.111328125 l 1
 EndSplineSet
-Validated: 524289
+Validated: 1
 EndChar
 
 StartChar: e
@@ -960,7 +961,7 @@ SplineSet
  101.666992188 133.333007812 l 1
  277.77734375 -42.77734375 l 1
 EndSplineSet
-Validated: 524289
+Validated: 1
 EndChar
 
 StartChar: f
@@ -993,7 +994,7 @@ SplineSet
  555.555664062 800 l 1
  555.555664062 262.77734375 l 1
 EndSplineSet
-Validated: 524289
+Validated: 1
 EndChar
 
 StartChar: g
@@ -1020,7 +1021,7 @@ SplineSet
  424.545898438 180 363.63671875 240.909179688 363.63671875 316.36328125 c 4
  363.63671875 391.818359375 424.545898438 452.727539062 500 452.727539062 c 4
 EndSplineSet
-Validated: 524289
+Validated: 1
 EndChar
 
 StartChar: h
@@ -1056,7 +1057,50 @@ SplineSet
  611.111328125 688.888671875 l 1
  611.111328125 800 l 1
 EndSplineSet
-Validated: 524289
+Validated: 1
+EndChar
+
+StartChar: i
+Encoding: 105 105 34
+Width: 1000
+VWidth: 0
+Flags: H
+LayerCount: 2
+Fore
+SplineSet
+900 700 m 6
+ 955 700 1000 655 1000 600 c 6
+ 1000 -100 l 6
+ 1000 -155 955 -200 900 -200 c 6
+ 200 -200 l 6
+ 144.5 -200 100 -155 100 -100 c 6
+ 100.5 600 l 6
+ 100.5 655 144.5 700 200 700 c 6
+ 250 700 l 5
+ 250 800 l 5
+ 350 800 l 5
+ 350 700 l 5
+ 750 700 l 5
+ 750 800 l 5
+ 850 800 l 5
+ 850 700 l 5
+ 900 700 l 6
+900 -100 m 5
+ 900 450 l 5
+ 200 450 l 5
+ 200 -100 l 5
+ 900 -100 l 5
+604.2890625 125 m 5
+ 300 125 l 5
+ 300 225 l 5
+ 604.2890625 225 l 5
+ 514.64453125 314.64453125 l 5
+ 585.35546875 385.35546875 l 5
+ 795.7109375 175 l 5
+ 585.35546875 -35.35546875 l 5
+ 514.64453125 35.35546875 l 5
+ 604.2890625 125 l 5
+EndSplineSet
 EndChar
 EndChars
 EndSplineFont

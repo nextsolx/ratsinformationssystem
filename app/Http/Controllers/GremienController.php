@@ -16,7 +16,7 @@ class GremienController extends Controller
                     'nextMeetingDate' => Carbon::createFromFormat('Y-m-d', '2019-09-23')
                 ],
                 [
-                    'title' => 'B Allgemeine Verwaltung und Rechtsfragen / Vergabe / Internationales',
+                    'title' => 'B Allgemeine Abrakadabra und Rechtsfragen / Vergabe / Internationales',
                     'memberCount' => 29,
                     'nextMeetingDate' => Carbon::createFromFormat('Y-m-d', '2019-09-23')
                 ],

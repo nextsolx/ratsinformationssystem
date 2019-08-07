@@ -1,0 +1,56 @@
+.ris-committee {
+    &__wrapper {
+        display: flex;
+        margin-bottom: 36px;
+        @media only screen and (max-width : 767px) {
+            margin-bottom: $indent-l;
+        }
+    }
+    &__search {
+        width: 472px;
+        .ris-search__input {
+            background-color: $c-white;
+            height: 48px;
+        }
+    }
+    &__select {
+        @media only screen and (max-width : 767px) {
+            margin-left: $indent-m;
+        }
+    }
+    &__select,
+    &__search {
+        @media only screen and (max-width : 767px) {
+            width: 50%;
+        }
+    }
+    &-main-list {
+        &__heading {
+            text-transform: uppercase;
+        }
+        &__item {
+            &:not(:last-child) {
+                margin-bottom: 52px;
+                @media only screen and (max-width : 767px) {
+                    margin-bottom: $indent-ml;
+                }
+            }
+        }
+    }
+    &-secondary-list {
+        &__item {
+            border-bottom: 1px solid $c-gray7;
+            &-wrapper {
+                @media only screen and (max-width : 767px) {
+                    display: none;
+                }
+            }
+        }
+    }
+    &__link {
+        display: block;
+        cursor: pointer;
+        padding: 16px 0;
+        text-decoration: none;
+    }
+}

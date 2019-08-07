@@ -72,7 +72,7 @@ $indent-s: 8px;
     color: $c-primary;
     font-family: $ff-helvetica;
     font-weight: bold;
-    margin: 0;
+    margin: $indent-m 0;
 
     @include breakpoint($bp-mobile-max) {
         font-size: $fs-xxxl;
@@ -138,3 +138,27 @@ $indent-s: 8px;
     font-size: $fs-l;
     line-height: $lh-l;
 }
+
+.ris-h2 {
+    margin: 0;
+    color: $c-primary;
+    font-family: $ff-helvetica;
+    font-size: $fs-xxl;
+    font-weight: bold;
+    line-height: $lh-xxl;
+}
+
+.ris-h3 {
+    margin: 0;
+    color: $c-primary;
+    font-family: $ff-helvetica;
+    font-size: $fs-l;
+    font-weight: bold;
+    line-height: $lh-l;
+}
+
+.ris-ul {
+    padding: 0;
+    list-style-type: none;
+}
+

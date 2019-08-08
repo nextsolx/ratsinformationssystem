@@ -6,9 +6,17 @@ use Carbon\Carbon;
 
 class GremienController extends Controller
 {
-    public function list()
+
+    public function view()
     {
         return view('committee')->with([
+            'title' => 'Ausschuss für Anregungen und Beschwerden (BA)',
+        ]);
+    }
+
+    public function list()
+    {
+        return view('committees')->with([
             'committees' => [
                 [
                     'title' => 'Ausschuss Allgemeine Verwaltung und Rechtsfragen / Vergabe / Internationales',

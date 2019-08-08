@@ -45,8 +45,24 @@ class Organization extends Model
         return $this->belongsToMany(Meeting::class);
     }
 
+    public function memberships()
+    {
+        return $this->hasMany(Membership::class);
+    }
+
     public function peopleCount()
     {
-        return $this->people()->count();
+
+        return $this->memberships()->count();
+    }
+
+    public function nextMeetingDate()
+    {
+        $nextMeeting = $this->nextMeeting();
+        return $nextMeeting ? $nextMeeting->start : null;
+    }
+    public function nextMeeting()
+    {
+        return $this->meetings()->orderBy('start', 'DESC')->first();
     }
 }

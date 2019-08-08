@@ -6,7 +6,7 @@
             Personen
         </h1>
 
-        {{ dd($title) }}
+        {{ dd($title, $info, $members, $meetings) }}
 
     </main>
 @endsection

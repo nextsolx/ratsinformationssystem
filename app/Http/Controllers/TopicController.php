@@ -17,13 +17,13 @@ class TopicController extends Controller
         $paperQuery = \App\Paper::with(Paper::$basicScope)->sort();
 
         if ($postalCode) {
-            $paperQuery->whereHas('location', function (Builder $query) use ($postalCode){
+            $paperQuery->whereHas('locations', function (Builder $query) use ($postalCode) {
                 $query->where('postal_code', '=', $postalCode);
             });
         }
 
         if ($district) {
-            $paperQuery->whereHas('location', function (Builder $query) use ($district){
+            $paperQuery->whereHas('locations', function (Builder $query) use ($district) {
                 $query->where('sub_locality', '=', $district);
             });
         }

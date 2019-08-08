@@ -138,3 +138,26 @@ $indent-s: 8px;
     font-size: $fs-l;
     line-height: $lh-l;
 }
+
+.ris-h2 {
+    color: $c-primary;
+    font-family: $ff-helvetica;
+    font-size: $fs-xxl;
+    font-weight: bold;
+    line-height: $lh-xxl;
+    margin: 0;
+}
+
+.ris-h3 {
+    color: $c-primary;
+    font-family: $ff-helvetica;
+    font-size: $fs-l;
+    font-weight: bold;
+    line-height: $lh-l;
+    margin: 0;
+}
+
+.ris-ul {
+    list-style-type: none;
+    padding: 0;
+}

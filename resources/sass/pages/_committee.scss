@@ -1,4 +1,7 @@
 .ris-committee {
+    .ris-section-wrapper {
+        border: 0;
+    }
     &__wrapper {
         display: flex;
         margin-bottom: 36px;
@@ -17,13 +20,23 @@
             background-color: transparent;
             border: 0;
             outline: none;
+            &.bolt {
+                font-weight: bold;
+            }
         }
+        @media only screen and (max-width : 767px) {
+            display: none;
+        }
+    }
+    &__subtitle {
+        margin-bottom: 10px;
     }
     &__search {
         width: 472px;
         .ris-search__input {
             background-color: $c-white;
-            height: 48px;
+            height: 50px;
+            box-shadow: none;
         }
     }
     &__select {
@@ -90,21 +103,24 @@
     &__link {
         display: block;
         cursor: pointer;
-        padding: 16px 0;
+        padding: 16px 36px 16px 0;
         text-decoration: none;
         position: relative;
         &::after {
             content: 'I';
             display: inline-block;
             font-family: $ff-ris-font-icons;
-            font-size: $fs-xl;
+            font-size: $fs-s;
             color: $c-gray8;
             position: absolute;
             right: 0;
             top: 50%;
             transform: translateY(-50%);
-            @media only screen and (max-width : 767px) {
-                display: none;
+        }
+        &:hover {
+            .ris-committee__subtitle,
+            &::after{
+                color: $c-red;
             }
         }
     }

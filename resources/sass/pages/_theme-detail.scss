@@ -181,18 +181,24 @@
             }
         }
 
-        &__role.ris-title {
-            font-size: $fs-l;
-            line-height: $lh-m;
-            margin-bottom: $indent-s;
+        &__role {
+            &.ris-title {
+                font-size: $fs-l;
+                line-height: $lh-m;
+                margin-bottom: $indent-s;
+            }
         }
 
-        &__created-at.ris-body-2 {
-            margin-bottom: $indent-s;
+        &__created-at {
+            &.ris-body-2 {
+                margin-bottom: $indent-s;
+            }
         }
 
-        &__description.ris-body-2 {
-            margin-bottom: $indent-m;
+        &__description {
+            &.ris-body-2 {
+                margin-bottom: $indent-m;
+            }
         }
 
         &__meeting {

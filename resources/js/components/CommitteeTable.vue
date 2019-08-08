@@ -1,13 +1,9 @@
 <script>
 import Vue from 'vue';
+import CommitteeItem from './CommitteeItem';
 
-const moment = require('moment');
-require('moment/locale/de');
 import checkView from 'vue-check-view';
 Vue.use(checkView);
-Vue.use(require('vue-moment'), {
-    moment
-});
 
 export default {
     name: 'SearchForm',
@@ -16,6 +12,9 @@ export default {
             type: Array,
             default: () => []
         }
+    },
+    components: {
+        CommitteeItem
     },
     data() {
         return {
@@ -71,15 +70,7 @@ export default {
                 document.querySelector(`#${e.target.element.id[0]}-search-button`).classList.remove('bolt');
             }
         }
-    },
-    filters: {
-        momentDate(date) {
-            return moment(date).date();
-        },
-        momentWeek(date) {
-            return moment(date).format('MMMM');
-        }
-    },
+    }
 };
 </script>
 
@@ -129,33 +120,20 @@ export default {
                 :key="item.char">
                 <h2 class="ris-committee-main-list__heading ris-h2">{{ item.char }}</h2>
                 <ul class="ris-ul ris-committee-secondary-list">
-                    <li v-for="(committe, committeIndex) in item.data"
+                    <CommitteeItem
                         class="ris-committee-secondary-list__item"
-                        :key="`${item.char}-${committeIndex}`">
-                        <a href="#" class="ris-committee__link">
-                            <h3 class="ris-h3 ris-committee__subtitle">{{ committe.title }}</h3>
-                            <span class="ris-committee-secondary-list__item-wrapper">
-                                <span class="ris-committee-secondary-list__counter">{{ committe.memberCount }}</span>
-                                <!--<time class="ris-committee-secondary-list__time">{{ committe.nextMeetingDate }}</time>-->
-                                <time class="ris-committee-secondary-list__time">{{ committe.nextMeetingDate | momentDate }}. {{ committe.nextMeetingDate | momentWeek }}</time>
-                            </span>
-                        </a>
-                    </li>
+                        v-for="(committee, committeeIndex) in item.data"
+                        :key="`${item.char}-${committeeIndex}`"
+                        :committee="committee"/>
                 </ul>
             </li>
         </transition-group>
         <transition-group tag="ul" name="fade" class="ris-committee-main-list ris-ul" v-if="filtered">
-            <li v-for="(item, index) in sortedCommittees"
+            <CommitteeItem
                 class="ris-committee-secondary-list__item"
-                :key="`${index}-filtered`">
-                <a href="#" class="ris-committee__link">
-                    <h3 class="ris-h3 ris-committee__subtitle">{{ item.title }}</h3>
-                    <span class="ris-committee-secondary-list__item-wrapper">
-                        <span class="ris-committee-secondary-list__counter">{{ item.memberCount }}</span>
-                        <time class="ris-committee-secondary-list__time">{{ item.nextMeetingDate | momentDate }}. {{ item.nextMeetingDate | momentWeek }}</time>
-                    </span>
-                </a>
-            </li>
+                v-for="(item, index) in sortedCommittees"
+                :key="`${index}-filtered`"
+                :committee="item"/>
         </transition-group>
     </div>
 </template>

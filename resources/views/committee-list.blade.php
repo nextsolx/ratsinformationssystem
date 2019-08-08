@@ -11,9 +11,9 @@
             <h1 class="ris-committee__headline ris-headline">
                 Gremien
             </h1>
-            <search-form
+            <committee-table
                 :committees="{{ json_encode($committees) }}"
-            ></search-form>
+            ></committee-table>
         </section>
     </main>
     @include('layouts.footer')

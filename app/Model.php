@@ -21,6 +21,10 @@ class Model extends \Illuminate\Database\Eloquent\Model
                 $value = Carbon::parse($value);
             }
 
+            if ($key == 'geojson') {
+                $value = json_encode($value);
+            }
+
             return [Str::snake($key) => $value];
         });
 

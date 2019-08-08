@@ -65,8 +65,8 @@
                                 >Kalender</a>
                             </li>
                             <li>
-                                <a class="ris-nav__link @if (url()->current() === route('committee')) ris-nav__link_active @endif"
-                                   href="{{ route('committee') }}"
+                                <a class="ris-nav__link @if (url()->current() === route('committee-list')) ris-nav__link_active @endif"
+                                   href="{{ route('committee-list') }}"
                                 >Gremien</a>
                             </li>
 

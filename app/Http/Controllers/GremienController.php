@@ -16,7 +16,7 @@ class GremienController extends Controller
 
     public function list()
     {
-        return view('committees')->with([
+        return view('committee-list')->with([
             'committees' => [
                 [
                     'title' => 'Ausschuss Allgemeine Verwaltung und Rechtsfragen / Vergabe / Internationales',

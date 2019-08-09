@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
+Route::get('/', 'MainPageController@welcome')->name('welcome');
 
 Route::get('/styleguide', function () {
     return view('styleguide');

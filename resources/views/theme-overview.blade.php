@@ -98,8 +98,8 @@
                                     Einstellungsdatum
                                 </option>
                             </select>
-                        <span class="ris-i ris-i_chevron-double"></span>
-                    </div>
+                            <span class="ris-i ris-i_chevron-double"></span>
+                        </div>
                     </div>
                 </section>
 

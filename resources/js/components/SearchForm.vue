@@ -5,9 +5,6 @@ const moment = require('moment');
 require('moment/locale/de');
 import checkView from 'vue-check-view';
 Vue.use(checkView);
-Vue.use(require('vue-moment'), {
-    moment
-});
 
 export default {
     name: 'SearchForm',
@@ -87,7 +84,9 @@ export default {
     <div>
         <div class="ris-committee__wrapper">
             <div class="ris-search ris-committee__search">
-                <button class="ris-search__button"/>
+                <button class="ris-search__button">
+                    <span class="ris-i ris-i_search"/>
+                </button>
                 <input type="search" class="ris-search__input" v-model="inputValue"
                     @input="filterList"
                     placeholder="Suche nach Themen, Vorlagen, Sitzungen..."
@@ -104,6 +103,7 @@ export default {
                         Chronologische Reihenfolge
                     </option>
                 </select>
+                <span class="ris-i ris-i_chevron-double"/>
             </div>
         </div>
         <nav v-if="!filtered" class="ris-committee-navigation">

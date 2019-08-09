@@ -478,6 +478,8 @@
                         <span class="ris-i ris-i__download-with-box"></span>
                         <span class="ris-i ris-i__eye"></span>
                         <span class="ris-i ris-i__resize-text"></span>
+                        <span class="ris-i ris-i__notice-box"></span>
+                        <span class="ris-i ris-i__doc"></span>
 
                         <br/><br/>
 

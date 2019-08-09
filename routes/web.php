@@ -11,22 +11,29 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
+Route::get('/', 'MainPageController@welcome')->name('welcome');
 
 Route::get('/styleguide', function () {
     return view('styleguide');
 });
 
 Route::get('/kalender', 'MeetingController@calendar')
-    ->name('calendar');
+    ->name('calendar-list');
 
-Route::get('/themen', function () {
-    return view('themes');
-})->name('themes');
+Route::get('/themen-overview', 'TopicController@themen')
+    ->name('theme-overview');
 
-Route::get('/thema/{paper}', 'TopicController@topic')->name('topic-detail');
+Route::get('/neue-themen', 'TopicController@newThemes')
+    ->name('new-themes');
+
+Route::get('/aktualisiert-themen', 'TopicController@progressThemes')
+    ->name('progress-themes');
+
+Route::get('/abgeschlossen-themen', 'TopicController@finishedThemes')
+    ->name('finished-themes');
+
+Route::get('/thema/{paper}', 'TopicController@topic')
+    ->name('theme-detail');
 
 Route::get('/karte', function () {
     return view('map');
@@ -57,3 +64,13 @@ Route::get('/api/meetings', 'MeetingController@all');
 Route::get('/api/meeting/{id}', 'MeetingController@index');
 Route::get('/api/topics', 'TopicController@all');
 Route::get('/api/topic/{paper}', 'TopicController@index');
+Route::get('/api/districts',function () {
+    return response(json_encode([
+        'data' => [
+            'districts' => [
+                'Innenstadt', 'Rodenkirchen', 'Lindenthal', 'Ehrenfeld',
+                'Nippes',  'Chorweiler', 'Porz',  'Kalk',  'Mülheim'
+            ]
+        ]
+    ]));
+});

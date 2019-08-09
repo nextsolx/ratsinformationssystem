@@ -1,0 +1,28 @@
+.ris-themes {
+    &__content {
+        .ris-headline,
+        .ris-top-box {
+            @include breakpoint($bp-mobile-max) {
+                padding: $indent-s $indent-m;
+            }
+
+            @include breakpoint($bp-tablet-min) {
+                padding: $indent-s $indent-ml;
+            }
+        }
+    }
+
+    .swiper-container {
+        @include breakpoint($bp-mobile-max) {
+            padding-right: $indent-m;
+        }
+    }
+
+    .ris-card-list {
+        border-bottom: 0;
+
+        &:not(:last-child) {
+            padding-bottom: 0;
+        }
+    }
+}

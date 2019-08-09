@@ -1,12 +1,14 @@
-// custom vendor styles
-@import 'leaflet-custom';
-@import 'v-tooltip';
-@import 'vue-transitions';
-@import 'v-calendar';
-@import 'i-view-notice-custom';
-
 // vendors from node_modules
 @import '~leaflet/dist/leaflet.css';
 @import '~leaflet-fullscreen/dist/leaflet.fullscreen.css';
 @import '~normalize.css';
 @import '~v-calendar/lib/v-calendar.min.css';
+@import '~swiper/dist/css/swiper.min.css';
+
+// custom vendor styles
+@import 'v-tooltip-custom';
+@import 'leaflet-custom';
+@import 'vue-transition-custom';
+@import 'v-calendar-custom';
+@import 'i-view-notice-custom';
+@import 'swiper-custom';

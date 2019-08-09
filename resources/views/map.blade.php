@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <main class="ris-content ris-map">
+    <main class="ris-main ris-map">
         <h1 class="ris-map__headline ris-headline">
             Map
         </h1>

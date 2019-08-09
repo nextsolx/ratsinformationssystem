@@ -2,28 +2,48 @@
     background: $c-white;
     border: 1px solid $c-gray3;
     border-radius: $b-radius-primary;
+    color: $c-gray2;
     display: inline-block;
     overflow: hidden;
     padding: 0;
     position: relative;
     vertical-align: middle;
 
-    &::before {
-        color: $c-gray2;
-        content: 'L';
-        display: inline-block;
-        font-family: $ff-ris-font-icons;
-        font-size: $fs-s;
-        height: 16px;
-        line-height: $lh-s;
-        margin: 0;
-        padding: 0;
+    @include breakpoint($bp-mobile-max) {
+        margin-left: $indent-s;
+        min-width: 42vw;
+    }
+
+    @include breakpoint($bp-tablet-min) {
+        margin-left: $indent-sm;
+        min-width: 240px;
+    }
+
+    .ris-i {
+        font-size: $fs-xl;
         pointer-events: none;
         position: absolute;
         right: $indent-m;
-        speak: none;
         top: calc(50% - #{$lh-s / 2});
-        width: 16px;
+    }
+
+    &__label {
+        box-sizing: border-box;
+        color: $c-gray2;
+        display: inline-block;
+        font-family: $ff-helvetica;
+        font-size: $fs-m;
+        left: 0;
+        line-height: $lh-l;
+        overflow: hidden;
+        padding-left: $indent-m;
+        padding-right: $indent-m * 3;
+        pointer-events: none;
+        position: absolute;
+        text-overflow: ellipsis;
+        top: 2px;
+        white-space: nowrap;
+        width: 100%;
     }
 
     &__select {
@@ -31,17 +51,19 @@
         background: transparent;
         background-image: none;
         border: 0;
+        color: $c-primary;
         cursor: pointer;
-        font-family: $ff-open-sans;
+        font-family: $ff-helvetica;
         font-size: $fs-l;
         font-weight: 600;
-        height: 54px;
+        height: 48px;
         line-height: $lh-l;
-        min-width: 174px;
-        padding: 0 $indent-m * 2 0 $indent-m;
-        text-align: center;
+        overflow: hidden;
+        padding: $indent-ml $indent-m * 3 0 $indent-m;
         text-indent: .01px;
-        text-overflow: unset;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 100%;
 
         &:focus {
             outline: none;
@@ -49,6 +71,17 @@
 
         &::-ms-expand {
             display: none;
+        }
+    }
+
+    &__option {
+        overflow: hidden;
+        padding: 0;
+        text-overflow: ellipsis;
+        width: 100px;
+
+        &:focus {
+            outline: none;
         }
     }
 }

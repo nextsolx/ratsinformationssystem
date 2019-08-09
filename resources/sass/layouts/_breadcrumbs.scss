@@ -1,0 +1,47 @@
+.ris-breadcrumbs {
+    display: inline-flex;
+    list-style: none;
+    padding: 0;
+
+    @include breakpoint($bp-mobile-max) {
+        margin: $indent-m;
+    }
+
+    @include breakpoint($bp-tablet-min) {
+        margin: $indent-m $indent-ml;
+    }
+
+    &__home-link {
+        .ris-i_house {
+            color: $c-secondary;
+            font-size: $fs-xll;
+            line-height: 1;
+        }
+
+        .ris-link__text {
+            display: none;
+        }
+    }
+
+    &__item {
+        align-items: center;
+        display: inline-flex;
+
+        .ris-i_chevron-right {
+            color: $c-gray7;
+            font-size: $fs-s;
+            padding-left: $indent-s;
+            padding-right: $indent-s;
+        }
+
+        &:last-child {
+            .ris-i_chevron-right {
+                display: none;
+            }
+        }
+    }
+
+    .ris-link {
+        color: $c-gray2;
+    }
+}

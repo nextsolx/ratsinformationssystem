@@ -1,5 +1,4 @@
 <script>
-import Swiper from 'swiper';
 import noticeMixin from '../mixins/NoticeMixin';
 
 const axios = require('axios');

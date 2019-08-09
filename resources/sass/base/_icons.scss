@@ -199,4 +199,28 @@
             content: 'e';
         }
     }
+
+    &_download-with-box {
+        &::before {
+            content: 'f';
+        }
+    }
+
+    &_eye {
+        &::before {
+            content: 'g';
+        }
+    }
+
+    &_resize-text {
+        &::before {
+            content: 'h';
+        }
+    }
+
+    &_calendar-arrow {
+        &::before {
+            content: 'i';
+        }
+    }
 }

@@ -15,6 +15,11 @@ export default {
             default: ''
         },
     },
+    filters: {
+        momentFullDate(data) {
+            return moment(data).format('dd.mm.yyyy');
+        }
+    }
 };
 </script>
 
@@ -43,19 +48,19 @@ export default {
 
                 <div class="ris-card-list__themes-completed"
                     v-if="themeListType === 'finished'"
-                >
+                        >
                     <span class="ris-i ris-i_check ris-i_has-bg"/>
                     Abgeschlossen
                 </div>
                 <div class="ris-progress-bar"
                     v-else
-                >
+                        >
                     <div class="ris-progress-bar__progress"
                         :style="{'width:': themeListType === 'new' ? '25%' : '75%'}"
-                    ></div>
+                            />
                 </div>
 
-                <div class="ris-caption ris-card-list__themes-date">27.10.2018</div>
+                <div class="ris-caption ris-card-list__themes-date">{{ '27.10.2018' | momentFullDate() }}</div>
             </div>
         </a>
     </div>

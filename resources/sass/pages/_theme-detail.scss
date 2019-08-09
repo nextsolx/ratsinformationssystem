@@ -144,11 +144,7 @@
             }
         }
 
-        &::after {
-            color: $c-secondary;
-            content: 'f';
-            display: inline-block;
-            font-family: $ff-ris-font-icons;
+        .ris-i_download-with-box {
             font-size: $fs-xl;
             margin-left: $indent-sm;
         }
@@ -181,14 +177,6 @@
 
                 @include breakpoint($bp-tablet-min) {
                     padding-bottom: $indent-xl;
-                }
-            }
-        }
-
-        &__detail {
-            .ris-link {
-                &::after {
-                    content: 'h';
                 }
             }
         }

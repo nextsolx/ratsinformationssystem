@@ -63,9 +63,9 @@
                 <section class="ris-section-wrapper">
                     <div class="ris-action-box">
                         <h2 class="ris-h2">Politischer Prozess</h2>
+
                         <div class="ris-select">
                             <div class="ris-select__label">Darstellung</div>
-
                             <select class="ris-select__select">
                                 <option class="ris-select__option" data-sort-type="newest-first">
                                     Das Neuste zuerst
@@ -74,6 +74,7 @@
                                     Chronologische Reihenfolge
                                 </option>
                             </select>
+                            <span class="ris-i ris-i_chevron-double"></span>
                         </div>
                     </div>
 
@@ -87,10 +88,11 @@
                                 <div class="ris-caption">Beschlussvorlage {{ $topic->reference }}</div>
 
                                 {{--@todo --- fix link--}}
-                                <a href="/meeting/" class="ris-link ris-link_has-icon"
+                                <a href="/meeting/" class="ris-link ris-link_button ris-link_right"
                                     title="Beschlussvorlage öffnen"
                                 >
                                     Beschlussvorlage öffnen
+                                    <span class="ris-i ris-i_resize-text"></span>
                                 </a>
                             </div>
                         </div>
@@ -121,10 +123,11 @@
                                             </div>
 
                                             {{--@todo --- fix link to meeting detail page--}}
-                                            <a href="/agendum/{{ $process->meeting->id }}" class="ris-link ris-link_has-icon"
+                                            <a href="/agendum/{{ $process->meeting->id }}" class="ris-link ris-link_button ris-link_right"
                                                 title="Zur Sitzung"
                                             >
                                                 Zur Sitzung
+                                                <span class="ris-i ris-i_chevron-right"></span>
                                             </a>
                                         </div>
                                     </div>
@@ -177,6 +180,7 @@
                                 <img src="/img/pdf.svg" class="ris-img" alt="{{ $file->name }}"/>
                             </div>
                             <span class="ris-text-wrapper">{{ $file->name }}</span>
+                            <span class="ris-i ris-i_download-with-box"></span>
                         </a>
                     @endforeach
                 @else

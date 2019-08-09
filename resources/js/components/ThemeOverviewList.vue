@@ -60,7 +60,7 @@ export default {
             v-if="themeListData.length > 3"
                 >
             Mehr anzeigen
-            <span class="ris-i ris-i_chevron-right"></span>
+            <span class="ris-i ris-i_chevron-right"/>
         </a>
 
         <div class="ris-body-1"

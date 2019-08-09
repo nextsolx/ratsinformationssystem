@@ -200,25 +200,25 @@
         }
     }
 
-    &__download-with-box {
+    &_download-with-box {
         &::before {
             content: 'f';
         }
     }
 
-    &__eye {
+    &_eye {
         &::before {
             content: 'g';
         }
     }
 
-    &__resize-text {
+    &_resize-text {
         &::before {
             content: 'h';
         }
     }
 
-    &__calendar-arrow {
+    &_calendar-arrow {
         &::before {
             content: 'i';
         }

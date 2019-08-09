@@ -8,12 +8,18 @@
                 <img class="ris-logo__mobile" src="/img/logo_mobile_stadt_koeln.png" alt="Stadt Koeln" content="noindex"/>
             </a>
             <div class="ris-slogan">Stadtpolitik</div>
-            <a class="ris-account" href="/account"></a>
+            {{-- @todo --- out of scope of this functionality --}}
+            {{--<a class="ris-account" href="/account">
+                <span class="ris-i ris-i_account-circle"></span>
+                <span class="ris-i ris-i_arrow-drop-down"></span>
+            </a>--}}
         </div>
 
         <div class="ris-header__bottom">
             <div class="ris-search" role="search">
-                <button class="ris-search__button"></button>
+                <button class="ris-search__button">
+                    <span class="ris-i ris-i_search"></span>
+                </button>
                 <input type="search" class="ris-search__input"
                        placeholder="Suche nach Themen, Vorlagen, Sitzungen..."
                 />
@@ -31,7 +37,7 @@
                         <div class="ris-nav__menu-header">
                             Menu
 
-                            <button class="ris-nav__cta ris-nav__cta_child ris-i ris-i__close"
+                            <button class="ris-nav__cta ris-nav__cta_child ris-i ris-i_close"
                                     @click="close"
                             >
                             </button>
@@ -60,8 +66,8 @@
                                 >Karte</a>
                             </li>
                             <li>
-                                <a class="ris-nav__link @if (url()->current() === route('calendar')) ris-nav__link_active @endif"
-                                   href="{{ route('calendar') }}"
+                                <a class="ris-nav__link @if (url()->current() === route('calendar-list')) ris-nav__link_active @endif"
+                                   href="{{ route('calendar-list') }}"
                                 >Kalender</a>
                             </li>
                             <li>

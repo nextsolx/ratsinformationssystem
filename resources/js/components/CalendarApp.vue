@@ -1,14 +1,11 @@
 <script>
 import Vue from 'vue';
 import VCalendar from 'v-calendar';
+import noticeMixin from '../mixins/NoticeMixin';
 
 const axios = require('axios');
 const moment = require('moment');
 require('moment/locale/de');
-
-Vue.use(require('vue-moment'), {
-    moment
-});
 
 Vue.use(VCalendar, {
     firstDayOfWeek: 2,  // Monday
@@ -22,8 +19,6 @@ Vue.use(VCalendar, {
         wrapper: {}
     }
 });
-
-import noticeMixin from '../mixins/NoticeMixin';
 
 
 
@@ -111,7 +106,7 @@ export default {
                             this.info(this.infoTitle, this.infoDescription);
                         }
 
-                        this.attrs = this.attrs.concat(...this.attrsToday);
+                        this.attrs = [...this.attrs, ...this.attrsToday];
                     })
                     .finally(() => {
                         this.loading = false;

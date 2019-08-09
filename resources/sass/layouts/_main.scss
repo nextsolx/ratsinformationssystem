@@ -3,6 +3,13 @@
     margin: 0 auto;
 }
 
+.ris-without-padding-mob {
+    @include breakpoint($bp-mobile-max) {
+        width: calc(100% + #{$indent-m * 2});
+        margin-left: -$indent-m;
+    }
+}
+
 .ris-content {
     $base-content: &;
     position: relative;

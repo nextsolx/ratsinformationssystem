@@ -2,6 +2,7 @@
 import Vue from 'vue';
 import CommitteeTableItem from './CommitteeTableItem';
 import CommitteeNavigation from './CommitteeNavigation';
+import Sorting from './Sorting';
 
 import checkView from 'vue-check-view';
 Vue.use(checkView);
@@ -16,7 +17,8 @@ export default {
     },
     components: {
         CommitteeTableItem,
-        CommitteeNavigation
+        CommitteeNavigation,
+        Sorting
     },
     data() {
         return {
@@ -45,8 +47,7 @@ export default {
                     }
                 });
         },
-        filterList (e) {
-            let value = e.target.value;
+        filterList (value) {
             if (value) {
                 this.sortedCommittees = this.committeesList
                     .filter(el => el.title.toLowerCase().includes(value.toLowerCase()));
@@ -66,7 +67,7 @@ export default {
                 document.querySelector(`#${e.target.element.id[0]}-search-button`).classList.remove('bolt');
             }
         }
-    }
+    },
 };
 </script>
 
@@ -75,27 +76,7 @@ export default {
         <div />
         <section class="ris-section-wrapper ris-content_six-eight-eight">
             <h1 class="ris-committee-list__headline ris-headline">Gremien</h1>
-            <div class="ris-committee-list__wrapper">
-                <div class="ris-search ris-committee-list__search">
-                    <button class="ris-search__button"/>
-                    <input type="search" class="ris-search__input" v-model="inputValue"
-                        @input="filterList"
-                        placeholder="Suche nach Themen, Vorlagen, Sitzungen..."
-                            >
-                </div>
-                <div class="ris-select ris-committee-list__select">
-                    <div class="ris-select__label">Darstellung</div>
-
-                    <select class="ris-select__select">
-                        <option class="ris-select__option" data-sort-type="newest-first">
-                            Das Neuste zuerst
-                        </option>
-                        <option class="ris-select__option" data-sort-type="oldest-first">
-                            Chronologische Reihenfolge
-                        </option>
-                    </select>
-                </div>
-            </div>
+            <Sorting :inputValue="inputValue" inputHiddenMob="true" @input="filterList" />
             <transition-group tag="ul" name="fade" class="ris-committee-list-main-list ris-ul" v-if="!filtered">
                 <li v-for="item in sortedCommittees"
                     class="ris-committee-list-main-list__item"

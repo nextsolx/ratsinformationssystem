@@ -23,13 +23,13 @@ export default {
         return {
             activeTab: 'aufgaben'
         };
-    }
+    },
 };
 </script>
 
 <template>
     <div>
-        <nav class="ris-committee-navigation">
+        <nav class="ris-committee-navigation ris-without-padding-mob">
             <ul class="ris-ul ris-committee-navigation__list">
                 <li class="ris-committee-navigation__item">
                     <button
@@ -54,6 +54,6 @@ export default {
                 </li>
             </ul>
         </nav>
-        <CommitteeInfo :information="info" />
+        <CommitteeInfo :information="info" v-if="activeTab === 'aufgaben'" />
     </div>
 </template>

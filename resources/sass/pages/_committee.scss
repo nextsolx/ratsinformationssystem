@@ -16,30 +16,110 @@
             border-color: transparent;
             border-bottom: 4px solid transparent;
             outline: none;
+            &:before {
+                padding-right: 5px;
+                display: inline-block;
+                font-family: $ff-ris-font-icons;
+                font-size: $fs-xl;
+            }
+            &--aufgaben {
+                &:before {
+                    content: 'j';
+                }
+            }
+            &--mitglieder {
+                &:before {
+                    content: 'X';
+                }
+            }
+            &--sitzungen {
+                &:before {
+                    content: 'b';
+                }
+            }
             &.active {
                 border-bottom-color: $c-red;
                 color: $c-red;
                 font-weight: bold;
             }
         }
-        @include breakpoint($bp-mobile-max) {
-            width: calc(100% + 32px);
-            margin-left: -16px;
-        }
     }
     &-info {
         &__text {
             display: inline-block;
-            margin: 40px 0;
+            margin: $indent-xl 0;
         }
         &__wrapper {
             display: flex;
             align-items: center;
+            @include breakpoint($bp-mobile-max) {
+                flex-wrap: wrap;
+            }
         }
         &__confirm {
             border-top: 1px solid $c-gray7;
             border-bottom: 1px solid $c-gray7;
-            padding: 10px 0 40px 0;
+            padding: $indent-sm 0 $indent-xl 0;
+            margin-bottom: $indent-sm;
+            @include breakpoint($bp-mobile-max) {
+                margin-bottom: $indent-ml;
+                padding: $indent-sm $indent-m $indent-xl $indent-m;
+                width: 100%;
+            }
+        }
+        &__heading {
+            display: inline-block;
+            margin-bottom: $indent-l;
+            @include breakpoint($bp-mobile-max) {
+                margin-bottom: 20px;
+            }
+        }
+        &__subheading {
+            position: relative;
+            padding: 0 0 0 60px;
+            &:before {
+                position: absolute;
+                left: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                content: 'k';
+                color: $c-gray2;
+                padding-right: 5px;
+                display: inline-block;
+                font-family: $ff-ris-font-icons;
+                font-size: 50px;
+                @include breakpoint($bp-mobile-max) {
+                    top: 0;
+                    transform: translateY(50%);
+                }
+            }
+        }
+        &-list {
+            &__item {
+                position: relative;
+                font-size: $fs-l;
+                font-weight: bold;
+                color: $c-gray;
+                padding: 16px 20px 16px 0;
+                @include breakpoint($bp-mobile-max) {
+                    border-top: 1px solid $c-gray7;
+                    border-bottom: 1px solid $c-gray7;
+                }
+            }
+            &__link {
+                position: absolute;
+                right: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                &:before {
+                    content: 'h';
+                    display: inline-block;
+                    font-family: $ff-ris-font-icons;
+                    font-size: $fs-xl;
+                    color: $c-gray;
+                }
+
+            }
         }
         &__button {
             background-color: $c-white2;
@@ -49,6 +129,10 @@
             width: 100%;
             height: 48px;
             padding: 0;
+            @include breakpoint($bp-mobile-max) {
+                margin-top: $indent-m;
+                max-width: 100%;
+            }
         }
     }
 }

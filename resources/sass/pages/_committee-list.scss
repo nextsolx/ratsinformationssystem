@@ -8,14 +8,6 @@
         margin: 0 auto;
     }
 
-    &__wrapper {
-        display: flex;
-        margin-bottom: 36px;
-        @include breakpoint($bp-mobile-max) {
-            margin-bottom: $indent-l;
-        }
-    }
-
     &-navigation {
 
         &__list {
@@ -43,22 +35,6 @@
 
     &__subtitle {
         margin-bottom: 10px;
-    }
-
-    &__search {
-        width: 472px;
-
-        .ris-search__input {
-            background-color: $c-white;
-            height: 50px;
-            box-shadow: none;
-        }
-    }
-
-    &__select {
-        @include breakpoint($bp-mobile-max) {
-            margin-left: $indent-m;
-        }
     }
 
     &__select,

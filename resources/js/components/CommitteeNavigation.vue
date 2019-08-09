@@ -14,7 +14,7 @@ export default {
                 el.scrollIntoView({ behavior: 'smooth'});
             }
         },
-    }
+    },
 };
 </script>
 

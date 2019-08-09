@@ -1,0 +1,34 @@
+.ris-sorting {
+    &__wrapper {
+        display: flex;
+        margin-bottom: 36px;
+        @include breakpoint($bp-mobile-max) {
+            margin-bottom: $indent-l;
+        }
+    }
+
+    &__search {
+        width: 472px;
+
+        .ris-search__input {
+            background-color: $c-white;
+            height: 50px;
+            box-shadow: none;
+        }
+        &.hiddenMob {
+            @include breakpoint($bp-mobile-max) {
+                display: none;
+            }
+        }
+    }
+    &__select {
+        @include breakpoint($bp-mobile-max) {
+            margin-left: $indent-m;
+        }
+        &.hiddenMob {
+            @include breakpoint($bp-mobile-max) {
+                display: none;
+            }
+        }
+    }
+}

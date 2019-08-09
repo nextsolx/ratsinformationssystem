@@ -15,7 +15,7 @@ export default {
         momentWeek(date) {
             return moment(date).format('MMMM');
         }
-    }
+    },
 };
 </script>
 

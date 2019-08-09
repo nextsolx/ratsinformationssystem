@@ -5,16 +5,16 @@
         @endif
     @endif
 
-    <a class="ris-card-list__item" title="Ausschuss für Anregungen und Beschwerden"
+    <a class="ris-card-list__item" title="{{ $calendar->title }}"
         href="/calendar"
     >
         <div class="ris-body-1">
-            Ausschuss für Anregungen und Beschwerden
+            {{ $calendar->title }}
         </div>
         <div class="ris-caption">BA/0028/2018</div>
         <div class="ris-body-2 ris-card-list__calendar-date">
             <span class="ris-i ris-i_calendar-empty"></span>
-            Morgen, 17:00 Uhr
+            {{ \Illuminate\Support\Carbon::parse($calendar->dateFrom)->format('l jS, h:i a') }}
         </div>
         <div class="ris-body-2 ris-card-list__calendar-place">
             <span class="ris-i ris-i_marker-with-dot"></span>

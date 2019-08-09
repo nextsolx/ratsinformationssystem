@@ -4,12 +4,12 @@
 if (isset($meetings) and is_array($meetings)) {
     foreach($meetings as $meet) {
         $meeting_list_sorted[
-            Carbon\Carbon::parse($meet->dateFrom)->weekOfYear . "_" .
-            Carbon\Carbon::parse($meet->dateFrom)->year
+            \Illuminate\Support\Carbon::parse($meet->dateFrom)->weekOfYear . "_" .
+            \Illuminate\Support\Carbon::parse($meet->dateFrom)->year
             ][
-            Carbon\Carbon::parse($meet->dateFrom)->year . "_" .
-            Carbon\Carbon::parse($meet->dateFrom)->month . "_" .
-            Carbon\Carbon::parse($meet->dateFrom)->day
+            \Illuminate\Support\Carbon::parse($meet->dateFrom)->year . "_" .
+            \Illuminate\Support\Carbon::parse($meet->dateFrom)->month . "_" .
+            \Illuminate\Support\Carbon::parse($meet->dateFrom)->day
             ][] = $meet;
     }
 }
@@ -34,14 +34,14 @@ if (isset($meetings) and is_array($meetings)) {
                                 <section class="ris-calendar__card-day">
 
                                     <div class="ris-calendar__card-day-left"
-                                        id="{{ '_' . Carbon\Carbon::parse($meeting_list_per_day[0]->dateFrom)->day
-                                        . '_' . Carbon\Carbon::parse($meeting_list_per_day[0]->dateFrom)->month
-                                        . '_' . Carbon\Carbon::parse($meeting_list_per_day[0]->dateFrom)->year }}"
+                                        id="{{ '_' . \Illuminate\Support\Carbon::parse($meeting_list_per_day[0]->dateFrom)->day
+                                        . '_' . \Illuminate\Support\Carbon::parse($meeting_list_per_day[0]->dateFrom)->month
+                                        . '_' . \Illuminate\Support\Carbon::parse($meeting_list_per_day[0]->dateFrom)->year }}"
                                         >
-                                        {{ Carbon\Carbon::parse($meeting_list_per_day[0]->dateFrom)->day }}
+                                        {{ \Illuminate\Support\Carbon::parse($meeting_list_per_day[0]->dateFrom)->day }}
                                         <br/>
                                         <span class="ris-calendar__card-day-of-week">
-                                            {{ Carbon\Carbon::parse($meeting_list_per_day[0]->dateFrom)->locale('de')->minDayName }}
+                                            {{ \Illuminate\Support\Carbon::parse($meeting_list_per_day[0]->dateFrom)->locale('de')->minDayName }}
                                         </span>
                                     </div>
 
@@ -53,9 +53,9 @@ if (isset($meetings) and is_array($meetings)) {
                                                 </h2>
                                                 <div class="ris-subheader">
                                                     Lorem data UAK/
-                                                    <span>00{{ Carbon\Carbon::parse($meeting->dateFrom)->weekOfYear }}</span>
+                                                    <span>00{{ \Illuminate\Support\Carbon::parse($meeting->dateFrom)->weekOfYear }}</span>
                                                     /
-                                                    <span>{{ Carbon\Carbon::parse($meeting->dateFrom)->year }}</span>
+                                                    <span>{{ \Illuminate\Support\Carbon::parse($meeting->dateFrom)->year }}</span>
                                                 </div>
                                                 <div class="ris-session-count">
                                                     <div class="ris-session-count__agenda">{{ $meeting->agendaCount }}</div>
@@ -71,7 +71,7 @@ if (isset($meetings) and is_array($meetings)) {
                         @endforeach
 
                         <div class="ris-subheader ris-calendar__card-list-ris-subheader">Kalenderwoche
-                            {{ Carbon\Carbon::parse(head($meeting_list_per_week)[0]->dateFrom)->weekOfYear }}
+                            {{ \Illuminate\Support\Carbon::parse(head($meeting_list_per_week)[0]->dateFrom)->weekOfYear }}
                         </div>
 
                     @endforeach

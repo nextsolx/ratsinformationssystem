@@ -68,9 +68,9 @@
                 <section class="ris-card-list ris-card-list__themes">
                     <div class="ris-title">Aktuelle Themen</div>
 
-                    @if (isset($topics_new))
+                    @if (isset($topics))
                         @include('components.theme',
-                            ['theme_list' => $topics_new, 'theme_type' => 'new', 'limit' => 3]
+                            ['theme_list' => $topics, 'theme_type' => 'new', 'limit' => 3]
                         )
 
                         <a href="{{ route('theme-overview') }}" class="ris-link ris-link_button ris-link_right"
@@ -88,9 +88,9 @@
                 <section class="ris-card-list ris-card-list__calendar">
                     <div class="ris-title">Aktuelle Sitzungen</div>
 
-                    @if (isset($calendar_list))
+                    @if (isset($meetings))
                         @include('components.calendar',
-                                ['calendar_list' => $calendar_list, 'limit' => 3]
+                                ['calendar_list' => $meetings, 'limit' => 3]
                             )
 
                         <a href="{{ route('calendar-list') }}" class="ris-link ris-link_button ris-link_right"
@@ -123,14 +123,14 @@
                     Wer macht in Köln Politik? Lernen Sie die Personen kennen, welche sich ehrenamtlich in den Gremien für Köln engagieren.
                 </div>
 
-                @if (isset($people_list))
+                @if (isset($people))
                     <div class="ris-body-2">
                         Neu in der Kölner Stadtpolitik
                     </div>
 
                     <div class="ris-welcome__people-list">
                         @include('components.people',
-                                ['people_list' => $people_list, 'limit' => 3]
+                                ['people_list' => $people, 'limit' => 5]
                             )
                     </div>
                     <a href="{{ route('people') }}" class="ris-link ris-link_button ris-link_right"

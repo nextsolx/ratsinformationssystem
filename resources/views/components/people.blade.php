@@ -6,16 +6,18 @@
     @endif
 
     <a class="ris-welcome__people" href="{{ route('people') }}/1"
-        title="Constanze Aengenvoort"
+        title="{{ $people->name }}"
     >
         <img src="/img/person-1.jpg" class="ris-welcome__people-img"
-            alt="Constanze Aengenvoort"
+            alt="{{ $people->name }}"
         />
         <div>
             <div class="ris-body-1">
-                Constanze Aengenvoort
+                {{ $people->name }}
             </div>
-            <div class="ris-caption">CDU</div>
+            @if ($people->status)
+                <div class="ris-caption">{{ $people->status }}</div>
+            @endif
         </div>
     </a>
 @endforeach

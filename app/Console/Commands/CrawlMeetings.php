@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Meeting;
 use App\OParl\OParlApiManager;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 
 class CrawlMeetings extends Command
 {
@@ -42,7 +43,11 @@ class CrawlMeetings extends Command
         $page = 1;
 
         do {
-            list($meetings, $pages) = OParlApiManager::meetings($page);
+            try {
+                list($meetings, $pages) = OParlApiManager::meetings($page);
+            } catch (\Exception $exception) {
+                Log::error($exception->getMessage());
+            }
 
             collect($meetings)->each(function ($meeting) {
                 Meeting::initialize($meeting);

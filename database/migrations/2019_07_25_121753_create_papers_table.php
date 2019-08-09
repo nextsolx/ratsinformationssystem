@@ -19,7 +19,7 @@ class CreatePapersTable extends Migration
             $table->string('reference')->nullable();
             $table->string('paper_type')->nullable();
             $table->dateTime('date')->nullable();
-            $table->string('location_id')->nullable();
+            $table->dateTime('modified')->nullable();
 
             $table->timestamps();
         });

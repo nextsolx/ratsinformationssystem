@@ -86,12 +86,7 @@
             display: none;
         }
 
-        &::before {
-            content: 'T';
-        }
-
-        &::after {
-            content: 'C';
+        .ris-i_arrow-drop-down {
             font-size: $fs-s;
             margin-left: $indent-s;
         }

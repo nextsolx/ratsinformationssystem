@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class Agendum extends JsonResource
+class Consultation extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -20,15 +20,10 @@ class Agendum extends JsonResource
 
         return [
             'id' => $this->id,
-            'number' => $this->number,
-            'name' => $this->name,
-            'resolutionText' => $this->resolutionText,
-            'result' => $this->result,
-            'order' => $this->order,
-            'public' => $this->public,
-            'start' => $this->start,
-            'end' => $this->end,
-            'hasTopic' => (boolean) $this->papers()->count(),
+            'finished' => (boolean) $this->authoritative,
+            'role' => $this->role,
+            'meeting' => new Meeting($this->meeting),
+            'agendum' => new Agendum($this->agendum),
         ];
     }
 }

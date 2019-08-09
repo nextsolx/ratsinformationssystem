@@ -27,7 +27,7 @@ class MeetingWithData extends JsonResource
             'peopleCount' => $this->peopleCount(),
             'fileCount' => $this->fileCount(),
             'location' => new Location($this->location),
-            'agenda' => Agendum::collection($this->agenda),
+            'agenda' => new AgendumCollection($this->agenda),
             'organizations' => Organization::collection($this->organizations),
             'people' => Person::collection($this->people()),
             'files' => File::collection($this->files),

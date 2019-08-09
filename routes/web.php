@@ -11,16 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
+Route::get('/', 'MainPageController@welcome')->name('welcome');
 
 Route::get('/styleguide', function () {
     return view('styleguide');
 });
 
 Route::get('/kalender', 'MeetingController@calendar')
-    ->name('calendar');
+    ->name('calendar-list');
 
 Route::get('/themen-overview', 'TopicController@themen')
     ->name('theme-overview');
@@ -64,3 +62,13 @@ Route::get('/api/meetings', 'MeetingController@all');
 Route::get('/api/meeting/{id}', 'MeetingController@index');
 Route::get('/api/topics', 'TopicController@all');
 Route::get('/api/topic/{paper}', 'TopicController@index');
+Route::get('/api/districts',function () {
+    return response(json_encode([
+        'data' => [
+            'districts' => [
+                'Innenstadt', 'Rodenkirchen', 'Lindenthal', 'Ehrenfeld',
+                'Nippes',  'Chorweiler', 'Porz',  'Kalk',  'Mülheim'
+            ]
+        ]
+    ]));
+});

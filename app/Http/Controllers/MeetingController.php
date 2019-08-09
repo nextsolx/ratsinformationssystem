@@ -24,7 +24,7 @@ class MeetingController extends Controller
 
         $meetings = Meeting::collection($meetingsQuery->paginate(100))->toResponse(request())->getData();
 
-        return view('calendar')->with([
+        return view('calendar-list')->with([
             'meetings' => $meetings->data,
             'links' => $meetings->links,
         ]);

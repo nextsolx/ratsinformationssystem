@@ -3,7 +3,9 @@
         <a href="{{ route('welcome') }}" title="Stadt Koeln"
            class="ris-breadcrumbs__home-link ris-link"
         >
+            <span class="ris-i ris-i_house"></span>
             <span class="ris-link__text">Stadt Koeln</span>
+            <span class="ris-i ris-i_chevron-right"></span>
         </a>
     </li>
 
@@ -17,6 +19,7 @@
                class="ris-link"
             >
                 <span>Themen</span>
+                <span class="ris-i ris-i_chevron-right"></span>
             </a>
         </li>
     @endif
@@ -27,6 +30,7 @@
                class="ris-link"
             >
                 <span>Neue Themen</span>
+                <span class="ris-i ris-i_chevron-right"></span>
             </a>
         </li>
     @elseif (url()->current() === route('progress-themes'))
@@ -35,6 +39,7 @@
                 class="ris-link"
             >
                 <span>Kürzlich aktualisiert</span>
+                <span class="ris-i ris-i_chevron-right"></span>
             </a>
         </li>
     @elseif (url()->current() === route('finished-themes'))
@@ -43,6 +48,7 @@
                 class="ris-link"
             >
                 <span>Kürzlich abgeschlossen</span>
+                <span class="ris-i ris-i_chevron-right"></span>
             </a>
         </li>
     @endif

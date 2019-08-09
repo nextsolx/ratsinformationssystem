@@ -1,12 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
-    <main class="ris-main ris-people">
-        <h1 class="ris-people__headline ris-headline">
-            Personen
-        </h1>
-
-        {{ dd($title, $info, $members, $meetings) }}
-
+    @include('layouts.breadcrumbs')
+    <main class="ris-main ris-committee ris-content_six-eight-eight">
+        <section class="ris-section-wrapper">
+            <h1 class="ris-committee__headline ris-headline">
+                {{ $title }}
+            </h1>
+            <committee
+                class="ris-committee__"
+                :info="{{ json_encode($info) }}"
+                :members="{{ json_encode($members) }}"
+                :meetings="{{ json_encode($meetings) }}"
+            />
+        </section>
     </main>
+    @include('layouts.footer')
 @endsection

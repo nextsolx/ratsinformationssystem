@@ -1,0 +1,59 @@
+<script>
+import CommitteeInfo from "./CommitteeInfo";
+export default {
+    name: 'Committee',
+    props: {
+        info: {
+            type: String,
+            default: () => 'info'
+        },
+        members: {
+            type: Array,
+            default: () => []
+        },
+        meetings: {
+            type: Array,
+            default: () => []
+        }
+    },
+    components: {
+        CommitteeInfo
+    },
+    data() {
+        return {
+            activeTab: 'aufgaben'
+        };
+    }
+};
+</script>
+
+<template>
+    <div>
+        <nav class="ris-committee-navigation">
+            <ul class="ris-ul ris-committee-navigation__list">
+                <li class="ris-committee-navigation__item">
+                    <button
+                        @click="activeTab = 'aufgaben'"
+                        :class="['ris-committee-navigation__button ris-committee-navigation__button--aufgaben', activeTab === 'aufgaben' ? 'active' : '' ]">
+                        Aufgaben
+                    </button>
+                </li>
+                <li class="ris-committee-navigation__item">
+                    <button
+                        @click="activeTab = 'mitglieder'"
+                        :class="['ris-committee-navigation__button ris-committee-navigation__button--mitglieder', activeTab === 'mitglieder' ? 'active' : '' ]">
+                        Mitglieder ({{ members.length }})
+                    </button>
+                </li>
+                <li class="ris-committee-navigation__item">
+                    <button
+                        @click="activeTab = 'sitzungen'"
+                        :class="['ris-committee-navigation__button ris-committee-navigation__button--sitzungen', activeTab === 'sitzungen' ? 'active' : '' ]">
+                        Sitzungen
+                    </button>
+                </li>
+            </ul>
+        </nav>
+        <CommitteeInfo :information="info" />
+    </div>
+</template>

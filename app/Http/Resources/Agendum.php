@@ -28,6 +28,7 @@ class Agendum extends JsonResource
             'public' => $this->public,
             'start' => $this->start,
             'end' => $this->end,
+            'hasTopic' => (boolean) $this->papers()->count(),
         ];
     }
 }

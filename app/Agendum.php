@@ -36,11 +36,36 @@ class Agendum extends Model
             $agendum->save();
         }
 
+        if ($file = Arr::get($data, 'resolutionFile')) {
+            $agendum->files()->attach(
+                self::extractIdFromUrl($file['id']),
+                ['type' => 'resolutionFile']
+            );
+        }
+        if ($files = Arr::get($data, 'auxiliaryFile')) {
+            foreach ($files as $file) {
+                $agendum->files()->attach(
+                    self::extractIdFromUrl($file['id']),
+                    ['type' => 'auxiliaryFile']
+                );
+            }
+        }
+
         return $agendum;
     }
 
     public function meeting()
     {
         return $this->belongsTo(Meeting::class);
+    }
+
+    public function files()
+    {
+        return $this->belongsToMany(File::class);
+    }
+
+    public function papers()
+    {
+        return $this->belongsToMany(Paper::class, 'consultations')->withPivot('authoritative');
     }
 }

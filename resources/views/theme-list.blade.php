@@ -26,9 +26,10 @@
                     <div class="ris-filter"
                             :class="{'ris-filter_active': activeFilter}"
                     >
-                        <div class="ris-filter__subheader ris-filter__subheader_has-left-icon ris-subheader"
+                        <div class="ris-filter__subheader ris-subheader"
                                 @click="collapseFilter"
                         >
+                            <span class="ris-i ris-i_filter"></span>
                             Filtern
                         </div>
 
@@ -43,6 +44,7 @@
                                         @click="removeSelectedDistrict(currentDistrictName)"
                                 >
                                     @{{ currentDistrictName }}
+                                    <span class="ris-i ris-i_close"></span>
                                 </button>
                             </div>
 
@@ -104,12 +106,13 @@
                                 Einstellungsdatum
                             </option>
                         </select>
+                        <span class="ris-i ris-i_chevron-double"></span>
                     </div>
                 </div>
 
                 @if (!empty($theme_list))
                     <section class="ris-card-list ris-card-list__themes"
-                        ref="defaultThemeList"
+                        v-show="themeListData.length === 0 && firstLoading"
                     >
 
                         @include('components.theme',

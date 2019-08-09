@@ -12,15 +12,9 @@
     }
 
     &__home-link {
-        line-height: 1;
-
-        &::before {
+        .ris-i_house {
             color: $c-secondary;
-            content: 'c';
-            display: inline-flex;
-            font-family: $ff-ris-font-icons;
-            font-size: $fs-xl;
-            height: 20px;
+            font-size: $fs-xll;
             line-height: 1;
         }
 
@@ -33,20 +27,21 @@
         align-items: center;
         display: inline-flex;
 
-        &:not(:last-child) {
-            &::after {
-                color: $c-gray3;
-                content: 'I';
-                font-family: $ff-ris-font-icons;
-                font-size: $fs-s;
-                line-height: 1;
-                padding-left: $indent-s;
-                padding-right: $indent-s;
+        .ris-i_chevron-right {
+            color: $c-gray7;
+            font-size: $fs-s;
+            padding-left: $indent-s;
+            padding-right: $indent-s;
+        }
+
+        &:last-child {
+            .ris-i_chevron-right {
+                display: none;
             }
         }
     }
 
     .ris-link {
-        color: $c-primary;
+        color: $c-gray2;
     }
 }

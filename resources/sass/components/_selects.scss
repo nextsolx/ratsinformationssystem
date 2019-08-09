@@ -2,6 +2,7 @@
     background: $c-white;
     border: 1px solid $c-gray3;
     border-radius: $b-radius-primary;
+    color: $c-gray2;
     display: inline-block;
     overflow: hidden;
     padding: 0;
@@ -18,22 +19,12 @@
         min-width: 240px;
     }
 
-    &::before {
-        color: $c-secondary;
-        content: 'e';
-        display: inline-block;
-        font-family: $ff-ris-font-icons;
+    .ris-i {
         font-size: $fs-xl;
-        height: 16px;
-        line-height: $lh-s;
-        margin: 0;
-        padding: 0;
         pointer-events: none;
         position: absolute;
         right: $indent-m;
-        speak: none;
         top: calc(50% - #{$lh-s / 2});
-        width: 10px;
     }
 
     &__label {

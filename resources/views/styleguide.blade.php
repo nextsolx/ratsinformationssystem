@@ -378,18 +378,22 @@
                                 <button class="ris-label gui-indent-b"
                                         v-tooltip="'.ris-label'"
                                         @click="copy($event)"
-                                >Tag label</button>
+                                >
+                                    Tag label
+                                    <span class="ris-i ris-i_close"></span>
+                                </button>
                             </div>
 
                             <div class="ris-filter ris-filter_active gui-indent-b"
                                  v-tooltip="'.ris-filter .ris-filter_active'"
                                  @click="copy($event)"
                             >
-                                <div class="ris-filter__subheader ris-filter__subheader_has-icon ris-subheader"
-                                     v-tooltip="'.ris-filter__subheader .ris-filter__subheader_has-icon .ris-subheader'"
+                                <div class="ris-filter__subheader ris-subheader"
+                                     v-tooltip="'.ris-filter__subheader .ris-subheader'"
                                      @click="copy($event)"
                                 >
                                     Themen filtern ...
+                                    <span class="ris-i ris-i_expand-more"></span>
                                 </div>
 
                                 <div class="ris-filter__content">
@@ -397,7 +401,10 @@
                                     <button class="ris-label"
                                             v-tooltip="'.ris-label'"
                                             @click="copy($event)"
-                                    >Tag label</button>
+                                    >
+                                        Tag label
+                                        <span class="ris-i ris-i_close"></span>
+                                    </button>
 
                                     <a href="#" class="ris-link"
                                        v-tooltip="'.ris-link'"
@@ -444,45 +451,46 @@
                     <div class="gui-headline">ICON SYSTEM</div>
 
                     <div class="gui-icons gui-indent-b">
-                        <span class="ris-i ris-i__apps"></span>
-                        <span class="ris-i ris-i__back"></span>
-                        <span class="ris-i ris-i__arrow-drop-down"></span>
-                        <span class="ris-i ris-i__arrow-drop-up"></span>
-                        <span class="ris-i ris-i__arrow-forward"></span>
-                        <span class="ris-i ris-i__check"></span>
-                        <span class="ris-i ris-i__chevron-left"></span>
-                        <span class="ris-i ris-i__chevron-right"></span>
-                        <span class="ris-i ris-i__close"></span>
-                        <span class="ris-i ris-i__expand-less"></span>
-                        <span class="ris-i ris-i__expand-more"></span>
-                        <span class="ris-i ris-i__fullscreen"></span>
-                        <span class="ris-i ris-i__fullscreen-exit"></span>
-                        <span class="ris-i ris-i__menu"></span>
-                        <span class="ris-i ris-i__more"></span>
-                        <span class="ris-i ris-i__refresh"></span>
-                        <span class="ris-i ris-i__add"></span>
-                        <span class="ris-i ris-i__favorite"></span>
-                        <span class="ris-i ris-i__search"></span>
-                        <span class="ris-i ris-i__account-circle"></span>
-                        <span class="ris-i ris-i__calendar"></span>
-                        <span class="ris-i ris-i__calendar-empty"></span>
-                        <span class="ris-i ris-i__download"></span>
-                        <span class="ris-i ris-i__list"></span>
-                        <span class="ris-i ris-i__people"></span>
-                        <span class="ris-i ris-i__info"></span>
-                        <span class="ris-i ris-i__star-filled"></span>
-                        <span class="ris-i ris-i__marker-with-dot"></span>
-                        <span class="ris-i ris-i__filter"></span>
-                        <span class="ris-i ris-i__chevron-double"></span>
+                        <span class="ris-i ris-i_apps"></span>
+                        <span class="ris-i ris-i_back"></span>
+                        <span class="ris-i ris-i_arrow-drop-down"></span>
+                        <span class="ris-i ris-i_arrow-drop-up"></span>
+                        <span class="ris-i ris-i_arrow-forward"></span>
+                        <span class="ris-i ris-i_check"></span>
+                        <span class="ris-i ris-i_chevron-left"></span>
+                        <span class="ris-i ris-i_chevron-right"></span>
+                        <span class="ris-i ris-i_close"></span>
+                        <span class="ris-i ris-i_expand-less"></span>
+                        <span class="ris-i ris-i_expand-more"></span>
+                        <span class="ris-i ris-i_fullscreen"></span>
+                        <span class="ris-i ris-i_fullscreen-exit"></span>
+                        <span class="ris-i ris-i_menu"></span>
+                        <span class="ris-i ris-i_more"></span>
+                        <span class="ris-i ris-i_refresh"></span>
+                        <span class="ris-i ris-i_add"></span>
+                        <span class="ris-i ris-i_favorite"></span>
+                        <span class="ris-i ris-i_search"></span>
+                        <span class="ris-i ris-i_account-circle"></span>
+                        <span class="ris-i ris-i_calendar"></span>
+                        <span class="ris-i ris-i_calendar-empty"></span>
+                        <span class="ris-i ris-i_download"></span>
+                        <span class="ris-i ris-i_list"></span>
+                        <span class="ris-i ris-i_people"></span>
+                        <span class="ris-i ris-i_info"></span>
+                        <span class="ris-i ris-i_star-filled"></span>
+                        <span class="ris-i ris-i_marker-with-dot"></span>
+                        <span class="ris-i ris-i_filter"></span>
+                        <span class="ris-i ris-i_chevron-double"></span>
+                        <span class="ris-i ris-i_house"></span>
 
                         <br/><br/>
 
-                        <span class="ris-i ris-i__apps ris-i_has-bg"></span>
-                        <span class="ris-i ris-i__back ris-i_has-bg"></span>
-                        <span class="ris-i ris-i__arrow-drop-down ris-i_has-bg"></span>
-                        <span class="ris-i ris-i__arrow-drop-up ris-i_has-bg"></span>
-                        <span class="ris-i ris-i__arrow-forward ris-i_has-bg"></span>
-                        <span class="ris-i ris-i__check ris-i_has-bg"></span>
+                        <span class="ris-i ris-i_apps ris-i_has-bg"></span>
+                        <span class="ris-i ris-i_back ris-i_has-bg"></span>
+                        <span class="ris-i ris-i_arrow-drop-down ris-i_has-bg"></span>
+                        <span class="ris-i ris-i_arrow-drop-up ris-i_has-bg"></span>
+                        <span class="ris-i ris-i_arrow-forward ris-i_has-bg"></span>
+                        <span class="ris-i ris-i_check ris-i_has-bg"></span>
                     </div>
 
                     <div class="gui-headline">Action Items</div>
@@ -491,9 +499,10 @@
                         <div class="ris-filter"
                              :class="{'ris-filter_active': activeFilter}"
                         >
-                            <div class="ris-filter__subheader ris-filter__subheader_has-left-icon ris-subheader"
+                            <div class="ris-filter__subheader ris-subheader"
                                  @click="collapseFilter"
                             >
+                                <span class="ris-i ris-i_filter"></span>
                                 Filtern
                             </div>
 
@@ -582,6 +591,7 @@
                                     Einstellungsdatum
                                 </option>
                             </select>
+                            <span class="ris-i ris-i_chevron-double"></span>
                         </div>
 
                     </div>
@@ -602,6 +612,7 @@
                                         Einstellungsdatum
                                     </option>
                                 </select>
+                                <span class="ris-i ris-i_chevron-double"></span>
                             </div>
                             <div class="ris-select">
                                 <select class="ris-select__select ris-gray2"
@@ -612,6 +623,7 @@
                                     <option value="25-jan">25.Jan</option>
                                     <option value="30-jan">30.Jan</option>
                                 </select>
+                                <span class="ris-i ris-i_chevron-double"></span>
                             </div>
                         </div>
 

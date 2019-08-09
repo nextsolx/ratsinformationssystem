@@ -1,16 +1,10 @@
 .ris-i {
-    align-items: center;
     box-sizing: content-box;
-    color: $c-gray2;
-    display: inline-flex;
+    display: inline-block;
     font-family: $ff-ris-font-icons;
-    height: 16px;
-    justify-content: center;
-    line-height: 1;
     margin: 0;
     padding: 0;
     speak: none;
-    width: 16px;
 
     &_has-bg {
         background-color: $c-gray4;
@@ -20,181 +14,187 @@
         padding: 7px;
     }
 
-    &__add {
+    &_add {
         &::before {
-            content: 'J';
+            content: 'A';
         }
     }
 
-    &__apps {
+    &_apps {
         &::before {
             content: 'B';
         }
     }
 
-    &__arrow-drop-down {
+    &_arrow-drop-down {
         &::before {
             content: 'C';
         }
     }
 
-    &__arrow-drop-up {
+    &_arrow-drop-up {
         &::before {
             content: 'D';
         }
     }
 
-    &__arrow-forward {
+    &_arrow-forward {
         &::before {
             content: 'E';
         }
     }
 
-    &__back {
+    &_back {
         &::before {
             content: 'F';
         }
     }
 
-    &__check {
+    &_check {
         &::before {
             content: 'G';
         }
     }
 
-    &__chevron-left {
+    &_chevron-left {
         &::before {
             content: 'H';
         }
     }
 
-    &__chevron-right {
+    &_chevron-right {
         &::before {
             content: 'I';
         }
     }
 
-    &__close {
+    &_close {
         &::before {
             content: 'J';
         }
     }
 
-    &__expand-less {
+    &_expand-less {
         &::before {
             content: 'K';
         }
     }
 
-    &__expand-more {
+    &_expand-more {
         &::before {
             content: 'L';
         }
     }
 
-    &__favorite {
+    &_favorite {
         &::before {
             content: 'M';
         }
     }
 
-    &__fullscreen-exit {
+    &_fullscreen-exit {
         &::before {
             content: 'N';
         }
     }
 
-    &__fullscreen {
+    &_fullscreen {
         &::before {
             content: 'O';
         }
     }
 
-    &__menu {
+    &_menu {
         &::before {
             content: 'P';
         }
     }
 
-    &__more {
+    &_more {
         &::before {
             content: 'Q';
         }
     }
 
-    &__refresh {
+    &_refresh {
         &::before {
             content: 'R';
         }
     }
 
-    &__search {
+    &_search {
         &::before {
             content: 'S';
         }
     }
 
-    &__account-circle {
+    &_account-circle {
         &::before {
             content: 'T';
         }
     }
 
-    &__calendar {
+    &_calendar {
         &::before {
             content: 'U';
         }
     }
 
-    &__download {
+    &_download {
         &::before {
             content: 'V';
         }
     }
 
-    &__list {
+    &_list {
         &::before {
             content: 'W';
         }
     }
 
-    &__people {
+    &_people {
         &::before {
             content: 'X';
         }
     }
 
-    &__info {
+    &_info {
         &::before {
             content: 'Y';
         }
     }
 
-    &__star-filled {
+    &_star-filled {
         &::before {
             content: 'Z';
         }
     }
 
-    &__marker-with-dot {
+    &_marker-with-dot {
         &::before {
             content: 'a';
         }
     }
 
-    &__calendar-empty {
+    &_calendar-empty {
         &::before {
             content: 'b';
         }
     }
 
-    &__filter {
+    &_house {
+        &::before {
+            content: 'c';
+        }
+    }
+
+    &_filter {
         &::before {
             content: 'd';
         }
     }
 
-    &__chevron-double {
+    &_chevron-double {
         &::before {
             content: 'e';
         }

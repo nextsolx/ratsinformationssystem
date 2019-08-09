@@ -20,7 +20,7 @@ Route::get('/styleguide', function () {
 });
 
 Route::get('/kalender', 'MeetingController@calendar')
-    ->name('calendar');
+    ->name('calendar-list');
 
 Route::get('/themen-overview', 'TopicController@themen')
     ->name('theme-overview');

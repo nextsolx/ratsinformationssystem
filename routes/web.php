@@ -11,16 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
+Route::get('/', 'MainPageController@welcome')->name('welcome');
 
 Route::get('/styleguide', function () {
     return view('styleguide');
 });
 
 Route::get('/kalender', 'MeetingController@calendar')
-    ->name('calendar');
+    ->name('calendar-list');
 
 Route::get('/themen-overview', 'TopicController@themen')
     ->name('theme-overview');

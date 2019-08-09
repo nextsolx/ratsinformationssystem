@@ -19,9 +19,10 @@
                         <div class="ris-filter"
                             :class="{'ris-filter_active': activeFilter}"
                         >
-                            <div class="ris-filter__subheader ris-filter__subheader_has-left-icon ris-subheader"
+                            <div class="ris-filter__subheader ris-subheader"
                                 @click="collapseFilter"
                             >
+                            <span class="ris-i ris-i_filter"></span>
                                 Filtern
                             </div>
 
@@ -30,17 +31,17 @@
                                         :class="selectedDistrictList.length > 0
                                         ? 'ris-filter-buttons__selected_active'
                                         : ''"
-                                >
+                                v-show="selectedDistrictList.length > 0">
                                     <button class="ris-label ris-label_has-border"
                                             v-for="currentDistrictName in selectedDistrictList"
                                             @click="removeSelectedDistrict(currentDistrictName)"
                                     >
-                                        @{{ currentDistrictName }}
+                                        @{{ currentDistrictName }}<span class="ris-i ris-i_close"></span>
                                     </button>
                                 </div>
 
                                 <div class="ris-filter-buttons"
-                                    ref="defaultDistrictListBlock"
+                                    v-show="firstLoading"
                                 >
                                     <div class="ris-filter-buttons__title">
                                         Nach Bezirken filtern
@@ -97,7 +98,8 @@
                                     Einstellungsdatum
                                 </option>
                             </select>
-                        </div>
+                        <span class="ris-i ris-i_chevron-double"></span>
+                    </div>
                     </div>
                 </section>
 
@@ -116,7 +118,7 @@
                                         href="/thema/{{ $topic->id }}"
                                     >
                                         <div class="ris-top-card-list__item-top">
-                                            <img src="./img/thumbnail-bridge-big-tile.png" class="ris-top-card-list__item-img"
+                                            <img src="/img/thumbnail-bridge-big-tile.png" class="ris-top-card-list__item-img"
                                                  alt="{{ $topic->name }}"/>
                                             <div class="ris-body-1">
                                                 {{ $topic->name }}
@@ -148,7 +150,7 @@
 
 
                 <section class="ris-section-wrapper ris-card-list ris-card-list__themes"
-                    ref="defaultThemeListNewBlock"
+                    v-show="themeListNew.length === 0 && firstLoading"
                 >
                     <div class="ris-title">Neue Themen</div>
 
@@ -157,10 +159,11 @@
                             ['theme_list' => $topics_new, 'theme_type' => 'new', 'limit' => 3]
                         )
 
-                        <a href="{{ route('new-themes') }}" class="ris-link ris-link_has-icon"
+                        <a href="{{ route('new-themes') }}" class="ris-link ris-link_button ris-link_right"
                             title="Mehr anzeigen"
                         >
                             Mehr anzeigen
+                            <span class="ris-i ris-i_chevron-right"></span>
                         </a>
                     @else
                         <div class="ris-body-1">There are no topics</div>
@@ -170,7 +173,6 @@
 
                 <theme-overview-list
                         :theme-list-data="themeListNew"
-                        :theme-list-data-count="themeListNewCount"
                         :theme-list-type="themeListNew ? 'new' : null"
                         :theme-first-loading="firstLoading"
                         :theme-type-link="'{{ route('new-themes') }}'"
@@ -180,7 +182,7 @@
 
 
                 <section class="ris-section-wrapper ris-card-list ris-card-list__themes"
-                    ref="defaultThemeListProgressBlock"
+                    v-show="themeListProgress.length === 0 && firstLoading"
                 >
                     <div class="ris-title">Kürzlich aktualisiert</div>
 
@@ -189,10 +191,11 @@
                                 ['theme_list' => $topics_progress, 'theme_type' => 'progress', 'limit' => 3]
                             )
 
-                        <a href="{{ route('progress-themes') }}" class="ris-link ris-link_has-icon"
+                        <a href="{{ route('progress-themes') }}" class="ris-link ris-link_button ris-link_right"
                             title="Mehr anzeigen"
                         >
                             Mehr anzeigen
+                            <span class="ris-i ris-i_chevron-right"></span>
                         </a>
                     @else
                         <div class="ris-body-1">There are no topics</div>
@@ -202,7 +205,6 @@
 
                 <theme-overview-list
                         :theme-list-data="themeListProgress"
-                        :theme-list-data-count="themeListProgressCount"
                         :theme-list-type="themeListProgress ? 'progress' : null"
                         :theme-first-loading="firstLoading"
                         :theme-type-link="'{{ route('progress-themes') }}'"
@@ -212,7 +214,7 @@
 
 
                 <section class="ris-section-wrapper ris-card-list ris-card-list__themes"
-                    ref="defaultThemeListFinishedBlock"
+                    v-show="themeListFinished.length === 0 && firstLoading"
                 >
                     <div class="ris-title">Kürzlich abgeschlossen</div>
 
@@ -221,10 +223,11 @@
                                 ['theme_list' => $topics_finished, 'theme_type' => 'finished', 'limit' => 3]
                             )
 
-                        <a href="{{ route('finished-themes') }}" class="ris-link ris-link_has-icon"
+                        <a href="{{ route('finished-themes') }}" class="ris-link ris-link_button ris-link_right"
                                 title="Mehr anzeigen"
                         >
                             Mehr anzeigen
+                            <span class="ris-i ris-i_chevron-right"></span>
                         </a>
                     @else
                         <div class="ris-body-1">There are no topics</div>
@@ -234,7 +237,6 @@
 
                 <theme-overview-list
                         :theme-list-data="themeListFinished"
-                        :theme-list-data-count="themeListFinishedCount"
                         :theme-list-type="themeListFinished ? 'finished' : null"
                         :theme-first-loading="firstLoading"
                         :theme-type-link="'{{ route('finished-themes') }}'"

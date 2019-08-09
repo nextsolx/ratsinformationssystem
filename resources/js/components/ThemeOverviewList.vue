@@ -11,10 +11,6 @@ export default {
             type: Array,
             default: () => ([])
         },
-        themeListDataCount: {
-            type: Number,
-            default: 0
-        },
         themeListType: {
             type: String,
             default: ''
@@ -59,11 +55,12 @@ export default {
             :theme-list-type="themeListType"
                 />
 
-        <a :href="themeTypeLink" class="ris-link ris-link_has-icon"
+        <a :href="themeTypeLink" class="ris-link ris-link_button ris-link_right"
             title="Mehr anzeigen"
-            v-if="themeListDataCount > 3"
+            v-if="themeListData.length > 3"
                 >
             Mehr anzeigen
+            <span class="ris-i ris-i_chevron-right"></span>
         </a>
 
         <div class="ris-body-1"

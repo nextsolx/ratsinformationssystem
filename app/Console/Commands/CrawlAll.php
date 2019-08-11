@@ -2,8 +2,6 @@
 
 namespace App\Console\Commands;
 
-use App\OParl\OParlApiManager;
-use App\Person;
 use Illuminate\Console\Command;
 
 class CrawlAll extends Command
@@ -76,7 +74,6 @@ class CrawlAll extends Command
 
         $this->call('crawl:files');
         $this->info('done.');
-
 
         $this->info('Crawling finished');
     }

@@ -96,6 +96,7 @@ class Meeting extends Model
         return $this->people()->count();
     }
 
+
     public function agenda()
     {
         return $this->hasMany(Agendum::class);

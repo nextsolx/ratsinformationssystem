@@ -14,9 +14,6 @@ export default {
         themeListNew: [],
         themeListProgress: [],
         themeListFinished: [],
-        themeListNewCount: 0,
-        themeListProgressCount: 0,
-        themeListFinishedCount: 0,
         themeFirstBlock: '.ris-card-list__themes',
         postcodeList: [],
         selectedDistrictList: [],
@@ -35,95 +32,73 @@ export default {
             this.activeFilter = !this.activeFilter;
         },
         getTopicByDistrict(e) {
-            if (!this.loading) {
-                this.loading = true;
-                this.postcodeList = [];
-
-                this.themeListNew = [];
-                this.themeListProgress = [];
-                this.themeListFinished = [];
-                this.themeListNewCount = 0;
-                this.themeListProgressCount = 0;
-                this.themeListFinishedCount = 0;
-
-                // collapse filter block when the district is selected
-                this.collapseFilter();
-
-                const currentSelectedDistrict = e.currentTarget.innerText.trim();
-                this.selectedDistrictList.push(currentSelectedDistrict);
-
-                this.removeDistrictFromList(currentSelectedDistrict);
-
-                this.selectedDistrictList.forEach(currentDistrictName => {
-
-                    axios
-                        .get(`/api/topics?district=${currentDistrictName}`)
-                        .then(res => {
-                            if (res.data.data.length === 0) {
-                                this.info(currentDistrictName, this.districtInfoDescription);
-                            } else {
-                                res.data.data.forEach((topic) => {
-                                    if (topic.newTopic) {
-                                        this.themeListNewCount++;
-
-                                        if (this.themeListNew.length < 3) {
-                                            this.themeListNew.push(topic);
-                                        }
-                                    } else if (topic.finished) {
-                                        this.themeListFinishedCount++;
-
-                                        if (this.themeListFinished.length < 3) {
-                                            this.themeListFinished.push(topic);
-                                        }
-                                    } else {
-                                        this.themeListProgressCount++;
-
-                                        if (this.themeListProgress.length < 3) {
-                                            this.themeListProgress.push(topic);
-                                        }
-                                    }
-
-                                    // for filter block
-                                    if (topic.location.postalCode) {
-                                        if (!this.postcodeList.includes(topic.location.postalCode)) {
-                                            this.postcodeList.push(topic.location.postalCode);
-                                        }
-                                    }
-                                });
-                            }
-                        })
-                        .finally(() => {
-                            this.loading = false;
-
-                            if (this.firstLoading) {
-                                this.hideDefaultBlocks();
-                                this.firstLoading = false;
-                            }
-                        });
-                });
-
-                this.scrollTo(this.themeFirstBlock);
+            if (this.loading) {
+                return;
             }
+
+            this.loading = true;
+            this.postcodeList = [];
+
+            this.themeListNew = [];
+            this.themeListProgress = [];
+            this.themeListFinished = [];
+
+            // collapse filter block when the district is selected
+            this.collapseFilter();
+
+            const currentSelectedDistrict = e.currentTarget.innerText.trim();
+            this.selectedDistrictList.push(currentSelectedDistrict);
+
+            this.removeDistrictFromList(currentSelectedDistrict);
+
+            this.selectedDistrictList.forEach(currentDistrictName => {
+
+                axios
+                    .get(`/api/topics?district=${currentDistrictName}`)
+                    .then(res => {
+                        if (res.data.data.length === 0) {
+                            this.info(currentDistrictName, this.districtInfoDescription);
+                        } else {
+                            res.data.data.forEach((topic) => {
+                                if (topic.newTopic) {
+                                    if (this.themeListNew.length < 10) {
+                                        this.themeListNew.push(topic);
+                                    }
+                                } else if (topic.finished) {
+                                    if (this.themeListFinished.length < 10) {
+                                        this.themeListFinished.push(topic);
+                                    }
+                                } else {
+                                    if (this.themeListProgress.length < 10) {
+                                        this.themeListProgress.push(topic);
+                                    }
+                                }
+
+                                // for filter block
+                                if (topic.location.postalCode) {
+                                    if (!this.postcodeList.includes(topic.location.postalCode)) {
+                                        this.postcodeList.push(topic.location.postalCode);
+                                    }
+                                }
+                            });
+                        }
+                    })
+                    .finally(() => {
+                        this.loading = false;
+
+                        if (this.firstLoading) {
+                            this.firstLoading = false;
+                        }
+                    });
+            });
+
+            this.scrollTo(this.themeFirstBlock);
         },
         scrollTo(selector) {
             const el = document.querySelector(selector);
             if (el) {
                 el.scrollIntoView({ behavior: 'smooth'});
             }
-        },
-        hideDefaultBlocks() {
-            const defaultBlocks = [
-                this.$refs.defaultThemeListNewBlock,
-                this.$refs.defaultThemeListProgressBlock,
-                this.$refs.defaultThemeListFinishedBlock,
-                this.$refs.defaultDistrictListBlock
-            ];
-
-            defaultBlocks.forEach(theme => {
-                if (theme) {
-                    theme.style.display = 'none';
-                }
-            });
         },
         removeDistrictFromList(district) {
             if (this.districtList.includes(district)) {

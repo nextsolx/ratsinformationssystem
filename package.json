@@ -33,12 +33,12 @@
         "iview": "^3.4.2",
         "leaflet": "^1.5.1",
         "leaflet-fullscreen": "^1.0.2",
+        "moment": "^2.24.0",
         "sass-lint": "^1.13.1",
         "swiper": "^4.5.0",
         "v-calendar": "^0.9.7",
         "vue-check-view": "^0.3.0",
         "vue-content-loader": "^0.2.2",
-        "vue-moment": "^4.0.0",
         "vue2-leaflet": "^2.1.1"
     },
     "browserslist": [

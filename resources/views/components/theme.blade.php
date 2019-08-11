@@ -9,7 +9,7 @@
             href="/thema/{{ $theme->id }}"
     >
         <div class="ris-card-list__themes-top">
-            <img src="./img/thumbnail-map-tile.png" class="ris-card-list__themes-img"
+            <img src="/img/thumbnail-map-tile.png" class="ris-card-list__themes-img"
                     alt="{{ $theme->name }}"/>
             <div class="ris-body-1">
                 {{ $theme->name }}
@@ -33,7 +33,7 @@
                 </div>
             @elseif ($theme_type === 'finished')
                 <div class="ris-card-list__themes-completed">
-                    <span class="ris-i ris-i__check ris-i_has-bg"></span>
+                    <span class="ris-i ris-i_check ris-i_has-bg"></span>
                     Abgeschlossen
                 </div>
             @endif

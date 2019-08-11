@@ -43,24 +43,6 @@
                 max-height: $lh-l * 2;
             }
         }
-
-        &_has-bookmark {
-            &::after {
-                color: $c-secondary;
-                content: 'Z';
-                font-family: $ff-ris-font-icons;
-                height: 16px;
-                padding: $indent-m;
-                position: absolute;
-                right: 0;
-                top: 0;
-                width: 16px;
-            }
-
-            .ris-link {
-                padding-right: $indent-m;
-            }
-        }
     }
 
     .ris-title {
@@ -171,18 +153,14 @@
 
     &__calendar {
         &-date {
-            &::before {
-                content: 'b';
-                font-family: $ff-ris-font-icons;
+            .ris-i_calendar-empty {
                 font-size: $fs-xl;
                 margin-right: $indent-sm;
             }
         }
 
         &-place {
-            &::before {
-                content: 'a';
-                font-family: $ff-ris-font-icons;
+            .ris-i_marker-with-dot {
                 font-size: $fs-xl;
                 margin-right: $indent-sm;
             }

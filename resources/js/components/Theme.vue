@@ -1,12 +1,6 @@
 <script>
-import Vue from 'vue';
-
 const moment = require('moment');
 require('moment/locale/de');
-
-Vue.use(require('vue-moment'), {
-    moment
-});
 
 export default {
     name: 'Theme',
@@ -21,6 +15,11 @@ export default {
             default: ''
         },
     },
+    filters: {
+        momentFullDate(data) {
+            return moment(data).format('dd.mm.yyyy');
+        }
+    }
 };
 </script>
 
@@ -47,24 +46,21 @@ export default {
                     <span>2018</span>
                 </div>
 
-                <div class="ris-progress-bar"
-                    v-if="themeListType === 'new'"
-                        >
-                    <div class="ris-progress-bar__progress" style="width: 25%"/>
-                </div>
-                <div class="ris-progress-bar"
-                    v-else-if="themeListType === 'progress'"
-                        >
-                    <div class="ris-progress-bar__progress" style="width: 75%"/>
-                </div>
                 <div class="ris-card-list__themes-completed"
-                    v-else-if="themeListType === 'finished'"
+                    v-if="themeListType === 'finished'"
                         >
-                    <span class="ris-i ris-i__check ris-i_has-bg"/>
+                    <span class="ris-i ris-i_check ris-i_has-bg"/>
                     Abgeschlossen
                 </div>
+                <div class="ris-progress-bar"
+                    v-else
+                        >
+                    <div class="ris-progress-bar__progress"
+                        :style="{'width:': themeListType === 'new' ? '25%' : '75%'}"
+                            />
+                </div>
 
-                <div class="ris-caption ris-card-list__themes-date">27.10.2018</div>
+                <div class="ris-caption ris-card-list__themes-date">{{ '27.10.2018' | momentFullDate() }}</div>
             </div>
         </a>
     </div>

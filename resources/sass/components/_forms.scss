@@ -97,25 +97,15 @@
         border: 0;
         cursor: pointer;
         display: inline-block;
+        height: 100%;
         margin: 0;
         outline: none;
         padding: 0;
         position: absolute;
+        width: 40px;
 
-        &::before {
-            align-items: center;
-            color: $c-gray2;
-            content: 'S';
-            display: inline-flex;
-            font-family: $ff-ris-font-icons;
-            height: 40px;
-            justify-content: center;
-            line-height: 1;
-            margin: 0;
-            padding: 0;
+        .ris-i_search {
             pointer-events: none;
-            speak: none;
-            width: 40px;
         }
     }
 

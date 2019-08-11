@@ -39,7 +39,9 @@ export default {
 <template>
     <div class="ris-sorting__wrapper">
         <div :class="['ris-search ris-sorting__search', { hiddenMob: inputHiddenMob }]" v-if="isInput">
-            <button class="ris-search__button"/>
+            <button class="ris-search__button">
+                <span class="ris-i ris-i_search"/>
+            </button>
             <input type="search" class="ris-search__input" v-model="value"
                 @input="$emit('input', value)"
                 :placeholder="inputPlaceholder"
@@ -56,6 +58,7 @@ export default {
                     Chronologische Reihenfolge
                 </option>
             </select>
+            <span class="ris-i ris-i_chevron-double"/>
         </div>
     </div>
 </template>

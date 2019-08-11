@@ -1,5 +1,5 @@
 <script>
-import CommitteeInfo from "./CommitteeInfo";
+import CommitteeInfo from './CommitteeInfo';
 export default {
     name: 'Committee',
     props: {

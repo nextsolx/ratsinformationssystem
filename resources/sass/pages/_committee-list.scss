@@ -45,6 +45,10 @@
     }
 
     &-main-list {
+        margin-top: 36px;
+        @include breakpoint($bp-mobile-max) {
+            margin-top: $indent-l;
+        }
 
         &__heading {
             text-transform: uppercase;

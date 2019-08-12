@@ -37,8 +37,12 @@ export default {
 </script>
 
 <template>
-    <div class="ris-sorting__wrapper">
-        <div :class="['ris-search ris-sorting__search', { hiddenMob: inputHiddenMob }]" v-if="isInput">
+    <div class="ris-sorting">
+        <div
+            :class="['ris-search ris-sorting__search',
+                     { hiddenMob: inputHiddenMob },
+                     { fullWidth : selectHiddenMob }]"
+            v-if="isInput">
             <button class="ris-search__button">
                 <span class="ris-i ris-i_search"/>
             </button>
@@ -47,7 +51,11 @@ export default {
                 :placeholder="inputPlaceholder"
                     >
         </div>
-        <div :class="['ris-select ris-committee-list__select', { hiddenMob: selectHiddenMob }, { hidden: inputHiddenMob }]" v-if="isSelect">
+        <div
+            :class="['ris-select ris-sorting__select',
+                     { hiddenMob: selectHiddenMob },
+                     { fullWidth: inputHiddenMob }]"
+            v-if="isSelect">
             <label class="ris-select__label">Darstellung</label>
 
             <select class="ris-select__select">

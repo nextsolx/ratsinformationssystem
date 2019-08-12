@@ -1,11 +1,5 @@
 .ris-sorting {
-    &__wrapper {
-        display: flex;
-        margin-bottom: 36px;
-        @include breakpoint($bp-mobile-max) {
-            margin-bottom: $indent-l;
-        }
-    }
+    display: flex;
 
     &__search {
         width: 472px;
@@ -15,15 +9,21 @@
             height: 50px;
             box-shadow: none;
         }
-        &.hiddenMob {
-            @include breakpoint($bp-mobile-max) {
-                display: none;
-            }
-        }
     }
     &__select {
         @include breakpoint($bp-mobile-max) {
             margin-left: $indent-m;
+        }
+    }
+
+    &__select,
+    &__search {
+        @include breakpoint($bp-mobile-max) {
+            width: 50%;
+        }
+        &.fullWidth {
+            width: 100%;
+            margin: 0
         }
         &.hiddenMob {
             @include breakpoint($bp-mobile-max) {

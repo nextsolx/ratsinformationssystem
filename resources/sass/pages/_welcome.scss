@@ -28,7 +28,7 @@
     &__content {
         @include breakpoint($bp-tablet-min) {
             box-shadow: 8px 5px 6px 0 $c-box-shadow3;
-            flex-basis: calc(100% - 320px);
+            flex-basis: calc(100% - #{$width-aside-320});
             position: relative;
             z-index: 2;
         }
@@ -195,7 +195,7 @@
             position: fixed;
             right: 0;
             top: 0;
-            width: 320px;
+            width: $width-aside-320;
 
             &__mobile {
                 display: none;
@@ -207,7 +207,7 @@
                 position: absolute;
                 right: 0;
                 top: 0;
-                width: 320px;
+                width: $width-aside-320;
             }
         }
 

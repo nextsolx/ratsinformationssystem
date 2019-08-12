@@ -13,7 +13,7 @@
 
     @include breakpoint($bp-tablet-min) {
         height: 1024px;
-        width: 320px;
+        width: $width-aside-320;
 
         &__mobile {
             display: none;

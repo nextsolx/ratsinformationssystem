@@ -8,7 +8,7 @@
                 {{ $title }}
             </h1>
             <committee
-                class="ris-committee__"
+                class=""
                 :info="{{ json_encode($info) }}"
                 :members="{{ json_encode($members) }}"
                 :meetings="{{ json_encode($meetings) }}"

@@ -3,6 +3,7 @@
         display: grid;
         grid-template-columns: auto auto auto;
     }
+
     .ris-section-wrapper {
         border: 0;
         margin: 0 auto;
@@ -14,20 +15,24 @@
             position: sticky;
             top: 48px;
         }
+
         &__item {
             text-align: right;
             padding-right: 15px;
         }
+
         &__button {
             text-transform: uppercase;
             padding: 7px 3px;
             background-color: transparent;
             border: 0;
             outline: none;
+
             &.bolt {
                 font-weight: bold;
             }
         }
+
         @include breakpoint($bp-mobile-max) {
             display: none;
         }
@@ -53,6 +58,7 @@
         &__heading {
             text-transform: uppercase;
         }
+
         &__item {
             &:not(:last-child) {
                 margin-bottom: 52px;
@@ -73,6 +79,7 @@
                 font-size: $fs-l;
                 display: flex;
                 align-items: center;
+
                 @include breakpoint($bp-mobile-max) {
                     display: none;
                 }
@@ -128,7 +135,7 @@
 
         &:hover {
             .ris-committee-list__subtitle,
-            &::after{
+            &::after {
                 color: $c-red;
             }
         }

@@ -1,5 +1,7 @@
 <script>
 import CommitteeInfo from './CommitteeInfo';
+import CommitteeMemberList from './CommitteeMemberList';
+import CommitteeSessions from './CommitteeSessions';
 export default {
     name: 'Committee',
     props: {
@@ -17,7 +19,9 @@ export default {
         }
     },
     components: {
-        CommitteeInfo
+        CommitteeInfo,
+        CommitteeMemberList,
+        CommitteeSessions
     },
     data() {
         return {
@@ -28,7 +32,7 @@ export default {
 </script>
 
 <template>
-    <div>
+    <div class="">
         <nav class="ris-committee-navigation ris-without-padding-mob">
             <ul class="ris-ul ris-committee-navigation__list">
                 <li class="ris-committee-navigation__item">
@@ -42,7 +46,7 @@ export default {
                     <button
                         @click="activeTab = 'mitglieder'"
                         :class="['ris-committee-navigation__button ris-committee-navigation__button--mitglieder', activeTab === 'mitglieder' ? 'active' : '' ]">
-                        Mitglieder ({{ members.length }})
+                        Mitglieder <span class="ris-committee-navigation__counter">({{ members.length }})</span>
                     </button>
                 </li>
                 <li class="ris-committee-navigation__item">
@@ -55,5 +59,7 @@ export default {
             </ul>
         </nav>
         <CommitteeInfo :information="info" v-if="activeTab === 'aufgaben'" />
+        <CommitteeMemberList :members="members" v-if="activeTab === 'mitglieder'" />
+        <CommitteeSessions v-if="activeTab === 'sitzungen'" />
     </div>
 </template>

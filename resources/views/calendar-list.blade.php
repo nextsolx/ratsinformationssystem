@@ -17,6 +17,9 @@ if (isset($meetings) and is_array($meetings)) {
 
 @section('content')
     <main class="ris-main ris-calendar">
+
+        @include('layouts.breadcrumbs')
+
         <h1 class="ris-calendar__headline ris-headline">
             Sitzungskalender
         </h1>
@@ -47,7 +50,9 @@ if (isset($meetings) and is_array($meetings)) {
 
                                     <div class="ris-calendar__card-day-right">
                                         @foreach ($meeting_list_per_day as $meeting)
-                                            <div class="ris-calendar__card">
+                                            <a class="ris-link ris-calendar__card" title="{{ $meeting->title }}"
+                                                href="/meeting/{{ $meeting->id }}"
+                                            >
                                                 <h2 class="ris-title">
                                                     {{ $meeting->title }}
                                                 </h2>
@@ -62,7 +67,7 @@ if (isset($meetings) and is_array($meetings)) {
                                                     <div class="ris-session-count__people">{{ $meeting->peopleCount }}</div>
                                                     <div class="ris-session-count__file">{{ $meeting->fileCount }}</div>
                                                 </div>
-                                            </div>
+                                            </a>
                                         @endforeach
                                     </div>
 

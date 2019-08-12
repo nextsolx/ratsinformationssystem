@@ -72,6 +72,7 @@
         border-radius: $b-radius-primary;
         box-shadow: 0 1px 6px 0 $c-box-shadow;
         box-sizing: border-box;
+        display: block;
         padding: $indent-m;
 
         &:not(:last-child) {

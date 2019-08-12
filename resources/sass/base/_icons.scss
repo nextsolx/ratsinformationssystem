@@ -223,4 +223,16 @@
             content: 'i';
         }
     }
+
+    &_notice-box {
+        &::before {
+            content: 'k';
+        }
+    }
+
+    &_doc {
+        &::before {
+            content: 'j';
+        }
+    }
 }

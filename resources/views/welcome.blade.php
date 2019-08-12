@@ -109,7 +109,7 @@
                 <div class="ris-subheader">
                     Welche Gremien gibt es? Für welche Aufgaben sind diese zuständig? Erfahren Sie mehr über die politischen Organe Kölns!
                 </div>
-                <a href="{{ route('committee') }}" class="ris-link ris-link_button ris-link_right"
+                <a href="{{ route('committee-list') }}" class="ris-link ris-link_button ris-link_right"
                     title="Zur den Gremien"
                 >
                     Zur den Gremien

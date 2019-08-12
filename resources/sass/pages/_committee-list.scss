@@ -1,0 +1,143 @@
+.ris-committee-list {
+    &-wrapper {
+        display: grid;
+        grid-template-columns: auto auto auto;
+    }
+
+    .ris-section-wrapper {
+        border: 0;
+        margin: 0 auto;
+    }
+
+    &-navigation {
+
+        &__list {
+            position: sticky;
+            top: 48px;
+        }
+
+        &__item {
+            text-align: right;
+            padding-right: 15px;
+        }
+
+        &__button {
+            text-transform: uppercase;
+            padding: 7px 3px;
+            background-color: transparent;
+            border: 0;
+            outline: none;
+
+            &.bolt {
+                font-weight: bold;
+            }
+        }
+
+        @include breakpoint($bp-mobile-max) {
+            display: none;
+        }
+    }
+
+    &__subtitle {
+        margin-bottom: 10px;
+    }
+
+    &__select,
+    &__search {
+        @include breakpoint($bp-mobile-max) {
+            width: 50%;
+        }
+    }
+
+    &-main-list {
+        margin-top: 36px;
+        @include breakpoint($bp-mobile-max) {
+            margin-top: $indent-l;
+        }
+
+        &__heading {
+            text-transform: uppercase;
+        }
+
+        &__item {
+            &:not(:last-child) {
+                margin-bottom: 52px;
+                @include breakpoint($bp-mobile-max) {
+                    margin-bottom: $indent-ml;
+                }
+            }
+        }
+    }
+
+    &-secondary-list {
+
+        &__item {
+            border-bottom: 1px solid $c-gray7;
+
+            &-wrapper {
+                color: $c-gray8;
+                font-size: $fs-l;
+                display: flex;
+                align-items: center;
+
+                @include breakpoint($bp-mobile-max) {
+                    display: none;
+                }
+            }
+        }
+
+        &__counter {
+            margin-right: $indent-m;
+
+            &::before {
+                content: 'X';
+                display: inline-block;
+                font-family: $ff-ris-font-icons;
+                font-size: $fs-xxl;
+            }
+        }
+
+        &__time {
+            &::before {
+                content: 'i';
+                display: inline-block;
+                font-family: $ff-ris-font-icons;
+                font-size: $fs-xl;
+            }
+        }
+
+        &__time,
+        &__counter {
+            &::before {
+                margin-right: $indent-s;
+            }
+        }
+    }
+
+    &__link {
+        display: block;
+        cursor: pointer;
+        padding: 16px 36px 16px 0;
+        text-decoration: none;
+        position: relative;
+
+        &::after {
+            content: 'I';
+            display: inline-block;
+            font-family: $ff-ris-font-icons;
+            font-size: $fs-s;
+            color: $c-gray8;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        &:hover {
+            .ris-committee-list__subtitle,
+            &::after {
+                color: $c-red;
+            }
+        }
+    }
+}

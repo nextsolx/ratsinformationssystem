@@ -3,12 +3,14 @@ import Vue from 'vue';
 import CommitteeTableItem from './CommitteeTableItem';
 import CommitteeNavigation from './CommitteeNavigation';
 import Sorting from './Sorting';
+import sortingMixin from '../mixins/sortingMixin';
 
 import checkView from 'vue-check-view';
 Vue.use(checkView);
 
 export default {
     name: 'SearchForm',
+    mixins: [sortingMixin],
     props: {
         committees: {
             type: Array,
@@ -22,7 +24,6 @@ export default {
     },
     data() {
         return {
-            inputValue: '',
             committeesList: this.committees,
             sortedCommittees: [],
             filtered: false
@@ -60,11 +61,14 @@ export default {
             }
         },
         viewHandler(e) {
-            if (e.percentInView === 1 || e.percentTop > .2 && e.percentTop < .9) {
-                document.querySelector(`#${e.target.element.id[0]}-search-button`).classList.add('bolt');
-            }
-            else {
-                document.querySelector(`#${e.target.element.id[0]}-search-button`).classList.remove('bolt');
+            let id = e.target.element.id;
+            if (id) {
+                if (e.percentInView === 1 || e.percentTop > .2 && e.percentTop < .9) {
+                    document.querySelector(`#${id[0]}-search-button`).classList.add('bolt');
+                }
+                else {
+                    document.querySelector(`#${id[0]}-search-button`).classList.remove('bolt');
+                }
             }
         }
     },
@@ -76,7 +80,7 @@ export default {
         <div />
         <section class="ris-section-wrapper ris-content_six-eight-eight">
             <h1 class="ris-committee-list__headline ris-headline">Gremien</h1>
-            <Sorting :input-value="inputValue" @input="filterList" />
+            <Sorting @input="filterList" />
             <transition-group tag="ul" name="fade" class="ris-committee-list-main-list ris-ul" v-if="!filtered">
                 <li v-for="item in sortedCommittees"
                     class="ris-committee-list-main-list__item"

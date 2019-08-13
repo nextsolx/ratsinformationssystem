@@ -131,7 +131,7 @@ export default {
 </script>
 
 <template>
-    <div class="ris-calendar-app">
+    <aside class="ris-calendar-app">
         <v-calendar
             :attributes="attrs"
             :is-expanded="true"
@@ -140,5 +140,5 @@ export default {
                 />
         <div class="ris-calendar-app__icon-calendar"
             @click="toggleCalendar"/>
-    </div>
+    </aside>
 </template>

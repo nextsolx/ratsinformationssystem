@@ -12,48 +12,50 @@
                     <img src="/img/thumbnail-very-big-bridge.jpg" class="ris-img"
                         alt="{{ $topic->name }}"/>
                 </div>
-                <div class="ris-caption">Thema 2408/2018</div>
+                <div class="ris-caption">Thema {{ $topic->reference }}</div>
                 <h1 class="ris-headline">{{ $topic->name }}</h1>
-                <div class="ris-caption">Zuletzt aktualisiert: 11.09.2018</div>
+                <div class="ris-caption">Zuletzt aktualisiert: {{ \Carbon\Carbon::parse($topic->modified)->format('d.m.Y') }}</div>
             </section>
 
             <section class="ris-section-wrapper">
-                <div class="ris-title">Worum geht es?</div>
-                <div class="ris-body-2">
-                    Die alte Drehbrücke im Deutzer Hafen muss dringend saniert werden.
-                    Dies wird rund 3.655.000 € kosten.
-                    Für den Zeitraum der Arbeiten muss zudem der Fussgängerweg über die Brücke gesperrt werden.
-                    Eine alternative Wegführung an der Severingsbrücke würde weitere 469.000 € kosten.
-                </div>
-
-                {{--<div>Nicht Beschrieben.</div>--}}
+                <h2 class="ris-h2">Worum geht es?</h2>
+                @if (isset($topic->text))
+                    <div class="ris-body-2 ris-theme-detail__text">
+                        {{ \Illuminate\Support\Str::limit(strip_tags($topic->text), 10000) }}
+                    </div>
+                @else
+                    <div class="ris-body-2">Nicht Beschrieben.</div>
+                @endif
             </section>
 
-            @if (isset($topic->location))
+            @if (isset($topic->location) && count($topic->location) > 0)
                 <section class="ris-section-wrapper">
-                    <div class="ris-title">Ort</div>
+                    <h2 class="ris-h2">Ort</h2>
 
                     <div class="ris-map-img ris-img-wrapper">
                         <a href="{{ route('map') }}" class="ris-link"
-                            title="Karte öffnen"
+                            title="{{ $topic->location[0]->city }}"
                         >
                             <img src="/img/thumbnail-very-big-map.jpg" class="ris-img"
-                                alt="{{ $topic->name }}"/>
+                                alt="{{ $topic->location[0]->city }}"/>
                         </a>
                     </div>
 
                     <div class="ris-map-detail">
                         <div class="ris-map-all-street-address ris-body-2">
+                            <span class="ris-i ris-i_marker-with-dot"></span>
                             <div>
-                                <div>{{ $topic->location->streetAddress }}</div>
-                                <div>{{ $topic->location->postalCode }} {{ $topic->location->city }}</div>
+                                <div>{{ $topic->location[0]->streetAddress }}</div>
+                                <div>{{ $topic->location[0]->postalCode }} {{ $topic->location[0]->city }}</div>
                             </div>
                         </div>
 
-                        <a href="{{ route('map') }}" class="ris-link ris-link_has-icon"
-                            title="Karte öffnen"
+                        {{--@todo --- fix link--}}
+                        <a href="{{ route('map') }}" class="ris-link ris-link_button ris-link_right"
+                            title="{{ $topic->location[0]->city }}"
                         >
                             Karte öffnen
+                            <span class="ris-i ris-i_resize-text"></span>
                         </a>
                     </div>
                 </section>
@@ -62,10 +64,10 @@
             @if (isset($topic->process))
                 <section class="ris-section-wrapper">
                     <div class="ris-action-box">
-                        <div class="ris-title">Politischer Prozess</div>
+                        <h2 class="ris-h2">Politischer Prozess</h2>
+
                         <div class="ris-select">
                             <div class="ris-select__label">Darstellung</div>
-
                             <select class="ris-select__select">
                                 <option class="ris-select__option" data-sort-type="newest-first">
                                     Das Neuste zuerst
@@ -74,68 +76,94 @@
                                     Chronologische Reihenfolge
                                 </option>
                             </select>
+                            <span class="ris-i ris-i_chevron-double"></span>
                         </div>
                     </div>
 
                     <div class="ris-process">
-                        @foreach ($topic->process as $process)
-                            <div class="ris-process__item">
-                                <div class="ris-process__created-at ris-body-2">{{ $process->created_at }}</div>
-                                <div class="ris-process__role ris-title">{{ $process->role }}</div>
-                                <div class="ris-process__description ris-body-2">Lorem description. Der Finanzausschuss hat über die Vorlage beraten und stimmt der Umsetzung uneingeschränkt zu. </div>
-                                <div class="ris-process__meeting-summary">
-                                    <div class="ris-process__meeting">
-                                        <div class="ris-caption">Sitzung BV1/0035/2018</div>
-                                        <div class="ris-caption">Tagesordnungspunkt (TOP) 3.11</div>
-                                    </div>
+                        <div class="ris-process__detail ris-process__item">
+                            <span class="ris-i ris-i_check ris-i_has-bg"></span>
+                            <div class="ris-process__date ris-body-2">{{ \Carbon\Carbon::parse($topic->date)->format('d. F Y') }}</div>
+                            <h3 class="ris-process__name ris-h3">{{ $topic->name }}</h3>
+                            <div class="ris-process__text ris-body-2">{{ \Illuminate\Support\Str::limit(strip_tags($topic->text), 5000) }}</div>
+                            <div class="ris-process__wrapper">
+                                <div class="ris-caption">Beschlussvorlage {{ $topic->reference }}</div>
 
-                                    <a href="{{ route('map') }}" class="ris-link ris-link_has-icon"
-                                        title="Karte öffnen"
-                                    >
-                                        Karte öffnen
-                                    </a>
-                                </div>
-
-                                {{--@if (isset($process->meeting))
-                                    <div class="ris-process__meeting">
-                                        @if (isset($process->meeting->name))
-                                            <div class="ris-process__meeting-name">{{ $process->meeting->name }}</div>
-                                        @endif
-                                        @if (isset($process->meeting->meeting_state))
-                                            <div class="ris-process__meeting-state">{{ $process->meeting->meeting_state }}</div>
-                                        @endif
-                                        <div class="ris-process__meeting-created-at">{{ $process->meeting->created_at }}</div>
-                                    </div>
-                                @endif--}}
+                                {{--@todo --- fix link--}}
+                                <a href="/meeting/" class="ris-link ris-link_button ris-link_right"
+                                    title="Beschlussvorlage öffnen"
+                                >
+                                    Beschlussvorlage öffnen
+                                    <span class="ris-i ris-i_resize-text"></span>
+                                </a>
                             </div>
-                        @endforeach
+                        </div>
+
+                        @if (isset($topic->process))
+                            @foreach ($topic->process as $process)
+                                @if (isset($process->meeting))
+                                    <div class="ris-process__agendum ris-process__item">
+                                        <span class="ris-i ris-i_check ris-i_has-bg"></span>
+
+                                        @if (isset($process->meeting->dateFrom))
+                                            <div class="ris-process__agendum-start ris-body-2">{{ \Carbon\Carbon::parse($process->meeting->dateFrom)->format('d. F Y') }}</div>
+                                        @endif
+                                        @if ($process->agendum->name)
+                                            <h3 class="ris-process__agendum-name ris-h3">{{ $process->agendum->name }}</h3>
+                                        @endif
+                                        @if (isset($process->agendum->resolutionText))
+                                            <div class="ris-process__meeting-state ris-body-2">{{ $process->agendum->resolutionText }}</div>
+                                        @endif
+
+                                        <div class="ris-process__wrapper">
+                                            <div>
+                                                {{--@todo --- mock data--}}
+                                                <div class="ris-caption">
+                                                    Sitzung BV1/00{{ \Carbon\Carbon::parse($process->meeting->dateFrom)->week }}/{{ \Carbon\Carbon::parse($process->meeting->dateFrom)->year }}
+                                                </div>
+                                                <div class="ris-caption">Tagesordnungspunkt (TOP) {{ $process->agendum->number }}</div>
+                                            </div>
+
+                                            {{--@todo --- fix link to meeting detail page--}}
+                                            <a href="/agendum/{{ $process->meeting->id }}" class="ris-link ris-link_button ris-link_right"
+                                                title="Zur Sitzung"
+                                            >
+                                                Zur Sitzung
+                                                <span class="ris-i ris-i_chevron-right"></span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                @endif
+                            @endforeach
+                        @endif
                     </div>
                 </section>
             @endif
 
-                {{--hide if data not exist--}}
+            @if (isset($topic->solution))
                 <section class="ris-section-wrapper">
-                    <div class="ris-title">Ergebnis</div>
+                    <h2 class="ris-h2">Ergebnis</h2>
                     <div class="ris-body-2">
-                        Der Rat war das entscheidende Gremium (Beschlussgremium) für dieses Thema.
-                        Der Vorschlag der Verwaltung wurde ohne Änderungen beschlossen.
-                        Der politische Prozess zu diesem Thema ist somit beendet.
+                        {{ $topic->solution }}
                     </div>
                 </section>
+            @endif
 
-                {{--hide if data not exist--}}
+            @if (isset($topic->whatNext))
                 <section class="ris-section-wrapper">
-                    <div class="ris-title">Was passiert Jetzt</div>
+                    <h2 class="ris-h2">Was passiert jetzt?</h2>
                     <div class="ris-body-2">
-                        Der Rat war das entscheidende Gremium (Beschlussgremium) für dieses Thema.
-                        Der Vorschlag der Verwaltung wurde ohne Änderungen beschlossen.
-                        Der politische Prozess zu diesem Thema ist somit beendet.
+                        {{ $topic->whatNext }}
                     </div>
                 </section>
+            @endif
 
-                <section class="ris-section-wrapper">
-                    <div class="ris-title">Dokumente</div>
+            <section class="ris-section-wrapper">
+                <h2 class="ris-h2">Dokumente</h2>
 
+                @if (isset($topic->files))
+                    {{--
+                    // @todo --- Alle Dokumente --- this will not be in this scope of functionality
                     <div class="ris-document ris-document-many">
                         <div class="ris-icon-wrapper">
                             <img src="/img/pdf-many.svg" class="ris-img" alt="Alle Dokumente"/>
@@ -144,21 +172,23 @@
                             <div class="ris-title">Alle Dokumente gebündelt</div>
                             <div class="ris-body-2">6 Dateien | 5,5 MB</div>
                         </div>
-                    </div>
-                    <div class="ris-document ris-document-one">
-                        <div class="ris-icon-wrapper">
-                            <img src="/img/pdf.svg" class="ris-img" alt="Beschlussvorlage Rat"/>
-                        </div>
-                        <span class="ris-text-wrapper">Beschlussvorlage Rat</span>
-                    </div>
+                    </div>--}}
 
-                    <div class="ris-document ris-document-one">
-                        <div class="ris-icon-wrapper">
-                            <img src="/img/pdf.svg" class="ris-img" alt="Anlage 1 - Zustimmung 14 Kostenberechnung"/>
-                        </div>
-                        <span class="ris-text-wrapper">Anlage 1 - Zustimmung 14 Kostenberechnung</span>
-                    </div>
-                </section>
+                    @foreach($topic->files as $file)
+                        <a class="ris-document ris-document-one ris-link" title="{{ $file->name }}"
+                            href="/{{ $file->downloadUrl }}"
+                        >
+                            <div class="ris-icon-wrapper">
+                                <img src="/img/pdf.svg" class="ris-img" alt="{{ $file->name }}"/>
+                            </div>
+                            <span class="ris-text-wrapper">{{ $file->name }}</span>
+                            <span class="ris-i ris-i_download-with-box"></span>
+                        </a>
+                    @endforeach
+                @else
+                    <div class="ris-title">Keine Dokumente</div>
+                @endif
+            </section>
 
         </div>
 

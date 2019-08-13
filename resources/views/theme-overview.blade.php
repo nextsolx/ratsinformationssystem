@@ -22,7 +22,7 @@
                             <div class="ris-filter__subheader ris-subheader"
                                 @click="collapseFilter"
                             >
-                            <span class="ris-i ris-i_filter"></span>
+                                <span class="ris-i ris-i_filter"></span>
                                 Filtern
                             </div>
 
@@ -150,12 +150,13 @@
                 @endif
 
 
-                @if (!empty($topics_new))
-                    <section class="ris-section-wrapper ris-card-list ris-card-list__themes"
-                        v-show="themeListNew.length === 0 && firstLoading"
-                    >
-                        <div class="ris-title">Neue Themen</div>
 
+                <section class="ris-section-wrapper ris-card-list ris-card-list__themes"
+                    v-show="themeListNew.length === 0 && firstLoading"
+                >
+                    <div class="ris-title">Neue Themen</div>
+
+                    @if (!empty($topics_new))
                         @include('components.theme',
                             ['theme_list' => $topics_new, 'theme_type' => 'new', 'limit' => 3]
                         )
@@ -166,12 +167,11 @@
                             Mehr anzeigen
                             <span class="ris-i ris-i_chevron-right"></span>
                         </a>
-                    </section>
-                @else
-                    <section class="ris-section-wrapper ris-card-list ris-card-list__themes">
-                        <div class="ris-title">There are no topics</div>
-                    </section>
-                @endif
+                    @else
+                        <div class="ris-body-1">There are no topics</div>
+                    @endif
+
+                </section>
 
                 <theme-overview-list
                         :theme-list-data="themeListNew"
@@ -183,12 +183,12 @@
 
 
 
-                @if (!empty($topics_progress))
-                    <section class="ris-section-wrapper ris-card-list ris-card-list__themes"
-                        v-show="themeListProgress.length === 0 && firstLoading"
-                    >
-                        <div class="ris-title">Kürzlich aktualisiert</div>
+                <section class="ris-section-wrapper ris-card-list ris-card-list__themes"
+                    v-show="themeListProgress.length === 0 && firstLoading"
+                >
+                    <div class="ris-title">Kürzlich aktualisiert</div>
 
+                    @if (!empty($topics_progress))
                         @include('components.theme',
                                 ['theme_list' => $topics_progress, 'theme_type' => 'progress', 'limit' => 3]
                             )
@@ -199,12 +199,11 @@
                             Mehr anzeigen
                             <span class="ris-i ris-i_chevron-right"></span>
                         </a>
-                    </section>
-                @else
-                    <section class="ris-section-wrapper ris-card-list ris-card-list__themes">
-                        <div class="ris-title">There are no topics</div>
-                    </section>
-                @endif
+                    @else
+                        <div class="ris-body-1">There are no topics</div>
+                    @endif
+
+                </section>
 
                 <theme-overview-list
                         :theme-list-data="themeListProgress"
@@ -216,12 +215,12 @@
 
 
 
-                @if (!empty($topics_finished))
-                    <section class="ris-section-wrapper ris-card-list ris-card-list__themes"
-                        v-show="themeListFinished.length === 0 && firstLoading"
-                    >
-                        <div class="ris-title">Kürzlich abgeschlossen</div>
+                <section class="ris-section-wrapper ris-card-list ris-card-list__themes"
+                    v-show="themeListFinished.length === 0 && firstLoading"
+                >
+                    <div class="ris-title">Kürzlich abgeschlossen</div>
 
+                    @if (!empty($topics_finished))
                         @include('components.theme',
                                 ['theme_list' => $topics_finished, 'theme_type' => 'finished', 'limit' => 3]
                             )
@@ -232,12 +231,11 @@
                             Mehr anzeigen
                             <span class="ris-i ris-i_chevron-right"></span>
                         </a>
-                    </section>
-                @else
-                    <section class="ris-section-wrapper ris-card-list ris-card-list__themes">
-                        <div class="ris-title">There are no topics</div>
-                    </section>
-                @endif
+                    @else
+                        <div class="ris-body-1">There are no topics</div>
+                    @endif
+
+                </section>
 
                 <theme-overview-list
                         :theme-list-data="themeListFinished"

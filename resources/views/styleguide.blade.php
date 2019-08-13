@@ -473,6 +473,7 @@
                         <span class="ris-i ris-i_account-circle"></span>
                         <span class="ris-i ris-i_calendar"></span>
                         <span class="ris-i ris-i_calendar-empty"></span>
+                        <span class="ris-i ris-i_calendar-arrow"></span>
                         <span class="ris-i ris-i_download"></span>
                         <span class="ris-i ris-i_list"></span>
                         <span class="ris-i ris-i_people"></span>

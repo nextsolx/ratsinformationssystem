@@ -24,7 +24,7 @@ export default {
                 <span class="ris-member-link__text" v-if="isParty">{{ member.role }}</span>
                 <span class="ris-member-link__text" v-else>{{ member.party }}</span>
             </span>
-            <button class="ris-member-link__button" />
+            <button class="ris-i ris-i_chevron-right ris-member-link__button" />
         </a>
     </li>
 </template>

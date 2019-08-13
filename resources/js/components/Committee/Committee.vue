@@ -29,6 +29,13 @@ export default {
             tabs: ['aufgaben', 'mitglieder', 'sitzungen']
         };
     },
+    methods: {
+        getClassForTab(tab) {
+            if (tab === 'sitzungen') return 'ris-i_calendar-empty';
+            if (tab === 'aufgaben') return 'ris-i_doc';
+            return 'ris-i_people';
+        }
+    }
 };
 </script>
 
@@ -41,9 +48,7 @@ export default {
                         @click="activeTab = tab"
                         class="ris-committee-navigation__button"
                         :class="[`ris-committee-navigation__button`, activeTab === tab ? 'active' : '' ]">
-                        <span v-if="tab === 'sitzungen'" class="ris-i ris-i_calendar-empty" />
-                        <span v-if="tab === 'aufgaben'" class="ris-i ris-i_doc" />
-                        <span v-if="tab === 'mitglieder'" class="ris-i ris-i_people" />
+                        <span class="ris-i" :class="getClassForTab(tab)" />
                         {{ tab }}
                         <span v-if="tab === 'mitglieder'" class="ris-committee-navigation__counter">({{ members.length }})</span>
                     </button>

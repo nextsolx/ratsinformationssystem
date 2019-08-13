@@ -17,19 +17,22 @@ export default {
     },
     data () {
         return {
-            selected: this.options[0]
+            selected: ''
         };
     }
 };
 </script>
 
 <template>
-    <div :class="['ris-select ']">
+    <div :class="['ris-select']">
         <label class="ris-select__label" v-if="label" :for="id">
             {{ label }}
             <select :id="id" class="ris-select__select" v-model="selected">
-                <option class="ris-select__option" v-for="option in options" :key="option" :value="option" >
-                    {{ option }}
+                <option class="ris-select__option">
+                    test
+                </option>
+                <option class="ris-select__option">
+                    test1
                 </option>
             </select>
         </label>

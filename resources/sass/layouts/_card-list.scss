@@ -1,19 +1,6 @@
 .ris-card-list {
     $base: &;
 
-    border-bottom: 1px solid $c-gray7;
-
-    @include breakpoint($bp-mobile-max) {
-        padding: $indent-ml $indent-m;
-    }
-
-    @include breakpoint($bp-tablet-min) {
-        margin-left: $indent-ml;
-        margin-right: $indent-ml;
-        padding-bottom: $indent-xl;
-        padding-top: $indent-ml;
-    }
-
     &__item {
         $base-item: &;
 
@@ -28,10 +15,6 @@
 
         &:hover {
             box-shadow: 0 1px 3px 0 $c-box-shadow3;
-
-            .ris-body-1 {
-                color: $c-red;
-            }
         }
 
         @include breakpoint($bp-tablet-min) {
@@ -55,6 +38,12 @@
                 -webkit-line-clamp: 2;
                 max-height: $lh-l * 2;
             }
+        }
+    }
+
+    .ris-body-1 {
+        &:hover {
+            color: $c-red;
         }
     }
 

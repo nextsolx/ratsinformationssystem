@@ -473,6 +473,7 @@
                         <span class="ris-i ris-i_account-circle"></span>
                         <span class="ris-i ris-i_calendar"></span>
                         <span class="ris-i ris-i_calendar-empty"></span>
+                        <span class="ris-i ris-i_calendar-arrow"></span>
                         <span class="ris-i ris-i_download"></span>
                         <span class="ris-i ris-i_list"></span>
                         <span class="ris-i ris-i_people"></span>
@@ -482,6 +483,9 @@
                         <span class="ris-i ris-i_filter"></span>
                         <span class="ris-i ris-i_chevron-double"></span>
                         <span class="ris-i ris-i_house"></span>
+                        <span class="ris-i ris-i_download-with-box"></span>
+                        <span class="ris-i ris-i_eye"></span>
+                        <span class="ris-i ris-i_resize-text"></span>
 
                         <br/><br/>
 

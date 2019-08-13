@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-    <main class="ris-main ris-welcome">
+    <main class="ris-main ris-welcome ris-content ris-content_has-widget ris-content_six-eight-eight">
         <div class="ris-welcome__content">
 
-            <section class="ris-welcome__content_wrapper">
+            <section class="ris-section-wrapper">
                 <h1 class="ris-headline">
                     Stadtpolitik Köln
                 </h1>
@@ -13,7 +13,7 @@
                 </div>
             </section>
 
-            <section class="ris-welcome__content_wrapper">
+            <section class="ris-section-wrapper">
                 <div class="ris-title">Themen über Karte erkunden</div>
                 <div class="ris-subheader">
                     Wählen Sie Ihren Stadtbezirk und finden Sie Themen in Ihrer Umgebung.
@@ -65,7 +65,7 @@
                 </div>
             </section>
 
-                <section class="ris-card-list ris-card-list__themes">
+                <section class="ris-section-wrapper ris-card-list ris-card-list__themes">
                     <div class="ris-title">Aktuelle Themen</div>
 
                     @if (isset($topics))
@@ -85,7 +85,7 @@
                 </section>
 
 
-                <section class="ris-card-list ris-card-list__calendar">
+                <section class="ris-section-wrapper ris-card-list ris-card-list__calendar">
                     <div class="ris-title">Aktuelle Sitzungen</div>
 
                     @if (isset($meetings))
@@ -104,7 +104,7 @@
                     @endif
                 </section>
 
-            <section class="ris-welcome__content_wrapper ris-welcome__committee">
+            <section class="ris-section-wrapper ris-welcome__committee">
                 <div class="ris-title">Gremien</div>
                 <div class="ris-subheader">
                     Welche Gremien gibt es? Für welche Aufgaben sind diese zuständig? Erfahren Sie mehr über die politischen Organe Kölns!
@@ -117,7 +117,7 @@
                 </a>
             </section>
 
-            <section class="ris-welcome__content_wrapper ris-welcome__people-wrapper">
+            <section class="ris-section-wrapper ris-welcome__people-wrapper">
                 <div class="ris-title">Personen</div>
                 <div class="ris-subheader">
                     Wer macht in Köln Politik? Lernen Sie die Personen kennen, welche sich ehrenamtlich in den Gremien für Köln engagieren.
@@ -144,7 +144,7 @@
                 @endif
             </section>
 
-            <section class="ris-welcome__content_wrapper ris-welcome__bookmarks">
+            <section class="ris-section-wrapper ris-welcome__bookmarks">
                 <div class="ris-title">Merkliste</div>
                 <div class="ris-subheader">
                     Hier finden Sie Ihre gemerkten Themen, Sitzungen und Personen an einem Ort.

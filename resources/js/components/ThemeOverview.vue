@@ -134,11 +134,11 @@ export default {
         }
 
         new Swiper ('.swiper-container', {
-            slidesPerView: 8,
+            slidesPerView: 3,
             spaceBetween: 16,
 
             breakpoints: {
-                1920: {
+                /*1920: {
                     slidesPerView: 7
                 },
                 1440: {
@@ -149,7 +149,7 @@ export default {
                 },
                 1024: {
                     slidesPerView: 3
-                },
+                },*/
                 768: {
                     slidesPerView: 3
                 },

@@ -70,6 +70,9 @@ export default {
                     document.querySelector(`#${id[0]}-search-button`).classList.remove('bolt');
                 }
             }
+        },
+        print(e) {
+            console.log(e);
         }
     },
 };
@@ -80,7 +83,7 @@ export default {
         <div />
         <section class="ris-section-wrapper ris-content_six-eight-eight">
             <h1 class="ris-committee-list__headline ris-headline">Gremien</h1>
-            <Sorting @input="filterList" />
+            <Sorting @input="filterList" @change="print" drop-label="Sortierung" drop-id="committee-drop" :dropOptions="['A-Z']" />
             <transition-group tag="ul" name="fade" class="ris-committee-list-main-list ris-ul" v-if="!filtered">
                 <li v-for="item in sortedCommittees"
                     class="ris-committee-list-main-list__item"

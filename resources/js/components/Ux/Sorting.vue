@@ -1,5 +1,5 @@
 <script>
-import Dropdown from './Dropdown'
+import Dropdown from './Dropdown';
 export default {
     name: 'Sorting',
     components: {
@@ -30,11 +30,23 @@ export default {
             type: String,
             default: 'Suche nach Themen, Vorlagen, Sitzungen...'
         },
+        dropOptions: {
+            type: Array,
+            default: () => []
+        },
+        dropLabel: {
+            type: String,
+            default: () => ''
+        },
+        dropId: {
+            type: String,
+            default: 'dropId'
+        }
     },
     data() {
         return {
             value: this.inputValue,
-            dropval: ''
+            dropValue: ''
         };
     },
 };
@@ -44,8 +56,8 @@ export default {
 <template>
     <div class="ris-sorting">
         <div
-            :class="['ris-search ris-sorting__search',
-                     { hiddenMob: inputHiddenMob },
+            class="ris-search ris-sorting__search"
+            :class="[{ hiddenMob: inputHiddenMob },
                      { fullWidth : selectHiddenMob }]"
             v-if="isInput">
             <button class="ris-search__button">
@@ -56,23 +68,11 @@ export default {
                 :placeholder="inputPlaceholder"
                     >
         </div>
-        <Dropdown :options="['123','456','789']" id="kek" v-model="dropval" />
-<!--        <div-->
-<!--            :class="['ris-select ris-sorting__select',-->
-<!--                     { hiddenMob: selectHiddenMob },-->
-<!--                     { fullWidth: inputHiddenMob }]"-->
-<!--            v-if="isSelect">-->
-<!--            <label class="ris-select__label">Darstellung</label>-->
-
-<!--            <select class="ris-select__select">-->
-<!--                <option class="ris-select__option" data-sort-type="newest-first">-->
-<!--                    Das Neuste zuerst-->
-<!--                </option>-->
-<!--                <option class="ris-select__option" data-sort-type="oldest-first">-->
-<!--                    Chronologische Reihenfolge-->
-<!--                </option>-->
-<!--            </select>-->
-<!--            <span class="ris-i ris-i_chevron-double"/>-->
-<!--        </div>-->
+        <Dropdown class="ris-sorting__select" :class="[{ hiddenMob: selectHiddenMob }, { fullWidth: inputHiddenMob }]"
+            :label="dropLabel"
+            :options="dropOptions"
+            @change="$emit('change', dropValue)"
+            :id="dropId"
+            v-model="dropValue" />
     </div>
 </template>

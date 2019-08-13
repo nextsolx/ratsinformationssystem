@@ -20,10 +20,10 @@
     &__search {
         @include breakpoint($bp-mobile-max) {
             width: 50%;
-        }
-        &.fullWidth {
-            width: 100%;
-            margin: 0
+            &.fullWidth {
+                width: 100%;
+                margin: 0
+            }
         }
         &.hiddenMob {
             @include breakpoint($bp-mobile-max) {

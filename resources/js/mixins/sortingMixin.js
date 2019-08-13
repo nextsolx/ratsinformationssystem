@@ -6,6 +6,7 @@ export default {
     },
     methods: {
         sortBy(unfilteredList,value = 'function') {
+            this.filteredList = [];
             let values = [];
             unfilteredList
                 .forEach(el => {

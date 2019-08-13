@@ -1,9 +1,19 @@
-.ris-top-box {
+.ris-top-card-list {
+    @include breakpoint($bp-mobile-max) {
+        padding-left: $indent-m;
+        padding-right: $indent-m;
+    }
+
+    @include breakpoint($bp-tablet-min) {
+        margin-left: $indent-ml;
+        margin-right: $indent-ml;
+    }
+
     > .ris-title {
         margin-bottom: $indent-s;
     }
 
-    &__card {
+    &__item {
         border-radius: $b-radius-primary;
         box-shadow: 0 1px 6px 0 $c-box-shadow3;
         box-sizing: border-box;

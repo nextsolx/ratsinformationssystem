@@ -1,0 +1,13 @@
+.ris-theme-list {
+    &__content {
+        .ris-headline {
+            padding-bottom: $indent-s;
+            padding-top: $indent-s;
+        }
+    }
+
+    .ris-section-wrapper {
+        border-bottom: 0;
+        padding-bottom: 0;
+    }
+}

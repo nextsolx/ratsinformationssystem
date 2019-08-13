@@ -11,35 +11,26 @@
         }
     }
 
-    &__content {
-        @include breakpoint($bp-tablet-min) {
-            box-shadow: 0 5px 6px 0 $c-box-shadow3;
-            flex-basis: calc(100% - 320px);
-            position: relative;
-            z-index: 2;
+    .ris-section-wrapper {
+        &:first-child {
+            padding-top: $indent-ml;
         }
 
-        &_wrapper {
-            border-bottom: 1px solid $c-gray7;
+        .ris-title {
+            margin-bottom: $indent-s;
+        }
 
-            @include breakpoint($bp-mobile-max) {
-                padding: $indent-ml $indent-m;
-            }
+        .ris-subheader {
+            margin-bottom: $indent-m;
+        }
+    }
 
-            @include breakpoint($bp-tablet-min) {
-                margin-left: $indent-ml;
-                margin-right: $indent-ml;
-                padding-bottom: $indent-xl;
-                padding-top: $indent-ml;
-            }
-
-            .ris-title {
-                margin-bottom: $indent-s;
-            }
-
-            .ris-subheader {
-                margin-bottom: $indent-m;
-            }
+    &__content {
+        @include breakpoint($bp-tablet-min) {
+            box-shadow: 8px 5px 6px 0 $c-box-shadow3;
+            flex-basis: calc(100% - #{$width-aside-320});
+            position: relative;
+            z-index: 2;
         }
     }
 
@@ -152,6 +143,9 @@
     }
 
     .ris-filter-buttons {
+        margin-left: 0;
+        margin-right: 0;
+
         @include breakpoint($bp-tablet-min) {
             margin-top: $indent-ml;
         }
@@ -176,7 +170,7 @@
         }
 
         @include breakpoint($bp-mobile-max) {
-            border-radius: 4px;
+            border-radius: $b-radius-primary;
             box-shadow: 0 2px 4px 0 $c-box-shadow2;
             height: 30vh;
             position: relative;
@@ -201,7 +195,7 @@
             position: fixed;
             right: 0;
             top: 0;
-            width: 320px;
+            width: $width-aside-320;
 
             &__mobile {
                 display: none;
@@ -213,7 +207,7 @@
                 position: absolute;
                 right: 0;
                 top: 0;
-                width: 320px;
+                width: $width-aside-320;
             }
         }
 

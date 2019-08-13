@@ -21,7 +21,7 @@ if (isset($meetings) and is_array($meetings)) {
             Sitzungskalender
         </h1>
 
-        <div class="ris-calendar__flex-wrapper">
+        <div class="ris-calendar__flex-wrapper ris-content ris-content_has-widget ris-content_six-eight-eight">
             <calendar-app></calendar-app>
 
             <div class="ris-calendar__content">

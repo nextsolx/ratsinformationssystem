@@ -1,19 +1,6 @@
 .ris-action-box {
     display: flex;
-    margin-bottom: $indent-s;
     margin-top: $indent-s;
-    padding-bottom: $indent-ml;
-
-    @include breakpoint($bp-mobile-max) {
-        border-bottom: 1px solid $c-gray7;
-        margin-left: $indent-m;
-        margin-right: $indent-m;
-    }
-
-    @include breakpoint($bp-tablet-min) {
-        margin-left: $indent-ml;
-        margin-right: $indent-ml;
-    }
 
     .ris-filter {
         flex-grow: 1;

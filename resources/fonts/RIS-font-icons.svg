@@ -2,7 +2,7 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
 <metadata>
-Created by FontForge 20170731 at Fri Aug  9 16:34:11 2019
+Created by FontForge 20170731 at Tue Aug 13 16:56:41 2019
  By Aleksey,,,
 Copyright (c) 2019, Alexandr Krivonos
 </metadata>
@@ -20,7 +20,7 @@ Copyright (c) 2019, Alexandr Krivonos
     bbox="0 -200 1040 800"
     underline-thickness="50"
     underline-position="-150"
-    unicode-range="U+0041-006B"
+    unicode-range="U+0041-006C"
   />
 <missing-glyph 
 d="M33 0v666h265v-666h-265zM66 33h199v600h-199v-600z" />
@@ -116,5 +116,7 @@ l-70 70z" />
 d="M583 717l250 -250v-500q0 -35 -24.5 -59.5t-58.5 -24.5h-500q-35 0 -59 24.5t-24 59.5v666q0 35 24.5 59.5t58.5 24.5h333zM667 50v83h-334v-83h334zM667 217v83h-334v-83h334zM542 425h229l-229 229v-229z" />
     <glyph glyph-name="k" unicode="k" 
 d="M833 717q35 0 59.5 -24.5t24.5 -59.5v-500q0 -34 -24.5 -58.5t-59.5 -24.5h-583l-167 -167l1 750q0 35 24 59.5t59 24.5h666zM542 342v250h-84v-250h84zM542 175v83h-84v-83h84z" />
+    <glyph glyph-name="l" unicode="l" 
+d="M0 244v556h444v-556h-444zM0 -200v333h444v-333h-444zM556 -200v556h444v-556h-444zM556 800h444v-333h-444v333z" />
   </font>
 </defs></svg>

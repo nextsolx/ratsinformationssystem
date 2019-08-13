@@ -1,6 +1,22 @@
 .ris-meeting {
-    &__headline {
-        margin-bottom: $indent-m;
+    .ris-section-wrapper {
+        @include breakpoint($bp-tablet-min) {
+            border-bottom: 0;
+            margin-bottom: 0;
+        }
+
+        &.ris-meeting__headline {
+            margin-bottom: 0;
+        }
+
+        &.ris-tab {
+            @include breakpoint($bp-mobile-max) {
+                border-bottom: 0;
+                padding-bottom: 0;
+                padding-left: 0;
+                padding-right: 0;
+            }
+        }
     }
 
     .ris-h2 {
@@ -23,12 +39,6 @@
                 margin-top: $indent-m;
             }
         }
-    }
-
-    .ris-overview,
-    .ris-agenda,
-    .ris-participant {
-        padding-top: $indent-l;
     }
 
     .ris-tab-data {
@@ -60,6 +70,7 @@
 
             .ris-i {
                 margin-right: $indent-m;
+                font-size: $fs-xl;
 
                 @include breakpoint($bp-mobile-max) {
                     display: none;
@@ -70,9 +81,11 @@
         &__content {
             .ris-i {
                 margin-left: $indent-m;
+                color: $c-secondary;
             }
 
             @include breakpoint($bp-mobile-max) {
+                align-items: center;
                 display: flex;
                 justify-content: space-between;
             }
@@ -98,7 +111,10 @@
         display: flex;
         justify-content: space-between;
         margin-bottom: $indent-sm;
-        margin-top: $indent-sm;
+
+        &:not(:first-child) {
+            margin-top: $indent-sm;
+        }
 
         &:hover {
             color: $c-red;
@@ -110,10 +126,6 @@
 
         .ris-i_download {
             color: $c-red;
-        }
-
-        .ris-i_download-with-box {
-            color: $c-secondary;
         }
 
         .ris-text {

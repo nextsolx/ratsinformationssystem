@@ -1,20 +1,23 @@
 @extends('layouts.app')
 
 @section('content')
+
+    @include('layouts.breadcrumbs')
+
     <meeting inline-template>
         <main class="ris-main ris-meeting ris-content_six-eight-eight">
 
-            <section class="ris-section-wrapper">
+            <section class="ris-section-wrapper ris-meeting__headline">
                 {{--@todo --- fix mock data--}}
                 <div class="ris-caption ris-caption__top">Rat/0043/2018</div>
-                <h1 class="ris-meeting__headline ris-headline">
+                <h1 class="ris-headline">
                     {{ $meeting['title'] }}
                 </h1>
             </section>
 
-            <section class="ris-section-wrapper">
+            <section class="ris-section-wrapper ris-tab">
                 <ul class="ris-tab-list">
-                    <li class="ris-tab ris-tab_active ris-body-2" @click="openTab($event, 'overview')">
+                    <li class="ris-tab ris-tab_active" @click="openTab($event, 'overview')">
                         <span class="ris-i ris-i_info"></span>
                         <h2 class="ris-h2">Übersicht</h2>
                     </li>
@@ -25,7 +28,7 @@
                         <h2 class="ris-h2">Tagesordnung</h2>
                         <span class="ris-count">({{ $meeting['agenda'] }})</span>
                     </li>--}}
-                    <li class="ris-tab ris-body-2" @click="openTab($event, 'participant')">
+                    <li class="ris-tab" @click="openTab($event, 'participant')">
                         <span class="ris-i ris-i_people"></span>
                         <h2 class="ris-h2">Teilnehmer</h2>
                         <span class="ris-count">({{ $meeting['peopleCount'] }})</span>
@@ -103,4 +106,7 @@
 
         </main>
     </meeting>
+
+    @include('layouts.footer')
+
 @endsection

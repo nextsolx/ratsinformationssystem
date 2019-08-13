@@ -43,6 +43,7 @@
 
                     <div class="ris-map-detail">
                         <div class="ris-map-all-street-address ris-body-2">
+                            <span class="ris-i ris-i_marker-with-dot"></span>
                             <div>
                                 <div>{{ $topic->location[0]->streetAddress }}</div>
                                 <div>{{ $topic->location[0]->postalCode }} {{ $topic->location[0]->city }}</div>
@@ -50,10 +51,11 @@
                         </div>
 
                         {{--@todo --- fix link--}}
-                        <a href="{{ route('map') }}" class="ris-link ris-link_has-icon"
+                        <a href="{{ route('map') }}" class="ris-link ris-link_button ris-link_right"
                             title="{{ $topic->location[0]->city }}"
                         >
                             Karte öffnen
+                            <span class="ris-i ris-i_resize-text"></span>
                         </a>
                     </div>
                 </section>
@@ -80,7 +82,7 @@
 
                     <div class="ris-process">
                         <div class="ris-process__detail ris-process__item">
-                            <span class="ris-i ris-i__check ris-i_has-bg"></span>
+                            <span class="ris-i ris-i_check ris-i_has-bg"></span>
                             <div class="ris-process__date ris-body-2">{{ \Carbon\Carbon::parse($topic->date)->format('d. F Y') }}</div>
                             <h3 class="ris-process__name ris-h3">{{ $topic->name }}</h3>
                             <div class="ris-process__text ris-body-2">{{ \Illuminate\Support\Str::limit(strip_tags($topic->text), 5000) }}</div>
@@ -101,7 +103,7 @@
                             @foreach ($topic->process as $process)
                                 @if (isset($process->meeting))
                                     <div class="ris-process__agendum ris-process__item">
-                                        <span class="ris-i ris-i__check ris-i_has-bg"></span>
+                                        <span class="ris-i ris-i_check ris-i_has-bg"></span>
 
                                         @if (isset($process->meeting->dateFrom))
                                             <div class="ris-process__agendum-start ris-body-2">{{ \Carbon\Carbon::parse($process->meeting->dateFrom)->format('d. F Y') }}</div>

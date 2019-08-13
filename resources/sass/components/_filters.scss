@@ -13,7 +13,7 @@
 
     @include breakpoint($bp-tablet-min) {
         margin-right: $indent-sm;
-        min-width: $width-interactive-tablet-300;
+        min-width: $width-interactive-tablet;
     }
 
     &_has-indent {

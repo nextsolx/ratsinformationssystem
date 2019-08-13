@@ -79,7 +79,7 @@
     .ris-map-detail {
         @include breakpoint($bp-tablet-min) {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
         }
 
         .ris-img {
@@ -88,7 +88,7 @@
 
         .ris-link {
             @include breakpoint($bp-tablet-min) {
-                width: $width-interactive-tablet-300;
+                width: $width-interactive-tablet;
             }
         }
     }
@@ -100,11 +100,8 @@
             margin-bottom: $indent-m;
         }
 
-        &::before {
+        .ris-i_marker-with-dot {
             color: $c-secondary;
-            content: 'a';
-            display: inline-block;
-            font-family: $ff-ris-font-icons;
             font-size: $fs-xl;
             margin-right: $indent-sm;
         }
@@ -197,7 +194,7 @@
                 border-left: 2px solid $c-red;
             }
 
-            .ris-i__check {
+            .ris-i_check {
                 background-color: $c-red;
                 color: $c-white;
                 font-size: $fs-s;
@@ -264,7 +261,7 @@
             }
 
             @include breakpoint($bp-tablet-min) {
-                width: $width-interactive-tablet-300;
+                width: $width-interactive-tablet;
             }
         }
     }
@@ -275,7 +272,7 @@
         }
 
         @include breakpoint($bp-tablet-min) {
-            min-width: $width-interactive-tablet-300;
+            min-width: $width-interactive-tablet;
         }
     }
 }

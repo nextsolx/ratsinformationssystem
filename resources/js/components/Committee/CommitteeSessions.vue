@@ -1,5 +1,5 @@
 <script>
-import Sorting from './Sorting';
+import Sorting from '../Ux/Sorting';
 
 export default {
     name: 'CommitteeSessions',

@@ -2,8 +2,8 @@
 import Vue from 'vue';
 import CommitteeTableItem from './CommitteeTableItem';
 import CommitteeNavigation from './CommitteeNavigation';
-import Sorting from './Sorting';
-import sortingMixin from '../mixins/sortingMixin';
+import Sorting from '../Ux/Sorting';
+import sortingMixin from '../../mixins/sortingMixin';
 
 import checkView from 'vue-check-view';
 Vue.use(checkView);

@@ -1,7 +1,7 @@
 <script>
-import Sorting from './Sorting';
+import Sorting from '../Ux/Sorting';
 import CommitteeMember from './CommitteeMember';
-import sortingMixin from '../mixins/sortingMixin';
+import sortingMixin from '../../mixins/sortingMixin';
 
 export default {
     name: 'CommitteeMemberList',

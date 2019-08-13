@@ -72,7 +72,7 @@ $indent-s: 8px;
     color: $c-primary;
     font-family: $ff-helvetica;
     font-weight: bold;
-    margin: 0;
+    margin: $indent-m 0;
 
     @include breakpoint($bp-mobile-max) {
         font-size: $fs-xxxl;

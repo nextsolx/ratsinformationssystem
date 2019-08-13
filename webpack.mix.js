@@ -12,8 +12,8 @@ const mix = require('laravel-mix');
  */
 
 mix.options({
-        processCssUrls: true
-    });
+    processCssUrls: true
+});
 
 mix.copy('resources/img', 'public/img')
     .copy('resources/fonts', 'public/fonts')

@@ -31,12 +31,14 @@
                                         :class="selectedDistrictList.length > 0
                                         ? 'ris-filter-buttons__selected_active'
                                         : ''"
-                                v-show="selectedDistrictList.length > 0">
+                                    v-show="selectedDistrictList.length > 0"
+                                >
                                     <button class="ris-label ris-label_has-border"
                                             v-for="currentDistrictName in selectedDistrictList"
                                             @click="removeSelectedDistrict(currentDistrictName)"
                                     >
-                                        @{{ currentDistrictName }}<span class="ris-i ris-i_close"></span>
+                                        @{{ currentDistrictName }}
+                                        <span class="ris-i ris-i_close"></span>
                                     </button>
                                 </div>
 

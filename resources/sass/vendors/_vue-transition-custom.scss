@@ -1,11 +1,11 @@
-.ris-fade {
-    &-enter-active,
-    &-leave-active {
-        transition: all .2s;
-    }
+.fade-enter-active,
+.fade-leave-active {
+    transition: all .4s;
+    opacity: 1;
+}
 
-    &-enter,
-    &-leave-active {
+.fade-leave {
+    &-to {
         opacity: 0;
     }
 }

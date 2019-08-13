@@ -20,10 +20,12 @@ class Organization extends JsonResource
 
         return [
             'id' => $this->id,
-            'name' => $this->name,
+            'title' => $this->name,
             'shortName' => $this->shortName,
             'organizationType' => $this->organizationType,
             'classification' => $this->classification,
+            'memberCount' => $this->peopleCount(),
+            'nextMeetingDate' => $this->nextMeetingDate(),
         ];
     }
 }

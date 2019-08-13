@@ -26,32 +26,11 @@
             border-bottom: 1px solid $c-gray7;
             outline: none;
 
-            &::before {
-                padding-right: 5px;
-                display: inline-block;
-                font-family: $ff-ris-font-icons;
-                font-size: $fs-xl;
+            text-transform: capitalize;
 
+            .ris-i {
                 @include breakpoint($bp-mobile-max) {
                     display: none;
-                }
-            }
-
-            &--aufgaben {
-                &:before {
-                    content: 'j';
-                }
-            }
-
-            &--mitglieder {
-                &:before {
-                    content: 'X';
-                }
-            }
-
-            &--sitzungen {
-                &:before {
-                    content: 'b';
                 }
             }
 

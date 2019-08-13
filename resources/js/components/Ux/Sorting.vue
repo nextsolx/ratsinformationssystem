@@ -1,6 +1,10 @@
 <script>
+import Dropdown from './Dropdown'
 export default {
     name: 'Sorting',
+    components: {
+        Dropdown
+    },
     props: {
         inputValue: {
             type: String,
@@ -29,7 +33,8 @@ export default {
     },
     data() {
         return {
-            value: this.inputValue
+            value: this.inputValue,
+            dropval: ''
         };
     },
 };
@@ -51,22 +56,23 @@ export default {
                 :placeholder="inputPlaceholder"
                     >
         </div>
-        <div
-            :class="['ris-select ris-sorting__select',
-                     { hiddenMob: selectHiddenMob },
-                     { fullWidth: inputHiddenMob }]"
-            v-if="isSelect">
-            <label class="ris-select__label">Darstellung</label>
+        <Dropdown :options="['123','456','789']" id="kek" v-model="dropval" />
+<!--        <div-->
+<!--            :class="['ris-select ris-sorting__select',-->
+<!--                     { hiddenMob: selectHiddenMob },-->
+<!--                     { fullWidth: inputHiddenMob }]"-->
+<!--            v-if="isSelect">-->
+<!--            <label class="ris-select__label">Darstellung</label>-->
 
-            <select class="ris-select__select">
-                <option class="ris-select__option" data-sort-type="newest-first">
-                    Das Neuste zuerst
-                </option>
-                <option class="ris-select__option" data-sort-type="oldest-first">
-                    Chronologische Reihenfolge
-                </option>
-            </select>
-            <span class="ris-i ris-i_chevron-double"/>
-        </div>
+<!--            <select class="ris-select__select">-->
+<!--                <option class="ris-select__option" data-sort-type="newest-first">-->
+<!--                    Das Neuste zuerst-->
+<!--                </option>-->
+<!--                <option class="ris-select__option" data-sort-type="oldest-first">-->
+<!--                    Chronologische Reihenfolge-->
+<!--                </option>-->
+<!--            </select>-->
+<!--            <span class="ris-i ris-i_chevron-double"/>-->
+<!--        </div>-->
     </div>
 </template>

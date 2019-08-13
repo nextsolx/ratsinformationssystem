@@ -43,7 +43,9 @@
                             Termin
                         </div>
                         <div class="ris-body-2 ris-body-2__content">
-                            {{ $meeting['dateFrom'] }} 15:40 – 23:11 Uhr
+                            {{ \Illuminate\Support\Carbon::parse($meeting['dateFrom'])->locale('de')->format('l, d. F Y') }}
+                            {{ \Illuminate\Support\Carbon::parse($meeting['dateFrom'])->format('H:i') }}-{{ \Illuminate\Support\Carbon::parse($meeting['dateTill'])->format('H:i') }}
+                            Uhr
                             <span class="ris-i ris-i_calendar"></span>
                         </div>
                     </div>
@@ -54,6 +56,16 @@
                         </div>
                         <div class="ris-body-2 ris-body-2__content">
                             Rathaus, Spanischer Bau, Ratssaal
+                            <span class="ris-i ris-i_marker-with-dot"></span>
+                        </div>
+                    </div>
+                    <div class="ris-flex">
+                        <div class="ris-body-2 ris-body-2__headline">
+                            <span class="ris-i ris-i_marker-with-dot"></span>
+                            Gremium
+                        </div>
+                        <div class="ris-body-2 ris-body-2__content">
+                            Ausschuss für Anregungen und Beschwerden
                             <span class="ris-i ris-i_marker-with-dot"></span>
                         </div>
                     </div>

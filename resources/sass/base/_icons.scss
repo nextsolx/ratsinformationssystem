@@ -14,6 +14,12 @@
         padding: 7px;
     }
 
+    &_calendar-empty {
+        &::before {
+            content: "b";
+        }
+    }
+
     &_add {
         &::before {
             content: 'A';
@@ -176,12 +182,6 @@
         }
     }
 
-    &_calendar-empty {
-        &::before {
-            content: 'b';
-        }
-    }
-
     &_house {
         &::before {
             content: 'c';
@@ -221,6 +221,18 @@
     &_calendar-arrow {
         &::before {
             content: 'i';
+        }
+    }
+
+    &_notice-box {
+        &::before {
+            content: 'k';
+        }
+    }
+
+    &_doc {
+        &::before {
+            content: 'j';
         }
     }
 }

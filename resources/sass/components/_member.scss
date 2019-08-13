@@ -1,0 +1,40 @@
+.ris-member {
+    &-link {
+        display: flex;
+        align-items: center;
+        padding: $indent-m $indent-xl $indent-m 0;
+        position: relative;
+        text-decoration: none;
+        color: $c-gray;
+
+        &:hover {
+            // color: $c-red;
+            .ris-member-link__heading {
+                color: $c-red;
+            }
+            .ris-member-link__button {
+                color: $c-red;
+                transition: all ease-in-out .1s;
+                transform: translate(2px,-50%);
+            }
+        }
+
+        &__img {
+            border-radius: 50%;
+            height: 48px;
+            width: 48px;
+            margin-right: 16px;
+        }
+
+        &__button {
+            position: absolute;
+            transition: all ease-in-out .3s;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: 0;
+            font-size: $fs-s;
+        }
+    }
+}

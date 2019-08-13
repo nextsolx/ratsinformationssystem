@@ -1,0 +1,207 @@
+.ris-committee {
+    .ris-section-wrapper {
+        border-bottom: 0;
+    }
+
+    &-navigation {
+        margin-bottom: $indent-l;
+        @include breakpoint($bp-mobile-max) {
+            margin-bottom: $indent-m;
+        }
+
+        &__list {
+            display: flex;
+            height: 56px;
+        }
+
+        &__item {
+            width: 33.33%;
+        }
+
+        &__button {
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            border-color: transparent;
+            border-bottom: 1px solid $c-gray7;
+            outline: none;
+
+            text-transform: capitalize;
+
+            .ris-i {
+                text-transform: none;
+                @include breakpoint($bp-mobile-max) {
+                    display: none;
+                }
+            }
+
+            &.active {
+                border-bottom: 4px solid $c-red;
+                color: $c-red;
+                font-weight: bold;
+            }
+        }
+
+        &__counter {
+            @include breakpoint($bp-mobile-max) {
+                display: none;
+            }
+        }
+    }
+
+    &-info {
+
+        &__text {
+            display: inline-block;
+            margin-bottom: 40px;
+        }
+
+        &__wrapper {
+            display: flex;
+            align-items: center;
+
+            @include breakpoint($bp-mobile-max) {
+                flex-wrap: wrap;
+            }
+        }
+
+        &__confirm {
+            border-top: 1px solid $c-gray7;
+            border-bottom: 1px solid $c-gray7;
+            padding: $indent-sm 0 $indent-xl;
+            margin-bottom: $indent-sm;
+
+            @include breakpoint($bp-mobile-max) {
+                margin-bottom: $indent-ml;
+                padding: $indent-sm $indent-m $indent-xl;
+                width: 100%;
+            }
+        }
+
+        &__heading {
+            display: inline-block;
+            margin-bottom: $indent-l;
+
+            @include breakpoint($bp-mobile-max) {
+                margin-bottom: 20px;
+            }
+        }
+
+        &__subheading {
+            position: relative;
+            padding: 0 0 0 60px;
+
+            .ris-i {
+                position: absolute;
+                left: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                color: $c-gray2;
+                padding-right: 5px;
+                font-size: 50px;
+
+                @include breakpoint($bp-mobile-max) {
+                    top: 0;
+                    transform: translateY(50%);
+                }
+            }
+        }
+
+        &-list {
+            &__item {
+                position: relative;
+                font-size: $fs-l;
+                font-weight: bold;
+                color: $c-gray;
+                padding: 16px 20px 16px 0;
+
+                @include breakpoint($bp-mobile-max) {
+                    border-top: 1px solid $c-gray7;
+                    border-bottom: 1px solid $c-gray7;
+                }
+            }
+
+            &__link {
+                position: absolute;
+                right: 0;
+                top: 50%;
+                transform: translateY(-50%);
+
+                &.ris-i {
+                    font-size: $fs-xl;
+                    color: $c-gray;
+                }
+            }
+        }
+
+        &__button {
+            background-color: $c-white2;
+            color: $c-blue5;
+            font-size: $fs-l;
+            max-width: 212px;
+            width: 100%;
+            height: 48px;
+            padding: 0;
+
+            @include breakpoint($bp-mobile-max) {
+                margin-top: $indent-m;
+                max-width: 100%;
+            }
+        }
+    }
+
+    &-members {
+        &__heading {
+            margin-bottom: $indent-sm;
+        }
+
+        &-main-list {
+            &__item {
+                &:not(:first-child) {
+                    margin-top: $indent-xl;
+
+                    @include breakpoint($bp-mobile-max) {
+                        margin-top: $indent-ml;
+                    }
+                }
+            }
+        }
+
+        &-secondary-list {
+            &__item {
+                border-top: 1px solid $c-gray7;
+
+                &:last-child {
+                    border-bottom: 1px solid $c-gray7;
+                }
+            }
+        }
+    }
+
+    &-sessions {
+        &__heading {
+            margin-bottom: $indent-l;
+        }
+    }
+
+    &-members,
+    &-sessions {
+        &__sorting {
+            margin-bottom: 36px;
+
+            @include breakpoint($bp-mobile-max) {
+                margin-bottom: $indent-m;
+                padding: 0 16px 16px;
+                width: 100%;
+                border-bottom: 1px solid $c-gray7;
+            }
+        }
+
+        &__heading {
+            @include breakpoint($bp-mobile-max) {
+                margin-bottom: $indent-m;
+            }
+        }
+    }
+}
+

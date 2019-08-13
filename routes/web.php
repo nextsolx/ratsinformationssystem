@@ -39,9 +39,9 @@ Route::get('/karte', function () {
     return view('map');
 })->name('map');
 
-Route::get('/gremien', function () {
-    return view('committee');
-})->name('committee');
+Route::get('/gremien-list', 'GremienController@list')->name('committee-list');
+
+Route::get('/gremien/{gremium}', 'GremienController@view')->name('committee');
 
 Route::get('/personen', function () {
     return view('people');

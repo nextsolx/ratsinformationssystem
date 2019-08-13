@@ -1,9 +1,4 @@
 .ris-meeting {
-    //@todo --- tmp width instead class .six-eighty-eight
-    //max-width: 688px;
-    //margin-left: auto;
-    //margin-right: auto;
-
     &__headline {
         margin-bottom: $indent-m;
     }
@@ -84,7 +79,8 @@
 
             @include breakpoint($bp-tablet-min) {
                 .ris-i_calendar,
-                .ris-i_marker-with-dot {
+                .ris-i_marker-with-dot,
+                .ris-i_squares-in-square {
                     display: none;
                 }
             }
@@ -97,15 +93,32 @@
     }
 
     .ris-document {
+        align-items: center;
+        color: $c-primary;
         display: flex;
         justify-content: space-between;
+        margin-bottom: $indent-sm;
+        margin-top: $indent-sm;
+
+        &:hover {
+            color: $c-red;
+
+            .ris-i_download-with-box {
+                color: $c-red;
+            }
+        }
 
         .ris-i_download {
             color: $c-red;
         }
 
+        .ris-i_download-with-box {
+            color: $c-secondary;
+        }
+
         .ris-text {
             flex-grow: 1;
+            text-transform: capitalize;
         }
 
         .ris-i_download {

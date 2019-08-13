@@ -223,4 +223,16 @@
             content: 'i';
         }
     }
+
+    &_doc {
+        &::before {
+            content: 'j';
+        }
+    }
+
+    &_squares-in-square {
+        &::before {
+            content: 'k';
+        }
+    }
 }

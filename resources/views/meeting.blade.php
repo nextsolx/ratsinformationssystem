@@ -2,7 +2,7 @@
 
 @section('content')
     <meeting inline-template>
-        <main class="ris-main ris-meeting">
+        <main class="ris-main ris-meeting ris-content_six-eight-eight">
 
             <section class="ris-section-wrapper">
                 {{--@todo --- fix mock data--}}
@@ -61,35 +61,29 @@
                     </div>
                     <div class="ris-flex">
                         <div class="ris-body-2 ris-body-2__headline">
-                            <span class="ris-i ris-i_marker-with-dot"></span>
+                            <span class="ris-i ris-i_squares-in-square"></span>
                             Gremium
                         </div>
                         <div class="ris-body-2 ris-body-2__content">
                             Ausschuss für Anregungen und Beschwerden
-                            <span class="ris-i ris-i_marker-with-dot"></span>
+                            <span class="ris-i ris-i_squares-in-square"></span>
                         </div>
                     </div>
                     <div class="ris-flex">
                         <div class="ris-body-2 ris-body-2__headline">
-                            <span class="ris-i ris-i_download"></span>
+                            <span class="ris-i ris-i_doc"></span>
                             Dokumente
                         </div>
                         <div class="ris-body-2 ris-body-2__content ris-document-list">
-                            <div class="ris-document">
-                                <span class="ris-i ris-i_download"></span>
-                                <span class="ris-text">Einladung Rat</span>
-                                <span class="ris-i ris-i_add"></span>
-                            </div>
-                            <div class="ris-document">
-                                <span class="ris-i ris-i_download"></span>
-                                <span class="ris-text">Einladung Rat</span>
-                                <span class="ris-i ris-i_add"></span>
-                            </div>
-                            <div class="ris-document">
-                                <span class="ris-i ris-i_download"></span>
-                                <span class="ris-text">Einladung Rat</span>
-                                <span class="ris-i ris-i_add"></span>
-                            </div>
+                            @foreach($meeting['files'] as $file)
+                                <a class="ris-document ris-document-one ris-link" title="{{ $file['name'] }}"
+                                    href="/{{ $file['downloadUrl'] }}"
+                                >
+                                    <span class="ris-i ris-i_download"></span>
+                                    <span class="ris-text">{{ $file['name'] }}</span>
+                                    <span class="ris-i ris-i_download-with-box"></span>
+                                </a>
+                            @endforeach
                         </div>
                     </div>
                 </div>

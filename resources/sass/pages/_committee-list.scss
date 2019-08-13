@@ -17,16 +17,16 @@
         }
 
         &__item {
-            text-align: right;
             padding-right: 15px;
+            text-align: right;
         }
 
         &__button {
-            text-transform: uppercase;
-            padding: 7px 3px;
             background-color: transparent;
             border: 0;
             outline: none;
+            padding: 7px 3px;
+            text-transform: uppercase;
 
             &.bolt {
                 font-weight: bold;
@@ -75,10 +75,10 @@
             border-bottom: 1px solid $c-gray7;
 
             &-wrapper {
-                color: $c-gray8;
-                font-size: $fs-l;
-                display: flex;
                 align-items: center;
+                color: $c-gray8;
+                display: flex;
+                font-size: $fs-l;
 
                 @include breakpoint($bp-mobile-max) {
                     display: none;
@@ -89,20 +89,16 @@
         &__counter {
             margin-right: $indent-m;
 
-            &::before {
-                content: 'X';
-                display: inline-block;
-                font-family: $ff-ris-font-icons;
+            .ris-i {
                 font-size: $fs-xxl;
+                padding-right: 10px;
             }
         }
 
         &__time {
-            &::before {
-                content: 'i';
-                display: inline-block;
-                font-family: $ff-ris-font-icons;
+            .ris-i {
                 font-size: $fs-xl;
+                padding-right: 10px;
             }
         }
 
@@ -115,18 +111,18 @@
     }
 
     &__link {
-        display: block;
         cursor: pointer;
+        display: block;
         padding: 16px 36px 16px 0;
-        text-decoration: none;
         position: relative;
+        text-decoration: none;
 
         &::after {
+            color: $c-gray8;
             content: 'I';
             display: inline-block;
             font-family: $ff-ris-font-icons;
             font-size: $fs-s;
-            color: $c-gray8;
             position: absolute;
             right: 0;
             top: 50%;

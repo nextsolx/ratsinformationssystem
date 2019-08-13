@@ -24,8 +24,8 @@ export default {
         <a :href="'/gremien/' + committee.id" class="ris-committee-list__link">
             <h3 class="ris-h3 ris-committee-list__subtitle">{{ committee.title }}</h3>
             <span class="ris-committee-list-secondary-list__item-wrapper">
-                <span class="ris-committee-list-secondary-list__counter">{{ committee.memberCount }}</span>
-                <time class="ris-committee-list-secondary-list__time" v-if="committee.nextMeetingDate">{{ committee.nextMeetingDate | momentDate }}. {{ committee.nextMeetingDate | momentWeek }}</time>
+                <span class="ris-committee-list-secondary-list__counter"><span class="ris-i ris-i_people" />{{ committee.memberCount }}</span>
+                <time class="ris-committee-list-secondary-list__time" v-if="committee.nextMeetingDate"><span class="ris-i ris-i_calendar-arrow" />{{ committee.nextMeetingDate | momentDate }}. {{ committee.nextMeetingDate | momentWeek }}</time>
             </span>
         </a>
     </li>

@@ -34,6 +34,7 @@ export default {
     },
     methods: {
         sortByChar() {
+            this.sortedCommittees = [];
             let chars = [];
             this.committeesList
                 .sort((a, b) => a.title === b.title ? 0 : +(a.title > b.title) || -1)
@@ -55,7 +56,6 @@ export default {
                 this.filtered = true;
             }
             else {
-                this.sortedCommittees = [];
                 this.sortByChar();
                 this.filtered = false;
             }

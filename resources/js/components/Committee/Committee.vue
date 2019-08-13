@@ -41,7 +41,9 @@ export default {
                         @click="activeTab = tab"
                         class="ris-committee-navigation__button"
                         :class="[`ris-committee-navigation__button`, activeTab === tab ? 'active' : '' ]">
-                        <span :class="['ris-i ris-i_calendar-empty']" />
+                        <span v-if="tab === 'sitzungen'" class="ris-i ris-i_calendar-empty" />
+                        <span v-if="tab === 'aufgaben'" class="ris-i ris-i_doc" />
+                        <span v-if="tab === 'mitglieder'" class="ris-i ris-i_people" />
                         {{ tab }}
                         <span v-if="tab === 'mitglieder'" class="ris-committee-navigation__counter">({{ members.length }})</span>
                     </button>

@@ -29,6 +29,7 @@
             text-transform: capitalize;
 
             .ris-i {
+                text-transform: none;
                 @include breakpoint($bp-mobile-max) {
                     display: none;
                 }
@@ -90,16 +91,13 @@
             position: relative;
             padding: 0 0 0 60px;
 
-            &::before {
+            .ris-i {
                 position: absolute;
                 left: 0;
                 top: 50%;
                 transform: translateY(-50%);
-                content: 'k';
                 color: $c-gray2;
                 padding-right: 5px;
-                display: inline-block;
-                font-family: $ff-ris-font-icons;
                 font-size: 50px;
 
                 @include breakpoint($bp-mobile-max) {
@@ -129,14 +127,10 @@
                 top: 50%;
                 transform: translateY(-50%);
 
-                &::before {
-                    content: 'h';
-                    display: inline-block;
-                    font-family: $ff-ris-font-icons;
+                &.ris-i {
                     font-size: $fs-xl;
                     color: $c-gray;
                 }
-
             }
         }
 

@@ -27,6 +27,7 @@ export default {
                 <span class="ris-committee-list-secondary-list__counter"><span class="ris-i ris-i_people" />{{ committee.memberCount }}</span>
                 <time class="ris-committee-list-secondary-list__time" v-if="committee.nextMeetingDate"><span class="ris-i ris-i_calendar-arrow" />{{ committee.nextMeetingDate | momentDate }}. {{ committee.nextMeetingDate | momentWeek }}</time>
             </span>
+            <button class="ris-i ris-i_chevron-right ris-committee-list__button" />
         </a>
     </li>
 </template>

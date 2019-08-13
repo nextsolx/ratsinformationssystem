@@ -117,23 +117,28 @@
         position: relative;
         text-decoration: none;
 
-        &::after {
-            color: $c-gray8;
-            content: 'I';
-            display: inline-block;
-            font-family: $ff-ris-font-icons;
-            font-size: $fs-s;
-            position: absolute;
-            right: 0;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-
         &:hover {
-            .ris-committee-list__subtitle,
-            &::after {
-                color: $c-red;
+            .ris-committee-list{
+                &__subtitle {
+                    color: $c-red;
+                }
+                &__button {
+                    color: $c-red;
+                    transition: all ease-in-out .1s;
+                    transform: translate(2px, -50%);
+                }
             }
         }
+    }
+    &__button {
+        transition: all ease-in-out .1s;
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        border: 0;
+        background: none;
+        font-size: $fs-s;
+        color: $c-gray8;
     }
 }

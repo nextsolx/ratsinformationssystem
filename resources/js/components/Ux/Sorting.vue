@@ -10,11 +10,11 @@ export default {
             type: String,
             default: () => ''
         },
-        isSelect: {
+        displaySelect: {
             type: Boolean,
             default: true
         },
-        isInput: {
+        displayInput: {
             type: Boolean,
             default: true
         },
@@ -47,7 +47,7 @@ export default {
             :class="['ris-search ris-sorting__search',
                      { hiddenMob: inputHiddenMob },
                      { fullWidth : selectHiddenMob }]"
-            v-if="isInput">
+            v-if="displayInput">
             <button class="ris-search__button">
                 <span class="ris-i ris-i_search"/>
             </button>
@@ -57,22 +57,22 @@ export default {
                     >
         </div>
         <Dropdown :options="['123','456','789']" id="kek" v-model="dropval" />
-<!--        <div-->
-<!--            :class="['ris-select ris-sorting__select',-->
-<!--                     { hiddenMob: selectHiddenMob },-->
-<!--                     { fullWidth: inputHiddenMob }]"-->
-<!--            v-if="isSelect">-->
-<!--            <label class="ris-select__label">Darstellung</label>-->
+        <div
+            :class="['ris-select ris-sorting__select',
+                     { hiddenMob: selectHiddenMob },
+                     { fullWidth: inputHiddenMob }]"
+            v-if="displaySelect">
+            <label class="ris-select__label">Darstellung</label>
 
-<!--            <select class="ris-select__select">-->
-<!--                <option class="ris-select__option" data-sort-type="newest-first">-->
-<!--                    Das Neuste zuerst-->
-<!--                </option>-->
-<!--                <option class="ris-select__option" data-sort-type="oldest-first">-->
-<!--                    Chronologische Reihenfolge-->
-<!--                </option>-->
-<!--            </select>-->
-<!--            <span class="ris-i ris-i_chevron-double"/>-->
-<!--        </div>-->
+            <select class="ris-select__select">
+                <option class="ris-select__option" data-sort-type="newest-first">
+                    Das Neuste zuerst
+                </option>
+                <option class="ris-select__option" data-sort-type="oldest-first">
+                    Chronologische Reihenfolge
+                </option>
+            </select>
+            <span class="ris-i ris-i_chevron-double"/>
+        </div>
     </div>
 </template>

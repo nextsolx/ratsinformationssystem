@@ -6,7 +6,7 @@ export default {
     mixins: [dateFilterMixin],
     props: {
         meetingSortedDayList: {
-            type: Array,
+            type: Object,
             default: () => []
         }
     },
@@ -16,28 +16,34 @@ export default {
 <template>
     <section class="ris-calendar__card-day">
         <div class="ris-calendar__card-day-left">
-            {{ meetingSortedDayList.title }}
+            {{ meetingSortedDayList.title | momentDate }}
+            <br>
+            <span class="ris-calendar__card-day-of-week">
+                {{ meetingSortedDayList.title | momentDayFormat }}
+            </span>
         </div>
 
         <div class="ris-calendar__card-day-right">
             <div class="ris-calendar__card"
                 v-for="meetup in meetingSortedDayList.data"
                 :key="meetup.title"
-                :data-date-from="dateFrom"
+
                     >
-                <h2 class="ris-title">
-                    {{ meetup.title }}
-                </h2>
-                <div class="ris-subheader">
-                    Lorem data UAK/
-                    <span>00{{ meetup.date }}</span>
-                    /
-                    <span>{{ meetup.date}}</span>
-                </div>
-                <div class="ris-session-count">
-                    <div class="ris-session-count__agenda">{{ meetup.topCount }}</div>
-                    <div class="ris-session-count__people">{{ meetup.attendeesCount }}</div>
-                    <div class="ris-session-count__file" v-if="meetup.fileCount">{{ meetup.fileCount }}</div>
+                <div>
+                    <h3 class="ris-title">
+                        {{ meetup.title }}
+                    </h3>
+                    <div  v-if="!meetup.isCancelled">
+                        <p class="ris-subheader" >BA/0028/2018</p>
+                        <span class="ris-session-count">
+                            <span class="ris-session-count__agenda"><span class="ris-i ris-i_list" />{{ meetup.topCount }}</span>
+                            <span class="ris-session-count__people"><span class="ris-i ris-i_people" />{{ meetup.attendeesCount }}</span>
+                            <span class="ris-session-count__file" v-if="meetup.fileCount">{{ meetup.fileCount }}</span>
+                        </span>
+                    </div>
+                    <p v-else class="ris-calendar__placeholder">
+                        Sitzung ist ausgefallen
+                    </p>
                 </div>
             </div>
         </div>

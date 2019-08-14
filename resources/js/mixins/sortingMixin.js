@@ -1,7 +1,8 @@
 export default {
     data() {
         return {
-            sortedList: []
+            sortedList: [],
+            filteredList: [],
         };
     },
     methods: {
@@ -20,7 +21,19 @@ export default {
                     }
                 });
             this.sortedList = [...sortedList];
+        },
+        filterList (value) {
+            if (value) {
+                this.filteredList = this.unfilteredList
+                    .filter(el => el[this.filterValue].toLowerCase().includes(value.toLowerCase()));
+                this.filtered = true;
+            }
+            else {
+                // this.sortBy(this.unfilteredList, this.filterValue);
+                this.filtered = false;
+            }
         }
     },
+
 };
 

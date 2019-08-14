@@ -17,12 +17,11 @@ export default {
         options: {
             type: Array,
             default: () => []
+        },
+        value: {
+            type: String,
+            default: ''
         }
-    },
-    data () {
-        return {
-            selected: this.options[0]
-        };
     }
 };
 </script>
@@ -32,12 +31,9 @@ export default {
         <label class="ris-select__label" :for="id" v-if="label">
             {{ label }}
         </label>
-        <select :id="id" class="ris-select__select" v-model="selected" @change="$emit('change', selected)">
-            <option class="ris-select__option" >
-                    test
-                </option>
-                <option class="ris-select__option" >
-                test1
+        <select :id="id" class="ris-select__select" :value="value" @change="$event => $emit('change', $event.target.value)">
+            <option class="ris-select__option" v-for="option in options" :key="option">
+                {{ option }}
             </option>
         </select>
 

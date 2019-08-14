@@ -166,7 +166,7 @@ Bei der Geschäftsstelle des Ausschusses für Anregungen und Beschwerden können
             'meetings' => [
                 [
                     'title' => 'Sitzungs Nr. 6',
-                    'date' => '03.12.2019',
+                    'date' => '2019-12-03 18:00:00',
                     'topCount' => rand(4, 16),
                     'attendeesCount' => rand(17, 33),
                     'decisionTemplate' => 'BA/0028/2018',
@@ -175,7 +175,7 @@ Bei der Geschäftsstelle des Ausschusses für Anregungen und Beschwerden können
                 ],
                 [
                     'title' => 'Sitzungs Nr. 5',
-                    'date' => '29.10.2019',
+                    'date' => '2019-10-29 18:00:00',
                     'topCount' => rand(4, 16),
                     'attendeesCount' => rand(17, 33),
                     'decisionTemplate' => '',
@@ -184,7 +184,7 @@ Bei der Geschäftsstelle des Ausschusses für Anregungen und Beschwerden können
                 ],
                 [
                     'title' => 'Sitzungs Nr. 4',
-                    'date' => '03.09.2019',
+                    'date' => '2019-09-03 18:00:00',
                     'topCount' => rand(4, 16),
                     'attendeesCount' => rand(17, 33),
                     'decisionTemplate' => 'BA/0028/2018',
@@ -193,7 +193,16 @@ Bei der Geschäftsstelle des Ausschusses für Anregungen und Beschwerden können
                 ],
                 [
                     'title' => 'Sitzungs Nr. 3',
-                    'date' => '02.07.2019',
+                    'date' => '2017-07-02 18:00:00',
+                    'topCount' => rand(4, 16),
+                    'attendeesCount' => rand(17, 33),
+                    'decisionTemplate' => '',
+                    'isCancelled' => true,
+                    'location' => 'Rathaus Spanischer Bau, Theodor-Heuss-Saal, Raum-Nr. A 119'
+                ],
+                [
+                    'title' => 'Sitzungs Nr. 3',
+                    'date' => '2017-05-02 18:00:00',
                     'topCount' => rand(4, 16),
                     'attendeesCount' => rand(17, 33),
                     'decisionTemplate' => '',
@@ -202,7 +211,7 @@ Bei der Geschäftsstelle des Ausschusses für Anregungen und Beschwerden können
                 ],
                 [
                     'title' => 'Sitzungs Nr. 2',
-                    'date' => '14.05.2019',
+                    'date' => '2019-05-14 18:00:00',
                     'topCount' => rand(4, 16),
                     'attendeesCount' => rand(17, 33),
                     'decisionTemplate' => 'BA/0028/2018',
@@ -211,7 +220,7 @@ Bei der Geschäftsstelle des Ausschusses für Anregungen und Beschwerden können
                 ],
                 [
                     'title' => 'Sitzungs Nr. 1',
-                    'date' => '14.05.2019',
+                    'date' => '2019-05-14 18:00:00',
                     'topCount' => rand(4, 16),
                     'attendeesCount' => rand(17, 33),
                     'decisionTemplate' => '',
@@ -220,7 +229,7 @@ Bei der Geschäftsstelle des Ausschusses für Anregungen und Beschwerden können
                 ],
                 [
                     'title' => 'Sitzungs Nr. 8',
-                    'date' => '27.11.2018',
+                    'date' => '2018-11-27 18:00:00',
                     'topCount' => rand(4, 16),
                     'attendeesCount' => rand(17, 33),
                     'decisionTemplate' => 'BA/0028/2018',
@@ -229,7 +238,7 @@ Bei der Geschäftsstelle des Ausschusses für Anregungen und Beschwerden können
                 ],
                 [
                     'title' => 'Sitzungs Nr. 7',
-                    'date' => '30.10.2018',
+                    'date' => '2019-10-30 18:00:00',
                     'topCount' => rand(4, 16),
                     'attendeesCount' => rand(17, 33),
                     'decisionTemplate' => 'BA/0028/2018',
@@ -238,7 +247,7 @@ Bei der Geschäftsstelle des Ausschusses für Anregungen und Beschwerden können
                 ],
                 [
                     'title' => 'Sitzungs Nr. 6',
-                    'date' => '13.09.2018',
+                    'date' => '2019-09-13 18:00:00',
                     'topCount' => rand(4, 16),
                     'attendeesCount' => rand(17, 33),
                     'decisionTemplate' => '',
@@ -247,7 +256,7 @@ Bei der Geschäftsstelle des Ausschusses für Anregungen und Beschwerden können
                 ],
                 [
                     'title' => 'Sitzungs Nr. 5',
-                    'date' => '12.06.2018',
+                    'date' => '2019-06-12 18:00:00',
                     'topCount' => rand(4, 16),
                     'attendeesCount' => rand(17, 33),
                     'decisionTemplate' => '',
@@ -256,7 +265,7 @@ Bei der Geschäftsstelle des Ausschusses für Anregungen und Beschwerden können
                 ],
                 [
                     'title' => 'Sitzungs Nr. 4',
-                    'date' => '08.05.2018',
+                    'date' => '2018-05-08 18:00:00',
                     'topCount' => rand(4, 16),
                     'attendeesCount' => rand(17, 33),
                     'decisionTemplate' => 'BA/0028/2018',
@@ -265,7 +274,7 @@ Bei der Geschäftsstelle des Ausschusses für Anregungen und Beschwerden können
                 ],
                 [
                     'title' => 'Sitzungs Nr. 3',
-                    'date' => '10.04.2018',
+                    'date' => '2019-04-10 18:00:00',
                     'topCount' => rand(4, 16),
                     'attendeesCount' => rand(17, 33),
                     'decisionTemplate' => '',
@@ -274,7 +283,7 @@ Bei der Geschäftsstelle des Ausschusses für Anregungen und Beschwerden können
                 ],
                 [
                     'title' => 'Sitzungs Nr. 2',
-                    'date' => '13.03.2018',
+                    'date' => '2019-03-13 18:00:00',
                     'topCount' => rand(4, 16),
                     'attendeesCount' => rand(17, 33),
                     'decisionTemplate' => 'BA/0028/2018',
@@ -283,7 +292,7 @@ Bei der Geschäftsstelle des Ausschusses für Anregungen und Beschwerden können
                 ],
                 [
                     'title' => 'Sitzungs Nr. 1',
-                    'date' => '16.01.2018',
+                    'date' => '2018-01-16 18:00:00',
                     'topCount' => rand(4, 16),
                     'attendeesCount' => rand(17, 33),
                     'decisionTemplate' => '',

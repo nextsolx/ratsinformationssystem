@@ -34,7 +34,7 @@ export default {
     },
     methods: {
         sortByChar() {
-            this.sortedCommittees = [];
+            const sortedCommittees = [];
             let chars = [];
             this.committeesList
                 .sort((a, b) => a.title === b.title ? 0 : +(a.title > b.title) || -1)
@@ -42,22 +42,23 @@ export default {
                     if (!chars.includes(el.title[0].toLowerCase())) {
                         chars.push(el.title[0].toLowerCase());
                         let arr = this.committeesList.filter(el => el.title[0].toLowerCase() === chars[chars.length - 1]);
-                        this.sortedCommittees.push({
+                        sortedCommittees.push({
                             data: arr,
                             char: chars[chars.length - 1]
                         });
                     }
                 });
+            this.sortedCommittees = sortedCommittees;
         },
         filterList (value) {
             if (value) {
                 this.sortedCommittees = this.committeesList
                     .filter(el => el.title.toLowerCase().includes(value.toLowerCase()));
-                this.filtered = false;
+                this.filtered = true;
             }
             else {
                 this.sortByChar();
-                this.filtered = true;
+                this.filtered = false;
             }
         },
         viewHandler(e) {
@@ -80,7 +81,7 @@ export default {
         <div />
         <section class="ris-section-wrapper ris-content_six-eight-eight">
             <h1 class="ris-committee-list__headline ris-headline">Gremien</h1>
-            <Sorting @input="filterList" @change="print" drop-label="Sortierung" drop-id="committee-drop" :dropOptions="['A-Z']" />
+            <Sorting @input="filterList" drop-label="Sortierung" drop-id="committee-drop" :drop-options="['A-Z']" />
             <transition-group tag="ul" name="fade" class="ris-committee-list-main-list ris-ul" v-if="!filtered">
                 <li v-for="item in sortedCommittees"
                     class="ris-committee-list-main-list__item"
@@ -91,8 +92,8 @@ export default {
                     <ul class="ris-ul ris-committee-list-secondary-list">
                         <CommitteeTableItem
                             class="ris-committee-list-secondary-list__item"
-                            v-for="(committee, committeeIndex) in item.data"
-                            :key="`${item.char}-${committeeIndex}`"
+                            v-for="(committee, index) in item.data"
+                            :key="`${item.char}-${index}`"
                             :committee="committee"/>
                     </ul>
                 </li>

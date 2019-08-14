@@ -17,36 +17,26 @@ export default {
         }
     },
     created() {
-        this.sortBy(this.memberList,'function');
+        this.sortBy(this.unfilteredList,'function');
     },
     data() {
         return {
-            memberList: this.members,
+            unfilteredList: this.members,
             dropValue: 'function',
             dropOptions: ['function', 'party'],
             filteredList: [],
             filtered: false,
+            filterValue: 'name'
         };
     },
     methods: {
         changeArg(value) {
             this.dropValue = value;
-            this.sortBy(this.memberList, value);
+            this.sortBy(this.unfilteredList, value);
         },
         getTitleValue(value) {
             if (!value && this.dropValue === 'party') return 'Fraktionslose Mitglieder';
             return value;
-        },
-        filterList (value) {
-            if (value) {
-                this.filteredList = this.memberList
-                    .filter(el => el.name.toLowerCase().includes(value.toLowerCase()));
-                this.filtered = true;
-            }
-            else {
-                this.sortBy(this.memberList, this.dropValue);
-                this.filtered = false;
-            }
         },
     },
 };

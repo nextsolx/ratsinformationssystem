@@ -7,7 +7,7 @@ export default {
     props: {
         info: {
             type: String,
-            default: () => 'info'
+            default: 'info'
         },
         members: {
             type: Array,
@@ -25,9 +25,17 @@ export default {
     },
     data() {
         return {
-            activeTab: 'sitzungen'
+            activeTab: 'sitzungen',
+            tabs: ['aufgaben', 'mitglieder', 'sitzungen']
         };
     },
+    methods: {
+        getClassForTab(tab) {
+            if (tab === 'sitzungen') return 'ris-i_calendar-empty';
+            if (tab === 'aufgaben') return 'ris-i_doc';
+            return 'ris-i_people';
+        }
+    }
 };
 </script>
 
@@ -35,25 +43,14 @@ export default {
     <div class="">
         <nav class="ris-committee-navigation ris-without-padding-mob">
             <ul class="ris-ul ris-committee-navigation__list">
-                <li class="ris-committee-navigation__item">
+                <li class="ris-committee-navigation__item" v-for="tab in tabs" :key="tab">
                     <button
-                        @click="activeTab = 'aufgaben'"
-                        :class="['ris-committee-navigation__button ris-committee-navigation__button--aufgaben', activeTab === 'aufgaben' ? 'active' : '' ]">
-                        Aufgaben
-                    </button>
-                </li>
-                <li class="ris-committee-navigation__item">
-                    <button
-                        @click="activeTab = 'mitglieder'"
-                        :class="['ris-committee-navigation__button ris-committee-navigation__button--mitglieder', activeTab === 'mitglieder' ? 'active' : '' ]">
-                        Mitglieder <span class="ris-committee-navigation__counter">({{ members.length }})</span>
-                    </button>
-                </li>
-                <li class="ris-committee-navigation__item">
-                    <button
-                        @click="activeTab = 'sitzungen'"
-                        :class="['ris-committee-navigation__button ris-committee-navigation__button--sitzungen', activeTab === 'sitzungen' ? 'active' : '' ]">
-                        Sitzungen
+                        @click="activeTab = tab"
+                        class="ris-committee-navigation__button"
+                        :class="[`ris-committee-navigation__button`, activeTab === tab ? 'active' : '' ]">
+                        <span class="ris-i" :class="getClassForTab(tab)" />
+                        {{ tab }}
+                        <span v-if="tab === 'mitglieder'" class="ris-committee-navigation__counter">({{ members.length }})</span>
                     </button>
                 </li>
             </ul>

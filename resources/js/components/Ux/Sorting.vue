@@ -10,11 +10,11 @@ export default {
             type: String,
             default: () => ''
         },
-        isSelect: {
+        displaySelect: {
             type: Boolean,
             default: true
         },
-        isInput: {
+        displayInput: {
             type: Boolean,
             default: true
         },
@@ -59,7 +59,7 @@ export default {
             class="ris-search ris-sorting__search"
             :class="[{ hiddenMob: inputHiddenMob },
                      { fullWidth : selectHiddenMob }]"
-            v-if="isInput">
+            v-if="displayInput">
             <button class="ris-search__button">
                 <span class="ris-i ris-i_search"/>
             </button>

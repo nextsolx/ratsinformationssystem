@@ -28,13 +28,16 @@ export default {
 </script>
 
 <template>
-    <div :class="['ris-select ']">
+    <div :class="['ris-select']">
         <label class="ris-select__label" :for="id" v-if="label">
             {{ label }}
         </label>
         <select :id="id" class="ris-select__select" v-model="selected" @change="$emit('change', selected)">
-            <option class="ris-select__option" v-for="option in options" :key="option" :value="option" >
-                {{ option }}
+            <option class="ris-select__option" >
+                    test
+                </option>
+                <option class="ris-select__option" >
+                test1
             </option>
         </select>
 

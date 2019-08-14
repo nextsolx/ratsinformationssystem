@@ -13,7 +13,7 @@
 
     @include breakpoint($bp-tablet-min) {
         margin-right: $indent-sm;
-        min-width: 300px;
+        min-width: $width-interactive-tablet;
     }
 
     &_has-indent {
@@ -61,28 +61,7 @@
 
     &_active {
         #{$base}__content {
-            background: $c-white;
-            border-radius: $b-radius-primary;
-            bottom: auto;
-            box-shadow: 0 1px 6px 0 $c-box-shadow2;
             display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            position: absolute;
-            right: auto;
-            top: calc(100% + 15px);
-            transform: translateX(-50%);
-            z-index: 101;
-
-            @include breakpoint($bp-mobile-max) {
-                left: 100%;
-                width: calc(100vw - #{$indent-m * 2});
-            }
-
-            @include breakpoint($bp-tablet-min) {
-                left: 50%;
-                width: 100%;
-            }
         }
 
         .ris-i_filter {
@@ -91,7 +70,30 @@
     }
 
     &__content {
+        background: $c-white;
+        border-radius: $b-radius-primary;
+        bottom: auto;
+        box-shadow: 0 1px 6px 0 $c-box-shadow2;
         display: none;
+        flex-direction: column;
+        overflow: hidden;
+        padding-bottom: $indent-m;
+        padding-top: $indent-m;
+        position: absolute;
+        right: auto;
+        top: calc(100% + 15px);
+        transform: translateX(-50%);
+        z-index: 101;
+
+        @include breakpoint($bp-mobile-max) {
+            left: 100%;
+            width: calc(100vw - #{$indent-m * 2});
+        }
+
+        @include breakpoint($bp-tablet-min) {
+            left: 50%;
+            width: 100%;
+        }
 
         #{$base}-buttons__title {
             font-weight: normal;

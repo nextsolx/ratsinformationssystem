@@ -32,6 +32,10 @@
     &_right {
         display: flex;
         margin-left: auto;
+
+        @include breakpoint($bp-mobile-max) {
+            margin-left: 0;
+        }
     }
 
     &_button {

@@ -1,4 +1,21 @@
 .ris-theme-detail {
+    &__text {
+        -webkit-box-orient: vertical;
+        display: -webkit-box;
+        line-height: $lh-l;
+        overflow: hidden;
+
+        @include breakpoint($bp-tablet-min) {
+            -webkit-line-clamp: 20;
+            max-height: $lh-l * 20;
+        }
+
+        @include breakpoint($bp-mobile-max) {
+            -webkit-line-clamp: 40;
+            max-height: $lh-l * 40;
+        }
+    }
+
     .ris-section-wrapper {
         &:last-child {
             border-bottom: 0;
@@ -22,10 +39,20 @@
         }
     }
 
+    .ris-title {
+        font-size: $fs-l;
+        line-height: $lh-m;
+        margin-bottom: $indent-s;
+    }
+
+    .ris-h2 {
+        margin-bottom: $indent-m;
+    }
+
     .ris-img-wrapper {
         margin-left: auto;
         margin-right: auto;
-        max-width: 1024px;
+        max-width: $width-section-1024;
         width: 100%;
 
         &:not(:last-child) {
@@ -41,10 +68,6 @@
         }
     }
 
-    .ris-title {
-        margin-bottom: $indent-s;
-    }
-
     .ris-caption {
         margin-top: $indent-s;
 
@@ -56,7 +79,7 @@
     .ris-map-detail {
         @include breakpoint($bp-tablet-min) {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
         }
 
         .ris-img {
@@ -65,7 +88,7 @@
 
         .ris-link {
             @include breakpoint($bp-tablet-min) {
-                width: 300px;
+                width: $width-interactive-tablet;
             }
         }
     }
@@ -77,11 +100,8 @@
             margin-bottom: $indent-m;
         }
 
-        &::before {
+        .ris-i_marker-with-dot {
             color: $c-secondary;
-            content: 'a';
-            display: inline-block;
-            font-family: $ff-ris-font-icons;
             font-size: $fs-xl;
             margin-right: $indent-sm;
         }
@@ -115,6 +135,17 @@
         margin-bottom: $indent-sm;
         margin-top: $indent-sm;
 
+        &:hover {
+            &::after {
+                color: $c-red;
+            }
+        }
+
+        .ris-i_download-with-box {
+            font-size: $fs-xl;
+            margin-left: $indent-sm;
+        }
+
         &-many,
         &-one {
             .ris-icon-wrapper {
@@ -128,28 +159,54 @@
             }
         }
 
-        &::after {
-            color: $c-secondary;
-            content: 'f';
-            display: inline-block;
-            font-family: $ff-ris-font-icons;
-            font-size: $fs-xl;
-            margin-left: $indent-sm;
-        }
-
-        .ris-title {
-            font-size: $fs-l;
-            line-height: $lh-m;
-            margin-bottom: 0;
-        }
-
         .ris-text-wrapper {
             flex-grow: 1;
         }
     }
 
     .ris-process {
-        &__meeting-summary {
+        &__detail,
+        &__agendum {
+            &:not(:last-child) {
+                @include breakpoint($bp-mobile-max) {
+                    padding-bottom: $indent-l;
+                }
+
+                @include breakpoint($bp-tablet-min) {
+                    padding-bottom: $indent-xl;
+                }
+            }
+        }
+
+        &__item {
+            margin-left: $indent-s;
+            position: relative;
+
+            @include breakpoint($bp-mobile-max) {
+                padding-left: $indent-ml;
+            }
+
+            @include breakpoint($bp-tablet-min) {
+                padding-left: $indent-l;
+            }
+
+            &:not(:last-child) {
+                border-left: 2px solid $c-red;
+            }
+
+            .ris-i_check {
+                background-color: $c-red;
+                color: $c-white;
+                font-size: $fs-s;
+                height: 12px;
+                left: -10px;
+                padding: 4px;
+                position: absolute;
+                width: 12px;
+            }
+        }
+
+        &__wrapper {
             display: flex;
 
             @include breakpoint($bp-mobile-max) {
@@ -157,52 +214,54 @@
             }
 
             @include breakpoint($bp-tablet-min) {
-                justify-content: center;
-            }
-
-            .ris-link {
-                @include breakpoint($bp-tablet-min) {
-                    width: 300px;
-                }
+                align-items: center;
+                justify-content: space-between;
             }
         }
 
-        &__item {
+        &__date {
+            &.ris-body-2 {
+                margin-bottom: $indent-s;
+            }
+        }
+
+        &__text {
+            -webkit-box-orient: vertical;
+            display: -webkit-box;
+            line-height: $lh-l;
+            overflow: hidden;
+
+            @include breakpoint($bp-tablet-min) {
+                -webkit-line-clamp: 10;
+                max-height: $lh-l * 10;
+            }
+
             @include breakpoint($bp-mobile-max) {
-                margin-bottom: $indent-l;
+                -webkit-line-clamp: 20;
+                max-height: $lh-l * 20;
+            }
+
+            &.ris-body-2 {
+                margin-bottom: $indent-m;
+            }
+        }
+
+        .ris-h3 {
+            margin-bottom: $indent-s;
+        }
+
+        .ris-caption {
+            margin-bottom: 0;
+            margin-top: 0;
+        }
+
+        .ris-link {
+            @include breakpoint($bp-mobile-max) {
+                margin-top: $indent-s;
             }
 
             @include breakpoint($bp-tablet-min) {
-                margin-bottom: $indent-xxl;
-            }
-
-            &:last-child {
-                margin-bottom: 0;
-            }
-        }
-
-        &__role.ris-title {
-            font-size: $fs-l;
-            line-height: $lh-m;
-            margin-bottom: $indent-s;
-        }
-
-        &__created-at.ris-body-2 {
-            margin-bottom: $indent-s;
-        }
-
-        &__description.ris-body-2 {
-            margin-bottom: $indent-m;
-        }
-
-        &__meeting {
-            @include breakpoint($bp-mobile-max) {
-                margin-bottom: $indent-s;
-            }
-
-            .ris-caption {
-                margin-bottom: 0;
-                margin-top: 0;
+                width: $width-interactive-tablet;
             }
         }
     }
@@ -213,7 +272,7 @@
         }
 
         @include breakpoint($bp-tablet-min) {
-            min-width: 300px;
+            min-width: $width-interactive-tablet;
         }
     }
 }

@@ -68,7 +68,7 @@ export default {
         <h2 class="ris-h2 ris-committee-sessions__heading">
             {{ `${dropValue} (${sortedList.length} Sitzungen)` }}
         </h2>
-        <div>
+        <div class="ris-calendar">
             <CalendarCard class="ris-calendar__card-list" v-for="(meeting, index) in sortedList " :key="index" :meeting-sorted-day-list="meeting" />
         </div>
     </div>

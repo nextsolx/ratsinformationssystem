@@ -52,7 +52,7 @@ export default {
             drop-id="committee-drop"
             :drop-options="dropOptions" />
         <transition-group tag="ul" name="fade" class="ris-ul ris-committee-members-main-list" v-if="!filtered">
-            <li v-for="(item, index) in sortedList" :key="index" class="ris-committee-members-main-list__item">
+            <li v-for="(item, index) in sortedList" :key="`${index}-sortedlist`" class="ris-committee-members-main-list__item">
                 <h2 class="ris-committee-members__heading ris-h2" >
                     {{ getTitleValue(item.title) }}
                 </h2>

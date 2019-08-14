@@ -35,11 +35,11 @@ export default {
                     </h3>
                     <div  v-if="!meetup.isCancelled">
                         <p class="ris-subheader" >BA/0028/2018</p>
-                        <span class="ris-session-count">
+                        <div class="ris-session-count">
                             <span class="ris-session-count__agenda"><span class="ris-i ris-i_list" />{{ meetup.topCount }}</span>
                             <span class="ris-session-count__people"><span class="ris-i ris-i_people" />{{ meetup.attendeesCount }}</span>
                             <span class="ris-session-count__file" v-if="meetup.fileCount">{{ meetup.fileCount }}</span>
-                        </span>
+                        </div>
                     </div>
                     <p v-else class="ris-calendar__placeholder">
                         Sitzung ist ausgefallen

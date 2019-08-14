@@ -4,9 +4,7 @@
 
     @include('layouts.breadcrumbs')
 
-    <meeting inline-template
-        @change="orderMembersBy"
-    >
+    <meeting inline-template>
         <main class="ris-main ris-meeting ris-content_six-eight-eight">
 
             <section class="ris-section-wrapper ris-meeting__headline">
@@ -115,6 +113,7 @@
                     <dropdown
                         :label="'Sortierung nach'"
                         :options="['Funktion', 'Partei']"
+                        @change="orderMembersBy"
                         :id="'meeting-member'"
                     ></dropdown>
 

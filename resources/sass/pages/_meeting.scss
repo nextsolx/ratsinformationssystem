@@ -45,8 +45,8 @@
 
     .ris-h2 {
         display: inline-block;
-        font-weight: normal;
         font-size: $fs-l;
+        font-weight: normal;
         margin-bottom: 0;
         margin-top: 0;
     }
@@ -69,9 +69,9 @@
         margin-left: 0;
 
         @include breakpoint($bp-mobile-max) {
-            width: calc(100% - #{$indent-m} * 2);
             margin-left: $indent-m;
             margin-right: $indent-m;
+            width: calc(100% - #{$indent-m} * 2);
         }
 
         @include breakpoint($bp-tablet-min) {
@@ -103,8 +103,8 @@
             }
 
             .ris-i {
-                margin-right: $indent-m;
                 font-size: $fs-xl;
+                margin-right: $indent-m;
 
                 @include breakpoint($bp-mobile-max) {
                     display: none;
@@ -114,8 +114,8 @@
 
         &__content {
             .ris-i {
-                margin-left: $indent-m;
                 color: $c-secondary;
+                margin-left: $indent-m;
             }
 
             @include breakpoint($bp-mobile-max) {
@@ -220,14 +220,14 @@
                 }
 
                 @include breakpoint($bp-mobile-max) {
-                    margin-top: $indent-ml;
                     background-color: $c-white2;
+                    margin-top: $indent-ml;
                 }
             }
 
             &_empty {
-                margin-top: $indent-s;
                 margin-bottom: $indent-s;
+                margin-top: $indent-s;
 
                 @include breakpoint($bp-mobile-max) {
                     padding-left: $indent-m;

@@ -3,6 +3,7 @@ export default {
     name: 'Meeting',
     data: () => ({
         activeTab: 'true',
+        dropValue: 'Funktion',
     }),
     methods: {
         openTab(e, dataType) {
@@ -23,7 +24,11 @@ export default {
             this.$refs[dataTypeRef].classList.add('ris-tab-data_active');
         },
         orderMembersBy(orderBy) {
-            console.log('Order By: ', orderBy);
+            // @todo --- need to add JS order functionality
+            // console.log('Order By: ', orderBy);
+            this.dropValue = orderBy;
+
+            //this.sortBy(this.memberList, orderBy);
         },
     },
 };

@@ -5,8 +5,8 @@
 
 .ris-without-padding-mob {
     @include breakpoint($bp-mobile-max) {
-        width: calc(100% + #{$indent-m * 2});
         margin-left: -$indent-m;
+        width: calc(100% + #{$indent-m * 2});
     }
 }
 

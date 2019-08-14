@@ -23,7 +23,7 @@ export default {
         return {
             memberList: this.members,
             dropValue: 'function',
-            dropOptions: ['function', 'party', 'role'],
+            dropOptions: ['function', 'party'],
             filteredList: [],
             filtered: false,
         };
@@ -61,7 +61,7 @@ export default {
             @change="changeArg"
             drop-id="committee-drop"
             :drop-options="dropOptions" />
-        <ul class="ris-ul ris-committee-members-main-list" v-if="!filtered">
+        <transition-group tag="ul" name="fade" class="ris-ul ris-committee-members-main-list" v-if="!filtered">
             <li v-for="(item, index) in sortedList" :key="index" class="ris-committee-members-main-list__item">
                 <h2 class="ris-committee-members__heading ris-h2" >
                     {{ getTitleValue(item.title) }}
@@ -76,8 +76,8 @@ export default {
                             />
                 </ul>
             </li>
-        </ul>
-        <ul class="ris-ul ris-committee-members-secondary-list" v-if="filtered">
+        </transition-group>
+        <transition-group tag="ul" name="fade" class="ris-ul ris-committee-members-secondary-list" v-if="filtered">
             <CommitteeMember
                 v-for="member in filteredList"
                 :key="member.name"
@@ -85,6 +85,6 @@ export default {
                 :is-party="true"
                 class="ris-committee-members-secondary-list__item"
                     />
-        </ul>
+        </transition-group>
     </div>
 </template>

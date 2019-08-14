@@ -1,72 +1,45 @@
 <script>
-const moment = require('moment');
+import dateFilterMixin from '../mixins/dateFilterMixin';
 
 export default {
     name: 'CalendarCard',
+    mixins: [dateFilterMixin],
     props: {
-
-    },
-    filters: {
-        momentDate(date) {
-            return moment(date).date();
-        },
-        momentDayFormat(date) {
-            return moment(date).format('dd');
-        },
-        momentWeek(date) {
-            return moment(date).week();
-        },
-        momentYear(date) {
-            return moment(date).year();
-        },
+        meetingSortedDayList: {
+            type: Array,
+            default: () => []
+        }
     },
 };
 </script>
 
 <template>
-    <div>
-        <div v-for="(meetingWeekList, meetingWeekYearKey ) in meetingList"
-            :key="meetingWeekYearKey">
-            <div class="ris-calendar__card-list"
-                v-for="(meetingListPerDay, meetingListPerDayKey) in meetingWeekList"
-                :key="meetingListPerDayKey"
-                    >
-                <section class="ris-calendar__card-day">
-                    <div class="ris-calendar__card-day-left">
-                        {{ meetingListPerDay[0].dateFrom | momentDate() }}
-                        <br>
-                        <span class="ris-calendar__card-day-of-week">
-                            {{ meetingListPerDay[0].dateFrom | momentDayFormat() }}
-                        </span>
-                    </div>
+    <section class="ris-calendar__card-day">
+        <div class="ris-calendar__card-day-left">
+            {{ meetingSortedDayList.title }}
+        </div>
 
-                    <div class="ris-calendar__card-day-right">
-                        <div class="ris-calendar__card"
-                            v-for="{ id, title, dateFrom, agendaCount, peopleCount, fileCount } in meetingListPerDay"
-                            :key="id"
-                            :data-date-from="dateFrom"
-                                >
-                            <h2 class="ris-title">
-                                {{ title }}
-                            </h2>
-                            <div class="ris-subheader">
-                                Lorem data UAK/
-                                <span>00{{ dateFrom | momentWeek() }}</span>
-                                /
-                                <span>{{ dateFrom | momentYear() }}</span>
-                            </div>
-                            <div class="ris-session-count">
-                                <div class="ris-session-count__agenda">{{ agendaCount }}</div>
-                                <div class="ris-session-count__people">{{ peopleCount }}</div>
-                                <div class="ris-session-count__file">{{ fileCount }}</div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </div>
-            <div class="ris-subheader ris-calendar__card-list-ris-subheader">
-                Kalenderwoche {{ meetingList[meetingWeekYearKey].dayList[0].dateFrom | momentWeek() }}
+        <div class="ris-calendar__card-day-right">
+            <div class="ris-calendar__card"
+                v-for="meetup in meetingSortedDayList.data"
+                :key="meetup.title"
+                :data-date-from="dateFrom"
+                    >
+                <h2 class="ris-title">
+                    {{ meetup.title }}
+                </h2>
+                <div class="ris-subheader">
+                    Lorem data UAK/
+                    <span>00{{ meetup.date }}</span>
+                    /
+                    <span>{{ meetup.date}}</span>
+                </div>
+                <div class="ris-session-count">
+                    <div class="ris-session-count__agenda">{{ meetup.topCount }}</div>
+                    <div class="ris-session-count__people">{{ meetup.attendeesCount }}</div>
+                    <div class="ris-session-count__file" v-if="meetup.fileCount">{{ meetup.fileCount }}</div>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 </template>

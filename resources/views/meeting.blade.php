@@ -4,7 +4,9 @@
 
     @include('layouts.breadcrumbs')
 
-    <meeting inline-template>
+    <meeting inline-template
+        @change="orderMembersBy"
+    >
         <main class="ris-main ris-meeting ris-content_six-eight-eight">
 
             <section class="ris-section-wrapper ris-meeting__headline">
@@ -28,19 +30,21 @@
                         <h2 class="ris-h2">Tagesordnung</h2>
                         <span class="ris-count">({{ $meeting['agenda'] }})</span>
                     </li>--}}
-                    <li class="ris-tab" @click="openTab($event, 'participant')">
+                    <li class="ris-tab" @click="openTab($event, 'member')">
                         <span class="ris-i ris-i_people"></span>
                         <h2 class="ris-h2">Teilnehmer</h2>
-                        <span class="ris-count">({{ $meeting['peopleCount'] }})</span>
+                        @if (isset($meeting['peopleCount']) and $meeting['peopleCount'] > 0)
+                            <span class="ris-count">({{ $meeting['peopleCount'] }})</span>
+                        @endif
                     </li>
                 </ul>
             </section>
 
-            <section class="ris-section-wrapper ris-tab-data ris-tab-data_active"
+            <section class="ris-section-wrapper ris-tab-data ris-tab-data_active ris-tab-data-overview"
                 ref="overview"
             >
-                <div class="ris-overview">
-                    <div class="ris-flex">
+                <div class="ris-overview-list">
+                    <div class="ris-overview">
                         <div class="ris-body-2 ris-body-2__headline">
                             <span class="ris-i ris-i_calendar"></span>
                             Termin
@@ -52,7 +56,7 @@
                             <span class="ris-i ris-i_calendar"></span>
                         </div>
                     </div>
-                    <div class="ris-flex">
+                    <div class="ris-overview">
                         <div class="ris-body-2 ris-body-2__headline">
                             <span class="ris-i ris-i_marker-with-dot"></span>
                             Sitzungsort
@@ -62,7 +66,7 @@
                             <span class="ris-i ris-i_marker-with-dot"></span>
                         </div>
                     </div>
-                    <div class="ris-flex">
+                    <div class="ris-overview">
                         <div class="ris-body-2 ris-body-2__headline">
                             <span class="ris-i ris-i_squares-in-square"></span>
                             Gremium
@@ -72,36 +76,86 @@
                             <span class="ris-i ris-i_squares-in-square"></span>
                         </div>
                     </div>
-                    <div class="ris-flex">
+                    <div class="ris-overview">
                         <div class="ris-body-2 ris-body-2__headline">
                             <span class="ris-i ris-i_doc"></span>
                             Dokumente
                         </div>
                         <div class="ris-body-2 ris-body-2__content ris-document-list">
-                            @foreach($meeting['files'] as $file)
-                                <a class="ris-document ris-document-one ris-link" title="{{ $file['name'] }}"
-                                    href="/{{ $file['downloadUrl'] }}"
-                                >
-                                    <span class="ris-i ris-i_download"></span>
-                                    <span class="ris-text">{{ $file['name'] }}</span>
-                                    <span class="ris-i ris-i_download-with-box"></span>
-                                </a>
-                            @endforeach
+                            @if (isset($meeting['files']) and count($meeting['files']) > 0)
+                                @foreach($meeting['files'] as $file)
+                                    <a class="ris-document ris-document-one ris-link" title="{{ $file['name'] }}"
+                                        href="/{{ $file['downloadUrl'] }}"
+                                    >
+                                        <span class="ris-i ris-i_download"></span>
+                                        <span class="ris-text">{{ $file['name'] }}</span>
+                                        <span class="ris-i ris-i_download-with-box"></span>
+                                    </a>
+                                @endforeach
+                            @else
+                                <div class="ris-text">Keine Dokumente</div>
+                            @endif
+
+
                         </div>
                     </div>
                 </div>
             </section>
 
-            <section class="ris-section-wrapper ris-tab-data"
+            <section class="ris-section-wrapper ris-tab-data ris-tab-data-agenda"
                 ref="agenda"
             >
                 <div class="ris-agenda">Agenda data</div>
             </section>
 
-            <section class="ris-section-wrapper ris-tab-data"
-                ref="participant"
+            <section class="ris-section-wrapper ris-tab-data ris-tab-data-member"
+                ref="member"
             >
-                <div class="ris-participant">Participant data</div>
+                @if (isset($meeting['people']) and count($meeting['people']) > 0)
+                    <dropdown
+                        :label="'Sortierung nach'"
+                        :options="['Funktion', 'Partei']"
+                        :id="'meeting-member'"
+                    ></dropdown>
+
+                    <div class="ris-member-list">
+                        {{--@todo --- fix mock data--}}
+                        <div class="ris-h3 ris-h3__headline">Stimmberechtigte Teilnehmer</div>
+                        <ul class="ris-ul ris-committee-members-main-list">
+                            @foreach ($meeting['people'] as $people)
+                                <li class="ris ris-member">
+                                    <a href="/person/{{ $people->id }}" class="ris-member-link">
+                                        <img src="@if (isset($people->photo)) {{ $people->photo }} @else /img/thumbnail-avatar.svg @endif" alt="{{ $people->name }}" class="ris-member-link__img"/>
+                                        <div class="ris-member-link__content">
+                                            <h3 class="ris-h3 ris-member-link__heading">{{ $people->name }}</h3>
+                                            {{-- @todo --- fix mock data --}}
+                                            <span class="ris-member-link__text">CDU</span>
+                                        </div>
+                                        <span class="ris-i ris-i_chevron-right ris-link_right"></span>
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul>
+
+                        {{-- @todo --- fix mock data, all block --}}
+                        <div class="ris-h3 ris-h3__headline">Beratende Teilnehmer</div>
+                        <ul class="ris-ul ris-committee-members-main-list">
+                            <li class="ris ris-member">
+                                <a href="/person/id" class="ris-member-link">
+                                    <img src="/img/thumbnail-avatar.svg" alt="Liane Bchir" class="ris-member-link__img"/>
+                                    <div class="ris-member-link__content">
+                                        <h3 class="ris-h3 ris-member-link__heading">Liane Bchir</h3>
+                                        <span class="ris-member-link__text">AfD</span>
+                                    </div>
+                                    <span class="ris-i ris-i_chevron-right ris-link_right"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                @else
+                    <div class="ris-member-list_empty ris-h3">Keine Teilnehmer</div>
+                @endif
+
             </section>
 
         </main>

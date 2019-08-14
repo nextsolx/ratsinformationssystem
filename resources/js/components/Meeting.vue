@@ -22,6 +22,9 @@ export default {
             });
             this.$refs[dataTypeRef].classList.add('ris-tab-data_active');
         },
-    }
+        orderMembersBy(orderBy) {
+            console.log('Order By: ', orderBy);
+        },
+    },
 };
 </script>

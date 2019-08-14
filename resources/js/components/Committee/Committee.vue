@@ -60,6 +60,6 @@ export default {
         </nav>
         <CommitteeInfo :information="info" v-if="activeTab === 'aufgaben'" />
         <CommitteeMemberList :members="members" v-if="activeTab === 'mitglieder'" />
-        <CommitteeSessions v-if="activeTab === 'sitzungen'" />
+        <CommitteeSessions :meetings="meetings" v-if="activeTab === 'sitzungen'" />
     </div>
 </template>

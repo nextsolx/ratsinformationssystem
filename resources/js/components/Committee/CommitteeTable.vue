@@ -53,11 +53,11 @@ export default {
             if (value) {
                 this.sortedCommittees = this.committeesList
                     .filter(el => el.title.toLowerCase().includes(value.toLowerCase()));
-                this.filtered = true;
+                this.filtered = false;
             }
             else {
                 this.sortByChar();
-                this.filtered = false;
+                this.filtered = true;
             }
         },
         viewHandler(e) {
@@ -71,9 +71,6 @@ export default {
                 }
             }
         },
-        print(e) {
-            console.log(e);
-        }
     },
 };
 </script>

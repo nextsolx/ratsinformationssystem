@@ -1,25 +1,26 @@
 export default {
     data() {
         return {
-            filteredList: []
+            sortedList: []
         };
     },
     methods: {
         sortBy(unfilteredList,value = 'function') {
-            this.filteredList = [];
-            let values = [];
+            const sortedList = [];
+            const values = [];
             unfilteredList
                 .forEach(el => {
                     if (!values.includes(el[value])) {
                         values.push(el[value]);
                         let arr = unfilteredList.filter(el => el[value] === values[values.length - 1]);
-                        this.filteredList.push({
+                        sortedList.push({
                             data: arr,
                             title: values[values.length - 1]
                         });
                     }
                 });
-        },
+            this.sortedList = [...sortedList];
+        }
     },
 };
 

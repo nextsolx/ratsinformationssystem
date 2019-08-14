@@ -1,11 +1,27 @@
 <script>
 import Sorting from '../Ux/Sorting';
+import sortingMixin from '../../mixins/sortingMixin';
 
 export default {
     name: 'CommitteeSessions',
+    mixins: [sortingMixin],
+    props: {
+        meetings: {
+            type: Array,
+            default: () => []
+        }
+    },
     components: {
         Sorting
     },
+    data() {
+        return {
+            meetingList: []
+        };
+    },
+    created() {
+        this.sortBy(this.meetings,'date');
+    }
 };
 </script>
 

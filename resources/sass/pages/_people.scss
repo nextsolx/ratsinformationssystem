@@ -1,3 +1,237 @@
 .ris-people {
+    &__headline {
+        display: flex;
+        flex-wrap: wrap;
 
+        @include breakpoint($bp-mobile-max) {
+            border-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .ris-headline {
+            margin-bottom: $indent-s;
+            margin-top: $indent-s;
+        }
+
+        .ris-body-2 {
+            text-decoration: underline;
+        }
+    }
+
+    .ris-people__img {
+        @include breakpoint($bp-mobile-max) {
+            margin-right: $indent-m;
+            width: 64px;
+        }
+
+        @include breakpoint($bp-tablet-min) {
+            margin-right: $indent-ml;
+        }
+    }
+
+    &__contact {
+        @include breakpoint($bp-mobile-max) {
+            border-bottom: 0;
+        }
+
+        &-detail {
+            display: flex;
+
+            @include breakpoint($bp-mobile-max) {
+                &:not(:last-child) {
+                    margin-bottom: $indent-m;
+                }
+            }
+
+            @include breakpoint($bp-tablet-min) {
+                &:not(:last-child) {
+                    margin-bottom: $indent-s;
+                }
+            }
+        }
+
+        .ris-h2 {
+            margin-bottom: $indent-m;
+        }
+
+        .ris-body-2 {
+            margin-right: $indent-m;
+
+            &__text {
+                @include breakpoint($bp-mobile-max) {
+                    display: none;
+                }
+
+                @include breakpoint($bp-tablet-min) {
+                    min-width: 80px;
+                }
+            }
+
+            .ris-i {
+                color: $c-secondary;
+                font-size: $fs-xl;
+
+                @include breakpoint($bp-tablet-min) {
+                    display: none;
+                }
+            }
+        }
+
+        .ris-link {
+            color: $c-primary;
+
+            &_phone {
+                text-decoration: underline;
+            }
+        }
+
+        .ris-text {
+            line-height: $lh-l;
+        }
+    }
+
+    &__committee {
+        @include breakpoint($bp-mobile-max) {
+            border-bottom: 0;
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        &-detail {
+            display: flex;
+
+            @include breakpoint($bp-mobile-max) {
+                flex-direction: column;
+                padding-left: $indent-m;
+                padding-right: $indent-m;
+
+                &:not(:last-child) {
+                    margin-bottom: $indent-m;
+                }
+            }
+
+            @include breakpoint($bp-tablet-min) {
+                justify-content: space-between;
+
+                &:not(:last-child) {
+                    margin-bottom: $indent-l;
+                }
+            }
+        }
+
+        &-count {
+            background-color: $c-white2;
+            font-weight: bold;
+            padding-left: $indent-m;
+            padding-right: $indent-m;
+            line-height: $lh-xxl;
+            margin-bottom: $indent-m;
+
+            @include breakpoint($bp-tablet-min) {
+                display: none;
+            }
+        }
+
+        .ris-h2 {
+            margin-bottom: $indent-m;
+
+            @include breakpoint($bp-mobile-max) {
+                padding-left: $indent-m;
+                padding-right: $indent-m;
+            }
+        }
+
+        .ris-body-2 {
+            @include breakpoint($bp-mobile-max) {
+                margin-bottom: $indent-s;
+            }
+
+            &__headline {
+                font-weight: bold;
+            }
+        }
+    }
+
+    &__document-list {
+        border-bottom: 0;
+        margin-bottom: $indent-sm;
+    }
+
+    .ris-document {
+        align-items: center;
+        color: $c-primary;
+        display: flex;
+        justify-content: space-between;
+
+        &:not(:first-child) {
+            margin-top: $indent-sm;
+        }
+
+        &:hover {
+            color: $c-red;
+
+            .ris-i_download-with-box {
+                color: $c-red;
+            }
+        }
+
+        .ris-img {
+            margin-right: $indent-ml;
+        }
+
+        .ris-text {
+            flex-grow: 1;
+            word-break: break-word;
+        }
+
+        .ris-i {
+            color: $c-secondary;
+            margin-left: $indent-m;
+        }
+    }
+
+    .ris-tab-data {
+        @include breakpoint($bp-mobile-max) {
+            display: none;
+
+            &_active {
+                display: block;
+            }
+
+            .ris-h2 {
+                display: none;
+            }
+        }
+    }
+
+    .ris-tab__mobile {
+        border-bottom: 0;
+        padding-left: 0;
+        padding-right: 0;
+        padding-bottom: 0;
+
+        @include breakpoint($bp-tablet-min) {
+            display: none;
+        }
+
+        .ris-tab-list {
+            justify-content: space-between;
+
+            .ris-h2 {
+                font-size: $fs-l;
+            }
+
+            .ris-tab {
+                padding: $indent-s 4px;
+
+                &:first-child {
+                    padding-left: $indent-m;
+                }
+
+                &:last-child {
+                    padding-right: $indent-m;
+                }
+            }
+        }
+    }
 }

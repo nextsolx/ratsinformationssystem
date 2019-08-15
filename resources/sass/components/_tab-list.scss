@@ -1,0 +1,33 @@
+.ris-tab-list {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    .ris-i,
+    .ris-count {
+        @include breakpoint($bp-mobile-max) {
+            display: none;
+        }
+    }
+
+    .ris-tab {
+        border-bottom: 1px solid $c-gray3;
+        cursor: pointer;
+        flex-grow: 1;
+        padding: $indent-sm $indent-l;
+        text-align: center;
+
+        &:hover,
+        &_active {
+            border-bottom: 4px solid $c-red;
+            color: $c-red;
+            font-weight: bold;
+
+            .ris-h2 {
+                color: $c-red;
+                font-weight: bold;
+            }
+        }
+    }
+}

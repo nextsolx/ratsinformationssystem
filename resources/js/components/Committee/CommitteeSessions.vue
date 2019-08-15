@@ -36,12 +36,12 @@ export default {
         this.sortBy(this.unfilteredList,'date');
     },
     computed: {
-        yearsList() { // [... new Set[array] returns new array with uniq values]
+        yearsList() {
             const list = [{
                 label: 'Alle',
                 value: 'all'
             }];
-            [... new Set(this.unfilteredList.map(el => moment(el.date).year()))].forEach(item => {
+            this.uniqArray(this.unfilteredList.map(el => moment(el.date).year())).forEach(item => {
                 list.push({
                     value: `${item}`,
                     label: `${item}`
@@ -70,6 +70,10 @@ export default {
                 this.sortBy(this.filteredList, 'date');
             } else this.sortBy(this.unfilteredList,'date');
         },
+        uniqArray(arr) {
+            const onlyUnique = (value, index, self) => self.indexOf(value) === index;
+            return arr.filter( onlyUnique );
+        }
     },
 };
 // TODO: styles: red/ regular, bold

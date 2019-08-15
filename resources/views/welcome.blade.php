@@ -133,7 +133,7 @@
                                 ['people_list' => $people, 'limit' => 5]
                             )
                     </div>
-                    <a href="{{ route('people') }}" class="ris-link ris-link_button ris-link_right"
+                    <a href="{{ route('people-list') }}" class="ris-link ris-link_button ris-link_right"
                         title="Alle Personen"
                     >
                         Alle Personen

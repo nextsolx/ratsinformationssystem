@@ -34,7 +34,7 @@ class TopicController extends Controller
     {
         $topic = (new Topic($paper))->toResponse(request())->getData()->data;
 
-        return view('theme-detail')->with([
+        return view('theme')->with([
             'topic' => $topic
         ]);
     }

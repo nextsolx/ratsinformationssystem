@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <main class="ris-main ris-theme-detail">
+    <main class="ris-main ris-theme">
 
         @include('layouts.breadcrumbs')
 
-        <div class="ris-theme-detail__content ris-content ris-content_six-eight-eight">
+        <div class="ris-theme__content ris-content ris-content_six-eight-eight">
 
             <section class="ris-section-wrapper ris-section-wrapper_full">
                 <div class="ris-img-wrapper">
@@ -20,7 +20,7 @@
             <section class="ris-section-wrapper">
                 <h2 class="ris-h2">Worum geht es?</h2>
                 @if (isset($topic->text))
-                    <div class="ris-body-2 ris-theme-detail__text">
+                    <div class="ris-body-2 ris-theme__text">
                         {{ \Illuminate\Support\Str::limit(strip_tags($topic->text), 10000) }}
                     </div>
                 @else

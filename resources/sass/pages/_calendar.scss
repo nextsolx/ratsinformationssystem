@@ -35,11 +35,14 @@
         }
 
         &-ris-subheader {
-            color: $c-primary;
+            color: $c-secondary;
             font-size: $fs-l;
             line-height: $lh-l;
-            margin: $indent-s 0 $indent-s 64px;
-            text-transform: uppercase;
+            margin-left: 64px;
+
+            &:first-child {
+                margin-top: $indent-sm;
+            }
         }
     }
 
@@ -105,7 +108,6 @@
 
             .ris-i {
                 font-size: $fs-xxxl;
-                opacity: .5;
                 padding-left: $indent-s;
             }
         }
@@ -117,7 +119,6 @@
 
             .ris-i {
                 font-size: $fs-xxl;
-                opacity: .5;
                 padding-left: $indent-s;
             }
         }
@@ -129,7 +130,6 @@
 
             .ris-i {
                 font-size: $fs-xll;
-                opacity: .5;
                 padding-left: $indent-s;
             }
         }

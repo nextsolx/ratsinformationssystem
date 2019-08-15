@@ -32,6 +32,10 @@ if (isset($meetings) and is_array($meetings)) {
 
                     @foreach ($meeting_list_sorted as $meeting_list_per_week)
 
+                        <div class="ris-subheader ris-calendar__card-list-ris-subheader">Kalenderwoche
+                            {{ \Illuminate\Support\Carbon::parse(head($meeting_list_per_week)[0]->dateFrom)->weekOfYear }}
+                        </div>
+
                         @foreach ($meeting_list_per_week as $meeting_list_per_day)
                             <div class="ris-calendar__card-list">
                                 <section class="ris-calendar__card-day">
@@ -83,10 +87,6 @@ if (isset($meetings) and is_array($meetings)) {
                                 </section>
                             </div>
                         @endforeach
-
-                        <div class="ris-subheader ris-calendar__card-list-ris-subheader">Kalenderwoche
-                            {{ \Illuminate\Support\Carbon::parse(head($meeting_list_per_week)[0]->dateFrom)->weekOfYear }}
-                        </div>
 
                     @endforeach
 

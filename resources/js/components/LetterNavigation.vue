@@ -19,16 +19,16 @@ export default {
 </script>
 
 <template>
-    <nav>
-        <ul class="ris-ul ris-committee-list-navigation__list">
+    <nav class="ris-letter-nav">
+        <ul class="ris-ul ris-letter-nav__list">
             <li
                 v-for="(element, index) in navigationList"
-                class="ris-committee-list-navigation__item"
+                class="ris-letter-nav__item"
                 :key="`${index}-list-button`">
                 <button
                     @click="scrollToComponents(element.char)"
                     :id="`${element.char}-search-button`"
-                    class="ris-committee-list-navigation__button">
+                    class="ris-letter-nav__button">
                     {{ element.char }}
                 </button>
             </li>

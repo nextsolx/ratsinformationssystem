@@ -3,7 +3,7 @@ import Vue from 'vue';
 import CommitteeTableItem from './CommitteeTableItem';
 import Dropdown from '../Ux/Dropdown';
 import Search from '../Ux/Search';
-import CommitteeNavigation from './CommitteeNavigation';
+import LetterNavigation from '../LetterNavigation';
 import sortingMixin from '../../mixins/sortingMixin';
 
 import checkView from 'vue-check-view';
@@ -20,7 +20,9 @@ export default {
     },
     components: {
         CommitteeTableItem,
-        CommitteeNavigation
+        LetterNavigation,
+        Dropdown,
+        Search
     },
     data() {
         return {
@@ -89,7 +91,6 @@ export default {
                     label="Sortierung"
                     id="committee-drop"
                     :options="[{label:'A-Z', value:'A-Z'}]"
-                    @change="changeArg"
                     :full-width-mob="true"
                     v-model="dropValue" />
             </div>
@@ -117,7 +118,7 @@ export default {
                     :committee="item"/>
             </transition-group>
         </section>
-        <CommitteeNavigation
+        <LetterNavigation
             v-if="!filtered"
             class="ris-committee-list-navigation"
             :navigation-list="sortedCommittees"

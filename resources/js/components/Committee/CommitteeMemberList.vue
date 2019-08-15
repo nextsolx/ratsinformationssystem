@@ -1,12 +1,12 @@
 <script>
-import CommitteeMember from './CommitteeMember';
+import Member from '../Member';
 import sortingMixin from '../../mixins/sortingMixin';
 
 export default {
     name: 'CommitteeMemberList',
     mixins: [sortingMixin],
     components: {
-        CommitteeMember
+        Member
     },
     props: {
         members: {
@@ -72,7 +72,7 @@ export default {
                     {{ getTitleValue(item.title) }}
                 </h2>
                 <ul class="ris-ul ris-committee-members-secondary-list">
-                    <CommitteeMember
+                    <Member
                         v-for="member in item.data"
                         :key="member.name"
                         :member="member"
@@ -83,7 +83,7 @@ export default {
             </li>
         </transition-group>
         <transition-group tag="ul" name="fade" class="ris-ul ris-committee-members-secondary-list" v-if="filtered">
-            <CommitteeMember
+            <Member
                 v-for="member in filteredList"
                 :key="member.name"
                 :member="member"

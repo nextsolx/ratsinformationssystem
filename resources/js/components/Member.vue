@@ -21,8 +21,8 @@ export default {
             <!--            <img v-else src="../../img/thumbnail-avatar.svg">-->
             <span class="ris-member-link__content">
                 <h3 class="ris-h3 ris-member-link__heading">{{ member.name }}</h3>
-                <span class="ris-member-link__text" v-if="isParty">{{ member.role }}</span>
-                <span class="ris-member-link__text" v-else>{{ member.party }}</span>
+                <span class="ris-member-link__text" v-if="member.party">{{ member.party }}</span>
+                <span class="ris-member-link__text" v-else>{{ member.role }}</span>
             </span>
             <button class="ris-i ris-i_chevron-right ris-member-link__button" />
         </a>

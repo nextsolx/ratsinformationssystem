@@ -10,7 +10,7 @@ import checkView from 'vue-check-view';
 Vue.use(checkView);
 
 export default {
-    name: 'SearchForm',
+    name: 'CommitteeTable',
     mixins: [sortingMixin],
     props: {
         committees: {
@@ -26,45 +26,17 @@ export default {
     },
     data() {
         return {
-            committeesList: this.committees,
-            sortedCommittees: [],
+            unfilteredList: this.committees,
             filtered: false,
             inputValue: '',
-            dropValue: {label:'A-Z', value:'A-Z'}
+            dropValue: {label:'A-Z', value:'A-Z'},
+            filterValue: 'title'
         };
     },
     created () {
-        this.sortByChar();
+        this.sortBy(this.unfilteredList, this.filterValue, true);
     },
     methods: {
-        sortByChar() {
-            const sortedCommittees = [];
-            let chars = [];
-            this.committeesList
-                .sort((a, b) => a.title === b.title ? 0 : +(a.title > b.title) || -1)
-                .forEach(el => {
-                    if (!chars.includes(el.title[0].toLowerCase())) {
-                        chars.push(el.title[0].toLowerCase());
-                        let arr = this.committeesList.filter(el => el.title[0].toLowerCase() === chars[chars.length - 1]);
-                        sortedCommittees.push({
-                            data: arr,
-                            char: chars[chars.length - 1]
-                        });
-                    }
-                });
-            this.sortedCommittees = sortedCommittees;
-        },
-        filterList (value) {
-            if (value) {
-                this.sortedCommittees = this.committeesList
-                    .filter(el => el.title.toLowerCase().includes(value.toLowerCase()));
-                this.filtered = true;
-            }
-            else {
-                this.sortByChar();
-                this.filtered = false;
-            }
-        },
         viewHandler(e) {
             let id = e.target.element.id;
             if (id) {
@@ -95,7 +67,7 @@ export default {
                     v-model="dropValue" />
             </div>
             <transition-group tag="ul" name="fade" class="ris-committee-list-main-list ris-ul" v-if="!filtered">
-                <li v-for="item in sortedCommittees"
+                <li v-for="item in sortedList"
                     class="ris-committee-list-main-list__item"
                     :id="`${item.char}-list-element`"
                     v-view="viewHandler"
@@ -113,14 +85,14 @@ export default {
             <transition-group tag="ul" name="fade" class="ris-committee-list-main-list ris-ul" v-if="filtered">
                 <CommitteeTableItem
                     class="ris-committee-list-secondary-list__item"
-                    v-for="(item, index) in sortedCommittees"
+                    v-for="(item, index) in filteredList"
                     :key="`${index}-filtered`"
                     :committee="item"/>
             </transition-group>
         </section>
         <LetterNavigation
             v-if="!filtered"
-            :navigation-list="sortedCommittees"
+            :navigation-list="sortedList"
                 />
     </div>
 </template>

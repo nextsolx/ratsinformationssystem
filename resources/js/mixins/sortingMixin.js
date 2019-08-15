@@ -6,20 +6,35 @@ export default {
         };
     },
     methods: {
-        sortBy(unfilteredList,value = 'function') {
+        sortBy(unfilteredList,value = 'function', char = false) {
             const sortedList = [];
             const values = [];
-            unfilteredList
-                .forEach(el => {
-                    if (!values.includes(el[value])) {
-                        values.push(el[value]);
-                        let arr = unfilteredList.filter(el => el[value] === values[values.length - 1]);
-                        sortedList.push({
-                            data: arr,
-                            title: values[values.length - 1]
-                        });
-                    }
-                });
+            if (char) {
+                unfilteredList
+                    .sort((a, b) => a[value] === b[value] ? 0 : +(a[value] > b[value]) || -1)
+                    .forEach(el => {
+                        if (!values.includes(el[value][0].toLowerCase())) {
+                            values.push(el[value][0].toLowerCase());
+                            let arr = unfilteredList.filter(el => el[value][0].toLowerCase() === values[values.length - 1]);
+                            sortedList.push({
+                                data: arr,
+                                char: values[values.length - 1]
+                            });
+                        }
+                    });
+            } else {
+                unfilteredList
+                    .forEach(el => {
+                        if (!values.includes(el[value])) {
+                            values.push(el[value]);
+                            let arr = unfilteredList.filter(el => el[value] === values[values.length - 1]);
+                            sortedList.push({
+                                data: arr,
+                                title: values[values.length - 1]
+                            });
+                        }
+                    });
+            }
             this.sortedList = [...sortedList];
         },
         filterList (value) {

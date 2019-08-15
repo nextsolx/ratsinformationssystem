@@ -1,11 +1,11 @@
 @extends('layouts.app')
-{{ dd($members)  }}
-@section('content')
-    <main class="ris-main ris-people">
-        <h1 class="ris-people__headline ris-headline">
-            Personen List
-        </h1>
 
-        <a href="/personen/">Go to temporary person page</a>
+@section('content')
+    @include('layouts.breadcrumbs')
+    <main class="ris-main ris-people">
+        <people-table
+            :members="{{ json_encode($members) }}"
+        ></people-table>
     </main>
+    @include('layouts.footer')
 @endsection

@@ -71,7 +71,7 @@ export default {
         <Dropdown class="ris-sorting__select" :class="[{ hiddenMob: selectHiddenMob }, { fullWidth: inputHiddenMob }]"
             :label="dropLabel"
             :options="dropOptions"
-            @change="$emit('change', dropValue)"
+            @change="event => $emit('change', event)"
             :id="dropId"
             v-model="dropValue" />
     </div>

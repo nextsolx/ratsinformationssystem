@@ -1,5 +1,6 @@
 <script>
-import Sorting from '../Ux/Sorting';
+import Dropdown from '../Ux/Dropdown';
+import Search from '../Ux/Search';
 import sortingMixin from '../../mixins/sortingMixin';
 import CalendarCard from '../CalendarCard';
 const moment = require('moment');
@@ -15,15 +16,20 @@ export default {
         }
     },
     components: {
-        Sorting,
-        CalendarCard
+        Dropdown,
+        CalendarCard,
+        Search
     },
     data() {
         return {
             unfilteredList: this.meetings,
             filterValue: 'date',
             filtered: false,
-            dropValue: 'all'
+            inputValue: '',
+            dropValue: {
+                value: 'all',
+                label: 'Alle'
+            }
         };
     },
     created() {
@@ -31,22 +37,33 @@ export default {
     },
     computed: {
         yearsList() { // [... new Set[array] returns new array with uniq values]
-            return ['all',... new Set(this.unfilteredList.map(el => {
-                return moment(el.date).year();
-            }))];
+            const list = [{
+                label: 'Alle',
+                value: 'all'
+            }];
+            [... new Set(this.unfilteredList.map(el => moment(el.date).year()))].forEach(item => {
+                list.push({
+                    value: `${item}`,
+                    label: `${item}`
+                });
+            });
+            return list;
         }
     },
     methods: {
         filterMeetingsByTitle(value) {
+            this.dropValue = {
+                value: 'all',
+                label: 'Alle'
+            };
             if (value) {
-                this.dropValue = 'all';
                 this.filterValue = 'title';
                 this.filterList(value);
                 this.sortBy(this.filteredList, 'date');
             } else this.sortBy(this.unfilteredList,'date');
         },
-        filterMeetingsByDate(value) {
-            this.dropValue = value;
+        filterMeetingsByDate(obj) {
+            let value = obj.value;
             if (value !== 'all') {
                 this.filterValue = 'date';
                 this.filterList(value);
@@ -55,18 +72,23 @@ export default {
         },
     },
 };
+// TODO: styles: red/ regular, bold
 </script>
 
 <template>
     <div class="ris-committee-sessions">
-        <Sorting
-            class="ris-committee-sessions__sorting ris-without-padding-mob"
-            :drop-options="yearsList"
-            @input="filterMeetingsByTitle"
-            @change="filterMeetingsByDate"
-            :input-hidden-mob="true" />
+        <div class="ris-filter-wrapper">
+            <Search v-model="inputValue" :hidden-mob="true" @input="filterMeetingsByTitle" />
+            <Dropdown
+                label="Sortierung"
+                id="drop-sitzunget"
+                :options="yearsList"
+                @change="filterMeetingsByDate"
+                :full-width-mob="true"
+                v-model="dropValue" />
+        </div>
         <h2 class="ris-h2 ris-committee-sessions__heading">
-            {{ `${dropValue} (${sortedList.length} Sitzungen)` }}
+            {{ `${dropValue.label} (${sortedList.length} Sitzungen)` }}
         </h2>
         <div class="ris-calendar">
             <CalendarCard class="ris-calendar__card-list" v-for="(meeting, index) in sortedList " :key="index" :meeting-sorted-day-list="meeting" />

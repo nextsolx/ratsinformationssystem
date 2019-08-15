@@ -23,7 +23,15 @@ export default {
         return {
             unfilteredList: this.members,
             dropValue: 'function',
-            dropOptions: ['function', 'party'],
+            dropOptions: [
+                {
+                    value: 'function',
+                    label: 'Funktion'
+                },
+                {
+                    value: 'party',
+                    label: 'Partei'
+                }],
             filteredList: [],
             filtered: false,
             filterValue: 'name'

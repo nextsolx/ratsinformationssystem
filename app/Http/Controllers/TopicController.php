@@ -77,7 +77,22 @@ class TopicController extends Controller
 
     public function newThemes(Request $request)
     {
+        $postalCode = $request->input('postalCode');
+        $district = $request->input('district');
+
         $paperQuery = \App\Paper::with(Paper::$basicScope)->sort()->new();
+
+        if ($postalCode) {
+            $paperQuery->whereHas('locations', function (Builder $query) use ($postalCode) {
+                $query->where('postal_code', '=', $postalCode);
+            });
+        }
+
+        if ($district) {
+            $paperQuery->whereHas('locations', function (Builder $query) use ($district) {
+                $query->where('sub_locality', '=', $district);
+            });
+        }
 
         $topics = Topic::collection($paperQuery->paginate(100))->toResponse(request())->getData();
 
@@ -94,7 +109,22 @@ class TopicController extends Controller
 
     public function progressThemes(Request $request)
     {
+        $postalCode = $request->input('postalCode');
+        $district = $request->input('district');
+
         $paperQuery = \App\Paper::with(Paper::$basicScope)->sort()->updated();
+
+        if ($postalCode) {
+            $paperQuery->whereHas('locations', function (Builder $query) use ($postalCode) {
+                $query->where('postal_code', '=', $postalCode);
+            });
+        }
+
+        if ($district) {
+            $paperQuery->whereHas('locations', function (Builder $query) use ($district) {
+                $query->where('sub_locality', '=', $district);
+            });
+        }
 
         $topics = Topic::collection($paperQuery->paginate(100))->toResponse(request())->getData();
 
@@ -111,7 +141,22 @@ class TopicController extends Controller
 
     public function finishedThemes(Request $request)
     {
+        $postalCode = $request->input('postalCode');
+        $district = $request->input('district');
+
         $paperQuery = \App\Paper::with(Paper::$basicScope)->sort()->finished();
+
+        if ($postalCode) {
+            $paperQuery->whereHas('locations', function (Builder $query) use ($postalCode) {
+                $query->where('postal_code', '=', $postalCode);
+            });
+        }
+
+        if ($district) {
+            $paperQuery->whereHas('locations', function (Builder $query) use ($district) {
+                $query->where('sub_locality', '=', $district);
+            });
+        }
 
         $topics = Topic::collection($paperQuery->paginate(100))->toResponse(request())->getData();
 

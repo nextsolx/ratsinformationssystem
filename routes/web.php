@@ -47,9 +47,7 @@ Route::get('/personen', function () {
     return view('people');
 })->name('people');
 
-Route::get('/personen-list', function () {
-    return view('people-list');
-})->name('people-list');
+Route::get('/personen-list', 'PersonenController@view')->name('people-list');
 
 Route::get('/merkliste', function () {
     return view('bookmarks');

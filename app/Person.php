@@ -12,6 +12,7 @@ class Person extends Model
         'form_of_address',
         'affix',
         'gender',
+        'status',
         'life',
         'life_source',
     ];
@@ -19,6 +20,6 @@ class Person extends Model
     public function organizations()
     {
         return $this->belongsToMany(Organization::class, 'memberships')
-            ->using(Membership::class);
+            ->using(Membership::class)->withPivot(['role']);
     }
 }

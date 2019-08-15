@@ -20,7 +20,7 @@ if (isset($meetings) and is_array($meetings)) {
 
         @include('layouts.breadcrumbs')
 
-        <h1 class="ris-calendar__headline ris-headline">
+        <h1 class="ris-h3 ris-calendar__headline">
             Sitzungskalender
         </h1>
 
@@ -63,9 +63,18 @@ if (isset($meetings) and is_array($meetings)) {
                                                     <span>{{ \Illuminate\Support\Carbon::parse($meeting->dateFrom)->year }}</span>
                                                 </div>
                                                 <div class="ris-session-count">
-                                                    <div class="ris-session-count__agenda">{{ $meeting->agendaCount }}</div>
-                                                    <div class="ris-session-count__people">{{ $meeting->peopleCount }}</div>
-                                                    <div class="ris-session-count__file">{{ $meeting->fileCount }}</div>
+                                                    <div class="ris-session-count__agenda">
+                                                        {{ $meeting->agendaCount }}
+                                                        <span class="ris-i ris-i_list"></span>
+                                                    </div>
+                                                    <div class="ris-session-count__people">
+                                                        {{ $meeting->peopleCount }}
+                                                        <span class="ris-i ris-i_people"></span>
+                                                    </div>
+                                                    <div class="ris-session-count__file">
+                                                        {{ $meeting->fileCount }}
+                                                        <span class="ris-i ris-i_download"></span>
+                                                    </div>
                                                 </div>
                                             </a>
                                         @endforeach

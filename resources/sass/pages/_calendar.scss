@@ -103,9 +103,8 @@
             align-items: center;
             display: flex;
 
-            &::after {
-                @include font-icon('W', 24px);
-
+            .ris-i {
+                font-size: $fs-xxxl;
                 opacity: .5;
                 padding-left: $indent-s;
             }
@@ -116,9 +115,8 @@
             display: flex;
             margin-left: 20px;
 
-            &::after {
-                @include font-icon('X', 22px);
-
+            .ris-i {
+                font-size: $fs-xxl;
                 opacity: .5;
                 padding-left: $indent-s;
             }
@@ -129,9 +127,8 @@
             display: flex;
             margin-left: 20px;
 
-            &::after {
-                @include font-icon('V', 20px);
-
+            .ris-i {
+                font-size: $fs-xll;
                 opacity: .5;
                 padding-left: $indent-s;
             }

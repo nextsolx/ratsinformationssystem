@@ -33,7 +33,7 @@ Route::get('/abgeschlossen-themen', 'TopicController@finishedThemes')
     ->name('finished-themes');
 
 Route::get('/thema/{paper}', 'TopicController@topic')
-    ->name('theme-detail');
+    ->name('theme');
 
 Route::get('/karte', function () {
     return view('map');
@@ -46,6 +46,10 @@ Route::get('/gremien/{gremium}', 'GremienController@view')->name('committee');
 Route::get('/personen', function () {
     return view('people');
 })->name('people');
+
+Route::get('/personen-list', function () {
+    return view('people-list');
+})->name('people-list');
 
 Route::get('/merkliste', function () {
     return view('bookmarks');

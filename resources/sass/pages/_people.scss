@@ -122,10 +122,10 @@
         &-count {
             background-color: $c-white2;
             font-weight: bold;
-            padding-left: $indent-m;
-            padding-right: $indent-m;
             line-height: $lh-xxl;
             margin-bottom: $indent-m;
+            padding-left: $indent-m;
+            padding-right: $indent-m;
 
             @include breakpoint($bp-tablet-min) {
                 display: none;
@@ -206,9 +206,9 @@
 
     .ris-tab__mobile {
         border-bottom: 0;
+        padding-bottom: 0;
         padding-left: 0;
         padding-right: 0;
-        padding-bottom: 0;
 
         @include breakpoint($bp-tablet-min) {
             display: none;

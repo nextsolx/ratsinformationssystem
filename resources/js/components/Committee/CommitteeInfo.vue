@@ -17,7 +17,7 @@ export default {
             <h2 class="ris-h2 ris-committee-info__heading">Bürgereingabe</h2>
             <div class="ris-committee-info__wrapper">
                 <h3 class="ris-h3 ris-committee-info__subheading">
-                    <span class="ris-i ris-i_notice-box ris-committee-info__notice"></span>
+                    <span class="ris-i ris-i_notice-box ris-committee-info__notice"/>
                     „Sie haben ein Anliegen, über das ein politisches Gremium entscheiden soll?“
                 </h3>
                 <button class="ris-button ris-committee-info__button">Eingabe einreichen</button>

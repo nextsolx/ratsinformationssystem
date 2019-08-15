@@ -110,12 +110,22 @@
                 ref="member"
             >
                 @if (isset($meeting['people']) and count($meeting['people']) > 0)
-                    <dropdown
-                        :label="'Sortierung nach'"
-                        :options="['Funktion', 'Partei']"
-                        @change="orderMembersBy"
-                        :id="'meeting-member'"
-                    ></dropdown>
+                    <div class="ris-action-box">
+                        <div class="ris-search ris-sorting__search">
+                            <button class="ris-search__button">
+                                <span class="ris-i ris-i_search"></span>
+                            </button>
+                            <input type="search" class="ris-search__input"
+                                placeholder="Suche nach Themen, Vorlagen, Sitzungen..."
+                            />
+                        </div>
+                        <dropdown
+                            :label="'Sortierung nach'"
+                            :options="['Funktion', 'Partei']"
+                            @change="orderMembersBy"
+                            :id="'meeting-member'"
+                        ></dropdown>
+                    </div>
 
                     <div class="ris-member-list">
                         {{--@todo --- fix mock data--}}

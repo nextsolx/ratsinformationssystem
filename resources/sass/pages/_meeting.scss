@@ -66,16 +66,17 @@
     }
 
     .ris-select {
-        margin-left: 0;
+        margin-left: $indent-m;
 
         @include breakpoint($bp-mobile-max) {
-            margin-left: $indent-m;
             margin-right: $indent-m;
             width: calc(100% - #{$indent-m} * 2);
         }
+    }
 
-        @include breakpoint($bp-tablet-min) {
-            width: 100%;
+    .ris-search {
+        @include breakpoint($bp-mobile-max) {
+            display: none;
         }
     }
 

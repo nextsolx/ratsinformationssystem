@@ -35,7 +35,11 @@ class TopicController extends Controller
         $topic = (new Topic($paper))->toResponse(request())->getData()->data;
 
         return view('theme-detail')->with([
-            'topic' => $topic
+            'topic' => $topic,
+            'breadcrumbs' => [
+                'Themen' => route('theme-overview'),
+                $paper->name => route('committee', $paper->id),
+            ]
         ]);
     }
 
@@ -72,6 +76,9 @@ class TopicController extends Controller
                 'Nippes',  'Chorweiler', 'Porz',  'Kalk',  'Mülheim'
             ],
             'links' => $topics->links,
+            'breadcrumbs' => [
+                'Themen' => route('theme-overview')
+            ]
         ]);
     }
 
@@ -104,6 +111,9 @@ class TopicController extends Controller
                 'Nippes',  'Chorweiler', 'Porz',  'Kalk',  'Mülheim'
             ],
             'links' => $topics->links,
+            'breadcrumbs' => [
+                'Neue Themen' => route('new-themes')
+            ]
         ]);
     }
 
@@ -136,6 +146,9 @@ class TopicController extends Controller
                 'Nippes',  'Chorweiler', 'Porz',  'Kalk',  'Mülheim'
             ],
             'links' => $topics->links,
+            'breadcrumbs' => [
+                'Kürzlich aktualisiert' => route('progress-themes')
+            ]
         ]);
     }
 
@@ -168,6 +181,9 @@ class TopicController extends Controller
                 'Nippes',  'Chorweiler', 'Porz',  'Kalk',  'Mülheim'
             ],
             'links' => $topics->links,
+            'breadcrumbs' => [
+                'Kürzlich abgeschlossen' => route('finished-themes')
+            ]
         ]);
     }
 }

@@ -29,7 +29,7 @@ export default {
     },
     methods: {
         setValue(e) {
-            const value = this.options.find(el => el.label === e.target.value)
+            const value = this.options.find(el => el.label === e.target.value);
             this.$emit('change', value);
         }
     },

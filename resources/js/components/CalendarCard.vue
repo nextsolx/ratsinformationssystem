@@ -33,7 +33,7 @@ export default {
                     <h3 class="ris-title">
                         {{ meetup.title }}
                     </h3>
-                    <div  v-if="!meetup.isCancelled">
+                    <div v-if="!meetup.isCancelled">
                         <p class="ris-subheader" >BA/0028/2018</p>
                         <div class="ris-session-count">
                             <span class="ris-session-count__agenda"><span class="ris-i ris-i_list" />{{ meetup.topCount }}</span>

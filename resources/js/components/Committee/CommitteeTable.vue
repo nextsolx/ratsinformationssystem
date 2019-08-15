@@ -1,8 +1,9 @@
 <script>
 import Vue from 'vue';
 import CommitteeTableItem from './CommitteeTableItem';
+import Dropdown from '../Ux/Dropdown';
+import Search from '../Ux/Search';
 import CommitteeNavigation from './CommitteeNavigation';
-import Sorting from '../Ux/Sorting';
 import sortingMixin from '../../mixins/sortingMixin';
 
 import checkView from 'vue-check-view';
@@ -19,14 +20,15 @@ export default {
     },
     components: {
         CommitteeTableItem,
-        CommitteeNavigation,
-        Sorting
+        CommitteeNavigation
     },
     data() {
         return {
             committeesList: this.committees,
             sortedCommittees: [],
-            filtered: false
+            filtered: false,
+            inputValue: '',
+            dropValue: {label:'A-Z', value:'A-Z'}
         };
     },
     created () {
@@ -81,7 +83,16 @@ export default {
         <div />
         <section class="ris-section-wrapper ris-content_six-eight-eight">
             <h1 class="ris-committee-list__headline ris-headline">Gremien</h1>
-            <Sorting @input="filterList" drop-label="Sortierung" drop-id="committee-drop" :drop-options="[{label:'A-Z', value:'A-Z'}]" />
+            <div class="ris-filter-wrapper">
+                <Search v-model="inputValue" :hidden-mob="true" @input="filterList" />
+                <Dropdown
+                    label="Sortierung"
+                    id="committee-drop"
+                    :options="[{label:'A-Z', value:'A-Z'}]"
+                    @change="changeArg"
+                    :full-width-mob="true"
+                    v-model="dropValue" />
+            </div>
             <transition-group tag="ul" name="fade" class="ris-committee-list-main-list ris-ul" v-if="!filtered">
                 <li v-for="item in sortedCommittees"
                     class="ris-committee-list-main-list__item"

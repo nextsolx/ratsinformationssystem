@@ -17,7 +17,7 @@ export default {
 
 <template>
     <div class="ris-committee-info">
-        <p class="ris-committee-info__text">{{ information }}</p>
+        <p class="ris-committee-info__text ris-body-2">{{ information }}</p>
         <div class="ris-committee-info__confirm ris-without-padding-mob">
             <h2 class="ris-h2 ris-committee-info__heading">Bürgereingabe</h2>
             <div class="ris-committee-info__wrapper">

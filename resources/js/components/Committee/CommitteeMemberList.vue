@@ -1,5 +1,4 @@
 <script>
-import Sorting from '../Ux/Sorting';
 import CommitteeMember from './CommitteeMember';
 import sortingMixin from '../../mixins/sortingMixin';
 
@@ -7,7 +6,6 @@ export default {
     name: 'CommitteeMemberList',
     mixins: [sortingMixin],
     components: {
-        Sorting,
         CommitteeMember
     },
     props: {
@@ -22,7 +20,10 @@ export default {
     data() {
         return {
             unfilteredList: this.members,
-            dropValue: 'function',
+            dropValue: {
+                value: 'function',
+                label: 'Funktion'
+            },
             dropOptions: [
                 {
                     value: 'function',
@@ -33,14 +34,17 @@ export default {
                     label: 'Partei'
                 }],
             filteredList: [],
+            inputValue: '',
             filtered: false,
             filterValue: 'name'
         };
     },
     methods: {
-        changeArg(value) {
-            this.dropValue = value;
-            this.sortBy(this.unfilteredList, value);
+        changeArg(obj) {
+            this.inputValue = '';
+            this.dropValue = obj;
+            this.sortBy(this.unfilteredList, obj.value);
+            this.filtered = false;
         },
         getTitleValue(value) {
             if (!value && this.dropValue === 'party') return 'Fraktionslose Mitglieder';
@@ -52,13 +56,16 @@ export default {
 
 <template>
     <div class="ris-committee-members">
-        <Sorting class="ris-committee-members__sorting ris-without-padding-mob"
-            :input-hidden-mob="true"
-            drop-label="Sortierung"
-            @input="filterList"
-            @change="changeArg"
-            drop-id="committee-drop"
-            :drop-options="dropOptions" />
+        <div class="ris-filter-wrapper">
+            <Search v-model="inputValue" :hidden-mob="true" @input="filterList" />
+            <Dropdown
+                label="Sortierung"
+                id="committee-drop"
+                :options="dropOptions"
+                @change="changeArg"
+                :full-width-mob="true"
+                v-model="dropValue" />
+        </div>
         <transition-group tag="ul" name="fade" class="ris-ul ris-committee-members-main-list" v-if="!filtered">
             <li v-for="(item, index) in sortedList" :key="`${index}-sortedlist`" class="ris-committee-members-main-list__item">
                 <h2 class="ris-committee-members__heading ris-h2" >

@@ -25,7 +25,7 @@ export default {
     },
     data() {
         return {
-            activeTab: 'sitzungen',
+            activeTab: 'aufgaben',
             tabs: ['aufgaben', 'mitglieder', 'sitzungen']
         };
     },

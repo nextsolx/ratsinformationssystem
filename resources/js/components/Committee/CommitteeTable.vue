@@ -120,7 +120,6 @@ export default {
         </section>
         <LetterNavigation
             v-if="!filtered"
-            class="ris-committee-list-navigation"
             :navigation-list="sortedCommittees"
                 />
     </div>

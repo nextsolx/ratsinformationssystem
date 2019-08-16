@@ -27,8 +27,8 @@ class Organization extends JsonResource
             'classification' => $this->classification,
             'memberCount' => $this->peopleCount(),
             'nextMeetingDate' => $this->nextMeetingDate(),
-            'members' => $this->whenLoaded('people'),
-            'meetings' => $this->whenLoaded('meetings'),
+            'members' => Person::collection($this->whenLoaded('people')),
+            'meetings' => Meeting::collection($this->whenLoaded('meetings')),
         ];
     }
 }

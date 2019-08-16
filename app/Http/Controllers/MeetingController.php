@@ -27,6 +27,9 @@ class MeetingController extends Controller
         return view('calendar-list')->with([
             'meetings' => $meetings->data,
             'links' => $meetings->links,
+            'breadcrumbs' => [
+                'Kalendar' => route('calendar-list'),
+            ]
         ]);
     }
 

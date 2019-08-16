@@ -22,10 +22,13 @@ class Organization extends JsonResource
             'id' => $this->id,
             'title' => $this->name,
             'shortName' => $this->shortName,
+            'info' => 'INFO',
             'organizationType' => $this->organizationType,
             'classification' => $this->classification,
             'memberCount' => $this->peopleCount(),
             'nextMeetingDate' => $this->nextMeetingDate(),
+            'members' => $this->whenLoaded('people'),
+            'meetings' => $this->whenLoaded('meetings'),
         ];
     }
 }

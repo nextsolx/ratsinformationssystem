@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 class GremienController extends Controller
 {
-
     public function view(Request $request, Organization $organization)
     {
         $organization->load(['people', 'meetings']);

@@ -72,7 +72,7 @@ class MeetingController extends Controller
         $meeting = new MeetingWithData(\App\Meeting::findOrFail($id));
 
         return view('meeting')->with([
-            'meeting' => $meeting->toArray($request)
+            'meeting' => (array) $meeting->toResponse($request)->getData()->data
         ]);
     }
 }

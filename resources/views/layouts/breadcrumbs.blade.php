@@ -9,48 +9,25 @@
         </a>
     </li>
 
-    @if (url()->current() === route('theme-overview')
-        or url()->current() === route('new-themes')
-        or url()->current() === route('progress-themes')
-        or url()->current() === route('finished-themes')
-    )
+    @if (is_array($breadcrumbs))
         <li class="ris-breadcrumbs__item">
-            <a href="{{ route('theme-overview') }}" title="Themen"
-               class="ris-link"
+            <a href="{{ array_values($breadcrumbs)[0] }}" title= {{array_keys($breadcrumbs)[0] }}
+                    class="ris-link"
             >
-                <span>Themen</span>
+                <span>{{ array_keys($breadcrumbs)[0] }}</span>
                 <span class="ris-i ris-i_chevron-right"></span>
             </a>
         </li>
     @endif
 
-    @if (url()->current() === route('new-themes'))
+    @if (count($breadcrumbs)>1)
         <li class="ris-breadcrumbs__item">
-            <a href="{{ route('new-themes') }}" title="Neue Themen"
-               class="ris-link"
+            <a href="{{ array_values($breadcrumbs)[1] }}" title= {{array_keys($breadcrumbs)[1] }}
+                    class="ris-link"
             >
-                <span>Neue Themen</span>
-                <span class="ris-i ris-i_chevron-right"></span>
-            </a>
-        </li>
-    @elseif (url()->current() === route('progress-themes'))
-        <li class="ris-breadcrumbs__item">
-            <a href="{{ route('progress-themes') }}" title="Kürzlich aktualisiert"
-                class="ris-link"
-            >
-                <span>Kürzlich aktualisiert</span>
-                <span class="ris-i ris-i_chevron-right"></span>
-            </a>
-        </li>
-    @elseif (url()->current() === route('finished-themes'))
-        <li class="ris-breadcrumbs__item">
-            <a href="{{ route('finished-themes') }}" title="Kürzlich abgeschlossen"
-                class="ris-link"
-            >
-                <span>Kürzlich abgeschlossen</span>
+                <span>{{ array_keys($breadcrumbs)[1] }}</span>
                 <span class="ris-i ris-i_chevron-right"></span>
             </a>
         </li>
     @endif
-
 </ol>

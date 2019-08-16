@@ -1,8 +1,9 @@
 <script>
 import Vue from 'vue';
 import CommitteeTableItem from './CommitteeTableItem';
-import CommitteeNavigation from './CommitteeNavigation';
-import Sorting from '../Ux/Sorting';
+import Dropdown from '../Ux/Dropdown';
+import Search from '../Ux/Search';
+import LetterNavigation from '../LetterNavigation';
 import sortingMixin from '../../mixins/sortingMixin';
 
 import checkView from 'vue-check-view';
@@ -19,14 +20,17 @@ export default {
     },
     components: {
         CommitteeTableItem,
-        CommitteeNavigation,
-        Sorting
+        LetterNavigation,
+        Dropdown,
+        Search
     },
     data() {
         return {
             committeesList: this.committees,
             sortedCommittees: [],
-            filtered: false
+            filtered: false,
+            inputValue: '',
+            dropValue: {label:'A-Z', value:'A-Z'}
         };
     },
     created () {
@@ -34,7 +38,7 @@ export default {
     },
     methods: {
         sortByChar() {
-            this.sortedCommittees = [];
+            const sortedCommittees = [];
             let chars = [];
             this.committeesList
                 .sort((a, b) => a.title === b.title ? 0 : +(a.title > b.title) || -1)
@@ -42,12 +46,13 @@ export default {
                     if (!chars.includes(el.title[0].toLowerCase())) {
                         chars.push(el.title[0].toLowerCase());
                         let arr = this.committeesList.filter(el => el.title[0].toLowerCase() === chars[chars.length - 1]);
-                        this.sortedCommittees.push({
+                        sortedCommittees.push({
                             data: arr,
                             char: chars[chars.length - 1]
                         });
                     }
                 });
+            this.sortedCommittees = sortedCommittees;
         },
         filterList (value) {
             if (value) {
@@ -70,7 +75,7 @@ export default {
                     document.querySelector(`#${id[0]}-search-button`).classList.remove('bolt');
                 }
             }
-        }
+        },
     },
 };
 </script>
@@ -80,7 +85,15 @@ export default {
         <div />
         <section class="ris-section-wrapper ris-content_six-eight-eight">
             <h1 class="ris-committee-list__headline ris-headline">Gremien</h1>
-            <Sorting @input="filterList" />
+            <div class="ris-filter-wrapper">
+                <Search v-model="inputValue" :hidden-mob="true" @input="filterList" />
+                <Dropdown
+                    label="Sortierung"
+                    id="committee-drop"
+                    :options="[{label:'A-Z', value:'A-Z'}]"
+                    :full-width-mob="true"
+                    v-model="dropValue" />
+            </div>
             <transition-group tag="ul" name="fade" class="ris-committee-list-main-list ris-ul" v-if="!filtered">
                 <li v-for="item in sortedCommittees"
                     class="ris-committee-list-main-list__item"
@@ -91,8 +104,8 @@ export default {
                     <ul class="ris-ul ris-committee-list-secondary-list">
                         <CommitteeTableItem
                             class="ris-committee-list-secondary-list__item"
-                            v-for="(committee, committeeIndex) in item.data"
-                            :key="`${item.char}-${committeeIndex}`"
+                            v-for="(committee, index) in item.data"
+                            :key="`${item.char}-${index}`"
                             :committee="committee"/>
                     </ul>
                 </li>
@@ -105,9 +118,8 @@ export default {
                     :committee="item"/>
             </transition-group>
         </section>
-        <CommitteeNavigation
+        <LetterNavigation
             v-if="!filtered"
-            class="ris-committee-list-navigation"
             :navigation-list="sortedCommittees"
                 />
     </div>

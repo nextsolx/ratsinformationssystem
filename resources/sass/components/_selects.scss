@@ -85,4 +85,10 @@
             outline: none;
         }
     }
+    @include breakpoint($bp-mobile-max) {
+        &.fullWidthMob {
+            width: 100%;
+            margin-left: 0;
+        }
+    }
 }

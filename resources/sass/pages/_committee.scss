@@ -3,6 +3,10 @@
         border-bottom: 0;
     }
 
+    &__headline {
+        margin: 0;
+    }
+
     &-navigation {
         margin-bottom: $indent-l;
         @include breakpoint($bp-mobile-max) {
@@ -12,6 +16,7 @@
         &__list {
             display: flex;
             height: 56px;
+            margin: 0;
         }
 
         &__item {
@@ -53,7 +58,7 @@
 
         &__text {
             display: inline-block;
-            margin-bottom: 40px;
+            margin:0 0 40px 0;
         }
 
         &__wrapper {
@@ -198,10 +203,15 @@
         }
 
         &__heading {
+            margin-top: 36px;
             @include breakpoint($bp-mobile-max) {
                 margin-bottom: $indent-m;
             }
         }
     }
+}
+
+.ris-filter-wrapper {
+    display: flex;
 }
 

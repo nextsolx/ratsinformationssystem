@@ -35,7 +35,11 @@ class TopicController extends Controller
         $topic = (new Topic($paper))->toResponse(request())->getData()->data;
 
         return view('theme-detail')->with([
-            'topic' => $topic
+            'topic' => $topic,
+            'breadcrumbs' => [
+                'Themen' => route('theme-overview'),
+                $paper->name => route('committee', $paper->id),
+            ]
         ]);
     }
 
@@ -72,12 +76,30 @@ class TopicController extends Controller
                 'Nippes',  'Chorweiler', 'Porz',  'Kalk',  'Mülheim'
             ],
             'links' => $topics->links,
+            'breadcrumbs' => [
+                'Themen' => route('theme-overview')
+            ]
         ]);
     }
 
     public function newThemes(Request $request)
     {
+        $postalCode = $request->input('postalCode');
+        $district = $request->input('district');
+
         $paperQuery = \App\Paper::with(Paper::$basicScope)->sort()->new();
+
+        if ($postalCode) {
+            $paperQuery->whereHas('locations', function (Builder $query) use ($postalCode) {
+                $query->where('postal_code', '=', $postalCode);
+            });
+        }
+
+        if ($district) {
+            $paperQuery->whereHas('locations', function (Builder $query) use ($district) {
+                $query->where('sub_locality', '=', $district);
+            });
+        }
 
         $topics = Topic::collection($paperQuery->paginate(100))->toResponse(request())->getData();
 
@@ -89,12 +111,30 @@ class TopicController extends Controller
                 'Nippes',  'Chorweiler', 'Porz',  'Kalk',  'Mülheim'
             ],
             'links' => $topics->links,
+            'breadcrumbs' => [
+                'Neue Themen' => route('new-themes')
+            ]
         ]);
     }
 
     public function progressThemes(Request $request)
     {
+        $postalCode = $request->input('postalCode');
+        $district = $request->input('district');
+
         $paperQuery = \App\Paper::with(Paper::$basicScope)->sort()->updated();
+
+        if ($postalCode) {
+            $paperQuery->whereHas('locations', function (Builder $query) use ($postalCode) {
+                $query->where('postal_code', '=', $postalCode);
+            });
+        }
+
+        if ($district) {
+            $paperQuery->whereHas('locations', function (Builder $query) use ($district) {
+                $query->where('sub_locality', '=', $district);
+            });
+        }
 
         $topics = Topic::collection($paperQuery->paginate(100))->toResponse(request())->getData();
 
@@ -106,12 +146,30 @@ class TopicController extends Controller
                 'Nippes',  'Chorweiler', 'Porz',  'Kalk',  'Mülheim'
             ],
             'links' => $topics->links,
+            'breadcrumbs' => [
+                'Kürzlich aktualisiert' => route('progress-themes')
+            ]
         ]);
     }
 
     public function finishedThemes(Request $request)
     {
+        $postalCode = $request->input('postalCode');
+        $district = $request->input('district');
+
         $paperQuery = \App\Paper::with(Paper::$basicScope)->sort()->finished();
+
+        if ($postalCode) {
+            $paperQuery->whereHas('locations', function (Builder $query) use ($postalCode) {
+                $query->where('postal_code', '=', $postalCode);
+            });
+        }
+
+        if ($district) {
+            $paperQuery->whereHas('locations', function (Builder $query) use ($district) {
+                $query->where('sub_locality', '=', $district);
+            });
+        }
 
         $topics = Topic::collection($paperQuery->paginate(100))->toResponse(request())->getData();
 
@@ -123,6 +181,9 @@ class TopicController extends Controller
                 'Nippes',  'Chorweiler', 'Porz',  'Kalk',  'Mülheim'
             ],
             'links' => $topics->links,
+            'breadcrumbs' => [
+                'Kürzlich abgeschlossen' => route('finished-themes')
+            ]
         ]);
     }
 }

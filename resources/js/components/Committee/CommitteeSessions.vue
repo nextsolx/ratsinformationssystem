@@ -1,17 +1,101 @@
 <script>
-import Sorting from '../Ux/Sorting';
+import Dropdown from '../Ux/Dropdown';
+import Search from '../Ux/Search';
+import sortingMixin from '../../mixins/sortingMixin';
+import CalendarCard from '../CalendarCard';
+const moment = require('moment');
+require('moment/locale/de');
 
 export default {
     name: 'CommitteeSessions',
+    mixins: [sortingMixin],
+    props: {
+        meetings: {
+            type: Array,
+            default: () => []
+        }
+    },
     components: {
-        Sorting
+        Dropdown,
+        CalendarCard,
+        Search
+    },
+    data() {
+        return {
+            unfilteredList: this.meetings,
+            filterValue: 'date',
+            filtered: false,
+            inputValue: '',
+            dropValue: {
+                value: 'all',
+                label: 'Alle'
+            }
+        };
+    },
+    created() {
+        this.sortBy(this.unfilteredList,'date');
+    },
+    computed: {
+        yearsList() {
+            const list = [{
+                label: 'Alle',
+                value: 'all'
+            }];
+            this.uniqArray(this.unfilteredList.map(el => moment(el.date).year())).forEach(item => {
+                list.push({
+                    value: `${item}`,
+                    label: `${item}`
+                });
+            });
+            return list;
+        }
+    },
+    methods: {
+        filterMeetingsByTitle(value) {
+            this.dropValue = {
+                value: 'all',
+                label: 'Alle'
+            };
+            if (value) {
+                this.filterValue = 'title';
+                this.filterList(value);
+                this.sortBy(this.filteredList, 'date');
+            } else this.sortBy(this.unfilteredList,'date');
+        },
+        filterMeetingsByDate(obj) {
+            let value = obj.value;
+            if (value !== 'all') {
+                this.filterValue = 'date';
+                this.filterList(value);
+                this.sortBy(this.filteredList, 'date');
+            } else this.sortBy(this.unfilteredList,'date');
+        },
+        uniqArray(arr) {
+            const onlyUnique = (value, index, self) => self.indexOf(value) === index;
+            return arr.filter( onlyUnique );
+        }
     },
 };
+// TODO: styles: red/ regular, bold
 </script>
 
 <template>
     <div class="ris-committee-sessions">
-        <Sorting class="ris-committee-sessions__sorting ris-without-padding-mob" :input-hidden-mob="true" />
-        <h2 class="ris-h2 ris-committee-sessions__heading">2018 (6 Sitzungen)</h2>
+        <div class="ris-filter-wrapper">
+            <Search v-model="inputValue" :hidden-mob="true" @input="filterMeetingsByTitle" />
+            <Dropdown
+                label="Sortierung"
+                id="drop-sitzunget"
+                :options="yearsList"
+                @change="filterMeetingsByDate"
+                :full-width-mob="true"
+                v-model="dropValue" />
+        </div>
+        <h2 class="ris-h2 ris-committee-sessions__heading">
+            {{ `${dropValue.label} (${sortedList.length} Sitzungen)` }}
+        </h2>
+        <div class="ris-calendar">
+            <CalendarCard class="ris-calendar__card-list" v-for="(meeting, index) in sortedList " :key="index" :meeting-sorted-day-list="meeting" />
+        </div>
     </div>
 </template>

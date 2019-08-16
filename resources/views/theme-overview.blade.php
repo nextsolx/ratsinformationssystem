@@ -22,7 +22,7 @@
                             <div class="ris-filter__subheader ris-subheader"
                                 @click="collapseFilter"
                             >
-                                <span class="ris-i ris-i_filter"></span>
+                            <span class="ris-i ris-i_filter"></span>
                                 Filtern
                             </div>
 

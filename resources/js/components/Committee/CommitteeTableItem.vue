@@ -19,7 +19,7 @@ export default {
 };
 </script>
 
-<template>
+<template z>
     <li>
         <a :href="'/gremien/' + committee.id" class="ris-committee-list__link">
             <h3 class="ris-h3 ris-committee-list__subtitle">{{ committee.title }}</h3>

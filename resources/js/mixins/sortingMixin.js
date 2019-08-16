@@ -44,7 +44,6 @@ export default {
                 this.filtered = true;
             }
             else {
-                // this.sortBy(this.unfilteredList, this.filterValue);
                 this.filtered = false;
             }
         }

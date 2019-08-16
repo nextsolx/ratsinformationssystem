@@ -1,4 +1,5 @@
 <script>
+const moment = require('moment');
 import dateFilterMixin from '../mixins/dateFilterMixin';
 
 export default {
@@ -10,11 +11,20 @@ export default {
             default: () => []
         }
     },
+    methods: {
+        getCardClass(date) {
+            const tableDate = moment(moment(date).format('DD.MM.YYYY'), 'DD.MM.YYYY');
+            const today = moment(moment(new Date).format('DD.MM.YYYY'), 'DD.MM.YYYY');
+            const diff = today.diff(tableDate, 'days');
+            if (diff > 0) return 'bold';
+            if (diff === 0) return 'warning';
+        }
+    },
 };
 </script>
 
 <template>
-    <section class="ris-calendar__card-day">
+    <section class="ris-calendar__card-day" :class="getCardClass(meetingSortedDayList.title)">
         <div class="ris-calendar__card-day-left">
             {{ meetingSortedDayList.title | momentDate }}
             <br>

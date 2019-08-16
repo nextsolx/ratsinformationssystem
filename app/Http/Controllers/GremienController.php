@@ -238,7 +238,7 @@ Bei der Geschäftsstelle des Ausschusses für Anregungen und Beschwerden können
                 ],
                 [
                     'title' => 'Sitzungs Nr. 7',
-                    'date' => '2019-10-30 18:00:00',
+                    'date' => '2019-08-16 18:00:00',
                     'topCount' => rand(4, 16),
                     'attendeesCount' => rand(17, 33),
                     'decisionTemplate' => 'BA/0028/2018',

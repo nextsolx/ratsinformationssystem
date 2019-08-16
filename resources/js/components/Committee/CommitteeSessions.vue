@@ -33,7 +33,7 @@ export default {
         };
     },
     created() {
-        this.sortBy(this.unfilteredList,'date');
+        this.sortBy(this.sortByDate(this.unfilteredList),'date');
     },
     computed: {
         yearsList() {
@@ -51,6 +51,9 @@ export default {
         }
     },
     methods: {
+        sortByDate (list) {
+            return list.sort((a,b) => new Date(a.date) - new Date(b.date));
+        },
         filterMeetingsByTitle(value) {
             this.dropValue = {
                 value: 'all',

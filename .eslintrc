@@ -16,7 +16,8 @@
     "eslint:recommended",
     "plugin:vue/base",
     "plugin:vue/essential",
-    "plugin:vue/strongly-recommended"
+    "plugin:vue/strongly-recommended",
+    "@vue/airbnb"
   ],
   "rules": {
     "indent": ["error", 4, { "SwitchCase": 1 }],
@@ -41,6 +42,8 @@
     "semi": [
       2,
       "always"
-    ]
+    ],
+    "max-len": [
+        "error", { "code": 150 }]
   }
 }

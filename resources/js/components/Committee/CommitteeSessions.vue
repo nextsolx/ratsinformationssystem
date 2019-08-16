@@ -23,7 +23,7 @@ export default {
     data() {
         return {
             unfilteredList: this.meetings,
-            filterValue: 'start',
+            filterValue: 'dateFrom',
             filtered: false,
             inputValue: '',
             dropValue: {
@@ -33,7 +33,6 @@ export default {
         };
     },
     created() {
-        // this.sortByDate(this.unfilteredList)
         this.sortBy(this.sortByDate(this.unfilteredList), this.filterValue);
     },
     computed: {
@@ -42,7 +41,7 @@ export default {
                 label: 'Alle',
                 value: 'all'
             }];
-            this.uniqArray(this.unfilteredList.map(el => moment(el.start).year())).forEach(item => {
+            this.uniqArray(this.unfilteredList.map(el => moment(el.dateFrom).year())).forEach(item => {
                 list.push({
                     value: `${item}`,
                     label: `${item}`
@@ -61,18 +60,18 @@ export default {
                 label: 'Alle'
             };
             if (value) {
-                this.filterValue = 'name';
+                this.filterValue = 'title';
                 this.filterList(value);
-                this.sortBy(this.filteredList, 'start');
-            } else this.sortBy(this.unfilteredList,'start');
+                this.sortBy(this.filteredList, 'dateFrom');
+            } else this.sortBy(this.unfilteredList,'dateFrom');
         },
         filterMeetingsByDate(obj) {
             let value = obj.value;
             if (value !== 'all') {
-                this.filterValue = 'start';
+                this.filterValue = 'dateFrom';
                 this.filterList(value);
-                this.sortBy(this.filteredList, 'start');
-            } else this.sortBy(this.unfilteredList,'start');
+                this.sortBy(this.filteredList, 'dateFrom');
+            } else this.sortBy(this.unfilteredList,'dateFrom');
         },
         uniqArray(arr) {
             const onlyUnique = (value, index, self) => self.indexOf(value) === index;
@@ -80,7 +79,6 @@ export default {
         }
     },
 };
-// TODO: styles: red/ regular, bold
 </script>
 
 <template>

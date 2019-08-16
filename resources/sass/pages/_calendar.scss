@@ -98,28 +98,22 @@
         font-size: $fs-l;
         line-height: $lh-l;
 
+
         &__agenda {
             align-items: center;
             display: flex;
-
-            &::after {
-                @include font-icon('W', 24px);
-
-                opacity: .5;
-                padding-left: $indent-s;
-            }
         }
 
         &__people {
             align-items: center;
             display: flex;
             margin-left: 20px;
+        }
 
-            &::after {
-                @include font-icon('X', 22px);
-
-                opacity: .5;
-                padding-left: $indent-s;
+        &__agenda,
+        &__people {
+            .ris-i {
+                padding-right: 10px;
             }
         }
 

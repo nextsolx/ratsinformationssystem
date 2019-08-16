@@ -6,37 +6,37 @@ export default {
     name: 'CommitteeMemberList',
     mixins: [sortingMixin],
     components: {
-        Member
+        Member,
     },
     props: {
         members: {
             type: Array,
-            default: () => []
-        }
+            default: () => [],
+        },
     },
     created() {
-        this.sortBy(this.unfilteredList,this.dropValue.value);
+        this.sortBy(this.unfilteredList, this.dropValue.value);
     },
     data() {
         return {
             unfilteredList: this.members,
             dropValue: {
                 value: 'party',
-                label: 'Partei'
+                label: 'Partei',
             },
             dropOptions: [
                 {
                     value: 'function',
-                    label: 'Funktion'
+                    label: 'Funktion',
                 },
                 {
                     value: 'party',
-                    label: 'Partei'
+                    label: 'Partei',
                 }],
             filteredList: [],
             inputValue: '',
             filtered: false,
-            filterValue: 'name'
+            filterValue: 'name',
         };
     },
     methods: {

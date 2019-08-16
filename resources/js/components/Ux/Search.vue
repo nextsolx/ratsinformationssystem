@@ -4,19 +4,18 @@ export default {
     props: {
         value: {
             type: String,
-            default: () => ''
+            default: () => '',
         },
         hiddenMob: {
             type: Boolean,
-            default: false
+            default: false,
         },
         inputPlaceholder: {
             type: String,
-            default: 'Suche nach Themen, Vorlagen, Sitzungen...'
-        }
+            default: 'Suche nach Themen, Vorlagen, Sitzungen...',
+        },
     },
 };
-// TODO: add classes hidden/full-width
 </script>
 
 <template>

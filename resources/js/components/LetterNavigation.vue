@@ -4,14 +4,14 @@ export default {
     props: {
         navigationList: {
             type: Array,
-            default: () => []
-        }
+            default: () => [],
+        },
     },
     methods: {
         scrollToComponents(id) {
             const el = document.querySelector(`#${id}-list-element`);
             if (el) {
-                el.scrollIntoView({ behavior: 'smooth'});
+                el.scrollIntoView({ behavior: 'smooth' });
             }
         },
     },

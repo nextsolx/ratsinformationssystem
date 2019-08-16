@@ -3,6 +3,7 @@ import Dropdown from '../Ux/Dropdown';
 import Search from '../Ux/Search';
 import sortingMixin from '../../mixins/sortingMixin';
 import CalendarCard from '../CalendarCard';
+
 const moment = require('moment');
 require('moment/locale/de');
 
@@ -12,13 +13,13 @@ export default {
     props: {
         meetings: {
             type: Array,
-            default: () => []
-        }
+            default: () => [],
+        },
     },
     components: {
         Dropdown,
         CalendarCard,
-        Search
+        Search,
     },
     data() {
         return {
@@ -28,8 +29,8 @@ export default {
             inputValue: '',
             dropValue: {
                 value: 'all',
-                label: 'Alle'
-            }
+                label: 'Alle',
+            },
         };
     },
     created() {
@@ -39,44 +40,44 @@ export default {
         yearsList() {
             const list = [{
                 label: 'Alle',
-                value: 'all'
+                value: 'all',
             }];
-            this.uniqArray(this.unfilteredList.map(el => moment(el.dateFrom).year())).forEach(item => {
+            this.uniqArray(this.unfilteredList.map(el => moment(el.dateFrom).year())).forEach((item) => {
                 list.push({
                     value: `${item}`,
-                    label: `${item}`
+                    label: `${item}`,
                 });
             });
             return list;
-        }
+        },
     },
     methods: {
         sortByDate (list) {
-            return list.sort((a,b) => new Date(a.start) - new Date(b.start));
+            return list.sort((a, b) => new Date(a.start) - new Date(b.start));
         },
         filterMeetingsByTitle(value) {
             this.dropValue = {
                 value: 'all',
-                label: 'Alle'
+                label: 'Alle',
             };
             if (value) {
                 this.filterValue = 'title';
                 this.filterList(value);
                 this.sortBy(this.filteredList, 'dateFrom');
-            } else this.sortBy(this.unfilteredList,'dateFrom');
+            } else this.sortBy(this.unfilteredList, 'dateFrom');
         },
         filterMeetingsByDate(obj) {
-            let value = obj.value;
+            const { value } = obj;
             if (value !== 'all') {
                 this.filterValue = 'dateFrom';
                 this.filterList(value);
                 this.sortBy(this.filteredList, 'dateFrom');
-            } else this.sortBy(this.unfilteredList,'dateFrom');
+            } else this.sortBy(this.unfilteredList, 'dateFrom');
         },
         uniqArray(arr) {
             const onlyUnique = (value, index, self) => self.indexOf(value) === index;
-            return arr.filter( onlyUnique );
-        }
+            return arr.filter(onlyUnique);
+        },
     },
 };
 </script>

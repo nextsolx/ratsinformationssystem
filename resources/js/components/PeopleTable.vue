@@ -4,20 +4,21 @@ import LetterNavigation from './LetterNavigation';
 import sortingMixin from '../mixins/sortingMixin';
 import Dropdown from './Ux/Dropdown';
 import Search from './Ux/Search';
+
 export default {
     name: 'PeopleTable',
     mixins: [sortingMixin],
     props: {
         members: {
             type: Array,
-            default: () => []
-        }
+            default: () => [],
+        },
     },
     components: {
         Member,
         LetterNavigation,
         Dropdown,
-        Search
+        Search,
     },
     data() {
         return {
@@ -25,7 +26,7 @@ export default {
             inputValue: '',
             dropValue: {},
             filtered: false,
-            filterValue: 'name'
+            filterValue: 'name',
         };
     },
     created () {

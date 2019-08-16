@@ -1,12 +1,12 @@
 <script>
 import Vue from 'vue';
+import checkView from 'vue-check-view';
 import CommitteeTableItem from './CommitteeTableItem';
 import Dropdown from '../Ux/Dropdown';
 import Search from '../Ux/Search';
 import LetterNavigation from '../LetterNavigation';
 import sortingMixin from '../../mixins/sortingMixin';
 
-import checkView from 'vue-check-view';
 Vue.use(checkView);
 
 export default {
@@ -15,22 +15,22 @@ export default {
     props: {
         committees: {
             type: Array,
-            default: () => []
-        }
+            default: () => [],
+        },
     },
     components: {
         CommitteeTableItem,
         LetterNavigation,
         Dropdown,
-        Search
+        Search,
     },
     data() {
         return {
             unfilteredList: this.committees,
             filtered: false,
             inputValue: '',
-            dropValue: {label:'A-Z', value:'A-Z'},
-            filterValue: 'title'
+            dropValue: { label: 'A-Z', value: 'A-Z' },
+            filterValue: 'title',
         };
     },
     created () {
@@ -38,12 +38,11 @@ export default {
     },
     methods: {
         viewHandler(e) {
-            let id = e.target.element.id;
+            const { id } = e.target.element;
             if (id) {
-                if (e.percentInView === 1 || e.percentTop > .2 && e.percentTop < .9) {
+                if (e.percentInView === 1 || (e.percentTop > 0.2 && e.percentTop < 0.9)) {
                     document.querySelector(`#${id[0]}-search-button`).classList.add('bolt');
-                }
-                else {
+                } else {
                     document.querySelector(`#${id[0]}-search-button`).classList.remove('bolt');
                 }
             }

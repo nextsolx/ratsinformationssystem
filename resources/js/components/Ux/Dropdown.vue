@@ -3,35 +3,35 @@ export default {
     name: 'Dropdown',
     model: {
         prop: 'value',
-        event: 'change'
+        event: 'change',
     },
     props: {
         label: {
             type: String,
-            default: ''
+            default: '',
         },
         id: {
             type: String,
-            required: true
+            required: true,
         },
         options: {
             type: Array,
-            default: () => []
+            default: () => [],
         },
         value: {
             type: Object,
-            default: () => {}
+            default: () => {},
         },
         fullWidthMob: {
             type: Boolean,
-            default: false
-        }
+            default: false,
+        },
     },
     methods: {
         setValue(e) {
             const value = this.options.find(el => el.label === e.target.value);
             this.$emit('change', value);
-        }
+        },
     },
 };
 </script>

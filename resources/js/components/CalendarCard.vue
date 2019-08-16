@@ -16,8 +16,8 @@ export default {
             const tableDate = moment(moment(date).format('DD.MM.YYYY'), 'DD.MM.YYYY');
             const today = moment(moment(new Date).format('DD.MM.YYYY'), 'DD.MM.YYYY');
             const diff = today.diff(tableDate, 'days');
-            if (diff > 0) return 'bold';
-            if (diff === 0) return 'warning';
+            const isFuture = moment(today).isBefore(tableDate);
+            diff === 0 ? 'warning' : isFuture ? 'bold' : '';
         }
     },
 };
@@ -36,12 +36,12 @@ export default {
         <div class="ris-calendar__card-day-right">
             <div class="ris-calendar__card"
                 v-for="meetup in meetingSortedDayList.data"
-                :key="meetup.title"
+                :key="meetup.id"
 
                     >
                 <div>
                     <h3 class="ris-title">
-                        {{ meetup.title }}
+                        {{ meetup.name }}
                     </h3>
                     <div v-if="!meetup.isCancelled">
                         <p class="ris-subheader" >BA/0028/2018</p>

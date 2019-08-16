@@ -4,7 +4,7 @@ export default {
     props: {
         information: {
             type: String,
-            default: () => 'info'
+            default: 'info'
         }
     },
     data () {

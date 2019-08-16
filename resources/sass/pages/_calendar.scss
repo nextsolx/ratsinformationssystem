@@ -52,21 +52,29 @@
         display: flex;
         justify-content: space-between;
 
+        &.bold {
+            .ris-calendar__card-day-left {
+                font-weight: bold;
+            }
+        }
+
+        &.warning {
+            .ris-calendar__card-day-left {
+                font-weight: bold;
+                color: $c-red;
+            }
+            .ris-calendar__card-day-right {
+                border-bottom: 2px solid red;
+                padding-bottom: 16px;
+            }
+        }
+
         &-left {
             font-family: $ff-helvetica;
             font-size: $fs-xxxl;
             line-height: $lh-xl;
             min-width: 48px;
             padding-top: $indent-s;
-
-            &.bold {
-                font-weight: bold;
-            }
-
-            &.warning {
-                font-weight: bold;
-                color: $c-red;
-            }
         }
 
         &-right {

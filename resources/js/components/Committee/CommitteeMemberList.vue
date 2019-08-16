@@ -15,14 +15,14 @@ export default {
         }
     },
     created() {
-        this.sortBy(this.unfilteredList,'function');
+        this.sortBy(this.unfilteredList,this.dropValue.value);
     },
     data() {
         return {
             unfilteredList: this.members,
             dropValue: {
-                value: 'function',
-                label: 'Funktion'
+                value: 'party',
+                label: 'Partei'
             },
             dropOptions: [
                 {
@@ -74,7 +74,7 @@ export default {
                 <ul class="ris-ul ris-committee-members-secondary-list">
                     <Member
                         v-for="member in item.data"
-                        :key="member.name"
+                        :key="member.id"
                         :member="member"
                         :is-party="true"
                         class="ris-committee-members-secondary-list__item"
@@ -85,7 +85,7 @@ export default {
         <transition-group tag="ul" name="fade" class="ris-ul ris-committee-members-secondary-list" v-if="filtered">
             <Member
                 v-for="member in filteredList"
-                :key="member.name"
+                :key="member.id"
                 :member="member"
                 :is-party="true"
                 class="ris-committee-members-secondary-list__item"

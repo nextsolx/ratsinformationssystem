@@ -23,7 +23,7 @@ export default {
     data() {
         return {
             unfilteredList: this.meetings,
-            filterValue: 'date',
+            filterValue: 'start',
             filtered: false,
             inputValue: '',
             dropValue: {
@@ -33,7 +33,8 @@ export default {
         };
     },
     created() {
-        this.sortBy(this.sortByDate(this.unfilteredList),'date');
+        // this.sortByDate(this.unfilteredList)
+        this.sortBy(this.sortByDate(this.unfilteredList), this.filterValue);
     },
     computed: {
         yearsList() {
@@ -41,7 +42,7 @@ export default {
                 label: 'Alle',
                 value: 'all'
             }];
-            this.uniqArray(this.unfilteredList.map(el => moment(el.date).year())).forEach(item => {
+            this.uniqArray(this.unfilteredList.map(el => moment(el.start).year())).forEach(item => {
                 list.push({
                     value: `${item}`,
                     label: `${item}`
@@ -52,7 +53,7 @@ export default {
     },
     methods: {
         sortByDate (list) {
-            return list.sort((a,b) => new Date(a.date) - new Date(b.date));
+            return list.sort((a,b) => new Date(a.start) - new Date(b.start));
         },
         filterMeetingsByTitle(value) {
             this.dropValue = {
@@ -60,18 +61,18 @@ export default {
                 label: 'Alle'
             };
             if (value) {
-                this.filterValue = 'title';
+                this.filterValue = 'name';
                 this.filterList(value);
-                this.sortBy(this.filteredList, 'date');
-            } else this.sortBy(this.unfilteredList,'date');
+                this.sortBy(this.filteredList, 'start');
+            } else this.sortBy(this.unfilteredList,'start');
         },
         filterMeetingsByDate(obj) {
             let value = obj.value;
             if (value !== 'all') {
-                this.filterValue = 'date';
+                this.filterValue = 'start';
                 this.filterList(value);
-                this.sortBy(this.filteredList, 'date');
-            } else this.sortBy(this.unfilteredList,'date');
+                this.sortBy(this.filteredList, 'start');
+            } else this.sortBy(this.unfilteredList,'start');
         },
         uniqArray(arr) {
             const onlyUnique = (value, index, self) => self.indexOf(value) === index;

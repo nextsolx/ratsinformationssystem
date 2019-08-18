@@ -7,6 +7,8 @@ use Illuminate\Support\Arr;
 
 class Meeting extends Model
 {
+    public static $basicScope = ['location', 'agenda', 'files', 'organizations', 'organizations.people'];
+
     protected $fillable = [
         'id',
         'name',

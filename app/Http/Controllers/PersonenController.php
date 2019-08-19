@@ -9,12 +9,12 @@ class PersonenController extends Controller
 {
     public function view()
     {
-        $people = Person::with('organizations')->get();
+        // $people = Person::with('organizations')->get();
 
-        $peopleData = \App\Http\Resources\Person::collection($people)->toResponse(request())->getData();
+        // $peopleData = \App\Http\Resources\Person::collection($people)->toResponse(request())->getData();
 
-        return view('people')->with([
-            'members' => $peopleData->data,
+        return view('people-list')->with([
+            // 'members' => $peopleData->data,
             'breadcrumbs' => [
                 'Personen' => route('people-list'),
             ]
@@ -27,12 +27,17 @@ class PersonenController extends Controller
 
         $personData = (new \App\Http\Resources\Person($person))->toResponse(request())->getData();
 
-        return view('person-detail')->with([
+        return view('people')->with([
             'person' => $personData->data,
             'breadcrumbs' => [
                 'Personen' => route('people-list'),
-                $person->name => route('person-detail', $person->id),
+                $person->name => route('people', $person->id),
             ]
         ]);
+    }
+
+    public function all()
+    {
+        return \App\Http\Resources\Person::collection(Person::with('organizations')->whereNotNull('family_name')->orderBy('family_name')->get());
     }
 }

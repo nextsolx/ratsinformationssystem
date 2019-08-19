@@ -5,10 +5,6 @@ export default {
         member: {
             type: Object,
             required: true
-        },
-        isParty: {
-            type: Boolean,
-            required: true
         }
     }
 };

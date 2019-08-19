@@ -76,7 +76,6 @@ export default {
                         v-for="member in item.data"
                         :key="member.id"
                         :member="member"
-                        :is-party="true"
                         class="ris-committee-members-secondary-list__item"
                             />
                 </ul>
@@ -87,7 +86,6 @@ export default {
                 v-for="member in filteredList"
                 :key="member.id"
                 :member="member"
-                :is-party="true"
                 class="ris-committee-members-secondary-list__item"
                     />
         </transition-group>

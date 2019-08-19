@@ -14,7 +14,7 @@ class MeetingController extends Controller
     {
         $from = $request->input('from');
 
-        $meetingsQuery = \App\Meeting::with(['location', 'agenda', 'files', 'organizations', 'organizations.people'])
+        $meetingsQuery = \App\Meeting::with(\App\Meeting::$basicScope)
             ->whereNotNull('start')
             ->orderBy('start', 'DESC');
 
@@ -39,7 +39,7 @@ class MeetingController extends Controller
         $year = $request->input('year');
         $month = $request->input('month');
 
-        $meetingsQuery = \App\Meeting::with(['location', 'agenda', 'files', 'organizations', 'organizations.people'])
+        $meetingsQuery = \App\Meeting::with(\App\Meeting::$basicScope)
             ->whereNotNull('start')
             ->orderBy('start', 'DESC');
 
@@ -69,10 +69,14 @@ class MeetingController extends Controller
 
     public function getMeeting(Request $request, $id)
     {
-        $meeting = new MeetingWithData(\App\Meeting::findOrFail($id));
+        $meeting = new MeetingWithData(\App\Meeting::with(\App\Meeting::$basicScope)->findOrFail($id));
 
         return view('meeting')->with([
-            'meeting' => (array) $meeting->toResponse($request)->getData()->data
+            'meeting' => (array) $meeting->toResponse($request)->getData()->data,
+            'breadcrumbs' => [
+                'Kalendar' => route('calendar-list'),
+
+            ]
         ]);
     }
 }

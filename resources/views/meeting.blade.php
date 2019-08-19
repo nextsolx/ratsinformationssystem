@@ -105,7 +105,7 @@
             >
                 <div class="ris-agenda">Agenda data</div>
             </section>
-
+{{dd($meeting)}}
             <section class="ris-section-wrapper ris-tab-data ris-tab-data-member"
                 ref="member"
             >

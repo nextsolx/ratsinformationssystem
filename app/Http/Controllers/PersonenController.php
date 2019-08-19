@@ -13,7 +13,7 @@ class PersonenController extends Controller
 
         $peopleData = \App\Http\Resources\Person::collection($people)->toResponse(request())->getData();
 
-        return view('people')->with([
+        return view('people-list')->with([
             'members' => $peopleData->data,
             'breadcrumbs' => [
                 'Personen' => route('people-list'),
@@ -27,11 +27,11 @@ class PersonenController extends Controller
 
         $personData = (new \App\Http\Resources\Person($person))->toResponse(request())->getData();
 
-        return view('person-detail')->with([
+        return view('people')->with([
             'person' => $personData->data,
             'breadcrumbs' => [
                 'Personen' => route('people-list'),
-                $person->name => route('person-detail', $person->id),
+                $person->name => route('people', $person->id),
             ]
         ]);
     }

@@ -39,13 +39,13 @@ Route::get('/karte', function () {
     return view('map');
 })->name('map');
 
-Route::get('/gremien-list', 'GremienController@list')->name('committee-list');
+Route::get('/gremien-liste', 'GremienController@list')->name('committee-list');
 
 Route::get('/gremien/{organization}', 'GremienController@view')->name('committee');
 
-Route::get('/personen', 'PersonenController@view')->name('people-list');
+Route::get('/personen-liste', 'PersonenController@view')->name('people-list');
 
-Route::get('/person/{person}', 'PersonenController@personDetail')->name('person-detail');
+Route::get('/person/{person}', 'PersonenController@personDetail')->name('people');
 
 Route::get('/merkliste', function () {
     return view('bookmarks');

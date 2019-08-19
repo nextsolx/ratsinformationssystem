@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Person;
+use Illuminate\Http\Request;
 
 class PersonenController extends Controller
 {
@@ -12,10 +13,25 @@ class PersonenController extends Controller
 
         $peopleData = \App\Http\Resources\Person::collection($people)->toResponse(request())->getData();
 
-        return view('people-list')->with([
+        return view('people')->with([
             'members' => $peopleData->data,
             'breadcrumbs' => [
-                'Personen' => route('theme-overview'),
+                'Personen' => route('people-list'),
+            ]
+        ]);
+    }
+
+    public function personDetail(Request $request, Person $person)
+    {
+        $person->load('organizations');
+
+        $personData = (new \App\Http\Resources\Person($person))->toResponse(request())->getData();
+
+        return view('person-detail')->with([
+            'person' => $personData->data,
+            'breadcrumbs' => [
+                'Personen' => route('people-list'),
+                $person->name => route('person-detail', $person->id),
             ]
         ]);
     }

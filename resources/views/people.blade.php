@@ -3,7 +3,7 @@
 @section('content')
 
     @include('layouts.breadcrumbs')
-
+    
     <people inline-template>
         <main class="ris-main ris-people ris-content_six-eight-eight">
             <section class="ris-section-wrapper ris-people__headline">

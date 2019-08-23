@@ -17,11 +17,11 @@ export default {
     },
     data() {
         return {
-            unfilteredList: this.members,
+            unfilteredList: [],
             inputValue: '',
             dropValue: {label:'A-Z', value:'A-Z'},
             filtered: false,
-            filterValue: 'familyName',
+            filterValue: 'name',
         };
     },
     async created () {

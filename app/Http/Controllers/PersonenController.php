@@ -29,8 +29,7 @@ class PersonenController extends Controller
 
         $peopleData = \App\Http\Resources\Person::collection($peopleQuery->paginate(100))
             ->toResponse(request())->getData();
-
-        dd($peopleData->data);
+        
         return view('people-list')->with([
             'members' => $peopleData->data,
             'links' => $peopleData->links,

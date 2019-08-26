@@ -2,4 +2,4 @@ version: "3.4"
 
 services:
   app:
-    image: nextsolx/ratsinformationssystem:tmp
+    image: conv/ratsinformationssystem:tmp

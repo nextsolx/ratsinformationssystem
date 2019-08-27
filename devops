@@ -61,7 +61,6 @@ case $COMMAND in
             # when running in CI or other env where there is no access to TTY for shell script
             # this modifier will adjust docker-compose arguments to have that in mind
             echo ">>Running in CI<<"
-            cp -n ./.env.example ./.env
             COMPOSE="docker-compose -f docker-compose.yml -f .docker/overrides/docker-compose.ci.yml"
             COMMAND=$1; shift 1
             TTY="-T" ;;

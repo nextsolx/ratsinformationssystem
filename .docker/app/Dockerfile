@@ -27,6 +27,8 @@ ADD .docker/app/overlay /
 RUN apt-get update -qq && apt-get install -y -t unstable libheif-dev libfftw3-dev \
  && rm -rf /var/lib/apt/lists/*
 
+RUN echo $USER_UID
+RUN echo $USER_GID
 # working dir and ownership
 RUN chown -R www-data:www-data /var/www && /usr/local/bin/changeowner.sh www-data $USER_UID $USER_GID
 WORKDIR /var/www/html

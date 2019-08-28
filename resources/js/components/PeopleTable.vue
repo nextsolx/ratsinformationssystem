@@ -2,43 +2,87 @@
 import Member from './Member';
 import LetterNavigation from './LetterNavigation';
 import sortingMixin from '../mixins/sortingMixin';
+import lazyLoadMixin from '../mixins/lazyLoadMixin';
 import Dropdown from './Ux/Dropdown';
 import Search from './Ux/Search';
 import people from '../api/people';
+import { ContentLoader } from 'vue-content-loader';
 
 export default {
     name: 'PeopleTable',
-    mixins: [sortingMixin],
+    mixins: [sortingMixin, lazyLoadMixin],
     components: {
         Member,
         LetterNavigation,
         Dropdown,
         Search,
+        ContentLoader
     },
     data() {
         return {
             unfilteredList: [],
             inputValue: '',
-            dropValue: {label:'A-Z', value:'A-Z'},
+            dropValue: {label:'Nachname', value:'familyName'},
             filtered: false,
-            filterValue: 'name',
+            filterValue: 'familyName',
+            paginationPage: 1,
+            loading: true,
+            debounce: null
         };
     },
     async created () {
-        this.unfilteredList = await people.getAll();
-        this.sortBy(this.unfilteredList, 'familyName', true);
+        const peopleList = await people.getPaginationList();
+        this.unfilteredList = peopleList.filter(el => !el['familyName'].startsWith('_'));
+        this.sortBy(this.unfilteredList, this.filterValue, true);
+        this.loading = false;
     },
     methods: {
         viewHandler(e) {
             const { id } = e.target.element;
             if (id) {
-                if (e.percentInView === 1 || (e.percentTop > 0.2 && e.percentTop < 0.9)) {
+                if (e.percentInView === 1 || (e.percentTop > 0.1 && e.percentTop < 0.9) || e.type === 'progress' || e.type === 'enter') {
                     document.querySelector(`#${id[0]}-search-button`).classList.add('bolt');
                 } else {
                     document.querySelector(`#${id[0]}-search-button`).classList.remove('bolt');
                 }
             }
-        }
+        },
+        changeFilterValue (obj) {
+            this.filterValue = obj.value;
+            this.sortBy(this.unfilteredList, this.filterValue, true);
+        },
+        searchPeople (value) {
+            if (value) {
+                this.lazyLoading = false;
+                this.filtered = true;
+                this.filteredList = [];
+                this.loading = true;
+                this.debounce && clearTimeout(this.debounce);
+                this.debounce = setTimeout(
+                    async () => {
+                        this.filteredList = await people.search(value);
+                        this.loading = false;
+                    }, 1000);
+            } else {
+                this.filtered = false;
+                this.lazyLoading = true;
+            }
+        },
+        async buttonHandle (letter) {
+            this.lazyLoading = false;
+            // document.querySelectorAll('.ris-letter-nav__button').forEach(el => el.classList.remove('bolt'));
+            this.unfilteredList = await people.getListByLetter(letter);
+            // document.querySelector(`#${letter.toLowerCase()}-search-button`).classList.add('bolt');
+            this.sortBy(this.unfilteredList, 'familyName', true);
+        },
+        async lazyHandle () {
+            this.loading = true;
+            this.paginationPage++;
+            const peopleList = await people.getPaginationList(this.paginationPage);
+            this.unfilteredList = [...this.unfilteredList, ...peopleList];
+            this.sortBy(this.unfilteredList, this.filterValue, true);
+            this.loading = false;
+        },
     }
 };
 </script>
@@ -49,21 +93,22 @@ export default {
         <section class="ris-section-wrapper ris-content_six-eight-eight">
             <h1 class="ris-table-list__headline ris-headline">Personen</h1>
             <div class="ris-filter-wrapper">
-                <Search v-model="inputValue" :hidden-mob="true" @input="filterList" />
+                <Search v-model="inputValue" :hidden-mob="true" debounce="500" @input="searchPeople" />
                 <Dropdown
                     label="Sortierung"
                     id="table-drop"
-                    :options="[{label:'A-Z', value:'A-Z'}]"
+                    @change="changeFilterValue"
+                    :options="[{label:'Nachname', value:'familyName'}, {label:'Rolle', value: 'role'}]"
                     :full-width-mob="true"
                     v-model="dropValue" />
             </div>
             <transition-group tag="ul" name="fade" class="ris-table-list-main-list ris-ul" v-if="!filtered">
                 <li v-for="item in sortedList"
                     class="ris-table-list-main-list__item"
-                    :id="`${item.char}-list-element`"
+                    :id="`${item.title}-list-element`"
                     v-view="viewHandler"
-                    :key="item.char">
-                    <h2 class="ris-table-list-main-list__heading ris-h2">{{ item.char }}</h2>
+                    :key="item.title">
+                    <h2 class="ris-table-list-main-list__heading ris-h2">{{ item.title }}</h2>
                     <ul class="ris-ul ris-table-list-secondary-list">
                         <Member
                             class="ris-table-list-secondary-list__item"
@@ -73,6 +118,11 @@ export default {
                     </ul>
                 </li>
             </transition-group>
+            <content-loader v-if="loading" :primary-color="'#dadce0'" :height="80">
+                <rect x="40" y="20" rx="4" ry="4" width="150" height="3" />
+                <rect x="40" y="35" rx="3" ry="3" width="120" height="2" />
+                <circle cx="15" cy="30" r="15" />
+            </content-loader>
             <transition-group tag="ul" name="fade" class="ris-table-list-main-list ris-ul" v-if="filtered">
                 <Member
                     class="ris-table-list-secondary-list__item"
@@ -82,8 +132,9 @@ export default {
             </transition-group>
         </section>
         <LetterNavigation
-            v-if="!filtered"
-            :navigation-list="sortedList"
+            v-if="!filtered && filterValue === 'familyName'"
+            :pagination="true"
+            @click="buttonHandle"
                 />
     </div>
 </template>

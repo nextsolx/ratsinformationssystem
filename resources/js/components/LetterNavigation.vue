@@ -4,14 +4,24 @@ export default {
     props: {
         navigationList: {
             type: Array,
-            default: () => [],
+            default: () => ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
+                'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'Ä', 'Ö', 'Ü', 'ß']
         },
+        pagination: {
+            type: Boolean,
+            default: false
+        }
     },
     methods: {
-        scrollToComponents(id) {
-            const el = document.querySelector(`#${id}-list-element`);
-            if (el) {
-                el.scrollIntoView({ behavior: 'smooth' });
+        buttonHandle(id) {
+            if (this.pagination) {
+                this.$emit('click', id);
+            }
+            else {
+                const el = document.querySelector(`#${id}-list-element`);
+                if (el) {
+                    el.scrollIntoView({ behavior: 'smooth' });
+                }
             }
         },
     },
@@ -22,14 +32,14 @@ export default {
     <nav class="ris-letter-nav">
         <ul class="ris-ul ris-letter-nav__list">
             <li
-                v-for="(element, index) in navigationList"
+                v-for="element in navigationList"
                 class="ris-letter-nav__item"
-                :key="`${index}-list-button`">
+                :key="`${element}-list-button`">
                 <button
-                    @click="scrollToComponents(element.char)"
-                    :id="`${element.char}-search-button`"
+                    @click="buttonHandle(element)"
+                    :id="`${element.toLowerCase()}-search-button`"
                     class="ris-letter-nav__button">
-                    {{ element.char }}
+                    {{ element }}
                 </button>
             </li>
         </ul>

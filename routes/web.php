@@ -64,7 +64,7 @@ Route::get('/impressum', function () {
 })->name('company');
 
 
-Route::get('/api/people-list', 'PersonenController@all');
+Route::get('/api/people-list', 'PersonenController@getPeople');
 Route::get('/api/meetings', 'MeetingController@all');
 Route::get('/api/meeting/{id}', 'MeetingController@index');
 Route::get('/api/topics', 'TopicController@all');

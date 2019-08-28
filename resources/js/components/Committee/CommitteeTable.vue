@@ -36,6 +36,13 @@ export default {
     created () {
         this.sortBy(this.unfilteredList, this.filterValue, true);
     },
+    computed: {
+        letterNavigation() {
+            const letterList = [];
+            this.sortedList.map(el => letterList.push(el.title));
+            return letterList;
+        }
+    },
     methods: {
         viewHandler(e) {
             const { id } = e.target.element;
@@ -68,15 +75,15 @@ export default {
             <transition-group tag="ul" name="fade" class="ris-table-list-main-list ris-ul" v-if="!filtered">
                 <li v-for="item in sortedList"
                     class="ris-table-list-main-list__item"
-                    :id="`${item.char}-list-element`"
+                    :id="`${item.title}-list-element`"
                     v-view="viewHandler"
-                    :key="item.char">
-                    <h2 class="ris-table-list-main-list__heading ris-h2">{{ item.char }}</h2>
+                    :key="item.title">
+                    <h2 class="ris-table-list-main-list__heading ris-h2">{{ item.title }}</h2>
                     <ul class="ris-ul ris-table-list-secondary-list">
                         <CommitteeTableItem
                             class="ris-table-list-secondary-list__item"
                             v-for="(committee, index) in item.data"
-                            :key="`${item.char}-${index}`"
+                            :key="`${item.title}-${index}`"
                             :committee="committee"/>
                     </ul>
                 </li>
@@ -91,7 +98,7 @@ export default {
         </section>
         <LetterNavigation
             v-if="!filtered"
-            :navigation-list="sortedList"
+            :navigation-list="letterNavigation"
                 />
     </div>
 </template>

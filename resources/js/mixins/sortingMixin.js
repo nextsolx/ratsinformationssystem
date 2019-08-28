@@ -18,7 +18,7 @@ export default {
                             let arr = unfilteredList.filter(el => el[value][0].toLowerCase() === values[values.length - 1]);
                             sortedList.push({
                                 data: arr,
-                                char: values[values.length - 1]
+                                title: values[values.length - 1]
                             });
                         }
                     });

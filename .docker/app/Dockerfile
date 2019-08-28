@@ -28,6 +28,8 @@ RUN apt-get update -qq && apt-get install -y -t unstable libheif-dev libfftw3-de
  && rm -rf /var/lib/apt/lists/*
 
 # working dir and ownership
+RUN echo $USER_UID
+RUN echo $USER_GID
 RUN chown -R www-data:www-data /var/www
 RUN /usr/local/bin/changeowner.sh www-data $USER_UID $USER_GID
 WORKDIR /var/www/html

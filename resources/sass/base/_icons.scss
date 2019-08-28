@@ -147,6 +147,8 @@
     }
 
     &_download {
+        color: $c-red;
+
         &::before {
             content: 'V';
         }
@@ -239,6 +241,12 @@
     &_squares-in-square {
         &::before {
             content: 'l';
+        }
+    }
+
+    &_eye-crossed {
+        &::before {
+            content: 'm';
         }
     }
 }

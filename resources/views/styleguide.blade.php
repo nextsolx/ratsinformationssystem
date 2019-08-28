@@ -485,6 +485,7 @@
                         <span class="ris-i ris-i_house"></span>
                         <span class="ris-i ris-i_download-with-box"></span>
                         <span class="ris-i ris-i_eye"></span>
+                        <span class="ris-i ris-i_eye-crossed"></span>
                         <span class="ris-i ris-i_resize-text"></span>
                         <span class="ris-i ris-i_notice-box"></span>
                         <span class="ris-i ris-i_doc"></span>

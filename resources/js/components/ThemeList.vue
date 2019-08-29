@@ -52,7 +52,7 @@ export default {
                     .get(`/api/topics?district=${currentDistrictName}`)
                     .then(res => {
                         if (res.data.data.length === 0) {
-                            this.info(currentDistrictName, this.districtInfoDescription);
+                            //this.info(currentDistrictName, this.districtInfoDescription);
                         } else {
                             res.data.data.forEach((topic) => {
 

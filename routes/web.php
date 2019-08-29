@@ -74,3 +74,13 @@ Route::get('/api/districts',function () {
         ]
     ]));
 });
+Route::get('/api/postal_code',function () {
+    return response(json_encode([
+        'data' => [
+            'postalCode' => [
+                '04860', '04668', '04519', '04519',
+                '04519',  '04451', '04416',  '04356',  '04356'
+            ]
+        ]
+    ]));
+});

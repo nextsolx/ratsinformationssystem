@@ -66,13 +66,6 @@ Route::get('/api/meetings', 'MeetingController@all');
 Route::get('/api/meeting/{id}', 'MeetingController@index');
 Route::get('/api/topics', 'TopicController@all');
 Route::get('/api/topic/{paper}', 'TopicController@index');
-Route::get('/api/districts',function () {
-    return response(json_encode([
-        'data' => [
-            'districts' => [
-                'Innenstadt', 'Rodenkirchen', 'Lindenthal', 'Ehrenfeld',
-                'Nippes',  'Chorweiler', 'Porz',  'Kalk',  'Mülheim'
-            ]
-        ]
-    ]));
-});
+Route::get('/api/districts', 'DistrictController@all');
+Route::get('/api/districts/{district}', 'DistrictController@district');
+Route::get('/api/districts/{district}/{subdistrict}', 'DistrictController@subDistrict');

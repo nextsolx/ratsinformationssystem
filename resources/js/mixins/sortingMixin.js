@@ -13,7 +13,7 @@ export default {
                 unfilteredList
                     .sort((a, b) => a[value] === b[value] ? 0 : +(a[value] > b[value]) || -1)
                     .forEach(el => {
-                        if (!el[value]) return;
+                        // if (!el[value]) return;
                         if (!values.includes(el[value][0].toLowerCase())) {
                             values.push(el[value][0].toLowerCase());
                             let arr = unfilteredList.filter(el => {

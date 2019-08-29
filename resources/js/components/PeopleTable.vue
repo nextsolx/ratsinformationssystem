@@ -26,11 +26,12 @@ export default {
             filtered: false,
             filterValue: 'familyName',
             paginationPage: 1,
-            loading: true,
+            loading: false,
             debounce: null
         };
     },
     async created () {
+        this.loading = true;
         const peopleList = await people.getPaginationList();
         this.unfilteredList = peopleList.filter(el => !el['familyName'].startsWith('_'));
         this.sortBy(this.unfilteredList, this.filterValue, true);
@@ -47,13 +48,19 @@ export default {
                 }
             }
         },
-        changeFilterValue (obj) {
+        async changeFilterValue (obj) {
+            this.loading = true;
             this.filterValue = obj.value;
+            const peopleList = await people.getPaginationList(1, this.filterValue);
+            this.unfilteredList = [...peopleList];
             this.sortBy(this.unfilteredList, this.filterValue, true);
+            console.log(this.sortBy(this.unfilteredList, this.filterValue, true));
+            this.loading = false;
         },
         searchPeople (value) {
             if (value) {
                 this.lazyLoading = false;
+                this.paginationPage = 1;
                 this.filtered = true;
                 this.filteredList = [];
                 this.loading = true;
@@ -64,6 +71,7 @@ export default {
                         this.loading = false;
                     }, 1000);
             } else {
+                this.paginationPage = 1;
                 this.filtered = false;
                 this.lazyLoading = true;
             }
@@ -78,7 +86,7 @@ export default {
         async lazyHandle () {
             this.loading = true;
             this.paginationPage++;
-            const peopleList = await people.getPaginationList(this.paginationPage);
+            const peopleList = await people.getPaginationList(this.paginationPage, this.filterValue);
             this.unfilteredList = [...this.unfilteredList, ...peopleList];
             this.sortBy(this.unfilteredList, this.filterValue, true);
             this.loading = false;
@@ -98,7 +106,7 @@ export default {
                     label="Sortierung"
                     id="table-drop"
                     @change="changeFilterValue"
-                    :options="[{label:'Nachname', value:'familyName'}, {label:'Rolle', value: 'role'}]"
+                    :options="[{label:'Nachname', value:'familyName'}, {label:'Party', value: 'party'}]"
                     :full-width-mob="true"
                     v-model="dropValue" />
             </div>

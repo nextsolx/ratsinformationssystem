@@ -381,14 +381,6 @@
         }
 
         &__agenda-child {
-            display: none;
-
-            &_active {
-                &:not(.ris-agenda-list__agenda-child_hidden-by-search) {
-                    display: flex;
-                }
-            }
-
             .ris-description {
                 &__count {
                     padding-top: $indent-m;

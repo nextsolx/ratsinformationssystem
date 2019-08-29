@@ -1,7 +1,8 @@
 export default {
     data() {
         return {
-            lazyLoading: true
+            lazyLoading: true,
+            lazyLoadingDebounce: null
         };
     },
     mounted() {
@@ -13,7 +14,10 @@ export default {
         },
         scrollListener() {
             let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
-            if (bottomOfWindow && this.lazyLoading) this.lazyHandle();
+            if (bottomOfWindow && this.lazyLoading) {
+                this.lazyLoadingDebounce && clearTimeout(this.lazyLoadingDebounce);
+                this.lazyLoadingDebounce = setTimeout( () => this.lazyHandle(), 500);
+            }
         }
     },
     beforeDestroy() {

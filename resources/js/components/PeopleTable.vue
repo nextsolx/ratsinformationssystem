@@ -132,7 +132,6 @@ export default {
             </transition-group>
         </section>
         <LetterNavigation
-            v-if="!filtered && filterValue === 'familyName'"
             :pagination="true"
             @click="buttonHandle"
                 />

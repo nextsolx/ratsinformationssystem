@@ -37,7 +37,7 @@ export default {
         viewHandler(e) {
             const { id } = e.target.element;
             if (id && this.lazyLoading) {
-                if (e.percentInView === 1 || (e.percentTop > 0.1 && e.percentTop < 0.9) || e.type === 'progress' || e.type === 'enter') {
+                if (e.percentInView === 1 || (e.percentTop > 0.1 && e.percentTop < 0.9) ||e.type === 'progress' || e.type === 'enter') {
                     document.querySelector(`#${id[0]}-search-button`).classList.add('bolt');
                 } else {
                     document.querySelector(`#${id[0]}-search-button`).classList.remove('bolt');
@@ -80,9 +80,12 @@ export default {
         },
         async buttonHandle (letter) {
             this.lazyLoading = false;
+            this.loading = true;
+            this.sortedList = [];
             this.dropValue = {label:'Nachname', value:'familyName'};
             const { members } = await people.getListByLetter(letter, this.dropValue.value);
             this.sortBy(members, 'familyName', true);
+            this.loading = false;
             document.querySelectorAll('.ris-letter-nav__button').forEach(el => {
                 if (el.id === `${letter}-search-button`) {
                     el.classList.add('bolt');

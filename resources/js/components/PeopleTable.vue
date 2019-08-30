@@ -35,7 +35,6 @@ export default {
     },
     methods: {
         viewHandler(e) {
-            console.log(e)
             const { id } = e.target.element;
             if (id) {
                 if (e.percentInView === 1 || (e.percentTop > 0.1 && e.percentTop < 0.9) || e.type === 'progress' || e.type === 'enter') {
@@ -47,8 +46,8 @@ export default {
         },
         async getDataByFilter () {
             this.loading = true;
-            const peopleList = await people.getPaginationList(this.paginationPage, this.filterValue);
-            this.unfilteredList = [...this.unfilteredList, ...peopleList];
+            const { members } = await people.getPaginationList(this.paginationPage, this.filterValue);
+            this.unfilteredList = [...this.unfilteredList, ...members];
             this.sortBy(this.unfilteredList, this.filterValue, true);
             this.loading = false;
         },
@@ -80,9 +79,9 @@ export default {
         async buttonHandle (letter) {
             this.lazyLoading = false;
             // document.querySelectorAll('.ris-letter-nav__button').forEach(el => el.classList.remove('bolt'));
-            this.unfilteredList = await people.getListByLetter(letter, this.dropValue.value);
+            const { members } = await people.getListByLetter(letter, this.dropValue.value);
             // document.querySelector(`#${letter.toLowerCase()}-search-button`).classList.add('bolt');
-            this.sortBy(this.unfilteredList, 'familyName', true);
+            this.sortBy(members, 'familyName', true);
         },
         lazyHandle () {
             this.paginationPage++;

@@ -5,7 +5,7 @@ export default {
         navigationList: {
             type: Array,
             default: () => ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
-                'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'Ä', 'Ö', 'Ü', 'ß']
+                'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
         },
         pagination: {
             type: Boolean,
@@ -32,14 +32,14 @@ export default {
     <nav class="ris-letter-nav">
         <ul class="ris-ul ris-letter-nav__list">
             <li
-                v-for="element in navigationList"
+                v-for="letter in navigationList"
                 class="ris-letter-nav__item"
-                :key="`${element}-list-button`">
+                :key="`${letter}-list-button`">
                 <button
-                    @click="buttonHandle(element)"
-                    :id="`${element.toLowerCase()}-search-button`"
+                    @click="buttonHandle(letter)"
+                    :id="`${letter.toLowerCase()}-search-button`"
                     class="ris-letter-nav__button">
-                    {{ element }}
+                    {{ letter }}
                 </button>
             </li>
         </ul>

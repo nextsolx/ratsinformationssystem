@@ -2,10 +2,16 @@
     &-wrapper {
         display: grid;
         grid-template-columns: auto auto auto;
+        @include breakpoint($bp-mobile-max) {
+            display: block;
+        }
 
         .ris-section-wrapper {
             border: 0;
             margin: 0 auto;
+            @include breakpoint($bp-mobile-max) {
+                margin: 0;
+            }
         }
     }
 

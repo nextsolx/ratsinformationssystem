@@ -26,6 +26,10 @@ export default {
             type: Boolean,
             default: false,
         },
+        hiddenMob: {
+            type: Boolean,
+            default: false,
+        },
     },
     methods: {
         setValue(e) {
@@ -37,7 +41,7 @@ export default {
 </script>
 
 <template>
-    <div class="ris-select" :class="[{ fullWidthMob: fullWidthMob }]">
+    <div class="ris-select" :class="[{ fullWidthMob: fullWidthMob }, { hiddenMob: hiddenMob }]">
         <label class="ris-select__label" :for="id" v-if="label">
             {{ label }}
         </label>

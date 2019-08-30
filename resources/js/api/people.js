@@ -6,7 +6,7 @@ export default {
             sort = 'family_name';
             return axios.get(`/api/people-list/?sort=${sort}&page=${page}`).then(res => res.data);
         }
-        return axios.get(`/api/people-list/?sort=${sort}&order=DESC&page=${page}`).then(res => res.data.members);
+        return axios.get(`/api/people-list/?sort=${sort}&order=DESC&page=${page}`).then(res => res.data);
     },
     getListByLetter (letter, sort = 'familyName') {
         if (sort === 'familyName') sort = 'family_name';

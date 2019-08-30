@@ -36,7 +36,7 @@ export default {
     methods: {
         viewHandler(e) {
             const { id } = e.target.element;
-            if (id) {
+            if (id && this.lazyLoading) {
                 if (e.percentInView === 1 || (e.percentTop > 0.1 && e.percentTop < 0.9) || e.type === 'progress' || e.type === 'enter') {
                     document.querySelector(`#${id[0]}-search-button`).classList.add('bolt');
                 } else {
@@ -54,7 +54,9 @@ export default {
         changeFilterValue (obj) {
             this.filterValue = obj.value;
             this.paginationPage = 1;
+            this.lazyLoading = true;
             this.unfilteredList = [];
+            this.sortedList = [];
             this.getDataByFilter();
         },
         searchPeople (value) {
@@ -78,10 +80,17 @@ export default {
         },
         async buttonHandle (letter) {
             this.lazyLoading = false;
-            // document.querySelectorAll('.ris-letter-nav__button').forEach(el => el.classList.remove('bolt'));
+            this.dropValue = {label:'Nachname', value:'familyName'};
             const { members } = await people.getListByLetter(letter, this.dropValue.value);
-            // document.querySelector(`#${letter.toLowerCase()}-search-button`).classList.add('bolt');
             this.sortBy(members, 'familyName', true);
+            document.querySelectorAll('.ris-letter-nav__button').forEach(el => {
+                if (el.id === `${letter}-search-button`) {
+                    el.classList.add('bolt');
+                }
+                else {
+                    el.classList.remove('bolt');
+                }
+            });
         },
         lazyHandle () {
             this.paginationPage++;
@@ -97,13 +106,13 @@ export default {
         <section class="ris-section-wrapper ris-content_six-eight-eight">
             <h1 class="ris-table-list__headline ris-headline">Personen</h1>
             <div class="ris-filter-wrapper">
-                <Search v-model="inputValue" :hidden-mob="true" debounce="500" @input="searchPeople" />
+                <Search v-model="inputValue" :fullWidthMob="true" debounce="500" @input="searchPeople" />
                 <Dropdown
                     label="Sortierung"
                     id="table-drop"
                     @change="changeFilterValue"
                     :options="[{label:'Nachname', value:'familyName'}, {label:'Party', value: 'party'}]"
-                    :full-width-mob="true"
+                    :hiddenMob="true"
                     v-model="dropValue" />
             </div>
             <transition-group tag="ul" name="fade" class="ris-table-list-main-list ris-ul" v-if="!filtered">

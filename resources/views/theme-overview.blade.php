@@ -103,6 +103,7 @@
                             <span class="ris-i ris-i_chevron-double"></span>
                         </div>
                     </div>
+                    <collapse :option-list="{type: 'district', data: {{json_encode($district_list)}}}"></collapse>
                 </section>
 
                 @if (!empty($topics))

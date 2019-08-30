@@ -33,7 +33,7 @@ RUN /usr/local/bin/changeowner.sh www-data $USER_UID $USER_GID
 WORKDIR /var/www/html
 
 # startup
-ENTRYPOINT ["/usr/local/bin/run-app.sh"]
+#ENTRYPOINT ["/usr/local/bin/run-app.sh"]
 
 CMD ["/usr/bin/runsvdir", "-P", "/etc/service"]
 

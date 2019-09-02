@@ -360,12 +360,6 @@
                 .ris-i_expand-more {
                     transform: rotate(180deg);
                 }
-
-                .ris-description__content {
-                    @include breakpoint($bp-mobile-max) {
-                        display: none;
-                    }
-                }
             }
 
             .ris-text {

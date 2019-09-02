@@ -4,11 +4,8 @@
             @if ($agenda->public === $agenda_public_type)
                 <div class="ris-agenda-list__item ris-agenda-list__agenda-without-child"
                     ref="{{ $agenda->id }}"
-
-                    v-if="isActive"
+                    v-if="(!inputValue || inputValue.length === 1) || agendaListSorted['{{ $agenda->id }}']"
                 >
-                    {{--v-if="(!inputValue || inputValue.length === 1) || agendaListSorted['{{ $agenda->id }}']
-                        || isActive"--}}
                     <div class="ris-description ris-description__count">
                         {{ $agenda->number }}
                     </div>
@@ -26,14 +23,8 @@
                     <div class="ris-agenda-list__item ris-agenda-list__agenda-child
                         _agenda-child-{{ $agenda_public_type }}-{{ (int)$agenda->number }}"
                         ref="{{ $agenda->id }}"
-
-                        data-child-agenda="{{ $agenda->id }}"
-
-                        v-if="agendaChildRef['{{ $agenda->id }}']"
+                        v-if="agendaListSorted['{{ $agenda->id }}'] || agendaChildRef['{{ $agenda->id }}'] || isActiveChild"
                     >
-                        {{--v-if="(!inputValue || inputValue.length === 1)
-                        || agendaListSorted['{{ $agenda->id }}']
-                        || isActiveChild"--}}
                         <div class="ris-description ris-description__count ris-description_normal">
                             {{ $agenda->number }}
                         </div>
@@ -51,15 +42,11 @@
                 @else
                     <div class="ris-agenda-list__item ris-agenda-list__agenda-head
                         _agenda-head-{{ $agenda_public_type }}-{{ (int)$agenda->number }}"
+                        :class="{'ris-agenda-list__agenda-head_active': agendaParentRef['{{ $agenda->id }}']}"
                         @click="collapseAgendaChild({{ (int)$agenda->number }}, {{ $agenda_public_type }}, '{{ $agenda->id }}')"
                         ref="{{ $agenda->id }}"
-
-                        data-parent-agenda="{{ $agenda->id }}"
-
-                        :class="{'ris-agenda-list__agenda-head_active': agendaParentRef['{{ $agenda->id }}']}"
+                        v-if="(!inputValue || inputValue.length === 1) || agendaListSorted['{{ $agenda->id }}']"
                     >
-
-                        {{--v-if="(!inputValue || inputValue.length === 1) || agendaListSorted['{{ $agenda->id }}']"--}}
                         <div class="ris-description ris-description__count">
                             {{ $agenda->number }}
                         </div>

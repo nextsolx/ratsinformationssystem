@@ -4,13 +4,9 @@ export default {
     data: () => ({
         activeTab: 'true',
         dropValue: 'Funktion',
-        agendaChildNumber: '',
-        agendaType: '',
         agendaListSorted: [],
         inputValue: '',
-        isActive: true,
         isActiveChild: false,
-        isCollapsed: false,
         agendaParentRef: [],
         agendaChildRef: [],
     }),
@@ -58,12 +54,6 @@ export default {
 
             if (inputValue) {
                 if (inputValue.length > 1) {
-                    // clear collapsed child items for mobile version
-                    this.agendaChildNumber = '';
-                    this.agendaType = '';
-
-                    //this.isActive = false;
-
                     let agendaTmpList = [],
                         agendaParentId = null;
 
@@ -92,33 +82,27 @@ export default {
             }
         },
         collapseAgendaChild(agendaChildNumber, agendaType, parentAgenda) {
-            this.agendaChildNumber = agendaChildNumber;
-            this.agendaType = agendaType;
-            //this.isActive = !this.isActive;
-            this.isCollapsed = !this.isCollapsed;
-
-            if (this.isCollapsed && !this.agendaParentRef[parentAgenda]) {
-                console.log('Add agenda: ', parentAgenda);
-
+            if (!this.agendaParentRef[parentAgenda]) {
                 this.$set(this.agendaParentRef, parentAgenda, true);
 
                 this.agendaList.forEach(agenda => {
                     let agendaMainNumber = agenda.number.split('.', 1)[0];
                     if (agenda.number && agenda.number.includes('.') && agendaChildNumber === +agendaMainNumber) {
-                        this.agendaChildRef[agenda.id] = true;
+                        this.$set(this.agendaChildRef, agenda.id, true);
                     }
                 });
-
-                this.$refs[parentAgenda].scrollIntoView({ behavior: 'smooth'});
             } else {
-                console.log('Remove agenda: ', parentAgenda);
-
                 this.agendaParentRef[parentAgenda] = false;
-                this.agendaChildRef = [];
+
+                this.agendaList.forEach(agenda => {
+                    let agendaMainNumber = agenda.number.split('.', 1)[0];
+                    if (agenda.number && agenda.number.includes('.') && agendaChildNumber === +agendaMainNumber) {
+                        this.agendaChildRef[agenda.id] = false;
+                    }
+                });
             }
 
-            console.log('Parent: ', this.agendaParentRef);
-            console.log('Child: ', this.agendaChildRef);
+            this.$refs[parentAgenda].scrollIntoView({ behavior: 'smooth'});
         },
     },
 };

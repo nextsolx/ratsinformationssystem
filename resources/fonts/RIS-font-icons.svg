@@ -2,7 +2,7 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
 <metadata>
-Created by FontForge 20170731 at Fri Aug  9 16:34:11 2019
+Created by FontForge 20170731 at Thu Aug 15 11:57:31 2019
  By Aleksey,,,
 Copyright (c) 2019, Alexandr Krivonos
 </metadata>
@@ -20,7 +20,7 @@ Copyright (c) 2019, Alexandr Krivonos
     bbox="0 -200 1040 800"
     underline-thickness="50"
     underline-position="-150"
-    unicode-range="U+0041-006B"
+    unicode-range="U+0041-006E"
   />
 <missing-glyph 
 d="M33 0v666h265v-666h-265zM66 33h199v600h-199v-600z" />
@@ -116,5 +116,14 @@ l-70 70z" />
 d="M583 717l250 -250v-500q0 -35 -24.5 -59.5t-58.5 -24.5h-500q-35 0 -59 24.5t-24 59.5v666q0 35 24.5 59.5t58.5 24.5h333zM667 50v83h-334v-83h334zM667 217v83h-334v-83h334zM542 425h229l-229 229v-229z" />
     <glyph glyph-name="k" unicode="k" 
 d="M833 717q35 0 59.5 -24.5t24.5 -59.5v-500q0 -34 -24.5 -58.5t-59.5 -24.5h-583l-167 -167l1 750q0 35 24 59.5t59 24.5h666zM542 342v250h-84v-250h84zM542 175v83h-84v-83h84z" />
+    <glyph glyph-name="l" unicode="l" 
+d="M900 690q41 0 70.5 -29.5t29.5 -70.5v-600q0 -41 -29.5 -70.5t-70.5 -29.5h-800q-41 0 -70.5 29.5t-29.5 70.5v600q0 41 29.5 70.5t70.5 29.5h800zM900 490v100l-400 -250l-400 250v-100l400 -250z" />
+    <glyph glyph-name="m" unicode="m" 
+d="M850 450q60 0 103 -41t47 -100v-9v-300h-200v-200h-600v200h-200v300q0 60 41 103t100 47h9h700zM700 250h-400v-350h400v350zM650 0v-50h-300v50h300zM650 100v-50h-300v50h300zM650 200v-50h-300v50h300zM850 350q-21 0 -35.5 -14.5t-14.5 -35.5t14.5 -35.5t35.5 -14.5
+t35.5 14.5t14.5 35.5t-14.5 35.5t-35.5 14.5zM500 800q111 0 212 -41t178 -115q10 -9 10 -23t-10 -24l-82 -83q-10 -9 -24 -9q-13 0 -23 9q-40 37 -89 62q-19 9 -19 30v103q-73 24 -153 24q-79 0 -153 -24v-103q0 -21 -19 -30q-48 -24 -89 -62q-9 -9 -23 -9t-24 10l-82 82
+q-10 9 -10 24q0 14 10 23q77 74 178 115t212 41z" />
+    <glyph glyph-name="n" unicode="n" 
+d="M201 367q60 -117 154 -211t212 -155l122 122q25 25 57 14q96 -32 198 -32q23 0 39.5 -16.5t16.5 -39.5v-193q0 -23 -16.5 -39.5t-39.5 -16.5q-128 0 -250.5 34t-226 95t-190.5 148t-148 190.5t-95 226t-34 250.5q0 23 16.5 39.5t39.5 16.5h194q23 0 39.5 -16.5
+t16.5 -39.5q0 -102 31 -198q10 -32 -14 -57z" />
   </font>
 </defs></svg>

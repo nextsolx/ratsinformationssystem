@@ -117,7 +117,7 @@ export default {
         window.addEventListener('load', () => {
             this.createObserver();
         }, false);
-    }
+    },
 };
 </script>
 

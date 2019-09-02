@@ -235,4 +235,22 @@
             content: 'j';
         }
     }
+
+    &_email {
+        &::before {
+            content: 'l';
+        }
+    }
+
+    &_fax {
+        &::before {
+            content: 'm';
+        }
+    }
+
+    &_phone {
+        &::before {
+            content: 'n';
+        }
+    }
 }

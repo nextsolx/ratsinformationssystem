@@ -3,5 +3,5 @@ steps:
     agents:
       project: ratsinfosys
     command:
-      - ./devops ci build --build-arg USER_UID=999 --build-arg USER_GID=999 --no-cache
+      - ./devops ci build --build-arg USER_UID=999 --build-arg USER_GID=999
       - ./devops ci setup && ./devops ci tests

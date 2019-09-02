@@ -47,6 +47,8 @@ Route::get('/personen', function () {
     return view('people');
 })->name('people');
 
+Route::get('/personen', 'PersonenController@view')->name('people');
+
 Route::get('/merkliste', function () {
     return view('bookmarks');
 })->name('bookmarks');
@@ -64,23 +66,6 @@ Route::get('/api/meetings', 'MeetingController@all');
 Route::get('/api/meeting/{id}', 'MeetingController@index');
 Route::get('/api/topics', 'TopicController@all');
 Route::get('/api/topic/{paper}', 'TopicController@index');
-Route::get('/api/districts',function () {
-    return response(json_encode([
-        'data' => [
-            'districts' => [
-                'Innenstadt', 'Rodenkirchen', 'Lindenthal', 'Ehrenfeld',
-                'Nippes',  'Chorweiler', 'Porz',  'Kalk',  'Mülheim'
-            ]
-        ]
-    ]));
-});
-Route::get('/api/postal_code',function () {
-    return response(json_encode([
-        'data' => [
-            'postalCode' => [
-                '04860', '04668', '04519', '04519',
-                '04519',  '04451', '04416',  '04356',  '04356'
-            ]
-        ]
-    ]));
-});
+Route::get('/api/districts', 'DistrictController@all');
+Route::get('/api/districts/{district}', 'DistrictController@district');
+Route::get('/api/districts/{district}/{subdistrict}', 'DistrictController@subDistrict');

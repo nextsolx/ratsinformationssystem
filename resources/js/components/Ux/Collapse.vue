@@ -1,5 +1,5 @@
 <script>
-import clickOutSide from '../../mixins/tools/clickOutSide';
+import clickOutSide from '../../tools/clickOutSide';
 export default {
     name: 'Collapse',
     directives: {

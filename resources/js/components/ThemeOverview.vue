@@ -56,9 +56,7 @@ export default {
                 axios
                     .get(`/api/topics?district=${currentDistrictName}`)
                     .then(res => {
-                        if (res.data.data.length === 0) {
-                            //this.info(currentDistrictName, this.districtInfoDescription);
-                        } else {
+                        if (res.data.data.length > 0) {
                             res.data.data.forEach((topic) => {
                                 if (topic.newTopic) {
                                     if (this.themeListNew.length < 10) {

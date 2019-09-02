@@ -1,77 +1,55 @@
 <script>
 import Vue from 'vue';
+import checkView from 'vue-check-view';
 import CommitteeTableItem from './CommitteeTableItem';
 import Dropdown from '../Ux/Dropdown';
 import Search from '../Ux/Search';
 import LetterNavigation from '../LetterNavigation';
 import sortingMixin from '../../mixins/sortingMixin';
 
-import checkView from 'vue-check-view';
 Vue.use(checkView);
 
 export default {
-    name: 'SearchForm',
+    name: 'CommitteeTable',
     mixins: [sortingMixin],
     props: {
         committees: {
             type: Array,
-            default: () => []
-        }
+            default: () => [],
+        },
     },
     components: {
         CommitteeTableItem,
         LetterNavigation,
         Dropdown,
-        Search
+        Search,
     },
     data() {
         return {
-            committeesList: this.committees,
-            sortedCommittees: [],
+            unfilteredList: this.committees,
             filtered: false,
             inputValue: '',
-            dropValue: {label:'A-Z', value:'A-Z'}
+            dropValue: { label: 'A-Z', value: 'A-Z' },
+            filterValue: 'title',
         };
     },
     created () {
-        this.sortByChar();
+        this.sortBy(this.unfilteredList, this.filterValue, true);
+    },
+    computed: {
+        letterNavigation() {
+            const letterList = [];
+            this.sortedList.map(el => letterList.push(el.title));
+            return letterList;
+        }
     },
     methods: {
-        sortByChar() {
-            const sortedCommittees = [];
-            let chars = [];
-            this.committeesList
-                .sort((a, b) => a.title === b.title ? 0 : +(a.title > b.title) || -1)
-                .forEach(el => {
-                    if (!chars.includes(el.title[0].toLowerCase())) {
-                        chars.push(el.title[0].toLowerCase());
-                        let arr = this.committeesList.filter(el => el.title[0].toLowerCase() === chars[chars.length - 1]);
-                        sortedCommittees.push({
-                            data: arr,
-                            char: chars[chars.length - 1]
-                        });
-                    }
-                });
-            this.sortedCommittees = sortedCommittees;
-        },
-        filterList (value) {
-            if (value) {
-                this.sortedCommittees = this.committeesList
-                    .filter(el => el.title.toLowerCase().includes(value.toLowerCase()));
-                this.filtered = true;
-            }
-            else {
-                this.sortByChar();
-                this.filtered = false;
-            }
-        },
         viewHandler(e) {
-            let id = e.target.element.id;
+            const { id } = e.target.element;
             if (id) {
-                if (e.percentInView === 1 || e.percentTop > .2 && e.percentTop < .9) {
+                if (e.percentInView === 1 || (e.percentTop > 0.2 && e.percentTop < 0.9)) {
                     document.querySelector(`#${id[0]}-search-button`).classList.add('bolt');
-                }
-                else {
+                } else {
                     document.querySelector(`#${id[0]}-search-button`).classList.remove('bolt');
                 }
             }
@@ -81,10 +59,10 @@ export default {
 </script>
 
 <template>
-    <div class="ris-committee-list-wrapper">
+    <div class="ris-table-list-wrapper">
         <div />
         <section class="ris-section-wrapper ris-content_six-eight-eight">
-            <h1 class="ris-committee-list__headline ris-headline">Gremien</h1>
+            <h1 class="ris-table-list__headline ris-headline">Gremien</h1>
             <div class="ris-filter-wrapper">
                 <Search v-model="inputValue" :hidden-mob="true" @input="filterList" />
                 <Dropdown
@@ -94,33 +72,33 @@ export default {
                     :full-width-mob="true"
                     v-model="dropValue" />
             </div>
-            <transition-group tag="ul" name="fade" class="ris-committee-list-main-list ris-ul" v-if="!filtered">
-                <li v-for="item in sortedCommittees"
-                    class="ris-committee-list-main-list__item"
-                    :id="`${item.char}-list-element`"
+            <transition-group tag="ul" name="fade" class="ris-table-list-main-list ris-ul" v-if="!filtered">
+                <li v-for="item in sortedList"
+                    class="ris-table-list-main-list__item"
+                    :id="`${item.title}-list-element`"
                     v-view="viewHandler"
-                    :key="item.char">
-                    <h2 class="ris-committee-list-main-list__heading ris-h2">{{ item.char }}</h2>
-                    <ul class="ris-ul ris-committee-list-secondary-list">
+                    :key="item.title">
+                    <h2 class="ris-table-list-main-list__heading ris-h2">{{ item.title }}</h2>
+                    <ul class="ris-ul ris-table-list-secondary-list">
                         <CommitteeTableItem
-                            class="ris-committee-list-secondary-list__item"
+                            class="ris-table-list-secondary-list__item"
                             v-for="(committee, index) in item.data"
-                            :key="`${item.char}-${index}`"
+                            :key="`${item.title}-${index}`"
                             :committee="committee"/>
                     </ul>
                 </li>
             </transition-group>
-            <transition-group tag="ul" name="fade" class="ris-committee-list-main-list ris-ul" v-if="filtered">
+            <transition-group tag="ul" name="fade" class="ris-table-list-main-list ris-ul" v-if="filtered">
                 <CommitteeTableItem
-                    class="ris-committee-list-secondary-list__item"
-                    v-for="(item, index) in sortedCommittees"
+                    class="ris-table-list-secondary-list__item"
+                    v-for="(item, index) in filteredList"
                     :key="`${index}-filtered`"
                     :committee="item"/>
             </transition-group>
         </section>
         <LetterNavigation
             v-if="!filtered"
-            :navigation-list="sortedCommittees"
+            :navigation-list="letterNavigation"
                 />
     </div>
 </template>

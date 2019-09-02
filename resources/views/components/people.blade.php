@@ -5,7 +5,7 @@
         @endif
     @endif
 
-    <a class="ris-welcome__people" href="{{ route('people') }}/1"
+    <a class="ris-welcome__people" href="{{ route('people-list') }}/1"
         title="{{ $people->name }}"
     >
         <img src="/img/person-1.jpg" class="ris-welcome__people-img"

@@ -238,15 +238,33 @@
         }
     }
 
-    &_squares-in-square {
+    &_email {
         &::before {
             content: 'l';
         }
     }
 
-    &_eye-crossed {
+    &_fax {
         &::before {
             content: 'm';
+        }
+    }
+
+    &_phone {
+        &::before {
+            content: 'n';
+        }
+    }
+
+    &_squares-in-square {
+        &::before {
+            content: 'o';
+        }
+    }
+
+    &_eye-crossed {
+        &::before {
+            content: 'p';
         }
     }
 }

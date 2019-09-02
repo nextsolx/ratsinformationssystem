@@ -90,5 +90,8 @@
             width: 100%;
             margin-left: 0;
         }
+        &.hiddenMob {
+            display: none;
+        }
     }
 }

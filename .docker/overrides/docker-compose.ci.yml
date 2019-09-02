@@ -21,7 +21,7 @@ services:
       <<: *environment
     build:
       context: .
-      dockerfile: .docker/app/Dockerfile
+      dockerfile: .docker/overrides/Dockerfile
       target: develop
     ports:
       - 80:80

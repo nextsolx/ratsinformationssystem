@@ -128,14 +128,14 @@ if (isset($meeting['people']) and count($meeting['people']) > 0) {
                             <span class="ris-i ris-i_eye"></span>
                             Öffentlicher Teil
                         </h3>
-                        <button class="ris-link ris-link_button ris-button__back"
+                        {{--<button class="ris-link ris-link_button ris-button__back"
                             @click="backToList"
                             v-if="backButtonPublic"
                             v-cloak
                         >
                             <span class="ris-i ris-i_back"></span>
                             Zurück
-                        </button>
+                        </button>--}}
 
                         @include('components.meeting.agenda-list',
                                 ['agenda_grouped_list' => $meeting_agenda, 'agenda_public_type' => 1]
@@ -158,14 +158,14 @@ if (isset($meeting['people']) and count($meeting['people']) > 0) {
                                 <span class="ris-i ris-i_eye-crossed"></span>
                                 Nicht öffentlicher Teil
                             </h3>
-                            <button class="ris-link ris-link_button ris-button__back"
+                            {{--<button class="ris-link ris-link_button ris-button__back"
                                 @click="backToList"
                                 v-if="backButtonPrivate"
                                 v-cloak
                             >
                                 <span class="ris-i ris-i_back"></span>
                                 Zurück
-                            </button>
+                            </button>--}}
                             @include('components.meeting.agenda-list',
                                     ['agenda_grouped_list' => $meeting_agenda, 'agenda_public_type' => 0]
                                 )

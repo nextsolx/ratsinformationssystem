@@ -8,13 +8,9 @@ export default {
         agendaType: '',
         agendaListSorted: [],
         inputValue: '',
-        backButtonPublic: false,
-        backButtonPrivate: false,
-        isActiveParent: true,
+        isActive: true,
         isActiveChild: false,
-        isActiveEmpty: true,
         isCollapsed: false,
-        agendaParentRef: [],
         agendaChildRef: [],
     }),
     props: {
@@ -65,13 +61,7 @@ export default {
                     this.agendaChildNumber = '';
                     this.agendaType = '';
 
-                    this.isActiveParent = false;
-                    this.isActiveChild = false;
-                    // plus clear active 'back' button to all list
-                    // const buttonBackList = document.querySelectorAll('.ris-button__back');
-                    // buttonBackList.forEach(buttonBack => {
-                    //     buttonBack.classList.remove('ris-button__back_active');
-                    // });
+                    //this.isActive = false;
 
                     let agendaTmpList = [],
                         agendaParentId = null;
@@ -100,69 +90,27 @@ export default {
                 }
             }
         },
-        collapseAgendaChild(agendaChildNumber, agendaType, agendaParentRef) {
+        collapseAgendaChild(agendaChildNumber, agendaType) {
             this.agendaChildNumber = agendaChildNumber;
             this.agendaType = agendaType;
-            this.agendaParentRef = [];
-            this.backButtonPublic = false;
-            this.backButtonPrivate = false;
-            this.isActiveParent = this.isActiveParent === false;
-            //this.isActiveChild = this.isActiveChild === false;
+            //this.isActive = !this.isActive;
             this.isCollapsed = this.isCollapsed === false;
 
-            console.log('Cleared Child: ', this.isActiveParent, this.agendaChildRef, this.agendaChildRef.length);
+            const agendaHead = document.querySelector(`._agenda-head-${agendaType}-${agendaChildNumber}`);
 
-            const agendaChildList = document.querySelectorAll(`._agenda-child-${agendaType}-${agendaChildNumber}`),
-                agendaHead = document.querySelector(`._agenda-head-${agendaType}-${agendaChildNumber}`),
-                agendaListItem = document.querySelectorAll('.ris-agenda-list__item'),
-                agendaList = document.querySelectorAll('.ris-agenda-list');
-
-            if (agendaChildList && agendaHead) {
-                // hide all agenda list(if 2 or more)
-                /*agendaList.forEach(agenda => {
-                    agenda.classList.toggle('ris-agenda-list_hidden');
-                });*/
-
-                //const agendaHeadParent = agendaHead.parentElement;
-                // show only list block where chosen items
-                // agendaHeadParent.classList.toggle('ris-agenda-list_hidden');
-                // agendaHeadParent.classList.toggle('ris-agenda-list_active');
-
-                // 'back' button for all list
+            if (agendaHead) {
                 if (this.isCollapsed) {
-                    if (agendaType === 1) {
-                        this.backButtonPublic = true;
-                    } else {
-                        this.backButtonPrivate = true;
-                    }
-                }
+                    console.log('Open child: ', agendaChildNumber);
 
-                // hide all items
-                // agendaListItem.forEach(agenda => {
-                //     agenda.classList.toggle('ris-agenda-list__item_hidden-mobile');
-                // });
-
-                // show only chosen items - head
-                //agendaHead.classList.toggle('ris-agenda-list__agenda-head_active');
-
-                // show only chosen items - his children
-                /*agendaChildList.forEach(agenda => {
-                    agenda.classList.toggle('ris-agenda-list__agenda-child_active');
-                });*/
-
-                this.checkMobile(agendaParentRef);
-
-                if (this.isActiveParent) {
                     this.agendaList.forEach(agenda => {
-
                         let agendaMainNumber = agenda.number.split('.', 1)[0];
-                        console.log(agendaChildNumber, +agendaMainNumber);
+                        console.log('Main number: ', agendaMainNumber);
 
-                        if (agenda.number && agenda.number.includes('.')
-                            && agendaChildNumber === +agendaMainNumber) {
+                        if (agenda.number && agenda.number.includes('.') && agendaChildNumber === +agendaMainNumber) {
 
-                            console.log('Add child: ', agenda.id, agendaChildNumber, agendaMainNumber);
                             this.agendaChildRef[agenda.id] = true;
+
+                            console.log('Activation: ', agenda.id, true);
                         }
                     });
                 } else {
@@ -171,44 +119,9 @@ export default {
 
                 agendaHead.scrollIntoView({ behavior: 'smooth'});
 
-                console.log(this.agendaParentRef, this.agendaChildRef);
+                console.log('Child: ', this.agendaChildRef);
             }
         },
-        backToList() {
-            this.collapseAgendaChild(this.agendaChildNumber, this.agendaType);
-            // clear selected items for the new back button instance
-            this.agendaChildNumber = '';
-            this.agendaType = '';
-            this.backButtonPublic = false;
-            this.backButtonPrivate = false;
-            this.isCollapsed = false;
-            this.isActiveParent = true;
-            this.isActiveChild = false;
-        },
-        checkMobile(agendaParentRef) {
-            const bodyTag = document.querySelector('body');
-            if (agendaParentRef && bodyTag.offsetWidth < 768) {
-                // mobile version, set active only one parent items
-                this.agendaParentRef[agendaParentRef] = true;
-            } else {
-                // desktop version, set active all parent items
-                this.agendaList.forEach(agenda => {
-                    if (agenda.number && !agenda.number.includes('.')) {
-                        this.agendaParentRef[agenda.id] = true;
-                    }
-                });
-            }
-        }
-    },
-    mounted() {
-        // collapse roof details on the desktop version
-        this.checkMobile();
-
-        window.addEventListener('resize', this.checkMobile);
-    },
-
-    beforeDestroy() {
-        window.removeEventListener('resize', this.checkMobile);
     },
 };
 </script>

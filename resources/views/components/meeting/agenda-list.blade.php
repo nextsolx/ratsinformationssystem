@@ -5,10 +5,10 @@
                 <div class="ris-agenda-list__item ris-agenda-list__agenda-without-child"
                     ref="{{ $agenda->id }}"
 
-                    v-if="isActiveEmpty"
+                    v-if="isActive"
                 >
                     {{--v-if="(!inputValue || inputValue.length === 1) || agendaListSorted['{{ $agenda->id }}']
-                        || isActiveParent"--}}
+                        || isActive"--}}
                     <div class="ris-description ris-description__count">
                         {{ $agenda->number }}
                     </div>
@@ -27,11 +27,13 @@
                         _agenda-child-{{ $agenda_public_type }}-{{ (int)$agenda->number }}"
                         ref="{{ $agenda->id }}"
 
-                        v-if="isActiveChild || agendaChildRef['{{ $agenda->id }}']"
+                        data-child-agenda="{{ $agenda->id }}"
+
+                        v-if="agendaChildRef['{{ $agenda->id }}'] || isActiveChild"
                     >
                         {{--v-if="(!inputValue || inputValue.length === 1)
                         || agendaListSorted['{{ $agenda->id }}']
-                        || isActiveParent"--}}
+                        || isActiveChild"--}}
                         <div class="ris-description ris-description__count ris-description_normal">
                             {{ $agenda->number }}
                         </div>
@@ -51,7 +53,7 @@
                         _agenda-head-{{ $agenda_public_type }}-{{ (int)$agenda->number }}"
                         @click="collapseAgendaChild({{ (int)$agenda->number }}, {{ $agenda_public_type }}, '{{ $agenda->id }}')"
                         ref="{{ $agenda->id }}"
-                        v-if="isActiveParent || agendaParentRef['{{ $agenda->id }}']"
+                        v-if="isActive"
                     >
 
                         {{--v-if="(!inputValue || inputValue.length === 1) || agendaListSorted['{{ $agenda->id }}']"--}}

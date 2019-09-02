@@ -1,21 +1,20 @@
 <script>
+    import sortingMixin from '../mixins/sortingMixin';
+
 export default {
     name: 'Meeting',
+    mixins: [sortingMixin],
     data: () => ({
         activeTab: 'true',
         dropValue: 'Funktion',
         agendaListSorted: [],
-        inputValue: '',
+        inputValueAgenda: '',
         isActiveChild: false,
         agendaParentRef: [],
         agendaChildRef: [],
     }),
     props: {
         agendaList: {
-            type: Array,
-            default: () => []
-        },
-        peopleList: {
             type: Array,
             default: () => []
         },
@@ -38,18 +37,8 @@ export default {
             });
             this.$refs[dataTypeRef].classList.add('ris-tab-data_active');
         },
-        orderMembersBy(orderBy) {
-            // @todo --- need to add JS order functionality
-            // console.log('Order By: ', orderBy);
-            this.dropValue = orderBy;
-
-            //this.sortBy(this.memberList, orderBy);
-        },
-        searchMember(inputValue) {
-            console.log(inputValue);
-        },
         searchAgenda(inputValue) {
-            this.inputValue = inputValue;
+            this.inputValueAgenda = inputValue;
             this.agendaListSorted = [];
 
             if (inputValue) {

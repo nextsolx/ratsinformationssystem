@@ -1,9 +1,9 @@
 <script>
-import Member from '../Member';
-import sortingMixin from '../../mixins/sortingMixin';
+import Member from './Member';
+import sortingMixin from '../mixins/sortingMixin';
 
 export default {
-    name: 'CommitteeMemberList',
+    name: 'MemberList',
     mixins: [sortingMixin],
     components: {
         Member,
@@ -47,7 +47,7 @@ export default {
             this.filtered = false;
         },
         getTitleValue(value) {
-            if (!value && this.dropValue === 'party') return 'Fraktionslose Mitglieder';
+            if (!value && this.dropValue.value === 'party') return 'Fraktionslose Mitglieder';
             return value;
         },
     },
@@ -55,7 +55,7 @@ export default {
 </script>
 
 <template>
-    <div class="ris-committee-members">
+    <div class="ris-members">
         <div class="ris-filter-wrapper">
             <Search v-model="inputValue" :hidden-mob="true" @input="filterList" />
             <Dropdown
@@ -66,27 +66,27 @@ export default {
                 :full-width-mob="true"
                 v-model="dropValue" />
         </div>
-        <transition-group tag="ul" name="fade" class="ris-ul ris-committee-members-main-list" v-if="!filtered">
-            <li v-for="(item, index) in sortedList" :key="`${index}-sortedlist`" class="ris-committee-members-main-list__item">
-                <h2 class="ris-committee-members__heading ris-h2" >
+        <transition-group tag="ul" name="fade" class="ris-ul ris-members-main-list" v-if="!filtered">
+            <li v-for="(item, index) in sortedList" :key="`${index}-sortedlist`" class="ris-members-main-list__item">
+                <h2 class="ris-members__heading ris-h2" >
                     {{ getTitleValue(item.title) }}
                 </h2>
-                <ul class="ris-ul ris-committee-members-secondary-list">
+                <ul class="ris-ul ris-members-secondary-list">
                     <Member
                         v-for="member in item.data"
                         :key="member.id"
                         :member="member"
-                        class="ris-committee-members-secondary-list__item"
+                        class="ris-members-secondary-list__item"
                             />
                 </ul>
             </li>
         </transition-group>
-        <transition-group tag="ul" name="fade" class="ris-ul ris-committee-members-secondary-list" v-if="filtered">
+        <transition-group tag="ul" name="fade" class="ris-ul ris-members-secondary-list" v-if="filtered">
             <Member
                 v-for="member in filteredList"
                 :key="member.id"
                 :member="member"
-                class="ris-committee-members-secondary-list__item"
+                class="ris-members-secondary-list__item"
                     />
         </transition-group>
     </div>

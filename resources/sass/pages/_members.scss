@@ -1,0 +1,44 @@
+.ris-members {
+    &__sorting {
+        margin-bottom: 36px;
+
+        @include breakpoint($bp-mobile-max) {
+            margin-bottom: $indent-m;
+            padding: 0 16px 16px;
+            width: 100%;
+            border-bottom: 1px solid $c-gray7;
+        }
+    }
+
+    &__heading {
+        margin-bottom: $indent-sm;
+        margin-top: 36px;
+
+        @include breakpoint($bp-mobile-max) {
+            margin-bottom: $indent-m;
+        }
+    }
+
+    &-main-list {
+        &__item {
+            &:not(:first-child) {
+                margin-top: $indent-xl;
+
+                @include breakpoint($bp-mobile-max) {
+                    margin-top: $indent-ml;
+                }
+            }
+        }
+    }
+
+    &-secondary-list {
+        &__item {
+            border-top: 1px solid $c-gray7;
+
+            &:last-child {
+                border-bottom: 1px solid $c-gray7;
+            }
+        }
+    }
+}
+

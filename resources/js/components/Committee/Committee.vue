@@ -1,6 +1,6 @@
 <script>
 import CommitteeInfo from './CommitteeInfo';
-import CommitteeMemberList from './CommitteeMemberList';
+import MemberList from '../MemberList';
 import CommitteeSessions from './CommitteeSessions';
 
 export default {
@@ -21,7 +21,7 @@ export default {
     },
     components: {
         CommitteeInfo,
-        CommitteeMemberList,
+        MemberList,
         CommitteeSessions,
     },
     data() {
@@ -57,7 +57,7 @@ export default {
             </ul>
         </nav>
         <CommitteeInfo :information="info" v-if="activeTab === 'aufgaben'" />
-        <CommitteeMemberList :members="members" v-if="activeTab === 'mitglieder'" />
+        <MemberList :members="members" v-if="activeTab === 'mitglieder'" />
         <CommitteeSessions :meetings="meetings" v-if="activeTab === 'sitzungen'" />
     </div>
 </template>

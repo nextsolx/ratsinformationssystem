@@ -2,6 +2,7 @@
 
 <?php
 $meeting_agenda = [];
+$meeting_agenda_search = [];
 if (isset($meeting['agenda']) and count($meeting['agenda']) > 0
     and (isset($meeting['agenda'][0]) and is_object($meeting['agenda'][0]))) {
     $meeting_agenda = $meeting['agenda'][0];
@@ -182,54 +183,7 @@ if (isset($meeting['people']) and count($meeting['people']) > 0) {
                 ref="member"
             >
                 @if (count($meeting_people) > 0)
-                    <div class="ris-action-box">
-                        <search
-                            @input="searchMember"
-                        ></search>
-                        <dropdown
-                            :label="'Sortierung'"
-                            :options="[ {label: 'Funktion', value: 'funktion'}, {label: 'Partei', value: 'partei'} ]"
-                            :value="{label: 'Funktion', value: 'funktion'}"
-                            @change="orderMembersBy"
-                            :id="'meeting-member'"
-                        ></dropdown>
-                    </div>
-
-                    <div class="ris-member-list">
-                        <h3 class="ris-h3 ris-h3__headline">Stimmberechtigte Teilnehmer</h3>
-                        <ul class="ris-ul ris-committee-members-main-list">
-                            @foreach ($meeting_people as $people)
-                                <li class="ris ris-member">
-                                    <a href="/person/{{ $people->id }}" class="ris-member-link">
-                                        <img src="@if (isset($people->photo)) {{ $people->photo }} @else /img/thumbnail-avatar.svg @endif"
-                                            alt="{{ $people->name }}" class="ris-member-link__img"
-                                        />
-                                        <div class="ris-member-link__content">
-                                            <div class="ris-h3 ris-member-link__heading">{{ $people->name }}</div>
-                                            {{-- @todo --- fix mock data --}}
-                                            <span class="ris-text">CDU</span>
-                                        </div>
-                                        <span class="ris-i ris-i_chevron-right ris-link_right"></span>
-                                    </a>
-                                </li>
-                            @endforeach
-                        </ul>
-
-                        {{-- @todo --- fix mock data, all block --}}
-                        <div class="ris-h3 ris-h3__headline">Beratende Teilnehmer</div>
-                        <ul class="ris-ul ris-committee-members-main-list">
-                            <li class="ris ris-member">
-                                <a href="/person/id" class="ris-member-link">
-                                    <img src="/img/thumbnail-avatar.svg" alt="Liane Bchir" class="ris-member-link__img"/>
-                                    <div class="ris-member-link__content">
-                                        <h3 class="ris-h3 ris-member-link__heading">Liane Bchir</h3>
-                                        <span class="ris-text">AfD</span>
-                                    </div>
-                                    <span class="ris-i ris-i_chevron-right ris-link_right"></span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+                    <member-list :members="{{ json_encode($meeting_people) }}"></member-list>
                 @else
                     <div class="ris-empty ris-h3">Keine Teilnehmer</div>
                 @endif

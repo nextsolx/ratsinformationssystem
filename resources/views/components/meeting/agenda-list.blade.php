@@ -29,7 +29,7 @@
 
                         data-child-agenda="{{ $agenda->id }}"
 
-                        v-if="agendaChildRef['{{ $agenda->id }}'] || isActiveChild"
+                        v-if="agendaChildRef['{{ $agenda->id }}']"
                     >
                         {{--v-if="(!inputValue || inputValue.length === 1)
                         || agendaListSorted['{{ $agenda->id }}']
@@ -53,7 +53,10 @@
                         _agenda-head-{{ $agenda_public_type }}-{{ (int)$agenda->number }}"
                         @click="collapseAgendaChild({{ (int)$agenda->number }}, {{ $agenda_public_type }}, '{{ $agenda->id }}')"
                         ref="{{ $agenda->id }}"
-                        v-if="isActive"
+
+                        data-parent-agenda="{{ $agenda->id }}"
+
+                        :class="{'ris-agenda-list__agenda-head_active': agendaParentRef['{{ $agenda->id }}']}"
                     >
 
                         {{--v-if="(!inputValue || inputValue.length === 1) || agendaListSorted['{{ $agenda->id }}']"--}}

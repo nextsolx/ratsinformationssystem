@@ -11,6 +11,7 @@ export default {
         isActive: true,
         isActiveChild: false,
         isCollapsed: false,
+        agendaParentRef: [],
         agendaChildRef: [],
     }),
     props: {
@@ -90,37 +91,34 @@ export default {
                 }
             }
         },
-        collapseAgendaChild(agendaChildNumber, agendaType) {
+        collapseAgendaChild(agendaChildNumber, agendaType, parentAgenda) {
             this.agendaChildNumber = agendaChildNumber;
             this.agendaType = agendaType;
             //this.isActive = !this.isActive;
-            this.isCollapsed = this.isCollapsed === false;
+            this.isCollapsed = !this.isCollapsed;
 
-            const agendaHead = document.querySelector(`._agenda-head-${agendaType}-${agendaChildNumber}`);
+            if (this.isCollapsed && !this.agendaParentRef[parentAgenda]) {
+                console.log('Add agenda: ', parentAgenda);
 
-            if (agendaHead) {
-                if (this.isCollapsed) {
-                    console.log('Open child: ', agendaChildNumber);
+                this.$set(this.agendaParentRef, parentAgenda, true);
 
-                    this.agendaList.forEach(agenda => {
-                        let agendaMainNumber = agenda.number.split('.', 1)[0];
-                        console.log('Main number: ', agendaMainNumber);
+                this.agendaList.forEach(agenda => {
+                    let agendaMainNumber = agenda.number.split('.', 1)[0];
+                    if (agenda.number && agenda.number.includes('.') && agendaChildNumber === +agendaMainNumber) {
+                        this.agendaChildRef[agenda.id] = true;
+                    }
+                });
 
-                        if (agenda.number && agenda.number.includes('.') && agendaChildNumber === +agendaMainNumber) {
+                this.$refs[parentAgenda].scrollIntoView({ behavior: 'smooth'});
+            } else {
+                console.log('Remove agenda: ', parentAgenda);
 
-                            this.agendaChildRef[agenda.id] = true;
-
-                            console.log('Activation: ', agenda.id, true);
-                        }
-                    });
-                } else {
-                    this.agendaChildRef = [];
-                }
-
-                agendaHead.scrollIntoView({ behavior: 'smooth'});
-
-                console.log('Child: ', this.agendaChildRef);
+                this.agendaParentRef[parentAgenda] = false;
+                this.agendaChildRef = [];
             }
+
+            console.log('Parent: ', this.agendaParentRef);
+            console.log('Child: ', this.agendaChildRef);
         },
     },
 };

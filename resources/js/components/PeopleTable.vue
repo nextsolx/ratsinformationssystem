@@ -99,7 +99,7 @@ export default {
             this.paginationPage++;
             this.getDataByFilter();
         },
-    }
+    },
 };
 </script>
 
@@ -109,13 +109,13 @@ export default {
         <section class="ris-section-wrapper ris-content_six-eight-eight">
             <h1 class="ris-table-list__headline ris-headline">Personen</h1>
             <div class="ris-filter-wrapper">
-                <Search v-model="inputValue" :fullWidthMob="true" debounce="500" @input="searchPeople" />
+                <Search v-model="inputValue" :full-width-mob="true" debounce="500" @input="searchPeople" />
                 <Dropdown
                     label="Sortierung"
                     id="table-drop"
                     @change="changeFilterValue"
                     :options="[{label:'Nachname', value:'familyName'}, {label:'Party', value: 'party'}]"
-                    :hiddenMob="true"
+                    :hidden-mob="true"
                     v-model="dropValue" />
             </div>
             <transition-group tag="ul" name="fade" class="ris-table-list-main-list ris-ul" v-if="!filtered">

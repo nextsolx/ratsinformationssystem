@@ -46,8 +46,8 @@ export default {
                     <div v-if="!meetup.isCancelled">
                         <p class="ris-subheader" v-if="meetup.location">{{ meetup.location.description }}</p>
                         <div class="ris-session-count">
-                            <span class="ris-session-count__agenda"><span class="ris-i ris-i_list"></span>{{ meetup.agendaCount }}</span>
-                            <span class="ris-session-count__people"><span class="ris-i ris-i_people"></span>{{ meetup.peopleCount }}</span>
+                            <span class="ris-session-count__agenda"><span class="ris-i ris-i_list"/>{{ meetup.agendaCount }}</span>
+                            <span class="ris-session-count__people"><span class="ris-i ris-i_people"/>{{ meetup.peopleCount }}</span>
                             <span class="ris-session-count__file" v-if="meetup.fileCount">{{ meetup.fileCount }}</span>
                         </div>
                     </div>

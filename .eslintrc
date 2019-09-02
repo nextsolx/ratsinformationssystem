@@ -17,7 +17,6 @@
     "plugin:vue/base",
     "plugin:vue/essential",
     "plugin:vue/strongly-recommended"
-    // "@vue/airbnb"
   ],
   "rules": {
     "indent": ["error", 4, { "SwitchCase": 1 }],
@@ -42,15 +41,6 @@
     "semi": [
       2,
       "always"
-    ],
-    "max-len": [
-        "error", { "code": 150 }
-    ],
-    "import/extensions": [
-        "error", "always", {
-        "js": "never",
-        "vue": "never"
-    }],
-    "import/prefer-default-export": 0
+    ]
   }
 }

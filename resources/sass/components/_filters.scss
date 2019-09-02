@@ -5,6 +5,7 @@
     border-radius: $b-radius-primary;
     display: inline-block;
     position: relative;
+    outline: none;
 
     @include breakpoint($bp-mobile-max) {
         margin-right: $indent-s;
@@ -130,28 +131,23 @@
             margin-bottom: $indent-s;
         }
 
-        &__selected {
-            display: none;
+        &__item {
+            display: inline-block;
+            font-weight: 500;
+            min-width: auto;
+            padding: $indent-s $indent-sm;
+            &:not(:last-child) {
+                margin-bottom: $indent-s;
+                margin-right: $indent-s;
+            }
+        }
+
+        &--selected {
             margin-left: 0;
             margin-right: 0;
             padding-bottom: $indent-s;
             padding-left: $indent-m;
             padding-right: $indent-m;
-
-            &_active {
-                display: block;
-            }
-        }
-
-        .ris-button {
-            font-weight: 500;
-            min-width: auto;
-            padding: $indent-s $indent-sm;
-
-            &:not(:last-child) {
-                margin-bottom: $indent-s;
-                margin-right: $indent-s;
-            }
         }
     }
 }

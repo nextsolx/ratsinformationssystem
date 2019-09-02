@@ -1,5 +1,5 @@
 <script>
-import clickOutSide from '../tools/clickOutSide';
+import clickOutSide from '../../mixins/tools/clickOutSide';
 export default {
     name: 'Collapse',
     directives: {
@@ -23,19 +23,31 @@ export default {
         search () {
             return window.location.search;
         },
+        activeElement () {
+            const filterList = this.search.split('=');
+            return filterList[filterList.length - 1];
+        }
     },
     methods: {
         hide () {
             this.activeFilter = false;
         },
-        linkUrl (value) {
+        linkUrlFilter (value) {
             if (this.search) {
-                return '';
+                return `${this.pathname}${this.search}&${this.optionList.type}=${value.toLowerCase()}`;
             }
             else {
-                return `${window.location.pathname}/?${this.optionList.type}=${value.toLowerCase()}`;
+                return `${this.pathname}?${this.optionList.type}=${value.toLowerCase()}`;
             }
         },
+        linkUrlUnfilter() {
+            const filterList = this.search.split('&');
+            if (filterList.length === 1) return `${this.pathname}`;
+            else {
+                filterList.length--;
+                return `${this.pathname}${filterList.join('')}`;
+            }
+        }
     }
 };
 </script>
@@ -46,28 +58,27 @@ export default {
         :class="{'ris-filter_active': activeFilter}"
         v-outside="hide">
         <button class="ris-filter__subheader ris-subheader" @click="activeFilter = !activeFilter">
-            <span class="ris-i ris-i_filter"/>Filtern
+            <span class="ris-i ris-i_filter"/>Filter
         </button>
 
         <div class="ris-filter__content">
-<!--            <div class="ris-filter-buttons ris-filter-buttons__selected"-->
-<!--                :class="{'ris-filter-buttons__selected_active' : selectedDistrictList.length }">-->
-<!--                <button class="ris-label ris-label_has-border"-->
-<!--                    v-for="currentDistrictName in selectedDistrictList"-->
-<!--                    :key="currentDistrictName">-->
-<!--                    {{ currentDistrictName }}-->
-<!--                    <span class="ris-i ris-i_close"/>-->
-<!--                </button>-->
-<!--            </div>-->
+            <div class="ris-filter-buttons ris-filter-buttons--selected">
+                <a
+                    class="ris-label ris-label_has-border"
+                    :href="linkUrlUnfilter()">
+                    {{ activeElement }}
+                    <span class="ris-i ris-i_close"/>
+                </a>
+            </div>
 
             <div class="ris-filter-buttons">
                 <span class="ris-filter-buttons__title">
                     Nach Bezirken filtern
                 </span>
                 <a
-                    class="ris-button ris-button_secondary ris-button_has-shadow"
+                    class="ris-button ris-filter-buttons__item ris-button_secondary ris-button_has-shadow"
                     v-for="district in optionList.data"
-                    :href="linkUrl(district)"
+                    :href="linkUrlFilter(district)"
                     :key="district">
                     {{ district }}
                 </a>

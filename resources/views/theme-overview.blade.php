@@ -16,80 +16,7 @@
                     </h1>
 
                     <div class="ris-action-box">
-                        <div class="ris-filter"
-                            :class="{'ris-filter_active': activeFilter}"
-                        >
-                            <div class="ris-filter__subheader ris-subheader"
-                                @click="collapseFilter"
-                            >
-                            <span class="ris-i ris-i_filter"></span>
-                                Filtern
-                            </div>
-
-                            <div class="ris-filter__content">
-                                <div class="ris-filter-buttons ris-filter-buttons__selected"
-                                        :class="selectedDistrictList.length > 0
-                                        ? 'ris-filter-buttons__selected_active'
-                                        : ''"
-                                    v-show="selectedDistrictList.length > 0"
-                                >
-                                    <button class="ris-label ris-label_has-border"
-                                            v-for="currentDistrictName in selectedDistrictList"
-                                            @click="removeSelectedDistrict(currentDistrictName)"
-                                    >
-                                        @{{ currentDistrictName }}
-                                        <span class="ris-i ris-i_close"></span>
-                                    </button>
-                                </div>
-
-                                <div class="ris-filter-buttons"
-                                    v-show="firstLoading"
-                                >
-                                    <div class="ris-filter-buttons__title">
-                                        Nach Bezirken filtern
-                                    </div>
-
-                                    @foreach ($district_list as $district)
-                                        <button class="ris-button ris-button_secondary ris-button_has-shadow"
-                                            @click="getTopicByDistrict"
-                                        >
-                                            {{ $district }}
-                                        </button>
-                                    @endforeach
-                                </div>
-
-                                <div class="ris-filter-buttons"
-                                    v-if="districtList.length > 0 && !firstLoading"
-                                >
-                                    <div class="ris-filter-buttons__title">
-                                        Nach Bezirken filtern
-                                    </div>
-
-                                    <button class="ris-button ris-button_secondary ris-button_has-shadow"
-                                        @click="getTopicByDistrict"
-                                        v-for="district in districtList"
-                                    >
-                                        @{{ district }}
-                                    </button>
-                                </div>
-
-                                <div class="ris-filter-buttons"
-                                     v-if="postcodeList.length > 0"
-                                >
-                                    <div class="ris-filter-buttons__title">
-                                        Nach Postleitzahlen filtern
-                                    </div>
-
-                                    <button class="ris-button ris-button_secondary ris-button_has-shadow"
-                                        v-for="postcode in postcodeList"
-                                    >
-                                         @{{ postcode }}
-                                    </button>
-                                </div>
-                            </div>
-
-                        </div>
-
+                        <collapse :option-list="{type: 'district', data: {{json_encode($district_list)}}}"></collapse>
                         <div class="ris-select">
                             <div class="ris-select__label">Sortierung</div>
                             <select class="ris-select__select">
@@ -103,7 +30,6 @@
                             <span class="ris-i ris-i_chevron-double"></span>
                         </div>
                     </div>
-                    <collapse :option-list="{type: 'district', data: {{json_encode($district_list)}}}"></collapse>
                 </section>
 
                 @if (!empty($topics))

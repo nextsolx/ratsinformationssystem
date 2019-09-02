@@ -3,7 +3,7 @@ version: "3.4"
 x-container: &container
   image: conv/ratsinformationssystem:local
   volumes:
-    - .:/var/www/html:cached
+    - .:/var/www/html
   env_file:
     - .env
 

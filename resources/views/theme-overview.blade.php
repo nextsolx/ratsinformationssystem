@@ -79,9 +79,9 @@
 
 
                 <section class="ris-section-wrapper ris-card-list ris-card-list__themes"
-                    v-show="themeListNew.length === 0 && firstLoading"
+                    v-if="!themeListNew.length && firstLoading"
                 >
-                    <div class="ris-title">Neue Themen</div>
+                    <div class="ris-title">Neue Themen List</div>
 
                     @if (!empty($topics_new))
                         @include('components.theme',
@@ -111,7 +111,7 @@
 
 
                 <section class="ris-section-wrapper ris-card-list ris-card-list__themes"
-                    v-show="themeListProgress.length === 0 && firstLoading"
+                    v-if="!themeListProgress.length && firstLoading"
                 >
                     <div class="ris-title">Kürzlich aktualisiert</div>
 
@@ -143,7 +143,7 @@
 
 
                 <section class="ris-section-wrapper ris-card-list ris-card-list__themes"
-                    v-show="themeListFinished.length === 0 && firstLoading"
+                    v-if="!themeListFinished.length && firstLoading"
                 >
                     <div class="ris-title">Kürzlich abgeschlossen</div>
 

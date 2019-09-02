@@ -13,6 +13,11 @@
 .ris-content {
     $base-content: &;
     position: relative;
+    min-height: calc(100vh - 200px - 140px);
+
+    @include breakpoint($bp-mobile-max) {
+        min-height: calc(100vh - 200px - 90px - 100px);
+    }
 
     &_six-eight-eight {
         margin-left: auto;

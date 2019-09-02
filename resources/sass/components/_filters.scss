@@ -38,12 +38,6 @@
             cursor: pointer;
         }
 
-        .ris-i_expand-more {
-            margin-left: auto;
-            padding-left: $indent-l;
-            pointer-events: none;
-        }
-
         .ris-i_filter {
             font-size: $fs-xl;
             margin-right: $indent-sm;
@@ -129,6 +123,7 @@
             font-weight: bold;
             line-height: $lh-l;
             margin-bottom: $indent-s;
+            display: block;
         }
 
         &__item {

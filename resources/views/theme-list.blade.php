@@ -12,13 +12,11 @@
             <div class="ris-theme-list__content ris-content ris-content_six-eight-eight">
                 <section class="ris-section-wrapper">
                     <h1 class="ris-headline">
-                        @if (url()->current() === route('new-themes'))
-                            Neue Themen
-                        @elseif (url()->current() === route('progress-themes'))
+                        @if (url()->current() === route('progress-themes'))
                             Kürzlich aktualisiert
                         @elseif (url()->current() === route('finished-themes'))
                             Kürzlich abgeschlossen
-                        @else {
+                        @else
                             Neue Themen
                         @endif
                     </h1>

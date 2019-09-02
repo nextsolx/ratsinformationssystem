@@ -13,10 +13,7 @@
     "ecmaVersion": 8
   },
   "extends": [
-    "eslint:recommended",
-    "plugin:vue/base",
-    "plugin:vue/essential",
-    "plugin:vue/strongly-recommended"
+    "eslint:recommended"
   ],
   "rules": {
     "indent": ["error", 4, { "SwitchCase": 1 }],

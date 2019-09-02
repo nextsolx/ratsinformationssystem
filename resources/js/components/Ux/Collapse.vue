@@ -62,10 +62,11 @@ export default {
         </button>
 
         <div class="ris-filter__content">
-            <div class="ris-filter-buttons ris-filter-buttons--selected">
+            <div class="ris-filter-buttons ris-filter-buttons--selected" v-if="activeElement">
                 <a
                     class="ris-label ris-label_has-border"
-                    :href="linkUrlUnfilter()">
+                    :href="linkUrlUnfilter()"
+                >
                     {{ activeElement }}
                     <span class="ris-i ris-i_close"/>
                 </a>

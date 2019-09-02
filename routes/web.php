@@ -33,19 +33,17 @@ Route::get('/abgeschlossen-themen', 'TopicController@finishedThemes')
     ->name('finished-themes');
 
 Route::get('/thema/{paper}', 'TopicController@topic')
-    ->name('theme-detail');
+    ->name('theme');
 
 Route::get('/karte', 'MapController@view')->name('map');
 
-Route::get('/gremien-list', 'GremienController@list')->name('committee-list');
+Route::get('/gremien-liste', 'GremienController@list')->name('committee-list');
 
 Route::get('/gremien/{organization}', 'GremienController@view')->name('committee');
 
-Route::get('/personen', function () {
-    return view('people');
-})->name('people');
+Route::get('/personen/{person}', 'PersonenController@personDetail')->name('person-detail');
 
-Route::get('/personen', 'PersonenController@view')->name('people');
+Route::get('/personen-liste', 'PersonenController@view')->name('people-list');
 
 Route::get('/merkliste', function () {
     return view('bookmarks');
@@ -60,6 +58,7 @@ Route::get('/impressum', function () {
 })->name('company');
 
 
+Route::get('/api/people-list', 'PersonenController@getPeople');
 Route::get('/api/meetings', 'MeetingController@all');
 Route::get('/api/meeting/{id}', 'MeetingController@index');
 Route::get('/api/topics', 'TopicController@all');

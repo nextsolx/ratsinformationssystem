@@ -42,15 +42,36 @@
             text-transform: uppercase;
         }
     }
+    &__placeholder {
+        color: $c-gray8;
+        font-size: $fs-l;
+        margin: 5px 0 0 0;
+    }
 
     &__card-day {
         display: flex;
         justify-content: space-between;
 
+        &.bold {
+            .ris-calendar__card-day-left {
+                font-weight: bold;
+            }
+        }
+
+        &.warning {
+            .ris-calendar__card-day-left {
+                font-weight: bold;
+                color: $c-red;
+            }
+            .ris-calendar__card-day-right {
+                border-bottom: 2px solid red;
+                padding-bottom: 16px;
+            }
+        }
+
         &-left {
             font-family: $ff-helvetica;
             font-size: $fs-xxxl;
-            font-weight: bold;
             line-height: $lh-xl;
             min-width: 48px;
             padding-top: $indent-s;
@@ -87,7 +108,7 @@
             display: inline-flex;
             font-size: $fs-l;
             line-height: $lh-l;
-            margin-bottom: 8px;
+            margin: 5px 0;
         }
     }
 

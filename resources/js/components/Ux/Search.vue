@@ -4,25 +4,28 @@ export default {
     props: {
         value: {
             type: String,
-            default: () => ''
+            default: () => '',
         },
         hiddenMob: {
             type: Boolean,
-            default: false
+            default: false,
+        },
+        fullWidthMob: {
+            type: Boolean,
+            default: false,
         },
         inputPlaceholder: {
             type: String,
-            default: 'Suche nach Themen, Vorlagen, Sitzungen...'
-        }
+            default: 'Suche nach Themen, Vorlagen, Sitzungen...',
+        },
     },
 };
-// TODO: add classes hidden/full-width
 </script>
 
 <template>
     <div
         class="ris-search ris-sorting__search"
-        :class="[{ hiddenMob : hiddenMob }]">
+        :class="[{ hiddenMob : hiddenMob }, { fullWidthMob: fullWidthMob }]">
         <button class="ris-search__button">
             <span class="ris-i ris-i_search"/>
         </button>

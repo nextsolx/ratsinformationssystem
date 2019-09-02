@@ -2,31 +2,32 @@
 import CommitteeInfo from './CommitteeInfo';
 import CommitteeMemberList from './CommitteeMemberList';
 import CommitteeSessions from './CommitteeSessions';
+
 export default {
     name: 'Committee',
     props: {
         info: {
             type: String,
-            default: 'info'
+            default: 'info',
         },
         members: {
             type: Array,
-            default: () => []
+            default: () => [],
         },
         meetings: {
             type: Array,
-            default: () => []
-        }
+            default: () => [],
+        },
     },
     components: {
         CommitteeInfo,
         CommitteeMemberList,
-        CommitteeSessions
+        CommitteeSessions,
     },
     data() {
         return {
             activeTab: 'aufgaben',
-            tabs: ['aufgaben', 'mitglieder', 'sitzungen']
+            tabs: ['aufgaben', 'mitglieder', 'sitzungen'],
         };
     },
     methods: {
@@ -34,8 +35,8 @@ export default {
             if (tab === 'sitzungen') return 'ris-i_calendar-empty';
             if (tab === 'aufgaben') return 'ris-i_doc';
             return 'ris-i_people';
-        }
-    }
+        },
+    },
 };
 </script>
 

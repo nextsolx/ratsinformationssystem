@@ -77,8 +77,8 @@
                             </li>
 
                             <li>
-                                <a class="ris-nav__link @if (url()->current() === route('people')) ris-nav__link_active @endif"
-                                   href="{{ route('people') }}"
+                                <a class="ris-nav__link @if (url()->current() === route('people-list')) ris-nav__link_active @endif"
+                                    href="{{ route('people-list') }}"
                                 >Personen</a>
                             </li>
 

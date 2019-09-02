@@ -28,7 +28,9 @@
 
     &__subheader {
         color: $c-gray2;
-        display: flex;
+        width: 100%;
+        text-align: left;
+        background-color: transparent;
         padding: $indent-sm;
 
         &:hover {

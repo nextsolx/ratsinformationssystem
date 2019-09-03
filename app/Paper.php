@@ -14,6 +14,8 @@ class Paper extends Model
         'meetings', 'meetings.location', 'meetings.agenda', 'meetings.files', 'meetings.organizations', 'meetings.organizations.people',
     ];
 
+    const AVAILABLE_SCOPES = ['new','updated','finished','sort'];
+
     protected $dates = [
         'date',
         'modified'

@@ -56,20 +56,37 @@ class TopicController extends Controller
 
     public function themen(Request $request)
     {
+        $postalCode = $request->input('postalCode');
+        $district = $request->input('district');
+
+        $paperQuery = \App\Paper::with(Paper::$basicScope)->sort()->new();
+
+        if ($postalCode) {
+            $paperQuery->whereHas('locations', function (Builder $query) use ($postalCode) {
+                $query->where('postal_code', '=', $postalCode);
+            });
+        }
+
+        if ($district) {
+            $paperQuery->whereHas('locations', function (Builder $query) use ($district) {
+                $query->where('sub_locality', '=', $district);
+            });
+        }
+
         $topics = Topic::collection(
-            Paper::with(Paper::$basicScope)->sort()->paginate(100)
+            $paperQuery->sort()->paginate(100)
         )->toResponse(request())->getData();
 
         $new = Topic::collection(
-            Paper::with(Paper::$basicScope)->sort()->new()->paginate(3)
+            $paperQuery->sort()->new()->paginate(3)
         )->toResponse(request())->getData();
 
         $finished = Topic::collection(
-            Paper::with(Paper::$basicScope)->sort()->finished()->paginate(3)
+            $paperQuery->sort()->finished()->paginate(3)
         )->toResponse(request())->getData();
 
         $prograss = Topic::collection(
-            Paper::with(Paper::$basicScope)->sort()->updated()->paginate(3)
+            $paperQuery->sort()->updated()->paginate(3)
         )->toResponse(request())->getData();
 
         return view('theme-overview')->with([

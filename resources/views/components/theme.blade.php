@@ -38,7 +38,9 @@
                 </div>
             @endif
 
-            <div class="ris-caption ris-card-list__themes-date">27.10.2018</div>
+            <time class="ris-caption ris-card-list__themes-date">
+                {{ \Illuminate\Support\Carbon::parse($theme->date)->format('d.m.Y') }}
+            </time>
         </div>
     </a>
 @endforeach

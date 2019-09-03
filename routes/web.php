@@ -38,9 +38,7 @@ Route::get('/abgeschlossen-themen', 'TopicController@finishedThemes')
 Route::get('/thema/{paper}', 'TopicController@topic')
     ->name('theme');
 
-Route::get('/karte', function () {
-    return view('map');
-})->name('map');
+Route::get('/karte', 'MapController@view')->name('map');
 
 Route::get('/gremien-liste', 'GremienController@list')->name('committee-list');
 

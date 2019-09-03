@@ -1,7 +1,6 @@
 .ris-table-list {
     &-wrapper {
-        display: grid;
-        grid-template-columns: auto auto auto;
+        display: flex;
         @include breakpoint($bp-mobile-max) {
             display: block;
         }

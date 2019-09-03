@@ -106,7 +106,7 @@
                                 </option>
                             </select>
                             <span class="ris-i ris-i_chevron-double"></span>
-                    </div>
+                        </div>
                     </div>
                 </section>
 
@@ -133,7 +133,7 @@
                     >
                     </theme>
                 </section>
-
+                <topic-list></topic-list>
             </div>
         </theme-list>
 

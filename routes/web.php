@@ -43,9 +43,9 @@ Route::get('/gremien-liste', 'GremienController@list')->name('committee-list');
 
 Route::get('/gremien/{organization}', 'GremienController@view')->name('committee');
 
-Route::get('/personen-liste', 'PersonenController@view')->name('people-list');
+Route::get('/personen/{person}', 'PersonenController@personDetail')->name('person-detail');
 
-Route::get('/person/{person}', 'PersonenController@personDetail')->name('people');
+Route::get('/personen-liste', 'PersonenController@view')->name('people-list');
 
 Route::get('/merkliste', function () {
     return view('bookmarks');
@@ -60,17 +60,11 @@ Route::get('/impressum', function () {
 })->name('company');
 
 
+Route::get('/api/people-list', 'PersonenController@getPeople');
 Route::get('/api/meetings', 'MeetingController@all');
 Route::get('/api/meeting/{id}', 'MeetingController@index');
 Route::get('/api/topics', 'TopicController@all');
 Route::get('/api/topic/{paper}', 'TopicController@index');
-Route::get('/api/districts',function () {
-    return response(json_encode([
-        'data' => [
-            'districts' => [
-                'Innenstadt', 'Rodenkirchen', 'Lindenthal', 'Ehrenfeld',
-                'Nippes',  'Chorweiler', 'Porz',  'Kalk',  'Mülheim'
-            ]
-        ]
-    ]));
-});
+Route::get('/api/districts', 'DistrictController@all');
+Route::get('/api/districts/{district}', 'DistrictController@district');
+Route::get('/api/districts/{district}/{subdistrict}', 'DistrictController@subDistrict');

@@ -3,6 +3,12 @@
     margin: 0 auto;
 }
 
+.ris-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
 .ris-without-padding-mob {
     @include breakpoint($bp-mobile-max) {
         width: calc(100% + #{$indent-m * 2});

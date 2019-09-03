@@ -12,6 +12,7 @@
     <body class="ris-body">
 
         <div id="root"
+             class="ris-wrapper"
             :class="{ 'ris-nav__root_active': navActive }"
         >
             @include('layouts.header')

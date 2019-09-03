@@ -12,7 +12,7 @@
     @if (isset($breadcrumbs))
         @if (is_array($breadcrumbs))
             <li class="ris-breadcrumbs__item">
-                <a href="{{ array_values($breadcrumbs)[0] }}" title= {{array_keys($breadcrumbs)[0] }}
+                <a href="{{ array_values($breadcrumbs)[0] }}" title="{{array_keys($breadcrumbs)[0] }}"
                         class="ris-link"
                 >
                     <span>{{ array_keys($breadcrumbs)[0] }}</span>
@@ -23,7 +23,7 @@
 
         @if (count($breadcrumbs)>1)
             <li class="ris-breadcrumbs__item">
-                <a href="{{ array_values($breadcrumbs)[1] }}" title= {{array_keys($breadcrumbs)[1] }}
+                <a href="{{ array_values($breadcrumbs)[1] }}" title="{{array_keys($breadcrumbs)[1] }}"
                         class="ris-link"
                 >
                     <span>{{ array_keys($breadcrumbs)[1] }}</span>

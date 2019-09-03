@@ -23,6 +23,7 @@ class Person extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'familyName' => $this->family_name,
             'status' => $this->status,
             'party' => $this->party,
             'life' => $this->life,

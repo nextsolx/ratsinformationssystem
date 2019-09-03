@@ -4,8 +4,7 @@
 
     @include('layouts.breadcrumbs')
 
-    <people inline-template>
-        <main class="ris-main ris-people ris-content_six-eight-eight">
+    <people inline-template>    <main class="ris-main ris-people ris-content_six-eight-eight">
             <section class="ris-section-wrapper ris-people__headline">
                 <img src="{{ $person->photo ? $person->photo : '/img/thumbnail-big-people.svg' }}"
                     alt="{{ $person->name }}" class="ris-people__img"

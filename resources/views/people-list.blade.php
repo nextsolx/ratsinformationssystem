@@ -1,11 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+    @include('layouts.breadcrumbs')
     <main class="ris-main ris-people">
-        <h1 class="ris-people__headline ris-headline">
-            Personen List
-        </h1>
-
-        <a href="/personen/">Go to temporary person page</a>
+        <people-table></people-table>
     </main>
+    @include('layouts.footer')
 @endsection

@@ -102,8 +102,6 @@ export default {
                                     },
                                 });
                             }
-                        } else {
-                            this.info(this.infoTitle, this.infoDescription);
                         }
 
                         this.attrs = [...this.attrs, ...this.attrsToday];

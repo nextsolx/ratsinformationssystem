@@ -146,6 +146,7 @@ export default {
                     :key="`${member.id}-filtered`"
                     :member="member"/>
             </transition-group>
+            <h2 class="ris-table-list-main-list__heading ris-h2" v-if="!loading && (!filteredList.length || !sortedList.length)">Es gibt keine personen</h2>
         </section>
         <LetterNavigation
             :pagination="true"

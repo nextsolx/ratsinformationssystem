@@ -1,7 +1,7 @@
 $header-heigth: 200px;
-$breadcrumbs: 24px;
-$header-footer: 140px;
-$header-footer--mob: 190px;
+$breadcrumbs-heigth: 24px;
+$footer-heigth: 140px;
+$footer-heigth--mob: 190px;
 
 
 .ris-body {
@@ -16,10 +16,10 @@ $header-footer--mob: 190px;
 }
 
 .ris-main {
-    min-height: calc(100vh - #{$header-heigth} - #{$breadcrumbs} - #{$header-footer});
+    min-height: calc(100vh - #{$header-heigth} - #{$breadcrumbs-heigth} - #{$footer-heigth});
 
     @include breakpoint($bp-mobile-max) {
-        min-height: calc(100vh - #{$header-heigth} - #{$breadcrumbs} - #{$header-footer--mob});
+        min-height: calc(100vh - #{$header-heigth} - #{$breadcrumbs-heigth} - #{$footer-heigth--mob});
     }
 }
 

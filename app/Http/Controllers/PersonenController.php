@@ -39,6 +39,7 @@ class PersonenController extends Controller
             ]
         ]);
     }
+
     public function getPeople(PeopleListRequest $request)
     {
         $peopleQuery = Person::with('organizations');
@@ -69,5 +70,20 @@ class PersonenController extends Controller
                 'Personen' => route('theme-overview'),
             ]
         ];
+    }
+
+    public function personDetail(Request $request, Person $person)
+    {
+        $person->load('organizations');
+
+        $personData = (new \App\Http\Resources\Person($person))->toResponse(request())->getData();
+
+        return view('people')->with([
+            'person' => $personData->data,
+            'breadcrumbs' => [
+                'Personen' => route('people-list'),
+                $person->name => route('person', $person->id),
+            ]
+        ]);
     }
 }

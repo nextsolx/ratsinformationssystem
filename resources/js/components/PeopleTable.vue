@@ -37,10 +37,13 @@ export default {
         viewHandler(e) {
             const { id } = e.target.element;
             if (id && this.lazyLoading) {
-                if (e.percentInView === 1 || (e.percentTop > 0.1 && e.percentTop < 0.9) ||e.type === 'progress' || e.type === 'enter') {
-                    document.querySelector(`#${id[0]}-search-button`).classList.add('bolt');
-                } else {
-                    document.querySelector(`#${id[0]}-search-button`).classList.remove('bolt');
+                const searchButton = document.querySelector(`#${id[0]}-search-button`);
+                if (searchButton) {
+                    if (e.percentInView === 1 || (e.percentTop > 0.1 && e.percentTop < 0.9) || e.type === 'progress' || e.type === 'enter') {
+                        searchButton.classList.add('bolt');
+                    } else {
+                        searchButton.classList.remove('bolt');
+                    }
                 }
             }
         },

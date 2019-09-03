@@ -1,6 +1,5 @@
 <script>
 const moment = require('moment');
-require('moment/locale/de');
 
 export default {
     name: 'Theme',
@@ -17,7 +16,7 @@ export default {
     },
     filters: {
         momentFullDate(data) {
-            return moment(data).format('dd.mm.yyyy');
+            return moment(data).format('DD.MM.YYYY');
         }
     }
 };
@@ -26,16 +25,16 @@ export default {
 <template>
     <div>
         <a class="ris-card-list__item"
-            v-for="{ id, name } in themeListData"
-            :key="id"
-            :href="'/thema/' + id"
-            :title="name"
+            v-for="item in themeListData"
+            :key="item.id"
+            :href="'/thema/' + item.id"
+            :title="item.name"
                 >
             <div class="ris-card-list__themes-top">
                 <img src="/img/thumbnail-map-tile.png" class="ris-card-list__themes-img"
-                    :alt="name">
+                    :alt="item.name">
                 <div class="ris-body-1">
-                    {{ name }}
+                    {{ item.name }}
                 </div>
             </div>
             <div class="ris-card-list__themes-bottom">
@@ -60,7 +59,7 @@ export default {
                             />
                 </div>
 
-                <div class="ris-caption ris-card-list__themes-date">{{ '27.10.2018' | momentFullDate() }}</div>
+                <div class="ris-caption ris-card-list__themes-date">{{ item.date | momentFullDate }}</div>
             </div>
         </a>
     </div>

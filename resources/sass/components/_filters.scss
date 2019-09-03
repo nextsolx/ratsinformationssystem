@@ -5,6 +5,7 @@
     border-radius: $b-radius-primary;
     display: inline-block;
     position: relative;
+    outline: none;
 
     @include breakpoint($bp-mobile-max) {
         margin-right: $indent-s;
@@ -28,17 +29,15 @@
 
     &__subheader {
         color: $c-gray2;
-        display: flex;
+        width: 100%;
+        text-align: left;
+        background-color: transparent;
         padding: $indent-sm;
+        border: 0;
+        outline: none;
 
         &:hover {
             cursor: pointer;
-        }
-
-        .ris-i_expand-more {
-            margin-left: auto;
-            padding-left: $indent-l;
-            pointer-events: none;
         }
 
         .ris-i_filter {
@@ -126,30 +125,26 @@
             font-weight: bold;
             line-height: $lh-l;
             margin-bottom: $indent-s;
+            display: block;
         }
 
-        &__selected {
-            display: none;
+        &__item {
+            display: inline-block;
+            font-weight: 500;
+            min-width: auto;
+            padding: $indent-s $indent-sm;
+            &:not(:last-child) {
+                margin-bottom: $indent-s;
+                margin-right: $indent-s;
+            }
+        }
+
+        &--selected {
             margin-left: 0;
             margin-right: 0;
             padding-bottom: $indent-s;
             padding-left: $indent-m;
             padding-right: $indent-m;
-
-            &_active {
-                display: block;
-            }
-        }
-
-        .ris-button {
-            font-weight: 500;
-            min-width: auto;
-            padding: $indent-s $indent-sm;
-
-            &:not(:last-child) {
-                margin-bottom: $indent-s;
-                margin-right: $indent-s;
-            }
         }
     }
 }

@@ -1,43 +1,46 @@
 {
-  "env": {
-    "browser": true,
-    "es6": true,
-    "node": true
-  },
-  "globals": {
-    "axios": true,
-    "Bus": true,
-    "Vue": true
-  },
-  "parserOptions": {
-    "ecmaVersion": 8
-  },
-  "extends": [
-    "eslint:recommended"
-  ],
-  "rules": {
-    "indent": ["error", 4, { "SwitchCase": 1 }],
-    "vue/html-indent": ["error", 4, {
-      "alignAttributesVertically": false,
-      "closeBracket": 2
-    }],
-    "vue/max-attributes-per-line": "off",
-    "vue/html-closing-bracket-newline": "off",
-    "vue/html-closing-bracket-spacing": "off",
-    "vue/singleline-html-element-content-newline": "off",
-    "space-before-function-paren": 0,
-    "no-console": ["error", { "allow": ["warn", "error"] }],
-    "linebreak-style": [
-      2,
-      "unix"
+    "env": {
+        "browser": true,
+        "es6": true,
+        "node": true
+    },
+    "globals": {
+        "axios": true,
+        "Bus": true,
+        "Vue": true
+    },
+    "parserOptions": {
+        "ecmaVersion": 8
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:vue/base",
+        "plugin:vue/essential",
+        "plugin:vue/strongly-recommended"
     ],
-    "quotes": [
-      2,
-      "single"
-    ],
-    "semi": [
-      2,
-      "always"
-    ]
-  }
+    "rules": {
+        "indent": ["error", 4, { "SwitchCase": 1 }],
+        "vue/html-indent": ["error", 4, {
+            "alignAttributesVertically": false,
+            "closeBracket": 2
+        }],
+        "vue/max-attributes-per-line": "off",
+        "vue/html-closing-bracket-newline": "off",
+        "vue/html-closing-bracket-spacing": "off",
+        "vue/singleline-html-element-content-newline": "off",
+        "space-before-function-paren": 0,
+        "no-console": ["error", { "allow": ["warn", "error"] }],
+        "linebreak-style": [
+            2,
+            "unix"
+        ],
+        "quotes": [
+            2,
+            "single"
+        ],
+        "semi": [
+            2,
+            "always"
+        ]
+    }
 }

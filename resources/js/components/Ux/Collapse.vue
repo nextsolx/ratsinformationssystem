@@ -66,7 +66,7 @@ export default {
                 <a
                     class="ris-label ris-label_has-border"
                     :href="linkUrlUnfilter()"
-                >
+                        >
                     {{ activeElement }}
                     <span class="ris-i ris-i_close"/>
                 </a>

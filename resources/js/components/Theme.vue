@@ -16,7 +16,7 @@ export default {
     },
     filters: {
         momentFullDate(data) {
-            return moment(data).format("DD.MM.YYYY");
+            return moment(data).format('DD.MM.YYYY');
         }
     }
 };

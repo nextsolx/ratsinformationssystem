@@ -31,5 +31,5 @@ export default {
 </script>
 
 <template>
-    <Theme :themeListData="this.unfilteredList" />
+    <Theme :theme-list-data="this.unfilteredList" />
 </template>

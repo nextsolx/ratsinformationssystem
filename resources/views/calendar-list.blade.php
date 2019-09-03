@@ -93,10 +93,11 @@ if (isset($meetings) and is_array($meetings)) {
                     <calendar></calendar>
                 </div>
 
-                @include('layouts.footer')
-
             </div>
 
         </div>
     </main>
+
+    @include('layouts.footer')
+
 @endsection

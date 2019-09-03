@@ -33,6 +33,8 @@
         text-align: left;
         background-color: transparent;
         padding: $indent-sm;
+        border: 0;
+        outline: none;
 
         &:hover {
             cursor: pointer;

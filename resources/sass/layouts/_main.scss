@@ -1,3 +1,9 @@
+$header-heigth: 200px;
+$breadcrumbs-heigth: 24px;
+$footer-heigth: 140px;
+$footer-heigth--mob: 190px;
+
+
 .ris-body {
     font-family: $ff-open-sans;
     margin: 0 auto;
@@ -7,6 +13,14 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+}
+
+.ris-main {
+    min-height: calc(100vh - #{$header-heigth} - #{$breadcrumbs-heigth} - #{$footer-heigth});
+
+    @include breakpoint($bp-mobile-max) {
+        min-height: calc(100vh - #{$header-heigth} - #{$breadcrumbs-heigth} - #{$footer-heigth--mob});
+    }
 }
 
 .ris-without-padding-mob {

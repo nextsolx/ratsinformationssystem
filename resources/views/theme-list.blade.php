@@ -12,13 +12,11 @@
             <div class="ris-theme-list__content ris-content ris-content_six-eight-eight">
                 <section class="ris-section-wrapper">
                     <h1 class="ris-headline">
-                        @if (url()->current() === route('new-themes'))
-                            Neue Themen
-                        @elseif (url()->current() === route('progress-themes'))
+                        @if (url()->current() === route('progress-themes'))
                             Kürzlich aktualisiert
                         @elseif (url()->current() === route('finished-themes'))
                             Kürzlich abgeschlossen
-                        @else {
+                        @else
                             Neue Themen
                         @endif
                     </h1>
@@ -108,7 +106,7 @@
                                 </option>
                             </select>
                             <span class="ris-i ris-i_chevron-double"></span>
-                    </div>
+                        </div>
                     </div>
                 </section>
 
@@ -135,7 +133,7 @@
                     >
                     </theme>
                 </section>
-
+                <topic-list></topic-list>
             </div>
         </theme-list>
 

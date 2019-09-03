@@ -163,7 +163,7 @@ export default {
                 </section>
             </div>
             <div class="ris-subheader ris-calendar__card-list-ris-subheader">
-                Kalenderwoche {{ meetingList[meetingWeekYearKey].dayList[0].dateFrom | momentWeek() }}
+                Kalenderwoche {{ meetingList[meetingWeekYearKey].dayList[0].dateFrom | momentWeek }}
             </div>
         </div>
 

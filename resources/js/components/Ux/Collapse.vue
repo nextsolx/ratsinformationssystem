@@ -1,20 +1,39 @@
 <script>
 import clickOutSide from '../../tools/clickOutSide';
+import theme from '../../api/theme';
+import { decodeHashParams } from '../../tools/helpers';
 export default {
     name: 'Collapse',
     directives: {
         'outside': clickOutSide
     },
-    props: {
-        optionList: {
-            type: Object,
-            default: () => []
-        }
-    },
     data() {
         return {
-            activeFilter: false
+            activeFilter: false,
+            optionType: '',
+            optionList: [],
+            activeElement: null
         };
+    },
+    async created() {
+        let { district, subdistrict, index } = decodeHashParams(this.search.substr(1));
+        if (index) {
+            this.activeElement = index;
+            return;
+        } else if (subdistrict) {
+            this.activeElement = subdistrict;
+            this.optionType = 'index';
+            this.optionList = await theme.getIndexes(district, subdistrict);
+            return;
+        } else if (district) {
+            this.activeElement = district;
+            this.optionType = 'subdistrict';
+            this.optionList = await theme.getSubdistricts(district);
+            return;
+        } else {
+            this.optionType = 'district';
+            this.optionList =  await theme.getDistricts();
+        }
     },
     computed: {
         pathname () {
@@ -22,22 +41,21 @@ export default {
         },
         search () {
             return window.location.search;
-        },
-        activeElement () {
-            const filterList = this.search.split('=');
-            return filterList[filterList.length - 1];
         }
     },
     methods: {
         hide () {
             this.activeFilter = false;
         },
+        async getSubs () {
+            return await theme.getSubdistricts();
+        },
         linkUrlFilter (value) {
             if (this.search) {
-                return `${this.pathname}${this.search}&${this.optionList.type}=${value.toLowerCase()}`;
+                return `${this.pathname}${this.search}&${this.optionType}=${value}`;
             }
             else {
-                return `${this.pathname}?${this.optionList.type}=${value.toLowerCase()}`;
+                return `${this.pathname}?${this.optionType}=${value}`;
             }
         },
         linkUrlUnfilter() {
@@ -45,7 +63,7 @@ export default {
             if (filterList.length === 1) return `${this.pathname}`;
             else {
                 filterList.length--;
-                return `${this.pathname}${filterList.join('')}`;
+                return `${this.pathname}${filterList.join('&')}`;
             }
         }
     }
@@ -72,19 +90,18 @@ export default {
                 </a>
             </div>
 
-            <div class="ris-filter-buttons">
+            <div class="ris-filter-buttons" v-if="optionList.length">
                 <span class="ris-filter-buttons__title">
                     Nach Bezirken filtern
                 </span>
                 <a
                     class="ris-button ris-filter-buttons__item ris-button_secondary ris-button_has-shadow"
-                    v-for="district in optionList.data"
-                    :href="linkUrlFilter(district)"
-                    :key="district">
-                    {{ district }}
+                    v-for="item in optionList"
+                    :href="linkUrlFilter(item)"
+                    :key="item">
+                    {{ item }}
                 </a>
             </div>
         </div>
     </div>
 </template>
-

@@ -16,19 +16,16 @@
                     </h1>
 
                     <div class="ris-action-box">
-                        <collapse :option-list="{type: 'district', data: {{json_encode($district_list)}}}"></collapse>
-                        <div class="ris-select">
-                            <div class="ris-select__label">Sortierung</div>
-                            <select class="ris-select__select">
-                                <option class="ris-select__option" data-sort-type="progress">
-                                    Fortschritt
-                                </option>
-                                <option class="ris-select__option" data-sort-type="creation-date">
-                                    Einstellungsdatum
-                                </option>
-                            </select>
-                            <span class="ris-i ris-i_chevron-double"></span>
-                        </div>
+                        <collapse></collapse>
+                        <dropdown
+                            :id="'theme-dropdown'"
+                            label="Sortierung"
+                            :value="{label: 'Fortschritt', value: 'Fortschritt'}"
+                            :options="[
+                            {label: 'Einstellungsdatum', value: 'Einstellungsdatum'},
+                            {label: 'Fortschritt', value: 'Fortschritt'}
+                            ]"
+                        ></dropdown>
                     </div>
                 </section>
 

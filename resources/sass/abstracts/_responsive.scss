@@ -3,8 +3,13 @@ $bp-tablet-min: '(min-width: 768px)';
 $bp-tablet-max: '(max-width: 1023px)';
 $bp-desktop-min: '(min-width: 1024px)';
 
-$width-section-668: 668px;
-$width-section-1024: 1024px;
+$header-height: 200px;
+$breadcrumbs-height: 24px;
+$footer-height: 140px;
+$footer-height--mob: 190px;
+
+$width-section-tablet: 688px;
+$width-section-desktop: 976px;
 $width-aside-320: 320px;
 
 $width-interactive-tablet: 260px;

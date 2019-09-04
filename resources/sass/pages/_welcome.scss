@@ -31,6 +31,16 @@
             flex-basis: calc(100% - #{$width-aside-320});
             position: relative;
             z-index: 2;
+
+            &_padding {
+                padding-right: $indent-ml;
+            }
+        }
+    }
+
+    &__widget {
+        @include breakpoint($bp-tablet-min) {
+            flex-basis: $width-aside-320;
         }
     }
 
@@ -153,6 +163,14 @@
         @include breakpoint($bp-mobile-max) {
             margin-top: $indent-m;
         }
+
+        .ris-button {
+            font-weight: 500;
+            min-width: auto;
+            padding: $indent-s $indent-sm;
+            margin-right: $indent-s;
+            margin-bottom: $indent-s;
+        }
     }
 
     &-map {
@@ -193,7 +211,6 @@
         @include breakpoint($bp-tablet-min) {
             height: 100%;
             position: fixed;
-            right: 0;
             top: 0;
             width: $width-aside-320;
 

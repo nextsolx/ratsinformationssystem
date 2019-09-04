@@ -9,6 +9,7 @@
 
     @include breakpoint($bp-tablet-min) {
         box-shadow: 0 1px 6px 0 $c-box-shadow2;
+        font-size: 0;
         position: relative;
         z-index: 2;
     }

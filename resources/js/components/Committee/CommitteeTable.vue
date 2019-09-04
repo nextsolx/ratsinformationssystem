@@ -64,12 +64,13 @@ export default {
         <section class="ris-section-wrapper ris-content_six-eight-eight">
             <h1 class="ris-table-list__headline ris-headline">Gremien</h1>
             <div class="ris-filter-wrapper">
-                <Search v-model="inputValue" :hidden-mob="true" @input="filterList" />
+                <Search class="ris-table-list__input" v-model="inputValue" :hidden-mob="false" @input="filterList" />
                 <Dropdown
                     label="Sortierung"
                     id="committee-drop"
                     :options="[{label:'A-Z', value:'A-Z'}]"
                     :full-width-mob="true"
+                    style="display: none"
                     v-model="dropValue" />
             </div>
             <transition-group tag="ul" name="fade" class="ris-table-list-main-list ris-ul" v-if="!filtered">

@@ -25,7 +25,7 @@ class Topic extends JsonResource
             'reference' => $this->reference,
             'type' => $this->paper_type,
             'result' => $this->result(),
-            'date' => $this->date->toDateTimeString(),
+            'date' => $this->date ? $this->date->toDateTimeString() : null,
             'modified' => $this->modified,
             'finished' => $this->isFinished(),
             'newTopic' => $this->isNew(),

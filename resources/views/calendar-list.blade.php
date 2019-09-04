@@ -17,7 +17,10 @@ if (isset($meetings) and is_array($meetings)) {
 
 @section('content')
     <main class="ris-main ris-calendar">
-        <h1 class="ris-calendar__headline ris-headline">
+
+        @include('layouts.breadcrumbs')
+
+        <h1 class="ris-h3 ris-calendar__headline">
             Sitzungskalender
         </h1>
 
@@ -28,6 +31,10 @@ if (isset($meetings) and is_array($meetings)) {
                 <div class="ris-calendar__card-list-wrapper" data-page-loaded="1" id="card-list">
 
                     @foreach ($meeting_list_sorted as $meeting_list_per_week)
+
+                        <div class="ris-subheader ris-calendar__card-list-ris-subheader">Kalenderwoche
+                            {{ \Illuminate\Support\Carbon::parse(head($meeting_list_per_week)[0]->dateFrom)->weekOfYear }}
+                        </div>
 
                         @foreach ($meeting_list_per_week as $meeting_list_per_day)
                             <div class="ris-calendar__card-list">
@@ -47,7 +54,9 @@ if (isset($meetings) and is_array($meetings)) {
 
                                     <div class="ris-calendar__card-day-right">
                                         @foreach ($meeting_list_per_day as $meeting)
-                                            <div class="ris-calendar__card">
+                                            <a class="ris-link ris-calendar__card" title="{{ $meeting->title }}"
+                                                href="/meeting/{{ $meeting->id }}"
+                                            >
                                                 <h2 class="ris-title">
                                                     {{ $meeting->title }}
                                                 </h2>
@@ -58,11 +67,20 @@ if (isset($meetings) and is_array($meetings)) {
                                                     <span>{{ \Illuminate\Support\Carbon::parse($meeting->dateFrom)->year }}</span>
                                                 </div>
                                                 <div class="ris-session-count">
-                                                    <div class="ris-session-count__agenda">{{ $meeting->agendaCount }}</div>
-                                                    <div class="ris-session-count__people">{{ $meeting->peopleCount }}</div>
-                                                    <div class="ris-session-count__file">{{ $meeting->fileCount }}</div>
+                                                    <div class="ris-session-count__agenda">
+                                                        {{ $meeting->agendaCount }}
+                                                        <span class="ris-i ris-i_list"></span>
+                                                    </div>
+                                                    <div class="ris-session-count__people">
+                                                        {{ $meeting->peopleCount }}
+                                                        <span class="ris-i ris-i_people"></span>
+                                                    </div>
+                                                    <div class="ris-session-count__file">
+                                                        {{ $meeting->fileCount }}
+                                                        <span class="ris-i ris-i_download"></span>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            </a>
                                         @endforeach
                                     </div>
 
@@ -70,19 +88,16 @@ if (isset($meetings) and is_array($meetings)) {
                             </div>
                         @endforeach
 
-                        <div class="ris-subheader ris-calendar__card-list-ris-subheader">Kalenderwoche
-                            {{ \Illuminate\Support\Carbon::parse(head($meeting_list_per_week)[0]->dateFrom)->weekOfYear }}
-                        </div>
-
                     @endforeach
 
                     <calendar></calendar>
                 </div>
 
-                @include('layouts.footer')
-
             </div>
 
         </div>
     </main>
+
+    @include('layouts.footer')
+
 @endsection

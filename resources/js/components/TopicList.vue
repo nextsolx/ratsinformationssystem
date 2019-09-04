@@ -12,13 +12,19 @@ export default {
         return {
             loading: false,
             paginationPage: 1,
-            unfilteredList: []
+            unfilteredList: [],
+            type: '',
         };
+    },
+    created() {
+        if (window.location.pathname === '/neue-themen') this.type = 'new';
+        else if (window.location.pathname === '/aktualisiert-themen') this.type = 'updated';
+        else this.type = 'finished';
     },
     methods: {
         async getDataByFilter() {
             this.loading = true;
-            const { data } = await topics.getPaginationList(this.paginationPage);
+            const { data } = await topics.getPaginationList(this.type, this.paginationPage);
             this.unfilteredList = [...this.unfilteredList, ...data];
             this.loading = false;
         },

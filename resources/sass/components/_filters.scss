@@ -1,7 +1,7 @@
 .ris-filter {
     $base: &;
 
-    border: $border;
+    border: 1px solid $c-gray7;
     border-radius: $b-radius-primary;
     display: inline-block;
     position: relative;

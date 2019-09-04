@@ -23,10 +23,16 @@
             border-bottom: 4px solid $c-red;
             color: $c-red;
             font-weight: bold;
+            transition: all ease .4s;
 
             .ris-h2 {
                 color: $c-red;
                 font-weight: bold;
+                transition: all ease .4s;
+            }
+
+            .ris-i {
+                color: $c-red;
             }
         }
     }

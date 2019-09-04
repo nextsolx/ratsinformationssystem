@@ -25,7 +25,7 @@ class AgendumCollection extends ResourceCollection
                             'id' => $agendum->id,
                             'number' => $agendum->number,
                             'name' => $agendum->name,
-                            'resolutionText' => $agendum->resolutionText,
+                            'resolutionText' => $agendum->resolution_text,
                             'result' => $agendum->result,
                             'order' => $agendum->order,
                             'public' => $agendum->public,

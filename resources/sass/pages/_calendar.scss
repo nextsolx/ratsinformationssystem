@@ -35,11 +35,14 @@
         }
 
         &-ris-subheader {
-            color: $c-primary;
+            color: $c-secondary;
             font-size: $fs-l;
             line-height: $lh-l;
-            margin: $indent-s 0 $indent-s 64px;
-            text-transform: uppercase;
+            margin-left: 64px;
+
+            &:first-child {
+                margin-top: $indent-sm;
+            }
         }
     }
     &__placeholder {
@@ -92,6 +95,7 @@
         border-radius: $b-radius-primary;
         box-shadow: 0 1px 6px 0 $c-box-shadow;
         box-sizing: border-box;
+        display: block;
         padding: $indent-m;
 
         &:not(:last-child) {
@@ -119,22 +123,24 @@
         font-size: $fs-l;
         line-height: $lh-l;
 
-
         &__agenda {
             align-items: center;
             display: flex;
+
+            .ris-i {
+                font-size: $fs-xxxl;
+                padding-left: $indent-s;
+            }
         }
 
         &__people {
             align-items: center;
             display: flex;
             margin-left: 20px;
-        }
 
-        &__agenda,
-        &__people {
             .ris-i {
-                padding-right: 10px;
+                font-size: $fs-xxl;
+                padding-left: $indent-s;
             }
         }
 
@@ -143,10 +149,8 @@
             display: flex;
             margin-left: 20px;
 
-            &::after {
-                @include font-icon('V', 20px);
-
-                opacity: .5;
+            .ris-i {
+                font-size: $fs-xll;
                 padding-left: $indent-s;
             }
         }

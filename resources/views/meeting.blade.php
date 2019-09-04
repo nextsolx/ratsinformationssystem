@@ -35,11 +35,11 @@ if (isset($meeting['people']) and count($meeting['people']) > 0) {
 
             <section class="ris-section-wrapper ris-tab">
                 <ul class="ris-tab-list">
-                    <li class="ris-tab" @click="openTab($event, 'overview')">
+                    <li class="ris-tab ris-tab_active" @click="openTab($event, 'overview')">
                         <span class="ris-i ris-i_info"></span>
                         <h2 class="ris-h2">Übersicht</h2>
                     </li>
-                    <li class="ris-tab ris-tab_active" @click="openTab($event, 'agenda')">
+                    <li class="ris-tab" @click="openTab($event, 'agenda')">
                         <span class="ris-i ris-i_list"></span>
                         <h2 class="ris-h2">Tagesordnung</h2>
                         @if (isset($meeting['agendaCount']) and $meeting['agendaCount'] > 0)
@@ -56,7 +56,7 @@ if (isset($meeting['people']) and count($meeting['people']) > 0) {
                 </ul>
             </section>
 
-            <section class="ris-section-wrapper ris-tab-data ris-section-meeting-overview"
+            <section class="ris-section-wrapper ris-tab-data ris-section-meeting-overview ris-tab-data_active"
                 ref="overview"
             >
                 <div class="ris-overview">
@@ -116,7 +116,7 @@ if (isset($meeting['people']) and count($meeting['people']) > 0) {
 
 
 
-            <section class="ris-section-wrapper ris-tab-data ris-tab-data_active ris-section-meeting-agenda"
+            <section class="ris-section-wrapper ris-tab-data ris-section-meeting-agenda"
                 ref="agenda"
             >
                 @if ($meeting_agenda)

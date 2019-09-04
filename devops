@@ -78,7 +78,7 @@ case $COMMAND in
         stack_run app composer install --prefer-dist
         stack_run app yarn install
         stack_run app yarn development
-        stack_run app artisan migrate
+        stack_run app php artisan migrate
         ;;
 
     test)

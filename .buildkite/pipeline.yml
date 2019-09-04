@@ -5,3 +5,18 @@ steps:
     command:
       - ./devops ci build --build-arg USER_UID=999 --build-arg USER_GID=999
       - ./devops ci setup && ./devops ci test
+
+  - wait
+
+  - label: 'production'
+    branches: 'feature/devops-stage'
+    agents:
+      project: ratsinfosys
+    command:
+      - git clean -x -d -f . && \
+        docker build \
+        -t conv/ratsinformationssystem:$BUILDKITE_COMMIT \
+        -t conv/ratsinformationssystem:staging \
+        -f .docker/app/Dockerfile . && \
+        docker push conv/ratsinformationssystem:$BUILDKITE_COMMIT && \
+        docker push conv/ratsinformationssystem:staging

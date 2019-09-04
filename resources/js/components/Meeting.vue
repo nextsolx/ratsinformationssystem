@@ -1,5 +1,5 @@
 <script>
-    import sortingMixin from '../mixins/sortingMixin';
+import sortingMixin from '../mixins/sortingMixin';
 
 export default {
     name: 'Meeting',

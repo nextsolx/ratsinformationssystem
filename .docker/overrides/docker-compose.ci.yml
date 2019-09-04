@@ -4,6 +4,8 @@ x-container: &container
   image: conv/ratsinformationssystem:local
   volumes:
     - .:/var/www/html
+  links:
+    - "mysql"
   env_file:
     - .env
 

@@ -1,0 +1,462 @@
+.ris-meeting {
+    .ris-meeting__headline {
+        border-bottom: 0;
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+
+    .ris-tab-list {
+        .ris-tab {
+            @include breakpoint($bp-mobile-max) {
+                padding-left: $indent-s;
+                padding-right: $indent-s;
+            }
+        }
+
+        .ris-i_list {
+            font-size: $fs-xll;
+        }
+    }
+
+    .ris-tab-data {
+        display: none;
+
+        @include breakpoint($bp-mobile-max) {
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        &_active {
+            display: block;
+        }
+
+        .ris-i {
+            &:not(.ris-i_download):not(.ris-i_back) {
+                color: $c-gray2;
+            }
+        }
+    }
+
+    .ris-section-wrapper {
+        @include breakpoint($bp-tablet-min) {
+            border-bottom: 0;
+            margin-bottom: 0;
+        }
+
+        &.ris-tab {
+            @include breakpoint($bp-mobile-max) {
+                border-bottom: 0;
+                padding-bottom: 0;
+                padding-left: 0;
+                padding-right: 0;
+            }
+        }
+    }
+
+    .ris-h2 {
+        display: inline-block;
+        font-size: $fs-l;
+    }
+
+    .ris-caption {
+        &__top {
+            @include breakpoint($bp-mobile-max) {
+                margin-bottom: $indent-s;
+                margin-top: $indent-s;
+            }
+
+            @include breakpoint($bp-tablet-min) {
+                margin-bottom: $indent-m;
+                margin-top: $indent-m;
+            }
+        }
+    }
+
+    .ris-select {
+        margin-left: $indent-m;
+
+        @include breakpoint($bp-mobile-max) {
+            margin-right: $indent-m;
+            width: calc(100% - #{$indent-m} * 2);
+        }
+    }
+
+    .ris-ul {
+        margin-top: 0;
+    }
+
+    .ris-empty {
+        margin-bottom: $indent-s;
+        margin-top: $indent-s;
+
+        @include breakpoint($bp-mobile-max) {
+            padding-left: $indent-m;
+            padding-right: $indent-m;
+        }
+    }
+}
+
+.ris-section-meeting-overview {
+    @include breakpoint($bp-mobile-max) {
+        border-bottom: 0;
+        padding-bottom: 0;
+    }
+
+    .ris-overview {
+        display: flex;
+
+        @include breakpoint($bp-mobile-max) {
+            flex-direction: column;
+            padding-bottom: $indent-m;
+            padding-left: $indent-m;
+            padding-right: $indent-m;
+
+            &:not(:last-child) {
+                border-bottom: 1px solid $c-gray7;
+                margin-bottom: $indent-m;
+            }
+        }
+    }
+
+    .ris-description {
+        &:not(:last-child) {
+            margin-bottom: $indent-m;
+        }
+
+        &__content {
+            .ris-i {
+                margin-left: $indent-m;
+            }
+
+            @include breakpoint($bp-mobile-max) {
+                align-items: center;
+                display: flex;
+                justify-content: space-between;
+            }
+
+            @include breakpoint($bp-tablet-min) {
+                .ris-i_calendar,
+                .ris-i_marker-with-dot,
+                .ris-i_squares-in-square {
+                    display: none;
+                }
+            }
+        }
+
+        &__headline {
+            font-weight: bold;
+
+            @include breakpoint($bp-mobile-max) {
+                font-size: $fs-xll;
+                line-height: $lh-l;
+            }
+
+            @include breakpoint($bp-tablet-min) {
+                flex-basis: 30%;
+            }
+
+            .ris-i {
+                font-size: $fs-xl;
+                margin-right: $indent-m;
+
+                @include breakpoint($bp-mobile-max) {
+                    display: none;
+                }
+            }
+        }
+    }
+
+    .ris-document-list {
+        display: block;
+        flex-grow: 1;
+
+        &__item {
+            align-items: center;
+            color: $c-primary;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: $indent-sm;
+
+            &:not(:first-child) {
+                margin-top: $indent-sm;
+            }
+
+            &:hover {
+                color: $c-red;
+
+                .ris-i_download-with-box {
+                    color: $c-red;
+                }
+            }
+
+            .ris-text {
+                flex-grow: 1;
+                text-transform: capitalize;
+            }
+        }
+
+        .ris-i_download {
+            margin-right: $indent-m;
+        }
+
+        .ris-i_download-with-box {
+            margin-left: $indent-m;
+        }
+    }
+}
+
+.ris-section-meeting-agenda {
+    border-bottom: 0;
+    padding-bottom: 0;
+
+    .ris-sorting__search {
+        @include breakpoint($bp-mobile-max) {
+            margin-bottom: $indent-ml;
+            margin-left: $indent-m;
+            margin-right: $indent-m;
+            width: calc(100% - #{$indent-m} * 2);
+        }
+
+        @include breakpoint($bp-tablet-min) {
+            margin-bottom: $indent-xl;
+            width: 100%;
+        }
+    }
+
+    .ris-agenda-list {
+        @include breakpoint($bp-mobile-max) {
+            padding-left: $indent-m;
+            padding-right: $indent-m;
+        }
+
+        &:not(:last-child) {
+            @include breakpoint($bp-mobile-max) {
+                border-bottom: 1px solid $c-gray7;
+                margin-bottom: $indent-ml;
+            }
+
+            @include breakpoint($bp-tablet-min) {
+                margin-bottom: $indent-xl;
+            }
+        }
+
+        &_active {
+            @include breakpoint($bp-mobile-max) {
+                border-bottom: 0;
+
+                &:not(:last-child) {
+                    border-bottom: 0;
+                }
+            }
+
+            .ris-h3__headline {
+                @include breakpoint($bp-mobile-max) {
+                    display: none;
+                }
+            }
+        }
+
+        &_hidden {
+            @include breakpoint($bp-mobile-max) {
+                display: none;
+            }
+        }
+
+        .ris-button__back {
+            border: 0;
+
+            @include breakpoint($bp-tablet-min) {
+                display: none;
+            }
+
+            .ris-i {
+                margin-right: $indent-ml;
+            }
+        }
+
+        .ris-h3 {
+            @include breakpoint($bp-mobile-max) {
+                font-size: $fs-xll;
+                margin-bottom: $indent-m;
+                margin-left: $indent-m;
+
+                .ris-i {
+                    display: none;
+                }
+            }
+
+            @include breakpoint($bp-tablet-min) {
+                font-size: $fs-xxl;
+                line-height: $lh-xxl;
+                margin-bottom: $indent-sm;
+
+                .ris-i {
+                    margin-right: $indent-xl;
+                }
+            }
+
+            &_hidden {
+                @include breakpoint($bp-mobile-max) {
+                    display: none;
+                }
+            }
+        }
+
+        &__item {
+            display: flex;
+            justify-content: space-between;
+
+            &_hidden-mobile {
+                @include breakpoint($bp-mobile-max) {
+                    display: none;
+                }
+            }
+
+            &_hidden {
+                display: none;
+            }
+
+            .ris-description {
+                &__count {
+                    min-width: 60px;
+                }
+
+                &__headline {
+                    flex-grow: 1;
+                    word-break: break-word;
+                }
+
+                &__content {
+                    min-width: 60px;
+                    text-align: right;
+
+                    .ris-i {
+                        font-size: $fs-m;
+                    }
+                }
+            }
+        }
+
+        &__agenda-head {
+            border-bottom: 1px solid $c-gray7;
+            cursor: pointer;
+            padding-bottom: $indent-m;
+            padding-top: $indent-m;
+            margin-bottom: -1px;
+
+            &:hover {
+                .ris-i,
+                .ris-description {
+                    color: $c-red;
+                }
+            }
+
+            &_active {
+                display: flex;
+
+                .ris-i_expand-more {
+                    transform: rotate(180deg);
+                }
+            }
+
+            .ris-text {
+                margin-right: $indent-m;
+            }
+
+            .ris-description {
+                &__headline,
+                &__count {
+                    font-weight: bold;
+                }
+            }
+        }
+
+        &__agenda-child {
+            .ris-description {
+                &__count {
+                    padding-top: $indent-m;
+                }
+
+                &__headline {
+                    border-radius: $b-radius-primary;
+                    box-shadow: 0 1px 6px 0 $c-box-shadow3;
+                    padding: $indent-m;
+                    margin-bottom: $indent-s;
+                }
+            }
+        }
+
+        &__agenda-without-child {
+            border-bottom: 1px solid $c-gray7;
+            padding-bottom: $indent-m;
+            padding-top: $indent-m;
+            margin-bottom: -1px;
+
+            .ris-description {
+                &__content {
+                    color: $c-gray7;
+
+                    @include breakpoint($bp-mobile-max) {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.ris-section-meeting-member {
+    @include breakpoint($bp-mobile-max) {
+        border-bottom: 0;
+        padding-bottom: 0;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .ris-link_right {
+        margin-left: auto;
+    }
+
+    .ris-ul {
+        @include breakpoint($bp-mobile-max) {
+            padding-left: $indent-m;
+            padding-right: $indent-m;
+        }
+    }
+
+    .ris-h3__headline {
+        line-height: $lh-xxl;
+
+        @include breakpoint($bp-tablet-min) {
+            font-size: $fs-xxl;
+            margin-top: $indent-xl;
+        }
+
+        @include breakpoint($bp-mobile-max) {
+            background-color: $c-white2;
+            margin-top: $indent-ml;
+            padding-left: $indent-m;
+            padding-right: $indent-m;
+        }
+    }
+
+    .ris-search {
+        @include breakpoint($bp-mobile-max) {
+            display: none;
+        }
+    }
+
+    .ris-member {
+        border-bottom: 1px solid $c-gray7;
+
+        &:first-child {
+            @include breakpoint($bp-tablet-min) {
+                border-top: 1px solid $c-gray7;
+            }
+        }
+
+        &-link {
+            padding-right: 0;
+        }
+    }
+}

@@ -16,7 +16,7 @@
 
     &_calendar-empty {
         &::before {
-            content: "b";
+            content: 'b';
         }
     }
 
@@ -147,6 +147,8 @@
     }
 
     &_download {
+        color: $c-red;
+
         &::before {
             content: 'V';
         }
@@ -251,6 +253,18 @@
     &_phone {
         &::before {
             content: 'n';
+        }
+    }
+
+    &_squares-in-square {
+        &::before {
+            content: 'o';
+        }
+    }
+
+    &_eye-crossed {
+        &::before {
+            content: 'p';
         }
     }
 }

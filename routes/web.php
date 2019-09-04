@@ -20,6 +20,9 @@ Route::get('/styleguide', function () {
 Route::get('/kalender', 'MeetingController@calendar')
     ->name('calendar-list');
 
+Route::get('/meeting/{id}', 'MeetingController@getMeeting')
+    ->name('meeting');
+
 Route::get('/themen-overview', 'TopicController@themen')
     ->name('theme-overview');
 

@@ -155,41 +155,12 @@
         }
     }
 
-    &-members {
-        &__heading {
-            margin-bottom: $indent-sm;
-        }
-
-        &-main-list {
-            &__item {
-                &:not(:first-child) {
-                    margin-top: $indent-xl;
-
-                    @include breakpoint($bp-mobile-max) {
-                        margin-top: $indent-ml;
-                    }
-                }
-            }
-        }
-
-        &-secondary-list {
-            &__item {
-                border-top: 1px solid $c-gray7;
-
-                &:last-child {
-                    border-bottom: 1px solid $c-gray7;
-                }
-            }
-        }
-    }
-
     &-sessions {
         &__heading {
             margin-bottom: $indent-l;
         }
     }
 
-    &-members,
     &-sessions {
         &__sorting {
             margin-bottom: 36px;

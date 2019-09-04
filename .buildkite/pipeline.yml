@@ -4,4 +4,4 @@ steps:
       project: ratsinfosys
     command:
       - ./devops ci build --build-arg USER_UID=999 --build-arg USER_GID=999
-      - ./devops ci setup && ./devops ci tests
+      - ./devops ci setup && ./devops ci test

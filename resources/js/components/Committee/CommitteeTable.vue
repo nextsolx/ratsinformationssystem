@@ -1,11 +1,11 @@
 <script>
 import Vue from 'vue';
-    import checkView from 'vue-check-view';
-    import CommitteeTableItem from './CommitteeTableItem';
-    import Dropdown from '../Ux/Dropdown';
-    import Search from '../Ux/Search';
-    import LetterNavigation from '../LetterNavigation';
-    import sortingMixin from '../../mixins/sortingMixin';
+import checkView from 'vue-check-view';
+import CommitteeTableItem from './CommitteeTableItem';
+import Dropdown from '../Ux/Dropdown';
+import Search from '../Ux/Search';
+import LetterNavigation from '../LetterNavigation';
+import sortingMixin from '../../mixins/sortingMixin';
 
 Vue.use(checkView);
 
@@ -100,6 +100,6 @@ export default {
         <LetterNavigation
             v-if="!filtered"
             :navigation-list="letterNavigation"
-        />
+                />
     </div>
 </template>

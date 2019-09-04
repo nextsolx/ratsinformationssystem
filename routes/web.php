@@ -44,7 +44,7 @@ Route::get('/gremien-liste', 'GremienController@list')->name('committee-list');
 
 Route::get('/gremien/{organization}', 'GremienController@view')->name('committee');
 
-Route::get('/personen/{person}', 'PersonenController@personDetail')->name('person-detail');
+Route::get('/personen/{person}', 'PersonenController@personDetail')->name('person');
 
 Route::get('/personen-liste', 'PersonenController@view')->name('people-list');
 

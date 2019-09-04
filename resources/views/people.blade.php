@@ -4,17 +4,25 @@
 
     @include('layouts.breadcrumbs')
 
-    <people inline-template>    <main class="ris-main ris-people ris-content_six-eight-eight">
+    <people inline-template>
+        <main class="ris-main ris-people ris-content_six-eight-eight">
             <section class="ris-section-wrapper ris-people__headline">
-                <img src="/img/thumbnail-big-people.svg" alt="Hamide Akbayir"
-                    class="ris-people__img"
+                <img src="{{ $person->photo ? $person->photo : '/img/thumbnail-big-people.svg' }}"
+                    alt="{{ $person->name }}" class="ris-people__img"
                 />
                 <div>
                     <h1 class="ris-headline">
-                        Hamide Akbayir
+                        {{ $person->name }}
                     </h1>
-                    <div class="ris-body-2">DIE LINKE</div>
-                    <div class="ris-caption">Gremienmitglied seit 2014</div>
+                    @if ($person->party)
+                        <div class="ris-body-2">{{ $person->party }}</div>
+                    @endif
+                    @if (isset($person->committeeList->currentParty[0]))
+                        <div class="ris-caption">
+                            Gremienmitglied seit
+                            {{ \Illuminate\Support\Carbon::parse($person->committeeList->currentParty[0]->start_date)->year }}
+                        </div>
+                    @endif
                 </div>
             </section>
 
@@ -36,98 +44,115 @@
                 ref="contact"
             >
                 <h2 class="ris-h2">Kontakt</h2>
-                <div class="ris-people__contact-detail">
-                    <div class="ris-body-2">
-                        <div class="ris-body-2__text">E-Mail</div>
-                        <span class="ris-i ris-i_email"></span>
+
+                @if (isset($person->email))
+                    <div class="ris-people__contact-detail">
+                        <div class="ris-body-2">
+                            <div class="ris-body-2__text">E-Mail</div>
+                            <span class="ris-i ris-i_email"></span>
+                        </div>
+                        <a class="ris-link ris-link_phone" href="mailto:{{ $person->email }}">{{ $person->email }}</a>
                     </div>
-                    <a class="ris-link ris-link_phone" href="mailto:dielinke.koeln@stadt-koeln">dielinke.koeln@stadt-koeln</a>
-                </div>
-                <div class="ris-people__contact-detail">
-                    <div class="ris-body-2">
-                        <div class="ris-body-2__text">Telefon</div>
-                        <span class="ris-i ris-i_phone"></span>
+                @endif
+                @if (isset($person->phone))
+                    <div class="ris-people__contact-detail">
+                        <div class="ris-body-2">
+                            <div class="ris-body-2__text">Telefon</div>
+                            <span class="ris-i ris-i_phone"></span>
+                        </div>
+                        <a class="ris-link" href="tel:{{ $person->phone }}">{{ $person->phone }}</a>
                     </div>
-                    <a class="ris-link" href="tel:0221-221 27840">0221-221 27840</a>
-                </div>
-                <div class="ris-people__contact-detail">
-                    <div class="ris-body-2">
-                        <div class="ris-body-2__text">Fax</div>
-                        <span class="ris-i ris-i_fax"></span>
+                @endif
+                @if (isset($person->fax))
+                    <div class="ris-people__contact-detail">
+                        <div class="ris-body-2">
+                            <div class="ris-body-2__text">Fax</div>
+                            <span class="ris-i ris-i_fax"></span>
+                        </div>
+                        <a class="ris-link" href="tel:{{ $person->fax }}">{{ $person->fax }}</a>
                     </div>
-                    <a class="ris-link" href="tel:0221-221 27841">0221-221 27841</a>
-                </div>
-                <div class="ris-people__contact-detail">
-                    <div class="ris-body-2">
-                        <div class="ris-body-2__text">Adresse</div>
-                        <span class="ris-i ris-i_marker-with-dot"></span>
+                @endif
+                @if (isset($person->location))
+                    <div class="ris-people__contact-detail">
+                        <div class="ris-body-2">
+                            <div class="ris-body-2__text">Adresse</div>
+                            <span class="ris-i ris-i_marker-with-dot"></span>
+                        </div>
+                        <a class="ris-link ris-text" href="/karte">{{ $person->location }}</a>
                     </div>
-                    <div class="ris-text">Bezirksrathaus Rodenkirchen, Hauptstr. 85, 50996 Köln</div>
-                </div>
+                @endif
             </section>
 
-            <section class="ris-section-wrapper ris-people__committee ris-tab-data"
-                ref="committee"
-            >
-                <h2 class="ris-h2">Gremien</h2>
-                <div class="ris-people__committee-count ris-body-2">Aktuell (2 Gremium)</div>
-                <div class="ris-people__committee-detail">
-                    <div class="ris-body-2">
-                        <div class="ris-body-2__headline">Ausschuss für Anregungen und Beschwerden</div>
-                        <div class="ris-body-2__text">2. Stellvertretende Ausschussvorsitzende</div>
-                    </div>
-                    <div class="ris-caption">07/2014 - Heute</div>
-                </div>
-                <div class="ris-people__committee-detail">
-                    <div class="ris-body-2">
-                        <div class="ris-body-2__headline">Rat</div>
-                        <div class="ris-body-2__text">Ratsmitglied</div>
-                    </div>
-                    <div class="ris-caption">07/2014 - Heute</div>
-                </div>
+            @if (isset($person->committeeList))
+                <section class="ris-section-wrapper ris-people__committee ris-tab-data"
+                    ref="committee"
+                >
+                    <h2 class="ris-h2">Gremien</h2>
 
-                <div class="ris-people__committee-count ris-body-2">Ehemalig (1 Gremium)</div>
-                <div class="ris-people__committee-detail">
-                    <div class="ris-body-2">
-                        <div class="ris-body-2__headline">Ausschuss für Umwelt und Grün</div>
-                        <div class="ris-body-2__text">Ratsmitglied</div>
-                    </div>
-                    <div class="ris-caption">07/2014 - Heute</div>
-                </div>
-            </section>
+                    @if (isset($person->committeeList->currentParty))
+                        <div class="ris-people__committee-count ris-body-2">
+                            Aktuell ({{ count($person->committeeList->currentParty) }} Gremium)
+                        </div>
+
+                        @foreach ($person->committeeList->currentParty as $committee)
+                            <div class="ris-people__committee-detail">
+                                <div class="ris-body-2">
+                                    <div class="ris-body-2__headline">{{ $committee->name }}</div>
+                                    <div class="ris-body-2__text">{{ $committee->role }}</div>
+                                </div>
+                                <div class="ris-caption">
+                                    {{ \Illuminate\Support\Carbon::parse($committee->start_date)->format('m/Y') }} -
+                                    @if (isset($committee->end_date) and $committee->end_date)
+                                        {{ \Illuminate\Support\Carbon::parse($committee->end_date)->format('m/Y') }}
+                                    @else
+                                        Heute
+                                    @endif
+                                </div>
+                            </div>
+                        @endforeach
+                    @endif
+
+                    @if (isset($person->committeeList->previousParty))
+                        <div class="ris-people__committee-count ris-body-2">
+                            Ehemalig ({{ count($person->committeeList->previousParty) }} Gremium)
+                        </div>
+
+                        @foreach ($person->committeeList->previousParty as $committee)
+                            <div class="ris-people__committee-detail">
+                                <div class="ris-body-2">
+                                    <div class="ris-body-2__headline">{{ $committee->name }}</div>
+                                    <div class="ris-body-2__text">{{ $committee->role }}</div>
+                                </div>
+                                <div class="ris-caption">
+                                    {{ \Illuminate\Support\Carbon::parse($committee->start_date)->format('m/Y') }}
+                                    -
+                                    {{ \Illuminate\Support\Carbon::parse($committee->end_date)->format('m/Y') }}
+                                </div>
+                            </div>
+                        @endforeach
+                    @endif
+
+                </section>
+            @endif
 
             <section class="ris-section-wrapper ris-people__document-list ris-tab-data"
                 ref="document-list"
             >
                 <h2 class="ris-h2">Dokumente</h2>
-                <a class="ris-document ris-link" title="Erklärung nach dem Korruptionsbekämpfungsgesetz"
-                    href="/downloadUrl"
-                >
-                    <img class="ris-img" src="/img/pdf.svg" alt="Erklärung nach dem Korruptionsbekämpfungsgesetz"/>
-                    <span class="ris-text">Erklärung nach dem Korruptionsbekämpfungsgesetz</span>
-                    <span class="ris-i ris-i_download-with-box"></span>
-                </a>
-                <a class="ris-document ris-link" title="Erklärung nach dem Korruptionsbekämpfungsgesetz"
-                    href="/downloadUrl"
-                >
-                    <img class="ris-img" src="/img/pdf.svg" alt="Erklärung nach"/>
-                    <span class="ris-text">Erklärung nach</span>
-                    <span class="ris-i ris-i_download-with-box"></span>
-                </a>
 
-                {{--@if (isset($meeting['files']) and count($meeting['files']) > 0)
-                    @foreach($meeting['files'] as $file)
-                        <a class="ris-document ris-link" title="{{ $file['name'] }}"
-                            href="/{{ $file['downloadUrl'] }}"
+                @if (isset($person->files))
+                    @foreach($person->files as $file)
+                        <a class="ris-document ris-link" title="{{ $file->name }}"
+                            href="{{ $file->downloadUrl }}"
                         >
-                            <img src="/img/pdf.svg" alt="{{ $file['name'] }}"/>
-                            <span class="ris-text">{{ $file['name'] }}</span>
+                            <img class="ris-img" src="/img/pdf.svg" alt="{{ $file->name }}"/>
+                            <span class="ris-text">{{ $file->name }}</span>
                             <span class="ris-i ris-i_download-with-box"></span>
                         </a>
                     @endforeach
                 @else
                     <div class="ris-text">Keine Dokumente</div>
-                @endif--}}
+                @endif
             </section>
         </main>
     </people>

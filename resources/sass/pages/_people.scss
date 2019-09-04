@@ -10,7 +10,7 @@
 
         .ris-headline {
             margin-bottom: $indent-s;
-            margin-top: $indent-s;
+            margin-top: 0;
         }
 
         .ris-body-2 {
@@ -19,12 +19,16 @@
     }
 
     .ris-people__img {
+        align-self: flex-start;
+        margin-top: 4px;
+
         @include breakpoint($bp-mobile-max) {
             margin-right: $indent-m;
             width: 64px;
         }
 
         @include breakpoint($bp-tablet-min) {
+            width: 88px;
             margin-right: $indent-ml;
         }
     }
@@ -79,6 +83,10 @@
 
         .ris-link {
             color: $c-primary;
+
+            &:hover {
+                color: $c-red;
+            }
 
             &_phone {
                 text-decoration: underline;

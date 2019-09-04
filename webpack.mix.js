@@ -20,23 +20,23 @@ mix.copy('resources/img', 'public/img')
     .js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css');
 
-if (mix.inProduction()) {
-    mix.webpackConfig({
-        module: {
-            rules: [
-                {
-                    test: /\.js?$/,
-                    use: [
-                        {
-                            loader: 'babel-loader',
-                            options: mix.config.babel(),
-                        },
-                    ],
-                },
-            ],
-        },
-    });
+mix.webpackConfig({
+    module: {
+        rules: [
+            {
+                test: /\.js?$/,
+                use: [
+                    {
+                        loader: 'babel-loader',
+                        options: mix.config.babel(),
+                    },
+                ],
+            },
+        ],
+    },
+});
 
+if (mix.inProduction()) {
     mix.disableNotifications();
     mix.version();
 } else {

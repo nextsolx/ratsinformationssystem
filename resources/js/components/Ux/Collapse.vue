@@ -15,40 +15,9 @@ export default {
             activeElement: null
         };
     },
-    async created() {
-        let { district, subdistrict, index } = decodeHashParams(this.search.substr(1));
-        if (index) {
-            this.activeElement = index;
-            return;
-        } else if (subdistrict) {
-            this.activeElement = subdistrict;
-            this.optionType = 'index';
-            this.optionList = await theme.getIndexes(district, subdistrict);
-            return;
-        } else if (district) {
-            this.activeElement = district;
-            this.optionType = 'subdistrict';
-            this.optionList = await theme.getSubdistricts(district);
-            return;
-        } else {
-            this.optionType = 'district';
-            this.optionList =  await theme.getDistricts();
-        }
-    },
-    computed: {
-        pathname () {
-            return window.location.pathname;
-        },
-        search () {
-            return window.location.search;
-        }
-    },
     methods: {
         hide () {
             this.activeFilter = false;
-        },
-        async getSubs () {
-            return await theme.getSubdistricts();
         },
         linkUrlFilter (value) {
             if (this.search) {
@@ -66,7 +35,36 @@ export default {
                 return `${this.pathname}${filterList.join('&')}`;
             }
         }
-    }
+    },
+    computed: {
+        pathname () {
+            return window.location.pathname;
+        },
+        search () {
+            return window.location.search;
+        }
+    },
+    async created() {
+        let { district, subdistrict, index } = decodeHashParams(this.search.substr(1));
+        if (index) {
+            this.activeElement = index;
+            return;
+        }
+        if (subdistrict) {
+            this.activeElement = subdistrict;
+            this.optionType = 'index';
+            this.optionList = await theme.getIndexes(district, subdistrict);
+            return;
+        }
+        if (district) {
+            this.activeElement = district;
+            this.optionType = 'subdistrict';
+            this.optionList = await theme.getSubdistricts(district);
+            return;
+        }
+        this.optionType = 'district';
+        this.optionList =  await theme.getDistricts();
+    },
 };
 </script>
 

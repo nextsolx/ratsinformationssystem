@@ -14,9 +14,6 @@ steps:
       project: ratsinfosys
     command:
       - git clean -x -d -f .
-      - docker build \
-        -t conv/ratsinformationssystem:$BUILDKITE_COMMIT \
-        -t conv/ratsinformationssystem:staging \
-        -f .docker/app/Dockerfile .
+      - docker build -t conv/ratsinformationssystem:$BUILDKITE_COMMIT -t conv/ratsinformationssystem:staging -f .docker/app/Dockerfile .
       - docker push conv/ratsinformationssystem:$BUILDKITE_COMMIT
       - docker push conv/ratsinformationssystem:staging

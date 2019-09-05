@@ -1,11 +1,19 @@
 <script>
 import L from 'leaflet';
 import { LMap, LTileLayer, LMarker, LPopup, LPolygon } from 'vue2-leaflet';
+import MapDesktopAside from './MapDesktopAside';
 require('leaflet-fullscreen');
 
 export default {
     name: 'MapDesktopApp',
-    components: { LMap, LTileLayer, LMarker, LPopup, LPolygon },
+    components: {
+        LMap,
+        LTileLayer,
+        LMarker,
+        LPopup,
+        LPolygon,
+        MapDesktopAside
+    },
     data() {
         return {
             zoom: 11,
@@ -27,7 +35,7 @@ export default {
                     [51.0135, 6.9489],
                     [51.0135, 6.9299],
                 ],
-                color: "#ff00ff"
+                color: '#ff00ff'
             },
             polygonChild: {
                 latlngs: [
@@ -36,7 +44,7 @@ export default {
                     [51.0060, 6.9389],
                     [51.0135, 6.9299],
                 ],
-                color: "#ff00ff"
+                color: '#ff00ff'
             },
             display: 'district'
         };
@@ -50,19 +58,22 @@ export default {
 </script>
 
 <template>
-    <div id="map-desktop-osm" class="ris-map ris-map__desktop">
-        <l-map ref="mapDesktopOsm"
-            :zoom="zoom" :center="center">
-            <l-tile-layer
-                :url="url"
-                :attribution="attribution"
-                    />
-            <l-polygon @click="display = 'subdistrict'" v-if="display === 'district'" :lat-lngs="polygon.latlngs" :color="polygon.color">
-                <l-popup>some text</l-popup>
-            </l-polygon>
-            <l-polygon @click="display = 'district'" v-if="display === 'subdistrict'" :lat-lngs="polygonChild.latlngs" :color="polygon.color">
-                <l-popup>another text</l-popup>
-            </l-polygon>
-        </l-map>
+    <div>
+        <MapDesktopAside class="ris-map-desktop-aside"/>
+        <div id="map-desktop-osm" class="ris-map ris-map__desktop">
+            <l-map ref="mapDesktopOsm"
+                :zoom="zoom" :center="center">
+                <l-tile-layer
+                    :url="url"
+                    :attribution="attribution"
+                        />
+                <l-polygon @click="display = 'subdistrict'" v-if="display === 'district'" :lat-lngs="polygon.latlngs" :color="polygon.color">
+                    <l-popup>some text</l-popup>
+                </l-polygon>
+                <l-polygon @click="display = 'district'" v-if="display === 'subdistrict'" :lat-lngs="polygonChild.latlngs" :color="polygon.color">
+                    <l-popup>another text</l-popup>
+                </l-polygon>
+            </l-map>
+        </div>
     </div>
 </template>

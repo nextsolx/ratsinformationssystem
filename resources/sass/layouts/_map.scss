@@ -1,12 +1,17 @@
 .ris-map {
     z-index: 1;
+    display: flex;
 
     @include breakpoint($bp-mobile-max) {
         height: 30vh;
         margin: auto;
         width: 95%;
+    }
 
-        &__desktop {
+    &-desktop {
+        display: flex;
+
+        @include breakpoint($bp-mobile-max) {
             display: none;
         }
     }
@@ -15,8 +20,9 @@
         height: 1024px;
         width: $width-aside-320;
 
-        &__mobile {
+        &-mobile {
             display: none;
         }
     }
+
 }

@@ -1,11 +1,11 @@
 <script>
 import L from 'leaflet';
-import { LMap, LTileLayer, LMarker, LPopup } from 'vue2-leaflet';
+import { LMap, LTileLayer, LMarker, LPopup, LPolygon } from 'vue2-leaflet';
 require('leaflet-fullscreen');
 
 export default {
     name: 'MapDesktopApp',
-    components: { LMap, LTileLayer, LMarker, LPopup },
+    components: { LMap, LTileLayer, LMarker, LPopup, LPolygon },
     data() {
         return {
             zoom: 11,
@@ -19,7 +19,26 @@ export default {
                 iconAnchor: [24, 55],
                 popupAnchor: [0, -30]
             }),
-            markerPopupText: 'Hello World'
+            markerPopupText: 'Hello World',
+            polygon: {
+                latlngs: [
+                    [51.0025, 6.9299],
+                    [51.0025, 6.9489],
+                    [51.0135, 6.9489],
+                    [51.0135, 6.9299],
+                ],
+                color: "#ff00ff"
+            },
+            polygonChild: {
+                latlngs: [
+                    [51.0025, 6.9299],
+                    [51.0025, 6.9489],
+                    [51.0060, 6.9389],
+                    [51.0135, 6.9299],
+                ],
+                color: "#ff00ff"
+            },
+            display: 'district'
         };
     },
     mounted() {
@@ -38,12 +57,12 @@ export default {
                 :url="url"
                 :attribution="attribution"
                     />
-            <l-marker
-                :lat-lng="marker"
-                :icon="icon"
-                    >
-                <l-popup> {{ markerPopupText }} </l-popup>
-            </l-marker>
+            <l-polygon @click="display = 'subdistrict'" v-if="display === 'district'" :lat-lngs="polygon.latlngs" :color="polygon.color">
+                <l-popup>some text</l-popup>
+            </l-polygon>
+            <l-polygon @click="display = 'district'" v-if="display === 'subdistrict'" :lat-lngs="polygonChild.latlngs" :color="polygon.color">
+                <l-popup>another text</l-popup>
+            </l-polygon>
         </l-map>
     </div>
 </template>

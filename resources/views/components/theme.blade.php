@@ -6,21 +6,18 @@
     @endif
 
     <a class="ris-card-list__item" title="{{ $theme->name }}"
-            href="/thema/{{ $theme->id }}"
+        href="{{ route('theme', $theme->id) }}"
     >
         <div class="ris-card-list__themes-top">
             <img src="/img/thumbnail-map-tile.png" class="ris-card-list__themes-img"
                     alt="{{ $theme->name }}"/>
-            <div class="ris-body-1">
+            <h2 class="ris-h2">
                 {{ $theme->name }}
-            </div>
+            </h2>
         </div>
         <div class="ris-card-list__themes-bottom">
             <div class="ris-caption ris-card-list__themes-number">
-                Thema &nbsp;
-                <span>2477</span>
-                /
-                <span>{{ Carbon\Carbon::parse('27.10.2018')->year }}</span>
+                Thema {{ $theme->reference }}
             </div>
 
             @if ($theme_type === 'new')

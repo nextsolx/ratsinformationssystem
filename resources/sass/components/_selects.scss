@@ -87,9 +87,10 @@
     }
     @include breakpoint($bp-mobile-max) {
         &.fullWidthMob {
-            width: 100%;
             margin-left: 0;
+            width: 100%;
         }
+
         &.hiddenMob {
             display: none;
         }

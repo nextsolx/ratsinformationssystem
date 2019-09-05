@@ -4,8 +4,8 @@
     border: 1px solid $c-gray7;
     border-radius: $b-radius-primary;
     display: inline-block;
-    position: relative;
     outline: none;
+    position: relative;
 
     @include breakpoint($bp-mobile-max) {
         margin-right: $indent-s;
@@ -28,13 +28,13 @@
     }
 
     &__subheader {
-        color: $c-gray2;
-        width: 100%;
-        text-align: left;
         background-color: transparent;
-        padding: $indent-sm;
         border: 0;
+        color: $c-gray2;
         outline: none;
+        padding: $indent-sm;
+        text-align: left;
+        width: 100%;
 
         &:hover {
             cursor: pointer;
@@ -120,12 +120,12 @@
 
         &__title {
             color: $c-primary;
+            display: block;
             font-family: $ff-helvetica;
             font-size: $fs-l;
             font-weight: bold;
             line-height: $lh-l;
             margin-bottom: $indent-s;
-            display: block;
         }
 
         &__item {
@@ -133,6 +133,7 @@
             font-weight: 500;
             min-width: auto;
             padding: $indent-s $indent-sm;
+
             &:not(:last-child) {
                 margin-bottom: $indent-s;
                 margin-right: $indent-s;

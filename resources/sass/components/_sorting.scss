@@ -6,10 +6,11 @@
 
         .ris-search__input {
             background-color: $c-white;
-            height: 50px;
             box-shadow: none;
+            height: 50px;
         }
     }
+
     &__select {
         @include breakpoint($bp-mobile-max) {
             margin-left: $indent-m;
@@ -20,11 +21,13 @@
     &__search {
         @include breakpoint($bp-mobile-max) {
             width: 50%;
+
             &.fullWidthMob {
+                margin: 0;
                 width: 100%;
-                margin: 0
             }
         }
+
         &.hiddenMob {
             @include breakpoint($bp-mobile-max) {
                 display: none;

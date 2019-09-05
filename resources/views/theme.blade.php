@@ -89,13 +89,14 @@
                             <div class="ris-process__wrapper">
                                 <div class="ris-caption">Beschlussvorlage {{ $topic->reference }}</div>
 
-                                {{--@todo --- fix link--}}
-                                <a href="/meeting/" class="ris-link ris-link_button ris-link_right"
-                                    title="Beschlussvorlage öffnen"
-                                >
-                                    Beschlussvorlage öffnen
-                                    <span class="ris-i ris-i_resize-text"></span>
-                                </a>
+                                @if (isset($topic->files))
+                                    <a href="/meeting/{{ $topic->files[0]->accessUrl }}" class="ris-link ris-link_button ris-link_right"
+                                        title="Beschlussvorlage öffnen"
+                                    >
+                                        Beschlussvorlage öffnen
+                                        <span class="ris-i ris-i_resize-text"></span>
+                                    </a>
+                                @endif
                             </div>
                         </div>
 
@@ -117,15 +118,9 @@
 
                                         <div class="ris-process__wrapper">
                                             <div>
-                                                {{--@todo --- mock data--}}
-                                                <div class="ris-caption">
-                                                    Sitzung BV1/00{{ \Carbon\Carbon::parse($process->meeting->dateFrom)->week }}/{{ \Carbon\Carbon::parse($process->meeting->dateFrom)->year }}
-                                                </div>
                                                 <div class="ris-caption">Tagesordnungspunkt (TOP) {{ $process->agendum->number }}</div>
                                             </div>
-
-                                            {{--@todo --- fix link to meeting detail page--}}
-                                            <a href="/agendum/{{ $process->meeting->id }}" class="ris-link ris-link_button ris-link_right"
+                                            <a href="/meeting/{{ $process->meeting->id }}" class="ris-link ris-link_button ris-link_right"
                                                 title="Zur Sitzung"
                                             >
                                                 Zur Sitzung

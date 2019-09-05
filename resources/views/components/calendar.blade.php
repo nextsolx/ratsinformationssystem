@@ -5,20 +5,21 @@
         @endif
     @endif
 
-    <a class="ris-card-list__item" title="{{ $calendar->title }}"
-        href="/calendar"
+    <a class="ris-card-list__item ris-card-list__item-calendar" title="{{ $calendar->title }}"
+        href="{{ route('meeting', $calendar->id) }}"
     >
-        <div class="ris-body-1">
+        <h2 class="ris-h2">
             {{ $calendar->title }}
-        </div>
-        <div class="ris-caption">BA/0028/2018</div>
+        </h2>
         <div class="ris-body-2 ris-card-list__calendar-date">
             <span class="ris-i ris-i_calendar-empty"></span>
             {{ \Illuminate\Support\Carbon::parse($calendar->dateFrom)->format('l jS, h:i a') }}
         </div>
-        <div class="ris-body-2 ris-card-list__calendar-place">
-            <span class="ris-i ris-i_marker-with-dot"></span>
-            Rathaus Spanischer Bau, Theodor-Heuss-Saal, Raum-Nr. A 119
-        </div>
+        @if ($calendar->location)
+            <div class="ris-body-2 ris-card-list__calendar-place">
+                <span class="ris-i ris-i_marker-with-dot"></span>
+                Rathaus Spanischer Bau, Theodor-Heuss-Saal, Raum-Nr. A 119
+            </div>
+        @endif
     </a>
 @endforeach

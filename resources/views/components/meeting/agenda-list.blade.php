@@ -34,9 +34,6 @@
                             @else
                                 {{ strip_tags($agenda->name) }}
                             @endif
-
-                            {{--@todo - fix mock data--}}
-                            <div class="ris-caption">In Bearbeitung</div>
                         </div>
                     </div>
                 @else

@@ -17,6 +17,7 @@
     &__subtitle {
         margin-bottom: 10px;
     }
+
     &__input {
         width: 100%;
     }
@@ -97,27 +98,29 @@
         text-decoration: none;
 
         &:hover {
-            .ris-table-list{
+            .ris-table-list {
                 &__subtitle {
                     color: $c-red;
                 }
+
                 &__button {
                     color: $c-red;
-                    transition: all ease-in-out .1s;
                     transform: translate(2px, -50%);
+                    transition: all ease-in-out .1s;
                 }
             }
         }
     }
+
     &__button {
-        transition: all ease-in-out .1s;
+        background: none;
+        border: 0;
+        color: $c-gray8;
+        font-size: $fs-s;
         position: absolute;
         right: 0;
         top: 50%;
         transform: translateY(-50%);
-        border: 0;
-        background: none;
-        font-size: $fs-s;
-        color: $c-gray8;
+        transition: all ease-in-out .1s;
     }
 }

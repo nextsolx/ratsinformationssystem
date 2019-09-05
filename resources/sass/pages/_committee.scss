@@ -24,14 +24,13 @@
         }
 
         &__button {
-            width: 100%;
-            height: 100%;
             background: transparent;
-            border-color: transparent;
             border-bottom: 1px solid $c-gray7;
+            border-color: transparent;
+            height: 100%;
             outline: none;
-
             text-transform: capitalize;
+            width: 100%;
 
             .ris-i {
                 text-transform: none;
@@ -58,12 +57,12 @@
 
         &__text {
             display: inline-block;
-            margin:0 0 40px 0;
+            margin: 0 0 40px;
         }
 
         &__wrapper {
-            display: flex;
             align-items: center;
+            display: flex;
 
             @include breakpoint($bp-mobile-max) {
                 flex-wrap: wrap;
@@ -71,10 +70,10 @@
         }
 
         &__confirm {
-            border-top: 1px solid $c-gray7;
             border-bottom: 1px solid $c-gray7;
-            padding: $indent-sm 0 $indent-xl;
+            border-top: 1px solid $c-gray7;
             margin-bottom: $indent-sm;
+            padding: $indent-sm 0 $indent-xl;
 
             @include breakpoint($bp-mobile-max) {
                 margin-bottom: $indent-ml;
@@ -93,17 +92,17 @@
         }
 
         &__subheading {
-            position: relative;
             padding: 0 0 0 60px;
+            position: relative;
 
             .ris-i {
-                position: absolute;
+                color: $c-gray2;
+                font-size: 50px;
                 left: 0;
+                padding-right: 5px;
+                position: absolute;
                 top: 50%;
                 transform: translateY(-50%);
-                color: $c-gray2;
-                padding-right: 5px;
-                font-size: 50px;
 
                 @include breakpoint($bp-mobile-max) {
                     top: 0;
@@ -114,15 +113,15 @@
 
         &-list {
             &__item {
-                position: relative;
+                color: $c-gray;
                 font-size: $fs-l;
                 font-weight: bold;
-                color: $c-gray;
                 padding: 16px 20px 16px 0;
+                position: relative;
 
                 @include breakpoint($bp-mobile-max) {
-                    border-top: 1px solid $c-gray7;
                     border-bottom: 1px solid $c-gray7;
+                    border-top: 1px solid $c-gray7;
                 }
             }
 
@@ -133,8 +132,8 @@
                 transform: translateY(-50%);
 
                 &.ris-i {
-                    font-size: $fs-xl;
                     color: $c-gray;
+                    font-size: $fs-xl;
                 }
             }
         }
@@ -143,10 +142,10 @@
             background-color: $c-white2;
             color: $c-blue5;
             font-size: $fs-l;
-            max-width: 212px;
-            width: 100%;
             height: 48px;
+            max-width: 212px;
             padding: 0;
+            width: 100%;
 
             @include breakpoint($bp-mobile-max) {
                 margin-top: $indent-m;
@@ -156,25 +155,21 @@
     }
 
     &-sessions {
-        &__heading {
-            margin-bottom: $indent-l;
-        }
-    }
-
-    &-sessions {
         &__sorting {
             margin-bottom: 36px;
 
             @include breakpoint($bp-mobile-max) {
+                border-bottom: 1px solid $c-gray7;
                 margin-bottom: $indent-m;
                 padding: 0 16px 16px;
                 width: 100%;
-                border-bottom: 1px solid $c-gray7;
             }
         }
 
         &__heading {
+            margin-bottom: $indent-l;
             margin-top: 36px;
+
             @include breakpoint($bp-mobile-max) {
                 margin-bottom: $indent-m;
             }
@@ -185,4 +180,3 @@
 .ris-filter-wrapper {
     display: flex;
 }
-

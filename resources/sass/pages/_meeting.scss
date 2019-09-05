@@ -340,9 +340,9 @@
         &__agenda-head {
             border-bottom: 1px solid $c-gray7;
             cursor: pointer;
+            margin-bottom: -1px;
             padding-bottom: $indent-m;
             padding-top: $indent-m;
-            margin-bottom: -1px;
 
             &:hover {
                 .ris-i,
@@ -380,17 +380,17 @@
                 &__headline {
                     border-radius: $b-radius-primary;
                     box-shadow: 0 1px 6px 0 $c-box-shadow3;
-                    padding: $indent-m;
                     margin-bottom: $indent-s;
+                    padding: $indent-m;
                 }
             }
         }
 
         &__agenda-without-child {
             border-bottom: 1px solid $c-gray7;
+            margin-bottom: -1px;
             padding-bottom: $indent-m;
             padding-top: $indent-m;
-            margin-bottom: -1px;
 
             .ris-description {
                 &__content {

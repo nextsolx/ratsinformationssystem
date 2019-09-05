@@ -109,8 +109,11 @@ export default {
         momentWeek(date) {
             return moment(date).week();
         },
-        momentYear(date) {
-            return moment(date).year();
+        momentHour(date) {
+            return moment(date).format('HH:mm');
+        },
+        momentDayWithYear(date) {
+            return moment(date).format('dddd, DD. MMMM YYYY');
         },
     },
     mounted() {
@@ -131,16 +134,18 @@ export default {
                     >
                 <section class="ris-calendar__card-day">
                     <div class="ris-calendar__card-day-left">
-                        {{ meetingListPerDay[0].dateFrom | momentDate() }}
+                        {{ meetingListPerDay[0].dateFrom | momentDate }}
                         <br>
                         <span class="ris-calendar__card-day-of-week">
-                            {{ meetingListPerDay[0].dateFrom | momentDayFormat() }}
+                            {{ meetingListPerDay[0].dateFrom | momentDayFormat }}
                         </span>
                     </div>
 
                     <div class="ris-calendar__card-day-right">
-                        <div class="ris-calendar__card"
-                            v-for="{ id, title, dateFrom, agendaCount, peopleCount, fileCount } in meetingListPerDay"
+                        <a class="ris-link ris-calendar__card"
+                            v-for="{ id, title, dateFrom, dateTill, agendaCount, peopleCount, fileCount } in meetingListPerDay"
+                            :title="title"
+                            :href="'/meeting/' + id"
                             :key="id"
                             :data-date-from="dateFrom"
                                 >
@@ -148,17 +153,24 @@ export default {
                                 {{ title }}
                             </h2>
                             <div class="ris-subheader">
-                                Lorem data UAK/
-                                <span>00{{ dateFrom | momentWeek() }}</span>
-                                /
-                                <span>{{ dateFrom | momentYear() }}</span>
+                                {{ dateFrom | momentDayWithYear }}
+                                {{ dateFrom | momentHour }}-{{ dateTill | momentHour }} Uhr
                             </div>
                             <div class="ris-session-count">
-                                <div class="ris-session-count__agenda">{{ agendaCount }}</div>
-                                <div class="ris-session-count__people">{{ peopleCount }}</div>
-                                <div class="ris-session-count__file">{{ fileCount }}</div>
+                                <div class="ris-session-count__agenda">
+                                    {{ agendaCount }}
+                                    <span class="ris-i ris-i_list"/>
+                                </div>
+                                <div class="ris-session-count__people">
+                                    {{ peopleCount }}
+                                    <span class="ris-i ris-i_people"/>
+                                </div>
+                                <div class="ris-session-count__file">
+                                    {{ fileCount }}
+                                    <span class="ris-i ris-i_download"/>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 </section>
             </div>

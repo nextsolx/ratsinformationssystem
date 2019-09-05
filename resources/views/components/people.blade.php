@@ -1,22 +1,22 @@
-@foreach ($people_list as $people)
+@foreach ($people_list as $person)
     @if (isset($limit))
         @if ($loop->iteration > $limit)
             @break
         @endif
     @endif
 
-    <a class="ris-welcome__people" href="{{ route('people-list') }}/1"
-        title="{{ $people->name }}"
+    <a class="ris-welcome__people" title="{{ $person->name }}"
+        href="{{ route('person', $person->id) }}"
     >
-        <img src="/img/person-1.jpg" class="ris-welcome__people-img"
-            alt="{{ $people->name }}"
+        <img src="{{ $person->photo ? $person->photo : '/img/thumbnail-big-people.svg' }}"
+            alt="{{ $person->name }}" class="ris-people__img ris-welcome__people-img"
         />
         <div>
             <div class="ris-body-1">
-                {{ $people->name }}
+                {{ $person->name }}
             </div>
-            @if ($people->status)
-                <div class="ris-caption">{{ $people->status }}</div>
+            @if ($person->status)
+                <div class="ris-caption">{{ $person->status }}</div>
             @endif
         </div>
     </a>

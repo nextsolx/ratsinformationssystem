@@ -52,16 +52,15 @@
                                         </div>
                                         <div class="ris-top-card-list__item-bottom">
                                             <div class="ris-caption ris-top-card-list__item-number">
-                                                Thema &nbsp;
-                                                <span>2477</span>
-                                                /
-                                                <span>{{ Carbon\Carbon::parse('27.10.2018')->year }}</span>
+                                                Thema {{ $topic->reference }}
                                             </div>
                                             <div class="ris-top-card-list__item-progress-box">
                                                 <div class="ris-progress-bar">
                                                     <div class="ris-progress-bar__progress" style="width: 25%"></div>
                                                 </div>
-                                                <div class="ris-caption ris-top-card-list__item-date">27.10.2018</div>
+                                                <div class="ris-caption ris-top-card-list__item-date">
+                                                    {{ \Illuminate\Support\Carbon::parse($topic->date)->format('d.m.Y') }}
+                                                </div>
                                             </div>
                                         </div>
                                     </a>

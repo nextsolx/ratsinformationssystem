@@ -3,10 +3,10 @@
         margin-bottom: 36px;
 
         @include breakpoint($bp-mobile-max) {
+            border-bottom: 1px solid $c-gray7;
             margin-bottom: $indent-m;
             padding: 0 16px 16px;
             width: 100%;
-            border-bottom: 1px solid $c-gray7;
         }
     }
 

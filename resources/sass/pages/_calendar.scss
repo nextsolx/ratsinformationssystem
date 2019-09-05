@@ -45,10 +45,11 @@
             }
         }
     }
+
     &__placeholder {
         color: $c-gray8;
         font-size: $fs-l;
-        margin: 5px 0 0 0;
+        margin: 5px 0 0;
     }
 
     &__card-day {
@@ -63,11 +64,12 @@
 
         &.warning {
             .ris-calendar__card-day-left {
-                font-weight: bold;
                 color: $c-red;
+                font-weight: bold;
             }
+
             .ris-calendar__card-day-right {
-                border-bottom: 2px solid red;
+                border-bottom: 2px solid $c-red;
                 padding-bottom: 16px;
             }
         }
@@ -97,6 +99,14 @@
         box-sizing: border-box;
         display: block;
         padding: $indent-m;
+
+        &:hover {
+            box-shadow: 0 1px 3px 0 $c-box-shadow3;
+
+            .ris-title {
+                color: $c-red;
+            }
+        }
 
         &:not(:last-child) {
             margin-bottom: $indent-m;

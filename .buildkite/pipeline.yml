@@ -17,3 +17,12 @@ steps:
       - docker build -t conv/ratsinformationssystem:$BUILDKITE_COMMIT -t conv/ratsinformationssystem:staging -f .docker/app/Dockerfile .
       - docker push conv/ratsinformationssystem:$BUILDKITE_COMMIT
       - docker push conv/ratsinformationssystem:staging
+
+  - wait
+
+  - label: 'deploy to stage server'
+    branches: 'feature/devops-stage'
+    agents:
+      project: ratsinfosys
+    command:
+      - ./.buildkite/actions/deploy stage

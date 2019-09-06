@@ -13,9 +13,9 @@
 
 Route::get('/', 'MainPageController@welcome')->name('welcome');
 
-Route::get('/styleguide', function () {
+/*Route::get('/styleguide', function () {
     return view('styleguide');
-});
+});*/
 
 Route::get('/kalender', 'MeetingController@calendar')
     ->name('calendar-list');

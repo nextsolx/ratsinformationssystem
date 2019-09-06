@@ -122,7 +122,7 @@
                     </section>
                 @else
                     <section class="ris-section-wrapper ris-card-list ris-card-list__themes">
-                        <div class="ris-title">There are no topics</div>
+                        <div class="ris-title">Keine Themen verfügbar.</div>
                     </section>
                 @endif
 

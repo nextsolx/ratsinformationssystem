@@ -91,7 +91,7 @@
                             <span class="ris-i ris-i_chevron-right"></span>
                         </a>
                     @else
-                        <div class="ris-body-1">There are no topics</div>
+                        <div class="ris-body-1">Keine Themen verfügbar.</div>
                     @endif
 
                 </section>
@@ -123,7 +123,7 @@
                             <span class="ris-i ris-i_chevron-right"></span>
                         </a>
                     @else
-                        <div class="ris-body-1">There are no topics</div>
+                        <div class="ris-body-1">Keine Themen verfügbar.</div>
                     @endif
 
                 </section>
@@ -155,7 +155,7 @@
                             <span class="ris-i ris-i_chevron-right"></span>
                         </a>
                     @else
-                        <div class="ris-body-1">There are no topics</div>
+                        <div class="ris-body-1">Keine Themen verfügbar.</div>
                     @endif
 
                 </section>

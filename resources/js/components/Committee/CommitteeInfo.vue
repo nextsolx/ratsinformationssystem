@@ -28,7 +28,7 @@ export default {
                 <a class="ris-link ris-link_button ris-committee-info__button"
                     href="https://www.stadt-koeln.de/service/onlinedienste/anregungen-beschwerden/index.html"
                     target="_blank"
-                >
+                        >
                     Eingabe einreichen
                 </a>
             </div>

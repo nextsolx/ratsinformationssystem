@@ -44,7 +44,7 @@ class TopicController extends Controller
             'topic' => $topic,
             'breadcrumbs' => [
                 'Themen' => route('theme-overview'),
-                $paper->name => route('committee', $paper->id),
+                $paper->name => route('theme', $paper->id),
             ]
         ]);
     }

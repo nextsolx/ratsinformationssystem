@@ -66,14 +66,6 @@
     }
 
     &__themes {
-        #{$base}__item {
-            @include breakpoint($bp-mobile-max) {
-                &:nth-child(n+3) {
-                    display: none;
-                }
-            }
-        }
-
         > .ris-caption {
             margin-bottom: $indent-s;
         }

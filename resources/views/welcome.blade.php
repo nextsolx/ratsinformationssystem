@@ -144,7 +144,7 @@
                     @endif
                 </section>
 
-                <section class="ris-section-wrapper ris-welcome__bookmarks">
+                {{--<section class="ris-section-wrapper ris-welcome__bookmarks">
                     <div class="ris-title">Merkliste</div>
                     <div class="ris-subheader">
                         Hier finden Sie Ihre gemerkten Themen, Sitzungen und Personen an einem Ort.
@@ -155,7 +155,7 @@
                         Zur Merkliste
                         <span class="ris-i ris-i_chevron-right"></span>
                     </a>
-                </section>
+                </section>--}}
             </div>
 
             @include('layouts.footer')

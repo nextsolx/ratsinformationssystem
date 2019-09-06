@@ -33,16 +33,13 @@ export default {
             <div class="ris-card-list__themes-top">
                 <img src="/img/thumbnail-map-tile.png" class="ris-card-list__themes-img"
                     :alt="item.name">
-                <div class="ris-body-1">
+                <h2 class="ris-h2">
                     {{ item.name }}
-                </div>
+                </h2>
             </div>
             <div class="ris-card-list__themes-bottom">
                 <div class="ris-caption ris-card-list__themes-number">
-                    Thema &nbsp;
-                    <span>2477</span>
-                    /
-                    <span>2018</span>
+                    Thema {{ item.reference }}
                 </div>
 
                 <div class="ris-card-list__themes-completed"

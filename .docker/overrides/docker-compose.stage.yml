@@ -1,0 +1,63 @@
+version: "3.4"
+
+x-container: &container
+  image: conv/ratsinformationssystem:staging
+  volumes:
+    - .:/var/www/html
+  links:
+    - "mysql"
+  env_file:
+    - .env
+  environment:
+    - APP_ENV=production
+
+x-environment: &environment
+  # php configuration
+  PHP_OPCACHE_VALIDATE_TIMESTAMPS: 1
+  PHP_XDEBUG_REMOTE_ENABLE: 1
+  PHP_XDEBUG_REMOTE_CONNECT_BACK: 1
+  PHP_XDEBUG_REMOTE_PORT: 9000
+
+services:
+  app:
+    <<: *container
+    environment:
+      <<: *environment
+    build:
+      context: .
+      dockerfile: .docker/app/Dockerfile
+      target: production
+    ports:
+      - 80:80
+
+  scheduler:
+    <<: *container
+    environment:
+      <<: *environment
+      CONTAINER_ROLE: scheduler
+
+  app-test:
+    <<: *container
+    environment:
+      <<: *environment
+      APP_ENV: testing
+      APP_KEY: dca929db9304b6e9543380c3586290e8
+
+  mysql:
+    image: mysql:5.7
+    command: "--max_allowed_packet=32505856 --performance-schema=OFF --innodb_flush_log_at_trx_commit=2 --innodb_log_buffer_size=4M --innodb_buffer_pool_size=128M"
+    volumes:
+      - mysql:/var/lib/mysql
+      - ./.docker/overrides/mysql:/docker-entrypoint-initdb.d/
+    tmpfs:
+      - /tmp
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: ${DB_DATABASE:-database}
+      MYSQL_USER: ${DB_USERNAME:-database}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-database}
+
+volumes:
+  mysql:
+    driver: local
+

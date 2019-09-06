@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+# Bail out on first error
+set -e
+SUFFIX=$1
+
+case $SUFFIX in
+    stage)
+        SUFFIX="stage"
+        TAG="staging"
+        SERVER="159.65.124.4"
+    ;;
+    *)
+        SUFFIX="stage"
+        TAG="staging"
+        SERVER="159.65.124.4"
+    ;;
+esac
+
+scp "docker-compose.yml" root@$SERVER:~/docker-compose.yml
+scp "./.docker/overrides/docker-compose.$SUFFIX.yml" root@$SERVER:~/docker-compose.override.yml
+
+ssh root@$SERVER << EOF
+    s3cmd get s3://ris-space/env-$SUFFIX .env --force
+    docker pull conv/ratsinformationssystem:$TAG
+EOF

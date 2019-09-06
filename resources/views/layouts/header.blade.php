@@ -82,11 +82,11 @@
                                 >Personen</a>
                             </li>
 
-                            <li>
+                            {{--<li>
                                 <a class="ris-nav__link @if (url()->current() === route('bookmarks')) ris-nav__link_active @endif"
                                    href="{{ route('bookmarks') }}"
                                 >Merkliste</a>
-                            </li>
+                            </li>--}}
                         </ul>
                     </nav>
                 </div>

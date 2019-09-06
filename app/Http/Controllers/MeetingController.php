@@ -75,7 +75,7 @@ class MeetingController extends Controller
             'meeting' => (array) $meeting->toResponse($request)->getData()->data,
             'breadcrumbs' => [
                 'Kalendar' => route('calendar-list'),
-
+                $meeting->name => route('meeting', $meeting->id),
             ]
         ]);
     }

@@ -45,11 +45,7 @@ Route::group(['middleware' => 'under-construction'], function () {
 
     Route::get('/gremien/{organization}', 'GremienController@view')->name('committee');
 
-<<<<<<< HEAD
-Route::get('/personen/{person}', 'PersonenController@personDetail')->name('person');
-=======
-    Route::get('/personen/{person}', 'PersonenController@personDetail')->name('person-detail');
->>>>>>> feature/meeting-page
+    Route::get('/personen/{person}', 'PersonenController@personDetail')->name('person');
 
     Route::get('/personen-liste', 'PersonenController@view')->name('people-list');
 

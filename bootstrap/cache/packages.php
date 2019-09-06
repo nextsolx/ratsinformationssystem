@@ -20,6 +20,13 @@
       0 => 'Laravel\\Tinker\\TinkerServiceProvider',
     ),
   ),
+  'larsjanssen6/underconstruction' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'LarsJanssen\\UnderConstruction\\UnderConstructionServiceProvider',
+    ),
+  ),
   'nesbot/carbon' => 
   array (
     'providers' => 

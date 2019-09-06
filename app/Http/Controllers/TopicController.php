@@ -33,7 +33,7 @@ class TopicController extends Controller
             });
         }
 
-        return Topic::collection($paperQuery->paginate(100));
+        return Topic::collection($paperQuery->paginate(15));
     }
 
     public function topic(Request $request, Paper $paper)

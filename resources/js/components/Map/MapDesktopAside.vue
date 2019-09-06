@@ -14,7 +14,9 @@ export default {
             loading: true,
             district: '',
             subdistrict: '',
-            title: 'Karte'
+            title: 'Karte',
+            subTitle: 'Aktualle Themen',
+            newsList: []
         };
     },
     methods: {
@@ -23,24 +25,28 @@ export default {
             this.loading = false;
         },
         async getSubdistrictList () {
+            this.title = this.district + ' (Bezirk)';
+            this.subTitle = 'Themen in diesem Bezirk';
             this.navigationList = await location.getSubdistricts(this.district);
             this.location = 'subdistrict';
         },
-
+        async getIndexesList() {
+            this.title = this.district + ' (Viertel)';
+            this.subTitle = 'Themen in diesem Viertel';
+            this.navigationList = await location.getIndexes(this.district, this.subdistrict);
+            this.location = 'index';
+        },
         async buttonHandleInSide (value) {
             this.menuIsActive = false;
             switch (this.location) {
                 case 'district': {
                     this.district = value;
-                    this.title = this.district + ' (Bezirk)';
                     this.getSubdistrictList();
                     break;
                 }
                 case 'subdistrict': {
                     this.subdistrict = value;
-                    this.title = this.district + ' (Viertel)';
-                    this.navigationList = await location.getIndexes(this.district, value);
-                    this.location = 'index';
+                    this.getIndexesList();
                     break;
                 }
                 case 'index': {
@@ -118,5 +124,12 @@ export default {
                 <span class="ris-i ris-i_expand-more"></span>
             </button>
         </nav>
+        <h2>{{ subTitle }}</h2>
+        <p>caption</p>
+        <ul>
+            <li>
+
+            </li>
+        </ul>
     </aside>
 </template>

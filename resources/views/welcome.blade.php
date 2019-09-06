@@ -143,19 +143,6 @@
                         <div class="ris-body-1">Keine Personen verfügbar.</div>
                     @endif
                 </section>
-
-                {{--<section class="ris-section-wrapper ris-welcome__bookmarks">
-                    <div class="ris-title">Merkliste</div>
-                    <div class="ris-subheader">
-                        Hier finden Sie Ihre gemerkten Themen, Sitzungen und Personen an einem Ort.
-                    </div>
-                    <a href="{{ route('bookmarks') }}" class="ris-link ris-link_button ris-link_right"
-                        title="Zur Merkliste"
-                    >
-                        Zur Merkliste
-                        <span class="ris-i ris-i_chevron-right"></span>
-                    </a>
-                </section>--}}
             </div>
 
             @include('layouts.footer')

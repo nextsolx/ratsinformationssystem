@@ -16,6 +16,10 @@
             padding-top: $indent-ml;
         }
 
+        &:last-child {
+            border-bottom: 0;
+        }
+
         .ris-title {
             margin-bottom: $indent-s;
         }
@@ -84,10 +88,6 @@
                 &:not(:last-child) {
                     margin-bottom: $indent-m;
                 }
-
-                &:nth-child(n+4) {
-                    display: none;
-                }
             }
 
             @include breakpoint($bp-tablet-min) {
@@ -146,10 +146,6 @@
                 }
             }
         }
-    }
-
-    &__bookmarks {
-        border-bottom: 0;
     }
 
     .ris-filter-buttons {

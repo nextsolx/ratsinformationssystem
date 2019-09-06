@@ -18,8 +18,7 @@ export default {
         postcodeList: [],
         selectedDistrictList: [],
         districtList: [],
-        districtInfoDescription: 'There are no topics',
-        postcodeInfoDescription: 'There are no topics for the selected postcode',
+        districtInfoDescription: 'Keine Themen verfügbar.',
     }),
     props: {
         defaultDistrictList: {

@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+echo "cleanup all the mess"
+cd ${BUILDKITE_BUILD_CHECKOUT_PATH}
+
+docker system prune -af --filter "until=48h"
+
+docker image prune -af --filter "until=48h"
+
+docker-compose down || true
+
+# docker volume prune -f

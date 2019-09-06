@@ -61,10 +61,9 @@ if (isset($meetings) and is_array($meetings)) {
                                                     {{ $meeting->title }}
                                                 </h2>
                                                 <div class="ris-subheader">
-                                                    Lorem data UAK/
-                                                    <span>00{{ \Illuminate\Support\Carbon::parse($meeting->dateFrom)->weekOfYear }}</span>
-                                                    /
-                                                    <span>{{ \Illuminate\Support\Carbon::parse($meeting->dateFrom)->year }}</span>
+                                                    {{ \Illuminate\Support\Carbon::parse($meeting->dateFrom)->locale('de')->format('l, d. F Y') }}
+                                                    {{ \Illuminate\Support\Carbon::parse($meeting->dateFrom)->format('H:i') }}-{{ \Illuminate\Support\Carbon::parse($meeting->dateTill)->format('H:i') }}
+                                                    Uhr
                                                 </div>
                                                 <div class="ris-session-count">
                                                     <div class="ris-session-count__agenda">

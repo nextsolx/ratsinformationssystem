@@ -26,8 +26,6 @@ if (isset($meeting['people']) and count($meeting['people']) > 0) {
         <main class="ris-main ris-meeting ris-content_six-eight-eight">
 
             <section class="ris-section-wrapper ris-meeting__headline">
-                {{--@todo --- fix mock data--}}
-                <div class="ris-caption ris-caption__top">Rat/0043/2018</div>
                 <h1 class="ris-headline">
                     {{ $meeting['title'] }}
                 </h1>
@@ -71,26 +69,33 @@ if (isset($meeting['people']) and count($meeting['people']) > 0) {
                         <span class="ris-i ris-i_calendar"></span>
                     </div>
                 </div>
-                <div class="ris-overview">
-                    <div class="ris-description ris-description__headline">
-                        <span class="ris-i ris-i_marker-with-dot"></span>
-                        Sitzungsort
+
+                @if (isset($meeting['location']))
+                    <div class="ris-overview">
+                        <div class="ris-description ris-description__headline">
+                            <span class="ris-i ris-i_marker-with-dot"></span>
+                            Sitzungsort
+                        </div>
+                        <div class="ris-description ris-description__content">
+                            {{ $meeting['location']->description }}
+                            <span class="ris-i ris-i_marker-with-dot"></span>
+                        </div>
                     </div>
-                    <div class="ris-description ris-description__content">
-                        Rathaus, Spanischer Bau, Ratssaal
-                        <span class="ris-i ris-i_marker-with-dot"></span>
+                @endif
+
+                @if (isset($meeting['organizations']))
+                    <div class="ris-overview">
+                        <div class="ris-description ris-description__headline">
+                            <span class="ris-i ris-i_squares-in-square"></span>
+                            Gremium
+                        </div>
+                        <div class="ris-description ris-description__content">
+                            {{ $meeting['organizations'][0]->title }}
+                            <span class="ris-i ris-i_squares-in-square"></span>
+                        </div>
                     </div>
-                </div>
-                <div class="ris-overview">
-                    <div class="ris-description ris-description__headline">
-                        <span class="ris-i ris-i_squares-in-square"></span>
-                        Gremium
-                    </div>
-                    <div class="ris-description ris-description__content">
-                        Ausschuss für Anregungen und Beschwerden
-                        <span class="ris-i ris-i_squares-in-square"></span>
-                    </div>
-                </div>
+                @endif
+
                 <div class="ris-overview">
                     <div class="ris-description ris-description__headline">
                         <span class="ris-i ris-i_doc"></span>

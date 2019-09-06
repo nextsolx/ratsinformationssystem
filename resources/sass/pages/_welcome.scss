@@ -166,10 +166,10 @@
 
         .ris-button {
             font-weight: 500;
+            margin-bottom: $indent-s;
+            margin-right: $indent-s;
             min-width: auto;
             padding: $indent-s $indent-sm;
-            margin-right: $indent-s;
-            margin-bottom: $indent-s;
         }
     }
 

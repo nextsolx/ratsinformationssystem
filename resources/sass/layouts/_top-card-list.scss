@@ -40,6 +40,7 @@
         }
 
         &-bottom {
+            box-sizing: border-box;
             width: 100%;
 
             @include breakpoint($bp-mobile-max) {
@@ -69,8 +70,11 @@
         }
 
         &-number {
-            display: flex;
+            display: block;
             padding-bottom: $indent-s;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
         &-progress-box {

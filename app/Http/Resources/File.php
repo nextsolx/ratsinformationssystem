@@ -21,9 +21,9 @@ class File extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'fileName' => $this->fileName,
-            'accessUrl' => $this->accessUrl,
-            'downloadUrl' => $this->downloadUrl,
+            'fileName' => $this->file_name,
+            'accessUrl' => $this->access_url,
+            'downloadUrl' => $this->download_url,
         ];
     }
 }

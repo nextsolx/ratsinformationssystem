@@ -13,15 +13,19 @@
         position: relative;
         text-decoration: none;
 
-        &:hover {
-            box-shadow: 0 1px 3px 0 $c-box-shadow3;
-        }
-
         @include breakpoint($bp-tablet-min) {
             min-height: 112px;
         }
 
-        .ris-body-1 {
+        &:hover {
+            box-shadow: 0 1px 3px 0 $c-box-shadow3;
+
+            .ris-h2 {
+                color: $c-red;
+            }
+        }
+
+        .ris-h2 {
             -webkit-box-orient: vertical;
             display: -webkit-box;
             font-size: $fs-l;
@@ -39,9 +43,13 @@
                 max-height: $lh-l * 2;
             }
         }
+
+        &-calendar {
+            min-height: auto;
+        }
     }
 
-    .ris-body-1 {
+    .ris-h2 {
         &:hover {
             color: $c-red;
         }

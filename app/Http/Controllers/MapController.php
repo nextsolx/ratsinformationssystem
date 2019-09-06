@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\Topic;
+use App\Http\Resources\TopicWithData;
 use App\Paper;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -28,7 +28,7 @@ class MapController extends Controller
             });
         }
 
-        $topics = Topic::collection(
+        $topics = TopicWithData::collection(
             $paperQuery->sort()->paginate(100)
         )->toResponse(request())->getData();
 

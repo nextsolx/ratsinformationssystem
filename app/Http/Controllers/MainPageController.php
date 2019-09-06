@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\Meeting;
-use App\Http\Resources\Topic;
+use App\Http\Resources\TopicWithData;
 use App\Paper;
 use App\Person;
 use Illuminate\Http\Request;
@@ -22,7 +22,7 @@ class MainPageController extends Controller
 
         $meetings = Meeting::collection($meetingsQuery->take(3)->get())->toResponse(request())->getData();
 
-        $topics = Topic::collection(
+        $topics = TopicWithData::collection(
             Paper::with(Paper::$basicScope)->sort()->new()->paginate(3)
         )->toResponse(request())->getData();
 

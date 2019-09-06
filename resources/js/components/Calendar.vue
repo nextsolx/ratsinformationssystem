@@ -1,6 +1,7 @@
 <script>
 import { ContentLoader } from 'vue-content-loader';
 import noticeMixin from '../mixins/NoticeMixin';
+import intersectionObserverMixin from '../mixins/intersectionObserverMixin';
 
 const axios = require('axios');
 const moment = require('moment');
@@ -11,8 +12,9 @@ export default {
     components: {
         ContentLoader
     },
-    mixins: [ noticeMixin ],
+    mixins: [ noticeMixin, intersectionObserverMixin ],
     data: () => ({
+        observableRootBlock: null,
         observableBlock: '.ris-footer',
         prevRatio: 0,
         loading: false,
@@ -23,36 +25,7 @@ export default {
         infoTitle: 'All meetings have been loaded',
     }),
     methods: {
-        createObserver() {
-            let options = {
-                root: null,
-                rootMargin: '0px',
-                threshold: this.buildThresholdList()
-            };
-
-            const observer = new IntersectionObserver(this.handleIntersect, options),
-                observableBlock = document.querySelector(this.observableBlock);
-            observer.observe(observableBlock);
-        },
-        handleIntersect(entries) {
-            entries.forEach(entry => {
-                if (entry.intersectionRatio > this.prevRatio) {
-                    this.loadMeetings();
-                }
-                this.prevRatio = entry.intersectionRatio;
-            });
-        },
-        buildThresholdList() {
-            let thresholds = [],
-                numSteps = 20;
-            for (let i=1.0; i<=numSteps; i++) {
-                let ratio = i/numSteps;
-                thresholds.push(ratio);
-            }
-            thresholds.push(0);
-            return thresholds;
-        },
-        loadMeetings() {
+        lazyHandle() {
             if (!this.loading && !this.emptyMeetingList) {
                 this.loading = true;
                 this.currentPage += 1;

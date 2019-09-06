@@ -3,6 +3,8 @@
 echo "cleanup all the mess"
 cd ${BUILDKITE_BUILD_CHECKOUT_PATH}
 
+docker stop $(docker ps -aq)
+
 docker system prune -af --filter "until=48h"
 
 docker image prune -af --filter "until=48h"

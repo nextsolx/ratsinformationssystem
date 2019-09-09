@@ -23,4 +23,5 @@ scp "./.docker/overrides/docker-compose.$SUFFIX.yml" root@$SERVER:~/docker-compo
 ssh root@$SERVER << EOF
     s3cmd get s3://ris-space/env-$SUFFIX .env --force
     docker pull conv/ratsinformationssystem:$TAG
+    docker-compose config | docker stack deploy -c - --with-registry-auth ris-$SUFFIX
 EOF

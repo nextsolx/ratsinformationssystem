@@ -66,18 +66,15 @@
                     <div class="ris-action-box">
                         <h2 class="ris-h2">Politischer Prozess</h2>
 
-                        <div class="ris-select">
-                            <div class="ris-select__label">Darstellung</div>
-                            <select class="ris-select__select">
-                                <option class="ris-select__option" data-sort-type="newest-first">
-                                    Das Neuste zuerst
-                                </option>
-                                <option class="ris-select__option" data-sort-type="oldest-first">
-                                    Chronologische Reihenfolge
-                                </option>
-                            </select>
-                            <span class="ris-i ris-i_chevron-double"></span>
-                        </div>
+                        <dropdown
+                            :id="'theme-dropdown'"
+                            label="Darstellung"
+                            :value="{label: 'Chronologische Reihenfolge', value: 'id'}"
+                            :options="[
+                                {label: 'Chronologische Reihenfolge', value: 'id'},
+                                {label: 'Das Neuste zuerst', value: 'date'},
+                            ]"
+                        ></dropdown>
                     </div>
 
                     <div class="ris-process">

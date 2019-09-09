@@ -28,8 +28,8 @@
                             label="Sortierung"
                             :value="{label: 'Fortschritt', value: 'Fortschritt'}"
                             :options="[
-                            {label: 'Einstellungsdatum', value: 'Einstellungsdatum'},
-                            {label: 'Fortschritt', value: 'Fortschritt'}
+                                {label: 'Einstellungsdatum', value: 'Einstellungsdatum'},
+                                {label: 'Fortschritt', value: 'Fortschritt'}
                             ]"
                         ></dropdown>
                     </div>
@@ -52,13 +52,19 @@
                 @endif
 
                 <section class="ris-section-wrapper ris-card-list ris-card-list__themes">
-                    <theme
-                            :theme-list-data="themeListData"
-                            :theme-list-type="themeListType"
+                    <theme-component-lazy
+                        :theme-list-type="
+                            @if (url()->current() === route('progress-themes'))
+                                'updated'
+                            @elseif (url()->current() === route('finished-themes'))
+                                'finished'
+                            @else
+                                'new'
+                            @endif
+                        "
                     >
-                    </theme>
+                    </theme-component-lazy>
                 </section>
-                <topic-list></topic-list>
             </div>
         </theme-list>
 

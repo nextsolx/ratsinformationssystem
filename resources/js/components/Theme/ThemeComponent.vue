@@ -2,7 +2,7 @@
 const moment = require('moment');
 
 export default {
-    name: 'Theme',
+    name: 'ThemeComponent',
     props: {
         themeListData: {
             type: Array,
@@ -42,7 +42,7 @@ export default {
                     Thema {{ item.reference }}
                 </div>
 
-                <div class="ris-card-list__themes-completed"
+                <div class="ris-item-finished"
                     v-if="themeListType === 'finished'"
                         >
                     <span class="ris-i ris-i_check ris-i_has-bg"/>

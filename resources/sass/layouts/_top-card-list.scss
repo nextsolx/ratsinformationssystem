@@ -89,6 +89,14 @@
             width: auto;
         }
 
+        .ris-item-finished {
+            @include breakpoint($bp-tablet-min) {
+                margin-right: $indent-s;
+                max-width: 100px;
+                overflow: hidden;
+            }
+        }
+
         .ris-body-1 {
             -webkit-box-orient: vertical;
             -webkit-line-clamp: 3;

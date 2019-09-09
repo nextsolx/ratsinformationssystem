@@ -5,7 +5,6 @@ import sortingMixin from '../../mixins/sortingMixin';
 import CalendarCard from '../CalendarCard';
 
 const moment = require('moment');
-require('moment/locale/de');
 
 export default {
     name: 'CommitteeSessions',

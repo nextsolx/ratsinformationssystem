@@ -1,134 +1,98 @@
 <script>
-import location from '../../api/location';
-import clickOutSide from '../../tools/clickOutSide';
+const moment = require('moment');
+import topics from '../../api/topics';
+import MapAsideNavigation from './MapAsideNavigation';
+import lazyLoadMixin from '../../mixins/lazyLoadMixin';
 export default {
     name: 'MapDesktopAside',
-    directives: {
-        'outside': clickOutSide
+    components: {
+        MapAsideNavigation
     },
+    mixins: [lazyLoadMixin],
     data () {
         return {
-            location: 'district',
-            navigationList: [],
-            menuIsActive: false,
-            loading: true,
-            district: '',
-            subdistrict: '',
             title: 'Karte',
             subTitle: 'Aktualle Themen',
-            newsList: []
+            newsList: [],
+            totalThemes: 0,
+            paginationPage: 1,
+            typeOfTheme: 'new',
+            totalThemesText: 'Themen in ganz Köln'
         };
     },
     methods: {
-        async getDistrictList () {
-            this.navigationList = await location.getDistricts();
-            this.loading = false;
+        async getThemes () {
+            const themes = await topics.getPaginationList('new', this.paginationPage);
+            this.newsList = [...this.newsList, ...themes.data];
+            this.totalThemes = themes.meta.total;
         },
-        async getSubdistrictList () {
-            this.title = this.district + ' (Bezirk)';
-            this.subTitle = 'Themen in diesem Bezirk';
-            this.navigationList = await location.getSubdistricts(this.district);
-            this.location = 'subdistrict';
+        async getDistrictThemes (value) {
+            const themes = await topics.getTopicsByDistrictList(value, this.paginationPage);
+            this.newsList = [...this.newsList, ...themes.data];
+            this.totalThemes = themes.meta.total;
         },
-        async getIndexesList() {
-            this.title = this.district + ' (Viertel)';
-            this.subTitle = 'Themen in diesem Viertel';
-            this.navigationList = await location.getIndexes(this.district, this.subdistrict);
-            this.location = 'index';
+        async getIndexThemes (value) {
+            const themes = await topics.getTopicsByIndexList(value, this.paginationPage);
+            this.newsList = [...this.newsList, ...themes.data];
+            this.totalThemes = themes.meta.total;
         },
-        async buttonHandleInSide (value) {
-            this.menuIsActive = false;
-            switch (this.location) {
-                case 'district': {
-                    this.district = value;
-                    this.getSubdistrictList();
-                    break;
-                }
-                case 'subdistrict': {
-                    this.subdistrict = value;
-                    this.getIndexesList();
-                    break;
-                }
-                case 'index': {
-                    this.title = value;
-                    this.navigationList = [];
-                    break;
-                }
+        changeDirection ({ type, value }) {
+            this.newsList = [];
+            if (type === 'district') {
+                this.totalThemesText = `Thema in ${value} (Bezirk)`;
+                this.getDistrictThemes(value);
             }
-        },
-        async buttonHandleOutSide () {
-            this.menuIsActive = false;
-            switch (this.location) {
-                case 'index': {
-                    this.title = this.district + ' (Viertel)';
-                    this.getSubdistrictList();
-                    break;
-                }
-                case 'subdistrict': {
-                    this.title = 'Karte';
-                    this.getDistrictList();
-                    this.district = '';
-                    this.location = 'district';
-                    break;
-                }
-                case 'district': {
-                    break;
-                }
+            else if (type === 'all') {
+                this.totalThemesText = 'Themen in ganz Köln';
+                this.getThemes();
             }
-        },
-        hide () {
-            this.menuIsActive = false;
+            else {
+                this.totalThemesText = `Thema in ${value}`;
+                this.getIndexThemes(value);
+            }
+        }
+    },
+    filters: {
+        momentFullDate(data) {
+            return moment(data).format('DD.MM.YYYY');
         }
     },
     created () {
-        this.getDistrictList();
-    }
+        this.getThemes();
+    },
 };
 </script>
 
 <template>
     <aside class="ris-map-desktop-aside">
         <h1 class="ris-map-desktop-aside__heading">{{ title }}</h1>
-        <button
-            v-if="district"
-            class="ris-map-desktop-aside__nav-btn"
-            @click="buttonHandleOutSide">
-            <span class="ris-i ris-i_back ris-i_has-bg"></span>
-            Zurück zur Bezirksübersicht
-        </button>
-        <nav
-            class="ris-map-desktop-aside__nav"
-            v-if="!loading && navigationList.length"
-            v-outside="hide">
-            <ul
-                class="ris-map-desktop-aside-list"
-                :class="{ isActive: menuIsActive }">
-                <li
-                    class="ris-map-desktop-aside-list__item"
-                    v-for="element in navigationList"
-                    :key="`${element}-${location}`"
-                    @click="buttonHandleInSide(element)"
-                        >
-                    <button class="ris-map-desktop-aside-list__button">
-                        {{ element }}
-                        <span class="ris-i ris-i_add"/>
-                    </button>
-                </li>
-            </ul>
-            <button
-                class="ris-map-desktop-aside__control"
-                :class="{ isActive: menuIsActive }"
-                v-if="navigationList.length > 3"
-                @click="menuIsActive = !menuIsActive">
-                {{ menuIsActive ? 'Weniger anzeigen' : `Alle ${navigationList.length} anzeigen` }}
-                <span class="ris-i ris-i_expand-more"></span>
-            </button>
-        </nav>
-        <h2>{{ subTitle }}</h2>
-        <p>caption</p>
-        <ul>
-            <li>
-
+        <MapAsideNavigation @changeTitle="(value) => this.title = value" @changeDirection="changeDirection" />
+        <h2 class="ris-map-desktop-aside__subtitle">{{ subTitle }}</h2>
+        <p class="ris-map-desktop-aside__caption">
+            {{ `${totalThemes} ${totalThemesText}` }}
+        </p>
+        <ul class="ris-map-desktop-aside-theme-list">
+            <li
+                class="ris-map-desktop-aside-theme-list__item"
+                v-for="theme in newsList"
+                :key="theme.id">
+                <a
+                    class="ris-map-desktop-aside-theme-list__link"
+                    :href="'/theme/' + theme.id">
+                    <img
+                        class="ris-map-desktop-aside-theme-list__img"
+                        src="../../../img/theme-item-tile.jpg"
+                        alt="theme pleceholder">
+                    <div class="ris-map-desktop-aside-theme-list__wrapper">
+                        <h3 class="ris-map-desktop-aside-theme-list__heading">{{ theme.name }}</h3>
+                        <span class="ris-map-desktop-aside-theme-list__info">
+                            <span class="ris-map-desktop-aside-theme-list__info">{{ theme.reference }}</span>
+                            <time class="ris-map-desktop-aside-theme-list__time">
+                                {{ theme.date | momentFullDate }}
+                            </time>
+                        </span>
+                    </div>
+                </a>
             </li>
         </ul>
     </aside>

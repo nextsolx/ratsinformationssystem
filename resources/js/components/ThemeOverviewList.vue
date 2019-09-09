@@ -25,7 +25,7 @@ export default {
         },
     },
     data: () => ({
-        districtInfoDescription: 'There are no topics',
+        districtInfoDescription: 'Keine Themen verfügbar.',
     }),
 };
 </script>

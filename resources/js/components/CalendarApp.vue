@@ -59,7 +59,6 @@ export default {
         currentMonth: moment().month() + 1,
         loading: false,
         infoTitle: 'Calendar',
-        infoDescription: 'There are no meetings in the calendar for the current month',
     }),
     methods: {
         toggleCalendar() {

@@ -23,12 +23,7 @@
 
         @if (count($breadcrumbs)>1)
             <li class="ris-breadcrumbs__item">
-                <a href="{{ array_values($breadcrumbs)[1] }}" title="{{array_keys($breadcrumbs)[1] }}"
-                        class="ris-link"
-                >
-                    <span>{{ array_keys($breadcrumbs)[1] }}</span>
-                    <span class="ris-i ris-i_chevron-right"></span>
-                </a>
+                <span>{{ array_keys($breadcrumbs)[1] }}</span>
             </li>
         @endif
     @endif

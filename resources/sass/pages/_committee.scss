@@ -140,16 +140,12 @@
 
         &__button {
             background-color: $c-white2;
-            color: $c-blue5;
             font-size: $fs-l;
-            height: 48px;
-            max-width: 212px;
-            padding: 0;
-            width: 100%;
+            justify-content: center;
 
             @include breakpoint($bp-mobile-max) {
                 margin-top: $indent-m;
-                max-width: 100%;
+                width: 100%;
             }
         }
     }

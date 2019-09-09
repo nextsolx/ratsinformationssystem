@@ -80,7 +80,7 @@
                                 <span class="ris-i ris-i_chevron-right"></span>
                             </a>
                         @else
-                            <div class="ris-body-1">There are no topics</div>
+                            <div class="ris-body-1">Keine Themen verfügbar.</div>
                         @endif
                     </section>
 
@@ -100,7 +100,7 @@
                                 <span class="ris-i ris-i_chevron-right"></span>
                             </a>
                         @else
-                            <div class="ris-body-1">There are no events</div>
+                            <div class="ris-body-1">Keine Sitzungen verfügbar.</div>
                         @endif
                     </section>
 
@@ -140,21 +140,8 @@
                             <span class="ris-i ris-i_chevron-right"></span>
                         </a>
                     @else
-                        <div class="ris-body-1">There are no peoples</div>
+                        <div class="ris-body-1">Keine Personen verfügbar.</div>
                     @endif
-                </section>
-
-                <section class="ris-section-wrapper ris-welcome__bookmarks">
-                    <div class="ris-title">Merkliste</div>
-                    <div class="ris-subheader">
-                        Hier finden Sie Ihre gemerkten Themen, Sitzungen und Personen an einem Ort.
-                    </div>
-                    <a href="{{ route('bookmarks') }}" class="ris-link ris-link_button ris-link_right"
-                        title="Zur Merkliste"
-                    >
-                        Zur Merkliste
-                        <span class="ris-i ris-i_chevron-right"></span>
-                    </a>
                 </section>
             </div>
 

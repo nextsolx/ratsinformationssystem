@@ -26,6 +26,10 @@
     &__item {
         align-items: center;
         display: inline-flex;
+        color: $c-gray2;
+        font-family: $ff-helvetica-neue;
+        font-size: $fs-l;
+        line-height: $lh-l;
 
         .ris-i_chevron-right {
             color: $c-gray7;

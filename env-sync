@@ -1,0 +1,13 @@
+#!/bin/bash
+
+lastChange=$(date --date="$(ls -al --time-style="+%Y-%m-%d %H:%M:%S" .env | awk '{print $6" "$7}')" | awk '{print $6"-"$2"-"$3" "$4}')
+remote=$(s3cmd info s3://ris-space/env-stage | grep "Last mod:" | awk '{print $6"-"$5"-"$4" "$7}')
+lastPull=""
+echo $local
+echo $remote
+
+if [ $lastChange == $remote ]; then
+  echo "Strings are equal"
+else
+  echo "Strings are not equal"
+fi

@@ -75,7 +75,7 @@ class TopicController extends Controller
         }
 
         $topics = TopicWithData::collection(
-            $paperQuery->sort()->paginate(100)
+            $paperQuery->sort()->paginate(10)
         )->toResponse(request())->getData();
 
         $new = TopicWithData::collection(
@@ -91,7 +91,7 @@ class TopicController extends Controller
         )->toResponse(request())->getData();
 
         return view('theme-overview')->with([
-            'topics' => $topics->data,
+            'topics_top' => $topics->data,
             'topics_new' => $new->data,
             'topics_progress' => $prograss->data,
             'topics_finished' => $finished->data,
@@ -164,7 +164,7 @@ class TopicController extends Controller
 
         return view('theme-list')->with([
             'theme_list' => $topics->data,
-            'theme_type' => 'progress',
+            'theme_type' => 'updated',
             'district_list' => [
                 'Innenstadt', 'Rodenkirchen', 'Lindenthal', 'Ehrenfeld',
                 'Nippes',  'Chorweiler', 'Porz',  'Kalk',  'Mülheim'

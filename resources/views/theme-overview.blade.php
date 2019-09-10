@@ -5,9 +5,7 @@
 
         @include('layouts.breadcrumbs')
 
-        <theme-overview inline-template
-            :default-district-list="{{json_encode($district_list)}}"
-        >
+        <theme-overview inline-template>
 
             <div class="ris-theme-overview__content ris-content ris-content_six-eight-eight">
                 <section class="ris-section-wrapper">
@@ -22,26 +20,22 @@
                             label="Sortierung"
                             :value="{label: 'Fortschritt', value: 'Fortschritt'}"
                             :options="[
-                            {label: 'Einstellungsdatum', value: 'Einstellungsdatum'},
-                            {label: 'Fortschritt', value: 'Fortschritt'}
+                                {label: 'Einstellungsdatum', value: 'Einstellungsdatum'},
+                                {label: 'Fortschritt', value: 'Fortschritt'}
                             ]"
                         ></dropdown>
                     </div>
                 </section>
 
-                @if (!empty($topics))
+                @if (!empty($topics_top))
                     <section class="ris-section-wrapper ris-top-card-list">
                         <div class="ris-title">Top-Themen</div>
 
                         <div class="swiper-container">
                             <div class="swiper-wrapper">
-                                @foreach ($topics as $topic)
-                                    @if ($loop->iteration > 10)
-                                        @break
-                                    @endif
-
+                                @foreach ($topics_top as $topic)
                                     <a class="ris-top-card-list__item swiper-slide" title="{{ $topic->name }}"
-                                        href="/thema/{{ $topic->id }}"
+                                        href="{{ route('theme', $topic->id) }}"
                                     >
                                         <div class="ris-top-card-list__item-top">
                                             <img src="/img/thumbnail-bridge-big-tile.png" class="ris-top-card-list__item-img"
@@ -55,9 +49,16 @@
                                                 Thema {{ $topic->reference }}
                                             </div>
                                             <div class="ris-top-card-list__item-progress-box">
-                                                <div class="ris-progress-bar">
-                                                    <div class="ris-progress-bar__progress" style="width: 25%"></div>
-                                                </div>
+                                                @if ($topic->finished)
+                                                    <div class="ris-item-finished">
+                                                        <span class="ris-i ris-i_check ris-i_has-bg"></span>
+                                                        Abgeschl
+                                                    </div>
+                                                @else
+                                                    <div class="ris-progress-bar">
+                                                        <div class="ris-progress-bar__progress" style="width: @if ($topic->newTopic) 25% @else 75% @endif"></div>
+                                                    </div>
+                                                @endif
                                                 <div class="ris-caption ris-top-card-list__item-date">
                                                     {{ \Illuminate\Support\Carbon::parse($topic->date)->format('d.m.Y') }}
                                                 </div>
@@ -72,11 +73,7 @@
                     </section>
                 @endif
 
-
-
-                <section class="ris-section-wrapper ris-card-list ris-card-list__themes"
-                    v-if="!themeListNew.length && firstLoading"
-                >
+                <section class="ris-section-wrapper ris-card-list ris-card-list__themes">
                     <div class="ris-title">Neue Themen List</div>
 
                     @if (!empty($topics_new))
@@ -96,24 +93,12 @@
 
                 </section>
 
-                <theme-overview-list
-                        :theme-list-data="themeListNew"
-                        :theme-list-type="themeListNew ? 'new' : null"
-                        :theme-first-loading="firstLoading"
-                        :theme-type-link="'{{ route('new-themes') }}'"
-                >
-                </theme-overview-list>
-
-
-
-                <section class="ris-section-wrapper ris-card-list ris-card-list__themes"
-                    v-if="!themeListProgress.length && firstLoading"
-                >
+                <section class="ris-section-wrapper ris-card-list ris-card-list__themes">
                     <div class="ris-title">Kürzlich aktualisiert</div>
 
                     @if (!empty($topics_progress))
                         @include('components.theme',
-                                ['theme_list' => $topics_progress, 'theme_type' => 'progress', 'limit' => 3]
+                                ['theme_list' => $topics_progress, 'theme_type' => 'updated', 'limit' => 3]
                             )
 
                         <a href="{{ route('progress-themes') }}" class="ris-link ris-link_button ris-link_right"
@@ -128,19 +113,7 @@
 
                 </section>
 
-                <theme-overview-list
-                        :theme-list-data="themeListProgress"
-                        :theme-list-type="themeListProgress ? 'progress' : null"
-                        :theme-first-loading="firstLoading"
-                        :theme-type-link="'{{ route('progress-themes') }}'"
-                >
-                </theme-overview-list>
-
-
-
-                <section class="ris-section-wrapper ris-card-list ris-card-list__themes"
-                    v-if="!themeListFinished.length && firstLoading"
-                >
+                <section class="ris-section-wrapper ris-card-list ris-card-list__themes">
                     <div class="ris-title">Kürzlich abgeschlossen</div>
 
                     @if (!empty($topics_finished))
@@ -149,7 +122,7 @@
                             )
 
                         <a href="{{ route('finished-themes') }}" class="ris-link ris-link_button ris-link_right"
-                                title="Mehr anzeigen"
+                            title="Mehr anzeigen"
                         >
                             Mehr anzeigen
                             <span class="ris-i ris-i_chevron-right"></span>
@@ -159,14 +132,6 @@
                     @endif
 
                 </section>
-
-                <theme-overview-list
-                        :theme-list-data="themeListFinished"
-                        :theme-list-type="themeListFinished ? 'finished' : null"
-                        :theme-first-loading="firstLoading"
-                        :theme-type-link="'{{ route('finished-themes') }}'"
-                >
-                </theme-overview-list>
             </div>
 
         </theme-overview>

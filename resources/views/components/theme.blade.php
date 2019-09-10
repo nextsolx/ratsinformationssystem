@@ -20,18 +20,14 @@
                 Thema {{ $theme->reference }}
             </div>
 
-            @if ($theme_type === 'new')
-                <div class="ris-progress-bar">
-                    <div class="ris-progress-bar__progress" style="width: 25%"></div>
-                </div>
-            @elseif ($theme_type === 'progress')
-                <div class="ris-progress-bar">
-                    <div class="ris-progress-bar__progress" style="width: 75%"></div>
-                </div>
-            @elseif ($theme_type === 'finished')
-                <div class="ris-card-list__themes-completed">
+            @if ($theme_type === 'finished')
+                <div class="ris-item-finished">
                     <span class="ris-i ris-i_check ris-i_has-bg"></span>
                     Abgeschlossen
+                </div>
+            @else
+                <div class="ris-progress-bar">
+                    <div class="ris-progress-bar__progress" style="width: @if ($theme_type === 'new') 25% @else 75% @endif"></div>
                 </div>
             @endif
 

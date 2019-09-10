@@ -62,48 +62,50 @@
             @endif
 
             @if (isset($topic->process))
-                <section class="ris-section-wrapper">
-                    <div class="ris-action-box">
-                        <h2 class="ris-h2">Politischer Prozess</h2>
+                <theme-sort inline-template
+                    :theme-id="'{{ $topic->id }}'"
+                >
+                    <section class="ris-section-wrapper">
+                        <div class="ris-action-box">
+                            <h2 class="ris-h2">Politischer Prozess</h2>
 
-                        <div class="ris-select">
-                            <div class="ris-select__label">Darstellung</div>
-                            <select class="ris-select__select">
-                                <option class="ris-select__option" data-sort-type="newest-first">
-                                    Das Neuste zuerst
-                                </option>
-                                <option class="ris-select__option" data-sort-type="oldest-first">
-                                    Chronologische Reihenfolge
-                                </option>
-                            </select>
-                            <span class="ris-i ris-i_chevron-double"></span>
+                            <dropdown
+                                :id="'theme-dropdown'"
+                                label="Darstellung"
+                                :value="dropValue"
+                                :options="[
+                                    {label: 'Chronologische Reihenfolge', value: 'id'},
+                                    {label: 'Das Neuste zuerst', value: 'dateFrom'},
+                                ]"
+                                @change="changeProcessList"
+                            ></dropdown>
                         </div>
-                    </div>
 
-                    <div class="ris-process">
-                        <div class="ris-process__detail ris-process__item">
-                            <span class="ris-i ris-i_check ris-i_has-bg"></span>
-                            <div class="ris-process__date ris-body-2">{{ \Illuminate\Support\Carbon::parse($topic->date)->format('d. F Y') }}</div>
-                            <h3 class="ris-process__name ris-h3">{{ $topic->name }}</h3>
-                            <div class="ris-process__text ris-body-2">{{ \Illuminate\Support\Str::limit(strip_tags($topic->text), 5000) }}</div>
-                            <div class="ris-process__wrapper">
-                                <div class="ris-caption">Beschlussvorlage {{ $topic->reference }}</div>
+                        <div class="ris-process">
+                            <div class="ris-process__detail ris-process__item">
+                                <span class="ris-i ris-i_check ris-i_has-bg"></span>
+                                <div class="ris-process__date ris-body-2">{{ \Illuminate\Support\Carbon::parse($topic->date)->format('d. F Y') }}</div>
+                                <h3 class="ris-process__name ris-h3">{{ $topic->name }}</h3>
+                                <div class="ris-process__text ris-body-2">{{ \Illuminate\Support\Str::limit(strip_tags($topic->text), 5000) }}</div>
+                                <div class="ris-process__wrapper">
+                                    <div class="ris-caption">Beschlussvorlage {{ $topic->reference }}</div>
 
-                                @if (isset($topic->files))
-                                    <a href="{{ $topic->files[0]->accessUrl }}" class="ris-link ris-link_button ris-link_right"
-                                        title="Beschlussvorlage öffnen"
-                                    >
-                                        Beschlussvorlage öffnen
-                                        <span class="ris-i ris-i_resize-text"></span>
-                                    </a>
-                                @endif
+                                    @if (isset($topic->files))
+                                        <a href="{{ $topic->files[0]->accessUrl }}" class="ris-link ris-link_button ris-link_right"
+                                            title="Beschlussvorlage öffnen"
+                                        >
+                                            Beschlussvorlage öffnen
+                                            <span class="ris-i ris-i_resize-text"></span>
+                                        </a>
+                                    @endif
+                                </div>
                             </div>
-                        </div>
 
-                        @if (isset($topic->process))
                             @foreach ($topic->process as $process)
-                                @if (isset($process->meeting))
-                                    <div class="ris-process__agendum ris-process__item">
+                                @if (isset($process->meeting) and isset($process->agendum))
+                                    <div class="ris-process__agendum ris-process__item"
+                                        v-if="!processSortedList.length > 0"
+                                    >
                                         <span class="ris-i ris-i_check ris-i_has-bg"></span>
 
                                         @if (isset($process->meeting->dateFrom))
@@ -130,9 +132,44 @@
                                     </div>
                                 @endif
                             @endforeach
-                        @endif
-                    </div>
-                </section>
+
+                            <div class="ris-process__agendum ris-process__item"
+                                v-for="process in processSortedList"
+                                v-cloak
+                            >
+                                <span class="ris-i ris-i_check ris-i_has-bg"></span>
+
+                                <div class="ris-process__agendum-start ris-body-2"
+                                    v-if="process.meeting.dateFrom"
+                                >
+                                    @{{ process.meeting.dateFrom | momentDate }}
+                                </div>
+                                <h3 class="ris-process__agendum-name ris-h3"
+                                    v-if="process.agendum.name"
+                                >
+                                    @{{ process.agendum.name }}
+                                </h3>
+                                <div class="ris-process__meeting-state ris-body-2"
+                                    v-if="process.agendum.resolutionText"
+                                >
+                                    @{{ process.agendum.resolutionText }}
+                                </div>
+
+                                <div class="ris-process__wrapper">
+                                    <div>
+                                        <div class="ris-caption">Tagesordnungspunkt (TOP) @{{ process.agendum.number }}</div>
+                                    </div>
+                                    <a :href="'/meeting/' + process.meeting.id" class="ris-link ris-link_button ris-link_right"
+                                        title="Zur Sitzung"
+                                    >
+                                        Zur Sitzung
+                                        <span class="ris-i ris-i_chevron-right"></span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </theme-sort>
             @endif
 
             @if (isset($topic->solution))

@@ -1,19 +1,16 @@
 <script>
-import Swiper from 'swiper';
-import noticeMixin from '../mixins/NoticeMixin';
+import noticeMixin from '../../mixins/NoticeMixin';
 
 const axios = require('axios');
 
 export default {
-    name: 'ThemeOverview',
+    name: 'ThemeList',
     mixins: [noticeMixin],
     data: () => ({
         activeFilter: false,
         loading: false,
         firstLoading: true,
-        themeListNew: [],
-        themeListProgress: [],
-        themeListFinished: [],
+        themeListData: [],
         themeFirstBlock: '.ris-card-list__themes',
         postcodeList: [],
         selectedDistrictList: [],
@@ -37,10 +34,7 @@ export default {
 
             this.loading = true;
             this.postcodeList = [];
-
-            this.themeListNew = [];
-            this.themeListProgress = [];
-            this.themeListFinished = [];
+            this.themeListData = [];
 
             // collapse filter block when the district is selected
             this.collapseFilter();
@@ -57,19 +51,8 @@ export default {
                     .then(res => {
                         if (res.data.data.length > 0) {
                             res.data.data.forEach((topic) => {
-                                if (topic.newTopic) {
-                                    if (this.themeListNew.length < 10) {
-                                        this.themeListNew.push(topic);
-                                    }
-                                } else if (topic.finished) {
-                                    if (this.themeListFinished.length < 10) {
-                                        this.themeListFinished.push(topic);
-                                    }
-                                } else {
-                                    if (this.themeListProgress.length < 10) {
-                                        this.themeListProgress.push(topic);
-                                    }
-                                }
+
+                                this.themeListData.push(topic);
 
                                 // for filter block
                                 if (topic.location.postalCode) {
@@ -129,37 +112,6 @@ export default {
         if (this.defaultDistrictList) {
             this.districtList = this.defaultDistrictList.slice(0);
         }
-
-        new Swiper ('.swiper-container', {
-            slidesPerView: 3,
-            spaceBetween: 16,
-
-            breakpoints: {
-                /*1920: {
-                    slidesPerView: 7
-                },
-                1440: {
-                    slidesPerView: 6
-                },
-                1280: {
-                    slidesPerView: 5
-                },
-                1024: {
-                    slidesPerView: 3
-                },*/
-                768: {
-                    slidesPerView: 3
-                },
-                640: {
-                    slidesPerView: 2,
-                    spaceBetween: 8,
-                },
-                425: {
-                    slidesPerView: 'auto',
-                    spaceBetween: 8,
-                }
-            }
-        });
     },
 };
 </script>

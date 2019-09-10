@@ -5,7 +5,6 @@ import noticeMixin from '../mixins/NoticeMixin';
 
 const axios = require('axios');
 const moment = require('moment');
-require('moment/locale/de');
 
 Vue.use(VCalendar, {
     firstDayOfWeek: 2,  // Monday

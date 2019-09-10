@@ -10,7 +10,9 @@ require('./polyfill');
 
 import Vue from 'vue';
 import iView from 'iview';
+import moment from 'moment';
 
+moment.locale('de');
 Vue.use(iView);
 
 require('./bootstrap');

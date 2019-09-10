@@ -9,7 +9,7 @@ steps:
   - wait
 
   - label: 'production'
-    branches: 'feature/devops-stage'
+    branches: 'master'
     agents:
       project: ratsinfosys
     command:
@@ -21,7 +21,7 @@ steps:
   - wait
 
   - label: 'deploy to stage server'
-    branches: 'feature/devops-stage'
+    branches: 'master'
     agents:
       project: ratsinfosys
     command:

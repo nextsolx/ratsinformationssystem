@@ -48,12 +48,12 @@ export default {
         <theme-component
             :theme-list-data="this.unfilteredList"
             :theme-list-type="themeListType"
-        />
+                />
 
         <content-loader v-if="loading"
             :primary-color="'#dadce0'"
             :height="100"
-        >
+                >
             <rect x="5" y="15" rx="4" ry="4" width="20" height="6" />
             <rect x="5" y="30" rx="4" ry="4" width="20" height="6" />
 

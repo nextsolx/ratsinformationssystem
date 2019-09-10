@@ -14,7 +14,7 @@
                 </div>
                 <div class="ris-caption">Thema {{ $topic->reference }}</div>
                 <h1 class="ris-headline">{{ $topic->name }}</h1>
-                <div class="ris-caption">Zuletzt aktualisiert: {{ \Carbon\Carbon::parse($topic->modified)->format('d.m.Y') }}</div>
+                <div class="ris-caption">Zuletzt aktualisiert: {{ \Illuminate\Support\Carbon::parse($topic->modified)->format('d.m.Y') }}</div>
             </section>
 
             <section class="ris-section-wrapper">
@@ -83,14 +83,14 @@
                     <div class="ris-process">
                         <div class="ris-process__detail ris-process__item">
                             <span class="ris-i ris-i_check ris-i_has-bg"></span>
-                            <div class="ris-process__date ris-body-2">{{ \Carbon\Carbon::parse($topic->date)->format('d. F Y') }}</div>
+                            <div class="ris-process__date ris-body-2">{{ \Illuminate\Support\Carbon::parse($topic->date)->format('d. F Y') }}</div>
                             <h3 class="ris-process__name ris-h3">{{ $topic->name }}</h3>
                             <div class="ris-process__text ris-body-2">{{ \Illuminate\Support\Str::limit(strip_tags($topic->text), 5000) }}</div>
                             <div class="ris-process__wrapper">
                                 <div class="ris-caption">Beschlussvorlage {{ $topic->reference }}</div>
 
                                 @if (isset($topic->files))
-                                    <a href="/meeting/{{ $topic->files[0]->accessUrl }}" class="ris-link ris-link_button ris-link_right"
+                                    <a href="{{ $topic->files[0]->accessUrl }}" class="ris-link ris-link_button ris-link_right"
                                         title="Beschlussvorlage öffnen"
                                     >
                                         Beschlussvorlage öffnen
@@ -107,7 +107,7 @@
                                         <span class="ris-i ris-i_check ris-i_has-bg"></span>
 
                                         @if (isset($process->meeting->dateFrom))
-                                            <div class="ris-process__agendum-start ris-body-2">{{ \Carbon\Carbon::parse($process->meeting->dateFrom)->format('d. F Y') }}</div>
+                                            <div class="ris-process__agendum-start ris-body-2">{{ \Illuminate\Support\Carbon::parse($process->meeting->dateFrom)->format('d. F Y') }}</div>
                                         @endif
                                         @if ($process->agendum->name)
                                             <h3 class="ris-process__agendum-name ris-h3">{{ $process->agendum->name }}</h3>
@@ -171,7 +171,7 @@
 
                     @foreach($topic->files as $file)
                         <a class="ris-document ris-document-one ris-link" title="{{ $file->name }}"
-                            href="/{{ $file->downloadUrl }}"
+                            href="{{ $file->downloadUrl }}"
                         >
                             <div class="ris-icon-wrapper">
                                 <img src="/img/pdf.svg" class="ris-img" alt="{{ $file->name }}"/>

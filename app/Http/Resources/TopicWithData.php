@@ -31,7 +31,9 @@ class TopicWithData extends JsonResource
             'newTopic' => $this->isNew(),
             'location' => Location::collection($this->locations),
             'meetings' => Meeting::collection($this->meetings),
-            'process' => Consultation::collection($this->consultations),
+            'process' => Consultation::collection($this->consultations->sortByDesc(function ($consultation) {
+                return $consultation->meeting->start ?? null;
+            })),
             'files' => File::collection($this->files),
             'solution' => 'Der Vorschlag der Verwaltung wurde ohne Änderungen beschlossen.',
             'whatNext' => 'Die Politik beauftragt die Verwaltung mit der Umsetzung ihrer Entscheidung.',

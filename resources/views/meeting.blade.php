@@ -105,7 +105,7 @@ if (isset($meeting['people']) and count($meeting['people']) > 0) {
                         @if (isset($meeting['files']) and count($meeting['files']) > 0)
                             @foreach($meeting['files'] as $file)
                                 <a class="ris-document-list__item ris-link" title="{{ $file->name }}"
-                                    href="/{{ $file->downloadUrl }}"
+                                    href="{{ $file->downloadUrl }}"
                                 >
                                     <span class="ris-i ris-i_download"></span>
                                     <span class="ris-text">{{ $file->name }}</span>

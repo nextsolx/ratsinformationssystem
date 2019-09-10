@@ -25,7 +25,12 @@ export default {
                     <span class="ris-i ris-i_notice-box ris-committee-info__notice"/>
                     „Sie haben ein Anliegen, über das ein politisches Gremium entscheiden soll?“
                 </h3>
-                <button class="ris-button ris-committee-info__button">Eingabe einreichen</button>
+                <a class="ris-link ris-link_button ris-committee-info__button"
+                    href="https://www.stadt-koeln.de/service/onlinedienste/anregungen-beschwerden/index.html"
+                    target="_blank"
+                        >
+                    Eingabe einreichen
+                </a>
             </div>
         </div>
         <nav class="ris-committee-info__nav">

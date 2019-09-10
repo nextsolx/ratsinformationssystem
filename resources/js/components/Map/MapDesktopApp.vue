@@ -1,6 +1,6 @@
 <script>
 import L from 'leaflet';
-import { LMap, LTileLayer, LMarker, LPopup, LPolygon } from 'vue2-leaflet';
+import { LMap, LTileLayer, LPopup, LPolygon } from 'vue2-leaflet';
 import MapDesktopAside from './MapDesktopAside';
 require('leaflet-fullscreen');
 
@@ -9,7 +9,6 @@ export default {
     components: {
         LMap,
         LTileLayer,
-        LMarker,
         LPopup,
         LPolygon,
         MapDesktopAside

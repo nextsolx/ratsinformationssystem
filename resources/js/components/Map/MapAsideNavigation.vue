@@ -46,7 +46,7 @@ export default {
         },
         buttonHandleInSide (value) {
             this.menuIsActive = false;
-            this.loading = true
+            this.loading = true;
             switch (this.location) {
                 case 'district': {
                     this.district = value;
@@ -94,8 +94,7 @@ export default {
             }
         },
         changeTitle (title) {
-            this.title = title;
-            this.$emit('changeTitle', this.title);
+            this.$emit('changeTitle', title);
         }
     },
     created () {
@@ -110,7 +109,7 @@ export default {
             v-if="district"
             class="ris-map-desktop-aside__nav-btn"
             @click="buttonHandleOutSide">
-            <span class="ris-i ris-i_back ris-i_has-bg"></span>
+            <span class="ris-i ris-i_back ris-i_has-bg" />
             Zurück zur Bezirksübersicht
         </button>
         <transition name="fade-long">

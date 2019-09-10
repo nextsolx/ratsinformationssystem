@@ -89,11 +89,6 @@ export default {
             return moment(date).format('dddd, DD. MMMM YYYY');
         },
     },
-    mounted() {
-        window.addEventListener('load', () => {
-            this.createObserver();
-        }, false);
-    },
 };
 </script>
 

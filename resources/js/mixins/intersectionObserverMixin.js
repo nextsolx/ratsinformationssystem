@@ -16,10 +16,9 @@ export default {
                 rootMargin: '0px',
                 threshold: this.buildThresholdList()
             };
-
             const observer = new IntersectionObserver(this.handleIntersect, options),
                 observableBlock = document.querySelector(this.observableBlock);
-            observer.observe(observableBlock);
+            observableBlock && observer.observe(observableBlock);
         },
         handleIntersect(entries) {
             entries.forEach(entry => {
@@ -39,5 +38,10 @@ export default {
             thresholds.push(0);
             return thresholds;
         },
-    }
+    },
+    mounted() {
+        window.addEventListener('load', () => {
+            this.createObserver();
+        }, false);
+    },
 };

@@ -2,13 +2,17 @@
 const moment = require('moment');
 import topics from '../../api/topics';
 import MapAsideNavigation from './MapAsideNavigation';
-import lazyLoadMixin from '../../mixins/lazyLoadMixin';
+import intersectionObserverMixin from '../../mixins/intersectionObserverMixin';
+import { ContentLoader } from 'vue-content-loader';
 export default {
     name: 'MapDesktopAside',
     components: {
-        MapAsideNavigation
+        MapAsideNavigation,
+        ContentLoader
     },
-    mixins: [lazyLoadMixin],
+    mixins: [
+        intersectionObserverMixin
+    ],
     data () {
         return {
             title: 'Karte',
@@ -16,28 +20,38 @@ export default {
             newsList: [],
             totalThemes: 0,
             paginationPage: 1,
+            loading: false,
             typeOfTheme: 'new',
-            totalThemesText: 'Themen in ganz Köln'
+            totalThemesText: 'Themen in ganz Köln',
+            observableBlock: '.ris-load-element',
         };
     },
     methods: {
         async getThemes () {
+            this.loading = true;
             const themes = await topics.getPaginationList('new', this.paginationPage);
-            this.newsList = [...this.newsList, ...themes.data];
-            this.totalThemes = themes.meta.total;
+            this.putData(themes);
         },
         async getDistrictThemes (value) {
+            this.loading = true;
             const themes = await topics.getTopicsByDistrictList(value, this.paginationPage);
-            this.newsList = [...this.newsList, ...themes.data];
-            this.totalThemes = themes.meta.total;
+            this.putData(themes);
         },
         async getIndexThemes (value) {
+            this.loading = true;
             const themes = await topics.getTopicsByIndexList(value, this.paginationPage);
-            this.newsList = [...this.newsList, ...themes.data];
-            this.totalThemes = themes.meta.total;
+            this.putData(themes);
+        },
+        putData (themes) {
+            if (this.loading) {
+                this.newsList = [...this.newsList, ...themes.data];
+                this.totalThemes = themes.meta.total;
+            }
+            this.loading = false;
         },
         changeDirection ({ type, value }) {
             this.newsList = [];
+            this.paginationPage = 1;
             if (type === 'district') {
                 this.totalThemesText = `Thema in ${value} (Bezirk)`;
                 this.getDistrictThemes(value);
@@ -50,6 +64,12 @@ export default {
                 this.totalThemesText = `Thema in ${value}`;
                 this.getIndexThemes(value);
             }
+        },
+        lazyHandle () {
+            if (!this.loading && this.newsList.length) {
+                this.paginationPage++;
+                this.getThemes();
+            }
         }
     },
     filters: {
@@ -57,9 +77,9 @@ export default {
             return moment(data).format('DD.MM.YYYY');
         }
     },
-    created () {
+    created() {
         this.getThemes();
-    },
+    }
 };
 </script>
 
@@ -71,7 +91,7 @@ export default {
         <p class="ris-map-desktop-aside__caption">
             {{ `${totalThemes} ${totalThemesText}` }}
         </p>
-        <ul class="ris-map-desktop-aside-theme-list">
+        <transition-group tag="ul" name="fade" class="ris-map-desktop-aside-theme-list">
             <li
                 class="ris-map-desktop-aside-theme-list__item"
                 v-for="theme in newsList"
@@ -94,6 +114,12 @@ export default {
                     </div>
                 </a>
             </li>
-        </ul>
+        </transition-group>
+        <span class="ris-load-element" />
+        <content-loader v-if="loading" :primary-color="'#dadce0'" :height="140">
+            <rect x="125" y="20" rx="4" ry="4" width="150" height="6" />
+            <rect x="125" y="50" rx="3" ry="3" width="120" height="6" />
+            <circle cx="60" cy="45" r="36" />
+        </content-loader>
     </aside>
 </template>

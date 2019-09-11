@@ -25,7 +25,7 @@ export default {
             :key="item.label">
             <button
                 :title="item.label"
-                @click="$emit('click', item.value)"
+                @click="$emit('clickCrumbs', item.value)"
                 class="ris-link">
                 <span>{{ item.label }}</span>
                 <span class="ris-i ris-i_chevron-right"/>

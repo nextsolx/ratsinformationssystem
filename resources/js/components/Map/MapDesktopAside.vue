@@ -83,7 +83,7 @@ export default {
 
 <template>
     <aside class="ris-map-desktop-aside">
-        <MapAsideNavigation @changeLocation="changeLocation" @changeDirection="changeDirection" />
+        <MapAsideNavigation @changeDirection="changeDirection" />
         <h2 class="ris-map-desktop-aside__subtitle">{{ subTitle }}</h2>
         <p class="ris-map-desktop-aside__caption">
             {{ `${totalThemes} ${totalThemesText}` }}

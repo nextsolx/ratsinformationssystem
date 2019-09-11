@@ -38,8 +38,9 @@ export default {
         async getSubdistrictList () {
             this.changeTitle(this.district + ' (Bezirk)');
             this.subTitle = 'Themen in diesem Bezirk';
-            this.navigationList = await location.getSubdistricts(this.district);
             this.location = 'subdistrict';
+            console.log(this.location);
+            this.navigationList = await location.getSubdistricts(this.district);
             this.loading = false;
         },
         async getIndexesList() {
@@ -73,11 +74,13 @@ export default {
                 }
             }
         },
-        buttonHandleOutSide (value) {
+        buttonHandleOutSide (e) {
             this.menuIsActive = false;
-            switch (value || this.location) {
+            console.log(e.target.value, this.location);
+            switch (e.target.value || this.location) {
                 case 'index': {
                     this.changeTitle(this.district + ' (Viertel)');
+                    console.log('ke');
                     this.getSubdistrictList();
                     break;
                 }
@@ -110,7 +113,7 @@ export default {
 
 <template>
     <div>
-        <MapAsideBreadcrumbs :option-list="[]" @click="buttonHandleOutSide" />
+        <MapAsideBreadcrumbs :option-list="[]" @clickCrumbs="buttonHandleOutSide" />
         <h1 class="ris-map-desktop-aside__heading">{{ title }}</h1>
         <button
             v-if="district"

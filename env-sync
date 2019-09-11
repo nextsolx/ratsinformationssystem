@@ -1,13 +1,45 @@
 #!/bin/bash
 
-lastChange=$(date --date="$(ls -al --time-style="+%Y-%m-%d %H:%M:%S" .env | awk '{print $6" "$7}')" | awk '{print $6"-"$2"-"$3" "$4}')
-remote=$(s3cmd info s3://ris-space/env-stage | grep "Last mod:" | awk '{print $6"-"$5"-"$4" "$7}')
-lastPull=""
-echo $local
-echo $remote
+set -e
 
-if [ $lastChange == $remote ]; then
-  echo "Strings are equal"
-else
-  echo "Strings are not equal"
-fi
+LOCALFILE=".env"
+LOCALPATH="./"
+SPACE="ris-space"
+FILE="env-stage"
+
+COMMAND=$1; shift 1
+case $COMMAND in
+    pull)
+        if [ -f "$LOCALFILE" ]
+        then
+            mv $LOCALFILE "$LOCALFILE-backup"
+        fi
+
+        s3cmd get s3://$SPACE/$FILE $LOCALFILE
+
+        echo $(date --date="$(ls -al --time-style="+%Y-%m-%d %H:%M:%S" $LOCALFILE | awk '{print $6" "$7}')" | awk '{print $6"-"$2"-"$3" "$4}') > lastPull
+        ;;
+
+    push)
+        changeTime=$(date --date="$(ls -al --time-style="+%Y-%m-%d %H:%M:%S" $LOCALFILE | awk '{print $6" "$7}')" | awk '{print $6"-"$2"-"$3" "$4}')
+
+        remoteTime=$(s3cmd info s3://$SPACE/$FILE | grep "Last mod:" | awk '{print $6"-"$5"-"$4" "$7}')
+
+        pullTime=$(<lastPull)
+
+        if [ $pullTime -eq $remoteTime ] && [ $pullTime -ne $changeTime]
+         then
+            s3cmd put --force $LOCALFILE s3://$SPACE/$FILE
+        else
+            echo Nothing to push
+        fi
+        ;;
+    *)
+        echo not valid
+        ;;
+esac
+
+#changeTime=$(date --date="$(ls -al --time-style="+%Y-%m-%d %H:%M:%S" .env | awk '{print $6" "$7}')" | awk '{print $6"-"$2"-"$3" "$4}')
+#remoteTime=$(s3cmd info s3://ris-space/env-stage | grep "Last mod:" | awk '{print $6"-"$5"-"$4" "$7}')
+#pullTime
+

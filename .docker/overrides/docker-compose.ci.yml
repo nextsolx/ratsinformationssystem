@@ -6,8 +6,6 @@ x-container: &container
     - .:/var/www/html
   links:
     - "mysql"
-  env_file:
-    - .env
 
 x-environment: &environment
   # php configuration

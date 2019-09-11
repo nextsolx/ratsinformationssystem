@@ -19,10 +19,6 @@ services:
     <<: *container
     environment:
       <<: *environment
-    build:
-      context: .
-      dockerfile: .docker/app/Dockerfile
-      target: develop
     ports:
       - 80:80
 

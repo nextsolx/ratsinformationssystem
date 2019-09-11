@@ -57,7 +57,6 @@ case $COMMAND in
         ;;
 
      ci)
-        cp -n ./.env.example ./.env
         # modifier
         # when running in CI or other env where there is no access to TTY for shell script
         # this modifier will adjust docker-compose arguments to have that in mind

@@ -1,7 +1,7 @@
 .ris-map-desktop-aside {
     width: 320px;
     padding: 0 16px;
-    max-height: calc(100vh - 112px);
+    height: calc(100vh - 112px);
     overflow-y: scroll;
     &__nav {
         &-btn {

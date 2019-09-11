@@ -1,10 +1,14 @@
 <script>
 import clickOutSide from '../../tools/clickOutSide';
 import location from '../../api/location';
+import MapAsideBreadcrumbs from './MapAsideBreadcrumbs';
 export default {
     name: 'MapAsideNavigation',
     directives: {
         'outside': clickOutSide
+    },
+    components: {
+        MapAsideBreadcrumbs
     },
     props: {
         isActive: {
@@ -20,6 +24,7 @@ export default {
             district: '',
             subDistrict: '',
             loading: true,
+            title: 'Karte',
         };
     },
     methods: {
@@ -68,9 +73,9 @@ export default {
                 }
             }
         },
-        buttonHandleOutSide () {
+        buttonHandleOutSide (value) {
             this.menuIsActive = false;
-            switch (this.location) {
+            switch (value || this.location) {
                 case 'index': {
                     this.changeTitle(this.district + ' (Viertel)');
                     this.getSubdistrictList();
@@ -94,8 +99,8 @@ export default {
             }
         },
         changeTitle (title) {
-            this.$emit('changeTitle', title);
-        }
+            this.title = title;
+        },
     },
     created () {
         this.getDistrictList();
@@ -105,6 +110,8 @@ export default {
 
 <template>
     <div>
+        <MapAsideBreadcrumbs :option-list="[]" @click="buttonHandleOutSide" />
+        <h1 class="ris-map-desktop-aside__heading">{{ title }}</h1>
         <button
             v-if="district"
             class="ris-map-desktop-aside__nav-btn"

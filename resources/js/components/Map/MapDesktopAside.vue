@@ -15,13 +15,11 @@ export default {
     ],
     data () {
         return {
-            title: 'Karte',
             subTitle: 'Aktualle Themen',
             newsList: [],
             totalThemes: 0,
             paginationPage: 1,
             loading: false,
-            typeOfTheme: 'new',
             totalThemesText: 'Themen in ganz Köln',
             observableBlock: '.ris-load-element',
         };
@@ -70,7 +68,7 @@ export default {
                 this.paginationPage++;
                 this.getThemes();
             }
-        }
+        },
     },
     filters: {
         momentFullDate(data) {
@@ -85,8 +83,7 @@ export default {
 
 <template>
     <aside class="ris-map-desktop-aside">
-        <h1 class="ris-map-desktop-aside__heading">{{ title }}</h1>
-        <MapAsideNavigation @changeTitle="(value) => this.title = value" @changeDirection="changeDirection" />
+        <MapAsideNavigation @changeLocation="changeLocation" @changeDirection="changeDirection" />
         <h2 class="ris-map-desktop-aside__subtitle">{{ subTitle }}</h2>
         <p class="ris-map-desktop-aside__caption">
             {{ `${totalThemes} ${totalThemesText}` }}

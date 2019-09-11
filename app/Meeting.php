@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\OParl\OParlApiManager;
 use Illuminate\Support\Arr;
 
 class Meeting extends Model

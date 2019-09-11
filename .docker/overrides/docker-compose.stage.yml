@@ -1,0 +1,37 @@
+version: "3.4"
+
+x-container: &container
+  image: conv/ratsinformationssystem:staging
+  links:
+    - "mysql"
+  env_file:
+    - .env
+
+services:
+  app:
+    <<: *container
+    ports:
+      - 80:80
+
+  scheduler:
+    <<: *container
+    environment:
+      CONTAINER_ROLE: scheduler
+
+  mysql:
+    image: mysql:5.7
+    command: "--max_allowed_packet=32505856 --performance-schema=OFF --innodb_flush_log_at_trx_commit=2 --innodb_log_buffer_size=4M --innodb_buffer_pool_size=128M"
+    volumes:
+      - mysql:/var/lib/mysql
+    tmpfs:
+      - /tmp
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE:-database}
+      MYSQL_USER: ${DB_USERNAME:-database}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-database}
+
+volumes:
+  mysql:
+    driver: local
+

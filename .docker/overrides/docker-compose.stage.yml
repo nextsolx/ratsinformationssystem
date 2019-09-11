@@ -10,9 +10,6 @@ x-container: &container
 services:
   app:
     <<: *container
-    build:
-      dockerfile: .docker/app/Dockerfile
-      target: production
     ports:
       - 80:80
 

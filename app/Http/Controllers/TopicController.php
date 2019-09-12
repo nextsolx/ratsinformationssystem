@@ -60,7 +60,7 @@ class TopicController extends Controller
         $postalCode = $request->input('postalCode');
         $district = $request->input('district');
 
-        $paperQuery = Paper::with(Paper::$basicScope)->sort();
+        $paperQuery = Paper::with(Paper::$basicScope);
 
         if ($postalCode) {
             $paperQuery->whereHas('locations', function (Builder $query) use ($postalCode) {

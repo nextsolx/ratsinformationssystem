@@ -11,6 +11,31 @@
         margin: $indent-m $indent-ml;
     }
 
+    &-map {
+        margin: 16px 0;
+        width: 100%;
+        &__item {
+            flex-shrink: 1;
+            &:last-child {
+                flex-shrink: 0;
+                .ris-breadcrumbs__button {
+                    cursor: default;
+                    font-weight: bold;
+                }
+            }
+            &:not(:last-child) {
+                &:after {
+                    content: 'I';
+                    font-family: $ff-ris-font-icons;
+                    color: #ccc;
+                    font-size: 12px;
+                    padding-left: 8px;
+                    padding-right: 8px;
+                }
+            }
+        }
+    }
+
     &__home-link {
         .ris-i_house {
             color: $c-secondary;
@@ -21,6 +46,13 @@
         .ris-link__text {
             display: none;
         }
+    }
+
+    &__button {
+        outline: none;
+        border: none;
+        background: transparent;
+        padding: 0;
     }
 
     &__item {

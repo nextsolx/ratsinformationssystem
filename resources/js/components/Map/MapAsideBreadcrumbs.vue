@@ -6,12 +6,14 @@ export default {
             type: Array,
             default: () => []
         }
+    },
+    methods: {
     }
 };
 </script>
 
 <template>
-    <ol class="ris-breadcrumbs">
+    <ol class="ris-breadcrumbs ris-breadcrumbs-map">
         <li class="ris-breadcrumbs__item">
             <a href="/" title="Stadt Koeln"
                 class="ris-breadcrumbs__home-link ris-link">
@@ -20,15 +22,14 @@ export default {
                 <span class="ris-i ris-i_chevron-right"/>
             </a>
         </li>
-        <li class="ris-breadcrumbs__item"
-            v-for="item in optionList"
-            :key="item.label">
+        <li class="ris-breadcrumbs__item ris-breadcrumbs-map__item"
+            v-for="(item, index) in optionList"
+            :key="`${item.label}-${index}`">
             <button
                 :title="item.label"
-                @click="$emit('clickCrumbs', item.value)"
-                class="ris-link">
-                <span>{{ item.label }}</span>
-                <span class="ris-i ris-i_chevron-right"/>
+                @click="index === (optionList.length - 1) ? '' : $emit('clickCrumbs', item)"
+                class="ris-link ris-breadcrumbs__button">
+                {{ ((optionList.length - index >= 3) && (optionList.length > 2)) ? '...' : item.label }}
             </button>
         </li>
     </ol>

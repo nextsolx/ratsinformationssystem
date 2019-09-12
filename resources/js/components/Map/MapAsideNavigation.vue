@@ -25,6 +25,7 @@ export default {
             subDistrict: '',
             loading: true,
             title: 'Karte',
+            breadcrumbsList: [{ label: 'Köln', type: 'subdistrict' }]
         };
     },
     methods: {
@@ -39,7 +40,6 @@ export default {
             this.changeTitle(this.district + ' (Bezirk)');
             this.subTitle = 'Themen in diesem Bezirk';
             this.location = 'subdistrict';
-            console.log(this.location);
             this.navigationList = await location.getSubdistricts(this.district);
             this.loading = false;
         },
@@ -56,31 +56,49 @@ export default {
             switch (this.location) {
                 case 'district': {
                     this.district = value;
+                    this.breadcrumbsList.push({
+                        label: value,
+                        type: 'index'
+                    });
                     this.$emit('changeDirection', { type: 'district', value });
                     this.getSubdistrictList();
                     break;
                 }
                 case 'subdistrict': {
                     this.subDistrict = value;
+                    this.breadcrumbsList.push({
+                        label: value,
+                        type: 'end_point'
+                    });
                     this.getIndexesList();
                     break;
                 }
                 case 'index': {
                     this.changeTitle(value);
                     this.$emit('changeDirection', { type: 'index', value });
+                    this.breadcrumbsList.push({
+                        label: value,
+                        type: null
+                    });
                     this.location = 'end_point';
                     this.navigationList = [];
+                    this.loading = false;
                     break;
                 }
             }
         },
-        buttonHandleOutSide (e) {
+        buttonHandleOutSide (event, flag) {
             this.menuIsActive = false;
-            console.log(e.target.value, this.location);
-            switch (e.target.value || this.location) {
+            this.loading = true;
+            if (!flag) this.crumbsHandle();
+            switch (this.location) {
+                case 'end_point': {
+                    this.$emit('changeDirection', { type: 'district', value: this.district });
+                    this.getIndexesList();
+                    break;
+                }
                 case 'index': {
                     this.changeTitle(this.district + ' (Viertel)');
-                    console.log('ke');
                     this.getSubdistrictList();
                     break;
                 }
@@ -92,13 +110,18 @@ export default {
                     this.location = 'district';
                     break;
                 }
-                case 'district': {
-                    break;
+            }
+        },
+        crumbsHandle (value) {
+            this.loading = true;
+            if (value) {
+                this.breadcrumbsList = this.breadcrumbsList.slice(0, this.breadcrumbsList.indexOf(value) + 1);
+                if (value.type) {
+                    this.location = value.type;
+                    this.buttonHandleOutSide('e', 'flag');
                 }
-                default: {
-                    this.$emit('changeDirection', { type: 'district', value: this.district });
-                    this.getIndexesList();
-                }
+            } else {
+                this.breadcrumbsList = this.breadcrumbsList.slice(0, this.breadcrumbsList.length - 1);
             }
         },
         changeTitle (title) {
@@ -113,12 +136,12 @@ export default {
 
 <template>
     <div>
-        <MapAsideBreadcrumbs :option-list="[]" @clickCrumbs="buttonHandleOutSide" />
+        <MapAsideBreadcrumbs :option-list="breadcrumbsList" @clickCrumbs="crumbsHandle" />
         <h1 class="ris-map-desktop-aside__heading">{{ title }}</h1>
         <button
             v-if="district"
             class="ris-map-desktop-aside__nav-btn"
-            @click="buttonHandleOutSide">
+            @click="loading ? '' : buttonHandleOutSide()">
             <span class="ris-i ris-i_back ris-i_has-bg" />
             Zurück zur Bezirksübersicht
         </button>
@@ -132,7 +155,7 @@ export default {
                         class="ris-map-desktop-aside-list__item"
                         v-for="element in navigationList"
                         :key="`${element}-${location}`"
-                        @click="buttonHandleInSide(element)">
+                        @click="loading ? '' : buttonHandleInSide(element)">
                         <button class="ris-map-desktop-aside-list__button">
                             {{ element }}
                             <span class="ris-i ris-i_add"/>

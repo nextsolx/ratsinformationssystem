@@ -10,6 +10,18 @@
     }
 }
 
+.fade-long-enter-active,
+.fade-long-leave-active {
+    transition: all 1s;
+    opacity: 1;
+}
+
+.fade-long-leave {
+    &-to {
+        opacity: 0;
+    }
+}
+
 [v-cloak] {
     display: none;
 }

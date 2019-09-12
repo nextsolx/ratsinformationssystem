@@ -1,6 +1,6 @@
 <script>
 import clickOutSide from '../../tools/clickOutSide';
-import theme from '../../api/theme';
+import location from '../../api/location';
 import { decodeHashParams } from '../../tools/helpers';
 export default {
     name: 'Collapse',
@@ -53,17 +53,17 @@ export default {
         if (subdistrict) {
             this.activeElement = subdistrict;
             this.optionType = 'index';
-            this.optionList = await theme.getIndexes(district, subdistrict);
+            this.optionList = await location.getIndexes(district, subdistrict);
             return;
         }
         if (district) {
             this.activeElement = district;
             this.optionType = 'subdistrict';
-            this.optionList = await theme.getSubdistricts(district);
+            this.optionList = await location.getSubdistricts(district);
             return;
         }
         this.optionType = 'district';
-        this.optionList =  await theme.getDistricts();
+        this.optionList =  await location.getDistricts();
     },
 };
 </script>

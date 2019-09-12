@@ -1,0 +1,150 @@
+.ris-map-desktop-aside {
+    width: 320px;
+    padding: 0 $indent-m;
+    height: calc(100vh - 112px);
+    overflow-y: scroll;
+    &__nav {
+        &-btn {
+            border: none;
+            background-color: $c-white2;
+            color: #559CC3;
+            font-size: $fs-l;
+            padding: $indent-sm;
+            width: 100%;
+            text-align: left;
+            font-weight: bold;
+            margin-bottom: $indent-ml;
+            outline: none;
+
+            .ris-i {
+                margin-right: $indent-s;
+            }
+        }
+    }
+
+    &__sub-heading {
+        font-size: $fs-xll;
+        margin-bottom: $indent-s;
+    }
+
+    &-list {
+        list-style-type: none;
+        box-shadow: 0 1px 6px 0 rgba(0,0,0,0.32);
+        padding: 0;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+        margin: 0;
+        max-height: 153px;
+        overflow: hidden;
+        transition: all .7s ease-in-out;
+
+        &__item {
+            border-bottom: 1px solid $c-gray7;
+        }
+
+        &__button {
+            padding: $indent-m $indent-xl $indent-m $indent-m;
+            font-size: $fs-l;
+            font-weight: bold;
+            position: relative;
+            text-align: left;
+            width: 100%;
+            border: none;
+            background-color: $c-light-primary;
+            outline: none;
+            border-radius: 4px;
+
+            &:hover {
+                background-color: $c-white2;
+                cursor: pointer;
+            }
+
+            .ris-i_add {
+                position: absolute;
+                top: 50%;
+                left: calc(100% - #{$indent-xl});
+                transform: translateY(-50%);
+                color: rgb(139,139,139);
+            }
+        }
+
+        &.isActive {
+            transition: all .7s ease-in-out;
+            max-height: max-content;
+        }
+    }
+
+    &__control {
+        color: #559CC3;
+        text-align: center;
+        font-weight: 400;
+        padding: $indent-m 0;
+        width: 100%;
+        background-color: $c-light-primary;
+        outline: none;
+        border: none;
+        border-bottom-left-radius: 4px;
+        border-bottom-right-radius: 4px;
+        box-shadow: 0 1px 6px 0 rgba(0,0,0,0.32);
+        cursor: pointer;
+
+        .ris-i_expand-more {
+            font-size: $fs-m;
+        }
+
+        &.isActive {
+            .ris-i_expand-more {
+                transform: rotate(180deg) translateY(3px);
+            }
+        }
+    }
+    &__subtitle {
+        margin: $indent-ml 0 $indent-sm 0;
+    }
+    &__caption {
+        color: $c-gray8;
+    }
+    &-theme-list {
+        list-style-type: none;
+        padding: 0;
+        font-size: $fs-l;
+        &__item {
+            padding: $indent-m;
+            margin-bottom: $indent-m;
+            font-size: $fs-l;
+            border: 2px solid transparent;
+            border-radius: 4px;
+            box-shadow: 0 1px 6px 0 rgba(0,0,0,0.32);
+            &:hover {
+                border-color: $c-gray;
+            }
+        }
+        &__link {
+            display: flex;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        &__wrapper {
+            display: flex;
+            flex-direction: column;
+        }
+        &__info {
+            display: flex;
+            justify-content: space-between;
+            color: $c-gray8;
+        }
+        &__img {
+            height: 72px;
+            width: 72px;
+            margin-right: $indent-m;
+            flex-shrink: 0;
+        }
+        &__heading {
+            margin: 0 0 $indent-m 0;
+            color: $c-gray;
+            hyphens: auto;
+            font-size: $fs-l;
+            word-break: break-word;
+        }
+    }
+}

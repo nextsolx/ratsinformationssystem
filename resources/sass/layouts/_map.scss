@@ -1,25 +1,27 @@
 .ris-map {
     z-index: 1;
     display: flex;
+    width: 100%;
 
     @include breakpoint($bp-mobile-max) {
         height: 30vh;
         margin: auto;
-        width: 95%;
+        // width: 95%;
     }
 
     &-desktop {
         display: flex;
+        width: 100%;
 
         @include breakpoint($bp-mobile-max) {
             display: none;
         }
     }
+    &__desktop {
+        width: calc(100% - 320px);
+    }
 
     @include breakpoint($bp-tablet-min) {
-        // height: 1024px;
-        width: $width-aside-320;
-
         &-mobile {
             display: none;
         }

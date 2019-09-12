@@ -75,19 +75,19 @@ class TopicController extends Controller
         }
 
         $topics = TopicWithData::collection(
-            $paperQuery = Paper::with(Paper::$basicScope)->sort()->paginate(10)
+           Paper::with(Paper::$basicScope)->sort()->paginate(10)
         )->toResponse(request())->getData();
 
         $new = TopicWithData::collection(
-            $paperQuery = Paper::with(Paper::$basicScope)->sort()->new()->paginate(3)
+            Paper::with(Paper::$basicScope)->sort()->new()->paginate(3)
         )->toResponse(request())->getData();
 
         $finished = TopicWithData::collection(
-            $paperQuery = Paper::with(Paper::$basicScope)->sort()->finished()->paginate(3)
+            Paper::with(Paper::$basicScope)->sort()->finished()->paginate(3)
         )->toResponse(request())->getData();
 
         $prograss = TopicWithData::collection(
-            $paperQuery = Paper::with(Paper::$basicScope)->sort()->updated()->paginate(3)
+            Paper::with(Paper::$basicScope)->sort()->updated()->paginate(3)
         )->toResponse(request())->getData();
 
         return view('theme-overview')->with([

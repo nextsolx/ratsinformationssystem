@@ -45,7 +45,7 @@ export default {
             if (value) {
                 this.filteredList = this.unfilteredList
                     .filter(el => {
-                        if (el[this.filterValue].toLowerCase()) {
+                        if (el[this.filterValue]) {
                             return el[this.filterValue].toLowerCase().includes(value.toLowerCase());
                         }
                     });

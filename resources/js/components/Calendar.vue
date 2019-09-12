@@ -5,7 +5,6 @@ import intersectionObserverMixin from '../mixins/intersectionObserverMixin';
 
 const axios = require('axios');
 const moment = require('moment');
-require('moment/locale/de');
 
 export default {
     name: 'Calendar',

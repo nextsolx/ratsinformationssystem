@@ -16,7 +16,7 @@ class TopicController extends Controller
         $postalCode = $request->input('postalCode');
         $district = $request->input('district');
 
-        $paperQuery = \App\Paper::with(Paper::$basicScope);
+        $paperQuery = Paper::with(Paper::$basicScope);
 
         if($scope = $request->input('scope')){
             $paperQuery->{$scope}();
@@ -60,7 +60,7 @@ class TopicController extends Controller
         $postalCode = $request->input('postalCode');
         $district = $request->input('district');
 
-        $paperQuery = \App\Paper::with(Paper::$basicScope)->sort()->new();
+        $paperQuery = Paper::with(Paper::$basicScope);
 
         if ($postalCode) {
             $paperQuery->whereHas('locations', function (Builder $query) use ($postalCode) {
@@ -75,23 +75,23 @@ class TopicController extends Controller
         }
 
         $topics = TopicWithData::collection(
-            $paperQuery->sort()->paginate(100)
+           Paper::with(Paper::$basicScope)->sort()->paginate(10)
         )->toResponse(request())->getData();
 
         $new = TopicWithData::collection(
-            $paperQuery->sort()->new()->paginate(3)
+            Paper::with(Paper::$basicScope)->sort()->new()->paginate(3)
         )->toResponse(request())->getData();
 
         $finished = TopicWithData::collection(
-            $paperQuery->sort()->finished()->paginate(3)
+            Paper::with(Paper::$basicScope)->sort()->finished()->paginate(3)
         )->toResponse(request())->getData();
 
         $prograss = TopicWithData::collection(
-            $paperQuery->sort()->updated()->paginate(3)
+            Paper::with(Paper::$basicScope)->sort()->updated()->paginate(3)
         )->toResponse(request())->getData();
 
         return view('theme-overview')->with([
-            'topics' => $topics->data,
+            'topics_top' => $topics->data,
             'topics_new' => $new->data,
             'topics_progress' => $prograss->data,
             'topics_finished' => $finished->data,
@@ -111,7 +111,7 @@ class TopicController extends Controller
         $postalCode = $request->input('postalCode');
         $district = $request->input('district');
 
-        $paperQuery = \App\Paper::with(Paper::$basicScope)->sort()->new();
+        $paperQuery = Paper::with(Paper::$basicScope)->sort()->new();
 
         if ($postalCode) {
             $paperQuery->whereHas('locations', function (Builder $query) use ($postalCode) {
@@ -146,7 +146,7 @@ class TopicController extends Controller
         $postalCode = $request->input('postalCode');
         $district = $request->input('district');
 
-        $paperQuery = \App\Paper::with(Paper::$basicScope)->sort()->updated();
+        $paperQuery = Paper::with(Paper::$basicScope)->sort()->updated();
 
         if ($postalCode) {
             $paperQuery->whereHas('locations', function (Builder $query) use ($postalCode) {
@@ -164,7 +164,7 @@ class TopicController extends Controller
 
         return view('theme-list')->with([
             'theme_list' => $topics->data,
-            'theme_type' => 'progress',
+            'theme_type' => 'updated',
             'district_list' => [
                 'Innenstadt', 'Rodenkirchen', 'Lindenthal', 'Ehrenfeld',
                 'Nippes',  'Chorweiler', 'Porz',  'Kalk',  'Mülheim'
@@ -181,7 +181,7 @@ class TopicController extends Controller
         $postalCode = $request->input('postalCode');
         $district = $request->input('district');
 
-        $paperQuery = \App\Paper::with(Paper::$basicScope)->sort()->finished();
+        $paperQuery = Paper::with(Paper::$basicScope)->sort()->finished();
 
         if ($postalCode) {
             $paperQuery->whereHas('locations', function (Builder $query) use ($postalCode) {

@@ -122,30 +122,6 @@
             }
         }
 
-        &-completed {
-            align-items: center;
-            color: $c-red;
-            display: flex;
-            font-family: $ff-helvetica-neue;
-            font-size: $fs-l;
-            line-height: $lh-l;
-
-            @include breakpoint($bp-tablet-min) {
-                margin-right: $indent-ml;
-                max-width: 140px;
-            }
-
-            .ris-i_has-bg {
-                background-color: $c-red;
-                color: $c-white;
-                font-size: $fs-s;
-                height: 12px;
-                margin-right: $indent-s;
-                padding: 4px;
-                width: 12px;
-            }
-        }
-
         .ris-progress-bar {
             @include breakpoint($bp-tablet-min) {
                 margin-right: $indent-ml;

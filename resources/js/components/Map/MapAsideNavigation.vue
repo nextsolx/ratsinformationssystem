@@ -25,6 +25,7 @@ export default {
             subDistrict: '',
             loading: true,
             title: 'Karte',
+            subTitle: '',
             breadcrumbsList: [{ label: 'Köln', type: 'subdistrict' }]
         };
     },
@@ -34,18 +35,19 @@ export default {
         },
         async getDistrictList () {
             this.navigationList = await location.getDistricts();
+            this.subTitle = 'Stadtbezirke in Köln';
             this.loading = false;
         },
         async getSubdistrictList () {
             this.changeTitle(this.district + ' (Bezirk)');
-            this.subTitle = 'Themen in diesem Bezirk';
+            this.subTitle = 'Viertel in diesem Bezirk';
             this.location = 'subdistrict';
             this.navigationList = await location.getSubdistricts(this.district);
             this.loading = false;
         },
         async getIndexesList() {
             this.changeTitle(this.district + ' (Viertel)');
-            this.subTitle = 'Themen in diesem Viertel';
+            this.subTitle = 'PLZ in diesem Viertel';
             this.navigationList = await location.getIndexes(this.district, this.subDistrict);
             this.location = 'index';
             this.loading = false;
@@ -81,6 +83,7 @@ export default {
                         type: null
                     });
                     this.location = 'end_point';
+                    this.subTitle = '';
                     this.navigationList = [];
                     this.loading = false;
                     break;
@@ -145,6 +148,7 @@ export default {
             <span class="ris-i ris-i_back ris-i_has-bg" />
             Zurück zur Bezirksübersicht
         </button>
+        <h2 v-if="subTitle" class="ris-map-desktop-aside__sub-heading">{{ subTitle }}</h2>
         <transition name="fade-long">
             <nav class="ris-map-desktop-aside__nav"
                 v-if="!loading && navigationList.length"

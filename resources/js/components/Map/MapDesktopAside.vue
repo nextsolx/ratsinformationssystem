@@ -51,14 +51,20 @@ export default {
             this.newsList = [];
             this.paginationPage = 1;
             if (type === 'district') {
+                this.subTitle = 'Themen in diesem Bezirk';
                 this.totalThemesText = `Thema in ${value} (Bezirk)`;
                 this.getDistrictThemes(value);
             }
             else if (type === 'all') {
+                this.subTitle = 'Aktuelle Themen';
                 this.totalThemesText = 'Themen in ganz Köln';
                 this.getThemes();
             }
+            else if (type === 'index') {
+                this.subTitle = 'Themen in dieser PLZ';
+            }
             else {
+                this.subTitle = 'Themen in diesem Viertel';
                 this.totalThemesText = `Thema in ${value}`;
                 this.getIndexThemes(value);
             }

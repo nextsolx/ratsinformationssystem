@@ -31,8 +31,8 @@ class Person extends JsonResource
             'role' => $org ? $org->pivot->role : null,
             'function' => $org ? $org->pivot->role : null,
             'photo' => 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png',
-            'email' => 'dielinke.koeln@stadt-koeln', // @todo - fix mock data
-            'phone' => '0221-221 27840', // @todo - fix mock data
+            'email' => $this->email,
+            'phone' => $this->phone,
             'fax' => '0221-221 27840', // @todo - fix mock data
             'location' => 'Bezirksrathaus Rodenkirchen, Hauptstr. 85, 50996 Köln', // @todo - fix mock data
             'committeeList' => // @todo - fix mock data

@@ -124,6 +124,9 @@
             cursor: pointer;
             text-decoration: none;
         }
+        &__wrapper {
+            width: 100%;
+        }
         &__info {
             display: flex;
             justify-content: space-between;

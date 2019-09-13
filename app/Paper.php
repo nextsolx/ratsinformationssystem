@@ -18,7 +18,7 @@ class Paper extends Model
 
     protected $dates = [
         'date',
-        'modified'
+        'modified',
     ];
 
     protected $fillable = [
@@ -27,7 +27,7 @@ class Paper extends Model
         'reference',
         'paperType',
         'date',
-        'modified'
+        'modified',
     ];
 
     public static function initialize(array $data)
@@ -88,11 +88,6 @@ class Paper extends Model
     public function files()
     {
         return $this->belongsToMany(File::class);
-    }
-
-    public function scopeSort(Builder $query)
-    {
-        return $query->whereNotNull('date')->orderBy('date', 'DESC');
     }
 
     public function scopeNew(Builder $query)

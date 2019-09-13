@@ -124,14 +124,11 @@
             cursor: pointer;
             text-decoration: none;
         }
-        &__wrapper {
-            display: flex;
-            flex-direction: column;
-        }
         &__info {
             display: flex;
             justify-content: space-between;
             color: $c-gray8;
+            margin-right: 5px;
         }
         &__img {
             height: 72px;
@@ -140,6 +137,7 @@
             flex-shrink: 0;
         }
         &__heading {
+            display: block;
             margin: 0 0 $indent-m 0;
             color: $c-gray;
             hyphens: auto;

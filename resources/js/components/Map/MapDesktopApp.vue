@@ -1,7 +1,7 @@
 <script>
 import L from 'leaflet';
 import { LMap, LTileLayer, LPopup, LPolygon } from 'vue2-leaflet';
-import MapDesktopAside from './MapDesktopAside';
+import MapAside from './MapAside';
 require('leaflet-fullscreen');
 
 export default {
@@ -11,7 +11,7 @@ export default {
         LTileLayer,
         LPopup,
         LPolygon,
-        MapDesktopAside
+        MapAside
     },
     data() {
         return {
@@ -58,7 +58,7 @@ export default {
 
 <template>
     <div>
-        <MapDesktopAside class="ris-map-desktop-aside"/>
+        <MapAside class="ris-map-desktop-aside"/>
         <div id="map-desktop-osm" class="ris-map ris-map__desktop">
             <l-map ref="mapDesktopOsm"
                 :zoom="zoom" :center="center">

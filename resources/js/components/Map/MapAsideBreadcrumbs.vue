@@ -7,7 +7,26 @@ export default {
             default: () => []
         }
     },
+    computed: {
+        isShowed () {
+            return ((window.innerWidth <= 1040) && (this.optionList.length > 1));
+        }
+    },
     methods: {
+        checkList () {
+            if (this.isShowed) {
+                document.querySelector('.ris-header').classList.add('hidden');
+                document.querySelector('.ris-map__desktop').classList.add('fullHeight');
+            } else {
+                document.querySelector('.ris-header').classList.remove('hidden');
+                document.querySelector('.ris-map__desktop').classList.remove('fullHeight');
+            }
+        }
+    },
+    watch: {
+        optionList () {
+            this.checkList();
+        }
     }
 };
 </script>

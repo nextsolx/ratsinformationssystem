@@ -52,6 +52,7 @@ export default {
             this.$emit('selectedArea', { type, value });
 
             this.newsList = [];
+            this.totalThemes = 0;
             this.paginationPage = 1;
             if (type === 'district') {
                 this.subTitle = 'Themen in diesem Bezirk';
@@ -65,11 +66,11 @@ export default {
             }
             else if (type === 'index') {
                 this.subTitle = 'Themen in dieser PLZ';
+                this.totalThemesText = `Thema in ${value}`;
+                this.getIndexThemes(value);
             }
             else {
                 this.subTitle = 'Themen in diesem Viertel';
-                this.totalThemesText = `Thema in ${value}`;
-                this.getIndexThemes(value);
             }
         },
         lazyHandle () {

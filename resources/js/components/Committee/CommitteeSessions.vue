@@ -97,7 +97,11 @@ export default {
             {{ `${dropValue.label} (${sortedList.length} Sitzungen)` }}
         </h2>
         <div class="ris-calendar">
-            <CalendarCard class="ris-calendar__card-list" v-for="(meeting, index) in sortedList " :key="index" :meeting-sorted-day-list="meeting" />
+            <CalendarCard
+                class="ris-calendar__card-list"
+                v-for="(meeting, index) in sortedList "
+                :key="index"
+                :meeting-sorted-day-list="meeting" />
         </div>
     </div>
 </template>

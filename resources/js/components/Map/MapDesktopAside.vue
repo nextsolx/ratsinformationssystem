@@ -48,6 +48,9 @@ export default {
             this.loading = false;
         },
         changeDirection ({ type, value }) {
+            console.log('ACTION: ', type);
+            this.$emit('selectedArea', { type, value });
+
             this.newsList = [];
             this.paginationPage = 1;
             if (type === 'district') {

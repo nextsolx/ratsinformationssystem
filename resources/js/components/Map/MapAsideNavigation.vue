@@ -45,7 +45,7 @@ export default {
             this.loading = false;
         },
         async getIndexesList() {
-            this.changeTitle(this.district + ' (Viertel)');
+            this.changeTitle(this.subDistrict + ' (Viertel)');
             this.subTitle = 'PLZ in diesem Viertel';
             this.navigationList = await location.getIndexes(this.district, this.subDistrict);
             this.loading = false;
@@ -99,7 +99,7 @@ export default {
             switch (this.location) {
                 case 'index': {
                     this.location = 'subdistrict';
-                    this.$emit('changeDirection', { type: this.location, value: this.district });
+                    this.$emit('changeDirection', { type: this.location, value: this.subDistrict });
                     this.getIndexesList();
                     break;
                 }

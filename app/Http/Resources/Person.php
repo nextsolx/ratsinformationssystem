@@ -33,8 +33,8 @@ class Person extends JsonResource
             'photo' => 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png',
             'email' => $this->email,
             'phone' => $this->phone,
-            'fax' => '0221-221 27840', // @todo - fix mock data
-            'location' => new Location($this->location->first()),
+            'fax' => null,
+            'location' => new Location($this->location),
             'committeeList' => $org,
             'files' => // @todo - fix mock data
                 [

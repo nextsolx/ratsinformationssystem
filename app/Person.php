@@ -27,7 +27,6 @@ class Person extends Model
     public static function initialize (array $data)
     {
         $data['id'] = self::extractId($data);
-
         $data = collect($data)->mapWithKeys(function ($value, $key) {
             if (in_array($key, (new static())->dates)) {
                 $value = Carbon::parse($value);

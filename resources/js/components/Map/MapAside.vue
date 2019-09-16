@@ -48,7 +48,6 @@ export default {
             this.loading = false;
         },
         changeDirection ({ type, value }) {
-            //console.log('changeDirection: ', type);
             this.$emit('selectedArea', { type, value });
 
             this.newsList = [];

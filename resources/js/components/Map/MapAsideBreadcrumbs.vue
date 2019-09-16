@@ -9,7 +9,7 @@ export default {
     },
     computed: {
         isShowed () {
-            return ((window.innerWidth <= 1040) && (this.optionList.length > 1));
+            return this.optionList.length > 1;
         }
     },
     methods: {
@@ -25,14 +25,18 @@ export default {
     },
     watch: {
         optionList () {
-            this.checkList();
+            if (window.innerWidth <= 1040) {
+                this.checkList();
+            }
         }
     }
 };
 </script>
 
 <template>
-    <ol class="ris-breadcrumbs ris-breadcrumbs-map">
+    <ol
+        class="ris-breadcrumbs ris-breadcrumbs-map"
+        :class="{ hidden : this.optionList.length < 2 }">
         <li class="ris-breadcrumbs__item">
             <a href="/" title="Stadt Koeln"
                 class="ris-breadcrumbs__home-link ris-link">

@@ -26,7 +26,7 @@ export default {
             loading: true,
             title: 'Karte',
             subTitle: '',
-            breadcrumbsList: [{ label: 'Köln', type: 'subdistrict' }]
+            breadcrumbsList: [{ label: 'Köln', type: 'district' }]
         };
     },
     methods: {

@@ -19,6 +19,7 @@ export default {
     data() {
         return {
             zoom: 12,
+            zoomSnap: 0.5,
             center: L.latLng(50.9360, 6.9602),
             url:'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
             attribution:'&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
@@ -28,18 +29,11 @@ export default {
                 iconAnchor: [24, 55],
                 popupAnchor: [0, -30]
             }),
-            polygonChild: {
-                latlngs: [
-                    [51.0025, 6.9299],
-                    [51.0025, 6.9489],
-                    [51.0060, 6.9389],
-                    [51.0135, 6.9299],
-                ],
-            },
             polygonColor: '#E1151B',
             display: 'district',
             areaValue: '',
-            areaType: 'all',
+            areaPreviousValue: '',
+            areaType: 'city',
             markerList: [
                 "Innenstadt","Rodenkirchen","Lindenthal","Ehrenfeld","Nippes","Chorweiler","Porz","Kalk","Mülheim"
             ]
@@ -67,48 +61,88 @@ export default {
         },
         areaWithPoint() {
             let allPointInSelectedArea = [];
+            let latLngBoundArr = [];
+            let latLngReversed = '';
+
             if (areaData) {
                 for(let city in areaData) {
                     //console.log(areaData[city]);
 
                     for(let district in areaData[city]){
                         //console.log(district, areaData[city][district], areaData[city][district].point);
-                        //console.log('Area type: ', this.areaType);
-                        let areaDataPoint = '';
+                        //console.log('Area type: ', this.areaType, this.areaValue);
 
-                        if (this.areaValue && this.areaType === 'district') {
-                            //console.log('new Area Point', this.areaValue, this.areaType, areaData[city][district]);
+                        if (this.areaValue && this.areaType === 'index') {
+                            //console.log('new Area Point', this.areaValue, this.areaPreviousValue, this.areaType);
+
+                            if (areaData[city][district][this.areaPreviousValue] &&
+                                areaData[city][district][this.areaPreviousValue][this.areaValue]) {
+                                //console.log('Chosen postcode: ', areaData[city][district][this.areaPreviousValue][this.areaValue].point);
+
+                                latLngReversed = areaData[city][district][this.areaPreviousValue][this.areaValue].point.slice().reverse();
+                                allPointInSelectedArea.push({
+                                    latLng: latLngReversed,
+                                    areaName: this.areaValue,
+                                });
+
+                                latLngBoundArr.push(latLngReversed);
+                            }
+                        } else if (this.areaValue && this.areaType === 'subdistrict') {
+                            // @todo -- fix bug with go back link via Zur link
+                            //console.log('new Area Point', this.areaValue, this.areaPreviousValue, this.areaType);
+
+                            for (let subdistrict in areaData[city][district]) {
+                                for (let postcode in areaData[city][district][subdistrict]) {
+                                    if (subdistrict === this.areaValue && postcode !== 'point' && postcode !== 'polygon') {
+                                        //console.log('Chosen postcode: ', postcode, areaData[city][district][subdistrict][postcode].point);
+
+                                        latLngReversed = areaData[city][district][subdistrict][postcode].point.slice().reverse();
+                                        allPointInSelectedArea.push({
+                                            latLng: latLngReversed,
+                                            areaName: postcode,
+                                        });
+
+                                        latLngBoundArr.push(latLngReversed);
+                                    }
+                                }
+                            }
+                        } else if (this.areaValue && this.areaType === 'district') {
+                            //console.log('new Area Point', this.areaValue, this.areaPreviousValue, this.areaType);
 
                             for (let subdistrict in areaData[city][district]) {
                                 if (district === this.areaValue && subdistrict !== 'point' && subdistrict !== 'polygon') {
-                                    console.log('Subdistrict: ', subdistrict, areaData[city][district][subdistrict].point);
+                                    //console.log('Chosen subdistrict: ', subdistrict, areaData[city][district][subdistrict].point);
 
-                                    areaDataPoint = areaData[city][district][subdistrict].point.slice().reverse();
-
+                                    latLngReversed = areaData[city][district][subdistrict].point.slice().reverse();
                                     allPointInSelectedArea.push({
-                                        latLng: areaDataPoint,
+                                        latLng: latLngReversed,
                                         areaName: subdistrict,
                                     });
+
+                                    latLngBoundArr.push(latLngReversed);
                                 }
                             }
-                        } else {
+                        } else if (this.areaType === 'city') {
                             if (areaData[city][district] && areaData[city][district].point) {
 
-                                areaDataPoint = areaData[city][district].point.slice().reverse();
-
+                                latLngReversed = areaData[city][district].point.slice().reverse();
                                 allPointInSelectedArea.push({
-                                    latLng: areaDataPoint,
+                                    latLng: latLngReversed,
                                     areaName: district,
                                 });
+
+                                latLngBoundArr.push(latLngReversed);
                             }
                         }
                     }
                 }
 
-                if (this.areaType === 'all') {
-                    this.zoom = 12;
-                } else if (this.areaType === 'district') {
-                    this.zoom = 13;
+                if (latLngBoundArr.length > 0) {
+                    this.$nextTick(() => {
+                        // align and zoom by center of markers
+                        let markerBounds = L.latLngBounds(latLngBoundArr);
+                        this.$refs.mapDesktopOsm.mapObject.fitBounds(markerBounds);
+                    });
                 }
 
                 return allPointInSelectedArea;
@@ -119,6 +153,7 @@ export default {
     },
     methods: {
         selectedArea ({ type, value }) {
+            this.areaPreviousValue = this.areaValue;
             this.areaType = type;
             this.areaValue = value;
             console.log('Even was catch: ', type, value);
@@ -145,7 +180,7 @@ export default {
         <div id="map-desktop-osm" class="ris-map ris-map__desktop"
         >
             <l-map ref="mapDesktopOsm"
-                :zoom="zoom" :center="center"
+                :zoom="zoom" :zoomSnap="zoomSnap" :center="center"
             >
                 <l-tile-layer
                     :url="url"
@@ -156,12 +191,6 @@ export default {
                     :color="polygonColor"
                 >
                     <l-popup>some text</l-popup>
-                </l-polygon>
-                <l-polygon @click="display = 'district'" v-if="display === 'subdistrict'"
-                    :lat-lngs="polygonChild.latlngs"
-                    :color="polygonColor"
-                >
-                    <l-popup>another text</l-popup>
                 </l-polygon>
                 <div v-for="marker in areaWithPoint">
                     <l-marker

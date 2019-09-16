@@ -48,29 +48,29 @@ export default {
             this.loading = false;
         },
         changeDirection ({ type, value }) {
-            console.log('ACTION: ', type);
+            //console.log('changeDirection: ', type);
             this.$emit('selectedArea', { type, value });
 
             this.newsList = [];
             this.totalThemes = 0;
             this.paginationPage = 1;
-            if (type === 'district') {
+            if (type === 'city') {
+                this.subTitle = 'Aktuelle Themen';
+                this.totalThemesText = 'Themen in ganz Köln';
+                this.getThemes();
+            }
+            else if (type === 'district') {
                 this.subTitle = 'Themen in diesem Bezirk';
                 this.totalThemesText = `Thema in ${value} (Bezirk)`;
                 this.getDistrictThemes(value);
             }
-            else if (type === 'all') {
-                this.subTitle = 'Aktuelle Themen';
-                this.totalThemesText = 'Themen in ganz Köln';
-                this.getThemes();
+            else if (type === 'subdistrict') {
+                this.subTitle = 'Themen in diesem Viertel';
             }
             else if (type === 'index') {
                 this.subTitle = 'Themen in dieser PLZ';
                 this.totalThemesText = `Thema in ${value}`;
                 this.getIndexThemes(value);
-            }
-            else {
-                this.subTitle = 'Themen in diesem Viertel';
             }
         },
         lazyHandle () {

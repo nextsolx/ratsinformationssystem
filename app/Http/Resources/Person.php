@@ -81,14 +81,6 @@ class Person extends JsonResource
                 ],
             'files' => // @todo - fix mock data
                 [
-                [
-                    'name' => 'Erklärung nach dem Korruptionsbekämpfungsgesetz',
-                    'downloadUrl' => 'http://lorem.link',
-                ],
-                [
-                    'name' => 'Erklärung nach',
-                    'downloadUrl' => 'http://lorem.link',
-                ],
             ]
         ];
     }

@@ -21,7 +21,7 @@ class Person extends Model
         'life_source',
         'phone',
         'email',
-        'location',
+        'location_id',
     ];
 
     public static function initialize (array $data)
@@ -47,7 +47,7 @@ class Person extends Model
 
         return self::updateOrCreate(
             ['id' =>  $data['id']],
-            ['location' => $location['id']],
+            ['location_id' => $location['id']],
             $data->toArray()
         );
     }
@@ -60,6 +60,6 @@ class Person extends Model
 
     public function location()
     {
-        return $this->hasOne(Location::class);
+        return $this->belongsTo(Location::class);
     }
 }

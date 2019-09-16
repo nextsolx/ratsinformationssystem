@@ -34,51 +34,8 @@ class Person extends JsonResource
             'email' => $this->email,
             'phone' => $this->phone,
             'fax' => '0221-221 27840', // @todo - fix mock data
-            'location' => $this->location,
-            'committeeList' => // @todo - fix mock data
-                [
-                'currentParty' =>
-                    [
-                        [
-                            'name' => 'Ausschuss für Anregungen und Beschwerden',
-                            'role' => '2. Stellvertretende Ausschussvorsitzende',
-                            'party' => 'CDU',
-                            'start_date' => '2018-08-20T12:00:00+01:00',
-                            'end_date' => null,
-                        ],
-                        [
-                            'name' => 'Rat',
-                            'role' => 'Ratsmitglied',
-                            'party' => 'CDU',
-                            'start_date' => '2017-08-20T12:00:00+01:00',
-                            'end_date' => '2018-08-20T12:00:00+01:00',
-                        ],
-                    ],
-                'previousParty' =>
-                    [
-                        [
-                            'name' => 'Ausschuss für Umwelt und Grün',
-                            'role' => 'Ratsmitglied',
-                            'party' => 'DIE GRÜNEN',
-                            'start_date' => '2016-10-20T12:00:00+01:00',
-                            'end_date' => '2017-08-20T12:00:00+01:00',
-                        ],
-                        [
-                            'name' => 'Betriebsausschuss Abfallwirtschaftsbetrieb der Stadt Köln',
-                            'role' => 'Ratsmitglied',
-                            'party' => 'DIE GRÜNEN',
-                            'start_date' => '2014-10-20T12:00:00+01:00',
-                            'end_date' => '2016-08-20T12:00:00+01:00',
-                        ],
-                        [
-                            'name' => 'Bezirksvertretung Nippes',
-                            'role' => 'Beratendes Mitglied',
-                            'party' => 'DIE GRÜNEN',
-                            'start_date' => '2010-10-20T12:00:00+01:00',
-                            'end_date' => '2014-08-20T12:00:00+01:00',
-                        ],
-                    ],
-                ],
+            'location' => new Location($this->location->first()),
+            'committeeList' => $org,
             'files' => // @todo - fix mock data
                 [
             ]

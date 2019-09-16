@@ -24,7 +24,7 @@ class Location extends Model
 
     public function person()
     {
-        return $this->belongsTo(Person::class);
+        return $this->hasOne(Person::class);
     }
 
     //Todo: Verify

@@ -78,7 +78,11 @@
                             <div class="ris-body-2__text">Adresse</div>
                             <span class="ris-i ris-i_marker-with-dot"></span>
                         </div>
-                        <a class="ris-link ris-text" href="/karte">{{ $person->location }}</a>
+                        <a class="ris-link ris-text" href="/karte">
+                            {{$person->location->streetAddress}}
+                            <br>
+                            {{ $person->location->postalCode }} {{ $person->location->city }}
+                        </a>
                     </div>
                 @endif
             </section>

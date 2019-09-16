@@ -14,7 +14,7 @@ class AddLocationToPeopleTable extends Migration
     public function up()
     {
         Schema::table('people', function (Blueprint $table) {
-            $table->string('location')->nullable();
+            $table->string('location_id')->nullable();
         });
     }
 
@@ -26,7 +26,7 @@ class AddLocationToPeopleTable extends Migration
     public function down()
     {
         Schema::table('people', function (Blueprint $table) {
-            $table->dropColumn('location');
+            $table->dropColumn('location_id');
         });
     }
 }

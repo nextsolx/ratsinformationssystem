@@ -28,4 +28,10 @@ class Location extends JsonResource
             'geo' => $this->when($this->geojson, [$this->getLocationX(), $this->getLocationY()])
         ];
     }
+
+
+    public function person()
+    {
+        return $this->hasMany(\App\Person::class);
+    }
 }

@@ -185,11 +185,19 @@
                 justify-content: space-between;
             }
         }
+        &__info {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: nowrap;
+        }
         &__refer {
             display: flex;
             justify-content: space-between;
-            color: $c-gray8;
             margin-right: 5px;
+        }
+        &__time,
+        &__refer {
+            color: $c-gray8;
         }
         &__refer,
         &__time {

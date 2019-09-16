@@ -21,6 +21,7 @@ class Person extends Model
         'life_source',
         'phone',
         'email',
+        'location',
     ];
 
     public static function initialize (array $data)
@@ -39,14 +40,14 @@ class Person extends Model
             return [Str::snake($key) => $value];
         });
 
-        if ($location = Arr::get($data, 'locationObject')) {
-            $location = Location::initialize($data['location']);
-            $location->person()->associate($data);
+        if ($location = Arr::get($data, 'location_object')) {
+            $location = Location::initialize($data['location_object']);
             $location->save();
         }
 
         return self::updateOrCreate(
             ['id' =>  $data['id']],
+            ['location' => $location['id']],
             $data->toArray()
         );
     }

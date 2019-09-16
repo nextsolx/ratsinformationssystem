@@ -34,7 +34,7 @@ class Person extends JsonResource
             'email' => $this->email,
             'phone' => $this->phone,
             'fax' => '0221-221 27840', // @todo - fix mock data
-            'location' => 'Bezirksrathaus Rodenkirchen, Hauptstr. 85, 50996 Köln', // @todo - fix mock data
+            'location' => $this->location,
             'committeeList' => // @todo - fix mock data
                 [
                 'currentParty' =>

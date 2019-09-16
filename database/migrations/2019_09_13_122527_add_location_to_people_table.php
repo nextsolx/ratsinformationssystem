@@ -14,7 +14,7 @@ class AddLocationToPeopleTable extends Migration
     public function up()
     {
         Schema::table('people', function (Blueprint $table) {
-            $table->json('location')->nullable();
+            $table->string('location')->nullable();
         });
     }
 

@@ -5,7 +5,7 @@ import MapAsideNavigation from './MapAsideNavigation';
 import intersectionObserverMixin from '../../mixins/intersectionObserverMixin';
 import { ContentLoader } from 'vue-content-loader';
 export default {
-    name: 'MapDesktopAside',
+    name: 'MapAside',
     components: {
         MapAsideNavigation,
         ContentLoader
@@ -113,20 +113,25 @@ export default {
                     <div class="ris-map-desktop-aside-theme-list__wrapper">
                         <h3 class="ris-map-desktop-aside-theme-list__heading">{{ theme.name }}</h3>
                         <span class="ris-map-desktop-aside-theme-list__info">
-                            <span class="ris-map-desktop-aside-theme-list__info">{{ theme.reference }}</span>
+                            <span class="ris-map-desktop-aside-theme-list__refer">{{ theme.reference }}</span>
                             <time class="ris-map-desktop-aside-theme-list__time">
                                 {{ theme.date | momentFullDate }}
                             </time>
+                            <button class="ris-button ris-map-desktop-aside-theme-list__btn">
+                                Thema ansehen
+                            </button>
                         </span>
                     </div>
                 </a>
             </li>
+            <li class="ris-map-desktop-aside-theme-list__item" key="item-control">
+                <span class="ris-load-element" key="load-element" />
+                <content-loader v-if="loading" key="load-element-svg" :primary-color="'#dadce0'" :height="140">
+                    <rect x="125" y="20" rx="4" ry="4" width="150" height="6" />
+                    <rect x="125" y="50" rx="3" ry="3" width="120" height="6" />
+                    <circle cx="60" cy="45" r="36" />
+                </content-loader>
+            </li>
         </transition-group>
-        <span class="ris-load-element" />
-        <content-loader v-if="loading" :primary-color="'#dadce0'" :height="140">
-            <rect x="125" y="20" rx="4" ry="4" width="150" height="6" />
-            <rect x="125" y="50" rx="3" ry="3" width="120" height="6" />
-            <circle cx="60" cy="45" r="36" />
-        </content-loader>
     </aside>
 </template>

@@ -1,7 +1,7 @@
 <script>
 import L from 'leaflet';
 import { LMap, LTileLayer, LPopup, LPolygon, LMarker } from 'vue2-leaflet';
-import MapDesktopAside from './MapDesktopAside';
+import MapAside from './MapAside';
 require('leaflet-fullscreen');
 
 import areaData from '../../api/districts.js';
@@ -14,7 +14,7 @@ export default {
         LPopup,
         LPolygon,
         LMarker,
-        MapDesktopAside,
+        MapAside,
     },
     data() {
         return {
@@ -23,6 +23,7 @@ export default {
             center: L.latLng(50.9360, 6.9602),
             url:'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
             attribution:'&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+            marker: L.latLng(51.0025, 6.9299),
             icon: L.icon({
                 iconUrl: './img/map_pin.svg',
                 iconSize: [48, 55],
@@ -174,7 +175,7 @@ export default {
 
 <template>
     <div>
-        <MapDesktopAside class="ris-map-desktop-aside"
+        <MapAside class="ris-map-desktop-aside"
             @selectedArea="selectedArea"
         />
         <div id="map-desktop-osm" class="ris-map ris-map__desktop"

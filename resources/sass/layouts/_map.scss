@@ -1,3 +1,7 @@
+$breadcrumbs-height-mod: 165px;
+$header-height-mob: 175px;
+$aside-width: 320px;
+
 .ris-map {
     z-index: 1;
     display: flex;
@@ -6,22 +10,19 @@
     &-desktop {
         display: flex;
         width: 100%;
-
         @include breakpoint($bp-mobile-max) {
             display: block;
-            // height: 100vh;
-            // display: none;
         }
     }
     &__desktop {
-        width: calc(100% - 320px);
-        @media screen and (max-width: 1040px) {
+        width: calc(100% - #{$aside-width});
+        @include breakpoint($bp-desktop-max) {
             width: 100%;
-            height: calc(100vh - 175px);
+            height: calc(100vh - #{$header-height-mob});
         }
         &.fullHeight {
-            @media screen and (max-width: 1040px) {
-                height: calc(100vh - 165px);
+            @include breakpoint($bp-desktop-max) {
+                height: calc(100vh - #{$breadcrumbs-height-mod});
             }
         }
     }

@@ -51,14 +51,14 @@ export default {
                     if (this.areaValue && this.areaType === 'index') {
                         for (let district in areaData[city]) {
 
-                            if (district && Object.prototype.hasOwnProperty.call(areaData[city], district)) {
+                            if (district && district in areaData[city]) {
                                 for (let subdistrict in areaData[city][district]) {
 
-                                    if (Object.prototype.hasOwnProperty.call(areaData[city][district], subdistrict)) {
+                                    if (subdistrict in areaData[city][district]) {
                                         for (let postcode in areaData[city][district][subdistrict]) {
 
-                                            if (parseInt(postcode, 10) === this.areaValue &&
-                                                Object.prototype.hasOwnProperty.call(areaData[city][district][subdistrict], postcode) &&
+                                            if (postcode === this.areaValue &&
+                                                postcode in areaData[city][district][subdistrict] &&
                                                 postcode !== 'point' && postcode !== 'polygon') {
 
                                                 // @todo - there are problems with plural polygon draw,
@@ -78,11 +78,11 @@ export default {
                     } else if (this.areaValue && this.areaType === 'subdistrict') {
                         for (let district in areaData[city]) {
 
-                            if (district && Object.prototype.hasOwnProperty.call(areaData[city], district)) {
+                            if (district && district in areaData[city]) {
                                 for (let subdistrict in areaData[city][district]) {
 
                                     if (subdistrict === this.areaValue &&
-                                        Object.prototype.hasOwnProperty.call(areaData[city][district], subdistrict) &&
+                                        subdistrict in areaData[city][district] &&
                                         subdistrict !== 'point' && subdistrict !== 'polygon') {
 
                                         areaData[city][district][subdistrict].polygon[0].map(geodata => {
@@ -95,7 +95,7 @@ export default {
                             }
                         }
                     } else if (this.areaValue && this.areaType === 'district') {
-                        if (Object.prototype.hasOwnProperty.call(areaData[city], this.areaValue) && areaData[city][this.areaValue].polygon[0]) {
+                        if (this.areaValue in areaData[city] && areaData[city][this.areaValue].polygon[0]) {
 
                             areaData[city][this.areaValue].polygon[0].map(geodata => {
                                 geodataReversed = geodata.slice().reverse();
@@ -126,7 +126,7 @@ export default {
                 for(let city in areaData) {
 
                     for (let district in areaData[city]) {
-                        if (Object.prototype.hasOwnProperty.call(areaData[city], district)) {
+                        if (district in areaData[city]) {
 
                             if (this.areaValue && this.areaType === 'index') {
 
@@ -149,11 +149,11 @@ export default {
                             } else if (this.areaValue && this.areaType === 'subdistrict') {
                                 for (let subdistrict in areaData[city][district]) {
 
-                                    if (Object.prototype.hasOwnProperty.call(areaData[city][district], subdistrict)) {
+                                    if (subdistrict in areaData[city][district]) {
                                         for (let postcode in areaData[city][district][subdistrict]) {
 
                                             if (subdistrict === this.areaValue &&
-                                                Object.prototype.hasOwnProperty.call(areaData[city][district][subdistrict], postcode) &&
+                                                postcode in areaData[city][district][subdistrict] &&
                                                 postcode !== 'point' && postcode !== 'polygon') {
 
                                                 latLngReversed = areaData[city][district][subdistrict][postcode].point.slice().reverse();
@@ -170,7 +170,7 @@ export default {
                                 for (let subdistrict in areaData[city][district]) {
 
                                     if (district === this.areaValue &&
-                                        Object.prototype.hasOwnProperty.call(areaData[city][district], subdistrict) &&
+                                        subdistrict in areaData[city][district] &&
                                         subdistrict !== 'point' && subdistrict !== 'polygon') {
 
                                         latLngReversed = areaData[city][district][subdistrict].point.slice().reverse();

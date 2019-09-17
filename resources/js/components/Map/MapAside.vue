@@ -24,6 +24,12 @@ export default {
             observableBlock: '.ris-load-element',
         };
     },
+    props: {
+        callNavigation: {
+            type: Object,
+            default: () => {},
+        },
+    },
     methods: {
         async getThemes () {
             this.loading = true;
@@ -92,7 +98,9 @@ export default {
 
 <template>
     <aside class="ris-map-desktop-aside">
-        <MapAsideNavigation @changeDirection="changeDirection" />
+        <MapAsideNavigation @changeDirection="changeDirection"
+            :call-navigation="callNavigation"
+            />
         <h2 class="ris-map-desktop-aside__subtitle">{{ subTitle }}</h2>
         <p class="ris-map-desktop-aside__caption">
             {{ `${totalThemes} ${totalThemesText}` }}

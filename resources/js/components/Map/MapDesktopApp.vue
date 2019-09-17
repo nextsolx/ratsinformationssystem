@@ -36,7 +36,12 @@ export default {
             areaType: 'city',
             markerList: [
                 'Innenstadt','Rodenkirchen','Lindenthal','Ehrenfeld','Nippes','Chorweiler','Porz','Kalk','Mülheim'
-            ]
+            ],
+            typeNormolize: {
+                district: 'subdistrict',
+                subdistrict: 'index',
+                index: null
+            }
         };
     },
     computed: {
@@ -234,6 +239,7 @@ export default {
     <div>
         <MapAside class="ris-map-desktop-aside"
             @selectedArea="selectedArea"
+            :call-navigation="{ type: areaType, value: areaValue }"
                 />
         <div id="map-desktop-osm" class="ris-map ris-map__desktop"
                 >

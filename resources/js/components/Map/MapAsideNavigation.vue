@@ -15,6 +15,10 @@ export default {
             type: Boolean,
             default: false
         },
+        callNavigation: {
+            type: Object,
+            default: () => {},
+        },
     },
     data () {
         return {
@@ -50,7 +54,10 @@ export default {
             this.navigationList = await location.getIndexes(this.district, this.subDistrict);
             this.loading = false;
         },
-        buttonHandleInSide (value) {
+        changeDirection (value) {
+            this.$emit('changeDirection', { type: this.location, value });
+        },
+        buttonHandleInSide (value, emit = true) {
             this.menuIsActive = false;
             this.loading = true;
             switch (this.location) {
@@ -60,8 +67,8 @@ export default {
                         label: value,
                         type: 'subdistrict'
                     });
+                    emit && this.changeDirection(value);
                     this.location = 'district';
-                    this.$emit('changeDirection', { type: this.location, value });
                     this.getSubdistrictList();
                     break;
                 }
@@ -72,7 +79,7 @@ export default {
                         type: 'index'
                     });
                     this.location = 'subdistrict';
-                    this.$emit('changeDirection', { type: this.location, value });
+                    emit && this.changeDirection(value);
                     this.getIndexesList();
                     break;
                 }
@@ -83,7 +90,7 @@ export default {
                         type: null
                     });
                     this.location = 'index';
-                    this.$emit('changeDirection', { type: this.location, value });
+                    emit && this.changeDirection(value);
                     this.subTitle = '';
                     this.navigationList = [];
                     this.loading = false;
@@ -95,18 +102,17 @@ export default {
             this.menuIsActive = false;
             this.loading = true;
             if (!flag) this.crumbsHandle();
-
             switch (this.location) {
                 case 'index': {
                     this.location = 'subdistrict';
-                    this.$emit('changeDirection', { type: this.location, value: this.subDistrict });
+                    this.changeDirection(this.subDistrict);
                     this.getIndexesList();
                     break;
                 }
                 case 'subdistrict': {
                     this.changeTitle(this.district + ' (Viertel)');
                     this.location = 'district';
-                    this.$emit('changeDirection', { type: this.location, value: this.district });
+                    this.changeDirection(this.district);
                     this.getSubdistrictList();
                     break;
                 }
@@ -115,7 +121,7 @@ export default {
                     this.getDistrictList();
                     this.district = '';
                     this.location = 'city';
-                    this.$emit('changeDirection', { type: this.location, value: null });
+                    this.changeDirection();
                     break;
                 }
             }
@@ -135,6 +141,15 @@ export default {
         changeTitle (title) {
             this.title = title;
         },
+    },
+    watch: {
+        callNavigation(data) {
+            if (data.type) {
+                console.log(data);
+                this.location = data.type;
+                this.buttonHandleInSide(data.value, false);
+            }
+        }
     },
     created () {
         this.getDistrictList();

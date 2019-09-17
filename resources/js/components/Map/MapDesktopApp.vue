@@ -225,7 +225,6 @@ export default {
     },
     created () {
         Bus.$on('mapIn', ({ type, value }) => {
-            console.log('mapIn',{ type, value });
             this.areaPreviousValue = this.areaValue;
             this.areaType = type;
             this.areaValue = value;

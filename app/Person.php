@@ -41,16 +41,18 @@ class Person extends Model
             return [Str::snake($key) => $value];
         });
 
+        $person = self::updateOrCreate(
+            ['id' =>  $data['id']],
+            $data->toArray()
+        );
+
         if ($location = Arr::get($data, 'location_object')) {
             $location = Location::initialize($data['location_object']);
             $location->save();
+            $person['location'] = $location['id'];
         }
 
-        return self::updateOrCreate(
-            ['id' =>  $data['id']],
-            ['location_id' => $location['id']],
-            $data->toArray()
-        );
+        return $person;
     }
 
     public function organizations()

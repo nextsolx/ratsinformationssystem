@@ -24,6 +24,9 @@
             font-weight: bold;
             margin-bottom: $indent-ml;
             outline: none;
+            @media screen and (max-width: 1040px) {
+                display: none;
+            }
 
             .ris-i {
                 margin-right: $indent-s;

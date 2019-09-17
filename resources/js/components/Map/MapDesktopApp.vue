@@ -37,11 +37,6 @@ export default {
             markerList: [
                 'Innenstadt','Rodenkirchen','Lindenthal','Ehrenfeld','Nippes','Chorweiler','Porz','Kalk','Mülheim'
             ],
-            typeNormolize: {
-                district: 'subdistrict',
-                subdistrict: 'index',
-                index: null
-            }
         };
     },
     computed: {
@@ -220,12 +215,21 @@ export default {
             this.areaPreviousValue = this.areaValue;
             this.areaType = type;
             this.areaValue = value;
+            Bus.$emit('mapOut', { type, value });
         },
         openPopup(e) {
             this.$nextTick(() => {
                 e.target.openPopup();
             });
         },
+    },
+    created () {
+        Bus.$on('mapIn', ({ type, value }) => {
+            console.log('mapIn',{ type, value });
+            this.areaPreviousValue = this.areaValue;
+            this.areaType = type;
+            this.areaValue = value;
+        });
     },
     mounted() {
         this.$nextTick(() => {
@@ -237,10 +241,7 @@ export default {
 
 <template>
     <div>
-        <MapAside class="ris-map-desktop-aside"
-            @selectedArea="selectedArea"
-            :call-navigation="{ type: areaType, value: areaValue }"
-                />
+        <MapAside class="ris-map-desktop-aside"/>
         <div id="map-desktop-osm" class="ris-map ris-map__desktop"
                 >
             <l-map ref="mapDesktopOsm"

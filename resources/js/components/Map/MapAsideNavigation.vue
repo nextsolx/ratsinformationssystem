@@ -57,7 +57,7 @@ export default {
         changeDirection (value) {
             this.$emit('changeDirection', { type: this.location, value });
         },
-        buttonHandleInSide (value, emit = true) {
+        buttonHandleInSide (value, bus = true) {
             this.menuIsActive = false;
             this.loading = true;
             switch (this.location) {
@@ -67,8 +67,9 @@ export default {
                         label: value,
                         type: 'subdistrict'
                     });
-                    emit && this.changeDirection(value);
                     this.location = 'district';
+                    if (bus) Bus.$emit('mapIn', { type: this.location, value });
+                    this.changeDirection(value);
                     this.getSubdistrictList();
                     break;
                 }
@@ -79,7 +80,8 @@ export default {
                         type: 'index'
                     });
                     this.location = 'subdistrict';
-                    emit && this.changeDirection(value);
+                    if (bus) Bus.$emit('mapIn', { type: this.location, value });
+                    this.changeDirection(value);
                     this.getIndexesList();
                     break;
                 }
@@ -90,7 +92,8 @@ export default {
                         type: null
                     });
                     this.location = 'index';
-                    emit && this.changeDirection(value);
+                    if (bus) Bus.$emit('mapIn', { type: this.location, value });
+                    this.changeDirection(value);
                     this.subTitle = '';
                     this.navigationList = [];
                     this.loading = false;
@@ -105,22 +108,25 @@ export default {
             switch (this.location) {
                 case 'index': {
                     this.location = 'subdistrict';
+                    Bus.$emit('mapIn', { type: this.location, value: this.subDistrict });
                     this.changeDirection(this.subDistrict);
                     this.getIndexesList();
                     break;
                 }
                 case 'subdistrict': {
-                    this.changeTitle(this.district + ' (Viertel)');
                     this.location = 'district';
+                    Bus.$emit('mapIn', { type: this.location, value: this.district });
+                    this.changeTitle(this.district + ' (Viertel)');
                     this.changeDirection(this.district);
                     this.getSubdistrictList();
                     break;
                 }
                 case 'district': {
+                    this.location = 'city';
+                    Bus.$emit('mapIn', { type: this.location, value: null });
                     this.changeTitle('Karte');
                     this.getDistrictList();
                     this.district = '';
-                    this.location = 'city';
                     this.changeDirection();
                     break;
                 }
@@ -142,17 +148,11 @@ export default {
             this.title = title;
         },
     },
-    watch: {
-        callNavigation(data) {
-            if (data.type) {
-                console.log(data);
-                this.location = data.type;
-                this.buttonHandleInSide(data.value, false);
-            }
-        }
-    },
     created () {
         this.getDistrictList();
+        Bus.$on('mapOut', (e) => {
+            this.buttonHandleInSide(e.value, false);
+        });
     }
 };
 </script>
@@ -160,7 +160,6 @@ export default {
 <template>
     <div>
         <MapAsideBreadcrumbs :option-list="breadcrumbsList" @clickCrumbs="crumbsHandle" />
-        <!-- [{label: 'test'}, {label: 'test1'}] -->
         <h1 class="ris-map-desktop-aside__heading">{{ title }}</h1>
         <button
             v-if="district"
@@ -180,7 +179,7 @@ export default {
                         class="ris-map-desktop-aside-list__item"
                         v-for="element in navigationList"
                         :key="`${element}-${location}`"
-                        @click="loading ? '' : buttonHandleInSide(element)">
+                        @click="loading ? '' : buttonHandleInSide(element, true)">
                         <button class="ris-map-desktop-aside-list__button">
                             {{ element }}
                             <span class="ris-i ris-i_add"/>

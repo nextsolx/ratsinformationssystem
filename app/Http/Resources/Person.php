@@ -19,7 +19,7 @@ class Person extends JsonResource
         }
 
         $org = $this->organizations->first();
-
+        
         return [
             'id' => $this->id,
             'name' => $this->name,

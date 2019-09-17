@@ -21,12 +21,11 @@ class Person extends Model
         'life_source',
         'phone',
         'email',
-        'location_id',
+        'location',
     ];
 
     public static function initialize (array $data)
     {
-
         $data['id'] = self::extractId($data);
 
         $data = collect($data)->mapWithKeys(function ($value, $key) {
@@ -41,16 +40,16 @@ class Person extends Model
             return [Str::snake($key) => $value];
         });
 
+        if ($location = Arr::get($data, 'location_object')) {
+            $location = Location::initialize($data['location_object']);
+            $location->save();
+            $data['location'] = $location['id'];
+        }
+
         $person = self::updateOrCreate(
             ['id' =>  $data['id']],
             $data->toArray()
         );
-
-        if ($location = Arr::get($data, 'location_object')) {
-            $location = Location::initialize($data['location_object']);
-            $location->save();
-            $person['location'] = $location['id'];
-        }
 
         return $person;
     }
@@ -63,6 +62,6 @@ class Person extends Model
 
     public function location()
     {
-        return $this->hasOne(Location::class);
+        return $this->belongsTo(Location::class);
     }
 }

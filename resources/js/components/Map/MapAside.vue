@@ -130,7 +130,7 @@ export default {
                     </div>
                 </a>
             </li>
-            <li class="ris-map-desktop-aside-theme-list__item" key="item-control">
+            <li class="ris-map-desktop-aside-theme-list__item" v-show="loading || newsList.length" key="item-control">
                 <span class="ris-load-element" key="load-element" />
                 <content-loader v-if="loading" key="load-element-svg" :primary-color="'#dadce0'" :height="140">
                     <rect x="125" y="20" rx="4" ry="4" width="150" height="6" />

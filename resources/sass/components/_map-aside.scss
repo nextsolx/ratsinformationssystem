@@ -90,7 +90,7 @@
 
         &.isActive {
             transition: all .7s ease-in-out;
-            max-height: unset;
+            max-height: none;
         }
     }
 

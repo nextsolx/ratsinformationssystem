@@ -100,16 +100,20 @@
                 >
                     <h2 class="ris-h2">Gremien</h2>
 
-                    @if (isset($person->committeeList->currentParty))
+                    @if (isset($person->committeeList))
                         <div class="ris-people__committee-count ris-body-2">
-                            Aktuell ({{ count($person->committeeList->currentParty) }} Gremium)
+                            Aktuell ({{ count($person->committeeList) }} Gremium)
                         </div>
 
-                        @foreach ($person->committeeList->currentParty as $committee)
+                        @foreach ($person->committeeList as $committee)
                             <div class="ris-people__committee-detail">
                                 <div class="ris-body-2">
-                                    <div class="ris-body-2__headline">{{ $committee->name }}</div>
-                                    <div class="ris-body-2__text">{{ $committee->role }}</div>
+                                    @if (isset($committee->name))
+                                        <div class="ris-body-2__headline">{{ $committee->name }}</div>
+                                    @endif
+                                    @if (isset($committee->role))
+                                        <div class="ris-body-2__text">{{ $committee->role }}</div>
+                                    @endif
                                 </div>
                                 <div class="ris-caption">
                                     {{ \Illuminate\Support\Carbon::parse($committee->start_date)->format('m/Y') }} -
@@ -122,27 +126,6 @@
                             </div>
                         @endforeach
                     @endif
-
-                    @if (isset($person->committeeList->previousParty))
-                        <div class="ris-people__committee-count ris-body-2">
-                            Ehemalig ({{ count($person->committeeList->previousParty) }} Gremium)
-                        </div>
-
-                        @foreach ($person->committeeList->previousParty as $committee)
-                            <div class="ris-people__committee-detail">
-                                <div class="ris-body-2">
-                                    <div class="ris-body-2__headline">{{ $committee->name }}</div>
-                                    <div class="ris-body-2__text">{{ $committee->role }}</div>
-                                </div>
-                                <div class="ris-caption">
-                                    {{ \Illuminate\Support\Carbon::parse($committee->start_date)->format('m/Y') }}
-                                    -
-                                    {{ \Illuminate\Support\Carbon::parse($committee->end_date)->format('m/Y') }}
-                                </div>
-                            </div>
-                        @endforeach
-                    @endif
-
                 </section>
             @endif
 

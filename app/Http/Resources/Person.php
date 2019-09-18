@@ -18,7 +18,7 @@ class Person extends JsonResource
             return [];
         }
 
-        $org = $this->organizations->first();
+        $org = $this->organizations;
         
         return [
             'id' => $this->id,
@@ -28,8 +28,8 @@ class Person extends JsonResource
             'party' => $this->party,
             'life' => $this->life,
             'lifeSource' => $this->life_source,
-            'role' => $org ? $org->pivot->role : null,
-            'function' => $org ? $org->pivot->role : null,
+            'role' => $org ? $org->first()->pivot->role : null,
+            'function' => $org ? $org->first()->pivot->role : null,
             'photo' => 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png',
             'email' => $this->email,
             'phone' => $this->phone,

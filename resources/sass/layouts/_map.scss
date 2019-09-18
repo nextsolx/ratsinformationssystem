@@ -1,25 +1,33 @@
+$breadcrumbs-height-mod: 165px;
+$header-height-mob: 175px;
+$aside-width: 320px;
+
 .ris-map {
     z-index: 1;
     display: flex;
-
-    @include breakpoint($bp-mobile-max) {
-        height: 30vh;
-        margin: auto;
-        width: 95%;
-    }
+    width: 100%;
 
     &-desktop {
         display: flex;
-
+        width: 100%;
         @include breakpoint($bp-mobile-max) {
-            display: none;
+            display: block;
+        }
+    }
+    &__desktop {
+        width: calc(100% - #{$aside-width});
+        @include breakpoint($bp-desktop-max) {
+            width: 100%;
+            height: calc(100vh - #{$header-height-mob});
+        }
+        &.fullHeight {
+            @include breakpoint($bp-desktop-max) {
+                height: calc(100vh - #{$breadcrumbs-height-mod});
+            }
         }
     }
 
     @include breakpoint($bp-tablet-min) {
-        // height: 1024px;
-        width: $width-aside-320;
-
         &-mobile {
             display: none;
         }

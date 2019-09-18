@@ -15,18 +15,22 @@ export default {
             type: Boolean,
             default: false
         },
+        callNavigation: {
+            type: Object,
+            default: () => {},
+        },
     },
     data () {
         return {
             menuIsActive: this.isActive,
             navigationList: [],
-            location: 'district',
+            location: 'city',
             district: '',
             subDistrict: '',
             loading: true,
             title: 'Karte',
             subTitle: '',
-            breadcrumbsList: [{ label: 'Köln', type: 'subdistrict' }]
+            breadcrumbsList: [{ label: 'Köln', type: 'district' }]
         };
     },
     methods: {
@@ -41,48 +45,55 @@ export default {
         async getSubdistrictList () {
             this.changeTitle(this.district + ' (Bezirk)');
             this.subTitle = 'Viertel in diesem Bezirk';
-            this.location = 'subdistrict';
             this.navigationList = await location.getSubdistricts(this.district);
             this.loading = false;
         },
         async getIndexesList() {
-            this.changeTitle(this.district + ' (Viertel)');
+            this.changeTitle(this.subDistrict + ' (Viertel)');
             this.subTitle = 'PLZ in diesem Viertel';
             this.navigationList = await location.getIndexes(this.district, this.subDistrict);
-            this.location = 'index';
             this.loading = false;
         },
-        buttonHandleInSide (value) {
+        changeDirection (value) {
+            this.$emit('changeDirection', { type: this.location, value });
+        },
+        buttonHandleInSide (value, bus = true) {
             this.menuIsActive = false;
             this.loading = true;
             switch (this.location) {
-                case 'district': {
+                case 'city': {
                     this.district = value;
+                    this.breadcrumbsList.push({
+                        label: value,
+                        type: 'subdistrict'
+                    });
+                    this.location = 'district';
+                    if (bus) Bus.$emit('mapIn', { type: this.location, value });
+                    this.changeDirection(value);
+                    this.getSubdistrictList();
+                    break;
+                }
+                case 'district': {
+                    this.subDistrict = value;
                     this.breadcrumbsList.push({
                         label: value,
                         type: 'index'
                     });
-                    this.$emit('changeDirection', { type: 'district', value });
-                    this.getSubdistrictList();
-                    break;
-                }
-                case 'subdistrict': {
-                    this.subDistrict = value;
-                    this.breadcrumbsList.push({
-                        label: value,
-                        type: 'end_point'
-                    });
+                    this.location = 'subdistrict';
+                    if (bus) Bus.$emit('mapIn', { type: this.location, value });
+                    this.changeDirection(value);
                     this.getIndexesList();
                     break;
                 }
-                case 'index': {
+                case 'subdistrict': {
                     this.changeTitle(value);
-                    this.$emit('changeDirection', { type: 'index', value });
                     this.breadcrumbsList.push({
                         label: value,
                         type: null
                     });
-                    this.location = 'end_point';
+                    this.location = 'index';
+                    if (bus) Bus.$emit('mapIn', { type: this.location, value });
+                    this.changeDirection(value);
                     this.subTitle = '';
                     this.navigationList = [];
                     this.loading = false;
@@ -95,22 +106,28 @@ export default {
             this.loading = true;
             if (!flag) this.crumbsHandle();
             switch (this.location) {
-                case 'end_point': {
-                    this.$emit('changeDirection', { type: 'district', value: this.district });
+                case 'index': {
+                    this.location = 'subdistrict';
+                    Bus.$emit('mapIn', { type: this.location, value: this.subDistrict });
+                    this.changeDirection(this.subDistrict);
                     this.getIndexesList();
                     break;
                 }
-                case 'index': {
+                case 'subdistrict': {
+                    this.location = 'district';
+                    Bus.$emit('mapIn', { type: this.location, value: this.district });
                     this.changeTitle(this.district + ' (Viertel)');
+                    this.changeDirection(this.district);
                     this.getSubdistrictList();
                     break;
                 }
-                case 'subdistrict': {
+                case 'district': {
+                    this.location = 'city';
+                    Bus.$emit('mapIn', { type: this.location, value: null });
                     this.changeTitle('Karte');
                     this.getDistrictList();
                     this.district = '';
-                    this.$emit('changeDirection', { type: 'all', value: null });
-                    this.location = 'district';
+                    this.changeDirection();
                     break;
                 }
             }
@@ -133,6 +150,9 @@ export default {
     },
     created () {
         this.getDistrictList();
+        Bus.$on('mapOut', (e) => {
+            this.buttonHandleInSide(e.value, false);
+        });
     }
 };
 </script>
@@ -159,7 +179,7 @@ export default {
                         class="ris-map-desktop-aside-list__item"
                         v-for="element in navigationList"
                         :key="`${element}-${location}`"
-                        @click="loading ? '' : buttonHandleInSide(element)">
+                        @click="loading ? '' : buttonHandleInSide(element, true)">
                         <button class="ris-map-desktop-aside-list__button">
                             {{ element }}
                             <span class="ris-i ris-i_add"/>

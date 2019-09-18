@@ -5,7 +5,7 @@ import MapAsideNavigation from './MapAsideNavigation';
 import intersectionObserverMixin from '../../mixins/intersectionObserverMixin';
 import { ContentLoader } from 'vue-content-loader';
 export default {
-    name: 'MapDesktopAside',
+    name: 'MapAside',
     components: {
         MapAsideNavigation,
         ContentLoader
@@ -23,6 +23,12 @@ export default {
             totalThemesText: 'Themen in ganz Köln',
             observableBlock: '.ris-load-element',
         };
+    },
+    props: {
+        callNavigation: {
+            type: Object,
+            default: () => {},
+        },
     },
     methods: {
         async getThemes () {
@@ -49,22 +55,23 @@ export default {
         },
         changeDirection ({ type, value }) {
             this.newsList = [];
+            this.totalThemes = 0;
             this.paginationPage = 1;
-            if (type === 'district') {
-                this.subTitle = 'Themen in diesem Bezirk';
-                this.totalThemesText = `Thema in ${value} (Bezirk)`;
-                this.getDistrictThemes(value);
-            }
-            else if (type === 'all') {
+            if (type === 'city') {
                 this.subTitle = 'Aktuelle Themen';
                 this.totalThemesText = 'Themen in ganz Köln';
                 this.getThemes();
             }
+            else if (type === 'district') {
+                this.subTitle = 'Themen in diesem Bezirk';
+                this.totalThemesText = `Thema in ${value} (Bezirk)`;
+                this.getDistrictThemes(value);
+            }
+            else if (type === 'subdistrict') {
+                this.subTitle = 'Themen in diesem Viertel';
+            }
             else if (type === 'index') {
                 this.subTitle = 'Themen in dieser PLZ';
-            }
-            else {
-                this.subTitle = 'Themen in diesem Viertel';
                 this.totalThemesText = `Thema in ${value}`;
                 this.getIndexThemes(value);
             }
@@ -89,7 +96,10 @@ export default {
 
 <template>
     <aside class="ris-map-desktop-aside">
-        <MapAsideNavigation @changeDirection="changeDirection" />
+        <MapAsideNavigation
+            @changeDirection="changeDirection"
+            :call-navigation="callNavigation"
+                />
         <h2 class="ris-map-desktop-aside__subtitle">{{ subTitle }}</h2>
         <p class="ris-map-desktop-aside__caption">
             {{ `${totalThemes} ${totalThemesText}` }}
@@ -109,20 +119,25 @@ export default {
                     <div class="ris-map-desktop-aside-theme-list__wrapper">
                         <h3 class="ris-map-desktop-aside-theme-list__heading">{{ theme.name }}</h3>
                         <span class="ris-map-desktop-aside-theme-list__info">
-                            <span class="ris-map-desktop-aside-theme-list__info">{{ theme.reference }}</span>
+                            <span class="ris-map-desktop-aside-theme-list__refer">{{ theme.reference }}</span>
                             <time class="ris-map-desktop-aside-theme-list__time">
                                 {{ theme.date | momentFullDate }}
                             </time>
+                            <button class="ris-button ris-map-desktop-aside-theme-list__btn">
+                                Thema ansehen
+                            </button>
                         </span>
                     </div>
                 </a>
             </li>
+            <li class="ris-map-desktop-aside-theme-list__item" v-show="loading || newsList.length" key="item-control">
+                <span class="ris-load-element" key="load-element" />
+                <content-loader v-if="loading" key="load-element-svg" :primary-color="'#dadce0'" :height="140">
+                    <rect x="125" y="20" rx="4" ry="4" width="150" height="6" />
+                    <rect x="125" y="50" rx="3" ry="3" width="120" height="6" />
+                    <circle cx="60" cy="45" r="36" />
+                </content-loader>
+            </li>
         </transition-group>
-        <span class="ris-load-element" />
-        <content-loader v-if="loading" :primary-color="'#dadce0'" :height="140">
-            <rect x="125" y="20" rx="4" ry="4" width="150" height="6" />
-            <rect x="125" y="50" rx="3" ry="3" width="120" height="6" />
-            <circle cx="60" cy="45" r="36" />
-        </content-loader>
     </aside>
 </template>

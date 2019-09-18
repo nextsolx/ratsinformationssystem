@@ -37,7 +37,7 @@ export default {
         this.sortBy(this.unfilteredList, this.filterValue, true);
     },
     computed: {
-        letterNavigation() {
+        letterNavigationList() {
             const letterList = [];
             this.sortedList.map(el => letterList.push(el.title));
             return letterList;
@@ -98,8 +98,8 @@ export default {
             </transition-group>
         </section>
         <LetterNavigation
-            v-if="!filtered"
-            :navigation-list="letterNavigation"
+            :is-showed="!filtered"
+            :navigation-list="letterNavigationList"
                 />
     </div>
 </template>

@@ -10,6 +10,10 @@ export default {
         pagination: {
             type: Boolean,
             default: false
+        },
+        isShowed: {
+            type: Boolean,
+            default: true
         }
     },
     methods: {
@@ -30,7 +34,7 @@ export default {
 
 <template>
     <nav class="ris-letter-nav">
-        <ul class="ris-ul ris-letter-nav__list">
+        <ul class="ris-ul ris-letter-nav__list" v-if="isShowed">
             <li
                 v-for="letter in navigationList"
                 class="ris-letter-nav__item"

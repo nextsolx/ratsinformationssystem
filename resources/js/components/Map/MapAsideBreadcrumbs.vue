@@ -7,13 +7,36 @@ export default {
             default: () => []
         }
     },
+    computed: {
+        isShowed () {
+            return this.optionList.length > 1;
+        }
+    },
     methods: {
+        checkList () {
+            if (this.isShowed) {
+                document.querySelector('.ris-header').classList.add('hidden');
+                document.querySelector('.ris-map__desktop').classList.add('fullHeight');
+            } else {
+                document.querySelector('.ris-header').classList.remove('hidden');
+                document.querySelector('.ris-map__desktop').classList.remove('fullHeight');
+            }
+        }
+    },
+    watch: {
+        optionList () {
+            if (window.innerWidth <= 1040) {
+                this.checkList();
+            }
+        }
     }
 };
 </script>
 
 <template>
-    <ol class="ris-breadcrumbs ris-breadcrumbs-map">
+    <ol
+        class="ris-breadcrumbs ris-breadcrumbs-map"
+        :class="{ hidden : this.optionList.length < 2 }">
         <li class="ris-breadcrumbs__item">
             <a href="/" title="Stadt Koeln"
                 class="ris-breadcrumbs__home-link ris-link">

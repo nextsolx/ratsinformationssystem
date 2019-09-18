@@ -34,7 +34,7 @@ class Person extends JsonResource
             'email' => $this->email,
             'phone' => $this->phone,
             'fax' => null,
-            'location' => new Location($this->location),
+            'location' => \App\Location::find([$this->location])->first(),
             'committeeList' => $org,
             'files' => // @todo - fix mock data
                 [

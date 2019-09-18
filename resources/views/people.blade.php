@@ -79,9 +79,16 @@
                             <span class="ris-i ris-i_marker-with-dot"></span>
                         </div>
                         <a class="ris-link ris-text" href="/karte">
-                            {{$person->location->streetAddress}}
+                            @if (isset($person->location->streetAddress))
+                                {{$person->location->streetAddress}}
+                            @endif
                             <br>
-                            {{ $person->location->postalCode }} {{ $person->location->city }}
+                            @if (isset($person->location->postalCode))
+                                {{$person->location->postalCode}}
+                            @endif
+                            @if (isset($person->location->city))
+                                {{$person->location->city}}
+                            @endif
                         </a>
                     </div>
                 @endif

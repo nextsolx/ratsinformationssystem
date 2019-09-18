@@ -111,7 +111,7 @@ export default {
                 :key="theme.id">
                 <a
                     class="ris-map-desktop-aside-theme-list__link"
-                    :href="'/theme/' + theme.id">
+                    :href="'/thema/' + theme.id">
                     <img
                         class="ris-map-desktop-aside-theme-list__img"
                         src="../../../img/theme-item-tile.jpg"

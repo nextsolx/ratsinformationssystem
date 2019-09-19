@@ -5,9 +5,7 @@
 
         @include('layouts.breadcrumbs')
 
-        <theme-list inline-template
-                :default-district-list="{{json_encode($district_list)}}"
-        >
+        <theme-list inline-template>
 
             <div class="ris-theme-list__content ris-content ris-content_six-eight-eight">
                 <section class="ris-section-wrapper">
@@ -26,18 +24,19 @@
                         <dropdown
                             :id="'theme-dropdown'"
                             label="Sortierung"
-                            :value="{label: 'Fortschritt', value: 'Fortschritt'}"
+                            :value="dropValue"
                             :options="[
-                                {label: 'Einstellungsdatum', value: 'Einstellungsdatum'},
-                                {label: 'Fortschritt', value: 'Fortschritt'}
+                                {label: 'Einstellungsdatum', value: 'date'},
+                                {label: 'Fortschritt', value: 'progress'}
                             ]"
+                            @change="changeThemeList"
                         ></dropdown>
                     </div>
                 </section>
 
                 @if (!empty($theme_list))
                     <section class="ris-section-wrapper ris-card-list ris-card-list__themes"
-                        v-show="themeListData.length === 0 && firstLoading"
+                        v-if="themeSortedList.length === 0"
                     >
 
                         @include('components.theme',

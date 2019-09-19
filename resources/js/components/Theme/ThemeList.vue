@@ -1,117 +1,45 @@
 <script>
 import noticeMixin from '../../mixins/NoticeMixin';
 
-const axios = require('axios');
+import topics from '../../api/topics';
 
 export default {
     name: 'ThemeList',
     mixins: [noticeMixin],
     data: () => ({
-        activeFilter: false,
+        themeSortedList: [],
+        dropValue: {label: 'Einstellungsdatum', value: 'date'},
         loading: false,
-        firstLoading: true,
-        themeListData: [],
-        themeFirstBlock: '.ris-card-list__themes',
-        postcodeList: [],
-        selectedDistrictList: [],
-        districtList: [],
-        districtInfoDescription: 'Keine Themen verfügbar.',
     }),
-    props: {
-        defaultDistrictList: {
-            type: Array,
-            default: () => [],
-        },
-    },
     methods: {
-        collapseFilter() {
-            this.activeFilter = !this.activeFilter;
-        },
-        getTopicByDistrict(e) {
-            if (this.loading) {
-                return;
-            }
+        async changeThemeList(selectedSortType) {
+            if (!this.loading) {
+                console.log('loading start');
+                let theme = '';
+                this.loading = true;
 
-            this.loading = true;
-            this.postcodeList = [];
-            this.themeListData = [];
+                if (selectedSortType.value) {
+                    console.log('loading some value');
 
-            // collapse filter block when the district is selected
-            this.collapseFilter();
+                    if (selectedSortType.value === 'progress') {
+                        theme = await topics.getTopicsByProgress();
+                    } else {
+                        theme = await topics.getTopicsByNew();
+                    }
 
-            const currentSelectedDistrict = e.currentTarget.innerText.trim();
-            this.selectedDistrictList.push(currentSelectedDistrict);
+                    console.log('loaded data');
 
-            this.removeDistrictFromList(currentSelectedDistrict);
+                    this.loading = false;
+                    this.dropValue = {label: selectedSortType.label, value: selectedSortType.value};
 
-            this.selectedDistrictList.forEach(currentDistrictName => {
-
-                axios
-                    .get(`/api/topics?district=${currentDistrictName}`)
-                    .then(res => {
-                        if (res.data.data.length > 0) {
-                            res.data.data.forEach((topic) => {
-
-                                this.themeListData.push(topic);
-
-                                // for filter block
-                                if (topic.location.postalCode) {
-                                    if (!this.postcodeList.includes(topic.location.postalCode)) {
-                                        this.postcodeList.push(topic.location.postalCode);
-                                    }
-                                }
-                            });
-                        }
-                    })
-                    .finally(() => {
-                        this.loading = false;
-
-                        if (this.firstLoading) {
-                            this.firstLoading = false;
-                        }
-                    });
-            });
-
-            this.scrollTo(this.themeFirstBlock);
-        },
-        scrollTo(selector) {
-            const el = document.querySelector(selector);
-            if (el) {
-                el.scrollIntoView({ behavior: 'smooth'});
-            }
-        },
-        removeDistrictFromList(district) {
-            if (this.districtList.includes(district)) {
-                const districtIndex = this.districtList.indexOf(district);
-                this.districtList.splice(districtIndex, 1);
-            }
-        },
-        removeSelectedDistrict(district) {
-            if (this.selectedDistrictList.includes(district)) {
-                const selectedDistrictIndex = this.selectedDistrictList.indexOf(district);
-                this.selectedDistrictList.splice(selectedDistrictIndex, 1);
-
-                this.updateDistrictList();
-            }
-        },
-        updateDistrictList() {
-            this.districtList = this.defaultDistrictList.slice(0);
-
-            this.selectedDistrictList.forEach(selectedDistrict => {
-                if (this.districtList.includes(selectedDistrict)) {
-                    const districtIndex = this.districtList.indexOf(selectedDistrict);
-                    this.districtList.splice(districtIndex, 1);
+                    if (theme.data) {
+                        theme.data.map(theme => {
+                            this.themeSortedList.push(theme);
+                        });
+                    }
                 }
-            });
-
-            this.scrollTo(this.themeFirstBlock);
-            this.collapseFilter();
+            }
         },
-    },
-    mounted() {
-        if (this.defaultDistrictList) {
-            this.districtList = this.defaultDistrictList.slice(0);
-        }
     },
 };
 </script>

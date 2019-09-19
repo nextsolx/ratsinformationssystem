@@ -66,6 +66,8 @@ Route::group(['middleware' => 'under-construction'], function () {
     Route::get('/api/meetings', 'MeetingController@all');
     Route::get('/api/meeting/{id}', 'MeetingController@index');
     Route::get('/api/topics', 'TopicController@all');
+    Route::get('/api/topics/new', 'TopicController@new');
+    Route::get('/api/topics/progress', 'TopicController@progress');
     Route::get('/api/topic/{paper}', 'TopicController@index');
     Route::get('/api/districts', 'DistrictController@all');
     Route::get('/api/districts/{district}', 'DistrictController@district');

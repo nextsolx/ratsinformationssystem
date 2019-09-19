@@ -18,10 +18,10 @@
                         <dropdown
                             :id="'theme-dropdown'"
                             label="Sortierung"
-                            :value="{label: 'Fortschritt', value: 'Fortschritt'}"
+                            :value="dropValue"
                             :options="[
-                                {label: 'Einstellungsdatum', value: 'Einstellungsdatum'},
-                                {label: 'Fortschritt', value: 'Fortschritt'}
+                                {label: 'Einstellungsdatum', value: 'date'},
+                                {label: 'Fortschritt', value: 'progress'}
                             ]"
                         ></dropdown>
                     </div>

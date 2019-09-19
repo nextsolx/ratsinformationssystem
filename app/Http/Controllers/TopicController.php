@@ -37,6 +37,66 @@ class TopicController extends Controller
         return Topic::collection($paperQuery->paginate(15));
     }
 
+    // @todo --- progress() --- need to check and refactor
+    /**
+     * Get the in progress theme list
+     * Using for sorting by progress, via API
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     */
+    public function progress(Request $request)
+    {
+        $postalCode = $request->input('postalCode');
+        $district = $request->input('district');
+
+        $paperQuery = Paper::with(Paper::$basicScope);
+
+        if ($postalCode) {
+            $paperQuery->whereHas('locations', function (Builder $query) use ($postalCode) {
+                $query->where('postal_code', '=', $postalCode);
+            });
+        }
+
+        if ($district) {
+            $paperQuery->whereHas('locations', function (Builder $query) use ($district) {
+                $query->where('sub_locality', '=', $district);
+            });
+        }
+
+        return TopicWithData::collection($paperQuery->sort()->updated()->paginate(100));
+    }
+
+    // @todo --- new() --- need to check and refactor
+    /**
+     * Get the new theme list
+     * Using for sorting by date, via API
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     */
+    public function new(Request $request)
+    {
+        $postalCode = $request->input('postalCode');
+        $district = $request->input('district');
+
+        $paperQuery = Paper::with(Paper::$basicScope);
+
+        if ($postalCode) {
+            $paperQuery->whereHas('locations', function (Builder $query) use ($postalCode) {
+                $query->where('postal_code', '=', $postalCode);
+            });
+        }
+
+        if ($district) {
+            $paperQuery->whereHas('locations', function (Builder $query) use ($district) {
+                $query->where('sub_locality', '=', $district);
+            });
+        }
+
+        return TopicWithData::collection($paperQuery->sort()->new()->paginate(100));
+    }
+
     public function topic(Request $request, Paper $paper)
     {
         $topic = (new TopicWithData($paper))->toResponse(request())->getData()->data;

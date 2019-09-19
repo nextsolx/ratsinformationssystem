@@ -3,6 +3,9 @@ import Swiper from 'swiper';
 
 export default {
     name: 'ThemeOverview',
+    data: () => ({
+        dropValue: {label: 'Einstellungsdatum', value: 'date'},
+    }),
     mounted() {
         new Swiper ('.swiper-container', {
             slidesPerView: 3,

@@ -1,5 +1,5 @@
 <script>
-const moment = require('moment');
+import moment from 'moment';
 import topics from '../../api/topics';
 import MapAsideNavigation from './MapAsideNavigation';
 import intersectionObserverMixin from '../../mixins/intersectionObserverMixin';
@@ -22,6 +22,7 @@ export default {
             loading: false,
             totalThemesText: 'Themen in ganz Köln',
             observableBlock: '.ris-load-element',
+            district: '',
         };
     },
     props: {
@@ -57,23 +58,25 @@ export default {
             this.newsList = [];
             this.totalThemes = 0;
             this.paginationPage = 1;
-            if (type === 'city') {
-                this.subTitle = 'Aktuelle Themen';
-                this.totalThemesText = 'Themen in ganz Köln';
-                this.getThemes();
-            }
-            else if (type === 'district') {
-                this.subTitle = 'Themen in diesem Bezirk';
-                this.totalThemesText = `Thema in ${value} (Bezirk)`;
-                this.getDistrictThemes(value);
-            }
-            else if (type === 'subdistrict') {
-                this.subTitle = 'Themen in diesem Viertel';
-            }
-            else if (type === 'index') {
-                this.subTitle = 'Themen in dieser PLZ';
-                this.totalThemesText = `Thema in ${value}`;
-                this.getIndexThemes(value);
+            switch (type) {
+                case 'city': {
+                    this.subTitle = 'Aktuelle Themen';
+                    this.totalThemesText = 'Themen in ganz Köln';
+                    this.getThemes();
+                    break;
+                }
+                case 'index': {
+                    this.subTitle = 'Themen in dieser PLZ';
+                    this.totalThemesText = `Thema in ${value}`;
+                    this.getIndexThemes(value);
+                    break;
+                }
+                default: {
+                    if (type === 'district') this.district = value;
+                    this.subTitle = 'Themen in diesem Bezirk';
+                    this.totalThemesText = `Thema in ${this.district} (Bezirk)`;
+                    this.getDistrictThemes(this.district);
+                }
             }
         },
         lazyHandle () {

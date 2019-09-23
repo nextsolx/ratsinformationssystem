@@ -19,7 +19,7 @@
                     @if (isset($person->committeeList))
                         <div class="ris-caption">
                             Gremienmitglied seit
-                            {{ \Illuminate\Support\Carbon::parse($person->memberships[count($person->memberships)-1]->start_date)->year }}
+                            {{ \Illuminate\Support\Carbon::parse($person->committeeList[count($person->committeeList)-1]->joined)->year }}
                         </div>
                     @endif
                 </div>
@@ -95,38 +95,30 @@
 
             @if (isset($person->committeeList))
                 <section class="ris-section-wrapper ris-people__committee ris-tab-data"
-                    ref="committee"
+                         ref="committee"
                 >
                     <h2 class="ris-h2">Gremien</h2>
 
-                    @if (isset($person->committeeList) && isset ($person->memberships))
+                    @if (isset($person->committeeList))
                         <div class="ris-people__committee-count ris-body-2">
                             Aktuell ({{ count($person->committeeList) }} Gremium)
                         </div>
-                        @foreach ($person->memberships as $membership)
-                            @for($i = 0; $i < count($person->committeeList); $i++)
-                                @if($person->committeeList[$i]->id == $membership->organization_id)
-                                    <div class="ris-people__committee-detail">
-                                        <div class="ris-body-2">
-                                            @if (isset($person->committeeList[$i]->name))
-                                                <div class="ris-body-2__headline">{{ $person->committeeList[$i]->name }}</div>
-                                            @endif
-                                            @if (isset($person->committeeList[$i]->role))
-                                                <div class="ris-body-2__text">{{ $person->committeeList[$i]->role }}</div>
-                                            @endif
-                                        </div>
-                                        <div class="ris-caption">
-                                            {{ \Illuminate\Support\Carbon::parse($membership->start_date)->format('m/Y') }} -
-                                            @if (isset($membership->end_date) and $membership->end_date)
-                                                {{ \Illuminate\Support\Carbon::parse($membership->end_date)->format('m/Y') }}
-                                            @else
-                                                Heute
-                                            @endif
-                                        </div>
-                                    </div>
-                                    @php $i=count($person->committeeList) @endphp
-                                @endif
-                            @endfor
+
+                        @foreach ($person->committeeList as $committee)
+                            <div class="ris-people__committee-detail">
+                                <div class="ris-body-2">
+                                    <div class="ris-body-2__headline">{{ $committee->title }}</div>
+                                    <div class="ris-body-2__text">{{ $committee->role }}</div>
+                                </div>
+                                <div class="ris-caption">
+                                    {{ \Illuminate\Support\Carbon::parse($committee->joined)->format('m/Y') }} -
+                                    @if (isset($committee->left) and $committee->left)
+                                        {{ \Illuminate\Support\Carbon::parse($committee->left)->format('m/Y') }}
+                                    @else
+                                        Heute
+                                    @endif
+                                </div>
+                            </div>
                         @endforeach
                     @endif
                 </section>

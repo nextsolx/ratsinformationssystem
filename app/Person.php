@@ -4,6 +4,7 @@ namespace App;
 
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class Person extends Model
@@ -57,7 +58,8 @@ class Person extends Model
     public function organizations()
     {
         return $this->belongsToMany(Organization::class, 'memberships')
-            ->using(Membership::class)->withPivot(['role','start_date','end_date']);
+            ->using(Membership::class)->withPivot(['role','start_date','end_date'])
+            ->orderBy(DB::raw('memberships.end_date IS NOT NULL, memberships.end_date'), 'desc');
     }
 
     public function location()

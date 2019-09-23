@@ -57,7 +57,7 @@ class Person extends Model
     public function organizations()
     {
         return $this->belongsToMany(Organization::class, 'memberships')
-            ->using(Membership::class)->withPivot(['role']);
+            ->using(Membership::class)->withPivot(['role','start_date','end_date']);
     }
 
     public function location()

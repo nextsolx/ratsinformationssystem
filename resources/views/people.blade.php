@@ -3,7 +3,6 @@
 @section('content')
 
     @include('layouts.breadcrumbs')
-
     <people inline-template>
         <main class="ris-main ris-people ris-content_six-eight-eight">
             <section class="ris-section-wrapper ris-people__headline">
@@ -17,10 +16,10 @@
                     @if ($person->party)
                         <div class="ris-body-2">{{ $person->party }}</div>
                     @endif
-                    @if (isset($person->committeeList->currentParty[0]))
+                    @if (isset($person->committeeList))
                         <div class="ris-caption">
                             Gremienmitglied seit
-                            {{ \Illuminate\Support\Carbon::parse($person->committeeList->currentParty[0]->start_date)->year }}
+                            {{ \Illuminate\Support\Carbon::parse($person->memberships[count($person->memberships)-1]->start_date)->year }}
                         </div>
                     @endif
                 </div>
@@ -100,30 +99,34 @@
                 >
                     <h2 class="ris-h2">Gremien</h2>
 
-                    @if (isset($person->committeeList))
+                    @if (isset($person->committeeList) && isset ($person->memberships))
                         <div class="ris-people__committee-count ris-body-2">
                             Aktuell ({{ count($person->committeeList) }} Gremium)
                         </div>
-
-                        @foreach ($person->committeeList as $committee)
-                            <div class="ris-people__committee-detail">
-                                <div class="ris-body-2">
-                                    @if (isset($committee->name))
-                                        <div class="ris-body-2__headline">{{ $committee->name }}</div>
-                                    @endif
-                                    @if (isset($committee->role))
-                                        <div class="ris-body-2__text">{{ $committee->role }}</div>
-                                    @endif
-                                </div>
-                                <div class="ris-caption">
-                                    {{ \Illuminate\Support\Carbon::parse($committee->start_date)->format('m/Y') }} -
-                                    @if (isset($committee->end_date) and $committee->end_date)
-                                        {{ \Illuminate\Support\Carbon::parse($committee->end_date)->format('m/Y') }}
-                                    @else
-                                        Heute
-                                    @endif
-                                </div>
-                            </div>
+                        @foreach ($person->memberships as $membership)
+                            @for($i = 0; $i < count($person->committeeList); $i++)
+                                @if($person->committeeList[$i]->id == $membership->organization_id)
+                                    <div class="ris-people__committee-detail">
+                                        <div class="ris-body-2">
+                                            @if (isset($person->committeeList[$i]->name))
+                                                <div class="ris-body-2__headline">{{ $person->committeeList[$i]->name }}</div>
+                                            @endif
+                                            @if (isset($person->committeeList[$i]->role))
+                                                <div class="ris-body-2__text">{{ $person->committeeList[$i]->role }}</div>
+                                            @endif
+                                        </div>
+                                        <div class="ris-caption">
+                                            {{ \Illuminate\Support\Carbon::parse($membership->start_date)->format('m/Y') }} -
+                                            @if (isset($membership->end_date) and $membership->end_date)
+                                                {{ \Illuminate\Support\Carbon::parse($membership->end_date)->format('m/Y') }}
+                                            @else
+                                                Heute
+                                            @endif
+                                        </div>
+                                    </div>
+                                    @php $i=count($person->committeeList) @endphp
+                                @endif
+                            @endfor
                         @endforeach
                     @endif
                 </section>

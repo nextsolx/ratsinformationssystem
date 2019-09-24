@@ -3,7 +3,6 @@
 @section('content')
 
     @include('layouts.breadcrumbs')
-
     <people inline-template>
         <main class="ris-main ris-people ris-content_six-eight-eight">
             <section class="ris-section-wrapper ris-people__headline">
@@ -17,10 +16,10 @@
                     @if ($person->party)
                         <div class="ris-body-2">{{ $person->party }}</div>
                     @endif
-                    @if (isset($person->committeeList->currentParty[0]))
+                    @if (isset($person->committeeList))
                         <div class="ris-caption">
                             Gremienmitglied seit
-                            {{ \Illuminate\Support\Carbon::parse($person->committeeList->currentParty[0]->start_date)->year }}
+                            {{ \Illuminate\Support\Carbon::parse($person->committeeList[count($person->committeeList)-1]->joined)->year }}
                         </div>
                     @endif
                 </div>
@@ -78,32 +77,43 @@
                             <div class="ris-body-2__text">Adresse</div>
                             <span class="ris-i ris-i_marker-with-dot"></span>
                         </div>
-                        <a class="ris-link ris-text" href="/karte">{{ $person->location }}</a>
+                        <a class="ris-link ris-text" href="/karte">
+                            @if (isset($person->location->streetAddress))
+                                {{$person->location->streetAddress}}
+                            @endif
+                            <br>
+                            @if (isset($person->location->postalCode))
+                                {{$person->location->postalCode}}
+                            @endif
+                            @if (isset($person->location->city))
+                                {{$person->location->city}}
+                            @endif
+                        </a>
                     </div>
                 @endif
             </section>
 
             @if (isset($person->committeeList))
                 <section class="ris-section-wrapper ris-people__committee ris-tab-data"
-                    ref="committee"
+                         ref="committee"
                 >
                     <h2 class="ris-h2">Gremien</h2>
 
-                    @if (isset($person->committeeList->currentParty))
+                    @if (isset($person->committeeList))
                         <div class="ris-people__committee-count ris-body-2">
-                            Aktuell ({{ count($person->committeeList->currentParty) }} Gremium)
+                            Aktuell ({{ count($person->committeeList) }} Gremium)
                         </div>
 
-                        @foreach ($person->committeeList->currentParty as $committee)
+                        @foreach ($person->committeeList as $committee)
                             <div class="ris-people__committee-detail">
                                 <div class="ris-body-2">
-                                    <div class="ris-body-2__headline">{{ $committee->name }}</div>
+                                    <div class="ris-body-2__headline">{{ $committee->title }}</div>
                                     <div class="ris-body-2__text">{{ $committee->role }}</div>
                                 </div>
                                 <div class="ris-caption">
-                                    {{ \Illuminate\Support\Carbon::parse($committee->start_date)->format('m/Y') }} -
-                                    @if (isset($committee->end_date) and $committee->end_date)
-                                        {{ \Illuminate\Support\Carbon::parse($committee->end_date)->format('m/Y') }}
+                                    {{ \Illuminate\Support\Carbon::parse($committee->joined)->format('m/Y') }} -
+                                    @if (isset($committee->left) and $committee->left)
+                                        {{ \Illuminate\Support\Carbon::parse($committee->left)->format('m/Y') }}
                                     @else
                                         Heute
                                     @endif
@@ -111,27 +121,6 @@
                             </div>
                         @endforeach
                     @endif
-
-                    @if (isset($person->committeeList->previousParty))
-                        <div class="ris-people__committee-count ris-body-2">
-                            Ehemalig ({{ count($person->committeeList->previousParty) }} Gremium)
-                        </div>
-
-                        @foreach ($person->committeeList->previousParty as $committee)
-                            <div class="ris-people__committee-detail">
-                                <div class="ris-body-2">
-                                    <div class="ris-body-2__headline">{{ $committee->name }}</div>
-                                    <div class="ris-body-2__text">{{ $committee->role }}</div>
-                                </div>
-                                <div class="ris-caption">
-                                    {{ \Illuminate\Support\Carbon::parse($committee->start_date)->format('m/Y') }}
-                                    -
-                                    {{ \Illuminate\Support\Carbon::parse($committee->end_date)->format('m/Y') }}
-                                </div>
-                            </div>
-                        @endforeach
-                    @endif
-
                 </section>
             @endif
 

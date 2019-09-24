@@ -16,10 +16,10 @@
                     @if ($person->party)
                         <div class="ris-body-2">{{ $person->party }}</div>
                     @endif
-                    @if (isset($person->committeeList))
+                    @if (isset($person->committeeList[0]))
                         <div class="ris-caption">
                             Gremienmitglied seit
-                            {{ \Illuminate\Support\Carbon::parse($person->committeeList[count($person->committeeList)-1]->joined)->year }}
+                            {{ \Illuminate\Support\Carbon::parse($person->committeeList[0]->joined)->year }}
                         </div>
                     @endif
                 </div>

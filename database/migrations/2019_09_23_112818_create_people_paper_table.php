@@ -13,7 +13,7 @@ class CreatePeoplePaperTable extends Migration
      */
     public function up()
     {
-        Schema::table('people_paper', function (Blueprint $table) {
+        Schema::create('people_paper', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('people_id');
             $table->string('paper_id');
@@ -27,8 +27,6 @@ class CreatePeoplePaperTable extends Migration
      */
     public function down()
     {
-        Schema::table('people_paper', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('people_paper');
     }
 }

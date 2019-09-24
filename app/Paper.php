@@ -27,7 +27,7 @@ class Paper extends Model
         'reference',
         'paperType',
         'date',
-        'modified'
+        'modified',
     ];
 
     public static function initialize(array $data)
@@ -38,6 +38,13 @@ class Paper extends Model
             foreach ($locations as $location) {
                 $location = Location::initialize($location);
                 $paper->locations()->syncWithoutDetaching($location);
+            }
+        }
+
+        if ($people = Arr::get($data, 'originatorPerson')) {
+            foreach ($people as $person) {
+                $person = Person::initialize($person);
+                $paper->people()->syncWithoutDetaching($person);
             }
         }
 
@@ -58,6 +65,11 @@ class Paper extends Model
         }
 
         return $paper;
+    }
+
+    public function people()
+    {
+        return $this->belongsToMany(Person::class);
     }
 
     public function locations()

@@ -10,6 +10,8 @@ x-container: &container
 services:
   app:
     <<: *container
+    environment:
+      AUTOMIGRATE: true
     ports:
       - 80:80
 
@@ -34,4 +36,3 @@ services:
 volumes:
   mysql:
     driver: local
-

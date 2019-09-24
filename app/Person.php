@@ -62,9 +62,9 @@ class Person extends Model
             ->orderBy(DB::raw('memberships.end_date IS NOT NULL, memberships.end_date'), 'desc');
     }
 
-    public function paper()
+    public function papers()
     {
-        return $this->hasMany(Paper::class);
+        return $this->belongsToMany(Paper::class,'people_paper');
     }
 
     public function location()

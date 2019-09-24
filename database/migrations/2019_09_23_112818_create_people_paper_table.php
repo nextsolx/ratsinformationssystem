@@ -15,7 +15,7 @@ class CreatePeoplePaperTable extends Migration
     {
         Schema::create('people_paper', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('people_id');
+            $table->string('person_id');
             $table->string('paper_id');
         });
     }

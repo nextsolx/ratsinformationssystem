@@ -34,7 +34,7 @@ class Person extends JsonResource
             'fax' => null,
             'location' => \App\Location::find([$this->location])->first(),
             'committeeList' => Organization::collection($this->whenLoaded('organizations')),
-            'files' => []
+            'files' => null,
         ];
     }
 }

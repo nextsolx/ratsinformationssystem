@@ -11,7 +11,7 @@ services:
   app:
     <<: *container
     environment:
-      AUTOMIGRATE: true
+      AUTOMIGRATE: "true"
     ports:
       - 80:80
 

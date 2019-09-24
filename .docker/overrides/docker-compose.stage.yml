@@ -32,6 +32,8 @@ services:
       MYSQL_DATABASE: ${DB_DATABASE:-database}
       MYSQL_USER: ${DB_USERNAME:-database}
       MYSQL_PASSWORD: ${DB_PASSWORD:-database}
+    ports:
+      - "3306:3306"
 
 volumes:
   mysql:

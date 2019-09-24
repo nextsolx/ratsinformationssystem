@@ -42,18 +42,14 @@ class Paper extends Model
         }
 
         if ($file = Arr::get($data, 'mainFile')) {
-            $paper->files()->attach(
-                self::extractIdFromUrl($file['id']),
-                ['type' => 'mainFile']
-            );
+            $paper->files()->syncWithoutDetaching(self::extractIdFromUrl($file['id']));
+            $paper->files()->updateExistingPivot(self::extractIdFromUrl($file['id']), ['type' => 'mainFile']);
         }
 
         if ($files = Arr::get($data, 'auxiliaryFile')) {
             foreach ($files as $file) {
-                $paper->files()->attach(
-                    self::extractIdFromUrl($file['id']),
-                    ['type' => 'auxiliaryFile']
-                );
+                $paper->files()->syncWithoutDetaching(self::extractIdFromUrl($file['id']));
+                $paper->files()->updateExistingPivot(self::extractIdFromUrl($file['id']), ['type' => 'auxiliaryFile']);
             }
         }
 

@@ -19,14 +19,13 @@ services:
     <<: *container
     environment:
       <<: *environment
-    ports:
-      - 80:80
-
-  scheduler:
-    <<: *container
-    environment:
-      <<: *environment
-      CONTAINER_ROLE: scheduler
+    build:
+      context: .
+      dockerfile: .docker/app/Dockerfile
+      target: develop
+      args:
+        - USER_UID=${USER_UID:-1000}
+        - USER_GID=${USER_GID:-1000}
 
   app-test:
     <<: *container
@@ -52,4 +51,3 @@ services:
 volumes:
   mysql:
     driver: local
-

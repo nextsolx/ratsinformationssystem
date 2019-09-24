@@ -37,17 +37,13 @@ class Agendum extends Model
         }
 
         if ($file = Arr::get($data, 'resolutionFile')) {
-            $agendum->files()->attach(
-                self::extractIdFromUrl($file['id']),
-                ['type' => 'resolutionFile']
-            );
+            $agendum->files()->syncWithoutDetaching(self::extractIdFromUrl($file['id']));
+            $agendum->files()->updateExistingPivot(self::extractIdFromUrl($file['id']), ['type' => 'resolutionFile']);
         }
         if ($files = Arr::get($data, 'auxiliaryFile')) {
             foreach ($files as $file) {
-                $agendum->files()->attach(
-                    self::extractIdFromUrl($file['id']),
-                    ['type' => 'auxiliaryFile']
-                );
+                $agendum->files()->syncWithoutDetaching(self::extractIdFromUrl($file['id']));
+                $agendum->files()->updateExistingPivot(self::extractIdFromUrl($file['id']), ['type' => 'auxiliaryFile']);
             }
         }
 

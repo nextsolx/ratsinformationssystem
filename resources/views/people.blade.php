@@ -111,11 +111,13 @@
                                     <div class="ris-body-2__text">{{ $committee->role }}</div>
                                 </div>
                                 <div class="ris-caption">
-                                    {{ \Illuminate\Support\Carbon::parse($committee->joined)->format('m/Y') }} -
-                                    @if (isset($committee->left) and $committee->left)
-                                        {{ \Illuminate\Support\Carbon::parse($committee->left)->format('m/Y') }}
-                                    @else
-                                        Heute
+                                    @if(isset($committee->joined))
+                                        {{ \Illuminate\Support\Carbon::parse($committee->joined)->format('m/Y') }} -
+                                        @if (isset($committee->left) and $committee->left)
+                                            {{ \Illuminate\Support\Carbon::parse($committee->left)->format('m/Y') }}
+                                        @else
+                                            Heute
+                                        @endif
                                     @endif
                                 </div>
                             </div>

@@ -100,7 +100,7 @@ export default {
             <CalendarCard
                 class="ris-calendar__card-list"
                 v-for="meeting in sortedList"
-                :key="meeting.id"
+                :key="`${meeting.id}-sorted`"
                 :meeting-sorted-day-list="meeting" />
         </div>
     </div>

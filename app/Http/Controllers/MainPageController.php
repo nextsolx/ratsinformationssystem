@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\Meeting;
+use App\File;
+use App\Http\Resources\Search;
 use App\Http\Resources\TopicWithData;
+use App\Location;
+use App\Meeting;
+use App\Organization;
 use App\Paper;
 use App\Person;
 use Illuminate\Http\Request;
@@ -35,5 +39,24 @@ class MainPageController extends Controller
             'topics' => $topics->data,
             'people' => $people->data
         ]);
+    }
+
+    public function search(Request $request)
+    {
+        $searchTerm = $request->input('searchTerm');
+
+        $people = Person::where('name', 'like', '%'.$searchTerm.'%')->get();
+
+        $organizations = Organization::where('name', 'like', '%'.$searchTerm.'%')->get();
+
+        $meetings = Meeting::where('name', 'like', '%'.$searchTerm.'%')->get();
+
+        $files = File::where('name', 'like', '%'.$searchTerm.'%')->get();
+
+        $locations = Location::where('description', 'like', '%'.$searchTerm.'%')->get();
+
+        $papers = Paper::where('name', 'like', '%'.$searchTerm.'%')->get();
+
+        return new Search($meetings, $people, $organizations, $files, $locations, $papers);
     }
 }

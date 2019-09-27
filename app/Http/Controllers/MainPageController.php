@@ -55,8 +55,8 @@ class MainPageController extends Controller
 
         $locations = Location::where('description', 'like', '%'.$searchTerm.'%')->get();
 
-        $papers = Paper::where('name', 'like', '%'.$searchTerm.'%')->get();
+        $topics = Paper::where('name', 'like', '%'.$searchTerm.'%')->get();
 
-        return new Search($meetings, $people, $organizations, $files, $locations, $papers);
+        return new Search($meetings, $people, $organizations, $files, $locations, $topics);
     }
 }

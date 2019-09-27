@@ -33,12 +33,12 @@ class Search extends JsonResource
     public function toArray($request)
     {
         return [
-            'meetings' => $this->meetings,
-            'people' => $this->people,
-            'organizations' => $this->organizations,
-            'files' => $this->files,
-            'locations' => $this->locations,
-            'papers' => $this->papers,
+            'meetings' => Meeting::collection($this->meetings),
+            'people' => Person::collection($this->people),
+            'organizations' => Organization::collection($this->organizations),
+            'files' => File::collection($this->files),
+            'locations' => Location::collection($this->locations),
+            'topics' => TopicWithData::collection($this->papers),
         ];
     }
 }

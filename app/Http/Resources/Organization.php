@@ -29,6 +29,10 @@ class Organization extends JsonResource
             'nextMeetingDate' => $this->nextMeetingDate(),
             'members' => Person::collection($this->whenLoaded('people')),
             'meetings' => Meeting::collection($this->whenLoaded('meetings')),
+            'joined' => $this->relationLoaded('pivot') ? $this->whenPivotLoaded('memberships', $this->pivot->start_date) : null,
+            'left' => $this->relationLoaded('pivot') ? $this->whenPivotLoaded('memberships', $this->pivot->end_date) : null,
+            'role' => $this->relationLoaded('pivot') ? $this->whenPivotLoaded('memberships', $this->pivot->role) : null,
+            'website' => $this->website,
         ];
     }
 }

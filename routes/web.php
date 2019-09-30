@@ -61,6 +61,7 @@ Route::group(['middleware' => 'under-construction'], function () {
         return view('company');
     })->name('company');
 
+    Route::get('/suche', 'MainPageController@search')->name('search');
 
     Route::get('/api/people-list', 'PersonenController@getPeople');
     Route::get('/api/meetings', 'MeetingController@all');

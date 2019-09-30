@@ -14,6 +14,7 @@ class Organization extends Model
         'classification',
         'start_date',
         'end_date',
+        'website',
     ];
 
     public static function initialize(array $data)

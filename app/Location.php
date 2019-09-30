@@ -22,6 +22,11 @@ class Location extends Model
         return $this->belongsTo(Meeting::class);
     }
 
+    public function person()
+    {
+        return $this->hasMany(Person::class);
+    }
+
     //Todo: Verify
     public function getLocationX()
     {

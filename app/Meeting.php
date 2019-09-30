@@ -33,37 +33,29 @@ class Meeting extends Model
 
         if ($organizations = Arr::get($data, 'organization')) {
             foreach ($organizations as $organization) {
-                $meeting->organizations()->attach(self::extractIdFromUrl($organization));
+                $meeting->organizations()->syncWithoutDetaching(self::extractIdFromUrl($organization));
             }
         }
 
         if ($file = Arr::get($data, 'invitation')) {
-            $meeting->files()->attach(
-                self::extractIdFromUrl($file['id']),
-                ['type' => 'inviation']
-            );
+            $meeting->files()->syncWithoutDetaching(self::extractIdFromUrl($file['id']));
+            $meeting->files()->updateExistingPivot(self::extractIdFromUrl($file['id']), ['type' => 'invitation']);
         }
 
         if ($file = Arr::get($data, 'resultsProtocol')) {
-            $meeting->files()->attach(
-                self::extractIdFromUrl($file['id']),
-                ['type' => 'resultsProtocol']
-            );
+            $meeting->files()->syncWithoutDetaching(self::extractIdFromUrl($file['id']));
+            $meeting->files()->updateExistingPivot(self::extractIdFromUrl($file['id']), ['type' => 'resultsProtocol']);
         }
 
         if ($file = Arr::get($data, 'verbatimProtocol')) {
-            $meeting->files()->attach(
-                self::extractIdFromUrl($file['id']),
-                ['type' => 'verbatimProtocol']
-            );
+            $meeting->files()->syncWithoutDetaching(self::extractIdFromUrl($file['id']));
+            $meeting->files()->updateExistingPivot(self::extractIdFromUrl($file['id']), ['type' => 'verbatimProtocol']);
         }
 
         if ($files = Arr::get($data, 'auxiliaryFile')) {
             foreach ($files as $file) {
-                $meeting->files()->attach(
-                    self::extractIdFromUrl($file['id']),
-                    ['type' => 'auxiliaryFile']
-                );
+                $meeting->files()->syncWithoutDetaching(self::extractIdFromUrl($file['id']));
+                $meeting->files()->updateExistingPivot(self::extractIdFromUrl($file['id']), ['type' => 'auxiliaryFile']);
             }
         }
 

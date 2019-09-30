@@ -40,7 +40,8 @@ class Membership extends Pivot
         });
 
         return self::updateOrCreate(
-            ['id' =>  $data['id']],
+            ['person_id' =>  $data['person_id']],
+            ['organization_id' =>  $data['organization_id']],
             $data->toArray()
         );
     }

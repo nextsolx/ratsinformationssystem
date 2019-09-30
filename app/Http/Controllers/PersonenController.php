@@ -74,7 +74,7 @@ class PersonenController extends Controller
 
     public function personDetail(Request $request, Person $person)
     {
-        $person->load('organizations');
+        $person->load('organizations','papers');
 
         $personData = (new \App\Http\Resources\Person($person))->toResponse(request())->getData();
 

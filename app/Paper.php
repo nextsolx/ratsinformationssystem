@@ -27,7 +27,7 @@ class Paper extends Model
         'reference',
         'paperType',
         'date',
-        'modified'
+        'modified',
     ];
 
     public static function initialize(array $data)
@@ -41,23 +41,31 @@ class Paper extends Model
             }
         }
 
+        if ($people = Arr::get($data, 'originatorPerson')) {
+            foreach ($people as $person) {
+                $person = Person::initialize($person);
+                $paper->people()->syncWithoutDetaching($person);
+            }
+        }
+
         if ($file = Arr::get($data, 'mainFile')) {
-            $paper->files()->attach(
-                self::extractIdFromUrl($file['id']),
-                ['type' => 'mainFile']
-            );
+            $paper->files()->syncWithoutDetaching(self::extractIdFromUrl($file['id']));
+            $paper->files()->updateExistingPivot(self::extractIdFromUrl($file['id']), ['type' => 'mainFile']);
         }
 
         if ($files = Arr::get($data, 'auxiliaryFile')) {
             foreach ($files as $file) {
-                $paper->files()->attach(
-                    self::extractIdFromUrl($file['id']),
-                    ['type' => 'auxiliaryFile']
-                );
+                $paper->files()->syncWithoutDetaching(self::extractIdFromUrl($file['id']));
+                $paper->files()->updateExistingPivot(self::extractIdFromUrl($file['id']), ['type' => 'auxiliaryFile']);
             }
         }
 
         return $paper;
+    }
+
+    public function people()
+    {
+        return $this->belongsToMany(Person::class);
     }
 
     public function locations()

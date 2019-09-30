@@ -1,6 +1,10 @@
 <script>
+import ThemeItem from './Theme/ThemeItem';
 export default {
     name: 'GlobalSearch',
+    components: {
+        ThemeItem
+    },
     data () {
         return {
             onFocus: false,
@@ -18,7 +22,13 @@ export default {
             inputValue: 'q',
             navigationList: ['Alle', 'Themen', 'Orte', 'Personen'],
             activeTab: 'Alle',
-            resultList: []
+            option: {
+                id: 12313123123,
+                name: 'Theme title',
+                reference: 'qwe123 2',
+                type: null,
+                date: '2018-11-01 00:00:00'
+            }
         };
     },
     methods: {
@@ -54,7 +64,7 @@ export default {
                 @input="$event => $emit('input', $event.target.value)"
                 :placeholder="inputPlaceholder">
         </div>
-        <div v-if="onFocus" class="ris-global-search-content">
+        <div v-if="onFocus" class="ris-global-search-wrapper">
             <div v-if="!inputValue" class="ris-global-search-autocomplete">
                 <h2 class="ris-global-search-autocomplete__title">Aktuell beliebte Suchbegriffe</h2>
                 <ul class="ris-global-search-autocomplete__list">
@@ -70,7 +80,7 @@ export default {
                     </li>
                 </ul>
             </div>
-            <div v-if="resultList">
+            <div>
                 <h3 class="ris-global-search__result-title">
                     {{ `xyz Suchergebnisse für „${inputValue}“` }}
                 </h3>
@@ -84,6 +94,44 @@ export default {
                             :class="{ isActive : item === activeTab }"
                             @click="activeTab = item">
                             {{ item }}
+                        </button>
+                    </li>
+                </ul>
+                <ul class="ris-ul ris-global-search-content">
+                    <li v-if="activeTab === 'Alle' || activeTab === 'Themen'" class="ris-global-search-content__item">
+                        <h2 class="ris-global-search-content__title">Themen</h2>
+                        <ul class="ris-ul ris-global-search-content__list">
+                            <li class="ris-global-search-content__item">
+                                <ThemeItem :options="option" />
+                            </li>
+                        </ul>
+                        <button class="ris-global-search-content__button ris-link ris-link_button ris-link_right">
+                            Alle 217 Themen laden
+                            <span class="ris-i ris-i_chevron-right" />
+                        </button>
+                    </li>
+                    <li v-if="activeTab === 'Alle' || activeTab === 'Orte'" class="ris-global-search-content__item">
+                        <h2 class="ris-global-search-content__title">Orte</h2>
+                        <ul class="ris-ul ris-global-search-content-theme">
+                            <li class="ris-global-search-content-theme__item">
+                                qwe
+                            </li>
+                        </ul>
+                        <button class="ris-global-search-content__button ris-link ris-link_button ris-link_right">
+                            Alle 217 Themen laden
+                            <span class="ris-i ris-i_chevron-right" />
+                        </button>
+                    </li>
+                    <li v-if="activeTab === 'Alle' || activeTab === 'Personen'" class="ris-global-search-content__item">
+                        <h2 class="ris-global-search-content__title">Personen</h2>
+                        <ul class="ris-ul ris-global-search-content-theme">
+                            <li class="ris-global-search-content-theme__item">
+                                qwe
+                            </li>
+                        </ul>
+                        <button class="ris-global-search-content__button ris-link ris-link_button ris-link_right">
+                            Alle 217 Themen laden
+                            <span class="ris-i ris-i_chevron-right" />
                         </button>
                     </li>
                 </ul>

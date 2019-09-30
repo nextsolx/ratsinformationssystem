@@ -2,8 +2,8 @@
 import Vue from 'vue';
 import checkView from 'vue-check-view';
 import CommitteeTableItem from './CommitteeTableItem';
-import Dropdown from '../Ux/Dropdown';
-import Search from '../Ux/Search';
+import Dropdown from '../Ui/Dropdown';
+import Search from '../Ui/Search';
 import LetterNavigation from '../LetterNavigation';
 import sortingMixin from '../../mixins/sortingMixin';
 

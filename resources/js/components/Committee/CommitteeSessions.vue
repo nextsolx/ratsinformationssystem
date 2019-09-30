@@ -1,6 +1,6 @@
 <script>
-import Dropdown from '../Ux/Dropdown';
-import Search from '../Ux/Search';
+import Dropdown from '../Ui/Dropdown';
+import Search from '../Ui/Search';
 import sortingMixin from '../../mixins/sortingMixin';
 import CalendarCard from '../CalendarCard';
 

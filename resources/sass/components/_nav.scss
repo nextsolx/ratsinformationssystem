@@ -68,7 +68,6 @@
 
     @include breakpoint($bp-tablet-min) {
         margin-left: $indent-m;
-        margin-right: $indent-l;
     }
 
     &__cta {

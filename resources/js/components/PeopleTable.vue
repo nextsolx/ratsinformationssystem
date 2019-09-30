@@ -3,8 +3,8 @@ import Member from './Member';
 import LetterNavigation from './LetterNavigation';
 import sortingMixin from '../mixins/sortingMixin';
 import lazyLoadMixin from '../mixins/lazyLoadMixin';
-import Dropdown from './Ux/Dropdown';
-import Search from './Ux/Search';
+import Dropdown from './Ui/Dropdown';
+import Search from './Ui/Search';
 import people from '../api/people';
 import { ContentLoader } from 'vue-content-loader';
 

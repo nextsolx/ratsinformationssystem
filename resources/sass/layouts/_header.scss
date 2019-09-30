@@ -15,7 +15,6 @@
         box-shadow: 0 1px 6px 0 $c-box-shadow2;
         font-size: 0;
         position: relative;
-        z-index: 2;
     }
 
     &__bottom {
@@ -28,10 +27,13 @@
 
         @include breakpoint($bp-tablet-min) {
             display: flex;
+            margin: 0 16px 0 0;
         }
     }
 
     &__top {
+        z-index: 7;
+        position: relative;
         @include breakpoint($bp-mobile-max) {
             display: inline-flex;
         }
@@ -100,13 +102,8 @@
     .ris-search {
         flex-grow: 1;
 
-        @include breakpoint($bp-mobile-max) {
-            margin-left: $indent-sm;
-        }
-
         @include breakpoint($bp-tablet-min) {
             align-self: center;
-            margin-left: $indent-sm * 2;
         }
     }
 }

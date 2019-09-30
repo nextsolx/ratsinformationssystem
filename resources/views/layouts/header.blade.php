@@ -16,14 +16,7 @@
         </div>
 
         <div class="ris-header__bottom">
-            <div class="ris-search" role="search">
-                <button class="ris-search__button">
-                    <span class="ris-i ris-i_search"></span>
-                </button>
-                <input type="search" class="ris-search__input"
-                       placeholder="Suche nach Themen, Vorlagen, Sitzungen..."
-                />
-            </div>
+            <global-search></global-search>
 
             <div class="ris-nav">
                 <button class="ris-nav__cta ris-nav__cta_parent"

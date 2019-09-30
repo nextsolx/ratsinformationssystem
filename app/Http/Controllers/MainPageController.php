@@ -47,16 +47,10 @@ class MainPageController extends Controller
 
         $people = Person::where('name', 'like', '%'.$searchTerm.'%')->get();
 
-        $organizations = Organization::where('name', 'like', '%'.$searchTerm.'%')->get();
-
-        $meetings = Meeting::where('name', 'like', '%'.$searchTerm.'%')->get();
-
-        $files = File::where('name', 'like', '%'.$searchTerm.'%')->get();
-
         $locations = Location::where('description', 'like', '%'.$searchTerm.'%')->get();
 
         $topics = Paper::where('name', 'like', '%'.$searchTerm.'%')->get();
 
-        return new Search($meetings, $people, $organizations, $files, $locations, $topics);
+        return new Search($people, $locations, $topics);
     }
 }

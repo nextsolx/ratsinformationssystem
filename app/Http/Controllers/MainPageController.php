@@ -43,13 +43,33 @@ class MainPageController extends Controller
     {
         $searchTerm = $request->input('searchTerm');
 
-        $people = Person::where('name', 'like', "%$searchTerm%")->orderBy('family_name', 'asc')->paginate(15);
+        $people = Person::where('name', 'like', "%$searchTerm%")->orderBy('family_name', 'asc')->paginate(15)
+            ->setPath(url('/api/people-list?q=' . $searchTerm));
 
-        $locations = Location::where('description', 'like', "%$searchTerm%")->paginate(15);
+        $locations = Location::where('description', 'like', "%$searchTerm%")->paginate(15)
+            ->setPath(url('api/locations?q=' . $searchTerm));
 
         $topics = Paper::where('name', 'like', "%$searchTerm%")->sort()->paginate(15)
             ->setPath(url('api/topics?q=' . $searchTerm));
 
         return new Search($people, $locations, $topics);
+    }
+
+    public function getLocations(Request $request)
+    {
+        $locationQuery = Location::all();
+
+        if($search = $request->input('q')){
+            $locationQuery = Location::where('description', 'like', "%$search%");
+        }
+
+        $locationData = \App\Http\Resources\Location::collection($locationQuery->paginate(15))
+            ->toResponse(request())->getData();
+
+        return [
+            'lcoations' => $locationData->data,
+            'links' => $locationData->links,
+            'meta' => $locationData->meta,
+        ];
     }
 }

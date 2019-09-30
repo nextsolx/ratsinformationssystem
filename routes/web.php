@@ -71,4 +71,5 @@ Route::group(['middleware' => 'under-construction'], function () {
     Route::get('/api/districts', 'DistrictController@all');
     Route::get('/api/districts/{district}', 'DistrictController@district');
     Route::get('/api/districts/{district}/{subdistrict}', 'DistrictController@subDistrict');
+    Route::get('/api/locations', 'MainPageController@getLocations');
 });

@@ -60,12 +60,17 @@ class PersonenController extends Controller
                 ->orWhere('party', 'like', "%$search%");
         }
 
+        if ($search = $request->input('q')) {
+            $peopleQuery->where('name', 'like', "%$search%");
+        }
+
         $peopleData = \App\Http\Resources\Person::collection($peopleQuery->paginate(15))
             ->toResponse(request())->getData();
 
         return [
             'members' => $peopleData->data,
             'links' => $peopleData->links,
+            'meta' => $peopleData->meta,
             'breadcrumbs' => [
                 'Personen' => route('theme-overview'),
             ]

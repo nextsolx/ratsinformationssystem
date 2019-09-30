@@ -26,6 +26,7 @@ class Topic extends JsonResource
             'result' => $this->result(),
             'date' => $this->date->toDateTimeString() ?? null,
             'modified' => $this->modified,
+
 //            'text' => $this->text(),
 //            'finished' => $this->isFinished(),
 //            'newTopic' => $this->isNew(),

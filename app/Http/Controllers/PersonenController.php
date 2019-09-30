@@ -28,7 +28,7 @@ class PersonenController extends Controller
                 ->orWhere('party', 'like', "%$search%");
         }
 
-        $peopleData = \App\Http\Resources\Person::collection($peopleQuery->paginate(100))
+        $peopleData = \App\Http\Resources\Person::collection($peopleQuery->paginate(15))
             ->toResponse(request())->getData();
 
         return view('people-list')->with([
@@ -60,7 +60,7 @@ class PersonenController extends Controller
                 ->orWhere('party', 'like', "%$search%");
         }
 
-        $peopleData = \App\Http\Resources\Person::collection($peopleQuery->paginate(100))
+        $peopleData = \App\Http\Resources\Person::collection($peopleQuery->paginate(15))
             ->toResponse(request())->getData();
 
         return [

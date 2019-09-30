@@ -27,9 +27,21 @@ class Search extends JsonResource
     public function toArray($request)
     {
         return [
-            'people' => Person::collection($this->people),
-            'locations' => Location::collection($this->locations),
-            'topics' => TopicWithData::collection($this->papers),
+            'people' => [
+                'data' => Person::collection($this->people),
+                'links' => Person::collection($this->people)->toResponse($request)->getData()->links,
+                'meta' =>Person::collection($this->people)->toResponse($request)->getData()->meta,
+            ],
+            'locations' => [
+                'data' => Location::collection($this->locations),
+                'links' => Location::collection($this->locations)->toResponse($request)->getData()->links,
+                'meta' => Location::collection($this->locations)->toResponse($request)->getData()->meta,
+            ],
+            'topics' => [
+                'data' => Topic::collection($this->papers),
+                'links' => Topic::collection($this->papers)->toResponse($request)->getData()->links,
+                'meta' => Topic::collection($this->papers)->toResponse($request)->getData()->meta,
+            ],
         ];
     }
 }

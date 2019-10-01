@@ -32,19 +32,10 @@ class Organization extends JsonResource
             'joined' => $this->relationLoaded('pivot') ? $this->whenPivotLoaded('memberships', $this->pivot->start_date) : null,
             'left' => $this->relationLoaded('pivot') ? $this->whenPivotLoaded('memberships', $this->pivot->end_date) : null,
             'role' => $this->relationLoaded('pivot') ? $this->whenPivotLoaded('memberships', $this->pivot->role) : null,
-            'website' => $this->website,
             'links' => [
                 0 => [
-                    'linkText' => 'Placeholder',
-                    'url' => '/'
-                ],
-                1 => [
-                    'linkText' => 'Placeholder',
-                    'url' => '/'
-                ],
-                2 => [
-                    'linkText' => 'Placeholder',
-                    'url' => '/'
+                    'linkText' => 'Homepage',
+                    'url' => $this->website
                 ],
             ]
         ];

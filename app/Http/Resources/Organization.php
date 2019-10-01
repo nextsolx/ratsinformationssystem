@@ -37,6 +37,10 @@ class Organization extends JsonResource
                     'linkText' => 'Homepage',
                     'url' => $this->website
                 ],
+                0 => [
+                    'linkText' => 'Das Kölner Stadtrecht',
+                    'url' => 'https://www.stadt-koeln.de/artikel/00174/index.html'
+                ],
             ]
         ];
     }

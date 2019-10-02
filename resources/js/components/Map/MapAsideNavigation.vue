@@ -151,7 +151,9 @@ export default {
     created () {
         this.getDistrictList();
         Bus.$on('mapOut', (e) => {
-            this.buttonHandleInSide(e.value, false);
+            if (e.value) {
+                this.buttonHandleInSide(e.value, false);
+            }
         });
     }
 };

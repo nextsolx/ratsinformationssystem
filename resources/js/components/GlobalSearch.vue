@@ -1,9 +1,13 @@
 <script>
-import ThemeItem from './Theme/ThemeItem';
+import ThemeWidget from './Theme/ThemeWidget';
+import PersonWidget from './PersonWidget';
+import MapWidget from './Map/MapWidget';
 export default {
     name: 'GlobalSearch',
     components: {
-        ThemeItem
+        ThemeWidget,
+        PersonWidget,
+        MapWidget
     },
     data () {
         return {
@@ -27,7 +31,8 @@ export default {
                 name: 'Theme title',
                 reference: 'qwe123 2',
                 type: null,
-                date: '2018-11-01 00:00:00'
+                date: '2018-11-01 00:00:00',
+                role: 'DRQ'
             }
         };
     },
@@ -100,9 +105,12 @@ export default {
                 <ul class="ris-ul ris-global-search-content">
                     <li v-if="activeTab === 'Alle' || activeTab === 'Themen'" class="ris-global-search-content__item">
                         <h2 class="ris-global-search-content__title">Themen</h2>
-                        <ul class="ris-ul ris-global-search-content__list">
+                        <ul class="ris-ul ris-global-search-content__list ris-global-search-content__theme">
                             <li class="ris-global-search-content__item">
-                                <ThemeItem :options="option" />
+                                <ThemeWidget :options="option" />
+                            </li>
+                            <li class="ris-global-search-content__item">
+                                <ThemeWidget :options="option" />
                             </li>
                         </ul>
                         <button class="ris-global-search-content__button ris-link ris-link_button ris-link_right">
@@ -112,9 +120,12 @@ export default {
                     </li>
                     <li v-if="activeTab === 'Alle' || activeTab === 'Orte'" class="ris-global-search-content__item">
                         <h2 class="ris-global-search-content__title">Orte</h2>
-                        <ul class="ris-ul ris-global-search-content-theme">
-                            <li class="ris-global-search-content-theme__item">
-                                qwe
+                        <ul class="ris-ul ris-global-search-content__list ris-global-search-content__map">
+                            <li class="ris-global-search-content__item">
+                                <MapWidget :options="option" />
+                            </li>
+                            <li class="ris-global-search-content__item">
+                                <MapWidget :options="option" />
                             </li>
                         </ul>
                         <button class="ris-global-search-content__button ris-link ris-link_button ris-link_right">
@@ -124,9 +135,12 @@ export default {
                     </li>
                     <li v-if="activeTab === 'Alle' || activeTab === 'Personen'" class="ris-global-search-content__item">
                         <h2 class="ris-global-search-content__title">Personen</h2>
-                        <ul class="ris-ul ris-global-search-content-theme">
-                            <li class="ris-global-search-content-theme__item">
-                                qwe
+                        <ul class="ris-ul ris-global-search-content__list ris-global-search-content__person">
+                            <li class="ris-global-search-content__item">
+                                <PersonWidget :person="option" />
+                            </li>
+                            <li class="ris-global-search-content__item">
+                                <PersonWidget :person="option" />
                             </li>
                         </ul>
                         <button class="ris-global-search-content__button ris-link ris-link_button ris-link_right">

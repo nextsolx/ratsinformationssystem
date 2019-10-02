@@ -1,0 +1,60 @@
+.ris-person {
+    $this: &;
+    min-height: 200px;
+    width: 112px;
+    text-decoration: none;
+    box-shadow: 0 1px 6px 0 rgba(33, 33, 33, 0.24);
+    border-radius: 4px;
+    color: $c-black;
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    &:hover {
+        #{$this}__icon,
+        #{$this}__title {
+            color: $c-red;
+        }
+    }
+    @media screen and (max-width: 767px) {
+        flex-direction: row;
+        min-height: auto;
+        height: 80px;
+        width: 100%;
+    }
+    &__image {
+        height: 112px;
+        max-width: 112px;
+        width: 100%;
+        @media screen and (max-width: 767px) {
+            height: 80px;
+            max-width: 80px;
+        }
+    }
+    &__content {
+        padding: 8px;
+        @media screen and (max-width: 767px) {
+            padding: 16px;
+            width: 100%;
+            position: relative;
+        }
+    }
+    &__title {
+        font-size: 16px;
+        margin: 0;
+    }
+    &__info {
+        font-size: 16px;
+        color: $c-gray8;
+    }
+    &__icon {
+        display: none;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 20px;
+        font-size: 10px;
+        @media screen and (max-width: 767px) {
+            display: block;
+        }
+    }
+}

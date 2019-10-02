@@ -1,0 +1,64 @@
+.ris-theme-item {
+    display: flex;
+    text-decoration: none;
+    color: $c-black;
+    width: 100%;
+    min-height: 96px;
+    box-shadow: 0 1px 6px 0 rgba(33, 33, 33, 0.24);
+    @media screen and (max-width: 767px) {
+        padding: 16px;
+        width: auto;
+    }
+    &__image {
+        width: 96px;
+        &-mobi {
+            display: none;
+            width: 72px;
+            margin-right: 16px;
+            @media screen and (max-width: 767px) {
+                display: block;
+            }
+        }
+        @media screen and (max-width: 767px) {
+            display: none;
+        }
+    }
+    &__wrapper {
+        @media screen and (max-width: 767px) {
+            margin-bottom: 16px;
+            display: flex;
+        }
+    }
+    &__content {
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        @media screen and (max-width: 767px) {
+            padding: 0;
+        }
+    }
+    &__title {
+        margin: 0 0 8px 0;
+        font-size: 16px;
+        max-height: 36px;
+        overflow: hidden;
+        hyphens: auto;
+    }
+    &__info {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    &__reference,
+    &__date {
+        color: $c-gray8;
+        font-size: 16px;
+    }
+    &__reference {
+        margin: 0 20px 0 0;
+        @media screen and (max-width: 767px) {
+            width: 100%;
+            margin: 0 0 8px 0;
+        }
+    }
+}

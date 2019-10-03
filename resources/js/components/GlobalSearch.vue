@@ -204,7 +204,7 @@ export default {
                                 class="ris-global-search-content__item"
                                 v-for="topic in topicsList"
                                 :key="topic.id">
-                                <ThemeWidget :topic="topic" />
+                                <ThemeWidget :filterValue="inputValue" :topic="topic" />
                             </li>
                             <li v-if="activeTab === 'Themen'" class="ris-load-element" />
                         </ul>
@@ -227,7 +227,7 @@ export default {
                                 class="ris-global-search-content__item"
                                 v-for="location in locationList"
                                 :key="location.id">
-                                <MapWidget :options="location" />
+                                <MapWidget :filterValue="inputValue" :options="location" />
                             </li>
                             <li v-if="activeTab === 'Orte'" class="ris-load-element" />
                         </ul>
@@ -250,7 +250,7 @@ export default {
                                 class="ris-global-search-content__item"
                                 v-for="person in peopleList"
                                 :key="person.id">
-                                <PersonWidget :person="person" />
+                                <PersonWidget :filterValue="inputValue" :person="person" />
                             </li>
                             <li v-if="activeTab === 'Personen'" class="ris-load-element" />
                         </ul>

@@ -66,7 +66,7 @@ class MainPageController extends Controller
             ->toResponse(request())->getData();
 
         return [
-            'lcoations' => $locationData->data,
+            'locations' => $locationData->data,
             'links' => $locationData->links,
             'meta' => $locationData->meta,
         ];

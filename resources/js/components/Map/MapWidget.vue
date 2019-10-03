@@ -15,6 +15,6 @@ export default {
             <h3 class="ris-h3 ris-map-widget__title">headline</h3>
             <span class="ris-map-widget__sub-title">subline</span>
         </div>
-        <img src="https://via.placeholder.com/80" class="ris-map-widget__image">
+        <img src="/img/thumbnail-map-tile.png" class="ris-map-widget__image">
     </a>
 </template>

@@ -50,6 +50,7 @@
         @media screen and (max-width: 767px) {
             max-height: calc(100vh - 92px);
             top: 92px;
+            height: 100%;
         }
     }
     &-autocomplete {
@@ -139,18 +140,36 @@
         }
         &__theme {
             flex-direction: column;
+            max-height: 325px;
+            overflow-y: hidden;
+            padding: 4px 4px 4px 0;
+            &.isActive {
+                max-height: unset;
+                overflow-y: unset;
+            }
         }
         &__person {
             flex-wrap: wrap;
+            max-height: 212px;
+            overflow-y: hidden;
+            &.isActive {
+                max-height: unset;
+                overflow-y: unset;
+            }
             #{$this}-content__item {
                 margin: 0 15px 15px 0;
             }
         }
         &__map {
             flex-wrap: wrap;
+            max-height: 185px;
+            overflow-y: hidden;
+            &.isActive {
+                max-height: unset;
+                overflow-y: unset;
+            }
             #{$this}-content__item {
                 margin: 0 15px 15px 0;
-                width: 100%;
             }
         }
         &__item {
@@ -161,6 +180,29 @@
         }
         &__button {
             border: 0;
+        }
+    }
+    &-placeholder {
+        background-color: #F6F6F6;
+        padding: 47px 25px 50px;
+        text-align: center;
+        margin: 24px;
+        @media screen and (max-width: 767px) {
+            margin: 0;
+            padding: 24px 16px;
+            text-align: left;
+        }
+        &__title {
+            font-size: 24px;
+            margin-bottom: 40px;
+            @media screen and (max-width: 767px) {
+                font-size: 20px;
+                margin-bottom: 16px;
+            }
+        }
+        &__info {
+            font-size: 16px;
+            color: $c-gray6;
         }
     }
 }

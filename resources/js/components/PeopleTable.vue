@@ -72,7 +72,8 @@ export default {
                 this.debounce && clearTimeout(this.debounce);
                 this.debounce = setTimeout(
                     async () => {
-                        this.filteredList = await people.search(value);
+                        const { members } = await people.getPeopleLike(value);
+                        this.filteredList = members;
                         this.loading = false;
                     }, 1000);
             } else {

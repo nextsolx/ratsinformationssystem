@@ -160,21 +160,21 @@ export default {
                 :placeholder="inputPlaceholder">
         </div>
         <div v-if="onFocus && inputValue" class="ris-global-search-wrapper">
-<!--            <div v-if="!inputValue" class="ris-global-search-autocomplete">-->
-<!--                <h2 class="ris-global-search-autocomplete__title">Aktuell beliebte Suchbegriffe</h2>-->
-<!--                <ul class="ris-global-search-autocomplete__list">-->
-<!--                    <li-->
-<!--                        v-for="item in optionsList"-->
-<!--                        :key="item"-->
-<!--                        class="ris-global-search-autocomplete__item">-->
-<!--                        <button-->
-<!--                            class="ris-global-search-autocomplete__button"-->
-<!--                            @click="inputValue = item">-->
-<!--                            {{ item }}-->
-<!--                        </button>-->
-<!--                    </li>-->
-<!--                </ul>-->
-<!--            </div>-->
+            <!--            <div v-if="!inputValue" class="ris-global-search-autocomplete">-->
+            <!--                <h2 class="ris-global-search-autocomplete__title">Aktuell beliebte Suchbegriffe</h2>-->
+            <!--                <ul class="ris-global-search-autocomplete__list">-->
+            <!--                    <li-->
+            <!--                        v-for="item in optionsList"-->
+            <!--                        :key="item"-->
+            <!--                        class="ris-global-search-autocomplete__item">-->
+            <!--                        <button-->
+            <!--                            class="ris-global-search-autocomplete__button"-->
+            <!--                            @click="inputValue = item">-->
+            <!--                            {{ item }}-->
+            <!--                        </button>-->
+            <!--                    </li>-->
+            <!--                </ul>-->
+            <!--            </div>-->
             <div>
                 <h3 v-if="!isNothing" class="ris-global-search__result-title">
                     {{ `xyz Suchergebnisse für „${inputValue}“` }}
@@ -204,7 +204,7 @@ export default {
                                 class="ris-global-search-content__item"
                                 v-for="topic in topicsList"
                                 :key="topic.id">
-                                <ThemeWidget :filterValue="inputValue" :topic="topic" />
+                                <ThemeWidget :filter-value="inputValue" :topic="topic" />
                             </li>
                             <li v-if="activeTab === 'Themen'" class="ris-load-element" />
                         </ul>
@@ -227,7 +227,7 @@ export default {
                                 class="ris-global-search-content__item"
                                 v-for="location in locationList"
                                 :key="location.id">
-                                <MapWidget :filterValue="inputValue" :options="location" />
+                                <MapWidget :filter-value="inputValue" :options="location" />
                             </li>
                             <li v-if="activeTab === 'Orte'" class="ris-load-element" />
                         </ul>
@@ -250,7 +250,7 @@ export default {
                                 class="ris-global-search-content__item"
                                 v-for="person in peopleList"
                                 :key="person.id">
-                                <PersonWidget :filterValue="inputValue" :person="person" />
+                                <PersonWidget :filter-value="inputValue" :person="person" />
                             </li>
                             <li v-if="activeTab === 'Personen'" class="ris-load-element" />
                         </ul>

@@ -3,24 +3,24 @@
     width: 100%;
     align-self: center;
     position: relative;
-    @media screen and (max-width: 767px) {
+    @include breakpoint($bp-mobile-max) {
         position: static;
     }
     &__result-title {
-        padding-left: 25px;
-        margin: 32px 0 16px 0;
-        color: #8C8C8C;
-        font-size: 16px;
+        padding-left: $indent-ml;
+        margin: $indent-l 0 $indent-m 0;
+        color: $c-gray8;
+        font-size: $fs-l;
         font-weight: 400;
     }
     &-navigation {
         display: flex;
-        padding-left: 25px;
+        padding-left: $indent-ml;
         margin: 0;
-        border-bottom: 1px solid #ccc;
+        border-bottom: 1px solid $c-gray7;
         &__button {
             border: 0;
-            font-size: 16px;
+            font-size: $fs-l;
             background-color: transparent;
             border-bottom: 3px solid transparent;
             outline: none;
@@ -47,7 +47,7 @@
         z-index: 6;
         max-height: calc(100vh - 64px - 48px);
         overflow-y: scroll;
-        @media screen and (max-width: 767px) {
+        @include breakpoint($bp-mobile-max) {
             max-height: calc(100vh - 92px);
             top: 92px;
             height: 100%;
@@ -55,34 +55,34 @@
     }
     &-autocomplete {
         &__title {
-            font-size: 16px;
-            margin: 32px 0 16px 0;
-            padding-left: 25px;
-            @media screen and (max-width: 767px) {
-                margin: 16px 0;
+            font-size: $fs-l;
+            margin: 32px 0 $indent-m 0;
+            padding-left: $indent-ml;
+            @include breakpoint($bp-mobile-max) {
+                margin: $indent-m 0;
             }
         }
         &__list {
             margin: 0;
             list-style-type: none;
             display: flex;
-            padding: 0 20px 0 25px;
+            padding: 0 20px 0 $indent-ml;
             flex-wrap: wrap;
-            @media screen and (max-width: 767px) {
-                padding: 0 17px;
+            @include breakpoint($bp-mobile-max) {
+                padding: 0 $indent-m;
             }
         }
         &__item {
-            margin: 0 8px 8px 0;
+            margin: 0 $indent-s $indent-s 0;
         }
         &__button {
-            padding: 8px 12px;
+            padding: $indent-s $indent-sm;
             font-weight: 500;
             border-radius: 4px;
             border: 0;
             cursor: pointer;
-            font-size: 16px;
-            box-shadow: 0 1px 6px 0 rgba(33, 33, 33, 0.24);
+            font-size: $fs-l;
+            box-shadow: 0 1px 6px 0 $c-box-shadow3;
             color: #545458;
             background-color: #fff;
         }
@@ -94,19 +94,19 @@
         height: 100vh;
         width: 100vw;
         z-index: 5;
-        @media screen and (max-width: 767px) {
+        @include breakpoint($bp-mobile-max) {
             display: none;
         }
     }
     &-input{
         transition: padding-left ease-in-out .1s;
-        padding-left: 16px;
+        padding-left: $indent-m;
         font-weight: bold;
         &.focused {
             transition: padding-left ease-in-out .1s;
             padding-left: 0;
-            box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.32);
-            @media screen and (max-width: 767px) {
+            box-shadow: 0 1px 6px 0 $c-box-shadow2;
+            @include breakpoint($bp-mobile-max) {
                 box-shadow: none;
             }
         }
@@ -126,14 +126,14 @@
     &-content {
         display: flex;
         flex-direction: column;
-        padding: 0 25px;
-        margin: 0 0 30px 0;
-        @media screen and (max-width: 767px) {
-            padding: 0 16px;
+        padding: 0 $indent-ml;
+        margin: 0 0 $indent-l 0;
+        @include breakpoint($bp-mobile-max) {
+            padding: 0 $indent-m;
         }
         &__title {
-            margin: 8px 0;
-            font-size: 22px;
+            margin: $indent-s 0;
+            font-size: $fs-xxl;
         }
         &__list {
             display: flex;
@@ -157,7 +157,7 @@
                 overflow-y: unset;
             }
             #{$this}-content__item {
-                margin: 0 15px 15px 0;
+                margin: 0 $indent-m $indent-m 0;
             }
         }
         &__map {
@@ -169,12 +169,12 @@
                 overflow-y: unset;
             }
             #{$this}-content__item {
-                margin: 0 15px 15px 0;
+                margin: 0 $indent-m $indent-m 0;
             }
         }
         &__item {
-            margin-bottom: 15px;
-            @media screen and (max-width: 767px) {
+            margin-bottom: $indent-m;
+            @include breakpoint($bp-mobile-max) {
                 width: 100%;
             }
         }
@@ -184,24 +184,24 @@
     }
     &-placeholder {
         background-color: #F6F6F6;
-        padding: 47px 25px 50px;
+        padding: 47px $indent-ml 50px;
         text-align: center;
-        margin: 24px;
-        @media screen and (max-width: 767px) {
+        margin: $indent-ml;
+        @include breakpoint($bp-mobile-max) {
             margin: 0;
-            padding: 24px 16px;
+            padding: $indent-ml $indent-m;
             text-align: left;
         }
         &__title {
-            font-size: 24px;
-            margin-bottom: 40px;
-            @media screen and (max-width: 767px) {
+            font-size: $fs-xxxl;
+            margin-bottom: $indent-xl;
+            @include breakpoint($bp-mobile-max) {
                 font-size: 20px;
-                margin-bottom: 16px;
+                margin-bottom: $indent-m;
             }
         }
         &__info {
-            font-size: 16px;
+            font-size: $fs-l;
             color: $c-gray6;
         }
     }

@@ -1,3 +1,7 @@
+$header-top-height: 48px;
+$header-bottom-height: 64px;
+$header-height-mobi: 92px;
+
 .ris-global-search {
     $this: &;
     width: 100%;
@@ -16,8 +20,11 @@
     &-navigation {
         display: flex;
         padding-left: $indent-ml;
-        margin: 0;
+        margin: 0 0 $indent-m 0;
         border-bottom: 1px solid $c-gray7;
+        @include breakpoint($bp-mobile-max) {
+            padding-left: $indent-m;
+        }
         &__button {
             border: 0;
             font-size: $fs-l;
@@ -36,20 +43,20 @@
         height: 64px;
         display: flex;
         align-items: center;
-        background: white;
+        background: $c-white;
     }
     &-wrapper {
         font-size: 10px;
-        background-color: white;
+        background-color: $c-white;
         position: absolute;
         left: 0;
         right: 0;
         z-index: 6;
-        max-height: calc(100vh - 64px - 48px);
+        max-height: calc(100vh - #{$header-bottom-height} - #{$header-top-height});
         overflow-y: scroll;
         @include breakpoint($bp-mobile-max) {
-            max-height: calc(100vh - 92px);
-            top: 92px;
+            max-height: calc(100vh - #{$header-height-mobi});
+            top: $header-height-mobi;
             height: 100%;
         }
     }
@@ -84,11 +91,11 @@
             font-size: $fs-l;
             box-shadow: 0 1px 6px 0 $c-box-shadow3;
             color: #545458;
-            background-color: #fff;
+            background-color: $c-white;
         }
     }
     &__background {
-        background-color: rgba(0,0,0, .4);
+        background-color: $c-dark-disabled;
         position: fixed;
         top: 0;
         height: 100vh;
@@ -117,7 +124,7 @@
                 }
                 margin-left: 0;
                 border-color: transparent;
-                background: white;
+                background: $c-white;
                 width: 100%;
                 box-shadow: none;
             }
@@ -140,36 +147,23 @@
         }
         &__theme {
             flex-direction: column;
-            max-height: 325px;
-            overflow-y: hidden;
-            padding: 4px 4px 4px 0;
-            &.isActive {
-                max-height: unset;
-                overflow-y: unset;
-            }
         }
         &__person {
             flex-wrap: wrap;
-            max-height: 212px;
-            overflow-y: hidden;
-            &.isActive {
-                max-height: unset;
-                overflow-y: unset;
-            }
             #{$this}-content__item {
                 margin: 0 $indent-m $indent-m 0;
+                @include breakpoint($bp-mobile-max) {
+                    margin: 0 0 $indent-m 0;
+                }
             }
         }
         &__map {
             flex-wrap: wrap;
-            max-height: 185px;
-            overflow-y: hidden;
-            &.isActive {
-                max-height: unset;
-                overflow-y: unset;
-            }
             #{$this}-content__item {
                 margin: 0 $indent-m $indent-m 0;
+                @include breakpoint($bp-mobile-max) {
+                    margin: 0 0 $indent-m 0;
+                }
             }
         }
         &__item {
@@ -183,7 +177,7 @@
         }
     }
     &-placeholder {
-        background-color: #F6F6F6;
+        background-color: $c-white2;
         padding: 47px $indent-ml 50px;
         text-align: center;
         margin: $indent-ml;
@@ -208,6 +202,6 @@
 }
 
 .ris-selection {
-    background: #FFCC00;
+    background: $c-orange2;
     border-radius: 3px;
 }

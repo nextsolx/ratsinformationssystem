@@ -23,7 +23,6 @@ export default {
             onFocus: false,
             loading: false,
             observableBlock: '.ris-load-element',
-            inputPlaceholder: 'Suche nach Themen, Vorlagen, Sitzungen...',
             optionsList: [
                 'Bewohnerparken',
                 'Radwege',
@@ -37,15 +36,15 @@ export default {
             inputValue: '',
             activeTab: 'Alle',
             topicsList: [],
-            topicsCount: 0,
+            topicsTotalCount: 0,
             paginationTopics: 0,
             topicsFlag: true,
             peopleList: [],
-            peopleCount: 0,
+            peopleTotalCount: 0,
             paginationPeople: 0,
             peopleFlag: true,
             locationList: [],
-            locationCount: 0,
+            locationTotalCount: 0,
             paginationLocation: 0,
             locationFlag: true,
             debounce: null
@@ -59,15 +58,21 @@ export default {
             if (this.peopleList.length) list.push('Personen');
             return ['Alle', ...list];
         },
-        isNothing () {
+        isEmptySearchResults () {
             return this.inputValue &&
                 !this.loading &&
                 !this.topicsList.length &&
                 !this.locationList.length &&
                 !this.peopleList.length;
+        },
+        totalCount () {
+            return this.topicsTotalCount + this.peopleTotalCount + this.locationTotalCount;
         }
     },
     methods: {
+        debounceCheck () {
+            this.debounce && clearTimeout(this.debounce);
+        },
         focusHandle (value) {
             this.onFocus = value;
             if (value) {
@@ -81,32 +86,38 @@ export default {
             if (!this.topicsFlag) return;
             this.paginationTopics += 1;
             const { data, meta } = await topics.getTopicsLike(this.inputValue, this.paginationTopics);
-            this.topicsCount = meta.total;
-            this.topicsList = [...this.topicsList, ...data];
-            this.loading = false;
-            if (!data.length) this.topicsFlag = false;
+            if (data && meta) {
+                this.topicsTotalCount = meta.total;
+                this.topicsList = [...this.topicsList, ...data];
+                this.loading = false;
+                if (!data.length) this.topicsFlag = false;
+            }
 
         },
         async getPeople () {
             if (!this.peopleFlag) return;
             this.paginationPeople += 1;
             const { members, meta } = await people.getPeopleLike(this.inputValue, this.paginationPeople);
-            this.peopleCount = meta.total;
-            this.peopleList = [...this.peopleList, ...members];
-            this.loading = false;
-            if (!members.length) this.peopleFlag = false;
+            if (members && meta) {
+                this.peopleTotalCount = meta.total;
+                this.peopleList = [...this.peopleList, ...members];
+                this.loading = false;
+                if (!members.length) this.peopleFlag = false;
+            }
         },
         async getLocations () {
             if (!this.locationFlag) return;
             this.paginationLocation += 1;
             const { locations, meta } = await location.getLocationLike(this.inputValue, this.paginationLocation);
-            this.locationCount = meta.total;
-            this.locationList = [...this.locationList, ...locations];
-            this.loading = false;
-            if (!locations.length) this.locationFlag = false;
+            if (locations && meta) {
+                this.locationTotalCount = meta.total;
+                this.locationList = [...this.locationList, ...locations];
+                this.loading = false;
+                if (!locations.length) this.locationFlag = false;
+            }
         },
         lazyHandle () {
-            this.debounce && clearTimeout(this.debounce);
+            this.debounceCheck();
             this.debounce = setTimeout(
                 () => {
                     if (this.activeTab === 'Themen') this.getTopics();
@@ -116,7 +127,7 @@ export default {
         },
         changeTab (item) {
             this.activeTab = item;
-            setTimeout(() => this.createObserver(), 0);
+            setTimeout(() => this.createObserver(), 0);// need time to render DOM after switching tab
         },
         inputHandle () {
             this.topicsFlag = true;
@@ -125,7 +136,7 @@ export default {
             this.topicsList = [];
             this.locationList = [];
             this.peopleList = [];
-            this.debounce && clearTimeout(this.debounce);
+            this.debounceCheck();
             if (this.inputValue) {
                 this.loading = true;
                 this.debounce = setTimeout(
@@ -157,7 +168,7 @@ export default {
                 ref="globalSearchInput"
                 @focus="focusHandle(true)"
                 @input="inputHandle"
-                :placeholder="inputPlaceholder">
+                placeholder="Suche nach Themen, Vorlagen, Sitzungen...">
         </div>
         <div v-if="onFocus && inputValue" class="ris-global-search-wrapper">
             <!--            <div v-if="!inputValue" class="ris-global-search-autocomplete">-->
@@ -176,10 +187,10 @@ export default {
             <!--                </ul>-->
             <!--            </div>-->
             <div>
-                <h3 v-if="!isNothing" class="ris-global-search__result-title">
-                    {{ `xyz Suchergebnisse für „${inputValue}“` }}
+                <h3 v-if="!isEmptySearchResults" class="ris-global-search__result-title">
+                    {{ `${totalCount} Suchergebnisse für „${inputValue}“` }}
                 </h3>
-                <ul v-if="!isNothing" class="ris-ul ris-global-search-navigation">
+                <ul v-if="!isEmptySearchResults" class="ris-ul ris-global-search-navigation">
                     <li
                         class="ris-global-search-navigation__item"
                         v-for="item in navigationList"
@@ -192,17 +203,16 @@ export default {
                         </button>
                     </li>
                 </ul>
-                <ul v-if="!isNothing" class="ris-ul ris-global-search-content">
+                <ul v-if="!isEmptySearchResults" class="ris-ul ris-global-search-content">
                     <li
                         v-if="(activeTab === 'Alle' || activeTab === 'Themen') && topicsList.length"
                         class="ris-global-search-content__item">
                         <h2 class="ris-global-search-content__title">Themen</h2>
-                        <ul
-                            class="ris-ul ris-global-search-content__list ris-global-search-content__theme"
-                            :class="{ isActive : activeTab === 'Themen' }">
+                        <ul class="ris-ul ris-global-search-content__list ris-global-search-content__theme">
                             <li
                                 class="ris-global-search-content__item"
-                                v-for="topic in topicsList"
+                                v-for="(topic, index) in topicsList"
+                                v-show="(index < 3) || activeTab === 'Themen'"
                                 :key="topic.id">
                                 <ThemeWidget :filter-value="inputValue" :topic="topic" />
                             </li>
@@ -212,7 +222,7 @@ export default {
                             class="ris-global-search-content__button ris-link ris-link_button ris-link_right"
                             v-if="activeTab === 'Alle' && topicsList.length > 3"
                             @click="activeTab = 'Themen'">
-                            {{ `Alle ${topicsCount} Themen laden` }}
+                            {{ `Alle ${topicsTotalCount} Themen laden` }}
                             <span class="ris-i ris-i_chevron-right" />
                         </button>
                     </li>
@@ -220,12 +230,11 @@ export default {
                         v-if="(activeTab === 'Alle' || activeTab === 'Orte') && locationList.length"
                         class="ris-global-search-content__item">
                         <h2 class="ris-global-search-content__title">Orte</h2>
-                        <ul
-                            class="ris-ul ris-global-search-content__list ris-global-search-content__map"
-                            :class="{ isActive : activeTab === 'Orte' }">
+                        <ul class="ris-ul ris-global-search-content__list ris-global-search-content__map">
                             <li
                                 class="ris-global-search-content__item"
-                                v-for="location in locationList"
+                                v-for="(location, index) in locationList"
+                                v-show="(index < 4) || activeTab === 'Orte'"
                                 :key="location.id">
                                 <MapWidget :filter-value="inputValue" :options="location" />
                             </li>
@@ -235,7 +244,7 @@ export default {
                             class="ris-global-search-content__button ris-link ris-link_button ris-link_right"
                             v-if="activeTab === 'Alle' && locationList.length > 3"
                             @click="activeTab = 'Orte'">
-                            {{ `Alle ${locationCount} Orte laden` }}
+                            {{ `Alle ${locationTotalCount} Orte laden` }}
                             <span class="ris-i ris-i_chevron-right" />
                         </button>
                     </li>
@@ -243,12 +252,11 @@ export default {
                         v-if="(activeTab === 'Alle' || activeTab === 'Personen') && peopleList.length"
                         class="ris-global-search-content__item">
                         <h2 class="ris-global-search-content__title">Personen</h2>
-                        <ul
-                            class="ris-ul ris-global-search-content__list ris-global-search-content__person"
-                            :class="{ isActive : activeTab === 'Personen' }">
+                        <ul class="ris-ul ris-global-search-content__list ris-global-search-content__person">
                             <li
                                 class="ris-global-search-content__item"
-                                v-for="person in peopleList"
+                                v-for="(person, index) in peopleList"
+                                v-show="(index < 5) || activeTab === 'Personen'"
                                 :key="person.id">
                                 <PersonWidget :filter-value="inputValue" :person="person" />
                             </li>
@@ -258,7 +266,7 @@ export default {
                             class="ris-global-search-content__button ris-link ris-link_button ris-link_right"
                             v-if="activeTab === 'Alle' && peopleList.length > 5"
                             @click="activeTab = 'Personen'">
-                            {{ `Alle ${peopleCount} Personen laden` }}
+                            {{ `Alle ${peopleTotalCount} Personen laden` }}
                             <span class="ris-i ris-i_chevron-right" />
                         </button>
                     </li>
@@ -268,7 +276,7 @@ export default {
                     <rect x="40" y="35" rx="4" ry="4" width="120" height="3" />
                     <circle cx="15" cy="30" r="15" />
                 </content-loader>
-                <div v-if="isNothing" class="ris-global-search-placeholder">
+                <div v-if="isEmptySearchResults" class="ris-global-search-placeholder">
                     <h2 class="ris-h2 ris-global-search-placeholder__title">{{ `Für „${inputValue}“ wurde leider nichts gefunden` }}</h2>
                     <p class="ris-global-search-placeholder__info">Versuchen Sie es doch mit einem anderen Suchbegriff.</p>
                 </div>

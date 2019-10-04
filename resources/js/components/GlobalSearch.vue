@@ -136,9 +136,9 @@ export default {
             this.topicsList = [];
             this.locationList = [];
             this.peopleList = [];
-            this.locationTotalCount = 0;
-            this.peopleTotalCount = 0;
-            this.topicsTotalCount = 0;
+            this.paginationPeople = 0;
+            this.paginationLocation = 0;
+            this.paginationTopics = 0;
             this.debounceCheck();
             if (this.inputValue) {
                 this.loading = true;

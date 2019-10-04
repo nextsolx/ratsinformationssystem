@@ -102,6 +102,7 @@ export default {
         <MapAsideNavigation
             @changeDirection="changeDirection"
             :call-navigation="callNavigation"
+            @show-area="$emit('show-area', $event)"
                 />
         <h2 class="ris-map-desktop-aside__subtitle">{{ subTitle }}</h2>
         <p class="ris-map-desktop-aside__caption">

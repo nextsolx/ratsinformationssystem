@@ -132,6 +132,17 @@ export default {
                 }
             }
         },
+        getChildLocation () {
+            if (this.location === 'city') {
+                return 'district';
+            } else if (this.location === 'district') {
+                return 'subdistrict';
+            } else if (this.location === 'subdistrict') {
+                return 'index';
+            } else {
+                return null;
+            }
+        },
         crumbsHandle (value) {
             this.loading = true;
             if (value) {
@@ -166,6 +177,7 @@ export default {
         <button
             v-if="district"
             class="ris-map-desktop-aside__nav-btn"
+            :class="{'ris-map-desktop-aside__nav-btn_disable': loading}"
             @click="loading ? '' : buttonHandleOutSide()">
             <span class="ris-i ris-i_back ris-i_has-bg" />
             Zurück zur Bezirksübersicht
@@ -182,7 +194,10 @@ export default {
                         v-for="element in navigationList"
                         :key="`${element}-${location}`"
                         @click="loading ? '' : buttonHandleInSide(element, true)">
-                        <button class="ris-map-desktop-aside-list__button">
+                        <button class="ris-map-desktop-aside-list__button"
+                            @mouseover="$emit('show-area', { type: getChildLocation(), name: element, opacity: .5, stroke: true })"
+                            @mouseleave="$emit('show-area', { type: getChildLocation(), name: element, opacity: .01, stroke: false })"
+                                >
                             {{ element }}
                             <span class="ris-i ris-i_add"/>
                         </button>

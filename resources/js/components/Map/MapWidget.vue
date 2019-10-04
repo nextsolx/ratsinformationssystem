@@ -20,11 +20,11 @@ export default {
 };
 </script>
 <template>
-    <a href="#" class="ris-map-widget">
+    <div class="ris-map-widget">
         <div class="ris-map-widget__content">
             <h3 class="ris-h3 ris-map-widget__title" v-html="selectionFilter(options.streetAddress)" />
             <span class="ris-map-widget__sub-title" v-html="selectionFilter(`Stadt ${options.city}, PLZ: ${options.postalCode}`)" />
         </div>
         <img src="/img/thumbnail-map-tile.png" class="ris-map-widget__image">
-    </a>
+    </div>
 </template>

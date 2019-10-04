@@ -1,7 +1,6 @@
 .ris-map-widget {
     display: flex;
     width: 320px;
-    text-decoration: none;
     box-shadow: 0 1px 6px 0 $c-box-shadow3;
     @include breakpoint($bp-mobile-max) {
         width: 100%;

@@ -3,8 +3,8 @@ import Member from './Member';
 import LetterNavigation from './LetterNavigation';
 import sortingMixin from '../mixins/sortingMixin';
 import lazyLoadMixin from '../mixins/lazyLoadMixin';
-import Dropdown from './Ux/Dropdown';
-import Search from './Ux/Search';
+import Dropdown from './Ui/Dropdown';
+import Search from './Ui/Search';
 import people from '../api/people';
 import { ContentLoader } from 'vue-content-loader';
 
@@ -72,7 +72,8 @@ export default {
                 this.debounce && clearTimeout(this.debounce);
                 this.debounce = setTimeout(
                     async () => {
-                        this.filteredList = await people.search(value);
+                        const { members } = await people.getPeopleLike(value);
+                        this.filteredList = members;
                         this.loading = false;
                     }, 1000);
             } else {

@@ -13,4 +13,7 @@ export default {
     getTopicsByIndexList (index, page = 1) {
         return axios.get(`/api/topics/?postalCode=${index}&page=${page}`).then(res => res.data);
     },
+    getTopicsLike (value, page = 1) {
+        return axios.get(`/api/topics?q=${value}&page=${page}`).then(res => res.data);
+    }
 };

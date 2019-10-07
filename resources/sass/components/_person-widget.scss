@@ -1,0 +1,63 @@
+.ris-person {
+    $this: &;
+    min-height: 200px;
+    width: 112px;
+    text-decoration: none;
+    box-shadow: 0 1px 6px 0 $c-box-shadow3;
+    border-radius: 4px;
+    color: $c-black;
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    overflow: hidden;
+    &:hover {
+        #{$this}__icon,
+        #{$this}__title {
+            color: $c-red;
+        }
+    }
+    @include breakpoint($bp-mobile-max) {
+        flex-direction: row;
+        min-height: auto;
+        height: 80px;
+        width: 100%;
+    }
+    &__image {
+        height: 112px;
+        max-width: 112px;
+        width: 100%;
+        @include breakpoint($bp-mobile-max) {
+            height: 80px;
+            max-width: 80px;
+        }
+    }
+    &__content {
+        padding: $indent-s;
+        @include breakpoint($bp-mobile-max) {
+            padding: $indent-m;
+            width: 100%;
+            position: relative;
+        }
+    }
+    &__title {
+        font-size: $fs-l;
+        margin: 0;
+        hyphens: auto;
+        word-break: break-word;
+    }
+    &__info {
+        font-size: $fs-l;
+        color: $c-gray8;
+    }
+    &__icon {
+        display: none;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 20px;
+        font-size: 10px;
+        @include breakpoint($bp-mobile-max) {
+            display: block;
+        }
+    }
+}

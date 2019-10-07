@@ -69,9 +69,9 @@ export default {
             return this.topicsTotalCount + this.peopleTotalCount + this.locationTotalCount;
         },
         isLoadingButton () {
-            if (this.activeTab === 'Themen' && this.topicsFlag) return true;
-            if (this.activeTab === 'Orte' && this.locationFlag) return true;
-            if (this.activeTab === 'Personen' && this.peopleFlag) return true;
+            if ((this.activeTab === 'Themen' && this.topicsFlag) ||
+                (this.activeTab === 'Orte' && this.locationFlag) ||
+                (this.activeTab === 'Personen' && this.peopleFlag)) return true;
             return null;
         }
     },

@@ -123,11 +123,11 @@ export default {
                     if (this.activeTab === 'Themen') this.getTopics();
                     if (this.activeTab === 'Orte') this.getLocations();
                     if (this.activeTab === 'Personen') this.getPeople();
-                }, 500);
+                }, 2000);
         },
         changeTab (item) {
             this.activeTab = item;
-            setTimeout(() => this.createObserver(), 0);// need time to render DOM after switching tab
+            this.$nextTick(this.createObserver);
         },
         inputHandle () {
             this.topicsFlag = true;
@@ -219,7 +219,14 @@ export default {
                                 :key="topic.id">
                                 <ThemeWidget :filter-value="inputValue" :topic="topic" />
                             </li>
-                            <li v-if="activeTab === 'Themen'" class="ris-load-element" />
+                            <li v-if="activeTab === 'Themen'" class="ris-load-element">
+                                <button
+                                    class="ris-global-search-content__button ris-link ris-link_button ris-link_right"
+                                    @click="lazyHandle">
+                                    Mehr laden
+                                    <span class="ris-i ris-i_chevron-right" />
+                                </button>
+                            </li>
                         </ul>
                         <button
                             class="ris-global-search-content__button ris-link ris-link_button ris-link_right"
@@ -241,7 +248,14 @@ export default {
                                 :key="location.id">
                                 <MapWidget :filter-value="inputValue" :options="location" />
                             </li>
-                            <li v-if="activeTab === 'Orte'" class="ris-load-element" />
+                            <li v-if="activeTab === 'Orte'" class="ris-load-element">
+                                <button
+                                    class="ris-global-search-content__button ris-link ris-link_button ris-link_right"
+                                    @click="lazyHandle">
+                                    Mehr laden
+                                    <span class="ris-i ris-i_chevron-right" />
+                                </button>
+                            </li>
                         </ul>
                         <button
                             class="ris-global-search-content__button ris-link ris-link_button ris-link_right"
@@ -263,7 +277,14 @@ export default {
                                 :key="person.id">
                                 <PersonWidget :filter-value="inputValue" :person="person" />
                             </li>
-                            <li v-if="activeTab === 'Personen'" class="ris-load-element" />
+                            <li v-if="activeTab === 'Personen' && peopleFlag" class="ris-load-element">
+                                <button
+                                    class="ris-global-search-content__button ris-link ris-link_button ris-link_right"
+                                    @click="lazyHandle">
+                                    Mehr laden
+                                    <span class="ris-i ris-i_chevron-right" />
+                                </button>
+                            </li>
                         </ul>
                         <button
                             class="ris-global-search-content__button ris-link ris-link_button ris-link_right"

@@ -144,6 +144,9 @@ $header-height-mobi: 92px;
         }
         &__list {
             display: flex;
+            .ris-load-element {
+                width: 100%;
+            }
         }
         &__theme {
             flex-direction: column;

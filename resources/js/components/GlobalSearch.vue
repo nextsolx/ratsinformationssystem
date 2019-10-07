@@ -67,6 +67,12 @@ export default {
         },
         totalCount () {
             return this.topicsTotalCount + this.peopleTotalCount + this.locationTotalCount;
+        },
+        isLoadingButton () {
+            if (this.activeTab === 'Themen' && this.topicsFlag) return true;
+            if (this.activeTab === 'Orte' && this.locationFlag) return true;
+            if (this.activeTab === 'Personen' && this.peopleFlag) return true;
+            return null;
         }
     },
     methods: {
@@ -123,7 +129,7 @@ export default {
                     if (this.activeTab === 'Themen') this.getTopics();
                     if (this.activeTab === 'Orte') this.getLocations();
                     if (this.activeTab === 'Personen') this.getPeople();
-                }, 2000);
+                }, 1200);
         },
         changeTab (item) {
             this.activeTab = item;
@@ -219,14 +225,6 @@ export default {
                                 :key="topic.id">
                                 <ThemeWidget :filter-value="inputValue" :topic="topic" />
                             </li>
-                            <li v-if="activeTab === 'Themen'" class="ris-load-element">
-                                <button
-                                    class="ris-global-search-content__button ris-link ris-link_button ris-link_right"
-                                    @click="lazyHandle">
-                                    Mehr laden
-                                    <span class="ris-i ris-i_chevron-right" />
-                                </button>
-                            </li>
                         </ul>
                         <button
                             class="ris-global-search-content__button ris-link ris-link_button ris-link_right"
@@ -247,14 +245,6 @@ export default {
                                 v-show="(index < 4) || activeTab === 'Orte'"
                                 :key="location.id">
                                 <MapWidget :filter-value="inputValue" :options="location" />
-                            </li>
-                            <li v-if="activeTab === 'Orte'" class="ris-load-element">
-                                <button
-                                    class="ris-global-search-content__button ris-link ris-link_button ris-link_right"
-                                    @click="lazyHandle">
-                                    Mehr laden
-                                    <span class="ris-i ris-i_chevron-right" />
-                                </button>
                             </li>
                         </ul>
                         <button
@@ -277,20 +267,20 @@ export default {
                                 :key="person.id">
                                 <PersonWidget :filter-value="inputValue" :person="person" />
                             </li>
-                            <li v-if="activeTab === 'Personen' && peopleFlag" class="ris-load-element">
-                                <button
-                                    class="ris-global-search-content__button ris-link ris-link_button ris-link_right"
-                                    @click="lazyHandle">
-                                    Mehr laden
-                                    <span class="ris-i ris-i_chevron-right" />
-                                </button>
-                            </li>
                         </ul>
                         <button
                             class="ris-global-search-content__button ris-link ris-link_button ris-link_right"
                             v-if="activeTab === 'Alle' && peopleList.length > 5"
                             @click="activeTab = 'Personen'">
                             {{ `Alle ${peopleTotalCount} Personen laden` }}
+                            <span class="ris-i ris-i_chevron-right" />
+                        </button>
+                    </li>
+                    <li v-if="isLoadingButton" class="ris-load-element">
+                        <button
+                            class="ris-global-search-content__button ris-link ris-link_button ris-link_right"
+                            @click="lazyHandle">
+                            Mehr laden
                             <span class="ris-i ris-i_chevron-right" />
                         </button>
                     </li>

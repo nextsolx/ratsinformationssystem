@@ -6,6 +6,10 @@ export default {
             type: String,
             default: 'info',
         },
+        links: {
+            type: Array,
+            default: () => [],
+        }
     },
     data () {
         return {
@@ -36,20 +40,12 @@ export default {
         <nav class="ris-committee-info__nav">
             <h2 class="ris-h2 ris-committee-info__heading">Weiterführende Links</h2>
             <ul class="ris-ul ris-committee-info-list">
-                <li class="ris-committee-info-list__item">
-                    § 14 der Hauptsatzung der Stadt Köln <a href="#" class="ris-committee-info-list__link ris-i ris-i_resize-text" />
-                </li>
-                <li class="ris-committee-info-list__item">
-                    Bürgereingabe
-                    § 24 der Gemeindeordnung Nordrhein-Westfalen (GO NW) <a href="#" class="ris-committee-info-list__link ris-i ris-i_resize-text" />
-                </li>
-                <li class="ris-committee-info-list__item">
-                    Einwohnerantrag
-                    § 24 der Gemeindeordnung Nordrhein-Westfalen (GO NW)<a href="#" class="ris-committee-info-list__link ris-i ris-i_resize-text" />
-                </li>
-                <li class="ris-committee-info-list__item">
-                    Bürgerbegehren und Bürgerbescheid
-                    § 26 der Gemeindeordnung Nordrhein-Westfalen (GO NW)<a href="#" class="ris-committee-info-list__link ris-i ris-i_resize-text" />
+                <li class="ris-committee-info-list__item"
+                    v-for="link in links"
+                    :key="link.linkText">
+                    <a :href="link.url" class="ris-committee-info-list__link">
+                        {{ link.linkText }}<span class="ris-committee-info-list__button ris-i ris-i_resize-text" />
+                    </a>
                 </li>
             </ul>
         </nav>

@@ -7,6 +7,7 @@
                 {{ $title }}
             </h1>
             <committee
+                :links="{{ json_encode($links) }}"
                 :info="{{ json_encode($info) }}"
                 :members="{{ json_encode($members) }}"
                 :meetings="{{ json_encode($meetings) }}"

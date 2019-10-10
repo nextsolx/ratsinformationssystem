@@ -15,8 +15,9 @@ class TopicController extends Controller
     {
         $postalCode = $request->input('postalCode');
         $district = $request->input('district');
+        $search = $request->input('q');
 
-        $paperQuery = Paper::with(Paper::$basicScope);
+        $paperQuery = Paper::with(Paper::$basicScope)->sort();
 
         if($scope = $request->input('scope')){
             $paperQuery->{$scope}();
@@ -32,6 +33,10 @@ class TopicController extends Controller
             $paperQuery->whereHas('locations', function (Builder $query) use ($district) {
                 $query->where('sub_locality', '=', $district);
             });
+        }
+
+        if ($search) {
+            $paperQuery->where('name', 'like', "%$search%");
         }
 
         return Topic::collection($paperQuery->paginate(15));
@@ -185,7 +190,7 @@ class TopicController extends Controller
             });
         }
 
-        $topics = TopicWithData::collection($paperQuery->paginate(100))->toResponse(request())->getData();
+        $topics = TopicWithData::collection($paperQuery->paginate(15))->toResponse(request())->getData();
 
         return view('theme-list')->with([
             'theme_list' => $topics->data,
@@ -220,7 +225,7 @@ class TopicController extends Controller
             });
         }
 
-        $topics = TopicWithData::collection($paperQuery->paginate(100))->toResponse(request())->getData();
+        $topics = TopicWithData::collection($paperQuery->paginate(15))->toResponse(request())->getData();
 
         return view('theme-list')->with([
             'theme_list' => $topics->data,
@@ -255,7 +260,7 @@ class TopicController extends Controller
             });
         }
 
-        $topics = TopicWithData::collection($paperQuery->paginate(100))->toResponse(request())->getData();
+        $topics = TopicWithData::collection($paperQuery->paginate(15))->toResponse(request())->getData();
 
         return view('theme-list')->with([
             'theme_list' => $topics->data,

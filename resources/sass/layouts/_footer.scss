@@ -12,9 +12,9 @@
         display: inline-flex;
         outline: none;
         padding: 0;
-        position: absolute;
+        position: fixed;
         right: 12px;
-        top: 0;
+        bottom: 12px;
 
         .ris-i {
             padding: 24px;

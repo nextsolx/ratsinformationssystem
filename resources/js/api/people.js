@@ -12,7 +12,7 @@ export default {
         if (sort === 'familyName') sort = 'family_name';
         return axios.get(`/api/people-list/?sort=${sort}&letter=${letter}`).then(res => res.data);
     },
-    search (value) {
-        return axios.get(`/api/people-list/?search=${value}`).then(res => res.data.members);
-    }
+    getPeopleLike (value, page = 1) {
+        return axios.get(`/api/people-list/?q=${value}&page=${page}`).then(res => res.data);
+    },
 };

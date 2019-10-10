@@ -61,8 +61,8 @@ Route::group(['middleware' => 'under-construction'], function () {
         return view('company');
     })->name('company');
 
-    Route::get('/suche', 'MainPageController@search')->name('search');
 
+    Route::get('/api/search', 'MainPageController@search');
     Route::get('/api/people-list', 'PersonenController@getPeople');
     Route::get('/api/meetings', 'MeetingController@all');
     Route::get('/api/meeting/{id}', 'MeetingController@index');
@@ -73,4 +73,5 @@ Route::group(['middleware' => 'under-construction'], function () {
     Route::get('/api/districts', 'DistrictController@all');
     Route::get('/api/districts/{district}', 'DistrictController@district');
     Route::get('/api/districts/{district}/{subdistrict}', 'DistrictController@subDistrict');
+    Route::get('/api/locations', 'MainPageController@getLocations');
 });

@@ -1,0 +1,1036 @@
+{
+    "features": [
+        {
+            "attributes": {
+                "NAME": "Godorf",
+                "STADTBEZIRK": "Rodenkirchen"
+            },
+            "geometry": {
+                "rings": [
+                    50.851931,
+                    6.978290
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Lövenich",
+                "STADTBEZIRK": "Lindenthal"
+            },
+            "geometry": {
+                "rings": [
+                    50.944885,
+                    6.830345
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Weiden",
+                "STADTBEZIRK": "Lindenthal"
+            },
+            "geometry": {
+                "rings": [
+                    50.935605,
+                    6.832833
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Junkersdorf",
+                "STADTBEZIRK": "Lindenthal"
+            },
+            "geometry": {
+                "rings": [
+                    50.928587,
+                    6.867484
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Widdersdorf",
+                "STADTBEZIRK": "Lindenthal"
+            },
+            "geometry": {
+                "rings": [
+                    50.963058,
+                    6.838630
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Vogelsang",
+                "STADTBEZIRK": "Ehrenfeld"
+            },
+            "geometry": {
+                "rings": [
+                    50.958067,
+                    6.879861
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Weidenpesch",
+                "STADTBEZIRK": "Nippes"
+            },
+            "geometry": {
+                "rings": [
+                    50.983561,
+                    6.947215
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Mauenheim",
+                "STADTBEZIRK": "Nippes"
+            },
+            "geometry": {
+                "rings": [
+                    50.973726,
+                    6.945810
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Marienburg",
+                "STADTBEZIRK": "Rodenkirchen"
+            },
+            "geometry": {
+                "rings": [
+                    50.896444,
+                    6.975292
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Bayenthal",
+                "STADTBEZIRK": "Rodenkirchen"
+            },
+            "geometry": {
+                "rings": [
+                    50.909868,
+                    6.968669
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Weiß",
+                "STADTBEZIRK": "Rodenkirchen"
+            },
+            "geometry": {
+                "rings": [
+                    50.880562,
+                    7.038320
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Hahnwald",
+                "STADTBEZIRK": "Rodenkirchen"
+            },
+            "geometry": {
+                "rings": [
+                    50.873495,
+                    6.983777
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Meschenich",
+                "STADTBEZIRK": "Rodenkirchen"
+            },
+            "geometry": {
+                "rings": [
+                    50.851950,
+                    6.935237
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Immendorf",
+                "STADTBEZIRK": "Rodenkirchen"
+            },
+            "geometry": {
+                "rings": [
+                    50.848435,
+                    6.957167
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Buchforst",
+                "STADTBEZIRK": "Mülheim"
+            },
+            "geometry": {
+                "rings": [
+                    50.947969,
+                    7.003946
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Höhenberg",
+                "STADTBEZIRK": "Kalk"
+            },
+            "geometry": {
+                "rings": [
+                    50.944017,
+                    7.028328
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Vingst",
+                "STADTBEZIRK": "Kalk"
+            },
+            "geometry": {
+                "rings": [
+                    50.932075,
+                    7.022838
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Grengel",
+                "STADTBEZIRK": "Porz"
+            },
+            "geometry": {
+                "rings": [
+                    50.878255,
+                    7.123849
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Elsdorf",
+                "STADTBEZIRK": "Porz"
+            },
+            "geometry": {
+                "rings": [
+                    50.933200,
+                    6.565911
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Wahnheide",
+                "STADTBEZIRK": "Porz"
+            },
+            "geometry": {
+                "rings": [
+                    50.865145,
+                    7.107328
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Wahn",
+                "STADTBEZIRK": "Porz"
+            },
+            "geometry": {
+                "rings": [
+                    50.859750,
+                    7.090846
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Libur",
+                "STADTBEZIRK": "Porz"
+            },
+            "geometry": {
+                "rings": [
+                    50.840051,
+                    7.080388
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Lind",
+                "STADTBEZIRK": "Porz"
+            },
+            "geometry": {
+                "rings": [
+                    50.846456,
+                    7.114319
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Ensen",
+                "STADTBEZIRK": "Porz"
+            },
+            "geometry": {
+                "rings": [
+                    50.897072,
+                    7.044336
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Eil",
+                "STADTBEZIRK": "Porz"
+            },
+            "geometry": {
+                "rings": [
+                    50.903909,
+                    7.105891
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Raderthal",
+                "STADTBEZIRK": "Rodenkirchen"
+            },
+            "geometry": {
+                "rings": [
+                    50.892912,
+                    6.955271
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Raderberg",
+                "STADTBEZIRK": "Rodenkirchen"
+            },
+            "geometry": {
+                "rings": [
+                    50.911470,
+                    6.958223
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Rondorf",
+                "STADTBEZIRK": "Rodenkirchen"
+            },
+            "geometry": {
+                "rings": [
+                    50.876522,
+                    6.938604
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Holweide",
+                "STADTBEZIRK": "Mülheim"
+            },
+            "geometry": {
+                "rings": [
+                    50.968843,
+                    7.046405
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Buchheim",
+                "STADTBEZIRK": "Mülheim"
+            },
+            "geometry": {
+                "rings": [
+                    50.959855,
+                    7.025405
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Merheim",
+                "STADTBEZIRK": "Kalk"
+            },
+            "geometry": {
+                "rings": [
+                    50.948335,
+                    7.048229
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Neubrück",
+                "STADTBEZIRK": "Kalk"
+            },
+            "geometry": {
+                "rings": [
+                    50.934297,
+                    7.059666
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Ostheim",
+                "STADTBEZIRK": "Kalk"
+            },
+            "geometry": {
+                "rings": [
+                    50.929444,
+                    7.040299
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Westhoven",
+                "STADTBEZIRK": "Porz"
+            },
+            "geometry": {
+                "rings": [
+                    50.904076,
+                    7.015655
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Bocklemünd/Mengenich",
+                "STADTBEZIRK": "Ehrenfeld"
+            },
+            "geometry": {
+                "rings": [
+                    50.972815,
+                    6.860210
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Dünnwald",
+                "STADTBEZIRK": "Mülheim"
+            },
+            "geometry": {
+                "rings": [
+                    51.007400,
+                    7.047093
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Höhenhaus",
+                "STADTBEZIRK": "Mülheim"
+            },
+            "geometry": {
+                "rings": [
+                    50.985987,
+                    7.031613
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Poll",
+                "STADTBEZIRK": "Porz"
+            },
+            "geometry": {
+                "rings": [
+                    50.915014,
+                    6.997068
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Humboldt/Gremberg",
+                "STADTBEZIRK": "Kalk"
+            },
+            "geometry": {
+                "rings": [
+                    50.927150,
+                    7.006540
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Deutz",
+                "STADTBEZIRK": "Innenstadt"
+            },
+            "geometry": {
+                "rings": [
+                    50.937110,
+                    6.981473
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Bickendorf",
+                "STADTBEZIRK": "Ehrenfeld"
+            },
+            "geometry": {
+                "rings": [
+                    50.961247,
+                    6.896793
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Sürth",
+                "STADTBEZIRK": "Rodenkirchen"
+            },
+            "geometry": {
+                "rings": [
+                    50.865074,
+                    7.008963
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Rodenkirchen",
+                "STADTBEZIRK": "Rodenkirchen"
+            },
+            "geometry": {
+                "rings": [
+                    50.89324,
+                    6.99375
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Urbach",
+                "STADTBEZIRK": "Porz"
+            },
+            "geometry": {
+                "rings": [
+                    50.883238,
+                    7.084742
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Niehl",
+                "STADTBEZIRK": "Nippes"
+            },
+            "geometry": {
+                "rings": [
+                    50.992941,
+                    6.953191
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Flittard",
+                "STADTBEZIRK": "Mülheim"
+            },
+            "geometry": {
+                "rings": [
+                    51.005380,
+                    6.994338
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Dellbrück",
+                "STADTBEZIRK": "Mülheim"
+            },
+            "geometry": {
+                "rings": [
+                    50.974056,
+                    7.077286
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Rath/Heumar",
+                "STADTBEZIRK": "Kalk"
+            },
+            "geometry": {
+                "rings": [
+                    50.921866,
+                    7.090055
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Brück",
+                "STADTBEZIRK": "Kalk"
+            },
+            "geometry": {
+                "rings": [
+                    50.943863,
+                    7.076866
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Altstadt/Nord",
+                "STADTBEZIRK": "Innenstadt"
+            },
+            "geometry": {
+                "rings": [
+                    50.939960,
+                    6.954158
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Neustadt/Süd",
+                "STADTBEZIRK": "Innenstadt"
+            },
+            "geometry": {
+                "rings": [
+                    50.922592,
+                    6.944864
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Müngersdorf",
+                "STADTBEZIRK": "Lindenthal"
+            },
+            "geometry": {
+                "rings": [
+                    50.937383,
+                    6.866301
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Roggendorf/Thenhoven",
+                "STADTBEZIRK": "Chorweiler"
+            },
+            "geometry": {
+                "rings": [
+                    51.046228,
+                    6.831295
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Zündorf",
+                "STADTBEZIRK": "Porz"
+            },
+            "geometry": {
+                "rings": [
+                    50.864521,
+                    7.045338
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Langel",
+                "STADTBEZIRK": "Porz"
+            },
+            "geometry": {
+                "rings": [
+                    50.842099,
+                    7.003982
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Zollstock",
+                "STADTBEZIRK": "Rodenkirchen"
+            },
+            "geometry": {
+                "rings": [
+                    50.900818,
+                    6.937593
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Porz",
+                "STADTBEZIRK": "Porz"
+            },
+            "geometry": {
+                "rings": [
+                    50.884028,
+                    7.064760
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Altstadt/Süd",
+                "STADTBEZIRK": "Innenstadt"
+            },
+            "geometry": {
+                "rings": [
+                    50.929818,
+                    6.954311
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Neustadt/Nord",
+                "STADTBEZIRK": "Innenstadt"
+            },
+            "geometry": {
+                "rings": [
+                    50.949556,
+                    6.938202
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Kalk",
+                "STADTBEZIRK": "Kalk"
+            },
+            "geometry": {
+                "rings": [
+                    50.938388,
+                    7.007583
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Braunsfeld",
+                "STADTBEZIRK": "Lindenthal"
+            },
+            "geometry": {
+                "rings": [
+                    50.9380,
+                    6.8980
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Ossendorf",
+                "STADTBEZIRK": "Ehrenfeld"
+            },
+            "geometry": {
+                "rings": [
+                    50.980584,
+                    6.893372
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Neuehrenfeld",
+                "STADTBEZIRK": "Ehrenfeld"
+            },
+            "geometry": {
+                "rings": [
+                    50.958525,
+                    6.922316
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Esch/Auweiler",
+                "STADTBEZIRK": "Chorweiler"
+            },
+            "geometry": {
+                "rings": [
+                    51.003630,
+                    6.856321
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Pesch",
+                "STADTBEZIRK": "Chorweiler"
+            },
+            "geometry": {
+                "rings": [
+                    50.998847,
+                    6.875101
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Volkhoven/Weiler",
+                "STADTBEZIRK": "Chorweiler"
+            },
+            "geometry": {
+                "rings": [
+                    51.017703,
+                    6.878904
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Heimersdorf",
+                "STADTBEZIRK": "Chorweiler"
+            },
+            "geometry": {
+                "rings": [
+                    51.008768,
+                    6.899589
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Chorweiler",
+                "STADTBEZIRK": "Chorweiler"
+            },
+            "geometry": {
+                "rings": [
+                    51.026203,
+                    6.903108
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Seeberg",
+                "STADTBEZIRK": "Chorweiler"
+            },
+            "geometry": {
+                "rings": [
+                    51.015342,
+                    6.913916
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Lindweiler",
+                "STADTBEZIRK": "Chorweiler"
+            },
+            "geometry": {
+                "rings": [
+                    51.005565,
+                    6.888615
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Worringen",
+                "STADTBEZIRK": "Chorweiler"
+            },
+            "geometry": {
+                "rings": [
+                    51.053763,
+                    6.878839
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Riehl",
+                "STADTBEZIRK": "Nippes"
+            },
+            "geometry": {
+                "rings": [
+                    50.963268,
+                    6.977555
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Nippes",
+                "STADTBEZIRK": "Nippes"
+            },
+            "geometry": {
+                "rings": [
+                    50.966212,
+                    6.960726
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Lindenthal",
+                "STADTBEZIRK": "Lindenthal"
+            },
+            "geometry": {
+                "rings": [
+                    50.9258,
+                    6.9083
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Sülz",
+                "STADTBEZIRK": "Lindenthal"
+            },
+            "geometry": {
+                "rings": [
+                    50.912858,
+                    6.916585
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Klettenberg",
+                "STADTBEZIRK": "Lindenthal"
+            },
+            "geometry": {
+                "rings": [
+                    50.899443,
+                    6.919987
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Bilderstöckchen",
+                "STADTBEZIRK": "Nippes"
+            },
+            "geometry": {
+                "rings": [
+                    50.971159,
+                    6.930411
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Longerich",
+                "STADTBEZIRK": "Nippes"
+            },
+            "geometry": {
+                "rings": [
+                    50.996078,
+                    6.912578
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Gremberghoven",
+                "STADTBEZIRK": "Porz"
+            },
+            "geometry": {
+                "rings": [
+                    50.909768,
+                    7.049991
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Ehrenfeld",
+                "STADTBEZIRK": "Ehrenfeld"
+            },
+            "geometry": {
+                "rings": [
+                    50.9501,
+                    6.9115
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Finkenberg",
+                "STADTBEZIRK": "Porz"
+            },
+            "geometry": {
+                "rings": [
+                    50.896639,
+                    7.061953
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Merkenich",
+                "STADTBEZIRK": "Chorweiler"
+            },
+            "geometry": {
+                "rings": [
+                    51.029948,
+                    6.946459
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Fühlingen",
+                "STADTBEZIRK": "Chorweiler"
+            },
+            "geometry": {
+                "rings": [
+                    51.030487,
+                    6.914953
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Blumenberg",
+                "STADTBEZIRK": "Chorweiler"
+            },
+            "geometry": {
+                "rings": [
+                    51.035437,
+                    6.890874
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Stammheim",
+                "STADTBEZIRK": "Mülheim"
+            },
+            "geometry": {
+                "rings": [
+                    50.987181,
+                    6.994324
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Mülheim",
+                "STADTBEZIRK": "Mülheim"
+            },
+            "geometry": {
+                "rings": [
+                    50.959767,
+                    7.003722
+                ]
+            }
+        }
+    ]
+}

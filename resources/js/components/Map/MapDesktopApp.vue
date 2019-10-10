@@ -9,6 +9,9 @@ import districtListData from '../../api/districts.json';
 import subdistrictListData from '../../api/subdistricts.json';
 import postcodeListData from '../../api/postcode.json';
 
+import districtMarkerListData from '../../api/districtMarkers.json';
+import subdistrictMarkerListData from '../../api/subdistrictMarkers.json';
+
 export default {
     name: 'MapDesktopApp',
     components: {
@@ -55,6 +58,11 @@ export default {
                 ? this.areaDistrict.polygonList.filter(d => d.areaName === this.activeDistrict)
                 : this.areaDistrict.polygonList;
         },
+        districtMarkerList() {
+            return this.activeDistrict
+                ? this.areaDistrict.markerList.filter(d => d.areaName === this.activeDistrict)
+                : this.areaDistrict.markerList;
+        },
         subdistrictList() {
             if (this.activeSubdistrict) {
                 return this.areaSubdistrict.polygonList.filter(sub => sub.areaName === this.activeSubdistrict);
@@ -62,6 +70,15 @@ export default {
                 return this.areaSubdistrict.polygonList.filter(sub => sub.areaParentName === this.activeDistrict);
             } else {
                 return this.areaSubdistrict.polygonList;
+            }
+        },
+        subdistrictMarkerList() {
+            if (this.activeSubdistrict) {
+                return this.areaSubdistrict.markerList.filter(sub => sub.areaName === this.activeSubdistrict);
+            } else if (this.activeDistrict) {
+                return this.areaSubdistrict.markerList.filter(sub => sub.areaParentName === this.activeDistrict);
+            } else {
+                return this.areaSubdistrict.markerList;
             }
         },
         postcodeList() {
@@ -94,7 +111,7 @@ export default {
     },
     methods: {
         getCityPolygonList() {
-            let areaInner = {polygonList: [], pointList: [], latLngBound: []};
+            let areaInner = {polygonList: [], markerList: [], latLngBound: []};
 
             if (cityData) {
                 for (let city in cityData.features) {
@@ -123,7 +140,7 @@ export default {
             return areaInner;
         },
         getDistrictPolygonList() {
-            let areaInner = {polygonList: [], pointList: [], latLngBound: []};
+            let areaInner = {polygonList: [], markerList: [], latLngBound: []};
 
             if (districtListData) {
                 for (let districtList in districtListData.features) {
@@ -149,10 +166,25 @@ export default {
                 }
             }
 
+            if (districtMarkerListData) {
+                for (let districtMarkerList in districtMarkerListData.features) {
+                    let districtMarker = districtMarkerListData.features[districtMarkerList];
+
+                    if (districtMarker && districtMarker.attributes && districtMarker.geometry) {
+
+                        // coordinates + areaName
+                        areaInner.markerList.push({
+                            latLngs: districtMarker.geometry.rings,
+                            areaName: districtMarker.attributes.NAME,
+                        });
+                    }
+                }
+            }
+
             return areaInner;
         },
         getSubdistrictPolygonList() {
-            let areaInner = {polygonList: [], pointList: [], latLngBound: []};
+            let areaInner = {polygonList: [], markerList: [], latLngBound: []};
 
             if (subdistrictListData) {
                 for (let subdistrictList in subdistrictListData.features) {
@@ -180,10 +212,26 @@ export default {
                 }
             }
 
+            if (subdistrictMarkerListData) {
+                for (let subdistrictMarkerList in subdistrictMarkerListData.features) {
+                    let subdistrictMarker = subdistrictMarkerListData.features[subdistrictMarkerList];
+
+                    if (subdistrictMarker && subdistrictMarker.attributes && subdistrictMarker.geometry) {
+
+                        // coordinates + areaName
+                        areaInner.markerList.push({
+                            latLngs: subdistrictMarker.geometry.rings,
+                            areaParentName: subdistrictMarker.attributes.STADTBEZIRK,
+                            areaName: subdistrictMarker.attributes.NAME,
+                        });
+                    }
+                }
+            }
+
             return areaInner;
         },
         getPostcodePolygonList() {
-            let areaInner = {polygonList: [], pointList: [], latLngBound: []};
+            let areaInner = {polygonList: [], markerList: [], latLngBound: []};
 
             if (postcodeListData) {
                 for (let postcodeList in postcodeListData.features) {
@@ -214,7 +262,7 @@ export default {
             return areaInner;
         },
         getZoomData(areaType, areaName) {
-            let areaInner = {polygonList: [], pointList: [], latLngBound: []},
+            let areaInner = {polygonList: [], markerList: [], latLngBound: []},
                 areaListData;
             areaName = this.areaNameNormalize(areaName);
 
@@ -416,51 +464,45 @@ export default {
                 <!--city-->
                 <l-polygon
                     v-show="!activeDistrict"
-                    :color="colorCity"
-                    :fill-color="fillColor"
-                    :fill-opacity="activeDistrict ? 0.01 : .2"
-                    :weight="weightPolygon"
                     v-for="(polygon, index) in areaCity.polygonList"
                     :key="`${index}-${polygon.areaName}-city`"
+                    :color="colorCity"
+                    :weight="weightPolygon"
+                    :fill-color="fillColor"
+                    :fill-opacity="activeDistrict ? 0.01 : .2"
                     :lat-lngs="polygon.latLngs"
                         />
 
                 <!--district-->
                 <l-polygon
-                    :color="colorDistrict"
-
-                    :fill-color="fillColor"
-                    :weight="weightPolygon"
                     v-for="(polygon, index) in districtList"
                     :key="`${index}-${polygon.areaName}-district`"
-                    :lat-lngs="polygon.latLngs"
-
+                    :color="colorDistrict"
+                    :weight="weightPolygon"
+                    :fill-color="fillColor"
                     :fill-opacity="!activeSubdistrict && checkDistrict(polygon.areaName) ? .2 : .01"
+                    :lat-lngs="polygon.latLngs"
                     :stroke="checkDistrict(polygon.areaName)"
 
                     @mouseover="hoverDistrict(polygon.areaName)"
                     @mouseleave="hoverDistrict(null)"
-
                     @click="selectDistrict(polygon.areaName)"
                         />
 
                 <!--subdistrict-->
                 <div v-if="activeDistrict">
                     <l-polygon
-                        :color="checkSubdistrict(polygon.areaName) ? primaryColor : secondaryColor"
-
-                        :fill-color="fillColor"
-                        :weight="weightPolygon"
                         v-for="(polygon, index) in subdistrictList"
                         :key="`${index}-${polygon.areaName}-subdistrict`"
-                        :lat-lngs="polygon.latLngs"
-
+                        :color="checkSubdistrict(polygon.areaName) ? primaryColor : secondaryColor"
+                        :weight="weightPolygon"
+                        :fill-color="fillColor"
                         :fill-opacity="checkSubdistrict(polygon.areaName) ? .2 : .01"
+                        :lat-lngs="polygon.latLngs"
                         :stroke="checkSubdistrict(polygon.areaName)"
 
                         @mouseover="hoverSubdistrict(polygon.areaName)"
                         @mouseleave="hoverSubdistrict(null)"
-
                         @click="selectSubdistrict(polygon.areaName)"
                             />
                 </div>
@@ -468,41 +510,60 @@ export default {
                 <!--postcode-->
                 <div v-if="activeSubdistrict">
                     <l-polygon
-                        :color="checkPostcode(polygon.areaName) ? primaryColor : secondaryColor"
-
-                        :fill-color="fillColor"
-                        :weight="weightPolygon"
                         v-for="(polygon, index) in postcodeList"
                         :key="`${index}-${polygon.areaName}-postcode`"
-                        :lat-lngs="polygon.latLngs"
-
+                        :color="checkPostcode(polygon.areaName) ? primaryColor : secondaryColor"
+                        :weight="weightPolygon"
+                        :fill-color="fillColor"
                         :fill-opacity="checkPostcode(polygon.areaName) ? .2 : .01"
+                        :lat-lngs="polygon.latLngs"
                         :stroke="checkPostcode(polygon.areaName)"
 
                         @mouseover="hoverPostcode(polygon.areaName)"
                         @mouseleave="hoverPostcode(null)"
-
                         @click="selectPostcode(polygon.areaName)"
                             />
                 </div>
 
-
-                <!--<l-marker
-                    v-for="(marker, index) in area.pointList"
-                    :key="index"
-                    :lat-lng="marker.latLng"
-                    :icon="icon"
-                    @add="openPopup"
-                        >
-                    <l-popup
-                        :options="{ autoClose: false }"
-                        @click.native="selectArea(marker.areaType, marker.areaName, true)"
-                        @mouseover.native="showArea(marker.areaType, marker.areaName, true)"
-                        @mouseleave.native="showArea(marker.areaType, marker.areaName, false)"
+                <!--district markers-->
+                <div v-if="!activeDistrict">
+                    <l-marker
+                        v-for="(marker, index) in districtMarkerList"
+                        :key="`${index}-${marker.areaName}-district-marker`"
+                        :lat-lng="marker.latLngs"
+                        :icon="icon"
+                        @add="openPopup"
                             >
+                        <l-popup
+                            :options="{ autoClose: false }"
+                            @mouseover.native="hoverDistrict(marker.areaName)"
+                            @mouseleave.native="hoverDistrict(null)"
+                            @click.native="selectDistrict(marker.areaName)"
+                                >
                             {{ marker.areaName }}
-                    </l-popup>
-                </l-marker>-->
+                        </l-popup>
+                    </l-marker>
+                </div>
+
+                <!--subdistrict markers-->
+                <div v-if="activeDistrict">
+                    <l-marker
+                        v-for="(marker, index) in subdistrictMarkerList"
+                        :key="`${index}-${marker.areaName}-subdistrict-marker`"
+                        :lat-lng="marker.latLngs"
+                        :icon="icon"
+                        @add="openPopup"
+                            >
+                        <l-popup
+                            :options="{ autoClose: false }"
+                            @mouseover.native="hoverSubdistrict(marker.areaName)"
+                            @mouseleave.native="hoverSubdistrict(null)"
+                            @click.native="selectSubdistrict(marker.areaName)"
+                                >
+                            {{ marker.areaName }}
+                        </l-popup>
+                    </l-marker>
+                </div>
             </l-map>
         </div>
     </div>

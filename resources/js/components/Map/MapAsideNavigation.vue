@@ -115,7 +115,9 @@ export default {
                 }
                 case 'subdistrict': {
                     this.location = 'district';
-                    Bus.$emit('mapIn', { type: this.location, value: this.district });
+                    Bus.$emit('select-district', this.district);
+
+                    // Bus.$emit('mapIn', { type: this.location, value: this.district });
                     this.changeTitle(this.district + ' (Viertel)');
                     this.changeDirection(this.district);
                     this.getSubdistrictList();
@@ -123,7 +125,8 @@ export default {
                 }
                 case 'district': {
                     this.location = 'city';
-                    Bus.$emit('mapIn', { type: this.location, value: null });
+                    Bus.$emit('select-map');
+                    // Bus.$emit('mapIn', { type: this.location, value: null });
                     this.changeTitle('Karte');
                     this.getDistrictList();
                     this.district = '';
@@ -166,6 +169,13 @@ export default {
                 this.buttonHandleInSide(e.value, false);
             }
         });
+        Bus.$on('district-selected', areaName => {
+            this.buttonHandleInSide(areaName, false);
+        });
+
+        Bus.$on('subdistrict-selected', areaName => {
+            this.buttonHandleInSide(areaName, false);
+        });
     }
 };
 </script>
@@ -195,8 +205,9 @@ export default {
                         :key="`${element}-${location}`"
                         @click="loading ? '' : buttonHandleInSide(element, true)">
                         <button class="ris-map-desktop-aside-list__button"
-                            @mouseover="$emit('show-area', { type: getChildLocation(), name: element, opacity: .5, stroke: true })"
-                            @mouseleave="$emit('show-area', { type: getChildLocation(), name: element, opacity: .01, stroke: false })"
+                            @mouseover="$emit('mouse-handle', { type: getChildLocation(), name: element})"
+                            @mouseleave="$emit('mouse-handle', { type: getChildLocation(), name: null})"
+                            @click="$emit('click-handle', { type: getChildLocation(), name: element})"
                                 >
                             {{ element }}
                             <span class="ris-i ris-i_add"/>

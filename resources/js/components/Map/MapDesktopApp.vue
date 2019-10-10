@@ -4,8 +4,9 @@ import { LMap, LTileLayer, LPopup, LPolygon, LMarker } from 'vue2-leaflet';
 import MapAside from './MapAside';
 require('leaflet-fullscreen');
 
-//import areaData from '../../api/districts.js';
-import location from '../../api/location.js';
+import cityData from '../../api/city.json';
+import districtListData from '../../api/districts.json';
+import subdistrictListData from '../../api/subdistricts.json';
 
 export default {
     name: 'MapDesktopApp',
@@ -32,199 +33,178 @@ export default {
             }),
             primaryColor: '#e1151b',
             secondaryColor: '#8c8c8c',
+            thirdColor: '#43fa9d',
             fillColor: '#8c8c8c',
             weightPolygon: 2,
-            area: '',
-            areaParentPolygonList: [],
+            areaCity: {},
+            areaDistrict: {},
+            areaSubdistrict: {},
             areaName: '',
             areaType: 'city',
+
+
+            activeDistrict: null,
+            hoveredDistrict: null,
+            activeSubdistrict: null,
+            hoveredSubdistrict: null,
         };
     },
-    methods: {
-        getPolygonAndPointList() {
-
+    computed: {
+        subdistrictList() {
+            if (this.activeSubdistrict) {
+                return this.areaSubdistrict.polygonList.filter(sub => sub.areaName === this.activeSubdistrict)
+            } else if (this.activeDistrict) {
+                return this.areaSubdistrict.polygonList.filter(sub => sub.areaParentName === this.activeDistrict)
+            } else {
+                return this.areaSubdistrict.polygonList;
+            }
         },
-        getPolygonAndPointListOld(areaTypeParam, areaNameParam, areaPolygonFillOpacity = .001, areaPolygonStroke = false, mouseAction = 'leave') {
-            let allDataInSelectedArea = {'polygonList': [], 'pointList': [], 'latLngBound': []},
-                geodataReversed = '';
+        districtList() {
+            return this.activeDistrict ? this.areaDistrict.polygonList.filter(d => d.areaName === this.activeDistrict) : this.areaDistrict.polygonList;
+        },
+        colorCity() {
+            if (this.activeDistrict) {
+                return 'transparent';
+            } else if (this.hoveredDistrict) {
+                return this.secondaryColor;
+            } else {
+                return this.primaryColor;
+            }
+        },
+        colorDistrict() {
+            if (this.activeSubdistrict) {
+                return 'transparent';
+            } else if (this.hoveredSubdistrict) {
+                return this.secondaryColor;
+            } else {
+                return this.primaryColor;
+            }
 
-            if (areaData) {
-                for (let city in areaData) {
+            //:color="!hoveredSubdistrict && checkDistrict(polygon.areaName) ? primaryColor : secondaryColor"
+        }
+    },
+    methods: {
+        getCityPolygonList() {
+            let areaInner = {polygonList: [], pointList: [], latLngBound: []};
 
-                    if (areaNameParam && areaTypeParam === 'index') {
-                        for (let district in areaData[city]) {
+            if (cityData) {
+                for (let city in cityData.features) {
+                    let cityDetail = cityData.features[city];
 
-                            if (district && district in areaData[city]) {
-                                for (let subdistrict in areaData[city][district]) {
+                    if (cityDetail && cityDetail.attributes && cityDetail.geometry) {
+                        // coordinates
+                        let geodataReversed = [];
+                        cityDetail.geometry.rings[0].map(geodata => {
+                            let geodataTmp = geodata.slice().reverse();
+                            geodataReversed.push(geodataTmp);
+                        });
 
-                                    if (subdistrict in areaData[city][district]) {
-                                        for (let postcode in areaData[city][district][subdistrict]) {
+                        // areaName
+                        areaInner.polygonList.push({
+                            latLngs: geodataReversed,
+                            areaName: cityDetail.attributes.NAME,
+                        });
 
-                                            if (+postcode === +areaNameParam &&
-                                                postcode in areaData[city][district][subdistrict] &&
-                                                postcode !== 'point' && postcode !== 'polygon') {
-
-                                                // lat lng for polygonList
-                                                let geodataTmp = [];
-                                                areaData[city][district][subdistrict][postcode].polygon.map(geodataList => {
-                                                    geodataList.map(geodata => {
-                                                        geodataReversed = geodata.slice().reverse();
-                                                        geodataTmp.push(geodataReversed);
-                                                    });
-                                                });
-
-                                                // lat lng for pointList and areaName for polygonList
-                                                if (postcode !== 'point' && postcode !== 'polygon') {
-                                                    // lat lng for pointList
-                                                    allDataInSelectedArea.pointList.push({
-                                                        latLng: areaData[city][district][subdistrict][areaNameParam].point.slice().reverse(),
-                                                        areaName: areaNameParam,
-                                                        mobileInsideAreaType: null,
-                                                    });
-
-                                                    // areaName for polygonList
-                                                    allDataInSelectedArea.polygonList.push({
-                                                        latLngs: geodataTmp,
-                                                        areaName: areaNameParam,
-                                                        stroke: areaPolygonStroke,
-                                                        fillOpacity: areaPolygonFillOpacity,
-                                                    });
-                                                }
-
-                                                // future zoom to current lat lng
-                                                allDataInSelectedArea.latLngBound.push(geodataTmp);
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    } else if (areaNameParam && areaTypeParam === 'subdistrict') {
-                        for (let district in areaData[city]) {
-
-                            if (district && district in areaData[city]) {
-                                for (let subdistrict in areaData[city][district]) {
-
-                                    if (subdistrict === areaNameParam &&
-                                        subdistrict in areaData[city][district] &&
-                                        subdistrict !== 'point' && subdistrict !== 'polygon') {
-
-                                        // lat lng for polygonList
-                                        let geodataTmp = [];
-                                        areaData[city][district][subdistrict].polygon.map(geodataList => {
-                                            geodataList.map(geodata => {
-                                                geodataReversed = geodata.slice().reverse();
-                                                geodataTmp.push(geodataReversed);
-                                            });
-                                        });
-
-                                        // lat lng for pointList and areaName for polygonList
-                                        for (let postcode in areaData[city][district][areaNameParam]) {
-                                            if (postcode !== 'point' && postcode !== 'polygon') {
-                                                // lat lng for pointList
-                                                allDataInSelectedArea.pointList.push({
-                                                    latLng: areaData[city][district][areaNameParam][postcode].point.slice().reverse(),
-                                                    areaName: postcode,
-                                                    mobileInsideAreaType: 'index',
-                                                });
-
-                                                // areaName for polygonList
-                                                allDataInSelectedArea.polygonList.push({
-                                                    latLngs: geodataTmp,
-                                                    areaName: postcode,
-                                                    stroke: areaPolygonStroke,
-                                                    fillOpacity: areaPolygonFillOpacity,
-                                                });
-                                            }
-                                        }
-
-                                        // future zoom to current lat lng
-                                        allDataInSelectedArea.latLngBound.push(geodataTmp);
-                                    }
-                                }
-                            }
-                        }
-                    } else if (areaNameParam && areaTypeParam === 'district') {
-                        if (areaNameParam in areaData[city] && areaData[city][areaNameParam].polygon[0]) {
-
-                            // lat lng for polygonList
-                            let geodataTmp = [];
-                            areaData[city][areaNameParam].polygon.map(geodataList => {
-                                geodataList.map(geodata => {
-                                    geodataReversed = geodata.slice().reverse();
-                                    geodataTmp.push(geodataReversed);
-                                });
-                            });
-
-                            // lat lng for pointList and areaName for polygonList
-                            for (let subdistrict in areaData[city][areaNameParam]) {
-                                if (subdistrict !== 'point' && subdistrict !== 'polygon') {
-                                    // lat lng for pointList
-                                    allDataInSelectedArea.pointList.push({
-                                        latLng: areaData[city][areaNameParam][subdistrict].point.slice().reverse(),
-                                        areaName: subdistrict,
-                                        mobileInsideAreaType: 'subdistrict',
-                                    });
-
-                                    // areaName for polygonList
-                                    allDataInSelectedArea.polygonList.push({
-                                        latLngs: geodataTmp,
-                                        areaName: subdistrict,
-                                        stroke: areaPolygonStroke,
-                                        fillOpacity: areaPolygonFillOpacity,
-                                    });
-                                }
-                            }
-
-                            // future zoom to current lat lng
-                            allDataInSelectedArea.latLngBound.push(geodataTmp);
-                        }
-                    } else if (areaTypeParam === 'city') {
-                        //if (areaNameParam in areaData[city] && areaData[city][areaNameParam].polygon[0]) {
-
-                        for (let district in areaData[city]) {
-                            console.log('Get City: ', city, district, areaNameParam);
-
-                            if (district && mouseAction === 'over') {
-                                console.log(mouseAction, district, areaNameParam);
-                                district = areaNameParam;
-                            }
-
-                            if (areaData[city][district] && areaData[city][district].point) {
-
-                                // lat lng for polygonList
-                                let geodataTmp = [];
-                                areaData[city][district].polygon.map(geodataList => {
-                                    geodataList.map(geodata => {
-                                        geodataReversed = geodata.slice().reverse();
-                                        geodataTmp.push(geodataReversed);
-                                    });
-                                });
-                                // areaName for polygonList
-                                allDataInSelectedArea.polygonList.push({
-                                    areaName: district,
-                                    latLngs: geodataTmp,
-                                    stroke: areaPolygonStroke,
-                                    fillOpacity: areaPolygonFillOpacity,
-                                });
-
-                                // lat lng for pointList
-                                let latLngReversed = areaData[city][district].point.slice().reverse();
-                                allDataInSelectedArea.pointList.push({
-                                    areaName: district,
-                                    latLng: latLngReversed,
-                                    mobileInsideAreaType: 'city',
-                                });
-
-                                // future zoom to current lat lng
-                                allDataInSelectedArea.latLngBound.push(latLngReversed);
-                            }
-                        }
+                        // the future zooming to the current lat lng
+                        areaInner.latLngBound.push(geodataReversed);
                     }
                 }
             }
 
-            return allDataInSelectedArea;
+            return areaInner;
+        },
+        getDistrictPolygonList() {
+            let areaInner = {polygonList: [], pointList: [], latLngBound: []};
+
+            if (districtListData) {
+                for (let districtList in districtListData.features) {
+                    let district = districtListData.features[districtList];
+
+                    if (district && district.attributes && district.geometry) {
+                        // coordinates
+                        let geodataReversed = [];
+                        district.geometry.rings[0].map(geodata => {
+                            let geodataTmp = geodata.slice().reverse();
+                            geodataReversed.push(geodataTmp);
+                        });
+
+                        // areaName
+                        areaInner.polygonList.push({
+                            latLngs: geodataReversed,
+                            areaName: district.attributes.NAME,
+                        });
+
+                        // the future zooming to the current lat lng
+                        areaInner.latLngBound.push(geodataReversed);
+                    }
+                }
+            }
+
+            return areaInner;
+        },
+        getSubdistrictPolygonList() {
+            let areaInner = {polygonList: [], pointList: [], latLngBound: []};
+
+            if (subdistrictListData) {
+                for (let subdistrictList in subdistrictListData.features) {
+
+                    let subdistrict = subdistrictListData.features[subdistrictList];
+                    if (subdistrict && subdistrict.attributes && subdistrict.geometry) {
+
+                        // coordinates
+                        let geodataReversed = [];
+                        subdistrict.geometry.rings[0].map(geodata => {
+                            let geodataTmp = geodata.slice().reverse();
+                            geodataReversed.push(geodataTmp);
+                        });
+
+                        // areaName
+                        areaInner.polygonList.push({
+                            latLngs: geodataReversed,
+                            areaParentName: subdistrict.attributes.STADTBEZIRK,
+                            areaName: subdistrict.attributes.NAME,
+                        });
+
+                        // the future zooming to the current lat lng
+                        areaInner.latLngBound.push(geodataReversed);
+                    }
+                }
+            }
+
+            return areaInner;
+        },
+        getZoomData(areaType, areaName) {
+            let areaInner = {polygonList: [], pointList: [], latLngBound: []},
+                areaListData;
+            areaName = this.areaNameNormalize(areaName);
+
+            if (areaType === 'district') {
+                areaListData = districtListData;
+            } else if (areaType === 'subdistrict') {
+                areaListData = subdistrictListData;
+            } else {
+                areaListData = cityData;
+            }
+
+            if (areaListData) {
+                for (let areaList in areaListData.features) {
+
+                    let area = areaListData.features[areaList];
+                    if (area && area.geometry && area.attributes && (area.attributes.NAME === areaName || areaType === 'city')) {
+                        // coordinates
+                        let geodataReversed = [];
+                        area.geometry.rings[0].map(geodata => {
+                            let geodataTmp = geodata.slice().reverse();
+                            geodataReversed.push(geodataTmp);
+                        });
+
+                        // the future zooming to the current lat lng
+                        areaInner.latLngBound.push(geodataReversed);
+                    }
+                }
+            }
+
+            return areaInner;
         },
         zoomToSelectedArea(latLngBoundArr) {
             if (latLngBoundArr.length > 0) {
@@ -235,88 +215,136 @@ export default {
                 });
             }
         },
-        showArea(type, name, opacity, stroke, mouseAction) {
-            if (type) {
-                console.log(type, name, mouseAction);
-
-                /*if (showHide === 'show') {
-                    const areaData = this.getPolygonAndPointList(type, name, opacity, stroke, mouseAction);
-                    if (this.area && this.area.polygonList && areaData) {
-                        // show child only polygon area
-                        this.area.polygonList = areaData.polygonList;
-
-                        this.areaParentPolygonList = this.area.polygonList;
-                        //this.area.polygonList = [];
-                    }
-                } else {
-                    if (this.area && this.area.polygonList) {
-                        // hide child polygon area
-                        this.area.polygonList = [];
-                    }
-                }*/
-            }
-        },
-        selectedArea({ type, name }) {
-            if (type) {
-                this.areaType = type;
-                this.areaName = name;
-                this.area = this.getPolygonAndPointList(type, name);
-                this.zoomToSelectedArea(this.area.latLngBound);
-
-                /*if (type === 'city') {
-                    this.areaParentPolygonList = [];
-                } else {
-                    if (this.area && this.area.polygonList) {
-                        this.areaParentPolygonList = this.area.polygonList;
-                        this.area.polygonList = [];
-                    }
-                }*/
-
-                Bus.$emit('mapOut', {type, value: name});
-            }
-        },
         openPopup(e) {
             this.$nextTick(() => {
                 e.target.openPopup();
             });
         },
+
+        areaNameNormalize(areaName) {
+            return areaName ? areaName.replace(/-/i, '/') : null;
+        },
+        selectDistrict(areaName) {
+            areaName = this.areaNameNormalize(areaName);
+            this.activeDistrict = areaName;
+
+            // zoom to the new location
+            const zoomData = this.getZoomData('district', areaName);
+            this.zoomToSelectedArea(zoomData.latLngBound);
+
+            Bus.$emit('district-selected', areaName);
+
+            // update navigation
+            //Bus.$emit('mapOut', {type: 'district', value: areaName});
+        },
+        handleDistrict(areaName) {
+            areaName = this.areaNameNormalize(areaName);
+            this.hoveredDistrict = areaName;
+        },
+        checkDistrict(areaName) {
+            areaName = this.areaNameNormalize(areaName);
+
+            return areaName === this.activeDistrict || areaName === this.hoveredDistrict;
+        },
+        selectSubdistrict(areaName) {
+            areaName = this.areaNameNormalize(areaName);
+            this.activeSubdistrict = areaName;
+
+            // zoom to the new location
+            const zoomData = this.getZoomData('subdistrict', areaName);
+            this.zoomToSelectedArea(zoomData.latLngBound);
+
+            Bus.$emit('subdistrict-selected', areaName);
+            // console.log('mapOut', areaName);
+            // update navigation
+            //Bus.$emit('mapOut', {type: 'subdistrict', value: areaName});
+        },
+        handleSubdistrict(areaName) {
+            areaName = this.areaNameNormalize(areaName);
+            this.hoveredSubdistrict = areaName;
+        },
+        checkSubdistrict(areaName) {
+            areaName = this.areaNameNormalize(areaName);
+
+            return areaName === this.activeSubdistrict || areaName === this.hoveredSubdistrict;
+        },
+        selectByNavigation(areaType, areaName) {
+            if (areaType === 'district') {
+                this.selectDistrict(areaName);
+            } else if (areaType === 'subdistrict') {
+                this.selectSubdistrict(areaName);
+            }
+        },
+        handleByNavigation(areaType, areaName) {
+            if (areaType === 'district') {
+                this.handleDistrict(areaName);
+            } else if (areaType === 'subdistrict') {
+                this.handleSubdistrict(areaName);
+            }
+        },
     },
     created() {
+        Bus.$on('select-district', areaName => {
+            areaName = this.areaNameNormalize(areaName);
+            this.activeDistrict = areaName;
+            this.activeSubdistrict = null;
+
+            // zoom to the new location
+            const zoomData = this.getZoomData('district', areaName);
+            this.zoomToSelectedArea(zoomData.latLngBound);
+        });
+
+        Bus.$on('select-map', () => {
+            this.activeDistrict = null;
+            this.activeSubdistrict = null;
+        });
+
         Bus.$on('mapIn', ({ type, value: name }) => {
             this.areaType = type;
             this.areaName = name;
-            this.area = this.getPolygonAndPointList(type, name);
-            this.zoomToSelectedArea(this.area.latLngBound);
+            console.log('mapIn', type, name);
 
-            /*if (this.area && this.area.polygonList) {
-                this.areaParentPolygonList = this.area.polygonList;
-                this.area.polygonList = [];
-            }*/
+            if (type === 'district') {
+                this.selectDistrict(name);
+                this.activeSubdistrict = null;
+                this.hoveredSubdistrict = null;
+            } else if (type === 'subdistrict') {
+                this.selectSubdistrict(name);
+
+            } else {
+                // type city
+                this.activeDistrict = null;
+                this.hoveredDistrict = null;
+                this.activeSubdistrict = null;
+                this.hoveredSubdistrict = null;
+            }
+
+            const zoomData = this.getZoomData(type, name);
+            this.zoomToSelectedArea(zoomData.latLngBound);
         });
     },
-    async mounted() {
-        const city = await location.getDistrictsByAPI();
-        console.log(city);
+    mounted() {
+        this.areaCity = this.getCityPolygonList();
+        this.areaDistrict = this.getDistrictPolygonList();
+        this.areaSubdistrict = this.getSubdistrictPolygonList();
 
-        /*this.area = this.getPolygonAndPointList(this.areaType, this.areaName);
-        this.zoomToSelectedArea(this.area.latLngBound);
+        this.zoomToSelectedArea(this.areaCity.latLngBound);
 
-        if (this.area && this.area.polygonList) {
-            console.log('MOUNTED. first init - area and areaParent');
-            this.areaParentPolygonList = this.area.polygonList;
-            this.area.polygonList = [];
-        }
-
+        // add the fullscreen button
         this.$nextTick(() => {
             this.$refs.mapDesktopOsm.mapObject.addControl(new L.Control.Fullscreen());
-        });*/
+        });
     }
 };
 </script>
 
 <template>
     <div>
-        <MapAside @show-area="showArea($event.type, $event.name, $event.opacity, $event.stroke)" class="ris-map-desktop-aside"/>
+        <MapAside class="ris-map-desktop-aside"
+            @mouse-handle="handleByNavigation($event.type, $event.name)"
+            @click-handle="selectByNavigation($event.type, $event.name)"
+            />
+
         <div id="map-desktop-osm" class="ris-map ris-map__desktop"
                 >
             <l-map ref="mapDesktopOsm"
@@ -326,34 +354,62 @@ export default {
                     :url="url"
                     :attribution="attribution"
                         />
+
+                <!--city-->
                 <l-polygon
-                    :color="primaryColor"
+                    v-show="!activeDistrict"
+                    :color="colorCity"
                     :fill-color="fillColor"
+                    :fill-opacity="activeDistrict ? 0.01 : .2"
                     :weight="weightPolygon"
-                    :bubblingMouseEvents="false"
-                    v-for="(polygon, index) in area.polygonList"
-                    :key="`${index}-${polygon.areaName}-child`"
+                    v-for="(polygon, index) in areaCity.polygonList"
+                    :key="`${index}-${polygon.areaName}-city`"
                     :lat-lngs="polygon.latLngs"
-                    :fill-opacity="polygon.fillOpacity"
-                    :stroke="polygon.stroke"
-                    @mouseover="polygon.fillOpacity = .5, polygon.stroke = true"
-                    @mouseleave="polygon.fillOpacity = .01, polygon.stroke = false"
                         />
-                <!--display area data for init of page for main city district-->
-                <!--<l-polygon
-                    :color="secondaryColor"
+                <!--:fill-opacity="activeDistrict ? 0.01 : .2"-->
+
+                <!--district-->
+                <l-polygon
+                    :color="colorDistrict"
+
                     :fill-color="fillColor"
                     :weight="weightPolygon"
-                    :bubblingMouseEvents="false"
-                    v-for="(polygon, index) in areaParentPolygonList"
-                    :key="`${index}-${polygon.areaName}-parent`"
+                    v-for="(polygon, index) in districtList"
+                    :key="`${index}-${polygon.areaName}-district`"
                     :lat-lngs="polygon.latLngs"
-                    :fill-opacity="polygon.fillOpacity"
-                    :stroke="polygon.stroke"
-                    @mouseeover="polygon.fillOpacity = .5, polygon.stroke = true"
-                    @mouseleave="polygon.fillOpacity = .01, polygon.stroke = false"
-                        />-->
-                <l-marker
+
+                    :fill-opacity="!activeSubdistrict && checkDistrict(polygon.areaName) ? .2 : .01"
+                    :stroke="checkDistrict(polygon.areaName)"
+
+                    @mouseover="handleDistrict(polygon.areaName)"
+                    @mouseleave="handleDistrict(null)"
+
+                    @click="selectDistrict(polygon.areaName)"
+                />
+
+                <!--subdistrict-->
+                <l-polygon
+                    v-if="activeDistrict"
+
+                    :color="checkSubdistrict(polygon.areaName) ? primaryColor : secondaryColor"
+
+                    :fill-color="fillColor"
+                    :weight="weightPolygon"
+                    v-for="(polygon, index) in subdistrictList"
+                    :key="`${index}-${polygon.areaName}-subdistrict`"
+                    :lat-lngs="polygon.latLngs"
+
+                    :fill-opacity="checkSubdistrict(polygon.areaName) ? .2 : .01"
+                    :stroke="checkSubdistrict(polygon.areaName)"
+
+                    @mouseover="handleSubdistrict(polygon.areaName)"
+                    @mouseleave="handleSubdistrict(null)"
+
+                    @click="selectSubdistrict(polygon.areaName)"
+                />
+
+
+                <!--<l-marker
                     v-for="(marker, index) in area.pointList"
                     :key="index"
                     :lat-lng="marker.latLng"
@@ -362,13 +418,13 @@ export default {
                         >
                     <l-popup
                         :options="{ autoClose: false }"
-                        @click.native="selectedArea({ type: marker.mobileInsideAreaType, name: marker.areaName })"
-                        @mouseover.native="showArea(marker.mobileInsideAreaType, marker.areaName, .5, true, 'over')"
-                        @mouseleave.native="showArea(marker.mobileInsideAreaType, marker.areaName, .01, false, 'leave')"
+                        @click.native="selectArea(marker.areaType, marker.areaName, true)"
+                        @mouseover.native="showArea(marker.areaType, marker.areaName, true)"
+                        @mouseleave.native="showArea(marker.areaType, marker.areaName, false)"
                             >
                             {{ marker.areaName }}
                     </l-popup>
-                </l-marker>
+                </l-marker>-->
             </l-map>
         </div>
     </div>

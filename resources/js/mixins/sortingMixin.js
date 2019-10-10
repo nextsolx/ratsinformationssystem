@@ -6,7 +6,7 @@ export default {
         };
     },
     methods: {
-        sortBy(unfilteredList,value = 'function', char = false) {
+        sortBy(unfilteredList,value = 'role', char = false) {
             const sortedList = [];
             const values = [];
             if (char) {

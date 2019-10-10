@@ -26,8 +26,8 @@ export default {
             },
             dropOptions: [
                 {
-                    value: 'function',
-                    label: 'Funktion',
+                    value: 'role',
+                    label: 'Rolle',
                 },
                 {
                     value: 'party',
@@ -48,6 +48,7 @@ export default {
         },
         getTitleValue(value) {
             if (!value && this.dropValue.value === 'party') return 'Fraktionslose Mitglieder';
+            if (!value && this.dropValue.value === 'role') return 'Teilnehmen';
             return value;
         },
     },
@@ -74,7 +75,7 @@ export default {
                 <ul class="ris-ul ris-members-secondary-list">
                     <Member
                         v-for="member in item.data"
-                        :key="`${member.id}-member`"
+                        :key="member.id"
                         :member="member"
                         class="ris-members-secondary-list__item"
                             />

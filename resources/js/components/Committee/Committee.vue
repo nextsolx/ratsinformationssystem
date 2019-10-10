@@ -18,6 +18,10 @@ export default {
             type: Array,
             default: () => [],
         },
+        links: {
+            type: Array,
+            default: () => [],
+        }
     },
     components: {
         CommitteeInfo,
@@ -56,7 +60,7 @@ export default {
                 </li>
             </ul>
         </nav>
-        <CommitteeInfo :information="info" v-if="activeTab === 'aufgaben'" />
+        <CommitteeInfo :information="info" :links="links" v-if="activeTab === 'aufgaben'" />
         <MemberList :members="members" v-if="activeTab === 'mitglieder'" />
         <CommitteeSessions :meetings="meetings" v-if="activeTab === 'sitzungen'" />
     </div>

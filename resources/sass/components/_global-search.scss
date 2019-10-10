@@ -1,0 +1,210 @@
+$header-top-height: 48px;
+$header-bottom-height: 64px;
+$header-height-mobi: 92px;
+
+.ris-global-search {
+    $this: &;
+    width: 100%;
+    align-self: center;
+    position: relative;
+    @include breakpoint($bp-mobile-max) {
+        position: static;
+    }
+    &__result-title {
+        padding-left: $indent-ml;
+        margin: $indent-l 0 $indent-m 0;
+        color: $c-gray8;
+        font-size: $fs-l;
+        font-weight: 400;
+    }
+    &-navigation {
+        display: flex;
+        padding-left: $indent-ml;
+        margin: 0 0 $indent-m 0;
+        border-bottom: 1px solid $c-gray7;
+        @include breakpoint($bp-mobile-max) {
+            padding-left: $indent-m;
+        }
+        &__button {
+            border: 0;
+            font-size: $fs-l;
+            background-color: transparent;
+            border-bottom: 3px solid transparent;
+            outline: none;
+            &.isActive {
+                color: $c-red;
+                font-weight: bold;
+                border-color: $c-red;
+            }
+        }
+    }
+    &-input {
+        z-index: 7;
+        height: 64px;
+        display: flex;
+        align-items: center;
+        background: $c-white;
+    }
+    &-wrapper {
+        font-size: 10px;
+        background-color: $c-white;
+        position: absolute;
+        left: 0;
+        right: 0;
+        z-index: 6;
+        max-height: calc(100vh - #{$header-bottom-height} - #{$header-top-height});
+        overflow-y: scroll;
+        @include breakpoint($bp-mobile-max) {
+            max-height: calc(100vh - #{$header-height-mobi});
+            top: $header-height-mobi;
+            height: 100%;
+        }
+    }
+    &-autocomplete {
+        &__title {
+            font-size: $fs-l;
+            margin: 32px 0 $indent-m 0;
+            padding-left: $indent-ml;
+            @include breakpoint($bp-mobile-max) {
+                margin: $indent-m 0;
+            }
+        }
+        &__list {
+            margin: 0;
+            list-style-type: none;
+            display: flex;
+            padding: 0 20px 0 $indent-ml;
+            flex-wrap: wrap;
+            @include breakpoint($bp-mobile-max) {
+                padding: 0 $indent-m;
+            }
+        }
+        &__item {
+            margin: 0 $indent-s $indent-s 0;
+        }
+        &__button {
+            padding: $indent-s $indent-sm;
+            font-weight: 500;
+            border-radius: 4px;
+            border: 0;
+            cursor: pointer;
+            font-size: $fs-l;
+            box-shadow: 0 1px 6px 0 $c-box-shadow3;
+            color: #545458;
+            background-color: $c-white;
+        }
+    }
+    &__background {
+        background-color: $c-dark-disabled;
+        position: fixed;
+        top: 0;
+        height: 100vh;
+        width: 100vw;
+        z-index: 5;
+        @include breakpoint($bp-mobile-max) {
+            display: none;
+        }
+    }
+    &-input{
+        transition: padding-left ease-in-out .1s;
+        padding-left: $indent-m;
+        font-weight: bold;
+        &.focused {
+            transition: padding-left ease-in-out .1s;
+            padding-left: 0;
+            box-shadow: 0 1px 6px 0 $c-box-shadow2;
+            @include breakpoint($bp-mobile-max) {
+                box-shadow: none;
+            }
+        }
+        &__item {
+            &.focused {
+                & ~ .ris-search__button {
+                    margin-left: 0;
+                }
+                margin-left: 0;
+                border-color: transparent;
+                background: $c-white;
+                width: 100%;
+                box-shadow: none;
+            }
+        }
+    }
+    &-content {
+        display: flex;
+        flex-direction: column;
+        padding: 0 $indent-ml;
+        margin: 0 0 $indent-l 0;
+        @include breakpoint($bp-mobile-max) {
+            padding: 0 $indent-m;
+        }
+        &__title {
+            margin: $indent-s 0;
+            font-size: $fs-xxl;
+        }
+        &__list {
+            display: flex;
+            .ris-load-element {
+                width: 100%;
+            }
+        }
+        &__theme {
+            flex-direction: column;
+        }
+        &__person {
+            flex-wrap: wrap;
+            #{$this}-content__item {
+                margin: 0 $indent-m $indent-m 0;
+                @include breakpoint($bp-mobile-max) {
+                    margin: 0 0 $indent-m 0;
+                }
+            }
+        }
+        &__map {
+            flex-wrap: wrap;
+            #{$this}-content__item {
+                margin: 0 $indent-m $indent-m 0;
+                @include breakpoint($bp-mobile-max) {
+                    margin: 0 0 $indent-m 0;
+                }
+            }
+        }
+        &__item {
+            margin-bottom: $indent-m;
+            @include breakpoint($bp-mobile-max) {
+                width: 100%;
+            }
+        }
+        &__button {
+            border: 0;
+        }
+    }
+    &-placeholder {
+        background-color: $c-white2;
+        padding: 47px $indent-ml 50px;
+        text-align: center;
+        margin: $indent-ml;
+        @include breakpoint($bp-mobile-max) {
+            margin: 0;
+            padding: $indent-ml $indent-m;
+            text-align: left;
+        }
+        &__title {
+            font-size: $fs-xxxl;
+            margin-bottom: $indent-xl;
+            @include breakpoint($bp-mobile-max) {
+                font-size: 20px;
+                margin-bottom: $indent-m;
+            }
+        }
+        &__info {
+            font-size: $fs-l;
+            color: $c-gray6;
+        }
+    }
+}
+
+.ris-selection {
+    background: $c-orange2;
+    border-radius: 3px;
+}

@@ -125,7 +125,7 @@
                 }
             }
 
-            &__link {
+            &__button {
                 position: absolute;
                 right: 0;
                 top: 50%;
@@ -135,6 +135,11 @@
                     color: $c-gray;
                     font-size: $fs-xl;
                 }
+            }
+
+            &__link {
+                text-decoration: none;
+                color: $c-gray;
             }
         }
 

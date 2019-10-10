@@ -74,7 +74,7 @@ export default {
                 <ul class="ris-ul ris-members-secondary-list">
                     <Member
                         v-for="member in item.data"
-                        :key="member.id"
+                        :key="`${member.id}-member`"
                         :member="member"
                         class="ris-members-secondary-list__item"
                             />
@@ -84,7 +84,7 @@ export default {
         <transition-group tag="ul" name="fade" class="ris-ul ris-members-secondary-list" v-if="filtered">
             <Member
                 v-for="member in filteredList"
-                :key="member.id"
+                :key="`${member.id}-filtered`"
                 :member="member"
                 class="ris-members-secondary-list__item"
                     />

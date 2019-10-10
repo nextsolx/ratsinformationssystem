@@ -31,7 +31,6 @@ class MainPageController extends Controller
         $peopleQuery = Person::inRandomOrder();
 
         $people = \App\Http\Resources\Person::collection($peopleQuery->paginate(5))->toResponse(request())->getData();
-
         return view('welcome')->with([
             'meetings' => $meetings->data,
             'topics' => $topics->data,
@@ -67,7 +66,7 @@ class MainPageController extends Controller
             ->toResponse(request())->getData();
 
         return [
-            'lcoations' => $locationData->data,
+            'locations' => $locationData->data,
             'links' => $locationData->links,
             'meta' => $locationData->meta,
         ];

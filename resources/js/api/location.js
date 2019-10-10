@@ -13,4 +13,7 @@ export default {
     getDistricts () {
         return axios.get('/api/districts/').then(res => res.data);
     },
+    getLocationLike (value, page = 1) {
+        return axios.get(`/api/locations?q=${value}&page=${page}`).then(res => res.data);
+    },
 };

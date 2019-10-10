@@ -42,7 +42,7 @@ export default {
             const themes = await topics.getTopicsByDistrictList(value, this.paginationPage);
             this.putData(themes);
         },
-        async getIndexThemes (value) {
+        async getPostcodeThemes (value) {
             this.loading = true;
             const themes = await topics.getTopicsByIndexList(value, this.paginationPage);
             this.putData(themes);
@@ -65,10 +65,10 @@ export default {
                     this.getThemes();
                     break;
                 }
-                case 'index': {
+                case 'postcode': {
                     this.subTitle = 'Themen in dieser PLZ';
                     this.totalThemesText = `Thema in ${value}`;
-                    this.getIndexThemes(value);
+                    this.getPostcodeThemes(value);
                     break;
                 }
                 default: {

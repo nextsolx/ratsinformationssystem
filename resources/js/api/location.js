@@ -5,7 +5,7 @@ export default {
         district = encodeURIComponent(district);
         return axios.get(`/api/districts/${district}`).then(res => Object.keys(res.data));
     },
-    getIndexes (district, subdist) {
+    getPostcodes (district, subdist) {
         district = encodeURIComponent(district);
         subdist = encodeURIComponent(subdist);
         return axios.get(`/api/districts/${district}/${subdist}`).then(res => res.data);

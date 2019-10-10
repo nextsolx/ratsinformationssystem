@@ -7,6 +7,7 @@ require('leaflet-fullscreen');
 import cityData from '../../api/city.json';
 import districtListData from '../../api/districts.json';
 import subdistrictListData from '../../api/subdistricts.json';
+import postcodeListData from '../../api/postcode.json';
 
 export default {
     name: 'MapDesktopApp',
@@ -39,28 +40,38 @@ export default {
             areaCity: {},
             areaDistrict: {},
             areaSubdistrict: {},
-            areaName: '',
-            areaType: 'city',
-
-
+            areaPostcode: {},
             activeDistrict: null,
             hoveredDistrict: null,
             activeSubdistrict: null,
             hoveredSubdistrict: null,
+            activePostcode: null,
+            hoveredPostcode: null,
         };
     },
     computed: {
+        districtList() {
+            return this.activeDistrict
+                ? this.areaDistrict.polygonList.filter(d => d.areaName === this.activeDistrict)
+                : this.areaDistrict.polygonList;
+        },
         subdistrictList() {
             if (this.activeSubdistrict) {
-                return this.areaSubdistrict.polygonList.filter(sub => sub.areaName === this.activeSubdistrict)
+                return this.areaSubdistrict.polygonList.filter(sub => sub.areaName === this.activeSubdistrict);
             } else if (this.activeDistrict) {
-                return this.areaSubdistrict.polygonList.filter(sub => sub.areaParentName === this.activeDistrict)
+                return this.areaSubdistrict.polygonList.filter(sub => sub.areaParentName === this.activeDistrict);
             } else {
                 return this.areaSubdistrict.polygonList;
             }
         },
-        districtList() {
-            return this.activeDistrict ? this.areaDistrict.polygonList.filter(d => d.areaName === this.activeDistrict) : this.areaDistrict.polygonList;
+        postcodeList() {
+            if (this.activePostcode) {
+                return this.areaPostcode.polygonList.filter(sub => sub.areaName === this.activePostcode);
+            } else if (this.activeSubdistrict) {
+                return this.areaPostcode.polygonList.filter(sub => sub.areaParentName === this.activeSubdistrict);
+            } else {
+                return this.areaPostcode.polygonList;
+            }
         },
         colorCity() {
             if (this.activeDistrict) {
@@ -79,8 +90,6 @@ export default {
             } else {
                 return this.primaryColor;
             }
-
-            //:color="!hoveredSubdistrict && checkDistrict(polygon.areaName) ? primaryColor : secondaryColor"
         }
     },
     methods: {
@@ -173,12 +182,45 @@ export default {
 
             return areaInner;
         },
+        getPostcodePolygonList() {
+            let areaInner = {polygonList: [], pointList: [], latLngBound: []};
+
+            if (postcodeListData) {
+                for (let postcodeList in postcodeListData.features) {
+
+                    let postcode = postcodeListData.features[postcodeList];
+                    if (postcode && postcode.attributes && postcode.geometry) {
+
+                        // coordinates
+                        let geodataReversed = [];
+                        postcode.geometry.rings[0].map(geodata => {
+                            let geodataTmp = geodata.slice().reverse();
+                            geodataReversed.push(geodataTmp);
+                        });
+
+                        // areaName
+                        areaInner.polygonList.push({
+                            latLngs: geodataReversed,
+                            areaParentName: postcode.attributes.STADTBEZIRK,
+                            areaName: postcode.attributes.NAME,
+                        });
+
+                        // the future zooming to the current lat lng
+                        areaInner.latLngBound.push(geodataReversed);
+                    }
+                }
+            }
+
+            return areaInner;
+        },
         getZoomData(areaType, areaName) {
             let areaInner = {polygonList: [], pointList: [], latLngBound: []},
                 areaListData;
             areaName = this.areaNameNormalize(areaName);
 
-            if (areaType === 'district') {
+            if (areaType === 'postcode') {
+                areaListData = postcodeListData;
+            } else if (areaType === 'district') {
                 areaListData = districtListData;
             } else if (areaType === 'subdistrict') {
                 areaListData = subdistrictListData;
@@ -220,9 +262,12 @@ export default {
                 e.target.openPopup();
             });
         },
-
         areaNameNormalize(areaName) {
-            return areaName ? areaName.replace(/-/i, '/') : null;
+            // district, subdistrict, but except postcode
+            if (areaName && typeof areaName !== 'number') {
+                areaName = areaName.replace(/-/i, '/');
+            }
+            return areaName;
         },
         selectDistrict(areaName) {
             areaName = this.areaNameNormalize(areaName);
@@ -232,12 +277,10 @@ export default {
             const zoomData = this.getZoomData('district', areaName);
             this.zoomToSelectedArea(zoomData.latLngBound);
 
-            Bus.$emit('district-selected', areaName);
-
             // update navigation
-            //Bus.$emit('mapOut', {type: 'district', value: areaName});
+            Bus.$emit('district-selected', areaName);
         },
-        handleDistrict(areaName) {
+        hoverDistrict(areaName) {
             areaName = this.areaNameNormalize(areaName);
             this.hoveredDistrict = areaName;
         },
@@ -254,12 +297,10 @@ export default {
             const zoomData = this.getZoomData('subdistrict', areaName);
             this.zoomToSelectedArea(zoomData.latLngBound);
 
-            Bus.$emit('subdistrict-selected', areaName);
-            // console.log('mapOut', areaName);
             // update navigation
-            //Bus.$emit('mapOut', {type: 'subdistrict', value: areaName});
+            Bus.$emit('subdistrict-selected', areaName);
         },
-        handleSubdistrict(areaName) {
+        hoverSubdistrict(areaName) {
             areaName = this.areaNameNormalize(areaName);
             this.hoveredSubdistrict = areaName;
         },
@@ -268,22 +309,57 @@ export default {
 
             return areaName === this.activeSubdistrict || areaName === this.hoveredSubdistrict;
         },
+        selectPostcode(areaName) {
+            areaName = this.areaNameNormalize(areaName);
+            this.activePostcode = areaName;
+
+            // zoom to the new location
+            const zoomData = this.getZoomData('postcode', areaName);
+            this.zoomToSelectedArea(zoomData.latLngBound);
+
+            // update navigation
+            Bus.$emit('postcode-selected', areaName);
+        },
+        hoverPostcode(areaName) {
+            areaName = this.areaNameNormalize(areaName);
+            this.hoveredPostcode = areaName;
+        },
+        checkPostcode(areaName) {
+            areaName = this.areaNameNormalize(areaName);
+
+            return areaName === this.activePostcode || areaName === this.hoveredPostcode;
+        },
         selectByNavigation(areaType, areaName) {
-            if (areaType === 'district') {
+            if (areaType === 'postcode') {
+                this.selectPostcode(areaName);
+            } else if (areaType === 'district') {
                 this.selectDistrict(areaName);
             } else if (areaType === 'subdistrict') {
                 this.selectSubdistrict(areaName);
             }
         },
-        handleByNavigation(areaType, areaName) {
-            if (areaType === 'district') {
-                this.handleDistrict(areaName);
+        hoverByNavigation(areaType, areaName) {
+            if (areaType === 'postcode') {
+                this.hoverPostcode(areaName);
+            } else if (areaType === 'district') {
+                this.hoverDistrict(areaName);
             } else if (areaType === 'subdistrict') {
-                this.handleSubdistrict(areaName);
+                this.hoverSubdistrict(areaName);
             }
         },
     },
     created() {
+        Bus.$on('select-postcode', areaName => {
+            areaName = this.areaNameNormalize(areaName);
+            this.activePostcode = areaName;
+            this.activeDistrict = null;
+            this.activeSubdistrict = null;
+
+            // zoom to the new location
+            const zoomData = this.getZoomData('postcode', areaName);
+            this.zoomToSelectedArea(zoomData.latLngBound);
+        });
+
         Bus.$on('select-district', areaName => {
             areaName = this.areaNameNormalize(areaName);
             this.activeDistrict = areaName;
@@ -294,32 +370,13 @@ export default {
             this.zoomToSelectedArea(zoomData.latLngBound);
         });
 
-        Bus.$on('select-map', () => {
+        Bus.$on('select-city', () => {
+            this.activePostcode = null;
             this.activeDistrict = null;
             this.activeSubdistrict = null;
-        });
 
-        Bus.$on('mapIn', ({ type, value: name }) => {
-            this.areaType = type;
-            this.areaName = name;
-            console.log('mapIn', type, name);
-
-            if (type === 'district') {
-                this.selectDistrict(name);
-                this.activeSubdistrict = null;
-                this.hoveredSubdistrict = null;
-            } else if (type === 'subdistrict') {
-                this.selectSubdistrict(name);
-
-            } else {
-                // type city
-                this.activeDistrict = null;
-                this.hoveredDistrict = null;
-                this.activeSubdistrict = null;
-                this.hoveredSubdistrict = null;
-            }
-
-            const zoomData = this.getZoomData(type, name);
+            // zoom to the new location
+            const zoomData = this.getZoomData('city');
             this.zoomToSelectedArea(zoomData.latLngBound);
         });
     },
@@ -327,6 +384,7 @@ export default {
         this.areaCity = this.getCityPolygonList();
         this.areaDistrict = this.getDistrictPolygonList();
         this.areaSubdistrict = this.getSubdistrictPolygonList();
+        this.areaPostcode = this.getPostcodePolygonList();
 
         this.zoomToSelectedArea(this.areaCity.latLngBound);
 
@@ -341,9 +399,9 @@ export default {
 <template>
     <div>
         <MapAside class="ris-map-desktop-aside"
-            @mouse-handle="handleByNavigation($event.type, $event.name)"
+            @mouse-handle="hoverByNavigation($event.type, $event.name)"
             @click-handle="selectByNavigation($event.type, $event.name)"
-            />
+                />
 
         <div id="map-desktop-osm" class="ris-map ris-map__desktop"
                 >
@@ -366,7 +424,6 @@ export default {
                     :key="`${index}-${polygon.areaName}-city`"
                     :lat-lngs="polygon.latLngs"
                         />
-                <!--:fill-opacity="activeDistrict ? 0.01 : .2"-->
 
                 <!--district-->
                 <l-polygon
@@ -381,32 +438,53 @@ export default {
                     :fill-opacity="!activeSubdistrict && checkDistrict(polygon.areaName) ? .2 : .01"
                     :stroke="checkDistrict(polygon.areaName)"
 
-                    @mouseover="handleDistrict(polygon.areaName)"
-                    @mouseleave="handleDistrict(null)"
+                    @mouseover="hoverDistrict(polygon.areaName)"
+                    @mouseleave="hoverDistrict(null)"
 
                     @click="selectDistrict(polygon.areaName)"
-                />
+                        />
 
                 <!--subdistrict-->
-                <l-polygon
-                    v-if="activeDistrict"
+                <div v-if="activeDistrict">
+                    <l-polygon
+                        :color="checkSubdistrict(polygon.areaName) ? primaryColor : secondaryColor"
 
-                    :color="checkSubdistrict(polygon.areaName) ? primaryColor : secondaryColor"
+                        :fill-color="fillColor"
+                        :weight="weightPolygon"
+                        v-for="(polygon, index) in subdistrictList"
+                        :key="`${index}-${polygon.areaName}-subdistrict`"
+                        :lat-lngs="polygon.latLngs"
 
-                    :fill-color="fillColor"
-                    :weight="weightPolygon"
-                    v-for="(polygon, index) in subdistrictList"
-                    :key="`${index}-${polygon.areaName}-subdistrict`"
-                    :lat-lngs="polygon.latLngs"
+                        :fill-opacity="checkSubdistrict(polygon.areaName) ? .2 : .01"
+                        :stroke="checkSubdistrict(polygon.areaName)"
 
-                    :fill-opacity="checkSubdistrict(polygon.areaName) ? .2 : .01"
-                    :stroke="checkSubdistrict(polygon.areaName)"
+                        @mouseover="hoverSubdistrict(polygon.areaName)"
+                        @mouseleave="hoverSubdistrict(null)"
 
-                    @mouseover="handleSubdistrict(polygon.areaName)"
-                    @mouseleave="handleSubdistrict(null)"
+                        @click="selectSubdistrict(polygon.areaName)"
+                            />
+                </div>
 
-                    @click="selectSubdistrict(polygon.areaName)"
-                />
+                <!--postcode-->
+                <div v-if="activeSubdistrict">
+                    <l-polygon
+                        :color="checkPostcode(polygon.areaName) ? primaryColor : secondaryColor"
+
+                        :fill-color="fillColor"
+                        :weight="weightPolygon"
+                        v-for="(polygon, index) in postcodeList"
+                        :key="`${index}-${polygon.areaName}-postcode`"
+                        :lat-lngs="polygon.latLngs"
+
+                        :fill-opacity="checkPostcode(polygon.areaName) ? .2 : .01"
+                        :stroke="checkPostcode(polygon.areaName)"
+
+                        @mouseover="hoverPostcode(polygon.areaName)"
+                        @mouseleave="hoverPostcode(null)"
+
+                        @click="selectPostcode(polygon.areaName)"
+                            />
+                </div>
 
 
                 <!--<l-marker

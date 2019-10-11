@@ -1,0 +1,103 @@
+{
+    "features": [
+        {
+            "attributes": {
+                "NAME": "Nippes"
+            },
+            "geometry": {
+                "rings": [
+                    50.971578,
+                    6.957353
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Rodenkirchen"
+            },
+            "geometry": {
+                "rings": [
+                    50.890075,
+                    6.967055
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Ehrenfeld"
+            },
+            "geometry": {
+                "rings": [
+                    50.963414,
+                    6.897050
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Lindenthal"
+            },
+            "geometry": {
+                "rings": [
+                    50.936124,
+                    6.845074
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Porz"
+            },
+            "geometry": {
+                "rings": [
+                    50.885638,
+                    7.061605
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Kalk"
+            },
+            "geometry": {
+                "rings": [
+                    50.937164,
+                    7.008535
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Mülheim"
+            },
+            "geometry": {
+                "rings": [
+                    50.958194,
+                    7.005672
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Innenstadt"
+            },
+            "geometry": {
+                "rings": [
+                    50.939688,
+                    6.955551
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NAME": "Chorweiler"
+            },
+            "geometry": {
+                "rings": [
+                    51.027890,
+                    6.873158
+                ]
+            }
+        }
+    ]
+}

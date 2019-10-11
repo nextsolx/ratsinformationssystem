@@ -5,11 +5,21 @@
 .leaflet-popup {
     &-content {
         margin: 0;
-        padding: 10px;
         text-align: center;
 
         &:hover {
             cursor: pointer;
+        }
+
+        &-wrapper {
+            padding: 0;
+        }
+
+        > div {
+            align-items: center;
+            display: flex;
+            justify-content: center;
+            padding: 10px 20px;
         }
     }
 

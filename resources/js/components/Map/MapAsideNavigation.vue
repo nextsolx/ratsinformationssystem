@@ -169,11 +169,6 @@ export default {
     },
     created () {
         this.getDistrictList();
-        /*Bus.$on('mapOut', (e) => {
-            if (e.value) {
-                this.buttonHandleInSide(e.value, false);
-            }
-        });*/
 
         Bus.$on('district-selected', areaName => {
             this.buttonHandleInSide(areaName, false);
@@ -181,9 +176,9 @@ export default {
         Bus.$on('subdistrict-selected', areaName => {
             this.buttonHandleInSide(areaName, false);
         });
-        /*Bus.$on('postcode-selected', areaName => {
+        Bus.$on('postcode-selected', areaName => {
             this.buttonHandleInSide(areaName, false);
-        });*/
+        });
     }
 };
 </script>

@@ -29,6 +29,10 @@
                 display: none;
             }
 
+            &_disable {
+                opacity: .5;
+            }
+
             .ris-i {
                 margin-right: $indent-s;
             }

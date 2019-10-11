@@ -1,0 +1,510 @@
+{
+    "features": [
+        {
+            "attributes": {
+                "NUMMER": "50667"
+            },
+            "geometry": {
+                "rings": [
+                    50.938690,
+                    6.954881
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NUMMER": "50668"
+            },
+            "geometry": {
+                "rings": [
+                    50.948425,
+                    6.962449
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NUMMER": "50670"
+            },
+            "geometry": {
+                "rings": [
+                    50.951101,
+                    6.949073
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NUMMER": "50672"
+            },
+            "geometry": {
+                "rings": [
+                    50.942539,
+                    6.935757
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NUMMER": "50674"
+            },
+            "geometry": {
+                "rings": [
+                    50.933693,
+                    6.934293
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NUMMER": "50676"
+            },
+            "geometry": {
+                "rings": [
+                    50.931255,
+                    6.952574
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NUMMER": "50677"
+            },
+            "geometry": {
+                "rings": [
+                    50.920736,
+                    6.949144
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NUMMER": "50678"
+            },
+            "geometry": {
+                "rings": [
+                    50.922463,
+                    6.962971
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NUMMER": "50968"
+            },
+            "geometry": {
+                "rings": [
+                    50.904106,
+                    6.964519
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NUMMER": "50825"
+            },
+            "geometry": {
+                "rings": [
+                    50.955076,
+                    6.912840
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NUMMER": "50827"
+            },
+            "geometry": {
+                "rings": [
+                    50.967377,
+                    6.894866
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NUMMER": "50739"
+            },
+            "geometry": {
+                "rings": [
+                    50.983173,
+                    6.916488
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NUMMER": "50765"
+            },
+            "geometry": {
+                "rings": [
+                    51.017625,
+                    6.864832
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NUMMER": "50829"
+            },
+            "geometry": {
+                "rings": [
+                    50.973192,
+                    6.860649
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NUMMER": "50933"
+            },
+            "geometry": {
+                "rings": [
+                    50.939503,
+                    6.877218
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NUMMER": "51109"
+            },
+            "geometry": {
+                "rings": [
+                    50.941458,
+                    7.077708
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NUMMER": "51065"
+            },
+            "geometry": {
+                "rings": [
+                    50.954606,
+                    7.010364
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NUMMER": "51063"
+            },
+            "geometry": {
+                "rings": [
+                    50.967151,
+                    7.003856
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NUMMER": "51067"
+            },
+            "geometry": {
+                "rings": [
+                    50.964619,
+                    7.043143
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NUMMER": "51069"
+            },
+            "geometry": {
+                "rings": [
+                    50.989070,
+                    7.057828
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NUMMER": "50679"
+            },
+            "geometry": {
+                "rings": [
+                    50.935884,
+                    6.976317
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NUMMER": "51061"
+            },
+            "geometry": {
+                "rings": [
+                    50.998562,
+                    7.005279
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NUMMER": "51467"
+            },
+            "geometry": {
+                "rings": [
+                    51.005016,
+                    7.081439
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NUMMER": "50823"
+            },
+            "geometry": {
+                "rings": [
+                    50.949212,
+                    6.924150
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NUMMER": "51107"
+            },
+            "geometry": {
+                "rings": [
+                    50.921778,
+                    7.069924
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NUMMER": "51145"
+            },
+            "geometry": {
+                "rings": [
+                    50.881148,
+                    7.078925
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NUMMER": "51147"
+            },
+            "geometry": {
+                "rings": [
+                    50.857705,
+                    7.105515
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NUMMER": "51149"
+            },
+            "geometry": {
+                "rings": [
+                    50.907351,
+                    7.042036
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NUMMER": "50767"
+            },
+            "geometry": {
+                "rings": [
+                    51.001870,
+                    6.885430
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NUMMER": "50769"
+            },
+            "geometry": {
+                "rings": [
+                    51.054663,
+                    6.859247
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NUMMER": "50997"
+            },
+            "geometry": {
+                "rings": [
+                    50.869556,
+                    6.950220
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NUMMER": "50996"
+            },
+            "geometry": {
+                "rings": [
+                    50.884329,
+                    6.985810
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NUMMER": "50999"
+            },
+            "geometry": {
+                "rings": [
+                    50.875292,
+                    7.021216
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NUMMER": "51103"
+            },
+            "geometry": {
+                "rings": [
+                    50.943307,
+                    7.017327
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NUMMER": "51105"
+            },
+            "geometry": {
+                "rings": [
+                    50.920297,
+                    6.992827
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NUMMER": "50858"
+            },
+            "geometry": {
+                "rings": [
+                    50.925235,
+                    6.854816
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NUMMER": "50935"
+            },
+            "geometry": {
+                "rings": [
+                    50.925225,
+                    6.890697
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NUMMER": "50937"
+            },
+            "geometry": {
+                "rings": [
+                    50.912581,
+                    6.913288
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NUMMER": "50939"
+            },
+            "geometry": {
+                "rings": [
+                    50.902702,
+                    6.922276
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NUMMER": "51143"
+            },
+            "geometry": {
+                "rings": [
+                    50.858867,
+                    7.037163
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NUMMER": "50931"
+            },
+            "geometry": {
+                "rings": [
+                    50.932538,
+                    6.917282
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NUMMER": "50737"
+            },
+            "geometry": {
+                "rings": [
+                    50.990925,
+                    6.930797
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NUMMER": "50859"
+            },
+            "geometry": {
+                "rings": [
+                    50.954800,
+                    6.830553
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NUMMER": "50735"
+            },
+            "geometry": {
+                "rings": [
+                    50.978332,
+                    6.972211
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NUMMER": "50733"
+            },
+            "geometry": {
+                "rings": [
+                    50.965799,
+                    6.952167
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "NUMMER": "50969"
+            },
+            "geometry": {
+                "rings": [
+                    50.907140,
+                    6.939053
+                ]
+            }
+        }
+    ]
+}

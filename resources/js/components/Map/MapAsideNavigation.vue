@@ -48,10 +48,10 @@ export default {
             this.navigationList = await location.getSubdistricts(this.district);
             this.loading = false;
         },
-        async getIndexesList() {
+        async getPostcodeList() {
             this.changeTitle(this.subDistrict + ' (Viertel)');
             this.subTitle = 'PLZ in diesem Viertel';
-            this.navigationList = await location.getIndexes(this.district, this.subDistrict);
+            this.navigationList = await location.getPostcodes(this.district, this.subDistrict);
             this.loading = false;
         },
         changeDirection (value) {
@@ -60,6 +60,7 @@ export default {
         buttonHandleInSide (value, bus = true) {
             this.menuIsActive = false;
             this.loading = true;
+
             switch (this.location) {
                 case 'city': {
                     this.district = value;
@@ -68,7 +69,8 @@ export default {
                         type: 'subdistrict'
                     });
                     this.location = 'district';
-                    if (bus) Bus.$emit('mapIn', { type: this.location, value });
+                    if (bus) Bus.$emit('select-district', value);
+
                     this.changeDirection(value);
                     this.getSubdistrictList();
                     break;
@@ -77,12 +79,13 @@ export default {
                     this.subDistrict = value;
                     this.breadcrumbsList.push({
                         label: value,
-                        type: 'index'
+                        type: 'postcode'
                     });
                     this.location = 'subdistrict';
-                    if (bus) Bus.$emit('mapIn', { type: this.location, value });
+                    if (bus) Bus.$emit('select-subdistrict', value);
+
                     this.changeDirection(value);
-                    this.getIndexesList();
+                    this.getPostcodeList();
                     break;
                 }
                 case 'subdistrict': {
@@ -91,8 +94,9 @@ export default {
                         label: value,
                         type: null
                     });
-                    this.location = 'index';
-                    if (bus) Bus.$emit('mapIn', { type: this.location, value });
+                    this.location = 'postcode';
+                    if (bus) Bus.$emit('select-postcode', value);
+
                     this.changeDirection(value);
                     this.subTitle = '';
                     this.navigationList = [];
@@ -104,18 +108,21 @@ export default {
         buttonHandleOutSide (event, flag) {
             this.menuIsActive = false;
             this.loading = true;
+
             if (!flag) this.crumbsHandle();
             switch (this.location) {
-                case 'index': {
+                case 'postcode': {
                     this.location = 'subdistrict';
-                    Bus.$emit('mapIn', { type: this.location, value: this.subDistrict });
+                    Bus.$emit('select-subdistrict', this.subDistrict);
+
                     this.changeDirection(this.subDistrict);
-                    this.getIndexesList();
+                    this.getPostcodeList();
                     break;
                 }
                 case 'subdistrict': {
                     this.location = 'district';
-                    Bus.$emit('mapIn', { type: this.location, value: this.district });
+                    Bus.$emit('select-district', this.district);
+
                     this.changeTitle(this.district + ' (Viertel)');
                     this.changeDirection(this.district);
                     this.getSubdistrictList();
@@ -123,13 +130,25 @@ export default {
                 }
                 case 'district': {
                     this.location = 'city';
-                    Bus.$emit('mapIn', { type: this.location, value: null });
+                    Bus.$emit('select-city');
+
                     this.changeTitle('Karte');
                     this.getDistrictList();
                     this.district = '';
                     this.changeDirection();
                     break;
                 }
+            }
+        },
+        getChildLocation () {
+            if (this.location === 'city') {
+                return 'district';
+            } else if (this.location === 'district') {
+                return 'subdistrict';
+            } else if (this.location === 'subdistrict') {
+                return 'postcode';
+            } else {
+                return null;
             }
         },
         crumbsHandle (value) {
@@ -150,10 +169,15 @@ export default {
     },
     created () {
         this.getDistrictList();
-        Bus.$on('mapOut', (e) => {
-            if (e.value) {
-                this.buttonHandleInSide(e.value, false);
-            }
+
+        Bus.$on('district-selected', areaName => {
+            this.buttonHandleInSide(areaName, false);
+        });
+        Bus.$on('subdistrict-selected', areaName => {
+            this.buttonHandleInSide(areaName, false);
+        });
+        Bus.$on('postcode-selected', areaName => {
+            this.buttonHandleInSide(areaName, false);
         });
     }
 };
@@ -161,12 +185,17 @@ export default {
 
 <template>
     <div>
-        <MapAsideBreadcrumbs :option-list="breadcrumbsList" @clickCrumbs="crumbsHandle" />
+        <MapAsideBreadcrumbs
+            :option-list="breadcrumbsList"
+            @clickCrumbs="crumbsHandle"
+                />
         <h1 class="ris-map-desktop-aside__heading">{{ title }}</h1>
         <button
             v-if="district"
             class="ris-map-desktop-aside__nav-btn"
-            @click="loading ? '' : buttonHandleOutSide()">
+            :class="{'ris-map-desktop-aside__nav-btn_disable': loading}"
+            @click="loading ? '' : buttonHandleOutSide()"
+                >
             <span class="ris-i ris-i_back ris-i_has-bg" />
             Zurück zur Bezirksübersicht
         </button>
@@ -174,7 +203,8 @@ export default {
         <transition name="fade-long">
             <nav class="ris-map-desktop-aside__nav"
                 v-if="!loading && navigationList.length"
-                v-outside="hide">
+                v-outside="hide"
+                    >
                 <ul class="ris-map-desktop-aside-list"
                     :class="{ isActive: menuIsActive }">
                     <li
@@ -182,7 +212,11 @@ export default {
                         v-for="element in navigationList"
                         :key="`${element}-${location}`"
                         @click="loading ? '' : buttonHandleInSide(element, true)">
-                        <button class="ris-map-desktop-aside-list__button">
+                        <button class="ris-map-desktop-aside-list__button"
+                            @mouseover="$emit('mouse-handle', { type: getChildLocation(), name: element})"
+                            @mouseleave="$emit('mouse-handle', { type: getChildLocation(), name: null})"
+                            @click="$emit('click-handle', { type: getChildLocation(), name: element})"
+                                >
                             {{ element }}
                             <span class="ris-i ris-i_add"/>
                         </button>

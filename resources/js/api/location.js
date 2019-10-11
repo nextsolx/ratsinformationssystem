@@ -3,12 +3,12 @@ const axios = require('axios');
 export default {
     getSubdistricts (district) {
         district = encodeURIComponent(district);
-        return axios.get(`/api/districts/${district}`).then(res => Object.keys(res.data));
+        return axios.get(`/api/districts?district=${district}`).then(res => res.data);
     },
     getPostcodes (district, subdist) {
         district = encodeURIComponent(district);
         subdist = encodeURIComponent(subdist);
-        return axios.get(`/api/districts/${district}/${subdist}`).then(res => res.data);
+        return axios.get(`/api/districts?district=${district}&subDistrict=${subdist}`).then(res => res.data);
     },
     getDistricts () {
         return axios.get('/api/districts/').then(res => res.data);

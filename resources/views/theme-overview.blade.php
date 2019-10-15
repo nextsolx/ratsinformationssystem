@@ -15,15 +15,6 @@
 
                     <div class="ris-action-box">
                         <collapse></collapse>
-                        <dropdown
-                            :id="'theme-dropdown'"
-                            label="Sortierung"
-                            :value="dropValue"
-                            :options="[
-                                {label: 'Einstellungsdatum', value: 'date'},
-                                {label: 'Fortschritt', value: 'progress'}
-                            ]"
-                        ></dropdown>
                     </div>
                 </section>
 

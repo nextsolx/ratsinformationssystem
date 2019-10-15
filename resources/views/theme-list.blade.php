@@ -12,9 +12,9 @@
             <div class="ris-theme-list__content ris-content ris-content_six-eight-eight">
                 <section class="ris-section-wrapper">
                     <h1 class="ris-headline">
-                        @if (url()->current() === route('progress-themes'))
+                        @if ($theme_type === 'updated')
                             Kürzlich aktualisiert
-                        @elseif (url()->current() === route('finished-themes'))
+                        @elseif ($theme_type === 'finished')
                             Kürzlich abgeschlossen
                         @else
                             Neue Themen
@@ -54,9 +54,9 @@
                 <section class="ris-section-wrapper ris-card-list ris-card-list__themes">
                     <theme-component-lazy
                         :theme-list-type="
-                            @if (url()->current() === route('progress-themes'))
+                            @if ($theme_type === 'updated')
                                 'updated'
-                            @elseif (url()->current() === route('finished-themes'))
+                            @elseif ($theme_type === 'finished')
                                 'finished'
                             @else
                                 'new'

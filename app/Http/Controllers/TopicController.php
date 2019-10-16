@@ -60,7 +60,7 @@ class TopicController extends Controller
         return new TopicWithData($paper);
     }
 
-    public function themen(Request $request)
+    public function themenOverview(Request $request)
     {
         $postalCode = $request->input('postalCode');
         $district = $request->input('district');
@@ -111,12 +111,29 @@ class TopicController extends Controller
         ]);
     }
 
-    public function newThemes(Request $request)
+    public function themen(Request $request)
     {
         $postalCode = $request->input('postalCode');
+
         $district = $request->input('district');
 
-        $paperQuery = Paper::with(Paper::$basicScope)->sort()->new();
+        $section=$request->input('section');
+
+        if($section === 'new'){
+            $paperQuery = Paper::with(Paper::$basicScope)->sort()->new();
+            $breadcrumbs = ['Neue Themen' => route('themes')];
+        }
+
+        if($section === 'updated'){
+            $paperQuery = Paper::with(Paper::$basicScope)->sort()->updated();
+            $breadcrumbs = ['Aktualisierte Themen' => route('themes')];
+        }
+
+        if($section === 'finished'){
+            $paperQuery = Paper::with(Paper::$basicScope)->sort()->finished();
+            $breadcrumbs = ['Abgeschlossene Themen' => route('themes')];
+        }
+
 
         if ($postalCode) {
             $paperQuery->whereHas('locations', function (Builder $query) use ($postalCode) {
@@ -134,85 +151,13 @@ class TopicController extends Controller
 
         return view('theme-list')->with([
             'theme_list' => $topics->data,
-            'theme_type' => 'new',
+            'theme_type' => $section,
             'district_list' => [
                 'Innenstadt', 'Rodenkirchen', 'Lindenthal', 'Ehrenfeld',
                 'Nippes',  'Chorweiler', 'Porz',  'Kalk',  'Mülheim'
             ],
             'links' => $topics->links,
-            'breadcrumbs' => [
-                'Neue Themen' => route('new-themes')
-            ]
-        ]);
-    }
-
-    public function progressThemes(Request $request)
-    {
-        $postalCode = $request->input('postalCode');
-        $district = $request->input('district');
-
-        $paperQuery = Paper::with(Paper::$basicScope)->sort()->updated();
-
-        if ($postalCode) {
-            $paperQuery->whereHas('locations', function (Builder $query) use ($postalCode) {
-                $query->where('postal_code', '=', $postalCode);
-            });
-        }
-
-        if ($district) {
-            $paperQuery->whereHas('locations', function (Builder $query) use ($district) {
-                $query->where('sub_locality', '=', $district);
-            });
-        }
-
-        $topics = TopicWithData::collection($paperQuery->paginate(15))->toResponse(request())->getData();
-
-        return view('theme-list')->with([
-            'theme_list' => $topics->data,
-            'theme_type' => 'updated',
-            'district_list' => [
-                'Innenstadt', 'Rodenkirchen', 'Lindenthal', 'Ehrenfeld',
-                'Nippes',  'Chorweiler', 'Porz',  'Kalk',  'Mülheim'
-            ],
-            'links' => $topics->links,
-            'breadcrumbs' => [
-                'Kürzlich aktualisiert' => route('progress-themes')
-            ]
-        ]);
-    }
-
-    public function finishedThemes(Request $request)
-    {
-        $postalCode = $request->input('postalCode');
-        $district = $request->input('district');
-
-        $paperQuery = Paper::with(Paper::$basicScope)->sort()->finished();
-
-        if ($postalCode) {
-            $paperQuery->whereHas('locations', function (Builder $query) use ($postalCode) {
-                $query->where('postal_code', '=', $postalCode);
-            });
-        }
-
-        if ($district) {
-            $paperQuery->whereHas('locations', function (Builder $query) use ($district) {
-                $query->where('sub_locality', '=', $district);
-            });
-        }
-
-        $topics = TopicWithData::collection($paperQuery->paginate(15))->toResponse(request())->getData();
-
-        return view('theme-list')->with([
-            'theme_list' => $topics->data,
-            'theme_type' => 'finished',
-            'district_list' => [
-                'Innenstadt', 'Rodenkirchen', 'Lindenthal', 'Ehrenfeld',
-                'Nippes',  'Chorweiler', 'Porz',  'Kalk',  'Mülheim'
-            ],
-            'links' => $topics->links,
-            'breadcrumbs' => [
-                'Kürzlich abgeschlossen' => route('finished-themes')
-            ]
+            'breadcrumbs' => $breadcrumbs,
         ]);
     }
 }

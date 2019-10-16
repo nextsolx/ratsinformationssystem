@@ -15,15 +15,6 @@
 
                     <div class="ris-action-box">
                         <collapse></collapse>
-                        <dropdown
-                            :id="'theme-dropdown'"
-                            label="Sortierung"
-                            :value="{label: 'Fortschritt', value: 'Fortschritt'}"
-                            :options="[
-                                {label: 'Einstellungsdatum', value: 'Einstellungsdatum'},
-                                {label: 'Fortschritt', value: 'Fortschritt'}
-                            ]"
-                        ></dropdown>
                     </div>
                 </section>
 
@@ -81,7 +72,7 @@
                             ['theme_list' => $topics_new, 'theme_type' => 'new', 'limit' => 3]
                         )
 
-                        <a href="{{ route('new-themes') }}" class="ris-link ris-link_button ris-link_right"
+                        <a href="{{ route('themes', 'section=new') }}" class="ris-link ris-link_button ris-link_right"
                             title="Mehr anzeigen"
                         >
                             Mehr anzeigen
@@ -101,7 +92,7 @@
                                 ['theme_list' => $topics_progress, 'theme_type' => 'updated', 'limit' => 3]
                             )
 
-                        <a href="{{ route('progress-themes') }}" class="ris-link ris-link_button ris-link_right"
+                        <a href="{{ route('themes', 'section=updated') }}" class="ris-link ris-link_button ris-link_right"
                             title="Mehr anzeigen"
                         >
                             Mehr anzeigen
@@ -121,7 +112,7 @@
                                 ['theme_list' => $topics_finished, 'theme_type' => 'finished', 'limit' => 3]
                             )
 
-                        <a href="{{ route('finished-themes') }}" class="ris-link ris-link_button ris-link_right"
+                        <a href="{{ route('themes', 'section=finished') }}" class="ris-link ris-link_button ris-link_right"
                             title="Mehr anzeigen"
                         >
                             Mehr anzeigen

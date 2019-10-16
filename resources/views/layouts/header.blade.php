@@ -44,9 +44,7 @@
                             <li>
                                 <a class="ris-nav__link
                                     @if (url()->current() === route('theme-overview')
-                                        or url()->current() === route('new-themes')
-                                        or url()->current() === route('progress-themes')
-                                        or url()->current() === route('finished-themes')
+                                        or url()->current() === route('themes')
                                     )
                                         ris-nav__link_active
                                     @endif"

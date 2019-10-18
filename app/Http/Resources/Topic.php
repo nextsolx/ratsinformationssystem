@@ -30,7 +30,7 @@ class Topic extends JsonResource
 //            'text' => $this->text(),
 //            'finished' => $this->isFinished(),
 //            'newTopic' => $this->isNew(),
-//            'location' => Location::collection($this->locations),
+            'location' => Location::collection($this->locations),
 //            'meetings' => Meeting::collection($this->meetings),
 //            'process' => Consultation::collection($this->consultations),
 //            'files' => File::collection($this->files),

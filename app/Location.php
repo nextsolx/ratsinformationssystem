@@ -40,7 +40,7 @@ class Location extends Model
     //Todo: Verify
     private function getPoint()
     {
-        return $this->geojson ? Arr::get($this->geojson, 'geometry.coordinates') : [];
+        return $this['geojson'] ? json_decode($this['geojson'])->geometry->coordinates: [];
     }
 
     public static function fallback()

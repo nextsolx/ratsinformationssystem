@@ -23,7 +23,7 @@ class Location extends JsonResource
             'streetAddress' => $this->street_address,
             'postalCode' => $this->postal_code,
             'city' => $this->locality,
-            'district' => $this->subLocality,
+            'district' => $this->sub_locality,
             'description' => $this->description,
             'geo' => $this->when($this->geojson, [$this->getLocationX(), $this->getLocationY()])
         ];

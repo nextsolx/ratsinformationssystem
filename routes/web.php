@@ -24,17 +24,11 @@ Route::group(['middleware' => 'under-construction'], function () {
     Route::get('/meeting/{id}', 'MeetingController@getMeeting')
         ->name('meeting');
 
-    Route::get('/themen-overview', 'TopicController@themen')
+    Route::get('/themen-overview', 'TopicController@themenOverview')
         ->name('theme-overview');
 
-    Route::get('/neue-themen', 'TopicController@newThemes')
-        ->name('new-themes');
-
-    Route::get('/aktualisiert-themen', 'TopicController@progressThemes')
-        ->name('progress-themes');
-
-    Route::get('/abgeschlossen-themen', 'TopicController@finishedThemes')
-        ->name('finished-themes');
+    Route::get('/themen', 'TopicController@themen')
+        ->name('themes');
 
     Route::get('/thema/{paper}', 'TopicController@topic')
         ->name('theme');

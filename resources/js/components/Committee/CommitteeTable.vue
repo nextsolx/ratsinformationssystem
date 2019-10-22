@@ -60,7 +60,6 @@ export default {
 
 <template>
     <div class="ris-table-list-wrapper">
-        <div />
         <section class="ris-section-wrapper ris-content_six-eight-eight">
             <h1 class="ris-table-list__headline ris-headline">Gremien</h1>
             <div class="ris-filter-wrapper">

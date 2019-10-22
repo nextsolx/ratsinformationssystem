@@ -34,33 +34,60 @@
                             Die 9 Stadtbezirke in Köln
                         </div>
                         <div>
-                            <button class="ris-button ris-button_secondary ris-button_has-shadow">
+                            <a href="{{ route('theme-overview', 'district=Innenstadt') }}"
+                                class="ris-link ris-button ris-button_secondary ris-button_has-shadow"
+                                title="Innenstadt"
+                            >
                                 Innenstadt
-                            </button>
-                            <button class="ris-button ris-button_secondary ris-button_has-shadow">
+                            </a>
+                            <a href="{{ route('theme-overview', 'district=Rodenkirchen') }}"
+                                class="ris-link ris-button ris-button_secondary ris-button_has-shadow"
+                                title="Rodenkirchen"
+                            >
                                 Rodenkirchen
-                            </button>
-                            <button class="ris-button ris-button_secondary ris-button_has-shadow">
+                            </a>
+                            <a href="{{ route('theme-overview', 'district=Lindenthal') }}"
+                                class="ris-link ris-button ris-button_secondary ris-button_has-shadow"
+                                title="Lindenthal"
+                            >
                                 Lindenthal
-                            </button>
-                            <button class="ris-button ris-button_secondary ris-button_has-shadow">
+                            </a>
+                            <a href="{{ route('theme-overview', 'district=Ehrenfeld') }}"
+                                class="ris-link ris-button ris-button_secondary ris-button_has-shadow"
+                                title="Ehrenfeld"
+                            >
                                 Ehrenfeld
-                            </button>
-                            <button class="ris-button ris-button_secondary ris-button_has-shadow">
+                            </a>
+                            <a href="{{ route('theme-overview', 'district=Nippes') }}"
+                                class="ris-link ris-button ris-button_secondary ris-button_has-shadow"
+                                title="Nippes"
+                            >
                                 Nippes
-                            </button>
-                            <button class="ris-button ris-button_secondary ris-button_has-shadow">
+                            </a>
+                            <a href="{{ route('theme-overview', 'district=Chorweiler') }}"
+                                class="ris-link ris-button ris-button_secondary ris-button_has-shadow"
+                                title="Chorweiler"
+                            >
                                 Chorweiler
-                            </button>
-                            <button class="ris-button ris-button_secondary ris-button_has-shadow">
+                            </a>
+                            <a href="{{ route('theme-overview', 'district=Porz') }}"
+                                class="ris-link ris-button ris-button_secondary ris-button_has-shadow"
+                                title="Porz"
+                            >
                                 Porz
-                            </button>
-                            <button class="ris-button ris-button_secondary ris-button_has-shadow">
+                            </a>
+                            <a href="{{ route('theme-overview', 'district=Kalk') }}"
+                                class="ris-link ris-button ris-button_secondary ris-button_has-shadow"
+                                title="Kalk"
+                            >
                                 Kalk
-                            </button>
-                            <button class="ris-button ris-button_secondary ris-button_has-shadow">
+                            </a>
+                            <a href="{{ route('theme-overview', 'district=Mülheim') }}"
+                                class="ris-link ris-button ris-button_secondary ris-button_has-shadow"
+                                title="Mülheim"
+                            >
                                 Mülheim
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </section>
@@ -145,8 +172,6 @@
                 </section>
             </div>
 
-            @include('layouts.footer')
-
         </div>
 
         <div class="ris-welcome__widget">
@@ -161,4 +186,7 @@
             </a>
         </div>
     </main>
+
+    @include('layouts.footer')
+
 @endsection

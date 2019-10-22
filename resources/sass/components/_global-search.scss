@@ -4,9 +4,11 @@ $header-height-mobi: 92px;
 
 .ris-global-search {
     $this: &;
-    width: 100%;
+
+    flex-grow: 1;
     align-self: center;
     position: relative;
+
     @include breakpoint($bp-mobile-max) {
         position: static;
     }

@@ -1,8 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-    @include('layouts.breadcrumbs')
     <main class="ris-main ris-people">
+
+        @include('layouts.breadcrumbs')
+
         <people-table></people-table>
     </main>
     @include('layouts.footer')

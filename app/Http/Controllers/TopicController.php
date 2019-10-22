@@ -42,6 +42,66 @@ class TopicController extends Controller
         return Topic::collection($paperQuery->paginate(15));
     }
 
+    // @todo --- progress() --- need to check and refactor
+    /**
+     * Get the in progress theme list
+     * Using for sorting by progress, via API
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     */
+    public function progress(Request $request)
+    {
+        $postalCode = $request->input('postalCode');
+        $district = $request->input('district');
+
+        $paperQuery = Paper::with(Paper::$basicScope);
+
+        if ($postalCode) {
+            $paperQuery->whereHas('locations', function (Builder $query) use ($postalCode) {
+                $query->where('postal_code', '=', $postalCode);
+            });
+        }
+
+        if ($district) {
+            $paperQuery->whereHas('locations', function (Builder $query) use ($district) {
+                $query->where('sub_locality', '=', $district);
+            });
+        }
+
+        return TopicWithData::collection($paperQuery->sort()->updated()->paginate(100));
+    }
+
+    // @todo --- new() --- need to check and refactor
+    /**
+     * Get the new theme list
+     * Using for sorting by date, via API
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     */
+    public function new(Request $request)
+    {
+        $postalCode = $request->input('postalCode');
+        $district = $request->input('district');
+
+        $paperQuery = Paper::with(Paper::$basicScope);
+
+        if ($postalCode) {
+            $paperQuery->whereHas('locations', function (Builder $query) use ($postalCode) {
+                $query->where('postal_code', '=', $postalCode);
+            });
+        }
+
+        if ($district) {
+            $paperQuery->whereHas('locations', function (Builder $query) use ($district) {
+                $query->where('sub_locality', '=', $district);
+            });
+        }
+
+        return TopicWithData::collection($paperQuery->sort()->new()->paginate(100));
+    }
+
     public function topic(Request $request, Paper $paper)
     {
         $topic = (new TopicWithData($paper))->toResponse(request())->getData()->data;
@@ -64,6 +124,7 @@ class TopicController extends Controller
     {
         $postalCode = $request->input('postalCode');
         $district = $request->input('district');
+        $topicTitle = '';
 
         $paperQuery = Paper::with(Paper::$basicScope);
 
@@ -71,12 +132,14 @@ class TopicController extends Controller
             $paperQuery->whereHas('locations', function (Builder $query) use ($postalCode) {
                 $query->where('postal_code', '=', $postalCode);
             });
+            $topicTitle = $postalCode;
         }
 
         if ($district) {
             $paperQuery->whereHas('locations', function (Builder $query) use ($district) {
                 $query->where('sub_locality', '=', $district);
             });
+            $topicTitle = $district;
         }
 
         $topics = TopicWithData::collection(
@@ -91,15 +154,16 @@ class TopicController extends Controller
             Paper::with(Paper::$basicScope)->sort()->finished()->paginate(3)
         )->toResponse(request())->getData();
 
-        $prograss = TopicWithData::collection(
+        $progress = TopicWithData::collection(
             Paper::with(Paper::$basicScope)->sort()->updated()->paginate(3)
         )->toResponse(request())->getData();
 
         return view('theme-overview')->with([
             'topics_top' => $topics->data,
             'topics_new' => $new->data,
-            'topics_progress' => $prograss->data,
+            'topics_progress' => $progress->data,
             'topics_finished' => $finished->data,
+            'topic_title' => $topicTitle,
             'district_list' => [
                 'Innenstadt', 'Rodenkirchen', 'Lindenthal', 'Ehrenfeld',
                 'Nippes',  'Chorweiler', 'Porz',  'Kalk',  'Mülheim'
@@ -116,22 +180,26 @@ class TopicController extends Controller
         $postalCode = $request->input('postalCode');
 
         $district = $request->input('district');
+        $topicTitle = '';
 
         $section=$request->input('section');
 
         if($section === 'new'){
             $paperQuery = Paper::with(Paper::$basicScope)->sort()->new();
             $breadcrumbs = ['Neue Themen' => route('themes')];
+            $topicTitle = 'Neue Themen';
         }
 
         if($section === 'updated'){
             $paperQuery = Paper::with(Paper::$basicScope)->sort()->updated();
             $breadcrumbs = ['Aktualisierte Themen' => route('themes')];
+            $topicTitle = 'Kürzlich aktualisiert';
         }
 
         if($section === 'finished'){
             $paperQuery = Paper::with(Paper::$basicScope)->sort()->finished();
             $breadcrumbs = ['Abgeschlossene Themen' => route('themes')];
+            $topicTitle = 'Kürzlich abgeschlossen';
         }
 
 
@@ -139,12 +207,14 @@ class TopicController extends Controller
             $paperQuery->whereHas('locations', function (Builder $query) use ($postalCode) {
                 $query->where('postal_code', '=', $postalCode);
             });
+            $topicTitle .= ' für die ' . $postalCode;
         }
 
         if ($district) {
             $paperQuery->whereHas('locations', function (Builder $query) use ($district) {
                 $query->where('sub_locality', '=', $district);
             });
+            $topicTitle .= ' für die ' . $district;
         }
 
         $topics = TopicWithData::collection($paperQuery->paginate(15))->toResponse(request())->getData();
@@ -152,6 +222,7 @@ class TopicController extends Controller
         return view('theme-list')->with([
             'theme_list' => $topics->data,
             'theme_type' => $section,
+            'topic_title' => $topicTitle,
             'district_list' => [
                 'Innenstadt', 'Rodenkirchen', 'Lindenthal', 'Ehrenfeld',
                 'Nippes',  'Chorweiler', 'Porz',  'Kalk',  'Mülheim'

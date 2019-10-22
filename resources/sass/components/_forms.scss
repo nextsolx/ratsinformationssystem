@@ -102,11 +102,12 @@
         outline: none;
         padding: 0;
         position: absolute;
+        top: 0;
         width: 40px;
 
         .ris-i {
+            font-size: $fs-xl;
             pointer-events: none;
-            font-size: 18px;
         }
     }
 

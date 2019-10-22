@@ -10,10 +10,11 @@
 }
 
 .ris-main {
-    min-height: calc(100vh - #{$header-height} - #{$breadcrumbs-height} - #{$footer-height});
+    min-height: calc(100vh - #{$header-height} - #{$footer-height});
+    z-index: 2;
 
     @include breakpoint($bp-mobile-max) {
-        min-height: calc(100vh - #{$header-height} - #{$breadcrumbs-height} - #{$footer-height--mob});
+        min-height: calc(100vh - #{$header-height-mobile} - #{$footer-height-mobile});
     }
 }
 

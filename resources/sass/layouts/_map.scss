@@ -1,28 +1,32 @@
-$breadcrumbs-height-mod: 165px;
+$breadcrumbs-height-mob: 165px;
 $header-height-mob: 175px;
 $aside-width: 320px;
 
 .ris-map {
-    z-index: 1;
     display: flex;
     width: 100%;
+    z-index: 1;
 
     &-desktop {
         display: flex;
         width: 100%;
+
         @include breakpoint($bp-mobile-max) {
             display: block;
         }
     }
+
     &__desktop {
         width: calc(100% - #{$aside-width});
+
         @include breakpoint($bp-desktop-max) {
             width: 100%;
             height: calc(100vh - #{$header-height-mob});
         }
+
         &.fullHeight {
             @include breakpoint($bp-desktop-max) {
-                height: calc(100vh - #{$breadcrumbs-height-mod});
+                height: calc(100vh - #{$breadcrumbs-height-mob});
             }
         }
     }
@@ -32,5 +36,4 @@ $aside-width: 320px;
             display: none;
         }
     }
-
 }

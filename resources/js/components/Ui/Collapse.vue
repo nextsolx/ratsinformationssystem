@@ -53,7 +53,7 @@ export default {
         if (subdistrict) {
             this.activeElement = subdistrict;
             this.optionType = 'index';
-            this.optionList = await location.getIndexes(district, subdistrict);
+            this.optionList = await location.getPostcodes(district, subdistrict);
             return;
         }
         if (district) {

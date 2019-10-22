@@ -18,6 +18,8 @@
 
         &:last-child {
             border-bottom: 0;
+            margin-bottom: 0;
+            padding-bottom: 0;
         }
 
         .ris-title {
@@ -91,6 +93,7 @@
             }
 
             @include breakpoint($bp-tablet-min) {
+                overflow: hidden;
                 width: 120px;
 
                 &:not(:last-child) {
@@ -161,11 +164,16 @@
         }
 
         .ris-button {
+            color: $c-gray2;
             font-weight: 500;
             margin-bottom: $indent-s;
             margin-right: $indent-s;
             min-width: auto;
             padding: $indent-s $indent-sm;
+
+            &:hover {
+                color: $c-gray2;
+            }
         }
     }
 
@@ -175,13 +183,7 @@
         justify-content: center;
         opacity: .8;
         text-decoration: none;
-        z-index: -1;
-
-        &:hover {
-            .ris-button {
-                opacity: .7;
-            }
-        }
+        z-index: 1;
 
         @include breakpoint($bp-mobile-max) {
             border-radius: $b-radius-primary;
@@ -221,6 +223,12 @@
                 right: 0;
                 top: 0;
                 width: $width-aside-320;
+            }
+        }
+
+        &:hover {
+            .ris-button {
+                opacity: .7;
             }
         }
 

@@ -1,8 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-    @include('layouts.breadcrumbs')
     <main class="ris-main ris-committee-list">
+
+        @include('layouts.breadcrumbs')
+
         <committee-table
             :committees="{{ json_encode($committees) }}"
         ></committee-table>

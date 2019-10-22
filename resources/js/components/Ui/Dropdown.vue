@@ -30,11 +30,25 @@ export default {
             type: Boolean,
             default: false,
         },
+        openOnNewTab: {
+            type: Boolean,
+            default: false
+        },
+        tabUrl: {
+            type: String,
+            default: ''
+        }
     },
     methods: {
         setValue(e) {
             const value = this.options.find(el => el.label === e.target.value);
-            this.$emit('change', value);
+            if (this.openOnNewTab) {
+                if (this.tabUrl && value && value.value) {
+                    document.location.href = `${this.tabUrl}=${value.value}`;
+                }
+            } else {
+                this.$emit('change', value);
+            }
         },
     },
 };

@@ -1,12 +1,14 @@
 .ris-footer {
-    margin-top: auto;
+    background-color: $c-white;
     padding-top: 100px;
     position: relative;
+    z-index: 4;
 
     &__back-to-top {
         background-color: $c-white;
         border: 0;
         border-radius: 50%;
+        bottom: 12px;
         box-shadow: 0 2px 12px 0 $c-box-shadow2;
         cursor: pointer;
         display: inline-flex;
@@ -14,7 +16,6 @@
         padding: 0;
         position: fixed;
         right: 12px;
-        bottom: 12px;
 
         .ris-i {
             padding: 24px;

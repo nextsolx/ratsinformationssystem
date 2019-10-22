@@ -5,17 +5,13 @@
 
         @include('layouts.breadcrumbs')
 
-        <theme-list inline-template>
-
             <div class="ris-theme-list__content ris-content ris-content_six-eight-eight">
                 <section class="ris-section-wrapper">
                     <h1 class="ris-headline">
-                        @if ($theme_type === 'updated')
-                            Kürzlich aktualisiert
-                        @elseif ($theme_type === 'finished')
-                            Kürzlich abgeschlossen
+                        @if (!empty($topic_title))
+                            {{ $topic_title }}
                         @else
-                            Neue Themen
+                            Themen
                         @endif
                     </h1>
 
@@ -24,25 +20,29 @@
                         <dropdown
                             :id="'theme-dropdown'"
                             label="Sortierung"
-                            :value="dropValue"
+                            :value="@if ($theme_type === 'updated')
+                                {label: 'Fortschritt', value: 'updated'}
+                            @elseif ($theme_type === 'finished')
+                                {label: 'Abgeschlossen', value: 'finished'}
+                            @else
+                                {label: 'Einstellungsdatum', value: 'new'}
+                            @endif"
                             :options="[
-                                {label: 'Einstellungsdatum', value: 'date'},
-                                {label: 'Fortschritt', value: 'progress'}
+                                {label: 'Einstellungsdatum', value: 'new'},
+                                {label: 'Fortschritt', value: 'updated'},
+                                {label: 'Abgeschlossen', value: 'finished'}
                             ]"
-                            @change="changeThemeList"
+                            :open-on-new-tab="true"
+                            :tab-url="'/themen?section'"
                         ></dropdown>
                     </div>
                 </section>
 
                 @if (!empty($theme_list))
-                    <section class="ris-section-wrapper ris-card-list ris-card-list__themes"
-                        v-if="themeSortedList.length === 0"
-                    >
-
+                    <section class="ris-section-wrapper ris-card-list ris-card-list__themes">
                         @include('components.theme',
                             ['theme_list' => $theme_list, 'theme_type' => $theme_type]
                         )
-
                     </section>
                 @else
                     <section class="ris-section-wrapper ris-card-list ris-card-list__themes">
@@ -65,9 +65,9 @@
                     </theme-component-lazy>
                 </section>
             </div>
-        </theme-list>
-
-        @include('layouts.footer')
 
     </main>
+
+    @include('layouts.footer')
+
 @endsection

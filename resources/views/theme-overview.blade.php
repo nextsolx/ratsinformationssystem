@@ -10,7 +10,11 @@
             <div class="ris-theme-overview__content ris-content ris-content_six-eight-eight">
                 <section class="ris-section-wrapper">
                     <h1 class="ris-headline">
-                        Themen
+                        @if (!empty($topic_title))
+                            Themen für die {{ $topic_title }}
+                        @else
+                            Themen
+                        @endif
                     </h1>
 
                     <div class="ris-action-box">
@@ -127,7 +131,8 @@
 
         </theme-overview>
 
-        @include('layouts.footer')
-
     </main>
+
+    @include('layouts.footer')
+
 @endsection

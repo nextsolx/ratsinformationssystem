@@ -45,7 +45,19 @@ export default {
         async getSubdistrictList () {
             this.changeTitle(this.district + ' (Bezirk)');
             this.subTitle = 'Viertel in diesem Bezirk';
-            this.navigationList = await location.getSubdistricts(this.district);
+
+            let tmpSubdistrictList = await location.getSubdistricts(this.district),
+                tmpSubdistrictPostcodeList = [];
+            this.navigationList = Object.keys(tmpSubdistrictList);
+            for (let subdistrict in tmpSubdistrictList) {
+                tmpSubdistrictList[subdistrict].map(postcode => {
+                    if (!tmpSubdistrictPostcodeList.includes(postcode)) {
+                        tmpSubdistrictPostcodeList.push(postcode);
+                    }
+                });
+            }
+            this.$emit('theme-all-district-postcode-list', tmpSubdistrictPostcodeList);
+
             this.loading = false;
         },
         async getPostcodeList() {
@@ -102,6 +114,9 @@ export default {
                     this.navigationList = [];
                     this.loading = false;
                     break;
+                }
+                case 'postcode': {
+                    this.loading = false;
                 }
             }
         },

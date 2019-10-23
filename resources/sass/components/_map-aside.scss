@@ -160,6 +160,7 @@
             border: 2px solid transparent;
             border-radius: $b-radius-primary;
             box-shadow: 0 1px 6px 0 $c-box-shadow2;
+
             @include breakpoint($bp-desktop-max) {
                 margin: 0 $indent-s 0 0;
                 max-width: 150px;
@@ -170,6 +171,7 @@
                     margin-left: $indent-s;
                 }
             }
+
             &:hover {
                 border-color: $c-gray;
                 @include breakpoint($bp-desktop-max){
@@ -178,6 +180,11 @@
                         font-weight: bold;
                     }
                 }
+            }
+
+            &.ris-loading-handle {
+                padding: 0;
+                box-shadow: none;
             }
         }
         &__link {

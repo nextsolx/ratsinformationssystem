@@ -35,13 +35,42 @@ export default {
                 iconUrl: './img/map-pin-white.svg',
                 iconSize: [48, 55],
                 iconAnchor: [24, 55],
-                popupAnchor: [0, -30]
+                popupAnchor: [0, -30],
+                className: 'ris-marker'
             }),
             iconActive: L.icon({
                 iconUrl: './img/map-pin-red.svg',
                 iconSize: [48, 55],
                 iconAnchor: [24, 55],
                 popupAnchor: [0, -30]
+            }),
+            iconSubdistrict: L.icon({
+                iconUrl: './img/map-pin-white.svg',
+                iconSize: [48, 55],
+                iconAnchor: [24, 55],
+                popupAnchor: [0, -30],
+                className: 'ris-marker__subdistrict'
+            }),
+            iconSubdistrictActive: L.icon({
+                iconUrl: './img/map-pin-red.svg',
+                iconSize: [48, 55],
+                iconAnchor: [24, 55],
+                popupAnchor: [0, -30],
+                className: 'ris-marker__subdistrict ris-marker__subdistrict_active'
+            }),
+            iconDistrict: L.icon({
+                iconUrl: './img/map-pin-white.svg',
+                iconSize: [48, 55],
+                iconAnchor: [24, 55],
+                popupAnchor: [0, -30],
+                className: 'ris-marker__district'
+            }),
+            iconDistrictActive: L.icon({
+                iconUrl: './img/map-pin-red.svg',
+                iconSize: [48, 55],
+                iconAnchor: [24, 55],
+                popupAnchor: [0, -30],
+                className: 'ris-marker__district ris-marker__district_active'
             }),
             primaryColor: '#e1151b',
             secondaryColor: '#8c8c8c',
@@ -59,6 +88,8 @@ export default {
             activePostcode: null,
             hoveredPostcode: null,
             subdistrictPostcodeList: [],
+            themePostcodeList: [],
+            themeAllDistrictPostcodeList: [],
         };
     },
     computed: {
@@ -92,18 +123,30 @@ export default {
         },
         postcodeList() {
             if (this.activePostcode) {
-                return this.areaPostcode.polygonList.filter(sub => sub.areaName === this.activePostcode);
-            } else if (this.subdistrictPostcodeList && this.subdistrictPostcodeList.length > 0) {
-                return this.areaPostcode.polygonList.filter(sub => this.subdistrictPostcodeList.includes(+sub.areaName));
+                return this.areaPostcode.polygonList.filter(postcode =>
+                    +postcode.areaName === +this.activePostcode
+                );
+            } else if (this.activeSubdistrict) {
+                return this.areaPostcode.polygonList.filter(subdistrict =>
+                    this.subdistrictPostcodeList.includes(+subdistrict.areaName) && this.themePostcodeList.includes(subdistrict.areaName)
+                );
             } else {
                 return this.areaPostcode.polygonList;
             }
         },
         postcodeMarkerList() {
             if (this.activePostcode) {
-                return this.areaPostcode.markerList.filter(sub => sub.areaName === this.activePostcode);
-            } else if (this.subdistrictPostcodeList && this.subdistrictPostcodeList.length > 0) {
-                return this.areaPostcode.markerList.filter(sub => this.subdistrictPostcodeList.includes(+sub.areaName));
+                return this.areaPostcode.markerList.filter(postcode =>
+                    +postcode.areaName === +this.activePostcode
+                );
+            } else if (this.activeSubdistrict) {
+                return this.areaPostcode.markerList.filter(subdistrict =>
+                    this.themePostcodeList.includes(subdistrict.areaName) && this.subdistrictPostcodeList.includes(+subdistrict.areaName)
+                );
+            } else if (this.activeDistrict) {
+                return this.areaPostcode.markerList.filter(district =>
+                    this.themePostcodeList.includes(district.areaName) && this.themeAllDistrictPostcodeList.includes(+district.areaName)
+                );
             } else {
                 return this.areaPostcode.markerList;
             }
@@ -376,15 +419,17 @@ export default {
             return areaName;
         },
         selectDistrict(areaName) {
-            areaName = this.areaNameNormalize(areaName);
-            this.activeDistrict = areaName;
+            if (!this.activeSubdistrict) {
+                areaName = this.areaNameNormalize(areaName);
+                this.activeDistrict = areaName;
 
-            // zoom to the new location
-            const zoomData = this.getZoomData('district', areaName);
-            this.zoomToSelectedArea(zoomData.latLngBound);
+                // zoom to the new location
+                const zoomData = this.getZoomData('district', areaName);
+                this.zoomToSelectedArea(zoomData.latLngBound);
 
-            // update navigation
-            Bus.$emit('district-selected', areaName);
+                // update navigation
+                Bus.$emit('district-selected', areaName);
+            }
         },
         hoverDistrict(areaName) {
             areaName = this.areaNameNormalize(areaName);
@@ -395,18 +440,20 @@ export default {
             return areaName === this.activeDistrict || areaName === this.hoveredDistrict;
         },
         selectSubdistrict(areaName) {
-            areaName = this.areaNameNormalize(areaName);
-            this.activeSubdistrict = areaName;
+            if (!this.activeSubdistrict) {
+                areaName = this.areaNameNormalize(areaName);
+                this.activeSubdistrict = areaName;
 
-            // zoom to the new location
-            const zoomData = this.getZoomData('subdistrict', areaName);
-            this.zoomToSelectedArea(zoomData.latLngBound);
+                // zoom to the new location
+                const zoomData = this.getZoomData('subdistrict', areaName);
+                this.zoomToSelectedArea(zoomData.latLngBound);
 
-            // update navigation
-            Bus.$emit('subdistrict-selected', areaName);
+                // update navigation
+                Bus.$emit('subdistrict-selected', areaName);
 
-            // get child postcodes
-            this.getSubdistrictPostcodeList();
+                // get child postcodes
+                this.getSubdistrictPostcodeList();
+            }
         },
         hoverSubdistrict(areaName) {
             areaName = this.areaNameNormalize(areaName);
@@ -456,6 +503,14 @@ export default {
         async getSubdistrictPostcodeList() {
             this.subdistrictPostcodeList = await location.getPostcodes(this.activeDistrict, this.activeSubdistrict);
         },
+        setThemePostcodeList(postcodeList) {
+            this.themePostcodeList = [];
+            this.themePostcodeList = postcodeList;
+        },
+        setThemeAllDistrictPostcodeList(postcodeList) {
+            this.themeAllDistrictPostcodeList = [];
+            this.themeAllDistrictPostcodeList = postcodeList;
+        }
     },
     created() {
         // events for moving from postcode to city
@@ -521,9 +576,15 @@ export default {
         <MapAside class="ris-map-desktop-aside"
             @mouse-handle="hoverByNavigation($event.type, $event.name)"
             @click-handle="selectByNavigation($event.type, $event.name)"
+            @theme-postcode-list="setThemePostcodeList($event)"
+            @theme-all-district-postcode-list="setThemeAllDistrictPostcodeList($event)"
                 />
 
         <div id="map-desktop-osm" class="ris-map ris-map__desktop"
+            :class="[{ 'ris-map__city_active': !activeDistrict && !activeSubdistrict && !activePostcode },
+                     { 'ris-map__district_active': activeDistrict && !activeSubdistrict },
+                     { 'ris-map__subdistrict_active': activeSubdistrict && !activePostcode },
+                     { 'ris-map__postcode_active': activePostcode }]"
                 >
             <l-map ref="mapDesktopOsm"
                 :zoom="zoom" :zoom-snap="zoomSnap" :center="center"
@@ -604,7 +665,7 @@ export default {
                         v-for="(marker, index) in districtMarkerList"
                         :key="`${index}-${marker.areaName}-district-marker`"
                         :lat-lng="marker.latLngs"
-                        :icon="checkDistrict(marker.areaName) ? iconActive : icon"
+                        :icon="checkDistrict(marker.areaName) ? iconDistrictActive : iconDistrict"
                         @add="openPopup"
                             >
                         <l-popup
@@ -619,12 +680,12 @@ export default {
                 </div>
 
                 <!--subdistrict markers-->
-                <div v-if="activeDistrict && !activePostcode">
+                <div v-if="activeDistrict && !activeSubdistrict && !activePostcode">
                     <l-marker
                         v-for="(marker, index) in subdistrictMarkerList"
                         :key="`${index}-${marker.areaName}-subdistrict-marker`"
                         :lat-lng="marker.latLngs"
-                        :icon="checkSubdistrict(marker.areaName) ? iconActive : icon"
+                        :icon="checkSubdistrict(marker.areaName) ? iconSubdistrictActive : iconSubdistrict"
                         @add="openPopup"
                             >
                         <l-popup
@@ -639,7 +700,7 @@ export default {
                 </div>
 
                 <!--postcode markers-->
-                <div v-if="activeSubdistrict">
+                <div v-if="activeDistrict || activeSubdistrict || activePostcode">
                     <l-marker
                         v-for="(marker, index) in postcodeMarkerList"
                         :key="`${index}-${marker.areaName}-postcode-marker`"
@@ -648,6 +709,7 @@ export default {
                         @add="openPopup"
                             >
                         <l-popup
+                            v-if="activeSubdistrict"
                             :options="{ autoClose: false }"
                             @mouseover.native="hoverPostcode(marker.areaName)"
                             @mouseleave.native="hoverPostcode(null)"

@@ -7,6 +7,17 @@ $aside-width: 320px;
     width: 100%;
     z-index: 1;
 
+    .ris-marker__district,
+    .ris-marker__subdistrict {
+        display: none;
+    }
+
+    &__subdistrict_active {
+        .leaflet-marker-icon {
+            pointer-events: none;
+        }
+    }
+
     &-desktop {
         display: flex;
         width: 100%;

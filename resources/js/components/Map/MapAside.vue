@@ -16,7 +16,7 @@ export default {
     data () {
         return {
             subTitle: 'Aktualle Themen',
-            newsList: [],
+            themeList: [],
             totalThemes: 0,
             paginationPage: 1,
             loading: false,
@@ -49,13 +49,21 @@ export default {
         },
         putData (themes) {
             if (this.loading) {
-                this.newsList = [...this.newsList, ...themes.data];
+                this.themeList = [...this.themeList, ...themes.data];
                 this.totalThemes = themes.meta.total;
+
+                let topicPostcodeList = [];
+                themes.data.map(theme => {
+                    theme.location.map(themeLocation => {
+                        topicPostcodeList.push(themeLocation.postalCode);
+                    });
+                });
+                this.$emit('theme-postcode-list', topicPostcodeList);
             }
             this.loading = false;
         },
         changeDirection ({ type, value }) {
-            this.newsList = [];
+            this.themeList = [];
             this.totalThemes = 0;
             this.paginationPage = 1;
             switch (type) {
@@ -80,7 +88,7 @@ export default {
             }
         },
         lazyHandle () {
-            if (!this.loading && this.newsList.length) {
+            if (!this.loading && this.themeList.length) {
                 this.paginationPage++;
                 this.getThemes();
             }
@@ -104,6 +112,7 @@ export default {
             :call-navigation="callNavigation"
             @mouse-handle="$emit('mouse-handle', $event)"
             @click-handle="$emit('click-handle', $event)"
+            @theme-all-district-postcode-list="$emit('theme-all-district-postcode-list', $event)"
                 />
         <h2 class="ris-map-desktop-aside__subtitle">{{ subTitle }}</h2>
         <p class="ris-map-desktop-aside__caption">
@@ -112,14 +121,14 @@ export default {
         <transition-group tag="ul" name="fade" class="ris-map-desktop-aside-theme-list">
             <li
                 class="ris-map-desktop-aside-theme-list__item"
-                v-for="theme in newsList"
+                v-for="theme in themeList"
                 :key="theme.id">
                 <a
                     class="ris-map-desktop-aside-theme-list__link"
                     :href="'/thema/' + theme.id">
                     <img
                         class="ris-map-desktop-aside-theme-list__img"
-                        src="../../../img/theme-item-tile.jpg"
+                        src="/img/theme-item-tile.jpg"
                         alt="theme pleceholder">
                     <div class="ris-map-desktop-aside-theme-list__wrapper">
                         <h3 class="ris-map-desktop-aside-theme-list__heading">{{ theme.name }}</h3>
@@ -135,7 +144,7 @@ export default {
                     </div>
                 </a>
             </li>
-            <li class="ris-map-desktop-aside-theme-list__item" v-show="loading || newsList.length" key="item-control">
+            <li class="ris-map-desktop-aside-theme-list__item ris-loading-handle" v-show="loading || themeList.length" key="item-control">
                 <span class="ris-load-element" key="load-element" />
                 <content-loader v-if="loading" key="load-element-svg" :primary-color="'#dadce0'" :height="140">
                     <rect x="125" y="20" rx="4" ry="4" width="150" height="6" />

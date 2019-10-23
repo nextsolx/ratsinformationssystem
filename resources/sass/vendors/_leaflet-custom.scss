@@ -1,33 +1,35 @@
-.leaflet-pane {
-    font-family: "SanFrancisco Pro Display Bold";
-}
-
-.leaflet-popup {
-    &-content {
-        margin: 0;
-        text-align: center;
-
-        &:hover {
-            cursor: pointer;
-        }
-
-        &-wrapper {
-            padding: 0;
-        }
-
-        > div {
-            align-items: center;
-            display: flex;
-            justify-content: center;
-            padding: 10px 20px;
-        }
+.leaflet {
+    &-pane {
+        font-family: $ff-sf-pro-display-bold;
     }
 
-    &-close-button {
-        display: none;
-    }
+    &-popup {
+        &-content {
+            margin: 0;
+            text-align: center;
 
-    &-content-wrapper {
-        border-radius: 5px;
+            &:hover {
+                cursor: pointer;
+            }
+
+            &-wrapper {
+                padding: 0;
+            }
+
+            > div {
+                align-items: center;
+                display: flex;
+                justify-content: center;
+                padding: $indent-sm $indent-ml;
+            }
+        }
+
+        &-close-button {
+            display: none;
+        }
+
+        &-content-wrapper {
+            border-radius: $b-radius-primary;
+        }
     }
 }

@@ -601,7 +601,7 @@ export default {
                         />
 
                 <!--city-->
-                <!--<l-polygon
+                <l-polygon
                     v-show="!activeDistrict"
                     v-for="(polygon, index) in areaCity.polygonList"
                     :key="`${index}-${polygon.areaName}-city`"
@@ -610,7 +610,7 @@ export default {
                     :fill-color="fillColor"
                     :fill-opacity="activeDistrict ? 0.01 : .2"
                     :lat-lngs="polygon.latLngs"
-                        />-->
+                        />
 
                 <!--district polygon-->
                 <l-polygon

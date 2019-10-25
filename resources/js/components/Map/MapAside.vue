@@ -15,14 +15,17 @@ export default {
     ],
     data () {
         return {
-            subTitle: 'Aktualle Themen',
+            subTitle: 'Aktuelle Themen',
             themeList: [],
+            themeLocationList: [],
             totalThemes: 0,
             paginationPage: 1,
             loading: false,
             totalThemesText: 'Themen in ganz Köln',
             observableBlock: '.ris-load-element',
             district: '',
+            postcode: '',
+            location: 'city',
         };
     },
     props: {
@@ -52,20 +55,27 @@ export default {
                 this.themeList = [...this.themeList, ...themes.data];
                 this.totalThemes = themes.meta.total;
 
-                let topicPostcodeList = [];
-                themes.data.map(theme => {
-                    theme.location.map(themeLocation => {
-                        topicPostcodeList.push(themeLocation.postalCode);
+                themes.data.forEach(theme => {
+                    theme.location.forEach(themeLocation => {
+                        if (themeLocation.geo) {
+                            this.themeLocationList.push({
+                                'geo': themeLocation.geo,
+                                'postalCode': +themeLocation.postalCode
+                            });
+                        }
                     });
                 });
-                this.$emit('theme-postcode-list', topicPostcodeList);
+                this.$emit('theme-location-list', this.themeLocationList);
             }
             this.loading = false;
         },
         changeDirection ({ type, value }) {
             this.themeList = [];
+            this.themeLocationList = [];
             this.totalThemes = 0;
             this.paginationPage = 1;
+            this.location = type;
+
             switch (type) {
                 case 'city': {
                     this.subTitle = 'Aktuelle Themen';
@@ -73,24 +83,52 @@ export default {
                     this.getThemes();
                     break;
                 }
-                case 'postcode': {
-                    this.subTitle = 'Themen in dieser PLZ';
-                    this.totalThemesText = `Thema in ${value}`;
-                    this.getPostcodeThemes(value);
-                    break;
-                }
-                default: {
-                    if (type === 'district') this.district = value;
+                case 'district': {
+                    this.district = value;
                     this.subTitle = 'Themen in diesem Bezirk';
                     this.totalThemesText = `Thema in ${this.district} (Bezirk)`;
                     this.getDistrictThemes(this.district);
+                    break;
+                }
+                case 'subdistrict': {
+                    // for the subdistrict the data is the same like for the district and title will not be updated to subdistict
+                    this.subTitle = 'Themen in diesem Bezirk';
+                    this.totalThemesText = `Thema in ${this.district} (Bezirk)`;
+                    this.getDistrictThemes(this.district);
+                    break;
+                }
+                case 'postcode': {
+                    this.postcode = value;
+                    this.subTitle = 'Themen in dieser PLZ';
+                    this.totalThemesText = `Thema in ${this.postcode}`;
+                    this.getPostcodeThemes(this.postcode);
+                    break;
                 }
             }
         },
         lazyHandle () {
             if (!this.loading && this.themeList.length) {
                 this.paginationPage++;
-                this.getThemes();
+
+                switch (this.location) {
+                    case 'city': {
+                        this.getThemes();
+                        break;
+                    }
+                    case 'district': {
+                        this.getDistrictThemes(this.district);
+                        break;
+                    }
+                    case 'subdistrict': {
+                        // also get district themes in the subdistrict
+                        this.getDistrictThemes(this.district);
+                        break;
+                    }
+                    case 'postcode': {
+                        this.getPostcodeThemes(this.postcode);
+                        break;
+                    }
+                }
             }
         },
     },

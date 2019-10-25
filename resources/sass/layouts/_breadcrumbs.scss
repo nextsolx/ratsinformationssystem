@@ -14,12 +14,12 @@
     &-map {
         margin: 16px 0;
         width: 100%;
-        @include breakpoint($bp-desktop-max) {
+        @include breakpoint($bp-tablet-max) {
             margin: 0;
             padding: 16px 0 16px 16px;
         }
         &.hidden {
-            @include breakpoint($bp-desktop-max) {
+            @include breakpoint($bp-tablet-max) {
                 display: none;
             }
         }

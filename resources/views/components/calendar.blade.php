@@ -13,7 +13,7 @@
         </h2>
         <div class="ris-body-2 ris-card-list__calendar-date">
             <span class="ris-i ris-i_calendar-empty"></span>
-            {{ \Illuminate\Support\Carbon::parse($calendar->dateFrom)->format('l jS, h:i a') }}
+            {{ \Illuminate\Support\Carbon::parse($calendar->dateFrom)->isoFormat('LLLL')}}
         </div>
         @if ($calendar->location)
             <div class="ris-body-2 ris-card-list__calendar-place">

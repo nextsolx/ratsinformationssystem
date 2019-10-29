@@ -2,7 +2,6 @@ $bp-mobile-max: '(max-width: 767px)';
 $bp-tablet-min: '(min-width: 768px)';
 $bp-tablet-max: '(max-width: 1023px)';
 $bp-desktop-min: '(min-width: 1024px)';
-$bp-desktop-max: '(max-width: 1024px)';
 
 $header-height: 112px;
 $header-height-mobile: 88px;
@@ -11,6 +10,7 @@ $footer-height-mobile: 188px;
 
 $width-section-tablet: 688px;
 $width-section-desktop: 1012px;
-$width-aside-320: 320px;
+$aside-width: 320px;
+$aside-height-mobile: 106px;
 
 $width-interactive-tablet: 260px;

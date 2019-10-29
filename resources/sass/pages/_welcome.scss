@@ -34,7 +34,7 @@
     &__content {
         @include breakpoint($bp-tablet-min) {
             box-shadow: 8px 5px 6px 0 $c-box-shadow3;
-            flex-basis: calc(100% - #{$width-aside-320});
+            flex-basis: calc(100% - #{$aside-width});
             position: relative;
             z-index: 2;
 
@@ -46,7 +46,7 @@
 
     &__widget {
         @include breakpoint($bp-tablet-min) {
-            flex-basis: $width-aside-320;
+            flex-basis: $aside-width;
         }
     }
 
@@ -210,7 +210,7 @@
             height: 100%;
             position: fixed;
             top: 0;
-            width: $width-aside-320;
+            width: $aside-width;
 
             &__mobile {
                 display: none;
@@ -222,7 +222,7 @@
                 position: absolute;
                 right: 0;
                 top: 0;
-                width: $width-aside-320;
+                width: $aside-width;
             }
         }
 

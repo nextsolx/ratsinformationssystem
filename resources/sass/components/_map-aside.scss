@@ -1,16 +1,16 @@
 .ris-map-desktop-aside {
-    width: $width-aside-320;
+    width: $aside-width;
     padding: 0 $indent-m;
     height: calc(100vh - 112px);
     overflow-y: scroll;
-    @include breakpoint($bp-desktop-max) {
+    @include breakpoint($bp-tablet-max) {
         width: 100%;
         z-index: 100;
         padding: 0;
         height: auto;
     }
     &__nav {
-        @include breakpoint($bp-desktop-max) {
+        @include breakpoint($bp-tablet-max) {
             display: none;
         }
         &-btn {
@@ -25,7 +25,7 @@
             font-weight: bold;
             margin-bottom: $indent-ml;
             outline: none;
-            @include breakpoint($bp-desktop-max) {
+            @include breakpoint($bp-tablet-max) {
                 display: none;
             }
 
@@ -39,7 +39,7 @@
         }
     }
     &__heading {
-        @include breakpoint($bp-desktop-max) {
+        @include breakpoint($bp-tablet-max) {
             display: none;
         }
     }
@@ -47,7 +47,7 @@
     &__sub-heading {
         font-size: $fs-xll;
         margin-bottom: $indent-s;
-        @include breakpoint($bp-desktop-max) {
+        @include breakpoint($bp-tablet-max) {
             display: none;
         }
     }
@@ -125,13 +125,13 @@
     }
     &__subtitle {
         margin: $indent-ml 0 $indent-sm 0;
-        @include breakpoint($bp-desktop-max) {
+        @include breakpoint($bp-tablet-max) {
             display: none;
         }
     }
     &__caption {
         color: $c-gray8;
-        @include breakpoint($bp-desktop-max) {
+        @include breakpoint($bp-tablet-max) {
             display: none;
         }
     }
@@ -140,7 +140,7 @@
         padding: 0;
         font-size: $fs-l;
         $this: &;
-        @include breakpoint($bp-desktop-max) {
+        @include breakpoint($bp-tablet-max) {
             position: fixed;
             top: 100%;
             transform: translateY(-100%);
@@ -160,7 +160,8 @@
             border: 2px solid transparent;
             border-radius: $b-radius-primary;
             box-shadow: 0 1px 6px 0 $c-box-shadow2;
-            @include breakpoint($bp-desktop-max) {
+
+            @include breakpoint($bp-tablet-max) {
                 margin: 0 $indent-s 0 0;
                 max-width: 150px;
                 padding: $indent-s;
@@ -170,14 +171,20 @@
                     margin-left: $indent-s;
                 }
             }
+
             &:hover {
                 border-color: $c-gray;
-                @include breakpoint($bp-desktop-max){
+                @include breakpoint($bp-tablet-max){
                     #{$this}__heading,
                     #{$this}__btn {
                         font-weight: bold;
                     }
                 }
+            }
+
+            &.ris-loading-handle {
+                padding: 0;
+                box-shadow: none;
             }
         }
         &__link {
@@ -187,7 +194,7 @@
         }
         &__wrapper {
             width: 100%;
-            @include breakpoint($bp-desktop-max) {
+            @include breakpoint($bp-tablet-max) {
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
@@ -209,20 +216,20 @@
         }
         &__refer,
         &__time {
-            @include breakpoint($bp-desktop-max) {
+            @include breakpoint($bp-tablet-max) {
                 display: none;
             }
         }
         &__btn {
-            display: none;
-            color: $c-red2;
-            width: 100%;
-            min-width: auto;
-            white-space: nowrap;
             background: transparent;
-            padding: 0;
+            color: $c-red2;
+            display: none;
             font-weight: normal;
-            @include breakpoint($bp-desktop-max) {
+            min-width: auto;
+            padding: 0;
+            white-space: nowrap;
+
+            @include breakpoint($bp-tablet-max) {
                 display: block;
             }
         }
@@ -231,7 +238,7 @@
             width: 72px;
             margin-right: $indent-m;
             flex-shrink: 0;
-            @include breakpoint($bp-desktop-max) {
+            @include breakpoint($bp-tablet-max) {
                 display: none;
             }
         }
@@ -242,7 +249,7 @@
             hyphens: auto;
             font-size: $fs-l;
             word-break: break-word;
-            @include breakpoint($bp-desktop-max) {
+            @include breakpoint($bp-tablet-max) {
                 max-height: 36px;
                 text-overflow: ellipsis;
                 overflow: hidden;

@@ -124,6 +124,10 @@
                 &:not(:last-child) {
                     margin-bottom: $indent-l;
                 }
+
+                .ris-body-2 {
+                    flex-basis: 80%;
+                }
             }
         }
 

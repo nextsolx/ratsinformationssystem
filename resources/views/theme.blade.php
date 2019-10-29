@@ -90,7 +90,7 @@
                                 <div class="ris-process__wrapper">
                                     <div class="ris-caption">Beschlussvorlage {{ $topic->reference }}</div>
 
-                                    @if (isset($topic->files))
+                                    @if (isset($topic->files) and isset($topic->files[0]))
                                         <a href="{{ $topic->files[0]->accessUrl }}" class="ris-link ris-link_button ris-link_right"
                                             title="Beschlussvorlage öffnen"
                                         >

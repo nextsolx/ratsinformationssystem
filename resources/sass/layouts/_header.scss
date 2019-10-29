@@ -1,8 +1,5 @@
 .ris-header {
 
-    &.hidden {
-        display: none;
-    }
     @include breakpoint($bp-mobile-max) {
         align-items: center;
         box-shadow: 0 1px 6px 0 $c-box-shadow;
@@ -16,6 +13,12 @@
         font-size: 0;
         position: relative;
         z-index: 3;
+    }
+
+    &__mobile_hidden {
+        @include breakpoint($bp-tablet-max) {
+            display: none;
+        }
     }
 
     &__bottom {

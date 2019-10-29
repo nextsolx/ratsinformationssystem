@@ -30,7 +30,8 @@ export default {
             loading: true,
             title: 'Karte',
             subTitle: '',
-            breadcrumbsList: [{ label: 'Köln', type: 'district' }]
+            breadcrumbsList: [{ label: 'Köln', type: 'district' }],
+            titleNavigationBackButton: '',
         };
     },
     methods: {
@@ -45,7 +46,19 @@ export default {
         async getSubdistrictList () {
             this.changeTitle(this.district + ' (Bezirk)');
             this.subTitle = 'Viertel in diesem Bezirk';
-            this.navigationList = await location.getSubdistricts(this.district);
+
+            let tmpSubdistrictList = await location.getSubdistricts(this.district),
+                tmpSubdistrictPostcodeList = [];
+            this.navigationList = Object.keys(tmpSubdistrictList);
+            for (let subdistrict in tmpSubdistrictList) {
+                tmpSubdistrictList[subdistrict].forEach(postcode => {
+                    if (!tmpSubdistrictPostcodeList.includes(+postcode)) {
+                        tmpSubdistrictPostcodeList.push(+postcode);
+                    }
+                });
+            }
+            this.$emit('theme-all-district-postcode-list', tmpSubdistrictPostcodeList);
+
             this.loading = false;
         },
         async getPostcodeList() {
@@ -69,6 +82,7 @@ export default {
                         type: 'subdistrict'
                     });
                     this.location = 'district';
+                    this.titleNavigationBackButton = 'Zurück zur Bezirksübersicht';
                     if (bus) Bus.$emit('select-district', value);
 
                     this.changeDirection(value);
@@ -82,6 +96,7 @@ export default {
                         type: 'postcode'
                     });
                     this.location = 'subdistrict';
+                    this.titleNavigationBackButton = 'Zurück zur Viertelübersicht';
                     if (bus) Bus.$emit('select-subdistrict', value);
 
                     this.changeDirection(value);
@@ -95,6 +110,7 @@ export default {
                         type: null
                     });
                     this.location = 'postcode';
+                    this.titleNavigationBackButton = 'Zurück zur PLZ-Übersicht';
                     if (bus) Bus.$emit('select-postcode', value);
 
                     this.changeDirection(value);
@@ -102,6 +118,9 @@ export default {
                     this.navigationList = [];
                     this.loading = false;
                     break;
+                }
+                case 'postcode': {
+                    this.loading = false;
                 }
             }
         },
@@ -113,6 +132,7 @@ export default {
             switch (this.location) {
                 case 'postcode': {
                     this.location = 'subdistrict';
+                    this.titleNavigationBackButton = 'Zurück zur Viertelübersicht';
                     Bus.$emit('select-subdistrict', this.subDistrict);
 
                     this.changeDirection(this.subDistrict);
@@ -121,6 +141,7 @@ export default {
                 }
                 case 'subdistrict': {
                     this.location = 'district';
+                    this.titleNavigationBackButton = 'Zurück zur Bezirksübersicht';
                     Bus.$emit('select-district', this.district);
 
                     this.changeTitle(this.district + ' (Viertel)');
@@ -130,6 +151,7 @@ export default {
                 }
                 case 'district': {
                     this.location = 'city';
+                    this.titleNavigationBackButton = '';
                     Bus.$emit('select-city');
 
                     this.changeTitle('Karte');
@@ -191,13 +213,13 @@ export default {
                 />
         <h1 class="ris-map-desktop-aside__heading">{{ title }}</h1>
         <button
-            v-if="district"
+            v-show="location === 'district' || location === 'subdistrict' || location === 'postcode'"
             class="ris-map-desktop-aside__nav-btn"
             :class="{'ris-map-desktop-aside__nav-btn_disable': loading}"
             @click="loading ? '' : buttonHandleOutSide()"
                 >
             <span class="ris-i ris-i_back ris-i_has-bg" />
-            Zurück zur Bezirksübersicht
+            {{ titleNavigationBackButton }}
         </button>
         <h2 v-if="subTitle" class="ris-map-desktop-aside__sub-heading">{{ subTitle }}</h2>
         <transition name="fade-long">

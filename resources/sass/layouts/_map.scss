@@ -1,39 +1,49 @@
-$breadcrumbs-height-mob: 165px;
-$header-height-mob: 175px;
-$aside-width: 320px;
+$breadcrumbs-height-mobile: 56px;
 
 .ris-map {
     display: flex;
     width: 100%;
     z-index: 1;
 
+    .ris-marker__district,
+    .ris-marker__subdistrict,
+    .ris-marker__postcode {
+        display: none;
+    }
+
+    .ris-marker_active:hover {
+        .leaflet-marker-icon {
+            pointer-events: none;
+        }
+    }
+
     &-desktop {
         display: flex;
         width: 100%;
 
-        @include breakpoint($bp-mobile-max) {
+        @include breakpoint($bp-tablet-max) {
             display: block;
         }
     }
 
     &__desktop {
-        width: calc(100% - #{$aside-width});
-
-        @include breakpoint($bp-desktop-max) {
-            width: 100%;
-            height: calc(100vh - #{$header-height-mob});
+        @include breakpoint($bp-desktop-min) {
+            width: calc(100% - #{$aside-width});
         }
 
-        &.fullHeight {
-            @include breakpoint($bp-desktop-max) {
-                height: calc(100vh - #{$breadcrumbs-height-mob});
-            }
+        @include breakpoint($bp-tablet-max) {
+            width: 100%;
+            height: calc(100vh - #{$header-height} - #{$aside-height-mobile});
+        }
+
+        @include breakpoint($bp-mobile-max) {
+            height: calc(100vh - #{$header-height-mobile} - #{$aside-height-mobile});
         }
     }
 
-    @include breakpoint($bp-tablet-min) {
-        &-mobile {
-            display: none;
+    &__mobile_active-breadcrumbs {
+        @include breakpoint($bp-tablet-max) {
+            height: calc(100vh - #{$breadcrumbs-height-mobile} - #{$aside-height-mobile});
         }
     }
 }

@@ -15,19 +15,17 @@ export default {
     methods: {
         checkList () {
             if (this.isShowed) {
-                document.querySelector('.ris-header').classList.add('hidden');
-                document.querySelector('.ris-map__desktop').classList.add('fullHeight');
+                document.querySelector('.ris-header').classList.add('ris-header__mobile_hidden');
+                document.querySelector('.ris-map__desktop').classList.add('ris-map__mobile_active-breadcrumbs');
             } else {
-                document.querySelector('.ris-header').classList.remove('hidden');
-                document.querySelector('.ris-map__desktop').classList.remove('fullHeight');
+                document.querySelector('.ris-header').classList.remove('ris-header__mobile_hidden');
+                document.querySelector('.ris-map__desktop').classList.remove('ris-map__mobile_active-breadcrumbs');
             }
         }
     },
     watch: {
         optionList () {
-            if (window.innerWidth <= 1040) {
-                this.checkList();
-            }
+            this.checkList();
         }
     }
 };

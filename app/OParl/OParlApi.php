@@ -5,6 +5,7 @@ namespace App\OParl;
 use GuzzleHttp\Client;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class OParlApi implements \App\Contracts\OParlApi
@@ -30,7 +31,11 @@ class OParlApi implements \App\Contracts\OParlApi
 
         $urlConcat = Str::contains($endpoint, '?') ? '&' : '?';
 
-        $response = $this->client->request($method, sprintf('%s%spage=%s', $endpoint, $urlConcat , $page));
+        try {
+            $response = $this->client->request($method, sprintf('%s%spage=%s', $endpoint, $urlConcat , $page));
+        } catch (\Exception $exception) {
+            Log::error(get_class($exception) . ' threw ' . $exception->getMessage());
+        }
 
         $data = json_decode($response->getBody()->getContents(), true);
 

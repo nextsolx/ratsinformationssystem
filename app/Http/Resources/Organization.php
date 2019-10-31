@@ -22,7 +22,7 @@ class Organization extends JsonResource
             'id' => $this->id,
             'title' => $this->name,
             'shortName' => $this->shortName,
-            'info' => 'INFO',
+            'info' => '',
             'organizationType' => $this->organizationType,
             'classification' => $this->classification,
             'memberCount' => $this->peopleCount(),

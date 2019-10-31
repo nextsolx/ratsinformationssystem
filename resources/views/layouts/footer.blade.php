@@ -13,8 +13,10 @@
             </li>
         </ul>
         <button class="ris-footer__back-to-top"
-             @click="backToTop"
-            ><span class="ris-i ris-i_back"></span>
+            aria-label="Back to the top"
+            @click="backToTop"
+            >
+            <span class="ris-i ris-i_back"></span>
         </button>
         <div class="ris-footer__logo"></div>
     </footer>

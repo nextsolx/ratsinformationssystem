@@ -164,11 +164,15 @@ export default {
         <div
             class="ris-search ris-global-search-input"
             :class="{ 'focused': onFocus }">
-            <button @click="onFocus ? focusHandle(false) : focusHandle(true)" class="ris-search__button">
+            <button @click="onFocus ? focusHandle(false) : focusHandle(true)"
+                class="ris-search__button"
+                aria-label="Suche nach Site"
+                    >
                 <span v-if="onFocus" class="ris-i ris-i_back" />
                 <span v-else class="ris-i ris-i_search"/>
             </button>
             <input
+                aria-label="Site-Suchfeld"
                 type="search"
                 class="ris-search__input ris-global-search-input__item"
                 :class="{ 'focused': onFocus }"

@@ -1,6 +1,6 @@
 <ol class="ris-breadcrumbs">
     <li class="ris-breadcrumbs__item">
-        <a href="{{ route('welcome') }}" title="Stadt Koeln"
+        <a href="{{ route('welcome') }}" title="Stadt Koeln" aria-label="Stadt Koeln"
            class="ris-breadcrumbs__home-link ris-link"
         >
             <span class="ris-i ris-i_house"></span>

@@ -38,7 +38,7 @@
                         <ul class="ris-nav__link-wrapper">
                             <li>
                                 <a class="ris-nav__link @if (url()->current() === route('welcome')) ris-nav__link_active @endif"
-                                   href="/"
+                                    href="{{ route('welcome') }}" title="Stadt Koeln" aria-label="Stadt Koeln"
                                 >Start</a>
                             </li>
                             <li>

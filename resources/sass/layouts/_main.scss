@@ -33,7 +33,7 @@
         &_six-eight-eight {
             margin-left: auto;
             margin-right: auto;
-            width: $width-section-tablet;
+            width: $section-width-tablet;
 
             .ris-section-wrapper {
                 margin-left: 0;
@@ -45,7 +45,7 @@
     @include breakpoint($bp-desktop-min) {
         &_six-eight-eight {
             &#{$base-content}_has-widget {
-                width: $width-section-desktop;
+                width: $section-width-desktop;
             }
         }
     }

@@ -4,8 +4,9 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        <meta name="description" content="Die Startseite von SessionNet-B&uuml;rgerinfo liefert aktuelle Informationen f&uuml;r die &Ouml;ffentlichkeit. So kann z.B. auf einen Blick erfasst werden, wann Sitzungen stattfinden.">
 
-        <title>@yield('title', config('app.name'))</title>
+        <title>Informationssystem f&uuml;r B&uuml;rgerinnen und B&uuml;rger</title>
 
         <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}"/>
     </head>

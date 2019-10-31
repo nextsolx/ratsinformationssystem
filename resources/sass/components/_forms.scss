@@ -103,7 +103,7 @@
         padding: 0;
         position: absolute;
         top: 0;
-        width: 40px;
+        width: $button-min-width;
 
         .ris-i {
             font-size: $fs-xl;
@@ -121,7 +121,7 @@
         font-size: $fs-l;
         line-height: $lh-l;
         outline: none;
-        padding: $indent-s $indent-s $indent-s $indent-xl;
+        padding: $indent-s $indent-s $indent-s $indent-xll;
         text-overflow: ellipsis;
         width: 100%;
     }

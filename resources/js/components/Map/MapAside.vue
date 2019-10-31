@@ -144,7 +144,7 @@ export default {
 </script>
 
 <template>
-    <aside class="ris-map-desktop-aside">
+    <div class="ris-map-desktop-aside">
         <MapAsideNavigation
             @changeDirection="changeDirection"
             :call-navigation="callNavigation"
@@ -191,5 +191,5 @@ export default {
                 </content-loader>
             </li>
         </transition-group>
-    </aside>
+    </div>
 </template>

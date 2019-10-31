@@ -20,7 +20,7 @@ export default {
 };
 </script>
 
-<template z>
+<template>
     <li>
         <a :href="'/gremien/' + committee.id" class="ris-table-list__link">
             <h3 class="ris-h3 ris-table-list__subtitle">{{ committee.title }}</h3>
@@ -31,7 +31,7 @@ export default {
                     {{ committee.nextMeetingDate | momentDate }}. {{ committee.nextMeetingDate | momentWeek }}
                 </time>
             </span>
-            <button class="ris-i ris-i_chevron-right ris-table-list__button" />
+            <button class="ris-i ris-i_chevron-right ris-table-list__button" aria-label="Gehen Sie zur Komiteeseite" />
         </a>
     </li>
 </template>

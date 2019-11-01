@@ -650,7 +650,7 @@
 
                     <div class="gui-indent-b">
                         <div class="ris-search">
-                            <button class="ris-search__button"></button>
+                            <button class="ris-search__button" aria-label="Search by site"></button>
                             <input type="search" class="ris-search__input"
                                    placeholder="Suche nach Themen, Vorlagen, Sitzungen..."
                             />

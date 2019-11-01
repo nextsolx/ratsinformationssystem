@@ -17,7 +17,7 @@ if (isset($meeting['people']) and count($meeting['people']) > 0) {
 
 @section('content')
 
-    <meeting inline-template
+    <meeting-detail-page inline-template
         :agenda-list="{{ json_encode($meeting_agenda_search) }}"
         :people-list="{{ json_encode($meeting_people) }}"
     >
@@ -126,9 +126,9 @@ if (isset($meeting['people']) and count($meeting['people']) > 0) {
                     ref="agenda"
                 >
                     @if ($meeting_agenda)
-                        <search
+                        <ui-search
                             @input="searchAgenda"
-                        ></search>
+                        ></ui-search>
 
                         <div class="ris-agenda-list">
                             <h3 class="ris-h3 ris-h3__headline">
@@ -182,7 +182,7 @@ if (isset($meeting['people']) and count($meeting['people']) > 0) {
             </div>
 
         </main>
-    </meeting>
+    </meeting-detail-page>
 
     @include('layouts.footer')
 

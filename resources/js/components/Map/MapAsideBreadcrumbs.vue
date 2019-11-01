@@ -36,7 +36,7 @@ export default {
         class="ris-breadcrumbs ris-breadcrumbs-map"
         :class="{ hidden : this.optionList.length < 2 }">
         <li class="ris-breadcrumbs__item">
-            <a href="/" title="Stadt Koeln"
+            <a href="/" title="Stadt Koeln" aria-label="Stadt Koeln"
                 class="ris-breadcrumbs__home-link ris-link">
                 <span class="ris-i ris-i_house"/>
                 <span class="ris-link__text">Stadt Koeln</span>

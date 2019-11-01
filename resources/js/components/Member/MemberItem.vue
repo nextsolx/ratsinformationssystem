@@ -1,6 +1,6 @@
 <script>
 export default {
-    name: 'CommitteeMember',
+    name: 'MemberItem',
     props: {
         member: {
             type: Object,

@@ -130,7 +130,7 @@
         }
     }
     &__caption {
-        color: $c-gray8;
+        color: $c-secondary;
         @include breakpoint($bp-tablet-max) {
             display: none;
         }

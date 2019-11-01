@@ -1,9 +1,13 @@
 <script>
-import sortingMixin from '../mixins/sortingMixin';
+import sortingMixin from '../../mixins/sortingMixin';
 
 export default {
-    name: 'Meeting',
+    name: 'MeetingDetailPage',
     mixins: [sortingMixin],
+    components: {
+        UiSearch: () => import('../Ui/UiSearch'),
+        MemberList: () => import('../Member/MemberList'),
+    },
     data: () => ({
         activeTab: 'true',
         dropValue: 'Funktion',

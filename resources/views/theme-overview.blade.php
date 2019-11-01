@@ -18,7 +18,7 @@
                     </h1>
 
                     <div class="ris-action-box">
-                        <collapse></collapse>
+                        <ui-collapse></ui-collapse>
                     </div>
                 </section>
 

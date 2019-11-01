@@ -1,10 +1,6 @@
 <script>
-import CommitteeInfo from './CommitteeInfo';
-import MemberList from '../MemberList';
-import CommitteeSessions from './CommitteeSessions';
-
 export default {
-    name: 'Committee',
+    name: 'CommitteeDetailPage',
     props: {
         info: {
             type: String,
@@ -24,9 +20,9 @@ export default {
         }
     },
     components: {
-        CommitteeInfo,
-        MemberList,
-        CommitteeSessions,
+        CommitteeInfo: () => import('./CommitteeInfo'),
+        CommitteeSessions: () => import('./CommitteeSessions'),
+        MemberList: () => import('../Member/MemberList'),
     },
     data() {
         return {
@@ -60,8 +56,8 @@ export default {
                 </li>
             </ul>
         </nav>
-        <CommitteeInfo :information="info" :links="links" v-if="activeTab === 'aufgaben'" />
-        <MemberList :members="members" v-if="activeTab === 'mitglieder'" />
-        <CommitteeSessions :meetings="meetings" v-if="activeTab === 'sitzungen'" />
+        <committee-info :information="info" :links="links" v-if="activeTab === 'aufgaben'" />
+        <member-list :members="members" v-if="activeTab === 'mitglieder'" />
+        <committee-sessions :meetings="meetings" v-if="activeTab === 'sitzungen'" />
     </div>
 </template>

@@ -1,6 +1,6 @@
 <script>
 export default {
-    name: 'CommitteeNavigation',
+    name: 'LetterNavigation',
     props: {
         navigationList: {
             type: Array,

@@ -19,7 +19,7 @@
 
             <section class="ris-section-wrapper">
                 <h2 class="ris-h2">Worum geht es?</h2>
-                @if (isset($topic->text))
+                @if (isset($topic->text) and $topic->text)
                     <div class="ris-body-2 ris-theme__text">
                         {{ \Illuminate\Support\Str::limit(strip_tags($topic->text), 10000) }}
                     </div>
@@ -69,7 +69,7 @@
                         <div class="ris-action-box">
                             <h2 class="ris-h2">Politischer Prozess</h2>
 
-                            <dropdown
+                            <ui-dropdown
                                 :id="'theme-dropdown'"
                                 label="Darstellung"
                                 :value="dropValue"
@@ -78,7 +78,7 @@
                                     {label: 'Das Neuste zuerst', value: 'dateFrom'},
                                 ]"
                                 @change="changeProcessList"
-                            ></dropdown>
+                            ></ui-dropdown>
                         </div>
 
                         <div class="ris-process">
@@ -193,7 +193,7 @@
             <section class="ris-section-wrapper">
                 <h2 class="ris-h2">Dokumente</h2>
 
-                @if (isset($topic->files))
+                @if (isset($topic->files) and $topic->files)
                     {{--
                     // @todo --- Alle Dokumente --- this will not be in this scope of functionality
                     <div class="ris-document ris-document-many">

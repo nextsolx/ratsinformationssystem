@@ -16,8 +16,8 @@
                     </h1>
 
                     <div class="ris-action-box">
-                        <collapse></collapse>
-                        <dropdown
+                        <ui-collapse></ui-collapse>
+                        <ui-dropdown
                             :id="'theme-dropdown'"
                             label="Sortierung"
                             :value="@if ($theme_type === 'updated')
@@ -34,7 +34,7 @@
                             ]"
                             :open-on-new-tab="true"
                             :tab-url="'/themen?section'"
-                        ></dropdown>
+                        ></ui-dropdown>
                     </div>
                 </section>
 

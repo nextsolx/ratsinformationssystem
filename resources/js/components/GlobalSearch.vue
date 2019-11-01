@@ -1,8 +1,4 @@
 <script>
-import ThemeWidget from './Theme/ThemeWidget';
-import PersonWidget from './PersonWidget';
-import MapWidget from './Map/MapWidget';
-import { ContentLoader } from 'vue-content-loader';
 import location from '../api/location';
 import people from '../api/people';
 import topics from '../api/topics';
@@ -13,10 +9,10 @@ export default {
         intersectionObserverMixin
     ],
     components: {
-        ThemeWidget,
-        PersonWidget,
-        MapWidget,
-        ContentLoader
+        ThemeWidget: () => import('./Theme/ThemeWidget'),
+        PeopleWidget: () => import('./People/PeopleWidget'),
+        MapWidget: () => import('./Map/MapWidget'),
+        ContentLoader: () => import('vue-content-loader').then(({ContentLoader}) => ContentLoader),
     },
     data () {
         return {
@@ -164,11 +160,15 @@ export default {
         <div
             class="ris-search ris-global-search-input"
             :class="{ 'focused': onFocus }">
-            <button @click="onFocus ? focusHandle(false) : focusHandle(true)" class="ris-search__button">
+            <button @click="onFocus ? focusHandle(false) : focusHandle(true)"
+                class="ris-search__button"
+                aria-label="Suche nach Site"
+                    >
                 <span v-if="onFocus" class="ris-i ris-i_back" />
                 <span v-else class="ris-i ris-i_search"/>
             </button>
             <input
+                aria-label="Site-Suchfeld"
                 type="search"
                 class="ris-search__input ris-global-search-input__item"
                 :class="{ 'focused': onFocus }"
@@ -222,7 +222,7 @@ export default {
                                 v-for="(topic, index) in topicsList"
                                 v-show="(index < 3) || activeTab === 'Themen'"
                                 :key="topic.id">
-                                <ThemeWidget :filter-value="inputValue" :topic="topic" />
+                                <theme-widget :filter-value="inputValue" :topic="topic" />
                             </li>
                         </ul>
                         <button
@@ -243,7 +243,7 @@ export default {
                                 v-for="(location, index) in locationList"
                                 v-show="(index < 4) || activeTab === 'Orte'"
                                 :key="location.id">
-                                <MapWidget :filter-value="inputValue" :options="location" />
+                                <map-widget :filter-value="inputValue" :options="location" />
                             </li>
                         </ul>
                         <button
@@ -264,7 +264,7 @@ export default {
                                 v-for="(person, index) in peopleList"
                                 v-show="(index < 5) || activeTab === 'Personen'"
                                 :key="person.id">
-                                <PersonWidget :filter-value="inputValue" :person="person" />
+                                <people-widget :filter-value="inputValue" :person="person" />
                             </li>
                         </ul>
                         <button

@@ -1,22 +1,21 @@
 <script>
-import Member from './Member';
-import LetterNavigation from './LetterNavigation';
-import sortingMixin from '../mixins/sortingMixin';
-import lazyLoadMixin from '../mixins/lazyLoadMixin';
-import Dropdown from './Ui/Dropdown';
-import Search from './Ui/Search';
-import people from '../api/people';
-import { ContentLoader } from 'vue-content-loader';
+import Vue from 'vue';
+import checkView from 'vue-check-view';
+import sortingMixin from '../../mixins/sortingMixin';
+import lazyLoadMixin from '../../mixins/lazyLoadMixin';
+import people from '../../api/people';
+
+Vue.use(checkView);
 
 export default {
     name: 'PeopleTable',
     mixins: [sortingMixin, lazyLoadMixin],
     components: {
-        Member,
-        LetterNavigation,
-        Dropdown,
-        Search,
-        ContentLoader
+        MemberItem: () => import('../Member/MemberItem'),
+        LetterNavigation: () => import('../LetterNavigation'),
+        UiDropdown: () => import('../Ui/UiDropdown'),
+        UiSearch: () => import('../Ui/UiSearch'),
+        ContentLoader: () => import('vue-content-loader').then(({ContentLoader}) => ContentLoader),
     },
     data() {
         return {
@@ -109,12 +108,11 @@ export default {
 
 <template>
     <div class="ris-table-list-wrapper">
-        <div />
         <section class="ris-section-wrapper ris-content_six-eight-eight">
             <h1 class="ris-table-list__headline ris-headline">Personen</h1>
             <div class="ris-filter-wrapper">
-                <Search v-model="inputValue" :full-width-mob="true" debounce="500" @input="searchPeople" />
-                <Dropdown
+                <ui-search v-model="inputValue" :full-width-mob="true" debounce="500" @input="searchPeople" />
+                <ui-dropdown
                     label="Sortierung"
                     id="table-drop"
                     @change="changeFilterValue"
@@ -130,7 +128,7 @@ export default {
                     :key="item.title">
                     <h2 class="ris-table-list-main-list__heading ris-h2">{{ item.title }}</h2>
                     <ul class="ris-ul ris-table-list-secondary-list">
-                        <Member
+                        <member-item
                             class="ris-table-list-secondary-list__item"
                             v-for="member in item.data"
                             :key="member.id"
@@ -144,14 +142,14 @@ export default {
                 <circle cx="15" cy="30" r="15" />
             </content-loader>
             <transition-group tag="ul" name="fade" class="ris-table-list-main-list ris-ul" v-if="filtered">
-                <Member
+                <member-item
                     class="ris-table-list-secondary-list__item"
                     v-for="member in filteredList"
                     :key="`${member.id}-filtered`"
                     :member="member"/>
             </transition-group>
         </section>
-        <LetterNavigation
+        <letter-navigation
             :pagination="true"
             @click="buttonHandle"
                 />

@@ -1,14 +1,13 @@
 <script>
 import clickOutSide from '../../tools/clickOutSide';
 import location from '../../api/location';
-import MapAsideBreadcrumbs from './MapAsideBreadcrumbs';
 export default {
     name: 'MapAsideNavigation',
     directives: {
         'outside': clickOutSide
     },
     components: {
-        MapAsideBreadcrumbs
+        MapAsideBreadcrumbs: () => import('./MapAsideBreadcrumbs'),
     },
     props: {
         isActive: {
@@ -207,7 +206,7 @@ export default {
 
 <template>
     <div>
-        <MapAsideBreadcrumbs
+        <map-aside-breadcrumbs
             :option-list="breadcrumbsList"
             @clickCrumbs="crumbsHandle"
                 />

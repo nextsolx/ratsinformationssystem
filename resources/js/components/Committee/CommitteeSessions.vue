@@ -1,9 +1,5 @@
 <script>
-import Dropdown from '../Ui/Dropdown';
-import Search from '../Ui/Search';
 import sortingMixin from '../../mixins/sortingMixin';
-import CalendarCard from '../CalendarCard';
-
 const moment = require('moment');
 
 export default {
@@ -16,9 +12,9 @@ export default {
         },
     },
     components: {
-        Dropdown,
-        CalendarCard,
-        Search,
+        UiDropdown: () => import('../Ui/UiDropdown'),
+        UiSearch: () => import('../Ui/UiSearch'),
+        MeetingItem: () => import('../Meeting/MeetingItem'),
     },
     data() {
         return {
@@ -84,8 +80,8 @@ export default {
 <template>
     <div class="ris-committee-sessions">
         <div class="ris-filter-wrapper">
-            <Search v-model="inputValue" :hidden-mob="true" @input="filterMeetingsByTitle" />
-            <Dropdown
+            <ui-search v-model="inputValue" :hidden-mob="true" @input="filterMeetingsByTitle" />
+            <ui-dropdown
                 label="Sortierung"
                 id="drop-sitzunget"
                 :options="yearsList"
@@ -97,7 +93,7 @@ export default {
             {{ `${dropValue.label} (${sortedList.length} Sitzungen)` }}
         </h2>
         <div class="ris-calendar">
-            <CalendarCard
+            <meeting-item
                 class="ris-calendar__card-list"
                 v-for="meeting in sortedList"
                 :key="`${meeting.id}-sorted`"

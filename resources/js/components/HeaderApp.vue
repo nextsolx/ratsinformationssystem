@@ -1,6 +1,9 @@
 <script>
 export default {
     name: 'HeaderApp',
+    components: {
+        GlobalSearch: () => import('./GlobalSearch'),
+    },
     data() {
         return {
             navMobileActive: false

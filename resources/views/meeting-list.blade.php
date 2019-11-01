@@ -25,7 +25,7 @@ if (isset($meetings) and is_array($meetings)) {
         </h1>
 
         <div class="ris-calendar__flex-wrapper ris-content ris-content_has-widget ris-content_six-eight-eight">
-            <calendar-app></calendar-app>
+            <calendar-plugin></calendar-plugin>
 
             <div class="ris-calendar__content">
                 <div class="ris-calendar__card-list-wrapper" data-page-loaded="1" id="card-list">
@@ -88,7 +88,7 @@ if (isset($meetings) and is_array($meetings)) {
 
                     @endforeach
 
-                    <calendar></calendar>
+                    <meeting-list></meeting-list>
                 </div>
 
             </div>

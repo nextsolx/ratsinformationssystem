@@ -22,7 +22,7 @@ Vue.use(VCalendar, {
 
 
 export default {
-    name: 'CalendarApp',
+    name: 'CalendarPlugin',
     mixins: [ noticeMixin ],
     data: () => ({
         attrs: [],
@@ -45,7 +45,7 @@ export default {
                     height: '32px',
                 },
                 contentStyle: {
-                    color: '#fafafa',
+                    color: '#fff',
                 },
                 dates: [
                     new Date(),
@@ -127,7 +127,7 @@ export default {
 </script>
 
 <template>
-    <aside class="ris-calendar-app">
+    <div class="ris-calendar-app">
         <v-calendar
             :attributes="attrs"
             :is-expanded="true"
@@ -136,5 +136,5 @@ export default {
                 />
         <div class="ris-calendar-app__icon-calendar"
             @click="toggleCalendar"/>
-    </aside>
+    </div>
 </template>

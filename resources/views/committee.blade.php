@@ -9,7 +9,7 @@
                 <h1 class="ris-committee__headline ris-headline">
                     {{ $title }}
                 </h1>
-                <committee
+                <committee-detail-page
                     :links="{{ json_encode($links) }}"
                     :info="{{ json_encode($info) }}"
                     :members="{{ json_encode($members) }}"

@@ -38,7 +38,7 @@
                         <ul class="ris-nav__link-wrapper">
                             <li>
                                 <a class="ris-nav__link @if (url()->current() === route('welcome')) ris-nav__link_active @endif"
-                                   href="/"
+                                    href="{{ route('welcome') }}" title="Stadt Koeln" aria-label="Stadt Koeln"
                                 >Start</a>
                             </li>
                             <li>
@@ -57,8 +57,8 @@
                                 >Karte</a>
                             </li>
                             <li>
-                                <a class="ris-nav__link @if (url()->current() === route('calendar-list')) ris-nav__link_active @endif"
-                                   href="{{ route('calendar-list') }}"
+                                <a class="ris-nav__link @if (url()->current() === route('meeting-list')) ris-nav__link_active @endif"
+                                   href="{{ route('meeting-list') }}"
                                 >Kalender</a>
                             </li>
                             <li>

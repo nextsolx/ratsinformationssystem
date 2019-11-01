@@ -120,7 +120,7 @@
                                     ['calendar_list' => $meetings, 'limit' => 3]
                                 )
 
-                            <a href="{{ route('calendar-list') }}" class="ris-link ris-link_button ris-link_right"
+                            <a href="{{ route('meeting-list') }}" class="ris-link ris-link_button ris-link_right"
                                 title="Zum Sitzungskalender"
                             >
                                 Zum Sitzungskalender

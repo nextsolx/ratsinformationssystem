@@ -1,8 +1,4 @@
 <script>
-import ThemeWidget from './Theme/ThemeWidget';
-import PersonWidget from './PersonWidget';
-import MapWidget from './Map/MapWidget';
-import { ContentLoader } from 'vue-content-loader';
 import location from '../api/location';
 import people from '../api/people';
 import topics from '../api/topics';
@@ -13,10 +9,10 @@ export default {
         intersectionObserverMixin
     ],
     components: {
-        ThemeWidget,
-        PersonWidget,
-        MapWidget,
-        ContentLoader
+        ThemeWidget: () => import('./Theme/ThemeWidget'),
+        PeopleWidget: () => import('./People/PeopleWidget'),
+        MapWidget: () => import('./Map/MapWidget'),
+        ContentLoader: () => import('vue-content-loader').then(({ContentLoader}) => ContentLoader),
     },
     data () {
         return {
@@ -226,7 +222,7 @@ export default {
                                 v-for="(topic, index) in topicsList"
                                 v-show="(index < 3) || activeTab === 'Themen'"
                                 :key="topic.id">
-                                <ThemeWidget :filter-value="inputValue" :topic="topic" />
+                                <theme-widget :filter-value="inputValue" :topic="topic" />
                             </li>
                         </ul>
                         <button
@@ -247,7 +243,7 @@ export default {
                                 v-for="(location, index) in locationList"
                                 v-show="(index < 4) || activeTab === 'Orte'"
                                 :key="location.id">
-                                <MapWidget :filter-value="inputValue" :options="location" />
+                                <map-widget :filter-value="inputValue" :options="location" />
                             </li>
                         </ul>
                         <button
@@ -268,7 +264,7 @@ export default {
                                 v-for="(person, index) in peopleList"
                                 v-show="(index < 5) || activeTab === 'Personen'"
                                 :key="person.id">
-                                <PersonWidget :filter-value="inputValue" :person="person" />
+                                <people-widget :filter-value="inputValue" :person="person" />
                             </li>
                         </ul>
                         <button

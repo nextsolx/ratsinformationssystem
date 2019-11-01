@@ -1,15 +1,13 @@
 <script>
-import { ContentLoader } from 'vue-content-loader';
 import lazyLoadMixin from '../../mixins/lazyLoadMixin';
 import topics from '../../api/topics';
-import ThemeComponent from './ThemeComponent';
 
 export default {
     name: 'ThemeComponentLazy',
     mixins: [lazyLoadMixin],
     components: {
-        ContentLoader,
-        ThemeComponent,
+        ThemeComponent: () => import('./ThemeComponent'),
+        ContentLoader: () => import('vue-content-loader').then(({ContentLoader}) => ContentLoader),
     },
     props: {
         themeListType: {

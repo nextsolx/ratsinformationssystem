@@ -3,6 +3,9 @@ import Swiper from 'swiper';
 
 export default {
     name: 'ThemeOverview',
+    components: {
+        UiCollapse: () => import('../Ui/UiCollapse'),
+    },
     mounted() {
         new Swiper ('.swiper-container', {
             slidesPerView: 3,

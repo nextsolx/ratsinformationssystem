@@ -57,8 +57,8 @@
                                 >Karte</a>
                             </li>
                             <li>
-                                <a class="ris-nav__link @if (url()->current() === route('calendar-list')) ris-nav__link_active @endif"
-                                   href="{{ route('calendar-list') }}"
+                                <a class="ris-nav__link @if (url()->current() === route('meeting-list')) ris-nav__link_active @endif"
+                                   href="{{ route('meeting-list') }}"
                                 >Kalender</a>
                             </li>
                             <li>

@@ -69,7 +69,7 @@
                         <div class="ris-action-box">
                             <h2 class="ris-h2">Politischer Prozess</h2>
 
-                            <dropdown
+                            <ui-dropdown
                                 :id="'theme-dropdown'"
                                 label="Darstellung"
                                 :value="dropValue"
@@ -78,7 +78,7 @@
                                     {label: 'Das Neuste zuerst', value: 'dateFrom'},
                                 ]"
                                 @change="changeProcessList"
-                            ></dropdown>
+                            ></ui-dropdown>
                         </div>
 
                         <div class="ris-process">

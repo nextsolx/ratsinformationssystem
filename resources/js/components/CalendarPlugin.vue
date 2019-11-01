@@ -22,7 +22,7 @@ Vue.use(VCalendar, {
 
 
 export default {
-    name: 'CalendarApp',
+    name: 'CalendarPlugin',
     mixins: [ noticeMixin ],
     data: () => ({
         attrs: [],

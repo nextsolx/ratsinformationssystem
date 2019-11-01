@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <people inline-template>
+    <people-detail-page inline-template>
         <main class="ris-main ris-people">
 
             @include('layouts.breadcrumbs')
@@ -153,7 +153,7 @@
             </div>
 
         </main>
-    </people>
+    </people-detail-page>
 
     @include('layouts.footer')
 

@@ -1,7 +1,6 @@
 <script>
 import L from 'leaflet';
 import { LMap, LTileLayer, LPopup, LPolygon, LMarker } from 'vue2-leaflet';
-import MapAside from './MapAside';
 require('leaflet-fullscreen');
 
 import location from '../../api/location';
@@ -22,7 +21,7 @@ export default {
         LPopup,
         LPolygon,
         LMarker,
-        MapAside,
+        MapAside: () => import('./MapAside'),
     },
     data() {
         return {
@@ -579,7 +578,7 @@ export default {
 
 <template>
     <div>
-        <MapAside class="ris-map-desktop-aside"
+        <map-aside class="ris-map-desktop-aside"
             @mouse-handle="hoverByNavigation($event.type, $event.name)"
             @click-handle="selectByNavigation($event.type, $event.name)"
             @theme-location-list="setThemeLocationList($event)"

@@ -1,9 +1,9 @@
 <script>
 const moment = require('moment');
-import dateFilterMixin from '../mixins/dateFilterMixin';
+import dateFilterMixin from '../../mixins/dateFilterMixin';
 
 export default {
-    name: 'CalendarCard',
+    name: 'MeetingItem',
     mixins: [dateFilterMixin],
     props: {
         meetingSortedDayList: {
@@ -37,7 +37,6 @@ export default {
             <div class="ris-calendar__card"
                 v-for="meetup in meetingSortedDayList.data"
                 :key="meetup.id"
-
                     >
                 <div>
                     <h3 class="ris-title">

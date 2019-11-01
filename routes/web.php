@@ -19,7 +19,7 @@ Route::group(['middleware' => 'under-construction'], function () {
     });
 
     Route::get('/kalender', 'MeetingController@calendar')
-        ->name('calendar-list');
+        ->name('meeting-list');
 
     Route::get('/meeting/{id}', 'MeetingController@getMeeting')
         ->name('meeting');

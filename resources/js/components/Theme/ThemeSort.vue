@@ -4,6 +4,9 @@ const moment = require('moment');
 
 export default {
     name: 'ThemeSort',
+    components: {
+        UiDropdown: () => import('../Ui/UiDropdown'),
+    },
     data: () => ({
         processSortedList: [],
         dropValue: {label: 'Chronologische Reihenfolge', value: 'id'},

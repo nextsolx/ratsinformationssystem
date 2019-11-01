@@ -24,11 +24,11 @@ class MeetingController extends Controller
 
         $meetings = Meeting::collection($meetingsQuery->paginate(100))->toResponse(request())->getData();
 
-        return view('calendar-list')->with([
+        return view('meeting-list')->with([
             'meetings' => $meetings->data,
             'links' => $meetings->links,
             'breadcrumbs' => [
-                'Kalendar' => route('calendar-list'),
+                'Kalendar' => route('meeting-list'),
             ]
         ]);
     }
@@ -74,7 +74,7 @@ class MeetingController extends Controller
         return view('meeting')->with([
             'meeting' => (array) $meeting->toResponse($request)->getData()->data,
             'breadcrumbs' => [
-                'Kalendar' => route('calendar-list'),
+                'Kalendar' => route('meeting-list'),
                 $meeting->name => route('meeting', $meeting->id),
             ]
         ]);

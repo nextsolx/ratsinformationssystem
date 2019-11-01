@@ -1,6 +1,6 @@
 <script>
 export default {
-    name: 'PersonWidget',
+    name: 'PeopleWidget',
     props: {
         person: {
             type: Object,

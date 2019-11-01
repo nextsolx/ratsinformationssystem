@@ -1,14 +1,12 @@
 <script>
 import moment from 'moment';
 import topics from '../../api/topics';
-import MapAsideNavigation from './MapAsideNavigation';
 import intersectionObserverMixin from '../../mixins/intersectionObserverMixin';
-import { ContentLoader } from 'vue-content-loader';
 export default {
     name: 'MapAside',
     components: {
-        MapAsideNavigation,
-        ContentLoader
+        MapAsideNavigation: () => import('./MapAsideNavigation'),
+        ContentLoader: () => import('vue-content-loader').then(({ContentLoader}) => ContentLoader),
     },
     mixins: [
         intersectionObserverMixin
@@ -145,7 +143,7 @@ export default {
 
 <template>
     <div class="ris-map-desktop-aside">
-        <MapAsideNavigation
+        <map-aside-navigation
             @changeDirection="changeDirection"
             :call-navigation="callNavigation"
             @mouse-handle="$emit('mouse-handle', $event)"

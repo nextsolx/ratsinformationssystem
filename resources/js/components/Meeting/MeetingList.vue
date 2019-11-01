@@ -1,15 +1,14 @@
 <script>
-import { ContentLoader } from 'vue-content-loader';
-import noticeMixin from '../mixins/NoticeMixin';
-import intersectionObserverMixin from '../mixins/intersectionObserverMixin';
+import noticeMixin from '../../mixins/NoticeMixin';
+import intersectionObserverMixin from '../../mixins/intersectionObserverMixin';
 
 const axios = require('axios');
 const moment = require('moment');
 
 export default {
-    name: 'Calendar',
+    name: 'MeetingList',
     components: {
-        ContentLoader
+        ContentLoader: () => import('vue-content-loader').then(({ContentLoader}) => ContentLoader),
     },
     mixins: [ noticeMixin, intersectionObserverMixin ],
     data: () => ({

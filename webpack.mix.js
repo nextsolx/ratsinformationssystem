@@ -21,6 +21,12 @@ mix.copy('resources/img', 'public/img')
     .sass('resources/sass/app.scss', 'public/css');
 
 mix.webpackConfig({
+    output: {
+        filename: '[name].js',
+        chunkFilename: mix.inProduction() ? 'js/[name].[chunkhash].app.js'
+            : 'js/[name].app.js',
+        publicPath: '/',
+    },
     module: {
         rules: [
             {

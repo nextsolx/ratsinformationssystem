@@ -1,6 +1,6 @@
 <script>
 export default {
-    name: 'People',
+    name: 'PeopleDetailPage',
     data: () => ({
         activeTab: 'true',
     }),

@@ -1,12 +1,13 @@
 <script>
-import Member from './Member';
-import sortingMixin from '../mixins/sortingMixin';
+import sortingMixin from '../../mixins/sortingMixin';
 
 export default {
     name: 'MemberList',
     mixins: [sortingMixin],
     components: {
-        Member,
+        MemberItem: () => import('./MemberItem'),
+        UiSearch: () => import('../Ui/UiSearch'),
+        UiDropdown: () => import('../Ui/UiDropdown'),
     },
     props: {
         members: {
@@ -58,8 +59,8 @@ export default {
 <template>
     <div class="ris-members">
         <div class="ris-filter-wrapper">
-            <Search v-model="inputValue" :hidden-mob="true" @input="filterList" />
-            <Dropdown
+            <ui-search v-model="inputValue" :hidden-mob="true" @input="filterList" />
+            <ui-dropdown
                 label="Sortierung"
                 id="committee-drop"
                 :options="dropOptions"
@@ -73,7 +74,7 @@ export default {
                     {{ getTitleValue(item.title) }}
                 </h2>
                 <ul class="ris-ul ris-members-secondary-list">
-                    <Member
+                    <member-item
                         v-for="member in item.data"
                         :key="member.id"
                         :member="member"
@@ -83,7 +84,7 @@ export default {
             </li>
         </transition-group>
         <transition-group tag="ul" name="fade" class="ris-ul ris-members-secondary-list" v-if="filtered">
-            <Member
+            <member-item
                 v-for="member in filteredList"
                 :key="`${member.id}-filtered`"
                 :member="member"

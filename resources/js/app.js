@@ -26,8 +26,8 @@ require('./bootstrap');
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-const files = require.context('./', true, /\.vue$/i);
-files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
+//const files = require.context('./', true, /\.vue$/i);
+//files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
 window.Bus = new Vue();
 
@@ -39,6 +39,23 @@ window.Bus = new Vue();
 
 new Vue({
     el: '#root',
+    components: {
+        HeaderApp: () => import('./components/HeaderApp'),
+        FooterApp: () => import('./components/FooterApp'),
+        CalendarPlugin: () => import('./components/CalendarPlugin'),
+        UiCollapse: () => import('./components/Ui/UiCollapse'),
+        UiDropdown: () => import('./components/Ui/UiDropdown'),
+        ThemeOverview: () => import('./components/Theme/ThemeOverview'),
+        ThemeSort: () => import('./components/Theme/ThemeSort'),
+        ThemeComponentLazy: () => import('./components/Theme/ThemeComponentLazy'),
+        MapDesktopApp: () => import('./components/Map/MapDesktopApp'),
+        MeetingList: () => import('./components/Meeting/MeetingList'),
+        MeetingDetailPage: () => import('./components/Meeting/MeetingDetailPage'),
+        CommitteeTable: () => import('./components/Committee/CommitteeTable'),
+        CommitteeDetailPage: () => import('./components/Committee/CommitteeDetailPage'),
+        PeopleTable: () => import('./components/People/PeopleTable'),
+        PeopleDetailPage: () => import('./components/People/PeopleDetailPage'),
+    },
     data: () => ({
         navActive: false
     }),

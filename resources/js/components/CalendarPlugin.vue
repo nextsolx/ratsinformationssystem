@@ -1,9 +1,8 @@
 <script>
 import Vue from 'vue';
 import VCalendar from 'v-calendar';
-import noticeMixin from '../mixins/NoticeMixin';
 
-const axios = require('axios');
+import meeting from '../api/meeting';
 const moment = require('moment');
 
 Vue.use(VCalendar, {
@@ -23,7 +22,6 @@ Vue.use(VCalendar, {
 
 export default {
     name: 'CalendarPlugin',
-    mixins: [ noticeMixin ],
     data: () => ({
         attrs: [],
         attrsToday: [
@@ -70,7 +68,7 @@ export default {
                 el.style.pointerEvents = this.loading ? 'none' : 'auto';
             });
         },
-        loadMeetings(year = this.currentYear, month = this.currentMonth) {
+        async loadMeetings(year, month) {
             if (!this.loading) {
                 this.loading = true;
                 this.currentYear = year;
@@ -78,13 +76,12 @@ export default {
 
                 this.disableEnableNavButtons();
 
-                axios
-                    .get(`/api/meetings?year=${this.currentYear}&month=${this.currentMonth}`)
+                await meeting.getMeetingsByYearAndMonth(year, month)
                     .then(res => {
                         this.attrs = [];
 
-                        if (res.data.data.length > 0) {
-                            for (let { title, dateFrom } of res.data.data) {
+                        if (res.data.length > 0) {
+                            for (let { title, dateFrom } of res.data) {
                                 this.attrs.push({
                                     dates: [
                                         dateFrom
@@ -103,11 +100,10 @@ export default {
                         }
 
                         this.attrs = [...this.attrs, ...this.attrsToday];
-                    })
-                    .finally(() => {
-                        this.loading = false;
-                        this.disableEnableNavButtons();
                     });
+
+                this.loading = false;
+                this.disableEnableNavButtons();
             }
         },
         navClicked(page) {
@@ -121,7 +117,7 @@ export default {
         },
     },
     mounted() {
-        this.loadMeetings();
+        this.loadMeetings(this.currentYear, this.currentMonth);
     }
 };
 </script>

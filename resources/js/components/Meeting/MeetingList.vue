@@ -2,7 +2,7 @@
 import noticeMixin from '../../mixins/NoticeMixin';
 import intersectionObserverMixin from '../../mixins/intersectionObserverMixin';
 
-const axios = require('axios');
+import meeting from '../../api/meeting';
 const moment = require('moment');
 
 export default {
@@ -23,25 +23,23 @@ export default {
         infoTitle: 'All meetings have been loaded',
     }),
     methods: {
-        lazyHandle() {
+        async lazyHandle() {
             if (!this.loading && !this.emptyMeetingList) {
                 this.loading = true;
                 this.currentPage += 1;
                 const cardList = document.querySelector(this.cardListSelector);
 
-                axios
-                    .get('/api/meetings?page=' + this.currentPage)
+                await meeting.getMeetingList(this.currentPage)
                     .then(res => {
-                        this.meetingList = Object.assign({}, this.meetingList, this.sortedMeetingList(res.data.data));
+                        this.meetingList = Object.assign({}, this.meetingList, this.sortedMeetingList(res.data));
 
-                        if (res.data.data.length === 0) {
+                        if (res.data.length === 0) {
                             this.emptyMeetingList = true;
                         }
-                    })
-                    .finally(() => {
-                        this.loading = false;
-                        cardList.dataset.pageLoaded = this.currentPage;
                     });
+
+                this.loading = false;
+                cardList.dataset.pageLoaded = this.currentPage;
             }
 
             if (this.emptyMeetingList) {
@@ -59,8 +57,8 @@ export default {
                         dayList: (() =>
                             meetingList.filter(dayMeetList =>
                                 moment(dayMeetList.dateFrom).date() === moment(meet.dateFrom).date() &&
-                                moment(dayMeetList.dateFrom).week() === moment(meet.dateFrom).week() &&
-                                moment(dayMeetList.dateFrom).year() === moment(meet.dateFrom).year()
+                                    moment(dayMeetList.dateFrom).week() === moment(meet.dateFrom).week() &&
+                                    moment(dayMeetList.dateFrom).year() === moment(meet.dateFrom).year()
                             )
                         )()
                     };

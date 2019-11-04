@@ -1,6 +1,6 @@
 <script>
 export default {
-    name: 'Dropdown',
+    name: 'UiDropdown',
     model: {
         prop: 'value',
         event: 'change',

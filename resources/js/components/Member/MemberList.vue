@@ -15,9 +15,6 @@ export default {
             default: () => [],
         },
     },
-    created() {
-        this.sortBy(this.unfilteredList, this.dropValue.value);
-    },
     data() {
         return {
             unfilteredList: this.members,
@@ -52,6 +49,9 @@ export default {
             if (!value && this.dropValue.value === 'role') return 'Teilnehmen';
             return value;
         },
+    },
+    created() {
+        this.sortBy(this.unfilteredList, this.dropValue.value);
     },
 };
 </script>

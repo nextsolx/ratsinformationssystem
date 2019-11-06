@@ -22,8 +22,8 @@
                     <a class="ris-welcome-map ris-welcome-map__mobile" title="Karte öffnen"
                         href="{{ route('map') }}"
                     >
-                        <img src="/img/map-mobile-thumbnail.jpg" class="ris-welcome-map__img"
-                             alt="Karte öffnen" />
+                        <img src="/img/map-mobile-thumbnail.jpg" loading="lazy"
+                            class="ris-welcome-map__img" alt="Karte öffnen" />
                         <div class="ris-button ris-button_primary ris-button_bg-gray2">
                             Karte öffnen
                         </div>
@@ -178,8 +178,8 @@
             <a class="ris-welcome-map ris-welcome-map__desktop" title="Karte öffnen"
                href="{{ route('map') }}"
             >
-                <img src="/img/map-desktop-thumbnail.jpg" class="ris-welcome-map__img"
-                     alt="Karte öffnen" />
+                <img src="/img/map-desktop-thumbnail.jpg" loading="lazy"
+                    class="ris-welcome-map__img" alt="Karte öffnen" />
                 <div class="ris-button ris-button_primary ris-button_bg-gray2">
                     Karte öffnen
                 </div>

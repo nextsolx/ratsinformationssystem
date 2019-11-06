@@ -9,8 +9,8 @@
         href="{{ route('theme', $theme->id) }}"
     >
         <div class="ris-card-list__themes-top">
-            <img src="/img/thumbnail-map-tile.png" class="ris-card-list__themes-img"
-                    alt="{{ $theme->name }}"/>
+            <img src="/img/thumbnail-map-tile.png" loading="lazy"
+                class="ris-card-list__themes-img" alt="{{ $theme->name }}"/>
             <h2 class="ris-h2">
                 {{ $theme->name }}
             </h2>

@@ -10,7 +10,7 @@
             <div class="ris-content_six-eight-eight">
 
                 <section class="ris-section-wrapper ris-people__headline">
-                    <img src="{{ $person->photo ? $person->photo : '/img/thumbnail-big-people.svg' }}"
+                    <img src="{{ $person->photo ? $person->photo : '/img/thumbnail-avatar-blue.png' }}"
                         alt="{{ $person->name }}" class="ris-people__img"
                     />
                     <div>

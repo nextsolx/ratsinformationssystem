@@ -31,7 +31,7 @@ export default {
             :title="item.name"
                 >
             <div class="ris-card-list__themes-top">
-                <img src="/img/thumbnail-map-tile.png" class="ris-card-list__themes-img"
+                <img src="/img/thumbnail-map-tile.png" loading="lazy" class="ris-card-list__themes-img"
                     :alt="item.name">
                 <h2 class="ris-h2">
                     {{ item.name }}

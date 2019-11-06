@@ -39,7 +39,7 @@
                 position: fixed;
                 top: 0;
                 width: 100%;
-                z-index: 1001;
+                z-index: $zi-nav-menu-overlay-active;
 
                 & > #{$base}__menu {
                     display: block;
@@ -86,7 +86,7 @@
             padding-right: $indent-sm;
             position: relative;
             text-transform: uppercase;
-            z-index: 101;
+            z-index: $zi-nav-menu;
 
             @include breakpoint($bp-tablet-min) {
                 display: none;

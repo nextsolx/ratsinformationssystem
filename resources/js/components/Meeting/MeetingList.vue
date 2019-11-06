@@ -29,14 +29,13 @@ export default {
                 this.currentPage += 1;
                 const cardList = document.querySelector(this.cardListSelector);
 
-                await meeting.getMeetingList(this.currentPage)
-                    .then(res => {
-                        this.meetingList = Object.assign({}, this.meetingList, this.sortedMeetingList(res.data));
-
-                        if (res.data.length === 0) {
-                            this.emptyMeetingList = true;
-                        }
-                    });
+                const { data } = await meeting.getMeetingList(this.currentPage);
+                if (data) {
+                    this.meetingList = Object.assign({}, this.meetingList, this.sortedMeetingList(data));
+                    if (data.length === 0) {
+                        this.emptyMeetingList = true;
+                    }
+                }
 
                 this.loading = false;
                 cardList.dataset.pageLoaded = this.currentPage;

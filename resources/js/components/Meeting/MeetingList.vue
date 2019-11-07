@@ -29,12 +29,16 @@ export default {
                 this.currentPage += 1;
                 const cardList = document.querySelector(this.cardListSelector);
 
-                const { data } = await meeting.getMeetingList(this.currentPage);
-                if (data) {
-                    this.meetingList = Object.assign({}, this.meetingList, this.sortedMeetingList(data));
-                    if (data.length === 0) {
-                        this.emptyMeetingList = true;
+                try {
+                    const { data } = await meeting.getMeetingList(this.currentPage);
+                    if (data) {
+                        this.meetingList = Object.assign({}, this.meetingList, this.sortedMeetingList(data));
+                        if (data.length === 0) {
+                            this.emptyMeetingList = true;
+                        }
                     }
+                } catch (e) {
+                    console.log('getMeetingList: ', e);
                 }
 
                 this.loading = false;

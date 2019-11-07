@@ -76,26 +76,30 @@ export default {
 
                 this.toggleNavButtons();
 
-                const { data } = await meeting.getMeetingsByYearAndMonth(year, month);
-                if (data) {
-                    this.attrs = [];
-                    for (let { title, dateFrom } of data) {
-                        this.attrs.push({
-                            dates: [
-                                dateFrom
-                            ],
-                            popover: {
-                                label: title
-                            },
-                            dot: {
-                                backgroundColor:
-                                    moment(dateFrom).isBefore(new Date())
-                                        ? '#ccc'
-                                        : moment().format("YYYY-MM-DD") === moment(dateFrom).format("YYYY-MM-DD") ? '#fff' : '#ed1c24',
-                            },
-                        });
+                try {
+                    const { data } = await meeting.getMeetingsByYearAndMonth(year, month);
+                    if (data) {
+                        this.attrs = [];
+                        for (let { title, dateFrom } of data) {
+                            this.attrs.push({
+                                dates: [
+                                    dateFrom
+                                ],
+                                popover: {
+                                    label: title
+                                },
+                                dot: {
+                                    backgroundColor:
+                                        moment(dateFrom).isBefore(new Date())
+                                            ? '#ccc'
+                                            : moment().format('YYYY-MM-DD') === moment(dateFrom).format('YYYY-MM-DD') ? '#fff' : '#ed1c24',
+                                },
+                            });
+                        }
+                        this.attrs = [...this.attrs, ...this.attrsToday];
                     }
-                    this.attrs = [...this.attrs, ...this.attrsToday];
+                } catch (e) {
+                    console.error('getMeetingsByYearAndMonth: ', e);
                 }
 
                 this.loading = false;

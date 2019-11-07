@@ -2,7 +2,7 @@
     background-color: $c-white;
     padding-top: 100px;
     position: relative;
-    z-index: 4;
+    z-index: $zi-footer;
 
     &__back-to-top {
         background-color: $c-white;

@@ -36,7 +36,7 @@
             box-shadow: 8px 5px 6px 0 $c-box-shadow3;
             flex-basis: calc(100% - #{$aside-width});
             position: relative;
-            z-index: 2;
+            z-index: $zi-welcome-content;
 
             &_padding {
                 padding-right: $indent-ml;
@@ -183,7 +183,7 @@
         justify-content: center;
         opacity: .8;
         text-decoration: none;
-        z-index: 1;
+        z-index: $zi-welcome-map;
 
         @include breakpoint($bp-mobile-max) {
             border-radius: $b-radius-primary;
@@ -236,7 +236,7 @@
             font-weight: 500;
             line-height: $lh-m;
             opacity: .8;
-            z-index: 2;
+            z-index: $zi-welcome-map-button;
 
             @include breakpoint($bp-tablet-min) {
                 height: 20px;

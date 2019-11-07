@@ -8,7 +8,6 @@
     position: relative;
 
     @include breakpoint($bp-mobile-max) {
-        margin-right: $indent-s;
         min-width: 42vw;
     }
 
@@ -60,6 +59,10 @@
     &_active {
         #{$base}__content {
             display: flex;
+
+            @include breakpoint($bp-mobile-max) {
+                width: calc(100vw - #{$indent-m} * 2);
+            }
         }
 
         .ris-i_filter {
@@ -78,20 +81,9 @@
         padding-bottom: $indent-m;
         padding-top: $indent-m;
         position: absolute;
-        right: auto;
-        top: calc(100% + 15px);
-        transform: translateX(-50%);
-        z-index: 101;
-
-        @include breakpoint($bp-mobile-max) {
-            left: 100%;
-            width: calc(100vw - #{$indent-m * 2});
-        }
-
-        @include breakpoint($bp-tablet-min) {
-            left: 50%;
-            width: 100%;
-        }
+        left: 0;
+        width: inherit;
+        z-index: $zi-filter-content;
 
         #{$base}-buttons__title {
             font-weight: normal;

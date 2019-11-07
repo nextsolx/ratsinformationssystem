@@ -1,6 +1,6 @@
 .tooltip {
     display: $c-black;
-    z-index: 10000;
+    z-index: $zi-plugin-tooltip;
 
     .tooltip-inner {
         background: $c-black;
@@ -16,7 +16,7 @@
         position: absolute;
         margin: 5px;
         border-color: $c-black;
-        z-index: 1;
+        z-index: $zi-plugin-tooltip-arrow;
     }
 
     &[x-placement^="top"] {

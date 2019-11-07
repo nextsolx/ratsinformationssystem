@@ -1,9 +1,8 @@
 <script>
 import Vue from 'vue';
 import VCalendar from 'v-calendar';
-import noticeMixin from '../mixins/NoticeMixin';
 
-const axios = require('axios');
+import meeting from '../api/meeting';
 const moment = require('moment');
 
 Vue.use(VCalendar, {
@@ -23,7 +22,6 @@ Vue.use(VCalendar, {
 
 export default {
     name: 'CalendarPlugin',
-    mixins: [ noticeMixin ],
     data: () => ({
         attrs: [],
         attrsToday: [
@@ -64,50 +62,48 @@ export default {
             let weekdaysAndWeeks = document.querySelectorAll('.c-weekdays, .c-weeks');
             weekdaysAndWeeks.forEach(el => el.classList.toggle('hidden'));
         },
-        disableEnableNavButtons() {
+        toggleNavButtons() {
             const navButtons = document.querySelectorAll(this.navButtons);
             navButtons.forEach(el => {
                 el.style.pointerEvents = this.loading ? 'none' : 'auto';
             });
         },
-        loadMeetings(year = this.currentYear, month = this.currentMonth) {
+        async loadMeetings(year, month) {
             if (!this.loading) {
                 this.loading = true;
                 this.currentYear = year;
                 this.currentMonth = month;
 
-                this.disableEnableNavButtons();
+                this.toggleNavButtons();
 
-                axios
-                    .get(`/api/meetings?year=${this.currentYear}&month=${this.currentMonth}`)
-                    .then(res => {
+                try {
+                    const { data } = await meeting.getMeetingsByYearAndMonth(year, month);
+                    if (data) {
                         this.attrs = [];
-
-                        if (res.data.data.length > 0) {
-                            for (let { title, dateFrom } of res.data.data) {
-                                this.attrs.push({
-                                    dates: [
-                                        dateFrom
-                                    ],
-                                    popover: {
-                                        label: title
-                                    },
-                                    dot: {
-                                        backgroundColor:
-                                            moment(dateFrom).isBefore(new Date())
-                                                ? '#ccc'
-                                                : moment(dateFrom).isSame(new Date()) ? '#fff' : '#ed1c24',
-                                    },
-                                });
-                            }
+                        for (let { title, dateFrom } of data) {
+                            this.attrs.push({
+                                dates: [
+                                    dateFrom
+                                ],
+                                popover: {
+                                    label: title
+                                },
+                                dot: {
+                                    backgroundColor:
+                                        moment(dateFrom).isBefore(new Date())
+                                            ? '#ccc'
+                                            : moment().format('YYYY-MM-DD') === moment(dateFrom).format('YYYY-MM-DD') ? '#fff' : '#ed1c24',
+                                },
+                            });
                         }
-
                         this.attrs = [...this.attrs, ...this.attrsToday];
-                    })
-                    .finally(() => {
-                        this.loading = false;
-                        this.disableEnableNavButtons();
-                    });
+                    }
+                } catch (e) {
+                    console.error('getMeetingsByYearAndMonth: ', e);
+                }
+
+                this.loading = false;
+                this.toggleNavButtons();
             }
         },
         navClicked(page) {
@@ -120,8 +116,8 @@ export default {
             }
         },
     },
-    mounted() {
-        this.loadMeetings();
+    created() {
+        this.loadMeetings(this.currentYear, this.currentMonth);
     }
 };
 </script>

@@ -221,7 +221,7 @@ export default {
                                 class="ris-global-search-content__item"
                                 v-for="(topic, index) in topicsList"
                                 v-show="(index < 3) || activeTab === 'Themen'"
-                                :key="topic.id">
+                                :key="`${index}-${topic.id}`">
                                 <theme-widget :filter-value="inputValue" :topic="topic" />
                             </li>
                         </ul>

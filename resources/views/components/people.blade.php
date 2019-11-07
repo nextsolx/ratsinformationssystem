@@ -9,7 +9,7 @@
         href="{{ route('person', $person->id) }}"
         aria-label="{{ $person->name }}"
     >
-        <img src="{{ $person->photo ? $person->photo : '/img/thumbnail-big-people.svg' }}"
+        <img src="{{ $person->photo ? $person->photo : '/img/thumbnail-avatar-blue.png' }}"
             alt="{{ $person->name }}" class="ris-people__img ris-welcome__people-img"
         />
         <div>

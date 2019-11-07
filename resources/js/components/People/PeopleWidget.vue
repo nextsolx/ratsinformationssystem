@@ -23,7 +23,9 @@ export default {
     <a
         :href="'/personen/' + person.id"
         class="ris-person">
-        <img :src="person.photo" class="ris-person__image" alt="person">
+        <img v-if="person.photo" :src="person.photo" class="ris-person__image" :alt="person.name">
+        <img v-else src="/img/thumbnail-avatar-blue.png" class="ris-person__image" :alt="person.name">
+
         <div class="ris-person__content">
             <h3 class="ris-person__title" v-html="selectionFilter(person.name)" />
             <span class="ris-person__info" v-if="person.party">{{ person.party }}</span>

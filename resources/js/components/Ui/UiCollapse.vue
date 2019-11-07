@@ -3,7 +3,7 @@ import clickOutSide from '../../tools/clickOutSide';
 import location from '../../api/location';
 import { decodeHashParams } from '../../tools/helpers';
 export default {
-    name: 'Collapse',
+    name: 'UiCollapse',
     directives: {
         'outside': clickOutSide
     },

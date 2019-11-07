@@ -3,7 +3,7 @@
 
     margin-right: 24px;
     position: fixed;
-    z-index: 1010;
+    z-index: $zi-plugin-notice;
 
     @include breakpoint($bp-mobile-max) {
         width: 280px;

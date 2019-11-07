@@ -25,6 +25,6 @@ export default {
             <h3 class="ris-h3 ris-map-widget__title" v-html="selectionFilter(options.streetAddress)" />
             <span class="ris-map-widget__sub-title" v-html="selectionFilter(`Stadt ${options.city}, PLZ: ${options.postalCode}`)" />
         </div>
-        <img src="/img/thumbnail-map-tile.png" class="ris-map-widget__image">
+        <img src="/img/thumbnail-map-tile.png" loading="lazy" class="ris-map-widget__image">
     </div>
 </template>

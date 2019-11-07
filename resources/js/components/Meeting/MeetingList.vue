@@ -38,7 +38,7 @@ export default {
                         }
                     }
                 } catch (e) {
-                    console.log('getMeetingList: ', e);
+                    console.error('getMeetingList: ', e);
                 }
 
                 this.loading = false;

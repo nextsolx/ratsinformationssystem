@@ -83,7 +83,7 @@
         position: absolute;
         left: 0;
         width: inherit;
-        z-index: 101;
+        z-index: $zi-filter-content;
 
         #{$base}-buttons__title {
             font-weight: normal;

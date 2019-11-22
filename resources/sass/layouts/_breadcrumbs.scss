@@ -14,29 +14,35 @@
     &-map {
         margin: 16px 0;
         width: 100%;
+
         @include breakpoint($bp-tablet-max) {
             margin: 0;
             padding: 16px 0 16px 16px;
         }
+
         &.hidden {
             @include breakpoint($bp-tablet-max) {
                 display: none;
             }
         }
+
         &__item {
             flex-shrink: 1;
+
             &:last-child {
                 flex-shrink: 0;
+
                 .ris-breadcrumbs__button {
                     cursor: default;
                     font-weight: bold;
                 }
             }
+
             &:not(:last-child) {
-                &:after {
+                &::after {
+                    color: $c-gray7;
                     content: 'I';
                     font-family: $ff-ris-font-icons;
-                    color: #ccc;
                     font-size: 12px;
                     padding-left: 8px;
                     padding-right: 8px;
@@ -58,16 +64,16 @@
     }
 
     &__button {
-        outline: none;
-        border: none;
         background: transparent;
+        border: 0;
+        outline: none;
         padding: 0;
     }
 
     &__item {
         align-items: center;
-        display: inline-flex;
         color: $c-gray2;
+        display: inline-flex;
         font-family: $ff-helvetica-neue;
         font-size: $fs-l;
         line-height: $lh-l;

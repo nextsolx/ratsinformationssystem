@@ -21,9 +21,9 @@
             background-color: $c-white2;
             color: $c-link;
             display: inline-flex;
-            padding: $indent-sm;
-            min-width: auto;
             font-weight: 500;
+            min-width: auto;
+            padding: $indent-sm;
 
             @include breakpoint($bp-mobile-max) {
                 display: none;

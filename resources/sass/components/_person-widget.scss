@@ -1,61 +1,72 @@
 .ris-person {
     $this: &;
-    min-height: 200px;
-    width: 112px;
-    text-decoration: none;
-    box-shadow: 0 1px 6px 0 $c-box-shadow3;
+
     border-radius: 4px;
+    box-shadow: 0 1px 6px 0 $c-box-shadow3;
     color: $c-black;
     display: flex;
     flex-direction: column;
     justify-content: stretch;
+    min-height: 200px;
     overflow: hidden;
+    text-decoration: none;
+    width: 112px;
+
     &:hover {
         #{$this}__icon,
         #{$this}__title {
             color: $c-red;
         }
     }
+
     @include breakpoint($bp-mobile-max) {
         flex-direction: row;
-        min-height: auto;
         height: 80px;
+        min-height: auto;
         width: 100%;
     }
+
     &__image {
         height: 112px;
         max-width: 112px;
         width: 100%;
+
         @include breakpoint($bp-mobile-max) {
             height: 80px;
             max-width: 80px;
         }
     }
+
     &__content {
         padding: $indent-s;
+
         @include breakpoint($bp-mobile-max) {
             padding: $indent-m;
-            width: 100%;
             position: relative;
+            width: 100%;
         }
     }
+
     &__title {
         font-size: $fs-l;
-        margin: 0;
         hyphens: auto;
+        margin: 0;
         word-break: break-word;
     }
+
     &__info {
-        font-size: $fs-l;
         color: $c-gray8;
+        font-size: $fs-l;
     }
+
     &__icon {
         display: none;
+        font-size: 10px;
         position: absolute;
+        right: 20px;
         top: 50%;
         transform: translateY(-50%);
-        right: 20px;
-        font-size: 10px;
+
         @include breakpoint($bp-mobile-max) {
             display: block;
         }

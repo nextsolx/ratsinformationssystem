@@ -71,8 +71,8 @@
 
         &-number {
             display: block;
-            padding-bottom: $indent-s;
             overflow: hidden;
+            padding-bottom: $indent-s;
             text-overflow: ellipsis;
             white-space: nowrap;
         }

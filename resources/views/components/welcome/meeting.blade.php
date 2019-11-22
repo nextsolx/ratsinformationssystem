@@ -18,6 +18,7 @@
         @if ($calendar->location)
             <div class="ris-body-2 ris-card-list__calendar-place">
                 <span class="ris-i ris-i_marker-with-dot"></span>
+                <?php // @todo --- need to add real location data for welcome page ?>
                 Rathaus Spanischer Bau, Theodor-Heuss-Saal, Raum-Nr. A 119
             </div>
         @endif

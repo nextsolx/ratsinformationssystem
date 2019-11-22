@@ -53,7 +53,7 @@ export default {
         navButtons: '.c-arrow-layout',
         meetingList: [],
         currentYear: moment().year(),
-        currentMonth: moment().month() + 1,
+        currentMonth: moment().format('M'),
         loading: false,
         infoTitle: 'Calendar',
     }),
@@ -110,9 +110,9 @@ export default {
             this.loadMeetings(page.year, page.month);
         },
         dayClicked(day) {
-            const $el = document.querySelector(`#_${day.day}_${day.month}_${day.year}`);
-            if ($el) {
-                $el.scrollIntoView({ behavior: 'smooth' });
+            const date = document.querySelector(`#_${day.day}_${day.month}_${day.year}`);
+            if (date) {
+                date.scrollIntoView({ behavior: 'smooth' });
             }
         },
     },

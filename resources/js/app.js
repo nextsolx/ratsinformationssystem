@@ -42,7 +42,6 @@ new Vue({
     components: {
         HeaderApp: () => import('./components/HeaderApp'),
         FooterApp: () => import('./components/FooterApp'),
-        CalendarPlugin: () => import('./components/CalendarPlugin'),
         UiCollapse: () => import('./components/Ui/UiCollapse'),
         UiDropdown: () => import('./components/Ui/UiDropdown'),
         ThemeOverview: () => import('./components/Theme/ThemeOverview'),

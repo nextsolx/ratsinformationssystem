@@ -180,28 +180,23 @@ class TopicController extends Controller
         $postalCode = $request->input('postalCode');
 
         $district = $request->input('district');
-        $topicTitle = '';
 
         $section=$request->input('section');
 
-        if($section === 'new'){
-            $paperQuery = Paper::with(Paper::$basicScope)->sort()->new();
-            $breadcrumbs = ['Neue Themen' => route('themes')];
-            $topicTitle = 'Neue Themen';
-        }
-
         if($section === 'updated'){
             $paperQuery = Paper::with(Paper::$basicScope)->sort()->updated();
-            $breadcrumbs = ['Aktualisierte Themen' => route('themes')];
+            $breadcrumbs = ['Aktualisierte Themen' => route('themes', 'section=updated')];
             $topicTitle = 'Kürzlich aktualisiert';
-        }
-
-        if($section === 'finished'){
+        } elseif ($section === 'finished'){
             $paperQuery = Paper::with(Paper::$basicScope)->sort()->finished();
-            $breadcrumbs = ['Abgeschlossene Themen' => route('themes')];
+            $breadcrumbs = ['Abgeschlossene Themen' => route('themes', 'section=finished')];
             $topicTitle = 'Kürzlich abgeschlossen';
+        } else {
+            // the 'new' topic type by default if section type not exist or pass by direct link
+            $paperQuery = Paper::with(Paper::$basicScope)->sort()->new();
+            $breadcrumbs = ['Neue Themen' => route('themes', 'section=new')];
+            $topicTitle = 'Neue Themen';
         }
-
 
         if ($postalCode) {
             $paperQuery->whereHas('locations', function (Builder $query) use ($postalCode) {

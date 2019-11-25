@@ -35,7 +35,7 @@ class PersonenController extends Controller
             'members' => $peopleData->data,
             'links' => $peopleData->links,
             'breadcrumbs' => [
-                'Personen' => route('theme-overview'),
+                'Personen' => route('people-list'),
             ]
         ]);
     }

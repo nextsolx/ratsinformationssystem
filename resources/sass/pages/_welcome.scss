@@ -236,6 +236,8 @@
             font-weight: 500;
             line-height: $lh-m;
             opacity: .8;
+            padding-left: $indent-m;
+            padding-right: $indent-m;
             z-index: $zi-welcome-map-button;
 
             @include breakpoint($bp-tablet-min) {

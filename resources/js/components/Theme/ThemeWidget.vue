@@ -31,10 +31,8 @@ export default {
         class="ris-theme-item"
         :href="'/thema/' + topic.id"
         :title="topic.name">
-        <img src="/img/thumbnail-bridge-big-tile.png" class="ris-theme-item__image" alt="theme image">
         <div class="ris-theme-item__content">
             <div class="ris-theme-item__wrapper">
-                <img src="/img/thumbnail-bridge-big-tile.png" class="ris-theme-item__image-mobi" alt="theme image">
                 <h3 class="ris-theme-item__title" v-html="selectionFilter(topic.name)" />
             </div>
             <div class="ris-theme-item__info">

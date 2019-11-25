@@ -37,6 +37,8 @@ mix.webpackConfig({
                         options: mix.config.babel(),
                     },
                 ],
+                // don't exclude node_modules it generate IE11 syntax error
+                // exclude /node_modules/
             },
         ],
     },

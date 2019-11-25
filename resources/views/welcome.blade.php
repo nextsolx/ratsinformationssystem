@@ -19,13 +19,13 @@
                         Wählen Sie Ihren Stadtbezirk und finden Sie Themen in Ihrer Umgebung.
                     </div>
 
-                    <a class="ris-welcome-map ris-welcome-map__mobile" title="Karte öffnen"
+                    <a class="ris-welcome-map ris-welcome-map__mobile" title="Themen über karte erkunden"
                         href="{{ route('map') }}"
                     >
                         <img src="/img/map-mobile-thumbnail.jpg" loading="lazy"
-                            class="ris-welcome-map__img" alt="Karte öffnen" />
+                            class="ris-welcome-map__img" alt="Themen über karte erkunden" />
                         <div class="ris-button ris-button_primary ris-button_bg-gray2">
-                            Karte öffnen
+                            Themen über karte erkunden
                         </div>
                     </a>
 
@@ -34,60 +34,14 @@
                             Die 9 Stadtbezirke in Köln
                         </div>
                         <div>
-                            <a href="{{ route('theme-overview', 'district=Innenstadt') }}"
-                                class="ris-link ris-button ris-button_secondary ris-button_has-shadow"
-                                title="Innenstadt"
-                            >
-                                Innenstadt
-                            </a>
-                            <a href="{{ route('theme-overview', 'district=Rodenkirchen') }}"
-                                class="ris-link ris-button ris-button_secondary ris-button_has-shadow"
-                                title="Rodenkirchen"
-                            >
-                                Rodenkirchen
-                            </a>
-                            <a href="{{ route('theme-overview', 'district=Lindenthal') }}"
-                                class="ris-link ris-button ris-button_secondary ris-button_has-shadow"
-                                title="Lindenthal"
-                            >
-                                Lindenthal
-                            </a>
-                            <a href="{{ route('theme-overview', 'district=Ehrenfeld') }}"
-                                class="ris-link ris-button ris-button_secondary ris-button_has-shadow"
-                                title="Ehrenfeld"
-                            >
-                                Ehrenfeld
-                            </a>
-                            <a href="{{ route('theme-overview', 'district=Nippes') }}"
-                                class="ris-link ris-button ris-button_secondary ris-button_has-shadow"
-                                title="Nippes"
-                            >
-                                Nippes
-                            </a>
-                            <a href="{{ route('theme-overview', 'district=Chorweiler') }}"
-                                class="ris-link ris-button ris-button_secondary ris-button_has-shadow"
-                                title="Chorweiler"
-                            >
-                                Chorweiler
-                            </a>
-                            <a href="{{ route('theme-overview', 'district=Porz') }}"
-                                class="ris-link ris-button ris-button_secondary ris-button_has-shadow"
-                                title="Porz"
-                            >
-                                Porz
-                            </a>
-                            <a href="{{ route('theme-overview', 'district=Kalk') }}"
-                                class="ris-link ris-button ris-button_secondary ris-button_has-shadow"
-                                title="Kalk"
-                            >
-                                Kalk
-                            </a>
-                            <a href="{{ route('theme-overview', 'district=Mülheim') }}"
-                                class="ris-link ris-button ris-button_secondary ris-button_has-shadow"
-                                title="Mülheim"
-                            >
-                                Mülheim
-                            </a>
+                            @foreach ($district_list as $district)
+                                <a href="{{ route('map', 'district=' . $district) }}"
+                                    class="ris-link ris-button ris-button_secondary ris-button_has-shadow"
+                                    title="{{ $district }}"
+                                >
+                                    {{ $district }}
+                                </a>
+                            @endforeach
                         </div>
                     </div>
                 </section>
@@ -175,13 +129,13 @@
         </div>
 
         <div class="ris-welcome__widget">
-            <a class="ris-welcome-map ris-welcome-map__desktop" title="Karte öffnen"
+            <a class="ris-welcome-map ris-welcome-map__desktop" title="Themen über karte erkunden"
                href="{{ route('map') }}"
             >
                 <img src="/img/map-desktop-thumbnail.jpg" loading="lazy"
-                    class="ris-welcome-map__img" alt="Karte öffnen" />
+                    class="ris-welcome-map__img" alt="Themen über karte erkunden" />
                 <div class="ris-button ris-button_primary ris-button_bg-gray2">
-                    Karte öffnen
+                    Themen über karte erkunden
                 </div>
             </a>
         </div>

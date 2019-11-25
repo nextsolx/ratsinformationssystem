@@ -31,6 +31,10 @@ export default {
             type: Object,
             default: () => {},
         },
+        districtQuery: {
+            type: String,
+            default: '',
+        }
     },
     methods: {
         async getThemes () {
@@ -136,7 +140,11 @@ export default {
         }
     },
     created() {
-        this.getThemes();
+        if (this.districtQuery) {
+            this.getDistrictThemes(this.districtQuery);
+        } else {
+            this.getThemes();
+        }
     }
 };
 </script>
@@ -146,6 +154,7 @@ export default {
         <map-aside-navigation
             @changeDirection="changeDirection"
             :call-navigation="callNavigation"
+            :district-query="districtQuery"
             @mouse-handle="$emit('mouse-handle', $event)"
             @click-handle="$emit('click-handle', $event)"
             @theme-all-district-postcode-list="$emit('theme-all-district-postcode-list', $event)"

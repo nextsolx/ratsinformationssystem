@@ -2,6 +2,7 @@
 import L from 'leaflet';
 import { LMap, LTileLayer, LPopup, LPolygon, LMarker } from 'vue2-leaflet';
 require('leaflet-fullscreen');
+import { decodeHashParams } from '../../tools/helpers';
 
 import location from '../../api/location';
 import cityData from '../../api/city.json';
@@ -25,9 +26,9 @@ export default {
     },
     data() {
         return {
-            zoom: 12,
+            zoom: null,
             zoomSnap: 0.5,
-            center: L.latLng(50.9360, 6.9602),
+            center: null,
             url:'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
             attribution:'&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
             icon: L.icon({
@@ -83,6 +84,7 @@ export default {
             subdistrictPostcodeList: [],
             themeLocationList: [],
             themeAllDistrictPostcodeList: [],
+            districtQuery: '',
         };
     },
     computed: {
@@ -192,6 +194,9 @@ export default {
             } else {
                 return this.secondaryColor;
             }
+        },
+        urlQuery () {
+            return window.location.search;
         },
     },
     methods: {
@@ -515,6 +520,10 @@ export default {
         setThemeAllDistrictPostcodeList(postcodeList) {
             this.themeAllDistrictPostcodeList = [];
             this.themeAllDistrictPostcodeList = postcodeList;
+        },
+        urlQueryClear() {
+            const hrefWithoutQuery = window.location.href.replace(/\?.*$/, '');
+            window.history.replaceState('', document.title, hrefWithoutQuery);
         }
     },
     created() {
@@ -559,14 +568,25 @@ export default {
             const zoomData = this.getZoomData('city');
             this.zoomToSelectedArea(zoomData.latLngBound);
         });
-    },
-    mounted() {
+
         this.areaCity = this.getCityList();
         this.areaDistrict = this.getDistrictList();
         this.areaSubdistrict = this.getSubdistrictList();
         this.areaPostcode = this.getPostcodeList();
 
-        this.zoomToSelectedArea(this.areaCity.latLngBound);
+        const { district } = decodeHashParams(this.urlQuery.substr(1));
+        if (district) {
+            // zoom by district via get query
+            this.selectByNavigation('district', district);
+            this.districtQuery = district;
+            // clear query, this will not confuse the user in the future navigation by areas
+            this.urlQueryClear();
+        } else {
+            // zoom by city
+            this.zoom = 12;
+            this.center = L.latLng(50.9360, 6.9602);
+            this.zoomToSelectedArea(this.areaCity.latLngBound);
+        }
 
         // add the fullscreen button
         this.$nextTick(() => {
@@ -579,6 +599,7 @@ export default {
 <template>
     <div>
         <map-aside class="ris-map-desktop-aside"
+            :district-query="districtQuery"
             @mouse-handle="hoverByNavigation($event.type, $event.name)"
             @click-handle="selectByNavigation($event.type, $event.name)"
             @theme-location-list="setThemeLocationList($event)"

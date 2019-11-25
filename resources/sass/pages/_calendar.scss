@@ -1,6 +1,9 @@
 .ris-calendar {
     &__headline {
+        align-items: center;
         border-bottom: 1px solid $c-gray7;
+        display: flex;
+        justify-content: space-between;
 
         @include breakpoint($bp-mobile-max) {
             font-size: $fs-xxxl;
@@ -12,6 +15,23 @@
             font-size: $fs-xxxxl;
             line-height: $lh-xxl;
             padding: $indent-ml;
+        }
+
+        .ris-button {
+            background-color: $c-white2;
+            color: $c-link;
+            display: inline-flex;
+            font-weight: 500;
+            min-width: auto;
+            padding: $indent-sm;
+
+            @include breakpoint($bp-mobile-max) {
+                display: none;
+            }
+        }
+
+        .ris-i {
+            margin-right: $indent-sm;
         }
     }
 

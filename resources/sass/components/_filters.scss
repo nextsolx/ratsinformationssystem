@@ -77,11 +77,11 @@
         box-shadow: 0 1px 6px 0 $c-box-shadow2;
         display: none;
         flex-direction: column;
+        left: 0;
         overflow: hidden;
         padding-bottom: $indent-m;
         padding-top: $indent-m;
         position: absolute;
-        left: 0;
         width: inherit;
         z-index: $zi-filter-content;
 

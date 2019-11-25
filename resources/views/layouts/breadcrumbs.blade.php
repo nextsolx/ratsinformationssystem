@@ -11,20 +11,23 @@
 
     @if (isset($breadcrumbs))
         @if (is_array($breadcrumbs))
-            <li class="ris-breadcrumbs__item">
-                <a href="{{ array_values($breadcrumbs)[0] }}" title="{{array_keys($breadcrumbs)[0] }}"
-                        class="ris-link"
-                >
-                    <span>{{ array_keys($breadcrumbs)[0] }}</span>
-                    <span class="ris-i ris-i_chevron-right"></span>
-                </a>
-            </li>
-        @endif
-
-        @if (count($breadcrumbs)>1)
-            <li class="ris-breadcrumbs__item">
-                <span>{{ array_keys($breadcrumbs)[1] }}</span>
-            </li>
+            @foreach ($breadcrumbs as $breadcrumbName => $breadcrumbLink)
+                @if ($loop->index === 0)
+                    <li class="ris-breadcrumbs__item">
+                        <a href="{{ $breadcrumbLink }}" title="{{ $breadcrumbName }}"
+                                class="ris-link"
+                        >
+                            <span>{{ $breadcrumbName }}</span>
+                            <span class="ris-i ris-i_chevron-right"></span>
+                        </a>
+                    </li>
+                @else
+                    <li class="ris-breadcrumbs__item">
+                        <span>{{ $breadcrumbName }}</span>
+                        <span class="ris-i ris-i_chevron-right"></span>
+                    </li>
+                @endif
+            @endforeach
         @endif
     @endif
 </ol>

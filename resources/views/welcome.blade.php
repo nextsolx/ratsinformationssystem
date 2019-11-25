@@ -70,7 +70,7 @@
                         <div class="ris-title">Aktuelle Sitzungen</div>
 
                         @if (isset($meetings))
-                            @include('components.calendar',
+                            @include('components.welcome.meeting',
                                     ['calendar_list' => $meetings, 'limit' => 3]
                                 )
 

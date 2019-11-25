@@ -32,8 +32,8 @@ $breadcrumbs-height-mobile: 56px;
         }
 
         @include breakpoint($bp-tablet-max) {
-            width: 100%;
             height: calc(100vh - #{$header-height} - #{$aside-height-mobile});
+            width: 100%;
         }
 
         @include breakpoint($bp-mobile-max) {

@@ -1,14 +1,14 @@
 .ris-map-desktop-aside {
-    width: $aside-width;
-    padding: 0 $indent-m;
     height: calc(100vh - 112px);
     overflow-y: scroll;
+    padding: 0 $indent-m;
+    width: $aside-width;
 
     @include breakpoint($bp-tablet-max) {
+        height: auto;
+        padding: 0;
         width: 100%;
         z-index: $zi-map-aside;
-        padding: 0;
-        height: auto;
     }
 
     &__nav {
@@ -17,17 +17,18 @@
         }
 
         &-btn {
-            border: none;
             background-color: $c-white2;
+            border: 0;
             color: $c-link;
             cursor: pointer;
             font-size: $fs-l;
-            padding: $indent-sm;
-            width: 100%;
-            text-align: left;
             font-weight: bold;
             margin-bottom: $indent-ml;
             outline: none;
+            padding: $indent-sm;
+            text-align: left;
+            width: 100%;
+
             @include breakpoint($bp-tablet-max) {
                 display: none;
             }
@@ -41,6 +42,7 @@
             }
         }
     }
+
     &__heading {
         @include breakpoint($bp-tablet-max) {
             display: none;
@@ -57,14 +59,14 @@
     }
 
     &-list {
-        list-style-type: none;
-        box-shadow: 0 1px 6px 0 $c-box-shadow2;
-        padding: 0;
         border-top-left-radius: $b-radius-primary;
         border-top-right-radius: $b-radius-primary;
+        box-shadow: 0 1px 6px 0 $c-box-shadow2;
+        list-style-type: none;
         margin: 0;
         max-height: 153px;
         overflow: hidden;
+        padding: 0;
         transition: all .7s ease-in-out;
 
         &__item {
@@ -72,16 +74,16 @@
         }
 
         &__button {
-            padding: $indent-m $indent-xl $indent-m $indent-m;
+            background-color: $c-light-primary;
+            border: 0;
+            border-radius: $b-radius-primary;
             font-size: $fs-l;
             font-weight: bold;
+            outline: none;
+            padding: $indent-m $indent-xl $indent-m $indent-m;
             position: relative;
             text-align: left;
             width: 100%;
-            border: none;
-            background-color: $c-light-primary;
-            outline: none;
-            border-radius: $b-radius-primary;
 
             &:hover {
                 background-color: $c-white2;
@@ -89,33 +91,33 @@
             }
 
             .ris-i_add {
+                color: $c-secondary;
+                left: calc(100% - #{$indent-xl});
                 position: absolute;
                 top: 50%;
-                left: calc(100% - #{$indent-xl});
                 transform: translateY(-50%);
-                color: $c-secondary;
             }
         }
 
         &.isActive {
-            transition: all .7s ease-in-out;
             max-height: none;
+            transition: all .7s ease-in-out;
         }
     }
 
     &__control {
-        color: $c-link;
-        text-align: center;
-        font-weight: 400;
-        padding: $indent-m 0;
-        width: 100%;
         background-color: $c-light-primary;
-        outline: none;
-        border: none;
+        border: 0;
         border-bottom-left-radius: $b-radius-primary;
         border-bottom-right-radius: $b-radius-primary;
         box-shadow: 0 1px 6px 0 $c-box-shadow2;
+        color: $c-link;
         cursor: pointer;
+        font-weight: 400;
+        outline: none;
+        padding: $indent-m 0;
+        text-align: center;
+        width: 100%;
 
         .ris-i_expand-more {
             font-size: $fs-m;
@@ -127,13 +129,15 @@
             }
         }
     }
+
     &__subtitle {
-        margin: $indent-ml 0 $indent-sm 0;
+        margin: $indent-ml 0 $indent-sm;
 
         @include breakpoint($bp-tablet-max) {
             display: none;
         }
     }
+
     &__caption {
         color: $c-secondary;
 
@@ -141,40 +145,42 @@
             display: none;
         }
     }
+
     &-theme-list {
-        list-style-type: none;
-        padding: 0;
-        font-size: $fs-l;
         $this: &;
 
+        font-size: $fs-l;
+        list-style-type: none;
+        padding: 0;
+
         @include breakpoint($bp-tablet-max) {
+            background-color: $c-light-primary;
+            display: flex;
+            margin: 0;
+            overflow-x: scroll;
+            overflow-y: hidden;
+            padding: $indent-s 0;
             position: fixed;
             top: 100%;
             transform: translateY(-100%);
-            overflow-x: scroll;
-            overflow-y: hidden;
-            display: flex;
             width: 100%;
             z-index: $zi-map-aside-theme-list;
-            background-color: $c-light-primary;
-            padding: $indent-s 0;
-            margin: 0;
         }
 
         &__item {
-            padding: $indent-m;
-            margin-bottom: $indent-m;
-            font-size: $fs-l;
             border: 2px solid transparent;
             border-radius: $b-radius-primary;
             box-shadow: 0 1px 6px 0 $c-box-shadow2;
+            font-size: $fs-l;
+            margin-bottom: $indent-m;
+            padding: $indent-m;
 
             @include breakpoint($bp-tablet-max) {
+                box-sizing: border-box;
+                height: 90px;
                 margin: 0 $indent-s 0 0;
                 max-width: 150px;
                 padding: $indent-s;
-                height: 90px;
-                box-sizing: border-box;
 
                 &:first-child {
                     margin-left: $indent-s;
@@ -184,7 +190,7 @@
             &:hover {
                 border-color: $c-gray;
 
-                @include breakpoint($bp-tablet-max){
+                @include breakpoint($bp-tablet-max) {
                     #{$this}__heading,
                     #{$this}__btn {
                         font-weight: bold;
@@ -193,14 +199,14 @@
             }
 
             &.ris-loading-handle {
-                padding: 0;
                 box-shadow: none;
+                padding: 0;
             }
         }
 
         &__link {
-            display: flex;
             cursor: pointer;
+            display: flex;
             text-decoration: none;
         }
 
@@ -216,8 +222,8 @@
 
         &__info {
             display: flex;
-            justify-content: space-between;
             flex-wrap: nowrap;
+            justify-content: space-between;
         }
 
         &__refer {
@@ -253,10 +259,10 @@
         }
 
         &__img {
-            height: 72px;
-            width: 72px;
-            margin-right: $indent-m;
             flex-shrink: 0;
+            height: 72px;
+            margin-right: $indent-m;
+            width: 72px;
 
             @include breakpoint($bp-tablet-max) {
                 display: none;
@@ -264,20 +270,20 @@
         }
 
         &__heading {
-            display: block;
-            margin: 0 0 $indent-m 0;
             color: $c-gray;
-            hyphens: auto;
+            display: block;
             font-size: $fs-l;
+            hyphens: auto;
+            margin: 0 0 $indent-m;
             word-break: break-word;
 
             @include breakpoint($bp-tablet-max) {
-                max-height: 36px;
-                text-overflow: ellipsis;
-                overflow: hidden;
-                word-break: unset;
-                hyphens: unset;
                 font-weight: normal;
+                hyphens: unset;
+                max-height: 36px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                word-break: unset;
             }
         }
     }

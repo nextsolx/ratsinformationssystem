@@ -33,8 +33,6 @@
                                         href="{{ route('theme', $topic->id) }}"
                                     >
                                         <div class="ris-top-card-list__item-top">
-                                            <img src="/img/thumbnail-bridge-big-tile.png" loading="lazy"
-                                                class="ris-top-card-list__item-img" alt="{{ $topic->name }}"/>
                                             <div class="ris-body-1">
                                                 {{ $topic->name }}
                                             </div>

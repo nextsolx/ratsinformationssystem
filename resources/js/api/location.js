@@ -6,7 +6,9 @@ export default {
         return axios.get(`/api/districts?district=${district}`).then(res => res.data);
     },
     getPostcodes (district, subdist) {
+        district = district.replace(/\//, '-');
         district = encodeURIComponent(district);
+        subdist = subdist.replace(/\//, '-');
         subdist = encodeURIComponent(subdist);
         return axios.get(`/api/districts?district=${district}&subDistrict=${subdist}`).then(res => res.data);
     },

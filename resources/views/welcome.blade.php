@@ -19,13 +19,13 @@
                         Wählen Sie Ihren Stadtbezirk und finden Sie Themen in Ihrer Umgebung.
                     </div>
 
-                    <a class="ris-welcome-map ris-welcome-map__mobile" title="Karte öffnen"
+                    <a class="ris-welcome-map ris-welcome-map__mobile" title="Themen über karte erkunden"
                         href="{{ route('map') }}"
                     >
                         <img src="/img/map-mobile-thumbnail.jpg" loading="lazy"
-                            class="ris-welcome-map__img" alt="Karte öffnen" />
+                            class="ris-welcome-map__img" alt="Themen über karte erkunden" />
                         <div class="ris-button ris-button_primary ris-button_bg-gray2">
-                            Karte öffnen
+                            Themen über karte erkunden
                         </div>
                     </a>
 
@@ -175,13 +175,13 @@
         </div>
 
         <div class="ris-welcome__widget">
-            <a class="ris-welcome-map ris-welcome-map__desktop" title="Karte öffnen"
+            <a class="ris-welcome-map ris-welcome-map__desktop" title="Themen über karte erkunden"
                href="{{ route('map') }}"
             >
                 <img src="/img/map-desktop-thumbnail.jpg" loading="lazy"
-                    class="ris-welcome-map__img" alt="Karte öffnen" />
+                    class="ris-welcome-map__img" alt="Themen über karte erkunden" />
                 <div class="ris-button ris-button_primary ris-button_bg-gray2">
-                    Karte öffnen
+                    Themen über karte erkunden
                 </div>
             </a>
         </div>

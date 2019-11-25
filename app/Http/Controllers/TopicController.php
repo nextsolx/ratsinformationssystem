@@ -165,8 +165,8 @@ class TopicController extends Controller
             'topics_finished' => $finished->data,
             'topic_title' => $topicTitle,
             'district_list' => [
-                'Innenstadt', 'Rodenkirchen', 'Lindenthal', 'Ehrenfeld',
-                'Nippes',  'Chorweiler', 'Porz',  'Kalk',  'Mülheim'
+                'Chorweiler', 'Ehrenfeld', 'Innenstadt', 'Kalk',
+                'Lindenthal', 'Mülheim', 'Nippes', 'Porz', 'Rodenkirchen'
             ],
             'links' => $topics->links,
             'breadcrumbs' => [
@@ -224,8 +224,8 @@ class TopicController extends Controller
             'theme_type' => $section,
             'topic_title' => $topicTitle,
             'district_list' => [
-                'Innenstadt', 'Rodenkirchen', 'Lindenthal', 'Ehrenfeld',
-                'Nippes',  'Chorweiler', 'Porz',  'Kalk',  'Mülheim'
+                'Chorweiler', 'Ehrenfeld', 'Innenstadt', 'Kalk',
+                'Lindenthal', 'Mülheim', 'Nippes', 'Porz', 'Rodenkirchen'
             ],
             'links' => $topics->links,
             'breadcrumbs' => $breadcrumbs,

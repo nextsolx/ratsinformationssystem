@@ -34,7 +34,11 @@ class MainPageController extends Controller
         return view('welcome')->with([
             'meetings' => $meetings->data,
             'topics' => $topics->data,
-            'people' => $people->data
+            'people' => $people->data,
+            'district_list' => [
+                'Chorweiler', 'Ehrenfeld', 'Innenstadt', 'Kalk',
+                'Lindenthal', 'Mülheim', 'Nippes', 'Porz', 'Rodenkirchen'
+            ],
         ]);
     }
 

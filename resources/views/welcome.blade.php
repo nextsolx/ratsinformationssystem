@@ -34,60 +34,14 @@
                             Die 9 Stadtbezirke in Köln
                         </div>
                         <div>
-                            <a href="{{ route('theme-overview', 'district=Innenstadt') }}"
-                                class="ris-link ris-button ris-button_secondary ris-button_has-shadow"
-                                title="Innenstadt"
-                            >
-                                Innenstadt
-                            </a>
-                            <a href="{{ route('theme-overview', 'district=Rodenkirchen') }}"
-                                class="ris-link ris-button ris-button_secondary ris-button_has-shadow"
-                                title="Rodenkirchen"
-                            >
-                                Rodenkirchen
-                            </a>
-                            <a href="{{ route('theme-overview', 'district=Lindenthal') }}"
-                                class="ris-link ris-button ris-button_secondary ris-button_has-shadow"
-                                title="Lindenthal"
-                            >
-                                Lindenthal
-                            </a>
-                            <a href="{{ route('theme-overview', 'district=Ehrenfeld') }}"
-                                class="ris-link ris-button ris-button_secondary ris-button_has-shadow"
-                                title="Ehrenfeld"
-                            >
-                                Ehrenfeld
-                            </a>
-                            <a href="{{ route('theme-overview', 'district=Nippes') }}"
-                                class="ris-link ris-button ris-button_secondary ris-button_has-shadow"
-                                title="Nippes"
-                            >
-                                Nippes
-                            </a>
-                            <a href="{{ route('theme-overview', 'district=Chorweiler') }}"
-                                class="ris-link ris-button ris-button_secondary ris-button_has-shadow"
-                                title="Chorweiler"
-                            >
-                                Chorweiler
-                            </a>
-                            <a href="{{ route('theme-overview', 'district=Porz') }}"
-                                class="ris-link ris-button ris-button_secondary ris-button_has-shadow"
-                                title="Porz"
-                            >
-                                Porz
-                            </a>
-                            <a href="{{ route('theme-overview', 'district=Kalk') }}"
-                                class="ris-link ris-button ris-button_secondary ris-button_has-shadow"
-                                title="Kalk"
-                            >
-                                Kalk
-                            </a>
-                            <a href="{{ route('theme-overview', 'district=Mülheim') }}"
-                                class="ris-link ris-button ris-button_secondary ris-button_has-shadow"
-                                title="Mülheim"
-                            >
-                                Mülheim
-                            </a>
+                            @foreach ($district_list as $district)
+                                <a href="{{ route('map', 'district=' . $district) }}"
+                                    class="ris-link ris-button ris-button_secondary ris-button_has-shadow"
+                                    title="{{ $district }}"
+                                >
+                                    {{ $district }}
+                                </a>
+                            @endforeach
                         </div>
                     </div>
                 </section>

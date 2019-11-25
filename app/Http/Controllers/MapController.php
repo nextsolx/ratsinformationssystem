@@ -35,8 +35,8 @@ class MapController extends Controller
         return view('map')->with([
             'topics' => $topics->data,
             'district_list' => [
-                'Innenstadt', 'Rodenkirchen', 'Lindenthal', 'Ehrenfeld',
-                'Nippes',  'Chorweiler', 'Porz',  'Kalk',  'Mülheim'
+                'Chorweiler', 'Ehrenfeld', 'Innenstadt', 'Kalk',
+                'Lindenthal', 'Mülheim', 'Nippes', 'Porz', 'Rodenkirchen'
             ],
             'links' => $topics->links,
             'breadcrumbs' => [

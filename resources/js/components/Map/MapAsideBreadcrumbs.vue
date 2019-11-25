@@ -27,6 +27,9 @@ export default {
         optionList () {
             this.checkList();
         }
+    },
+    created() {
+        this.checkList();
     }
 };
 </script>

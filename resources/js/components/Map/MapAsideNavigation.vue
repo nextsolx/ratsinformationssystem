@@ -18,6 +18,10 @@ export default {
             type: Object,
             default: () => {},
         },
+        districtQuery: {
+            type: String,
+            default: '',
+        }
     },
     data () {
         return {
@@ -189,7 +193,12 @@ export default {
         },
     },
     created () {
-        this.getDistrictList();
+        if (this.districtQuery) {
+            this.location = 'city';
+            this.buttonHandleInSide(this.districtQuery, false);
+        } else {
+            this.getDistrictList();
+        }
 
         Bus.$on('district-selected', areaName => {
             this.buttonHandleInSide(areaName, false);

@@ -232,7 +232,7 @@ export default {
         <h2 v-if="subTitle" class="ris-map-desktop-aside__sub-heading">{{ subTitle }}</h2>
         <transition name="fade-long">
             <nav class="ris-map-desktop-aside__nav"
-                v-if="!loading && navigationList.length"
+                v-if="!loading && navigationList && navigationList.length"
                 v-outside="hide"
                     >
                 <ul class="ris-map-desktop-aside-list"

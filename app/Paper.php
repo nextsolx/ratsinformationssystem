@@ -141,6 +141,6 @@ class Paper extends Model
 
     public function isNew() : bool
     {
-        return (bool) $this->date ? $this->date->subMonths(12)->isFuture() : false ;
+        return (bool) $this->date ? $this->date->addMonths(12)->isFuture() : false ;
     }
 }

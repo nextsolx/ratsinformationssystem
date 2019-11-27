@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\PaperListRequest;
+use App\Paper;
+use Illuminate\Http\Request;
 use App\Http\Resources\Topic;
 use App\Http\Resources\TopicWithData;
-use App\Paper;
+use App\Http\Requests\PaperListRequest;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Http\Request;
 
 class TopicController extends Controller
 {
@@ -142,19 +142,20 @@ class TopicController extends Controller
             $topicTitle = $district;
         }
 
-        $topics = TopicWithData::collection(
+        $topics = Topic::collection(
            Paper::with(Paper::$basicScope)->sort()->paginate(10)
         )->toResponse(request())->getData();
 
-        $new = TopicWithData::collection(
+        $new = Topic::collection(
             Paper::with(Paper::$basicScope)->sort()->new()->paginate(3)
         )->toResponse(request())->getData();
 
-        $finished = TopicWithData::collection(
+
+        $finished = Topic::collection(
             Paper::with(Paper::$basicScope)->sort()->finished()->paginate(3)
         )->toResponse(request())->getData();
 
-        $progress = TopicWithData::collection(
+        $progress = Topic::collection(
             Paper::with(Paper::$basicScope)->sort()->updated()->paginate(3)
         )->toResponse(request())->getData();
 

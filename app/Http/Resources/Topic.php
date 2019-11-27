@@ -26,16 +26,11 @@ class Topic extends JsonResource
             'result' => $this->result(),
             'date' => $this->date->toDateTimeString() ?? null,
             'modified' => $this->modified,
-
-//            'text' => $this->text(),
-//            'finished' => $this->isFinished(),
-//            'newTopic' => $this->isNew(),
             'location' => Location::collection($this->locations),
-//            'meetings' => Meeting::collection($this->meetings),
-//            'process' => Consultation::collection($this->consultations),
-//            'files' => File::collection($this->files),
             'solution' => 'Der Vorschlag der Verwaltung wurde ohne Änderungen beschlossen.',
             'whatNext' => 'Die Politik beauftragt die Verwaltung mit der Umsetzung ihrer Entscheidung.',
+            'finished' => $this->isFinished(),
+            'newTopic' => $this->isNew(),
         ];
     }
 }

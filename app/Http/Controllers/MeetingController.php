@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\GetMeetingsRequest;
-use App\Http\Resources\Meeting;
-use App\Http\Resources\MeetingWithData;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use App\Http\Resources\MeetingWithData;
+use App\Http\Requests\GetMeetingsRequest;
+use App\Http\Resources\Meeting;
 
-class MeetingController extends Controller
+class MeetingController extends CachedController
 {
     public function calendar(Request $request)
     {

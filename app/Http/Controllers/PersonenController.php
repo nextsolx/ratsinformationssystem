@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\PeopleListRequest;
 use App\Person;
 use Illuminate\Http\Request;
+use App\Http\Requests\PeopleListRequest;
 
-class PersonenController extends Controller
+class PersonenController extends CachedController
 {
     public function view(PeopleListRequest $request)
     {

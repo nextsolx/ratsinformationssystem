@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\TopicWithData;
 use App\Paper;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use App\Http\Resources\TopicWithData;
+use Illuminate\Database\Eloquent\Builder;
 
-class MapController extends Controller
+class MapController extends CachedController
 {
     public function view(Request $request)
     {

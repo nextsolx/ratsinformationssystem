@@ -12,7 +12,7 @@
 */
 
 Route::group(['middleware' => 'under-construction'], function () {
-    Route::get('/', 'MainPageController@welcome')->middleware('doNotCacheResponse')->name('welcome');
+    Route::get('/', 'MainPageController@welcome')->name('welcome');
 
     Route::get('/styleguide', function () {
         return view('styleguide');

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Organization;
 use Illuminate\Http\Request;
 
-class GremienController extends Controller
+class GremienController extends CachedController
 {
     public function view(Request $request, Organization $organization)
     {

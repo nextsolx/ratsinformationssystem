@@ -9,7 +9,7 @@ use App\Http\Resources\TopicWithData;
 use App\Http\Requests\PaperListRequest;
 use Illuminate\Database\Eloquent\Builder;
 
-class TopicController extends Controller
+class TopicController extends CachedController
 {
     public function all(PaperListRequest $request)
     {
